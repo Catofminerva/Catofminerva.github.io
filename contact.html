@@ -51,30 +51,27 @@
     </center>
 <br>
 
+<form action="https://formspree.io/f/myyqoang" method="POST">
+  <!-- Example: Existing name field -->
+  <label>
+    Your Name:
+    <input type="text" name="name">
+  </label>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Page</title>
-    <!-- ... Other head elements ... -->
-</head>
-<body>
+  <!-- Formspree email field -->
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
 
-    <center>
-        <h1>Contact Us</h1>
-        <form action="send_email.php" method="post">
-            <label for="name">Your Name:</label><br>
-            <input type="text" id="name" name="name"><br>
-            
-            <label for="email">Your Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message"></textarea><br>
-            
-            <input type="submit" value="Submit">
-        </form>
-    </center>
+  <!-- Formspree message field -->
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
 
-</body>
-</html>
+  <!-- You can continue to add more fields as needed -->
+
+  <!-- Submit button -->
+  <button type="submit">Send</button>
+</form>
