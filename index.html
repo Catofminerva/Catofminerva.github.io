@@ -160,8 +160,8 @@ The files also transcend Verdery’s personal narrative in another way; they are
    const app = initializeApp(firebaseConfig);
    const analytics = getAnalytics(app);
    const db = getDatabase(app);
-</script>
 
+   
 document.getElementById('guestbook-form').addEventListener('submit', function(event) {
     event.preventDefault();  // Prevents the form from submitting the traditional way
 
@@ -192,7 +192,8 @@ db.ref('entries').orderByChild('timestamp').on('value', function(snapshot) {
         div.textContent = `${entry.handle}: ${entry.message}`;
         entriesDiv.appendChild(div);
     });
-});
+}); 
+</script>
 
     
 </body>
