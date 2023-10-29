@@ -5,22 +5,18 @@
     <meta charset="UTF-8">
     <title>Ali's Blog</title>
     <style>
-        body {
-            background-color: #FFCC99; /* Retro peach color */
-            font-family: "Times New Roman", Times, serif;
-            color: #FF33CC; /* Neon pink */
-        }
-        .retro-btn {
-            background-color: #FF66FF; /* Bright pink */
-            border: 2px outset #FFCCFF;
-            font-family: Arial, sans-serif;
-            padding: 5px 15px;
-            text-decoration: none;
-            color: #000000; /* Black text */
-        }
-        .retro-btn:hover {
-            background-color: #FF99FF; /* Lighter pink on hover */
-        }
+       body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: black url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><circle cx="1.5" cy="1.5" r="1.5" fill="white"/></svg>') 0 0;
+  background-size: 20px 20px;  /* You can adjust the size */
+}
+
     </style>
 </head>
 
