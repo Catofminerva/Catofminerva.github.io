@@ -33,6 +33,7 @@
 
     <center>
         <form id="guestbookForm">
+            <input type="text" id="username" placeholder="Your Name"><br>
             <textarea id="message" rows="4" cols="50" placeholder="Write your message here"></textarea><br>
             <input type="submit" value="Submit" class="retro-btn">
         </form>
@@ -67,23 +68,28 @@
       // Adding a new message to Firestore
       document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
           e.preventDefault();
+          const username = document.getElementById('username').value;
           const messageText = document.getElementById('message').value;
           await addDoc(collection(db, 'guestbook'), {
+              username: username,
               message: messageText,
               timestamp: new Date()
           });
+          document.getElementById('username').value = '';
           document.getElementById('message').value = '';
       });
 
-      // Reading messages from Firestore
-      async function loadMessages() {
-          const querySnapshot = await getDocs(collection(db, 'guestbook'));
-          const messagesDiv = document.getElementById('messages');
-          messagesDiv.innerHTML = '';
-          querySnapshot.forEach((doc) => {
-              messagesDiv.innerHTML += `<p>${doc.data().message}</p>`;
-          });
-      }
+// Reading messages from Firestore
+async function loadMessages() {
+    const querySnapshot = await getDocs(collection(db, 'guestbook'));
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        messagesDiv.innerHTML += `<p><strong>${data.username}</strong>: ${data.message}</p>`;
+    });
+}
+
 
       // Initially load messages
       loadMessages();
