@@ -1,1 +1,62 @@
-<button class="retro-music-button">Toggle Music</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <style>
+        .retro-music-button {
+            /* Basic styling */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            background-color: #00ff00;
+            color: #ff00ff;
+            border: 2px solid #ff00ff;
+            padding: 5px 15px;
+
+            /* Retro effects */
+            text-shadow: 1px 1px 0px #0000ff;
+            background: linear-gradient(to bottom, #00ff00, #008800);
+            border-radius: 5px;
+
+            /* Bevel effect */
+            box-shadow: 2px 2px 0px #0000ff, 
+                        4px 4px 0px #ff0000;
+
+            /* Cursor */
+            cursor: pointer;
+
+            /* Hover effect */
+            transition: transform 0.2s;
+        }
+
+        .retro-music-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(to bottom, #00ff44, #006600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio element (replace with your music file path) -->
+    <audio id="backgroundMusic" loop>
+        <source src="kawaii8bit.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Toggle Music Button -->
+    <button id="toggleMusic" class="retro-music-button">Play Music</button>
+
+    <script>
+        document.getElementById('toggleMusic').addEventListener('click', function() {
+            var music = document.getElementById('backgroundMusic');
+            if (music.paused) {
+                music.play();
+                this.innerText = "Pause Music";
+            } else {
+                music.pause();
+                this.innerText = "Play Music";
+            }
+        });
+    </script>
+</body>
+</html>
