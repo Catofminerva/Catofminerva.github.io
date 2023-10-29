@@ -65,19 +65,21 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      // Adding a new message to Firestore
-      document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const username = document.getElementById('username').value;
-          const messageText = document.getElementById('message').value;
-          await addDoc(collection(db, 'guestbook'), {
-              username: username,
-              message: messageText,
-              timestamp: new Date()
-          });
-          document.getElementById('username').value = '';
-          document.getElementById('message').value = '';
-      });
+// Adding a new message to Firestore
+document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const messageText = document.getElementById('message').value;
+    const timestamp = new Date();
+    await addDoc(collection(db, 'guestbook'), {
+        username: username,
+        message: messageText,
+        timestamp: timestamp.toISOString()  // Store as an ISO string
+    });
+    document.getElementById('username').value = '';
+    document.getElementById('message').value = '';
+});
+
 
 // Reading messages from Firestore
 async function loadMessages() {
@@ -86,9 +88,11 @@ async function loadMessages() {
     messagesDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
         const data = doc.data();
-        messagesDiv.innerHTML += `<p><strong>${data.username}</strong>: ${data.message}</p>`;
+        const timestamp = new Date(data.timestamp).toLocaleString();  // Convert ISO string to local date and time
+        messagesDiv.innerHTML += `<p><strong>${data.username}</strong> (${timestamp}): ${data.message}</p>`;
     });
 }
+
 
 
       // Initially load messages
