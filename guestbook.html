@@ -28,7 +28,34 @@
 
     <script src="your_firebase_config.js"></script>  <!-- Assuming you moved your Firebase config to a separate JS file -->
     <script>
-        // Add your Firebase guestbook logic here
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+const db = getFirestore(app); // assuming 'app' is your Firebase app
+
+// Adding a new message to Firestore
+document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const messageText = document.getElementById('message').value;
+    await addDoc(collection(db, 'guestbook'), {
+        message: messageText,
+        timestamp: new Date()
+    });
+    document.getElementById('message').value = '';
+});
+
+// Reading messages from Firestore
+async function loadMessages() {
+    const querySnapshot = await getDocs(collection(db, 'guestbook'));
+    const messagesDiv = document.getElementById('messages');
+    messagesDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+        messagesDiv.innerHTML += `<p>${doc.data().message}</p>`;
+    });
+}
+
+// Initially load messages
+loadMessages();
+
     </script>
 </body>
 
