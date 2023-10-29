@@ -99,11 +99,14 @@ The files also transcend Verdery’s personal narrative in another way; they are
     <center>
 
   <center>
-  <form action="/sign_guestbook" method="post">
+<form name="guestbook" method="POST" netlify>
+    <input type="hidden" name="form-name" value="guestbook">
+    
     Name: <input type="text" name="name"><br>
     Comment: <textarea name="comment"></textarea><br>
     <input type="submit" value="Sign Guestbook">
 </form>
+
 
 </center>
 
