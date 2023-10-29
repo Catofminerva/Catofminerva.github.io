@@ -115,6 +115,32 @@ The files also transcend Verdery’s personal narrative in another way; they are
 <div class="tamanotchi">
     <a href="https://tamanotchi.world/8060c"><img src="https://tamanotchi.world/i/8060" alt="It's tamaNOTchi! Click to feed!"></a>
 </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook</title>
+</head>
+<body>
+    <!-- The guestbook will go here -->
+</body>
+</html>
+
+    
+<div id="guestbook">
+    <form id="guestbook-form">
+        <label for="handle">Handle:</label>
+        <input type="text" id="handle" name="handle" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Sign Guestbook</button>
+    </form>
+</div>
+    
     
 <script type="module">
    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
@@ -136,6 +162,37 @@ The files also transcend Verdery’s personal narrative in another way; they are
    const db = getDatabase(app);
 </script>
 
+document.getElementById('guestbook-form').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevents the form from submitting the traditional way
+
+    const handle = document.getElementById('handle').value;
+    const message = document.getElementById('message').value;
+
+    // Push the data to Firebase
+    const newEntryRef = db.ref('entries').push();
+    newEntryRef.set({
+        handle: handle,
+        message: message,
+        timestamp: Date.now() // Adds a timestamp for sorting later if desired
+    });
+
+    // Optionally, clear the form fields after submission
+    document.getElementById('handle').value = '';
+    document.getElementById('message').value = '';
+});
+
+// To display existing entries, you can listen to Firebase database changes
+db.ref('entries').orderByChild('timestamp').on('value', function(snapshot) {
+    const entriesDiv = document.getElementById('entries');
+    entriesDiv.innerHTML = '';  // Clear the current entries
+
+    snapshot.forEach(function(entrySnapshot) {
+        const entry = entrySnapshot.val();
+        const div = document.createElement('div');
+        div.textContent = `${entry.handle}: ${entry.message}`;
+        entriesDiv.appendChild(div);
+    });
+});
 
     
 </body>
