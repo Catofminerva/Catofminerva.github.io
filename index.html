@@ -141,6 +141,8 @@ The files also transcend Verdery’s personal narrative in another way; they are
     </form>
 </div>
     
+document.addEventListener("DOMContentLoaded", function() {
+
     
 <script type="module">
    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
@@ -193,6 +195,7 @@ db.ref('entries').orderByChild('timestamp').on('value', function(snapshot) {
         entriesDiv.appendChild(div);
     });
 }); 
+   
 </script>
 
     
