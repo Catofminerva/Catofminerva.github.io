@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ali's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <style>
+        body {
+            background-color: black;
+            background-image: url('stars.gif');
+            font-family: "Press Start 2", Times, serif;
+            color: #FF33CC;
+        }
+
+        .tamanotchi {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
+    </center>
+    <hr>
+    <!-- Navigation Buttons -->
+    <center>
+        <a href="index.html" class="retro-btn">Home</a>
+        <a href="#" class="retro-btn">About</a>
+        <a href="#" class="retro-btn">Contact</a>
+        <a href="guestbook.html" class="retro-btn">Guestbook</a>
+        <a href="blog_post.html" class="retro-btn">Blog Post</a>
+    </center>
+<br>    
+
+<body>
+    <center>
+        <h2>Blog Posts</h2>
+        <ul>
+            <li><a href="post1.html">Blog Post 1</a></li>
+            <li><a href="post2.html">Blog Post 2</a></li>
+            <li><a href="post3.html">Blog Post 3</a></li>
+            <!-- ... Add more as you create more posts ... -->
+        </ul>
+    </center>
+</body>
+</html>
