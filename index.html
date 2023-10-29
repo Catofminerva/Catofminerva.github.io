@@ -122,43 +122,16 @@ The files also transcend Verdery’s personal narrative in another way; they are
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('guestbook-form');
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      
-      const name = document.getElementById('name').value;
-      const comment = document.getElementById('comment').value;
-      
-      fetch('/add_entry', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name, comment})
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Refresh the guestbook entries
-        loadGuestbook();
-      });
-    });
-
-    // Load existing entries
-    loadGuestbook();
-  });
-
-  function loadGuestbook() {
-    fetch('/get_entries')
+  fetch('./guestbook.json')
     .then(response => response.json())
     .then(data => {
-      const guestbookDiv = document.getElementById('guestbook-entries');
-      guestbookDiv.innerHTML = data.map(entry => {
-        return `<p>${entry.name} says: ${entry.comment}</p>`;
-      }).join('');
+      const commentSection = document.getElementById('comments');
+      data.forEach(entry => {
+        commentSection.innerHTML += `<p><strong>${entry.name}</strong>: ${entry.comment}</p>`;
+      });
     });
-  }
 </script>
+
 
 
 </body>
