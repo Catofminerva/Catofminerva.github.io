@@ -99,15 +99,12 @@ The files also transcend Verdery’s personal narrative in another way; they are
     <center>
 
   <center>
-  <h2>Sign My Guestbook</h2>
-  <form id="guestbook-form">
-    Name: <input type="text" id="name"><br>
-    Comment: <textarea id="comment"></textarea><br>
-    <input type="submit" value="Sign Guestbook" class="retro-btn">
-  </form>
-  <div id="guestbook-entries">
-    <!-- Guestbook entries will go here -->
-  </div>
+  <form action="/sign_guestbook" method="post">
+    Name: <input type="text" name="name"><br>
+    Comment: <textarea name="comment"></textarea><br>
+    <input type="submit" value="Sign Guestbook">
+</form>
+
 </center>
 
 
