@@ -1,36 +1,29 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
-    <style>
-        .retro-music-button {
-            /* Basic styling */
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            background-color: #00ff00;
-            color: #ff00ff;
-            border: 2px solid #ff00ff;
-            padding: 5px 15px;
+.retro-music-button {
+    /* Basic styling */
+    font-family: 'Courier New', Courier, monospace; /* Classic monospace font */
+    font-size: 16px;
+    background-color: #00ff00; /* Bright green */
+    color: #ff00ff; /* Bright magenta */
+    border: 2px solid #ff00ff;
+    padding: 5px 15px;
 
-            /* Retro effects */
-            text-shadow: 1px 1px 0px #0000ff;
-            background: linear-gradient(to bottom, #00ff00, #008800);
-            border-radius: 5px;
+    /* Retro effects */
+    text-shadow: 1px 1px 0px #0000ff; /* Bright blue shadow for a 3D effect */
+    background: linear-gradient(to bottom, #00ff00, #008800); /* Gradient for depth */
+    border-radius: 5px; /* Slightly rounded corners */
 
-            /* Bevel effect */
-            box-shadow: 2px 2px 0px #0000ff, 
-                        4px 4px 0px #ff0000;
+    /* Bevel effect */
+    box-shadow: 2px 2px 0px #0000ff, 
+                4px 4px 0px #ff0000; /* Red shadow for depth */
 
-            /* Cursor */
-            cursor: pointer;
+    /* Cursor */
+    cursor: pointer;
 
-            /* Hover effect */
-            transition: transform 0.2s;
-        }
+    /* Hover effect */
+    transition: transform 0.2s; /* Smooth transform on hover */
+}
 
-        .retro-music-button:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(to bottom, #00ff44, #006600);
-        }
-    </style>
-</head>
+.retro-music-button:hover {
+    transform: translateY(-2px); /* Button raises a bit on hover */
+    background: linear-gradient(to bottom, #00ff44, #006600); /* Slightly different gradient on hover */
+}
