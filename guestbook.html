@@ -4,7 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Ali's Blog - Guestbook</title>
-    <link rel="stylesheet" type="text/css" href="your_styles.css"> <!-- Assuming you moved your styles to a separate CSS file -->
+    <style>
+        /* Your existing CSS, moved here for the sake of completeness */
+        body {
+            background-color: #FFCC99;
+            font-family: "Times New Roman", Times, serif;
+            color: #FF33CC;
+        }
+        .retro-btn {
+            background-color: #FF66FF;
+            border: 2px outset #FFCCFF;
+            font-family: Arial, sans-serif;
+            padding: 5px 15px;
+            text-decoration: none;
+            color: #000000;
+        }
+        .retro-btn:hover {
+            background-color: #FF99FF;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,35 +44,54 @@
         </div>
     </center>
 
-    <script src="your_firebase_config.js"></script>  <!-- Assuming you moved your Firebase config to a separate JS file -->
-    <script>
-        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+    <!-- Initialize Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+      import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+      
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyA-m-KcbjUB3TQnMY3WfimJ8-TkNmSik00",
+        authDomain: "blog-d7401.firebaseapp.com",
+        projectId: "blog-d7401",
+        storageBucket: "blog-d7401.appspot.com",
+        messagingSenderId: "860631594502",
+        appId: "1:860631594502:web:febfe89706d410f0143587",
+        measurementId: "G-0RVMMB3QJ0"
+      };
 
-const db = getFirestore(app); // assuming 'app' is your Firebase app
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-// Adding a new message to Firestore
-document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const messageText = document.getElementById('message').value;
-    await addDoc(collection(db, 'guestbook'), {
-        message: messageText,
-        timestamp: new Date()
-    });
-    document.getElementById('message').value = '';
-});
+      // Adding a new message to Firestore
+      document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const messageText = document.getElementById('message').value;
+          await addDoc(collection(db, 'guestbook'), {
+              message: messageText,
+              timestamp: new Date()
+          });
+          document.getElementById('message').value = '';
+      });
 
-// Reading messages from Firestore
-async function loadMessages() {
-    const querySnapshot = await getDocs(collection(db, 'guestbook'));
-    const messagesDiv = document.getElementById('messages');
-    messagesDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-        messagesDiv.innerHTML += `<p>${doc.data().message}</p>`;
-    });
-}
+      // Reading messages from Firestore
+      async function loadMessages() {
+          const querySnapshot = await getDocs(collection(db, 'guestbook'));
+          const messagesDiv = document.getElementById('messages');
+          messagesDiv.innerHTML = '';
+          querySnapshot.forEach((doc) => {
+              messagesDiv.innerHTML += `<p>${doc.data().message}</p>`;
+          });
+      }
 
-// Initially load messages
-loadMessages();
+      // Initially load messages
+      loadMessages();
+    </script>
+</body>
+
+</html>
+
 
     </script>
 </body>
