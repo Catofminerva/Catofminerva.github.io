@@ -98,12 +98,18 @@ The files also transcend Verdery’s personal narrative in another way; they are
 
     <center>
 
+  <center>
   <h2>Sign My Guestbook</h2>
-  <form action="#" method="post">
-    Name: <input type="text" name="name"><br>
-    Comment: <textarea name="comment"></textarea><br>
+  <form id="guestbook-form">
+    Name: <input type="text" id="name"><br>
+    Comment: <textarea id="comment"></textarea><br>
     <input type="submit" value="Sign Guestbook" class="retro-btn">
   </form>
+  <div id="guestbook-entries">
+    <!-- Guestbook entries will go here -->
+  </div>
+</center>
+
 
         
         <p><font face="Arial" size="2">Visitor Count: 31</font></p>
@@ -118,6 +124,44 @@ The files also transcend Verdery’s personal narrative in another way; they are
 </div>
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('guestbook-form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
+      
+      fetch('/add_entry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name, comment})
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Refresh the guestbook entries
+        loadGuestbook();
+      });
+    });
+
+    // Load existing entries
+    loadGuestbook();
+  });
+
+  function loadGuestbook() {
+    fetch('/get_entries')
+    .then(response => response.json())
+    .then(data => {
+      const guestbookDiv = document.getElementById('guestbook-entries');
+      guestbookDiv.innerHTML = data.map(entry => {
+        return `<p>${entry.name} says: ${entry.comment}</p>`;
+      }).join('');
+    });
+  }
+</script>
 
 
 </body>
