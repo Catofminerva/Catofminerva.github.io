@@ -37,6 +37,7 @@
         <a href="#" class="retro-btn">Home</a>
         <a href="#" class="retro-btn">About</a>
         <a href="#" class="retro-btn">Contact</a>
+        <a href="guestbook.html" class="retro-btn">Guestbook</a>
     </center>
     <br>
 
@@ -116,87 +117,6 @@ The files also transcend Verdery’s personal narrative in another way; they are
     <a href="https://tamanotchi.world/8060c"><img src="https://tamanotchi.world/i/8060" alt="It's tamaNOTchi! Click to feed!"></a>
 </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guestbook</title>
-</head>
-<body>
-    <!-- The guestbook will go here -->
-</body>
-</html>
-
-    
-<div id="guestbook">
-    <form id="guestbook-form">
-        <label for="handle">Handle:</label>
-        <input type="text" id="handle" name="handle" required>
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit">Sign Guestbook</button>
-    </form>
-</div>
-    
-document.addEventListener("DOMContentLoaded", function() {
-
-    
-<script type="module">
-   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
-   import { getDatabase } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
-
-   const firebaseConfig = {
-     apiKey: "AIzaSyA-m-KcbjUB3TQnMY3WfimJ8-TkNmSik00",
-     authDomain: "blog-d7401.firebaseapp.com",
-     projectId: "blog-d7401",
-     storageBucket: "blog-d7401.appspot.com",
-     messagingSenderId: "860631594502",
-     appId: "1:860631594502:web:febfe89706d410f0143587",
-     measurementId: "G-0RVMMB3QJ0"
-   };
-
-   const app = initializeApp(firebaseConfig);
-   const analytics = getAnalytics(app);
-   const db = getDatabase(app);
-
-   
-document.getElementById('guestbook-form').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevents the form from submitting the traditional way
-
-    const handle = document.getElementById('handle').value;
-    const message = document.getElementById('message').value;
-
-    // Push the data to Firebase
-    const newEntryRef = db.ref('entries').push();
-    newEntryRef.set({
-        handle: handle,
-        message: message,
-        timestamp: Date.now() // Adds a timestamp for sorting later if desired
-    });
-
-    // Optionally, clear the form fields after submission
-    document.getElementById('handle').value = '';
-    document.getElementById('message').value = '';
-});
-
-// To display existing entries, you can listen to Firebase database changes
-db.ref('entries').orderByChild('timestamp').on('value', function(snapshot) {
-    const entriesDiv = document.getElementById('entries');
-    entriesDiv.innerHTML = '';  // Clear the current entries
-
-    snapshot.forEach(function(entrySnapshot) {
-        const entry = entrySnapshot.val();
-        const div = document.createElement('div');
-        div.textContent = `${entry.handle}: ${entry.message}`;
-        entriesDiv.appendChild(div);
-    });
-}); 
-   
-</script>
 
     
 </body>
