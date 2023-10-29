@@ -123,21 +123,7 @@ The files also transcend Verdery’s personal narrative in another way; they are
 <div class="tamanotchi">
     <a href="https://tamanotchi.world/8060c"><img src="https://tamanotchi.world/i/8060" alt="It's tamaNOTchi! Click to feed!"></a>
 </div>
-
-
-<script>
-  fetch('./guestbook.json')
-    .then(response => response.json())
-    .then(data => {
-      const commentSection = document.getElementById('comments');
-      data.forEach(entry => {
-        commentSection.innerHTML += `<p><strong>${entry.name}</strong>: ${entry.comment}</p>`;
-      });
-    });
-</script>
-
-<div id="comments"></div>
-
+    
 
 </body>
 
