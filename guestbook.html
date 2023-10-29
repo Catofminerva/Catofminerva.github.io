@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ali's Blog - Guestbook</title>
+    <link rel="stylesheet" type="text/css" href="your_styles.css"> <!-- Assuming you moved your styles to a separate CSS file -->
+</head>
+
+<body>
+    <center>
+        <marquee><font face="Comic Sans MS" size="7" color="black"><blink>Ali's Blog - Guestbook</blink></font></marquee>
+    </center>
+    <hr>
+
+    <center>
+        <form id="guestbookForm">
+            <textarea id="message" rows="4" cols="50" placeholder="Write your message here"></textarea><br>
+            <input type="submit" value="Submit" class="retro-btn">
+        </form>
+    </center>
+
+    <center>
+        <div id="messages">
+            <!-- Messages will be displayed here -->
+        </div>
+    </center>
+
+    <script src="your_firebase_config.js"></script>  <!-- Assuming you moved your Firebase config to a separate JS file -->
+    <script>
+        // Add your Firebase guestbook logic here
+    </script>
+</body>
+
+</html>
