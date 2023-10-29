@@ -2,7 +2,11 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styles.css">
+<audio id="myMusic" loop>
+    <source src="https://github.com/Catofminerva/Catofminerva.github.io/raw/main/audio.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" class="retro-music-btn">Play/Pause Music</button>
 
     <meta charset="UTF-8">
     <title>Ali's Blog</title>
@@ -35,6 +39,24 @@
             animation: flip 4s infinite; /* Flip animation */
         }
 
+.retro-music-btn {
+    background-color: #00ff00; /* Classic green background */
+    color: #000000; /* Black text */
+    border: 3px solid #ff0000; /* Thick red border */
+    padding: 10px 20px;
+    font-family: "Comic Sans MS", sans-serif; /* Classic 90s font */
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.retro-music-btn:hover {
+    background-color: #ff0000; /* Red background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+        
     </style>
 </head>
 
@@ -80,14 +102,17 @@
 
     </center>
 
-<audio id="backgroundMusic" loop>
-    <source src="https://github.com/Catofminerva/Catofminerva.github.io/raw/main/kawaii%208bit.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
+<script>
+    document.getElementById("musicBtn").addEventListener("click", function() {
+        var music = document.getElementById("myMusic");
+        if (music.paused) {
+            music.play();
+        } else {
+            music.pause();
+        }
+    });
+</script>
 
-<button id="toggleMusic" class="retro-music-button">Play Music</button>
-
-<script src="scripts.js" defer></script>
 
 
 </body>
