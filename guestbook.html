@@ -1,13 +1,15 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>Ali's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
     <style>
         body {
             background-color: black;
             background-image: url('stars.gif');
-            font-family: "Times New Roman", Times, serif;
+            font-family: "Press Start 2", Times, serif;
             color: #FF33CC;
         }
 
@@ -17,12 +19,26 @@
             right: 0;
             z-index: 1000;
         }
+
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
+        }
+
     </style>
 </head>
 
 <body>
     <center>
-        <marquee><font face="Comic Sans MS" size="7" color="purple"><blink>Ali's Blog</blink></font></marquee>
+        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
     </center>
     <hr>
     <!-- Navigation Buttons -->
@@ -31,12 +47,13 @@
         <a href="#" class="retro-btn">About</a>
         <a href="#" class="retro-btn">Contact</a>
         <a href="guestbook.html" class="retro-btn">Guestbook</a>
-        <a href="blog_post.html" class="retro-btn">Blog Post</a> <!-- Added link to Blog Post page -->
-    <hr>
-    </hr>
+        <a href="blog_post.html" class="retro-btn">Blog Post</a>
     </center>
-
-</body>
+<br>    
+    <center>
+        <img src="IMG_0212.gif">
+    </center>
+<br>
 
 </html>
 
