@@ -61,60 +61,69 @@ hr {
 <br>
 <center>
 
-<table border="1" id="truthTable">
-    <thead>
-        <tr>
-            <th>A</th>
-            <th>B</th>
-            <th>A AND B</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Rows will be added here by the JavaScript -->
-    </tbody>
-</table>
+<label for="formula">Enter Logical Formula:</label>
+<input type="text" id="formula" placeholder="e.g., p /\ q -> ~r">
+<button onclick="generateTruthTable()">Generate Truth Table</button>
+<div id="tableContainer"></div>
+
 
 <script>
-    // JavaScript to generate truth table for AND operation
+    function parseFormula(formula) {
+    formula = formula.replace(/\s/g, ''); // Remove whitespace
+    formula = formula.replace(/(and|&&)/gi, '&&');
+    formula = formula.replace(/(or|\|{2})/gi, '||');
+    formula = formula.replace(/(not|!)/gi, '!');
+    formula = formula.replace(/(->|=>)/g, '=>');
+    formula = formula.replace(/\//g, '');
+    return formula;
+}
 
-    // Function to calculate AND operation
-    function andOperation(a, b) {
-        return a && b;
+function getVariables(formula) {
+    return Array.from(new Set(formula.match(/[a-z]/gi) || []));
+}
+
+function evaluateFormula(formula, values) {
+    for (const variable in values) {
+        const regex = new RegExp(variable, 'g');
+        formula = formula.replace(regex, values[variable] ? 'T' : 'F');
     }
+    formula = formula.replace(/&&/g, '&').replace(/\|\|/g, '|');
+    formula = formula.replace(/T&/g, '1&').replace(/F&/g, '0&');
+    formula = formula.replace(/T\|/g, '1|').replace(/F\|/g, '0|');
+    formula = formula.replace(/!T/g, 'F').replace(/!F/g, 'T');
+    formula = formula.replace(/T=>T/g, 'T').replace(/T=>F/g, 'F').replace(/F=>T/g, 'T').replace(/F=>F/g, 'T');
+    return formula === 'T';
+}
 
-    // Function to generate the truth table
-    function generateTruthTable() {
-        const tableBody = document.querySelector('#truthTable tbody');
+function generateTruthTable() {
+    const formula = parseFormula(document.getElementById('formula').value);
+    const variables = getVariables(formula);
+    const combinations = 2 ** variables.length;
+    let tableHtml = '<table>';
 
-        // Possible input values
-        const values = [true, false];
+    tableHtml += '<tr>';
+    variables.forEach(variable => tableHtml += `<th>${variable}</th>`);
+    tableHtml += '<th>Result</th></tr>';
 
-        values.forEach(valueA => {
-            values.forEach(valueB => {
-                const row = document.createElement('tr');
-                
-                // Create A column
-                const colA = document.createElement('td');
-                colA.textContent = valueA;
-                row.appendChild(colA);
-                
-                // Create B column
-                const colB = document.createElement('td');
-                colB.textContent = valueB;
-                row.appendChild(colB);
-                
-                // Create A AND B column
-                const colResult = document.createElement('td');
-                colResult.textContent = andOperation(valueA, valueB);
-                row.appendChild(colResult);
+    for (let i = 0; i < combinations; i++) {
+        let values = {};
+        tableHtml += '<tr>';
 
-                tableBody.appendChild(row);
-            });
-        });
+        for (let j = 0; j < variables.length; j++) {
+            const isTrue = (i & (1 << j)) !== 0;
+            tableHtml += `<td>${isTrue ? 'T' : 'F'}</td>`;
+            values[variables[j]] = isTrue;
+        }
+
+        const result = evaluateFormula(formula, values);
+        tableHtml += `<td>${result ? 'T' : 'F'}</td>`;
+        tableHtml += '</tr>';
     }
+    tableHtml += '</table>';
 
-    // Call the function to generate the truth table when the document is loaded
-    generateTruthTable();
+    document.getElementById('tableContainer').innerHTML = tableHtml;
+}
+
 </script>
 
 </body>
