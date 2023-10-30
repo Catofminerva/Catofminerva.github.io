@@ -58,6 +58,41 @@
     color: purple;
 }
 
+<style>
+    /* ... all your existing styles ... */
+
+    @media screen and (max-width: 600px) {
+        /* Reduce title font size for smaller screens */
+        .title {
+            font-size: 1.5rem;
+        }
+
+        /* Adjust navigation buttons for smaller screens */
+        .retro-btn {
+            font-size: 12px;
+            padding: 8px 16px;
+        }
+
+        /* Adjust button size for play/pause music on smaller screens */
+        .retro-music-btn {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+
+        /* Adjust welcome message font size for better readability on small screens */
+        font[size="4"] {
+            font-size: 3vw; /* Use viewport width for dynamic resizing */
+        }
+
+        /* If the images in the navigation section are too large for mobile, you can reduce their size */
+        img[alt$="GIF"] {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* If any other element feels too big or out of place, you can similarly adjust its size or margins */
+    }
+</style>
 
         
     </style>
