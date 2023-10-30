@@ -61,16 +61,13 @@
     color: purple;
 }
 
-.bottom-center-container {
+.absolute-bottom-center {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 50px; /* Adjust if needed */
+    left: 50%;
+    transform: translateX(-50%);
 }
+
 
 
        
@@ -135,9 +132,10 @@
 </body>
 
 
-<div class="bottom-center-container">
+<div class="absolute-bottom-center">
     <img src="ieload.gif">
 </div>
+
 
     
 </html>
