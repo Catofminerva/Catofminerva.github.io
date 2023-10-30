@@ -63,12 +63,12 @@
 }
 
         
-
 .explorer {
-    position: fixed;  
-    bottom: 0;     
-    left: 50%;     
-    transform: translateX(-50%); 
+    position: absolute; /* Keeps the GIF in its place relative to its parent */
+    bottom: 0;          /* This sticks the element to the bottom of its parent */
+    left: 50%;          /* This centers the element horizontally within its parent */
+    transform: translateX(-50%);  /* This ensures true centering */
+    z-index: 10;        /* Ensures the GIF stays on top of other content */
 }
 
 
