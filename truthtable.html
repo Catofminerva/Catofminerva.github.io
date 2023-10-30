@@ -1,79 +1,114 @@
-<label for="expression">Enter Boolean Expression:</label>
-<input type="text" id="expression" placeholder="e.g., A AND B">
-<button onclick="generateTruthTable()">Generate Truth Table</button>
-<table id="truthTable">
-    <!-- Table will be populated by JavaScript -->
-</table>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-function and(a, b) {
-    return a && b;
-}
-
-function or(a, b) {
-    return a || b;
-}
-
-function not(a) {
-    return !a;
-}
-
-function evaluateExpression(expression, values) {
-    expression = expression.split(/\s+/).map(token => {
-        if (token === "AND") return "and";
-        if (token === "OR") return "or";
-        if (token === "NOT") return "not";
-        if (token === "A" || token === "B") return values[token];
-        return token;
-    });
-
-    for (let i = 0; i < expression.length; i++) {
-        if (expression[i] === "not") {
-            expression[i] = not(expression[i + 1]);
-            expression.splice(i + 1, 1);
+    <meta charset="UTF-8">
+    <title>Ali's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <style>
+        body {
+            background-color: black;
+            background-image: url('stars.gif');
+            font-family: "Press Start 2", Times, serif;
+            color: #FF33CC;
         }
-    }
 
-    for (let i = 0; i < expression.length; i += 2) {
-        if (expression[i + 1] === "and") {
-            expression[i] = and(expression[i], expression[i + 2]);
-            expression.splice(i + 1, 2);
-            i -= 2;
-        } else if (expression[i + 1] === "or") {
-            expression[i] = or(expression[i], expression[i + 2]);
-            expression.splice(i + 1, 2);
-            i -= 2;
+        .tamanotchi {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 1000;
         }
-    }
 
-    return expression[0];
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
+        }
+
+.kitty-gif {
+    margin-top: 0px; 
 }
 
-function generateTruthTable() {
-    const expression = document.getElementById('expression').value;
-    const table = document.getElementById('truthTable');
-    table.innerHTML = ''; // Clear previous table
+hr {
+    margin-top: -15px;  /* Adjust this value as needed */
+}
+        
+    </style>
+</head>
 
-    const headers = `
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Table Generator</title>
+</head>
+<body>
+
+<table border="1" id="truthTable">
+    <thead>
         <tr>
             <th>A</th>
             <th>B</th>
-            <th>Result</th>
+            <th>A AND B</th>
         </tr>
-    `;
-    table.innerHTML += headers;
+    </thead>
+    <tbody>
+        <!-- Rows will be added here by the JavaScript -->
+    </tbody>
+</table>
 
-    for (let A = 0; A <= 1; A++) {
-        for (let B = 0; B <= 1; B++) {
-            let result = evaluateExpression(expression, {A: Boolean(A), B: Boolean(B)});
-            table.innerHTML += `
-                <tr>
-                    <td>${A}</td>
-                    <td>${B}</td>
-                    <td>${result ? 1 : 0}</td>
-                </tr>
-            `;
-        }
+<script>
+    // JavaScript to generate truth table for AND operation
+
+    // Function to calculate AND operation
+    function andOperation(a, b) {
+        return a && b;
     }
-}
+
+    // Function to generate the truth table
+    function generateTruthTable() {
+        const tableBody = document.querySelector('#truthTable tbody');
+
+        // Possible input values
+        const values = [true, false];
+
+        values.forEach(valueA => {
+            values.forEach(valueB => {
+                const row = document.createElement('tr');
+                
+                // Create A column
+                const colA = document.createElement('td');
+                colA.textContent = valueA;
+                row.appendChild(colA);
+                
+                // Create B column
+                const colB = document.createElement('td');
+                colB.textContent = valueB;
+                row.appendChild(colB);
+                
+                // Create A AND B column
+                const colResult = document.createElement('td');
+                colResult.textContent = andOperation(valueA, valueB);
+                row.appendChild(colResult);
+
+                tableBody.appendChild(row);
+            });
+        });
+    }
+
+    // Call the function to generate the truth table when the document is loaded
+    generateTruthTable();
+</script>
+
+</body>
+</html>
