@@ -1,0 +1,79 @@
+<label for="expression">Enter Boolean Expression:</label>
+<input type="text" id="expression" placeholder="e.g., A AND B">
+<button onclick="generateTruthTable()">Generate Truth Table</button>
+<table id="truthTable">
+    <!-- Table will be populated by JavaScript -->
+</table>
+
+
+
+function and(a, b) {
+    return a && b;
+}
+
+function or(a, b) {
+    return a || b;
+}
+
+function not(a) {
+    return !a;
+}
+
+function evaluateExpression(expression, values) {
+    expression = expression.split(/\s+/).map(token => {
+        if (token === "AND") return "and";
+        if (token === "OR") return "or";
+        if (token === "NOT") return "not";
+        if (token === "A" || token === "B") return values[token];
+        return token;
+    });
+
+    for (let i = 0; i < expression.length; i++) {
+        if (expression[i] === "not") {
+            expression[i] = not(expression[i + 1]);
+            expression.splice(i + 1, 1);
+        }
+    }
+
+    for (let i = 0; i < expression.length; i += 2) {
+        if (expression[i + 1] === "and") {
+            expression[i] = and(expression[i], expression[i + 2]);
+            expression.splice(i + 1, 2);
+            i -= 2;
+        } else if (expression[i + 1] === "or") {
+            expression[i] = or(expression[i], expression[i + 2]);
+            expression.splice(i + 1, 2);
+            i -= 2;
+        }
+    }
+
+    return expression[0];
+}
+
+function generateTruthTable() {
+    const expression = document.getElementById('expression').value;
+    const table = document.getElementById('truthTable');
+    table.innerHTML = ''; // Clear previous table
+
+    const headers = `
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>Result</th>
+        </tr>
+    `;
+    table.innerHTML += headers;
+
+    for (let A = 0; A <= 1; A++) {
+        for (let B = 0; B <= 1; B++) {
+            let result = evaluateExpression(expression, {A: Boolean(A), B: Boolean(B)});
+            table.innerHTML += `
+                <tr>
+                    <td>${A}</td>
+                    <td>${B}</td>
+                    <td>${result ? 1 : 0}</td>
+                </tr>
+            `;
+        }
+    }
+}
