@@ -63,12 +63,29 @@
 }
 
         
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
+    background-color: black;
+    background-image: url('stars.gif');
+    font-family: "Press Start 2", Times, serif;
+    color: #FF33CC;
+}
+
+.container {
+    flex: 1; /* This ensures that the .container takes up all available space, pushing the .explorer to the bottom */
+}
+
 .explorer {
-    position: fixed;     /* Fixes the position relative to the viewport */
-    bottom: 0;           /* Sticks the GIF to the bottom of the viewport */
-    left: 50%;           /* Centers the GIF horizontally */
-    transform: translateX(-50%); /* True centering */
-    z-index: 1000;       /* Ensures the GIF stays on top of other content */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; /* This ensures it stretches across the viewport width */
+    z-index: 1000;
 }
 
        
@@ -77,6 +94,7 @@
 </head>
 
 <body>
+    <div class="container">
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
     </center>
@@ -131,11 +149,12 @@
 
 <script type="text/javascript" src="//counter.websiteout.net/js/15/0/0/0"></script>
 
-<div class="explorer">
-    <a href="ieload.gif">
-        <img src="ieload.gif" alt="Description for the image">
-    </a>
 </div>
+    <div class="explorer">
+        <a href="ieload.gif">
+            <img src="ieload.gif" alt="Description for the image">
+        </a>
+    </div>
     
 </body>
 </html>
