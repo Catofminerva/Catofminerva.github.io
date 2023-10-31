@@ -49,21 +49,19 @@ li {
 
 .two-columns-container {
     display: flex;
-    justify-content: space-between;
-    padding: 20px 5%; 
-    gap: 5%; /* This will create space between the columns */
+    justify-content: center;
+    align-items: start; /* This will align the top of the columns */
+    gap: 2%; /* gap between the two columns */
+    padding: 20px 5%; /* space around the container */
 }
 
 .column {
-    flex: 1; /* This will allow the columns to grow and fill the available space equally */
+    flex: 1; /* This allows each column to take equal space */
+    width: 45%; /* Each column takes 45% of the container's width */
     padding: 20px 2%; 
     text-align: justify;
 }
 
-.right-column {
-    flex-basis: 50%; /* Adjust this percentage to control the initial width of the right column */
-}
-        
     </style>
 </head>
 
