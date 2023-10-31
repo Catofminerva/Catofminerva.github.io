@@ -47,7 +47,18 @@ li {
     margin-bottom: 20px; /* This will add space below each bullet point */
 }
 
+        .two-columns-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
 
+        .column {
+            flex: 1;
+            padding: 20px;
+            text-align: justify;
+        }
+        
     </style>
 </head>
 
@@ -99,8 +110,9 @@ li {
 
     <!-- Two Column Layout for Cool Sites -->
     <div style="display: flex; justify-content: space-between; padding: 20px;">
+     <div class="two-columns-container">
         <!-- First Column -->
-        <div style="flex: 1; padding: 20px; text-align: justify;">
+       <div class="column">
             <h2 style="font-size: 1.5rem; color: yellow;">Academic:</h2>
             <img src="teacher.gif">
             <ul>
@@ -121,18 +133,10 @@ li {
 
             </ul>
         </div>
-<!-- Second Column -->
-                <div style="flex: 1; padding: 20px; text-align: justify;">
-            <h2 style="font-size: 1.5rem; color: yellow;">Retro links:</h2>
-            <img src="teacher.gif">
-            <ul>
-            <li><strong><a href="https://www.duckofminerva.com">Duck of Minerva</a></strong>: IR blog.</li>
-            </ul>
-        </div>
-<!-- Third Column -->
-                <div style="flex: 1; padding: 20px; text-align: justify;">
-            <h2 style="font-size: 1.5rem; color: yellow;">Miscellaneous:</h2>
-            <img src="teacher.gif">
+            <div style="flex: 1; padding: 20px; text-align: justify;">
+         <!-- Second Column -->
+            <div class="column">
+            <h2 style="font-size: 1.5rem; color: yellow;">Retro Webmaster Tools:</h2>
             <ul>
             <li><strong><a href="https://www.duckofminerva.com">Duck of Minerva</a></strong>: IR blog.</li>
             </ul>
