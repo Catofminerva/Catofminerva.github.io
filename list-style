@@ -36,15 +36,6 @@ hr {
     margin-top: -15px;  /* Adjust this value as needed */
 }
   
-ul {
-    list-style-position: inside; /* This positions the bullet inside the list item's content box */
-    padding-left: 0;             /* This removes any default padding */
-    margin-left: 0;              /* This removes any default margin */
-}
-
-li {
-    padding-left: 0.5em;         /* This adds a small space between the bullet and the text */
-}
 
      
     </style>
