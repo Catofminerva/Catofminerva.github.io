@@ -50,12 +50,13 @@ li {
 .two-columns-container {
     display: flex;
     justify-content: space-between;
-    padding: 20px 5%; /* Reducing the horizontal padding to 5% of container width */
+    padding: 20px 5%; 
+    gap: 5%; /* This will create space between the columns */
 }
 
 .column {
-    flex: 0.48; /* Taking up 48% of the container width for each column to leave some space in between */
-    padding: 20px 2%; /* Minimal padding for each column */
+    flex-basis: 45%; /* This defines the default size of each column */
+    padding: 20px 2%; 
     text-align: justify;
 }
         
