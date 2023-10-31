@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
     <meta charset="UTF-8">
     <title>Ali's Blog</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
@@ -11,16 +11,11 @@
         body {
             background-color: black;
             background-image: url('stars.gif');
-            font-family: "Times New Roman", Times, serif;
+            font-family: "Press Start 2", Times, serif;
             color: #FF33CC;
         }
 
-        .tamanotchi {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            z-index: 1000;
-        }
+
 
         @keyframes flip {
             0% { transform: rotateY(0deg); }
@@ -35,12 +30,32 @@
             animation: flip 4s infinite; /* Flip animation */
         }
 
+.kitty-gif {
+    margin-top: 0px; 
+}
+
+hr {
+    margin-top: -15px;  /* Adjust this value as needed */
+}
+
+.exported-content {
+    background-color: rgba(255, 255, 255, 0.8); /* Black background with 60% opacity */
+    color: black;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px;  /* Adds some space around your content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow for depth */
+}
+
+
+        
     </style>
 </head>
 
 <body>
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
+        <img src="kitty.gif" alt="Kitty Gif" class="kitty-gif">
     </center>
     <hr>
     <!-- Navigation Buttons -->
@@ -62,24 +77,9 @@
         <a href="contact.html" class="retro-btn">Contact</a>
         <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
     </center>
-<br>    
+<br>
 
-</html>
-    
-
-<!-- Blog Content -->
-<table width="80%" align="center" cellpadding="10" cellspacing="0" border="1">
-    <!-- Blog Title Row -->
-    <tr>
-        <td bgcolor="#FFCC99" align="center">
-            <font face="Times New Roman" size="6" color="purple">Ethnography or Espionage? Review of "My Life as Spy: Investigations In A Secret Police File" By Katherine Verdure</font>
-        </td>
-    </tr>
-
-    <!-- Blog Content Row -->
-    <tr>
-        <td bgcolor="white">
- <font face="Times New Roman" size="4" color="purple">
+ <div class="exported-content">   
 <p>After the fall of Romania's communist regime, the new government invited individuals to examine their personal files, which had been meticulously maintained by the secret police. Among those who took advantage of this unusual offer was the American anthropologist Katherine Verdery, who had conducted ethnographic research in the country for her Ph.D. Her research, untouched by explicit topics of communism or the Cold War, had no inkling of subterfuge or sensitive content. Imagine then, Verdery’s astonishment upon unearthing a veritable treasure trove of dossiers, informant letters, copied research, intimate photographs, and detailed records of her every move, all founded on the state's firm belief in her guise as a mischievous US spy.
 <p>There's a curious interplay between projection and perception here, a case of seeing what you expect to see, particularly when your occupation primes you for it. As Verdery reads her files, she finds that, during the heights of the Cold War, her minders had pegged her as a US spy. As tensions with Hungarians in Romania later escalated, she was reframed as an American spy with Hungarian roots. And when internal dissidents came under closer scrutiny, she was recast as an instigator of civil discord. Yet, Verdery's response to these attributions is far from simple. She expresses an unsettling kinship with her supposed counterparts; after all, isn't there an argument to be made about the blurry lines distinguishing anthropologists from spies, who also infiltrate communities to gather information? Verdery's own case only strengthens this comparison, and she finds herself pondering the perception of anthropologists as de facto spies, but for the existence of ethics boards, perhaps.
 
@@ -107,16 +107,4 @@ And yet, how could Verdery—or any of her perceived alter-egos—definitively a
 
 <p>It is here where surveillance takes on a more visceral form for the reader. While surveillance itself is an often-discussed topic in abstract terms, rarely do we glimpse its stark, raw reality such as we do here. This is why the explicit unveiling of Verdery's secret files becomes at the same time a paradoxical optic: they were never meant to be perused by their subjects. Their unveiling doesn't merely shed light; they refract and diffract. They take the invasive gaze once turned outward and fold it inward, forcing those who watched to become the watched. And what is found is a level of detail that borders on the obsessive, an almost fetishistic scrutiny, with activities and locations recorded down to the exact hour, written with a typical bureaucratic-scientific tone. Suddenly, the reader realises that it is less a violation of a single person and more an instantiation of the modern state’s impulse to observe, categorise, and control.
 <p>The files also transcend Verdery’s personal narrative in another way; they are spectral reflection of the Cold War era itself where the personal is inevitable political. The sheer influence that a foreign researcher's portrayal of a country can have on its international reputation took on a heightened importance during the ideological standoff of the Cold War, with communist and capitalist blocs each aiming to showcase the other's failings while affirming their own values and systems. Even seemingly impartial academic inquiry could be weaponised in the global battle of ideas. Any representation that did not align with the state's self-image had the potential to not only tarnish its global reputation but also fuel Western propaganda. Ironically, then, the state authorities in Romania, depicted by Verdery as ethnographer cum spy, were dealing with the same fundamental problem that she herself faced: the challenge of reconciling the collective identity they had perceived internally with the version others perceived from the outside. This makes it such that, even if Verdery wasn't a de jure spy, even when her spies had subsequently realised as much, the impact of her academic work, her narration of Romania's history and culture, was seen as carrying a similar weight to espionage, and further blurs the lines between academic research and intelligence gathering, as well as the tension between self-perception and external perception, both on the personal and national levels.
-        </td>
-    </tr>
-</table>
-
-
-    <br>
-
-    <center>
-
-  <center>
-
-
-</center>
+</div>
