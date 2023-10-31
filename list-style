@@ -36,7 +36,11 @@ hr {
     margin-top: -15px;  /* Adjust this value as needed */
 }
   
-
+    ul {
+        list-style-type: none; /* This removes the bullets */
+        padding-left: 0;             
+        margin-left: 0;              
+    }
      
     </style>
 </head>
