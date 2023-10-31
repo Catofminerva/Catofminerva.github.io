@@ -83,71 +83,48 @@ hr {
 --------------------                    --------------------
 </pre>
 
-            
-    <hr>
-    <div style="display: flex;">
-
-        <!-- Left Sidebar -->
+ <!-- Three Column Layout for Cool Sites -->
+    <div style="display: flex; justify-content: space-between; padding: 20px;">
+        <!-- Video People Column -->
         <div style="flex: 1; padding: 20px;">
-            <a href="#">
-                <img src="icon1.png" alt="Icon Description">
-                Home
-            </a>
-            <a href="#">
-                <img src="icon2.png" alt="Icon Description">
-                Fav Hyperlinks
-            </a>
-            <!-- ... more sidebar links ... -->
+            <h2 style="font-size: 1.5rem; color: yellow;">Video People:</h2>
+            <ul>
+                <li><a href="#">David Hoffman, interesting old films and footage.</a></li>
+                <!-- ...Other Video People Links... -->
+            </ul>
         </div>
 
-        <!-- Main Content Area -->
-        <div style="flex: 3; padding: 20px;">
+        <!-- Greenhouse/Webmaster Tools Column -->
+        <div style="flex: 1; padding: 20px;">
+            <h2 style="font-size: 1.5rem; color: yellow;">Greenhouse:</h2>
+            <p>Visit the greenhouse for bonsai sites!</p>
+            
+            <h2 style="font-size: 1.5rem; color: yellow; margin-top: 20px;">Webmaster Tools:</h2>
+            <ul>
+                <li><a href="#">Panic Software, best Editor and FTP</a></li>
+                <!-- ...Other Webmaster Tools Links... -->
+            </ul>
+        </div>
 
-            <!-- Video People Section -->
-            <div>
-                <h2>Video People:</h2>
-                <ul>
-                    <li>David Hoffman, interesting old films and footage.</li>
-                    <li>Lazy Game Reviews, retro tech and old DOS stuff.</li>
-                    <!-- ... more list items ... -->
-                </ul>
-            </div>
-
-            <!-- Greenhouse Section -->
-            <div>
-                <h2>Greenhouse:</h2>
-                <p>Visit the greenhouse for bonsai sites!</p>
-                <!-- ... more content if any ... -->
-            </div>
-
-            <!-- Music Featured on this Site Section -->
-            <div>
-                <h2>Music Featured on this Site:</h2>
-                <ul>
-                    <li>Lobo Loco, great mellow mood tracks like the Homepage.</li>
-                    <!-- ... more list items ... -->
-                </ul>
-            </div>
-
-            <!-- Interesting Links Section -->
-            <div>
-                <h2>Interesting Links:</h2>
-                <ul>
-                    <li>Skys Edge small engineering company, makes rotary mobile phone.</li>
-                    <!-- ... more list items ... -->
-                </ul>
-            </div>
-
-            <!-- Webmaster Tools Section -->
-            <div>
-                <h2>Webmaster Tools:</h2>
-                <ul>
-                    <li>Panic Software, best Editor and FTP.</li>
-                    <!-- ... more list items ... -->
-                </ul>
-            </div>
+        <!-- Music Featured on this Site Column -->
+        <div style="flex: 1; padding: 20px;">
+            <h2 style="font-size: 1.5rem; color: yellow;">Music Featured on this Site:</h2>
+            <ul>
+                <li><a href="#">Lobo Loco, great mellow mood tracks.</a></li>
+                <!-- ...Other Music Links... -->
+            </ul>
         </div>
     </div>
+    
+    <!-- Interesting Links, spanning the full width below the columns -->
+    <div style="padding: 20px;">
+        <h2 style="font-size: 1.5rem; color: yellow;">Interesting Links:</h2>
+        <ul>
+            <li><a href="#">Skys Edge, small engineering company.</a></li>
+            <!-- ...Other Interesting Links... -->
+        </ul>
+    </div>           
+
 
 </body>
 </html>
