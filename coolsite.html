@@ -47,19 +47,28 @@ li {
     margin-bottom: 20px; /* This will add space below each bullet point */
 }
 
-        .two-columns-container {
+       .columns-container {
             display: flex;
-            justify-content: center;
-            align-items: start; /* This will align the top of the columns */
-            gap: 2%; /* gap between the two columns */
-            padding: 20px 5%; /* space around the container */
+            justify-content: space-between;
+            align-items: start;
+            gap: 2%;
+            padding: 20px 2%;
+            max-width: 100vw;
+            box-sizing: border-box;
         }
 
         .column {
-            flex: 1; /* This allows each column to take equal space */
-            width: 100%; /* Each column takes 45% of the container's width */
-            padding: 20px 2%; 
+            flex: 1;
+            padding: 20px;
             text-align: justify;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
     </style>
 </head>
@@ -112,7 +121,7 @@ li {
 
     <!-- Two Column Layout for Cool Sites -->
     <div style="display: flex; justify-content: space-between; padding: 20px;">
-     <div class="two-columns-container">
+     <div class="columns-container">
         <!-- First Column -->
        <div class="column">
             <h2 style="font-size: 1.5rem; color: yellow;">Academic:</h2>
