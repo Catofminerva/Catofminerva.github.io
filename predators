@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="UTF-8">
+    <title>Ali's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <style>
+        body {
+            background-color: black;
+            background-image: url('stars.gif');
+            font-family: "Press Start 2", Times, serif;
+            color: #FF33CC;
+        }
+
+
+
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
+        }
+
+.kitty-gif {
+    margin-top: 0px; 
+}
+
+hr {
+    margin-top: -15px;  /* Adjust this value as needed */
+}
+
+.exported-content {
+    background-color: rgba(255, 255, 255, 0.8); /* Black background with 60% opacity */
+    color: black;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px;  /* Adds some space around your content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow for depth */
+}
+
+
+        
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
+        <img src="kitty.gif" alt="Kitty Gif" class="kitty-gif">
+    </center>
+    <hr>
+    <!-- Navigation Buttons -->
+    <center>
+        <a href="index.html" class="retro-btn">Home</a>
+        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+        <a href="about.html" class="retro-btn">About</a>
+        <img src="about.gif" alt="about GIF" style="vertical-align: middle;"></a>
+        <a href="blog_posts.html" class="retro-btn">Entries</a>
+        <img src="post.gif" alt="post GIF" style="vertical-align: middle;"></a>
+        <a href="coolsite.html" class="retro-btn">Kool Webpages</a>
+        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;"></a>
+        <a href="guestbook.html" class="retro-btn">Guestbook</a>
+        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;"></a>
+        <a href="books.html" class="retro-btn">Kool Books</a>
+        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+        <a href="truthtable.html" class="retro-btn">Truth Table</a>
+        <img src="math.gif" alt="math GIF" style="vertical-align: middle;"></a>
+        <a href="contact.html" class="retro-btn">Contact</a>
+        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
+    </center>
+<br>
+
+<div class="exported-content">
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc671aa8b-b93a-4e94-be82-5331feeb8985_498x498.gif" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/c671aa8b-b93a-4e94-be82-5331feeb8985_498x498.gif" style="height:498px; width:498px" /></a></p>
+
+<p>First, I will argue that nonhuman animals possess moral value. Then, I will demonstrate that their moral value is significant in multiple contexts, extending beyond their role as victims of human exploitation to also include their experience as victims of predation.</p>
+
+<h2><strong>The Argument from Species Overlap</strong></h2>
+
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0698b7-c1e8-4fea-9b65-982da398e3b3_940x788.png" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/bf0698b7-c1e8-4fea-9b65-982da398e3b3_940x788.png" style="height:264.9021276595745; width:316px" /></a></p>
+
+<p>First that they have moral value. The argument from species overlap or otherwise called &lsquo;the marginal cases argument&rsquo; argues that if nonhuman animals do not have moral value then so would marginal cases of humans, like the senile, infants, the severely mentally disabled and etc. But since most people hold that those groups <em>do</em> have moral value, then we can safely reject moral systems that entail that they do not.</p>
+
+<p>The crux of this argument lies in the identification of traits&mdash;such as rationality, intelligence, the ability to speak, or autonomy&mdash;that are often cited to deny moral value to nonhuman animals. If we apply these traits consistently, they would also negate the moral value of the aforementioned marginal human cases. To attribute moral value to one group but not the other constitutes special pleading. Thus, we are left with two options: either we acknowledge that these specific groups of humans do not have moral value, or we concede that nonhuman animals do have moral value.</p>
+
+<p>Expanding on this line of reasoning, it becomes clear that the moral value of nonhuman animals is not trivial.&nbsp;The Argument from Species Overlap reveals that there are no morally relevant distinctions between nonhuman animals and humans that would justify actions like mass killing of the former group for consumption, especially when alternatives exist, but not the latter group.&nbsp;other words, no logical proposition can be formulated that would permit the mass killing of animals for consumption while simultaneously forbidding the same treatment of humans, without invoking a logical contradiction or an absurdity. Any attempts to introduce such a &quot;symmetry breaker&quot; between the two groups seem to fail.</p>
+
+<p>Therefore, the moral value of nonhuman animals is both real and significant.</p>
+
+<p>But what if someone argues that the trait breaking the symmetry between humans and nonhuman animals is simply &#39;humanity&#39;? After all, the senile, infants, mentally disabled, and whatever other marginal cases of humans all share the similar trait of being&nbsp;<em>human</em>.</p>
+
+<p>This notion of humanity can be questioned in two key ways.</p>
+
+<ol>
+	<li><strong>Humanity Defined by Species</strong></li>
+</ol>
+
+<p>The first interpretation defines &#39;human&#39; at the species level, asserting that the morally relevant trait is &#39;possessing DNA that traces back to Homo erectus.&#39; While this may seem like a way to distinguish humans from nonhuman animals, it comes with ethical complications. Consider a hypothetical scenario in which archaeologists discover beings that exhibit all human characteristics but do not trace their lineage back to Homo erectus. Under the species-based definition, one would have to conclude that it is morally permissible to exploit these beings as we currently do nonhuman animals. which includes enslaving, torturing and killing nine billion of them annually.</p>
+
+<p>Alternatively, a more reasonable approach is to argue that moral value shouldn&#39;t hinge on genealogy. This means that when deciding whether or not we should unnecessarily mass enslave and kill other beings for consumption, where such beings&#39; DNA traces is not a relevant consideration. Rather, what should matter are characteristics like sentience, the ability to feel pain or pleasure, and subjective experience. The mere fact that humans share a common ancestor with Homo erectus does not necessarily make this a morally relevant point of differentiation.</p>
+
+<ol start="2">
+	<li><strong>Humans as In-group membership</strong></li>
+</ol>
+
+<p>The second interpretation posits &#39;human&#39; as a marker for in-group membership. In this case, moral value would be tied to one&#39;s membership in the human group.&nbsp;Categorisation as a member of an in-group is the relevant moral criterion that justifies mass killing non-members but not members for the purposes of consumption even when alternatives exist.</p>
+
+<p>However, this very same line of reasoning&nbsp;gives free license for racists to appeal to race or sexists to sex and etc as being a relevant non-trivial moral criteria.&nbsp;It opens the door to justifying prejudice based on other arbitrary group memberships. As A.W.F. Edwards noted:</p>
+
+<blockquote>
+<p>A proper analysis of human data reveals a substantial amount of information about genetic differences. What use, if any, one makes of it is quite another matter. But it is a dangerous mistake to premise the moral equality of human beings on biological similarity because dissimilarity, once revealed, then becomes an argument for moral inequality.</p>
+</blockquote>
+
+<p>Grounding the moral equality of humans in biological similarity is a risky premise, as any revealed dissimilarity could then be used to argue for moral inequality.</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>The Common Denominator: Sentience</strong></h3>
+
+<p>Across all attempts to define the &#39;break off point&#39; for moral consideration&mdash;whether it be intelligence, language, capacities, moral agency, or social contract&mdash;there exist marginal cases that also meet those criteria, forcing us to acknowledge their moral value if we wish to remain consistent. Sentience, however, is a trait shared by both human and nonhuman animals and serves as a necessary condition for experiencing desires, suffering, and other states relevant to moral consideration. Most people, myself included, value these experiences. This value is made clear when faced with the logical conlcusions which alternative views entail.</p>
+
+<p>Does this mean nonhuman animals have the same moral value as humans?</p>
+
+<p>The short answer is no, but the nuanced response is that it doesn&#39;t necessarily matter. Even if we value one group (Group A) over another (Group B), whenever we treat Group B worse, we must articulate a morally relevant reason for doing so. If we fail to provide such a rationale, any differential treatment would be unjustified. In other words, the real question in any situation where one group is discriminated against or harmed (like the mass killing of nonhuman animals) is: what morally relevant difference exists between Group A and Group B that justifies different treatment? Without a convincing answer, the action remains unjustifiable.</p>
+
+<p><strong>Syllogistic Argument:</strong></p>
+
+<ol>
+	<li>
+	<p>P1: If your ethical stance maintains that a human can possess the same traits as a nonhuman animal without losing moral value (P), then your ethical stance must, to remain consistent, also confer moral value to the nonhuman animal (Q).</p>
+	</li>
+	<li>
+	<p>P2: Your ethical stance does maintain that a human can possess the same traits as a nonhuman animal without losing moral value (P).</p>
+	</li>
+	<li>
+	<p>C: Therefore, to remain consistent, your ethical stance must also confer moral value to the nonhuman animal (Q).</p>
+	</li>
+</ol>
+
+<h4>The argument expanded by #AskYourself Discord channel:</h4>
+
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc7bb789-d56f-48a2-b4ef-d0038b62ca58_3940x3934.jpeg" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/fc7bb789-d56f-48a2-b4ef-d0038b62ca58_3940x3934.jpeg" style="height:1454px; width:1456px" /></a></p>
+
+<p>&nbsp;</p>
+
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fad6a860a-3016-4b46-bec2-8234e5cd99b6_2648x4400.jpeg" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/ad6a860a-3016-4b46-bec2-8234e5cd99b6_2648x4400.jpeg" style="height:2419px; width:1456px" /></a></p>
+
+<p>&nbsp;</p>
+
+<h2>Wild Animal Predation</h2>
+
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4cc04c6a-0123-4d7e-a62e-08fa5e279846_600x320.webp" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/4cc04c6a-0123-4d7e-a62e-08fa5e279846_600x320.webp" style="height:320px; width:600px" title="" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>The ethical framework of identifying a &#39;morally relevant trait&#39; that distinguishes humans from nonhuman animals in the context of factory farming can also be applied to the scenario of wild animal predation. Essentially, the question is: What trait or condition is true or false for nonhuman animals that, if also true or false for humans, would make it morally acceptable for humans to be subject to predation?</p>
+
+<p><strong>Hypothetical:</strong></p>
+
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Xenomorph">Xenomorphes</a>&nbsp;have evolved in a natural predator-prey cycle with humans. You are in a helicopter and you spot a xenomorph, fully aware that it will likely prey on a human in the future. You have a sniper rifle in your hands. Would you shoot the xenomorph?</p>
+</blockquote>
+
+<p>Most readers will likely answer &#39;yes&#39;.&nbsp; However, if we replace the xenomorph with a lion and humans with gazelles, many readers may hesitate to answer &#39;yes.&#39; This begs the question: What is the morally relevant difference between the xenomorph-human case and the lion-gazelle case?</p>
+
+<p>&nbsp;</p>
+
+<p>In the lion-gazelle case, many would argue that natural animal behavior should be left undisturbed for ecological balance. Yet, in the xenomorph-human case, the potential ecological impact of shooting the xenomorph was not the primary, espeically since humans are the species most responsible for environmental degradation, so shooting them may actually be better, ecologically speaking.&nbsp;If we accept that there is no consistent trait that justifies the predation of nonhuman animals but not humans, then the varying responses to these two hypothetical scenarios indicate a deeper issue in our ethical reasoning.</p>
+
+<p>It is very challenging to find a sound and consistent moral distinction between humans and non-human animals that would justify different moral considerations when it comes to predation or other forms of harm.</p>
+
+<h2><strong>Odd-order Predators</strong></h2>
+
+<p><a href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa88eaf04-68f6-432f-8c90-94044d1118ae_3072x2304.webp" target="_blank"><img alt="" src="https://substack-post-media.s3.amazonaws.com/public/images/a88eaf04-68f6-432f-8c90-94044d1118ae_3072x2304.webp" style="height:393px; width:524px" /></a></p>
+
+<p>Given the absence of universally acceptable morally relevant traits that could justify the predation of nonhuman animals but not humans, a different ethical solution must be considered. One proposal could be the concept of &quot;odd-order killing,&quot; which is designed to minimise harm within the food chain, potentially saving more animals from predation.</p>
+
+<p>The term &quot;odd-order&quot; refers to animals in odd positions within a food chain. If we consider a simplified food chain, the animals that prey on herbivores would be in the first odd-order (e.g., frogs in the case of grass ---&gt; grasshopper ---&gt; frog), and those who prey on predators of herbivores would be in the next odd-order (e.g., eagles in the case of frog ---&gt; snake ---&gt; eagle).</p>
+
+<blockquote>
+<p>(a) Herbivore.</p>
+
+<p>1. Carnivore eats (a).</p>
+
+<p>2. Carnivore eats 1.</p>
+
+<p>3. Carnivore eats 2.</p>
+
+<p>4. Carnivore eats 3.</p>
+
+<p>5. Carnivore eats 4.</p>
+</blockquote>
+
+<p>The odd numbers are odd-order.&nbsp;</p>
+
+<p>For example:&nbsp;</p>
+
+<blockquote>
+<p>grass &mdash;&gt;grasshopper&mdash;&gt;frog&mdash;&gt;snake&mdash;&gt;eagle.&nbsp;</p>
+</blockquote>
+
+<p>The odd-order predators in this chain will be the frog and the eagle. The idea is that, we can save the grasshopper which the frog would have eaten in two ways:&nbsp;</p>
+
+<ol>
+	<li>
+	<p>directly, by killing the frogs.</p>
+	</li>
+	<li>
+	<p>indirectly, by killing the eagle that would have killed the snake, that would have killed the frog.&nbsp;</p>
+	</li>
+</ol>
+
+<p>Killing the snake, on the other hand, would be bad because the snake is actually saving the grasshopper (by killing the frog).&nbsp;</p>
+
+<p>However, the complexities of actual ecosystems make the odd-order killing approach difficult to implement. Real-world food chains are seldom as linear as the idealized versions we discuss. For instance, an animal we might consider as an even-order predator could also prey directly on herbivores, thus rendering them an odd-order predator as well. This intricate network of relations in the food chain necessitates a deep understanding of the diet and behavior of each species involved.</p>
+</div>
