@@ -1,28 +1,35 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta charset="UTF-8">
-    <title>Ali's Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <title>Ali's Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: black;
             background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
+            font-family: 'Press Start 2P', cursive;
             color: #FF33CC;
         }
-
-        .tamanotchi {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            z-index: 1000;
+        .container {
+            width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #000; /* Changed to black */
+            border: 2px solid #FF33CC; /* Pink border */
+            margin-top: 50px;
+            box-shadow: 0 0 10px #FF33CC; /* Pink glow */
+        }
+        .header {
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
         }
 
-        @keyframes flip {
+    @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
             100% { transform: rotateY(0deg); }
@@ -42,10 +49,35 @@
 hr {
     margin-top: -15px;  /* Adjust this value as needed */
 }
-        
-    </style>
-</head>
+  
+ul {
+    list-style-position: inside; /
+    padding-left: 0;             
+    margin-left: 0;              
+}
 
+li {
+    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
+    margin-bottom: 20px; /* This will add space below each bullet point */
+}
+
+
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+
+        
+      </style>
+
+
+
+
+
+</head>
 <body>
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
@@ -55,7 +87,7 @@ hr {
     <!-- Navigation Buttons -->
     <center>
         <a href="index.html" class="retro-btn">Home</a>
-        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle;"></a>
+        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
         <a href="about.html" class="retro-btn">About</a>
         <img src="about.gif" alt="about GIF" style="vertical-align: middle;"></a>
         <a href="blog_posts.html" class="retro-btn">Entries</a>
@@ -65,15 +97,16 @@ hr {
         <a href="guestbook.html" class="retro-btn">Guestbook</a>
         <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;"></a>
         <a href="books.html" class="retro-btn">Kool Books</a>
-        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle;"></a>
+        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
         <a href="truthtable.html" class="retro-btn">Truth Table</a>
         <img src="math.gif" alt="math GIF" style="vertical-align: middle;"></a>
         <a href="contact.html" class="retro-btn">Contact</a>
         <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
         <a href="chat.html" class="retro-btn">Chat</a>
-        <img src="chattt.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
+        <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;"></a>
     </center>
 <br>
+
 <center>
 <img src="me.jpeg" width="500" height="320">
 </center>
