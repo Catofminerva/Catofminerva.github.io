@@ -106,28 +106,32 @@
             console.log('WebSocket error:', event);
         });
 
-     function processMessage(data) {
+    function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
-    console.log('Raw message data:', data); // Log the raw data for debugging
 
     try {
         var messageData = JSON.parse(data);
-        console.log('Parsed message data:', messageData); // Log the parsed data for debugging
 
-        if (messageData.type === 'history') {
+        // Check if the message data is of type 'Buffer'
+        if (messageData.data && messageData.data.type === 'Buffer') {
+            // Convert the Buffer to a string
+            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
+            chatLog.innerHTML += messageText + '\n';
+        } else if (messageData.type === 'history') {
             chatLog.innerHTML = '';
             messageData.data.forEach(function(message) {
                 chatLog.innerHTML += message + '\n';
             });
-        } else if (messageData.type === 'message') {
+        } else {
             chatLog.innerHTML += messageData.data + '\n';
         }
     } catch (error) {
         console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format\n'; // Indicate an error in the log
+        chatLog.innerHTML += 'Error in message format\n';
     }
     chatLog.scrollTop = chatLog.scrollHeight;
 }
+
 
 function sendMessage() {
     var handleInput = document.getElementById('handle-input');
