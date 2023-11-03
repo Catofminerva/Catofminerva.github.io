@@ -68,33 +68,44 @@
         </div>
 
     <script>
-        var ws = new WebSocket('wss://wave-sand-raisin.glitch.me');
-    
-        ws.onmessage = function(event) {
+       
+     // Initialize the WebSocket
+const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+
+socket.addEventListener('open', function (event) {
+    console.log('WebSocket connection established');
+});
+
+socket.addEventListener('message', function (event) {
     var chatLog = document.getElementById('chat-log');
-    
-    // Define a function to process the message data
-    function processMessage(data) {
-        // Try to parse the JSON data
-        try {
-            var messageData = JSON.parse(data);
-            // Handle differently based on message type
-            if (messageData.type === 'history') {
-                // Clear the chat log before appending history
-                chatLog.innerHTML = '';
-                messageData.data.forEach(function(message) {
-                    chatLog.innerHTML += message + '\n';
-                });
-            } else {
-                // Append the single message to the chat log
-                chatLog.innerHTML += messageData.data + '\n';
-            }
-        } catch (error) {
-            // If JSON parsing fails, treat it as plain text
-            chatLog.innerHTML += data + '\n';
+    processMessage(event.data); // Call the processMessage function directly
+});
+
+socket.addEventListener('close', function (event) {
+    console.log('WebSocket connection closed');
+});
+
+socket.addEventListener('error', function (event) {
+    console.log('WebSocket error:', event);
+});
+
+function processMessage(data) {
+    var chatLog = document.getElementById('chat-log');
+    try {
+        var messageData = JSON.parse(data);
+        if (messageData.type === 'history') {
+            chatLog.innerHTML = '';
+            messageData.data.forEach(function(message) {
+                chatLog.innerHTML += message + '\n';
+            });
+        } else {
+            chatLog.innerHTML += messageData.data + '\n';
         }
-        chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll to the latest message
+    } catch (error) {
+        chatLog.innerHTML += data + '\n';
     }
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
     
     // Check if the received data is a Blob
     if (event.data instanceof Blob) {
@@ -131,10 +142,15 @@ function sendMessage() {
     
     if (handle !== '' && message !== '') {
         var fullMessage = handle + ": " + message; // Combining handle and message
-        ws.send(fullMessage);
-        chatInput.value = '';
+        if (socket.readyState === WebSocket.OPEN) {
+            socket.send(fullMessage);
+            chatInput.value = '';
+        } else {
+            console.log('WebSocket is not open. readyState:', socket.readyState);
+        }
     }
 }
+
 
     
         var input = document.getElementById("chat-input");
