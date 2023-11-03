@@ -67,109 +67,80 @@
             © 1996 Ali's Chat. All rights reserved.
         </div>
 
-    <script>
-       
-     // Initialize the WebSocket
-const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+ <script>
+        // Initialize the WebSocket
+        const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-socket.addEventListener('open', function (event) {
-    console.log('WebSocket connection established');
-});
+        socket.addEventListener('open', function (event) {
+            console.log('WebSocket connection established');
+            // Request the chat history from the server
+            socket.send('request-chat-history');
+        });
 
-socket.addEventListener('message', function (event) {
-    var chatLog = document.getElementById('chat-log');
+        socket.addEventListener('message', function (event) {
+            var chatLog = document.getElementById('chat-log');
 
-    // Check if the received data is a Blob
-    if (event.data instanceof Blob) {
-        // Create a FileReader to read the Blob as text
-        var reader = new FileReader();
-        
-        reader.onload = function(e) {
-            // Process the text from the Blob
-            processMessage(e.target.result);
-        };
-        
-        // Read the Blob as text
-        reader.readAsText(event.data);
-    } else {
-        // If not a Blob, assume it's text and process it
-        processMessage(event.data);
-    }
-});
+            // Check if the received data is a Blob
+            if (event.data instanceof Blob) {
+                // Create a FileReader to read the Blob as text
+                var reader = new FileReader();
 
+                reader.onload = function(e) {
+                    // Process the text from the Blob
+                    processMessage(e.target.result);
+                };
 
-socket.addEventListener('close', function (event) {
-    console.log('WebSocket connection closed');
-});
+                // Read the Blob as text
+                reader.readAsText(event.data);
+            } else {
+                // If not a Blob, assume it's text and process it
+                processMessage(event.data);
+            }
+        });
 
-socket.addEventListener('error', function (event) {
-    console.log('WebSocket error:', event);
-});
+        socket.addEventListener('close', function (event) {
+            console.log('WebSocket connection closed');
+        });
 
-function processMessage(data) {
-    var chatLog = document.getElementById('chat-log');
-    try {
-        var messageData = JSON.parse(data);
-        if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
-            });
-        } else {
-            chatLog.innerHTML += messageData.data + '\n';
+        socket.addEventListener('error', function (event) {
+            console.log('WebSocket error:', event);
+        });
+
+        function processMessage(data) {
+            var chatLog = document.getElementById('chat-log');
+            try {
+                var messageData = JSON.parse(data);
+                if (messageData.type === 'history') {
+                    chatLog.innerHTML = '';
+                    messageData.data.forEach(function(message) {
+                        chatLog.innerHTML += message + '\n';
+                    });
+                } else {
+                    chatLog.innerHTML += messageData.data + '\n';
+                }
+            } catch (error) {
+                chatLog.innerHTML += data + '\n';
+            }
+            chatLog.scrollTop = chatLog.scrollHeight;
         }
-    } catch (error) {
-        chatLog.innerHTML += data + '\n';
-    }
-    chatLog.scrollTop = chatLog.scrollHeight;
-}
-    
-    // Check if the received data is a Blob
-    if (event.data instanceof Blob) {
-        // Create a FileReader to read the Blob as text
-        var reader = new FileReader();
-        
-        reader.onload = function(e) {
-            // Process the text from the Blob
-            processMessage(e.target.result);
-        };
-        
-        // Read the Blob as text
-        reader.readAsText(event.data);
-    } else {
-        // If not a Blob, assume it's text and process it
-        processMessage(event.data);
-    }
-};
 
+        function sendMessage() {
+            var handleInput = document.getElementById('handle-input');
+            var chatInput = document.getElementById('chat-input');
+            var handle = handleInput.value.trim();
+            var message = chatInput.value.trim();
 
-
-ws.onopen = function() {
-    console.log('Connected to the WebSocket server');
-    // Request the chat history from the server
-    ws.send('request-chat-history');
-};
-
-
-function sendMessage() {
-    var handleInput = document.getElementById('handle-input');
-    var chatInput = document.getElementById('chat-input');
-    var handle = handleInput.value.trim();
-    var message = chatInput.value.trim();
-    
-    if (handle !== '' && message !== '') {
-        var fullMessage = handle + ": " + message; // Combining handle and message
-        if (socket.readyState === WebSocket.OPEN) {
-            socket.send(fullMessage);
-            chatInput.value = '';
-        } else {
-            console.log('WebSocket is not open. readyState:', socket.readyState);
+            if (handle !== '' && message !== '') {
+                var fullMessage = handle + ": " + message; // Combining handle and message
+                if (socket.readyState === WebSocket.OPEN) {
+                    socket.send(fullMessage);
+                    chatInput.value = '';
+                } else {
+                    console.log('WebSocket is not open. readyState:', socket.readyState);
+                }
+            }
         }
-    }
-}
 
-
-    
         var input = document.getElementById("chat-input");
         input.addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {
@@ -177,6 +148,9 @@ function sendMessage() {
             }
         });
     </script>
+    
+</body>
+</html>
     
 </body>
 </html>
