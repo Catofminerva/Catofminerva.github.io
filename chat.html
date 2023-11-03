@@ -106,12 +106,14 @@
             console.log('WebSocket error:', event);
         });
 
-function processMessage(data) {
+     function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
+    console.log('Raw message data:', data); // Log the raw data for debugging
+
     try {
         var messageData = JSON.parse(data);
+        console.log('Parsed message data:', messageData); // Log the parsed data for debugging
 
-        // This check is important to see if the message is of a specific type
         if (messageData.type === 'history') {
             chatLog.innerHTML = '';
             messageData.data.forEach(function(message) {
@@ -121,8 +123,8 @@ function processMessage(data) {
             chatLog.innerHTML += messageData.data + '\n';
         }
     } catch (error) {
-        // This is only for messages that are not JSON formatted, which shouldn't be the case.
         console.error('Error parsing message:', error);
+        chatLog.innerHTML += 'Error in message format\n'; // Indicate an error in the log
     }
     chatLog.scrollTop = chatLog.scrollHeight;
 }
