@@ -106,23 +106,27 @@
             console.log('WebSocket error:', event);
         });
 
-        function processMessage(data) {
-            var chatLog = document.getElementById('chat-log');
-            try {
-                var messageData = JSON.parse(data);
-                if (messageData.type === 'history') {
-                    chatLog.innerHTML = '';
-                    messageData.data.forEach(function(message) {
-                        chatLog.innerHTML += message + '\n';
-                    });
-                } else {
-                    chatLog.innerHTML += messageData.data + '\n';
-                }
-            } catch (error) {
-                chatLog.innerHTML += data + '\n';
-            }
-            chatLog.scrollTop = chatLog.scrollHeight;
+function processMessage(data) {
+    var chatLog = document.getElementById('chat-log');
+    try {
+        var messageData = JSON.parse(data);
+
+        // This check is important to see if the message is of a specific type
+        if (messageData.type === 'history') {
+            chatLog.innerHTML = '';
+            messageData.data.forEach(function(message) {
+                chatLog.innerHTML += message + '\n';
+            });
+        } else if (messageData.type === 'message') {
+            chatLog.innerHTML += messageData.data + '\n';
         }
+    } catch (error) {
+        // This is only for messages that are not JSON formatted, which shouldn't be the case.
+        console.error('Error parsing message:', error);
+    }
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
+
 
         function sendMessage() {
             var handleInput = document.getElementById('handle-input');
