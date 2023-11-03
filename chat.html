@@ -78,8 +78,25 @@ socket.addEventListener('open', function (event) {
 
 socket.addEventListener('message', function (event) {
     var chatLog = document.getElementById('chat-log');
-    processMessage(event.data); // Call the processMessage function directly
+
+    // Check if the received data is a Blob
+    if (event.data instanceof Blob) {
+        // Create a FileReader to read the Blob as text
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // Process the text from the Blob
+            processMessage(e.target.result);
+        };
+        
+        // Read the Blob as text
+        reader.readAsText(event.data);
+    } else {
+        // If not a Blob, assume it's text and process it
+        processMessage(event.data);
+    }
 });
+
 
 socket.addEventListener('close', function (event) {
     console.log('WebSocket connection closed');
