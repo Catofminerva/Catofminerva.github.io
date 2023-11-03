@@ -15,12 +15,6 @@
             color: #FF33CC;
         }
 
-        .tamanotchi {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            z-index: 1000;
-        }
 
         @keyframes flip {
             0% { transform: rotateY(0deg); }
@@ -74,9 +68,21 @@ hr {
 <br>
 
 <center>
-
-<hr>
-        <h2>NON-FICTION BOOKS</h2>
+    <nav>
+        <ul>
+            <p><a href="#non-fiction">Non-Fiction</a>
+            <p><a href="#fiction">Fiction</a>
+        </ul>
+    </nav>
+    <search-bar>
+        <!-- Search functionality here -->
+    </search-bar>
+</header>
+<main>
+    <section id="non-fiction" class="genre-section">
+        <h2>Non-Fiction Books</h2>
+        <div class="book-container">
+            <!-- Non-Fiction Books here -->
 
     <!-- Book Cards -->    
 
@@ -125,7 +131,7 @@ hr {
         <img src="hope.jpeg" alt="Fevre Dream Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
         <p>Initially drawn to uncovering a universal law to explain historical and political phenomena, I was once captivated by theories suggesting that humans operated under fixed principles. Over time, and influenced by Rorty, my perspective shifted. I came to reject essentialism and foundationalism and embraced a more pluralistic, dynamic understanding of human behaviour. I cam to also recognise language and discourse as central to our interaction with the world.
 <p>This book is the best possible introduction to Rorty, clear and digestible philosophy that is relevant to people’s everyday thinking. Rorty's relativistic view, which might unsettle some, resonates deeply with me, as it reveals a world where fixed truths give way to discourse and practical utility. He argues that our beliefs do not mirror reality but are responses to cope with it. This framework dismisses the need for a unified appearance-reality distinction, given that we assess our beliefs based on their usefulness in achieving our goals. In this light, the sciences and religion serve different purposes and need not be reconciled.
-<p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. Consider this quote: 
+<p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. Consider this quote:
 <p>”We pragmatists cannot make sense of the idea that we should pursue truth for its own sake. We cannot regard truth as a goal of inquiry. The purpose of inquiry is to achieve agreement among human beings about what to do, to bring about consensus on the ends to be achieved and the means to be used to achieve those ends. Inquiry that does not achieve coordination of behaviour is not inquiry but simply wordplay. To argue for a certain theory about the microstructure of material bodies, or about the proper balance of powers between branches of government, is to argue about what we should do: how we should use the tools at our disposal in order to make technological, or political, progress. So, for pragmatists there is no sharp break between natural science and social science, nor between social science and politics, nor between politics, philosophy and literature. All areas of culture are parts of the same endeavour to make life better.”  </p>
         <a https://www.goodreads.com/book/show/86099.Philosophy_and_Social_Hope" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
     </div>
@@ -164,8 +170,14 @@ hr {
     <a href="https://www.goodreads.com/book/show/29380.Animal_Liberation" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
 </div>
 
-<hr>
-        <h2>FICTION BOOKS</h2>
+</div>
+</section>
+
+<section id="fiction" class="genre-section">
+    <h2>Fiction Books</h2>
+    <div class="book-container">
+                <!-- Fiction Books here -->
+
 <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
     <h3>Songs of a Dead Dreamer and Grimscribe</h3>
     <img src="ligotti1.jpeg" alt="Songs of a Dead Dreamer and Grimscribe Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
@@ -220,17 +232,12 @@ His prose, at times wry, pessimistic, or bitingly sarcastic, is nonetheless beau
         <p> Written in 1935, this is an existential novel set during the Great Depression. Gloria Beatty and her boyfriend particpate in a gruelling and long dance marathon contest that drags for weeks, all to win the $1000 prize money or be noticed by studio producers and movie stars. At one point, Gloria asks ”Why are these high-powered scientists always screwing around trying to prolong life instead of finding pleasant ways to end it?”. The novel ends with one of the most bleak questions in all of literature, which is the title of the book. It is meant to depict the helplessness people felt during the Depression, who worked really hard in a rat-race marathon to the top but ended up nowhere.</p>
         <a href="https://www.goodreads.com/book/show/152052.They_Shoot_Horses_Don_t_They_?ref=nav_sb_ss_1_17" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
     </div>
-
+</div>
+        </section>
     
     <!-- ... Add more book cards here ... -->
 
-</center>
-
-            <center>
-
-            <p style="margin-top: 30px;">Looking for more? Visit our guestbook and leave a suggestion!✌️</p>
-            </center>
-
-
-
-      
+</main>
+<footer>
+    <p>Looking for more? Visit our guestbook and leave a suggestion!</p>
+</footer>
