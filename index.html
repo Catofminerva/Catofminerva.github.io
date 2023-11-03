@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-<audio id="myMusic" loop autoplay>
-    <source src="https://github.com/Catofminerva/Catofminerva.github.io/raw/main/audio.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicBtn" class="retro-music-btn">Play/Pause Music</button>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>Ali's Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <audio id="myMusic" loop autoplay>
+        <source src="https://github.com/Catofminerva/Catofminerva.github.io/raw/main/audio.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn" class="retro-music-btn">Play/Pause Music</button>
+    
+
+    <title>Ali's Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
+       
+       .tamanotchi {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    @keyframes flip {
+        0% { transform: rotateY(0deg); }
+        50% { transform: rotateY(180deg); }
+        100% { transform: rotateY(0deg); }
+    }
+       
+       body {
             background-color: black;
             background-image: url('stars.gif');
             font-family: "Press Start 2", Times, serif;
@@ -23,14 +34,15 @@
             position: relative; 
         }
 
-        .tamanotchi {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            z-index: 1000;
+        .header {
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
         }
 
-        @keyframes flip {
+    @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
             100% { transform: rotateY(0deg); }
@@ -43,7 +55,7 @@
             animation: flip 4s infinite; /* Flip animation */
         }
 
-.retro-music-btn {
+        .retro-music-btn {
     display: inline-block;
     padding: 10px 20px;
     font-family: 'Courier New', Courier, monospace;
@@ -68,18 +80,32 @@
 
 hr {
     margin-top: -5px;  /* Adjust this value as needed */
+  
+ul {
+    list-style-position: inside; /
+    padding-left: 0;             
+    margin-left: 0;              
 }
 
-.nav-section a, .nav-section img {
-    font-size: 19px; /* Adjust as needed for desired text size */
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
+li {
+    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
+    margin-bottom: 20px; /* This will add space below each bullet point */
 }
 
 
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .nav {
+    font-family: 'Press Start 2P', cursive;
+    color: #FF33CC;
+}
         
-    </style>
+      </style>
 </head>
 
 <body>
@@ -118,7 +144,8 @@ hr {
     </center>
 <br>
     <!-- Welcome Message -->
-        <center>
+       
+    <center>
     <font face="Press Start 2P" size="4" color="yellow">Hey there, welcome to my blog! <img src="welcomer.gif"> Glad you could stop by. I've been doing some tinkering around these digital corners, and I'm thrilled to go live. There are a few things you can check out; blog posts lined up above, and more to come as I format and digitise them. Feedback is always welcome. Thanks again for your interest! I'm hoping you find something here that you like, and maybe even something you find slightly offensive! Oh, and don't forget to feed Zaki while youre here!
 </font>
 </center>
