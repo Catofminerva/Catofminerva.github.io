@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Ali's Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #c0c0c0; /* Classic grey background */
-            font-family: 'Courier New', monospace; /* Default system font */
+            background-color: black;
+            background-image: url('stars.gif');
+            font-family: 'Press Start 2P', cursive;
+            color: #FF33CC;
         }
         .container {
             width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: #ffffff;
-            border: 2px solid #000000;
+            background-color: #000; /* Changed to black */
+            border: 2px solid #FF33CC; /* Pink border */
             margin-top: 50px;
+            box-shadow: 0 0 10px #FF33CC; /* Pink glow */
         }
         .header {
-            background-color: #000080; /* Navy blue header */
-            color: #ffffff;
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
             padding: 10px;
             text-align: center;
             font-size: 1.5em;
@@ -26,28 +30,35 @@
         .chat-log {
             height: 300px;
             width: 100%;
-            border: 1px solid #000000;
+            border: 1px solid #FF33CC; /* Pink border */
             padding: 5px;
             margin: 10px 0;
             overflow-y: scroll;
-            background-color: #f0f0f0; /* Lighter grey background */
-            white-space: pre; /* Preserve spaces and line breaks */
+            background-color: #000; /* Black background */
+            color: #33FFA1; /* Neon green text */
+            font-family: 'Press Start 2P', cursive; /* Retro font */
         }
         .chat-input {
-            width: 70%;
+            width: calc(70% - 10px);
             padding: 5px;
+            margin: 5px;
+            background: #333; /* Darker background for inputs */
+            border: 1px solid #FF33CC; /* Pink border */
+            color: #FFF;
         }
         .send-button {
-            width: 25%;
+            width: calc(25% - 10px);
             padding: 5px;
-            background-color: #008000; /* Green send button */
-            color: #ffffff;
+            background-color: #FF33CC; /* Pink button */
+            color: #FFF;
             border: none;
+            cursor: pointer;
         }
         .footer {
             margin-top: 20px;
             text-align: center;
             font-size: 0.8em;
+            color: #FFF;
         }
     </style>
 </head>
@@ -66,7 +77,7 @@
         <div class="footer">
             © 1996 Ali's Chat. All rights reserved.
         </div>
-
+    </div>
  <script>
         // Initialize the WebSocket
         const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
