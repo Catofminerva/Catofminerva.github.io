@@ -129,23 +129,25 @@
     chatLog.scrollTop = chatLog.scrollHeight;
 }
 
+function sendMessage() {
+    var handleInput = document.getElementById('handle-input');
+    var chatInput = document.getElementById('chat-input');
+    var handle = handleInput.value.trim();
+    var message = chatInput.value.trim();
 
-        function sendMessage() {
-            var handleInput = document.getElementById('handle-input');
-            var chatInput = document.getElementById('chat-input');
-            var handle = handleInput.value.trim();
-            var message = chatInput.value.trim();
+    if (handle && message) {
+        var fullMessage = handle + ": " + message;
+        console.log('Sending message:', fullMessage); // Log the message being sent
 
-            if (handle !== '' && message !== '') {
-                var fullMessage = handle + ": " + message; // Combining handle and message
-                if (socket.readyState === WebSocket.OPEN) {
-                    socket.send(fullMessage);
-                    chatInput.value = '';
-                } else {
-                    console.log('WebSocket is not open. readyState:', socket.readyState);
-                }
-            }
+        if (socket.readyState === WebSocket.OPEN) {
+            socket.send(fullMessage);
+            chatInput.value = '';
+        } else {
+            console.log('WebSocket is not open. readyState:', socket.readyState);
         }
+    }
+}
+
 
         var input = document.getElementById("chat-input");
         input.addEventListener("keyup", function(event) {
