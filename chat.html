@@ -193,13 +193,13 @@ li {
     </div>
 
     <!-- Handle Input Screen - Initially shown -->
-    <div id="handle-screen" style="display: flex; justify-content: center; align-items: center;">
-        <div style="text-align: center;">
-            <label for="user-handle" style="display: block; color: black;">Enter your handle to start chatting:</label>
-            <input type="text" id="user-handle" style="padding: 5px; margin-top: 10px;">
-            <button onclick="enterChat()">Enter Chat</button>
-        </div>
+<div id="handle-screen" style="display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="text-align: center;">
+        <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
+        <input type="text" id="user-handle" style="padding: 5px; margin-top: 10px;">
+        <button onclick="enterChat()">Enter Chat</button>
     </div>
+</div>
 
     <!-- Chat Input - Initially hidden -->
     <div id="chat-input-area" style="display: none;">
@@ -297,21 +297,23 @@ function connectWebSocket() {
 
 // When the document is fully loaded, focus on the handle input
 document.addEventListener('DOMContentLoaded', (event) => {
+    // Ensure the handle screen is visible
+    document.getElementById('handle-screen').style.display = 'flex';
     document.getElementById('user-handle').focus();
 });
 
-// Function that gets called when user enters their handle and clicks "Enter Chat"
+// Function that gets called when the user enters their handle and clicks "Enter Chat"
 function enterChat() {
     var handle = document.getElementById('user-handle').value.trim();
-    if(handle) {
+    if (handle) {
         // Assuming you have a WebSocket connection called 'socket'
         socket.handle = handle;  // Store the user's handle in the socket object for later use
-        // Hide handle input screen and show chat input area
+        // Hide the handle input screen and show the chat input area
         document.getElementById('handle-screen').style.display = 'none';
-        document.getElementById('chat-input-area').style.display = 'block';
+        document.getElementById('chat-input').style.display = 'block'; // Make sure this ID matches your chat input element
         document.getElementById('chat-input').focus(); // Focus on the message input
     } else {
-        // Handle the case where handle is not entered
+        // Handle the case where the handle is not entered
         alert("Please enter a handle to continue.");
     }
 }
@@ -320,8 +322,8 @@ function enterChat() {
 function sendMessage() {
     var message = document.getElementById('chat-input').value.trim();
 
-    if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
+    if (socket.handle && message) {
+        var fullMessage = socket.handle + ": " + message;
         console.log('Sending message:', fullMessage);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
@@ -330,8 +332,11 @@ function sendMessage() {
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
+    } else if (!socket.handle) {
+        alert("You must enter a handle to send messages.");
     }
 }
+
 
 
 
