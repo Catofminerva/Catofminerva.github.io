@@ -269,37 +269,31 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-
-function processMessage(data) {
+    function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
-
-    console.log('Raw message data:', data);
 
     try {
         var messageData = JSON.parse(data);
-        console.log('Parsed message data:', messageData);
 
-if (messageData.type === 'history') {
-  messageData.data.forEach(function(historyItem) {
-    // Check if historyItem is a string before trying to split it
-    if (typeof historyItem === 'string') {
-      // Your existing code to handle the historyItem string
-    } else if (historyItem.type === 'Buffer') {
-      // Convert Buffer to string
-      let bufferString = Buffer.from(historyItem.data).toString();
-      console.log('Buffer converted to string:', bufferString);
-      // Now you can use your split logic on bufferString
-    } else {
-      // If it's not a string or a Buffer, log it to see what it is
-      console.log('Unexpected data type:', historyItem);
+        // Check if the message data is of type 'Buffer'
+        if (messageData.data && messageData.data.type === 'Buffer') {
+            // Convert the Buffer to a string
+            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
+            chatLog.innerHTML += messageText + '\n';
+        } else if (messageData.type === 'history') {
+            chatLog.innerHTML = '';
+            messageData.data.forEach(function(message) {
+                chatLog.innerHTML += message + '\n';
+            });
+        } else {
+            chatLog.innerHTML += messageData.data + '\n';
+        }
+    } catch (error) {
+        console.error('Error parsing message:', error);
+        chatLog.innerHTML += 'Error in message format\n';
     }
-  });
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
-
-
-
-
-
 
 
 // When the document is fully loaded, focus on the handle input
@@ -323,20 +317,6 @@ function enterChat() {
     }
 }
 
-function stringToColorCode(str) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    var color = '#';
-    for (var i = 0; i < 3; i++) {
-        var value = (hash >> (i * 8)) & 0xFF;
-        color += ('00' + value.toString(16)).substr(-2);
-    }
-    return color;
-}
-
-        
 // Adjusted sendMessage function
 function sendMessage() {
     var message = document.getElementById('chat-input').value.trim();
