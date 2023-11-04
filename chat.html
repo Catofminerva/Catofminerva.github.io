@@ -29,7 +29,10 @@
             font-size: 1.5em;
         }
 .chat-log {
-    position: relative;
+    display: flex;
+    justify-content: center; /* Aligns horizontally */
+    align-items: center;     /* Aligns vertically */
+    position: relative;      /* Ensure proper stacking */
     height: 300px;
     width: 100%;
     border: 1px solid #FF33CC; /* Pink border */
@@ -119,7 +122,20 @@ li {
             text-overflow: ellipsis;
         }
     
-    
+#loading-screen {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position it on top of the chat-log content */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    text-align: center;
+}
+
+
+        
     </style>
 
 
@@ -167,7 +183,7 @@ li {
         
         <div class="chat-log" id="chat-log">
             <!-- Chat log will be displayed here -->
-            <div id="loading-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding-top: 40%;">
+    <div id="loading-screen">
                 <p>Loading...</p>
             </div>
         </div>
@@ -190,7 +206,7 @@ li {
 function connectWebSocket() {
     // Get the loading screen within the chat log
     var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
-    chatLoadingScreen.style.display = 'block';
+    chatLoadingScreen.style.display = 'flex';
 
     // Initialize the WebSocket (no const keyword here)
     socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
