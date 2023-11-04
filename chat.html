@@ -165,12 +165,12 @@ li {
 
 
     
-<div class="container">
-    <div class="header">Ali's Chat Room</div>
-    
-    <div class="chat-log" id="chat-log">
+    <div class="container">
+        <div class="header">Ali's Chat Room</div>
+        
+        <div class="chat-log" id="chat-log">
             <!-- Chat log will be displayed here -->
-        <div id="loading-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); color: white; text-align: center; padding-top: 20%;">
+<div id="loading-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding-top: 40%;">
             <p>Loading...</p>
         </div>
     </div>
@@ -189,19 +189,19 @@ li {
 
 // Function to handle WebSocket connections with a reconnection strategy
 function connectWebSocket() {
-    // Display the loading screen
-    document.getElementById('loading-screen').style.display = 'block';
+    // Get the loading screen within the chat log
+    var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
+    chatLoadingScreen.style.display = 'block';
 
     // Initialize the WebSocket (no const keyword here)
     socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-        socket.addEventListener('open', function (event) {
-            console.log('WebSocket connection established');
-            // Hide the loading screen
-            document.getElementById('loading-screen').style.display = 'none';
-            // Request the chat history from the server
-            socket.send('request-chat-history');
-        });
+    socket.addEventListener('open', function (event) {
+        console.log('WebSocket connection established');
+        // Hide the chat loading screen
+        chatLoadingScreen.style.display = 'none';
+        // ...
+    });
 
         socket.addEventListener('message', function (event) {
             // Handle incoming messages
@@ -225,12 +225,12 @@ function connectWebSocket() {
             }
         });
 
-        socket.addEventListener('close', function (event) {
-            console.log('WebSocket connection closed');
-            // Show the loading screen and attempt to reconnect after 5 seconds
-            document.getElementById('loading-screen').style.display = 'block';
-            setTimeout(connectWebSocket, 5000);
-        });
+    socket.addEventListener('close', function (event) {
+        console.log('WebSocket connection closed');
+        // Show the chat loading screen and attempt to reconnect after 5 seconds
+        chatLoadingScreen.style.display = 'block';
+        setTimeout(connectWebSocket, 5000);
+    });
 
         socket.addEventListener('error', function (event) {
             console.log('WebSocket error:', event);
