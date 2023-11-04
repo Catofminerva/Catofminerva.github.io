@@ -269,31 +269,42 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-    function processMessage(data) {
+
+        function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
+        // Parse the incoming data as it's a stringified JSON
         var messageData = JSON.parse(data);
 
-        // Check if the message data is of type 'Buffer'
-        if (messageData.data && messageData.data.type === 'Buffer') {
-            // Convert the Buffer to a string
-            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
-            chatLog.innerHTML += messageText + '\n';
-        } else if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
-            });
-        } else {
-            chatLog.innerHTML += messageData.data + '\n';
+        // Check if messageData.message is a JSON string and parse it as well
+        if (typeof messageData.message === 'string') {
+            messageData = JSON.parse(messageData.message);
         }
+
+        // Now messageData is the actual object, not a string, so we can create the message element
+        var messageElement = document.createElement('div');
+
+        // Check if messageData has a color property and apply it to the user handle
+        if (messageData.color && messageData.handle) {
+            messageElement.innerHTML = '<span style="color: ' + messageData.color + ';">' +
+                                       messageData.handle + '</span>: ' + 
+                                       messageData.text;
+        } else {
+            // If there is no color, just display the handle and text
+            messageElement.textContent = messageData.handle + ': ' + messageData.text;
+        }
+
+        // Append the message element to the chat log
+        chatLog.appendChild(messageElement);
+
     } catch (error) {
         console.error('Error parsing message:', error);
         chatLog.innerHTML += 'Error in message format\n';
     }
     chatLog.scrollTop = chatLog.scrollHeight;
 }
+
 
 
 // When the document is fully loaded, focus on the handle input
