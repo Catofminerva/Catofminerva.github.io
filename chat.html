@@ -294,25 +294,29 @@ function processMessage(data) {
 
             // Append the message element to the chat log
             chatLog.appendChild(messageElement);
-        else if (messageData.type === 'history') {
-    // If it's the chat history, loop through each message and append it
-    chatLog.innerHTML = ''; // Clear the chat log before appending history
-    messageData.data.forEach(function(message) {
-        var historyElement = document.createElement('div');
-        
-        // Check if the message contains color information
-        if (message.color && message.handle) {
-            // Apply the color to the user handle for each history message
-            historyElement.innerHTML = '<span style="color: ' + message.color + ';">' + 
-                                        message.handle + '</span>: ' + 
-                                        message.text;
-        } else {
-            // If there is no color information, it falls back to plain text
-            historyElement.textContent = message.handle + ': ' + message.text;
-        }
+        } else if (messageData.type === 'history') {
+            // If it's the chat history, loop through each message and append it
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            messageData.data.forEach(function(message) {
+                var historyElement = document.createElement('div');
+                
+                // Check if the message contains color information
+                if (message.color && message.handle) {
+                    // Apply the color to the user handle for each history message
+                    historyElement.innerHTML = '<span style="color: ' + message.color + ';">' + 
+                                                message.handle + '</span>: ' + 
+                                                message.text;
+                } else {
+                    // If there is no color information, it falls back to plain text
+                    historyElement.textContent = message.handle + ': ' + message.text;
+                }
 
-        chatLog.appendChild(historyElement);
-    });
+                chatLog.appendChild(historyElement);
+            });
+        }
+    } catch (e) {
+        console.error('Error processing message:', e);
+    }
 }
 
 
