@@ -273,15 +273,17 @@ function connectWebSocket() {
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
-    console.log('Raw message data:', data); // Log the raw data for debugging
+    console.log('Raw message data:', data);
 
     try {
         var messageData = JSON.parse(data);
-        console.log('Parsed message data:', messageData); // Log the parsed data
+        console.log('Parsed message data:', messageData);
 
         if (messageData.type === 'history') {
             chatLog.innerHTML = '';
+            console.log('History items:', messageData.data); // Log the history items for debugging
             messageData.data.forEach(function(historyItem) {
+                console.log('Current history item:', historyItem); // Log the current history item for debugging
                 var parts = historyItem.split(": ");
                 var color = stringToColorCode(parts[0]);
                 chatLog.innerHTML += '<span style="color:' + color + ';">' + historyItem + '</span><br>';
@@ -295,10 +297,10 @@ function processMessage(data) {
         console.error('Error parsing message:', error);
         chatLog.innerHTML += 'Error in message format<br>';
     }
+
     chatLog.scrollTop = chatLog.scrollHeight;
 }
 
-// And the stringToColorCode function remains the same.
 
 
 
