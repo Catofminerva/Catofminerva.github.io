@@ -269,35 +269,31 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
+    function processMessage(data) {
+    var chatLog = document.getElementById('chat-log');
 
+    try {
+        var messageData = JSON.parse(data);
 
-function processMessage(data) {
-  var chatLog = document.getElementById('chat-log');
-
-  try {
-      var messageData = JSON.parse(data);
-
-      if (messageData.type === 'history') {
-          chatLog.innerHTML = '';
-          messageData.data.forEach(function(messageInfo) {
-              var messageElement = document.createElement('div');
-              messageElement.textContent = messageInfo.message;
-              messageElement.style.color = messageInfo.color; // Apply color
-              chatLog.appendChild(messageElement);
-          });
-      } else if (messageData.type === 'message') {
-          var messageElement = document.createElement('div');
-          messageElement.textContent = messageData.data;
-          messageElement.style.color = messageData.color; // Apply color
-          chatLog.appendChild(messageElement);
-      }
-  } catch (error) {
-      console.error('Error parsing message:', error);
-      chatLog.innerHTML += 'Error in message format\n';
-  }
-  chatLog.scrollTop = chatLog.scrollHeight;
+        // Check if the message data is of type 'Buffer'
+        if (messageData.data && messageData.data.type === 'Buffer') {
+            // Convert the Buffer to a string
+            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
+            chatLog.innerHTML += messageText + '\n';
+        } else if (messageData.type === 'history') {
+            chatLog.innerHTML = '';
+            messageData.data.forEach(function(message) {
+                chatLog.innerHTML += message + '\n';
+            });
+        } else {
+            chatLog.innerHTML += messageData.data + '\n';
+        }
+    } catch (error) {
+        console.error('Error parsing message:', error);
+        chatLog.innerHTML += 'Error in message format\n';
+    }
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
-
 
 
 // When the document is fully loaded, focus on the handle input
