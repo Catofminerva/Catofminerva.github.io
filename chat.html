@@ -271,9 +271,9 @@ function sendMessage() {
 
     if (handle && message) {
         var fullMessage = handle + ": " + message;
-        console.log('Sending message:', fullMessage); // Log the message being sent
+        console.log('Sending message:', fullMessage);
 
-        if (socket.readyState === WebSocket.OPEN) {
+        if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(fullMessage);
             chatInput.value = '';
         } else {
@@ -281,6 +281,7 @@ function sendMessage() {
         }
     }
 }
+
 
 
         var input = document.getElementById("chat-input");
