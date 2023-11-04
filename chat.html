@@ -277,20 +277,19 @@ function processMessage(data) {
 
     try {
         var messageData = JSON.parse(data);
-        console.log('Parsed message data:', messageData); // Log the parsed message data
+        console.log('Parsed message data:', messageData); // Log the parsed data
 
         if (messageData.type === 'history') {
-            console.log('History data:', messageData.data); // Log the history data
             chatLog.innerHTML = '';
-            messageData.data.forEach(function(message) {
-                var color = stringToColorCode(message.split(": ")[0]);
-                chatLog.innerHTML += '<span style="color:' + color + ';">' + message + '</span><br>';
+            messageData.data.forEach(function(historyItem) {
+                var parts = historyItem.split(": ");
+                var color = stringToColorCode(parts[0]);
+                chatLog.innerHTML += '<span style="color:' + color + ';">' + historyItem + '</span><br>';
             });
         } else if (messageData.type === 'message') {
-            var color = stringToColorCode(messageData.data.split(": ")[0]);
+            var parts = messageData.data.split(": ");
+            var color = stringToColorCode(parts[0]);
             chatLog.innerHTML += '<span style="color:' + color + ';">' + messageData.data + '</span><br>';
-        } else {
-            chatLog.innerHTML += 'Unknown message type<br>';
         }
     } catch (error) {
         console.error('Error parsing message:', error);
@@ -299,19 +298,8 @@ function processMessage(data) {
     chatLog.scrollTop = chatLog.scrollHeight;
 }
 
-// And the stringToColorCode function should be something like this:
-function stringToColorCode(str) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    var color = '#';
-    for (var i = 0; i < 3; i++) {
-        var value = (hash >> (i * 8)) & 0xFF;
-        color += ('00' + value.toString(16)).substr(-2);
-    }
-    return color;
-}
+// And the stringToColorCode function remains the same.
+
 
 
 
