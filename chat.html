@@ -269,30 +269,47 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
+
     function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
 
-        // Check if the message data is of type 'Buffer'
-        if (messageData.data && messageData.data.type === 'Buffer') {
-            // Convert the Buffer to a string
-            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
-            chatLog.innerHTML += messageText + '\n';
+        // Check if the messageData is of type 'message' and contains a data object
+        if (messageData.type === 'message' && messageData.data) {
+            // Create a new element for the message
+            var messageElement = document.createElement('div');
+
+            // Check if the data object has a color property
+            if (messageData.data.color && messageData.data.handle) {
+                // Apply the color to the user handle
+                messageElement.innerHTML = '<span style="color: ' + messageData.data.color + ';">' +
+                                            messageData.data.handle + '</span>: ' + 
+                                            messageData.data.text;
+            } else {
+                // If there is no color, display the message normally
+                messageElement.textContent = messageData.data.handle + ': ' + messageData.data.text;
+            }
+
+            // Append the message element to the chat log
+            chatLog.appendChild(messageElement);
         } else if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
+            // If it's the chat history, loop through each message and append it
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
             messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
+                var historyElement = document.createElement('div');
+                historyElement.textContent = message; // This assumes history messages are plain text
+                chatLog.appendChild(historyElement);
             });
-        } else {
-            chatLog.innerHTML += messageData.data + '\n';
         }
     } catch (error) {
         console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format\n';
+        var errorElement = document.createElement('div');
+        errorElement.textContent = 'Error in message format';
+        chatLog.appendChild(errorElement);
     }
-    chatLog.scrollTop = chatLog.scrollHeight;
+    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
 }
 
 
