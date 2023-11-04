@@ -187,13 +187,13 @@ li {
    // Declare the 'socket' variable in the global scope to be used by all functions
     var socket;
 
-    // Function to handle WebSocket connections with a reconnection strategy
-    function connectWebSocket() {
-        // Display the loading screen
-        document.getElementById('loading-screen').style.display = 'block';
+// Function to handle WebSocket connections with a reconnection strategy
+function connectWebSocket() {
+    // Display the loading screen
+    document.getElementById('loading-screen').style.display = 'block';
 
-        // Initialize the WebSocket
-        const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+    // Initialize the WebSocket (no const keyword here)
+    socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
         socket.addEventListener('open', function (event) {
             console.log('WebSocket connection established');
