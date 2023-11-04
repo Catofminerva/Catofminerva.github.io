@@ -124,17 +124,14 @@ li {
     
 #loading-screen {
     display: none; /* Hidden by default */
-    position: fixed; /* Position it on top of the entire window */
+    position: absolute; /* Position it on top of the chat-log content */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     color: white;
-    z-index: 9999; /* Ensures it's on top of everything else */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    display: flex; /* Enables flexbox */
+    text-align: center;
 }
 
 
@@ -186,6 +183,8 @@ li {
         
         <div class="chat-log" id="chat-log">
             <!-- Chat log will be displayed here -->
+    <div id="loading-screen">
+                <p>Loading...</p>
             </div>
         </div>
 
@@ -314,4 +313,3 @@ function sendMessage() {
     
 </body>
 </html>
-
