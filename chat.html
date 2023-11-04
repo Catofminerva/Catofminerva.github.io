@@ -269,23 +269,24 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-    function processMessage(data) {
+
+
+function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
+        // ... (previous message handling code remains unchanged)
 
-        // Check if the message data is of type 'Buffer'
-        if (messageData.data && messageData.data.type === 'Buffer') {
-            // Convert the Buffer to a string
-            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
-            chatLog.innerHTML += messageText + '\n';
-        } else if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
-            });
+        if (messageData.type === 'message') {
+            // The message includes handle, text, and color
+            var handle = messageData.data.split(':')[0].trim();
+            var message = messageData.data.substr(handle.length + 1).trim(); // Message without the handle
+
+            // Append to chatLog with handle colored
+            chatLog.innerHTML += `<span style="color: ${messageData.color};">${handle}</span>: ${message}\n`;
         } else {
+            // Handle other message types like 'history'
             chatLog.innerHTML += messageData.data + '\n';
         }
     } catch (error) {
