@@ -160,6 +160,10 @@ li {
     </center>
 <br>
 
+    <div id="handle-section" class="container">
+    <input type="text" id="handle" class="chat-input" placeholder="Enter your handle...">
+    <button onclick="enterChat()" class="send-button">Enter Chat</button>
+</div>
 
     
     <div class="container">
@@ -186,6 +190,34 @@ li {
    // Declare the 'socket' variable in the global scope to be used by all functions
     var socket;
 
+function enterChat() {
+    var handleInput = document.getElementById('handle');
+    var handle = handleInput.value.trim();
+    var chatContainer = document.getElementById('chat-container');
+    var handleSection = document.getElementById('handle-section');
+
+    if (handle) {
+        // Store the handle for later use (or use it directly as needed)
+        // For now, just log it to the console
+        console.log('Handle entered:', handle);
+
+        // Hide the handle input section and show the chat container
+        handleSection.style.display = 'none';
+        chatContainer.style.display = 'block';
+
+        // Set the handle in the chat input field
+        document.getElementById('handle-input').value = handle;
+
+        // Focus on the chat message input
+        document.getElementById('chat-input').focus();
+    } else {
+        // Handle the case where the handle is empty
+        alert('Please enter a handle to continue.');
+    }
+}
+
+     
+     
 // Function to handle WebSocket connections with a reconnection strategy
 function connectWebSocket() {
     // Get the loading screen within the chat log
