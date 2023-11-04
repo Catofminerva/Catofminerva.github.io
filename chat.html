@@ -128,14 +128,22 @@ li {
     color: #FFF;
 }
 
-#handle-screen button {
-    padding: 5px;
-    margin-top: 10px;
-    background-color: #FF33CC; /* Pink button */
-    color: #FFF;
-    border: none;
-    cursor: pointer;
+/* CSS inside the <style> tag */
+
+#handle-screen {
+    display: none; /* Change this to block to show the handle screen */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10; /* Make sure this is less than the loading-screen z-index if you want loading screen to cover it */
+    justify-content: center;
+    align-items: center;
 }
+
+/* Rest of your CSS styles */
 
 
         
@@ -189,6 +197,14 @@ li {
             <div id="loading-screen" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding-top: 40%;">
                 <p>Loading...</p>
             </div>
+                <!-- Handle Input Screen -->
+<div id="handle-screen" style="display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="text-align: center;">
+        <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
+        <input type="text" id="user-handle" style="padding: 5px; margin-top: 10px;">
+        <button onclick="enterChat()">Enter Chat</button>
+    </div>
+</div>
         </div>
 
 
@@ -201,15 +217,6 @@ li {
             © 1996 Ali's Chat. All rights reserved.
         </div>
     </div>
- 
-    <!-- Handle Input Screen -->
-<div id="handle-screen" style="display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); z-index: 10000; justify-content: center; align-items: center;">
-    <div style="text-align: center;">
-        <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
-        <input type="text" id="user-handle" style="padding: 5px; margin-top: 10px;">
-        <button onclick="enterChat()">Enter Chat</button>
-    </div>
-</div>
 
     
     <script>
