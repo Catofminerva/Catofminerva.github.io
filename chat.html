@@ -269,56 +269,31 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-
-function processMessage(data) {
+    function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
 
-        // Check if the messageData is of type 'message' and contains a data object
-        if (messageData.type === 'message' && messageData.data) {
-            // Create a new element for the message
-            var messageElement = document.createElement('div');
-
-            // Check if the data object has a color property
-            if (messageData.data.color && messageData.data.handle) {
-                // Apply the color to the user handle
-                messageElement.innerHTML = '<span style="color: ' + messageData.data.color + ';">' +
-                                            messageData.data.handle + '</span>: ' + 
-                                            messageData.data.text;
-            } else {
-                // If there is no color, display the message normally
-                messageElement.textContent = messageData.data.handle + ': ' + messageData.data.text;
-            }
-
-            // Append the message element to the chat log
-            chatLog.appendChild(messageElement);
+        // Check if the message data is of type 'Buffer'
+        if (messageData.data && messageData.data.type === 'Buffer') {
+            // Convert the Buffer to a string
+            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
+            chatLog.innerHTML += messageText + '\n';
         } else if (messageData.type === 'history') {
-            // If it's the chat history, loop through each message and append it
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            chatLog.innerHTML = '';
             messageData.data.forEach(function(message) {
-                var historyElement = document.createElement('div');
-                
-                // Check if the message contains color information
-                if (message.color && message.handle) {
-                    // Apply the color to the user handle for each history message
-                    historyElement.innerHTML = '<span style="color: ' + message.color + ';">' + 
-                                                message.handle + '</span>: ' + 
-                                                message.text;
-                } else {
-                    // If there is no color information, it falls back to plain text
-                    historyElement.textContent = message.handle + ': ' + message.text;
-                }
-
-                chatLog.appendChild(historyElement);
+                chatLog.innerHTML += message + '\n';
             });
+        } else {
+            chatLog.innerHTML += messageData.data + '\n';
         }
-    } catch (e) {
-        console.error('Error processing message:', e);
+    } catch (error) {
+        console.error('Error parsing message:', error);
+        chatLog.innerHTML += 'Error in message format\n';
     }
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
-
 
 
 // When the document is fully loaded, focus on the handle input
@@ -328,8 +303,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
-    var handleInput = document.getElementById('user-handle');
-    var handle = handleInput.value.trim();
+    var handle = document.getElementById('user-handle').value.trim();
     if(handle) {
         // Assuming you have a WebSocket connection called 'socket'
         socket.handle = handle;  // Store the user's handle in the socket object for later use
@@ -345,26 +319,20 @@ function enterChat() {
 
 // Adjusted sendMessage function
 function sendMessage() {
-    var messageInput = document.getElementById('chat-input');
-    var message = messageInput.value.trim();
+    var message = document.getElementById('chat-input').value.trim();
 
-    if (socket.handle && message) { 
-        var messageData = {
-            handle: socket.handle, 
-            text: message,
-            color: "#000000" // You would need to specify the color or obtain it from the user's data
-        };
-        console.log('Sending message:', messageData);
+    if (socket.handle && message) { // Use the handle from the socket object
+        var fullMessage = socket.handle + ": " + message; // Use the stored handle
+        console.log('Sending message:', fullMessage);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(JSON.stringify(messageData));
-            messageInput.value = ''; // Clear the message input
+            socket.send(fullMessage);
+            document.getElementById('chat-input').value = ''; // Clear the message input
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
     }
 }
-
 
 
 
@@ -380,9 +348,6 @@ function sendMessage() {
     connectWebSocket();
 
     </script>
-    
-</body>
-</html>
     
 </body>
 </html>
