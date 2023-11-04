@@ -284,14 +284,18 @@ if (messageData.type === 'history') {
     // Check if historyItem is a string before trying to split it
     if (typeof historyItem === 'string') {
       // Your existing code to handle the historyItem string
+    } else if (historyItem.type === 'Buffer') {
+      // Convert Buffer to string
+      let bufferString = Buffer.from(historyItem.data).toString();
+      console.log('Buffer converted to string:', bufferString);
+      // Now you can use your split logic on bufferString
     } else {
-      // If it's not a string, log it to see what it is
+      // If it's not a string or a Buffer, log it to see what it is
       console.log('Unexpected data type:', historyItem);
     }
   });
 }
-lHeight;
-}
+
 
 
 
