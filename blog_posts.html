@@ -1,22 +1,28 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta charset="UTF-8">
-    <title>Ali's Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <title>Ali's Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
+       body {
             background-color: black;
             background-image: url('stars.gif');
             font-family: "Press Start 2", Times, serif;
             color: #FF33CC;
+            position: relative; 
         }
 
+        .header {
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
 
-        @keyframes flip {
+    @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
             100% { transform: rotateY(0deg); }
@@ -29,14 +35,18 @@
             animation: flip 4s infinite; /* Flip animation */
         }
 
-
-ul {
-    list-style-type: none; /* This removes the bullet points */
+kitty.gif {
+    margin-top: 0px; 
 }
-        
-        
-ul li a {
-    font-size: 1.5rem; /* adjust this value as per your preference */
+
+hr {
+    margin-top: -15px;  /* Adjust this value as needed */
+}
+  
+ul {
+    list-style-position: inside; /
+    padding-left: 0;             
+    margin-left: 0;              
 }
 
 li {
@@ -44,37 +54,58 @@ li {
     margin-bottom: 20px; /* This will add space below each bullet point */
 }
 
-        
-    </style>
-</head>
 
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+
+.welcome-message {
+    font-family: Times New Roman, Times, serif;
+    color: yellow;
+    font-size: 1.25em; /* adjust size as desired */
+}
+
+
+        .nav {
+    font-family: 'Press Start 2P', cursive;
+    color: #FF33CC;
+}
+        
+      </style>
+
+</head>
 <body>
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
+        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
     </center>
     <hr>
     <!-- Navigation Buttons -->
-    <center>
-        <a href="index.html" class="retro-btn">Home</a>
-        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle;"></a>
-        <a href="about.html" class="retro-btn">About</a>
-        <img src="about.gif" alt="about GIF" style="vertical-align: middle;"></a>
-        <a href="blog_posts.html" class="retro-btn">Entries</a>
-        <img src="post.gif" alt="post GIF" style="vertical-align: middle;"></a>
-        <a href="coolsite.html" class="retro-btn">Kool Webpages</a>
-        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;"></a>
-        <a href="guestbook.html" class="retro-btn">Guestbook</a>
-        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;"></a>
-        <a href="books.html" class="retro-btn">Kool Books</a>
-        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle;"></a>
-        <a href="truthtable.html" class="retro-btn">Truth Table</a>
-        <img src="math.gif" alt="math GIF" style="vertical-align: middle;"></a>
-        <a href="contact.html" class="retro-btn">Contact</a>
-        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
-        <a href="chat.html" class="retro-btn">Chat</a>
-        <img src="chattt.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
-    </center>
-<br>    
+<center>
+    <a href="index.html" class="retro-btn nav">Home</a>
+    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="about.html" class="retro-btn nav">About</a>
+    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
+    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
+    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
+    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
+    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
+    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
+    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
+    <a href="books.html" class="retro-btn nav">Kool Books</a>
+    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
+    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
+    <a href="contact.html" class="retro-btn nav">Contact</a>
+    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
+    <a href="chat.html" class="retro-btn nav">Chat</a>
+    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+</center>
+<br>
 
 <body>
     <center>
