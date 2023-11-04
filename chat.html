@@ -273,30 +273,32 @@ function connectWebSocket() {
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
+    console.log('Raw message data:', data); // Log the raw data for debugging
+
     try {
         var messageData = JSON.parse(data);
+        console.log('Parsed message data:', messageData); // Log the parsed message data
 
         if (messageData.type === 'history') {
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            console.log('History data:', messageData.data); // Log the history data
+            chatLog.innerHTML = '';
             messageData.data.forEach(function(message) {
-                var parts = message.split(": ");
-                var handle = parts.shift(); // Extract the handle
-                var text = parts.join(": "); // The rest is the message text
-                var color = stringToColorCode(handle); // Get color for the handle
-                chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '<br>'; // Display with color
+                chatLog.innerHTML += message + '<br>';
             });
         } else if (messageData.type === 'message') {
-            var parts = messageData.data.split(": ");
-            var handle = parts.shift(); // Extract the handle
-            var text = parts.join(": "); // The rest is the message text
-            var color = stringToColorCode(handle); // Get color for the handle
-            chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '<br>'; // Append new message with color
+            var userMessage = JSON.parse(messageData.data);
+            var userHandle = userMessage.handle;
+            var messageText = userMessage.message;
+            var color = stringToColorCode(userHandle);
+            chatLog.innerHTML += '<span style="color:' + color + ';">' + userHandle + '</span>: ' + messageText + '<br>';
+        } else {
+            chatLog.innerHTML += 'Unknown message type<br>';
         }
     } catch (error) {
         console.error('Error parsing message:', error);
         chatLog.innerHTML += 'Error in message format<br>';
     }
-    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
 
 
