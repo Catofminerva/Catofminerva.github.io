@@ -328,7 +328,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
-    var handle = document.getElementById('user-handle').value.trim();
+    var handleInput = document.getElementById('user-handle');
+    var handle = handleInput.value.trim();
     if(handle) {
         // Assuming you have a WebSocket connection called 'socket'
         socket.handle = handle;  // Store the user's handle in the socket object for later use
@@ -344,20 +345,26 @@ function enterChat() {
 
 // Adjusted sendMessage function
 function sendMessage() {
-    var message = document.getElementById('chat-input').value.trim();
+    var messageInput = document.getElementById('chat-input');
+    var message = messageInput.value.trim();
 
-    if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
-        console.log('Sending message:', fullMessage);
+    if (socket.handle && message) { 
+        var messageData = {
+            handle: socket.handle, 
+            text: message,
+            color: "#000000" // You would need to specify the color or obtain it from the user's data
+        };
+        console.log('Sending message:', messageData);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(fullMessage);
-            document.getElementById('chat-input').value = ''; // Clear the message input
+            socket.send(JSON.stringify(messageData));
+            messageInput.value = ''; // Clear the message input
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
     }
 }
+
 
 
 
