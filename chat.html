@@ -269,24 +269,25 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-    function processMessage(data) {
+
+        function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
 
-        // Check if the message data is of type 'Buffer'
-        if (messageData.data && messageData.data.type === 'Buffer') {
-            // Convert the Buffer to a string
-            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
-            chatLog.innerHTML += messageText + '\n';
-        } else if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
+        // Check the message type
+        if (messageData.type === 'history' || messageData.type === 'message') {
             messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
+                // Extract the handle and the text
+                var parts = message.split(': ');
+                var handle = parts.shift(); // Remove and get the handle
+                var text = parts.join(': '); // Re-join the remaining message parts
+
+                // Get a consistent color for the handle
+                var color = stringToColorCode(handle);
+                chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '\n';
             });
-        } else {
-            chatLog.innerHTML += messageData.data + '\n';
         }
     } catch (error) {
         console.error('Error parsing message:', error);
@@ -317,6 +318,20 @@ function enterChat() {
     }
 }
 
+function stringToColorCode(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    var color = '#';
+    for (var i = 0; i < 3; i++) {
+        var value = (hash >> (i * 8)) & 0xFF;
+        color += ('00' + value.toString(16)).substr(-2);
+    }
+    return color;
+}
+
+        
 // Adjusted sendMessage function
 function sendMessage() {
     var message = document.getElementById('chat-input').value.trim();
