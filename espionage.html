@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta charset="UTF-8">
-    <title>Ali's Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Add retro font -->
+    <title>Ali's Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
+       body {
             background-color: black;
             background-image: url('stars.gif');
             font-family: "Press Start 2", Times, serif;
             color: #FF33CC;
+            position: relative; 
         }
 
+        .header {
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
 
-
-        @keyframes flip {
+    @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
             100% { transform: rotateY(0deg); }
@@ -30,12 +35,44 @@
             animation: flip 4s infinite; /* Flip animation */
         }
 
-.kitty-gif {
+kitty.gif {
     margin-top: 0px; 
 }
 
 hr {
     margin-top: -15px;  /* Adjust this value as needed */
+}
+  
+ul {
+    list-style-position: inside; /
+    padding-left: 0;             
+    margin-left: 0;              
+}
+
+li {
+    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
+    margin-bottom: 20px; /* This will add space below each bullet point */
+}
+
+
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+
+.welcome-message {
+    font-family: Times New Roman, Times, serif;
+    color: yellow;
+    font-size: 1.25em; /* adjust size as desired */
+}
+
+
+        .nav {
+    font-family: 'Press Start 2P', cursive;
+    color: #FF33CC;
 }
 
 .exported-content {
@@ -49,35 +86,43 @@ hr {
 
 
         
-    </style>
-</head>
+      </style>
 
+
+
+
+
+</head>
 <body>
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="Kitty Gif" class="kitty-gif">
+        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
     </center>
     <hr>
     <!-- Navigation Buttons -->
-    <center>
-        <a href="index.html" class="retro-btn">Home</a>
-        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="about.html" class="retro-btn">About</a>
-        <img src="about.gif" alt="about GIF" style="vertical-align: middle;"></a>
-        <a href="blog_posts.html" class="retro-btn">Entries</a>
-        <img src="post.gif" alt="post GIF" style="vertical-align: middle;"></a>
-        <a href="coolsite.html" class="retro-btn">Kool Webpages</a>
-        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;"></a>
-        <a href="guestbook.html" class="retro-btn">Guestbook</a>
-        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;"></a>
-        <a href="books.html" class="retro-btn">Kool Books</a>
-        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="truthtable.html" class="retro-btn">Truth Table</a>
-        <img src="math.gif" alt="math GIF" style="vertical-align: middle;"></a>
-        <a href="contact.html" class="retro-btn">Contact</a>
-        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;"></a>
-    </center>
+<center>
+    <a href="index.html" class="retro-btn nav">Home</a>
+    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="about.html" class="retro-btn nav">About</a>
+    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
+    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
+    <a href="chat.html" class="retro-btn nav">Chat</a>
+    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
+    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
+    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
+    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
+    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
+    <a href="books.html" class="retro-btn nav">Kool Books</a>
+    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
+    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
+    <a href="contact.html" class="retro-btn nav">Contact</a>
+    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
+</center>
 <br>
+
+
 
 <div class="exported-content"> <div class="captioned-image-container"><figure><a class="image-link is-viewable-img image2" target="_blank" href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg" data-component-name="Image2ToDOM"><div class="image2-inset"><picture><source type="image/webp" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 1456w" sizes="100vw"><img src="https://substack-post-media.s3.amazonaws.com/public/images/c15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg" width="528" height="792" data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/c15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:1500,&quot;width&quot;:1000,&quot;resizeWidth&quot;:528,&quot;bytes&quot;:136187,&quot;alt&quot;:null,&quot;title&quot;:null,&quot;type&quot;:&quot;image/jpeg&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:false,&quot;topImage&quot;:true,&quot;internalRedirect&quot;:null}" class="sizing-normal" alt="" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc15d72cd-4e46-4d38-b7cf-62ec57b07485_1000x1500.jpeg 1456w" sizes="100vw" fetchpriority="high"></picture><div class="image-link-expand"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></div></div></a></figure></div><p>After the fall of Romania's communist regime, the new government invited individuals to examine their personal files, which had been meticulously maintained by the secret police. Among those who took advantage of this unusual offer was the American anthropologist Katherine Verdery, who had conducted ethnographic research in the country for her Ph.D. Her research, untouched by explicit topics of communism or the Cold War, had no inkling of subterfuge or sensitive content. Imagine then, Verdery’s astonishment upon unearthing a veritable treasure trove of dossiers, informant letters, copied research, intimate photographs, and detailed records of her every move, all founded on the state's firm belief in her guise as a mischievous US spy.</p><h2>The Anthropologist as Spy</h2><p>There's a curious interplay between projection and perception here, a case of seeing what you expect to see, particularly when your occupation primes you for it. During the Cold War, Verdery's minders pegged her as a US spy. As tensions with Hungarians in Romania later escalated, she was reframed as an American spy with Hungarian roots. And when internal dissidents came under closer scrutiny, she was recast as an instigator of civil discord. Yet, Verdery's response to these attributions is far from simple. She expresses an unsettling kinship with her supposed counterparts; after all, isn't there an argument to be made about the blurry lines distinguishing anthropologists from spies, who also infiltrate communities to gather information? Verdery's own case only strengthens this comparison, and she finds herself pondering the perception of anthropologists as de facto spies, but for the existence of ethics boards, perhaps.</p><p>This isn't an unfounded correlation either, considering the rich history of anthropologists being co-opted as government agents, even spies, exemplified by the American Anthropological Association's backlash when the U.S. military employed anthropologists for counterinsurgency operations in Afghanistan and Iraq post 9/11.</p><div class="captioned-image-container"><figure><a class="image-link is-viewable-img image2" target="_blank" href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg" data-component-name="Image2ToDOM"><div class="image2-inset"><picture><source type="image/webp" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 1456w" sizes="100vw"><img src="https://substack-post-media.s3.amazonaws.com/public/images/0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg" width="462" height="306.6525" data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:531,&quot;width&quot;:800,&quot;resizeWidth&quot;:462,&quot;bytes&quot;:246053,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:null,&quot;type&quot;:&quot;image/jpeg&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:false,&quot;topImage&quot;:false,&quot;internalRedirect&quot;:null}" class="sizing-normal" alt="" title="" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0de222cb-cd1b-4067-a35f-d68c875b6046_800x531.jpeg 1456w" sizes="100vw"></picture><div class="image-link-expand"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></div></div></a><figcaption class="image-caption">Anthropologists formed part of the “Human Terrain System” during the war</figcaption></figure></div><p>Viewing herself as an ethnographer while being externally perceived as a spy leads Verdery on a vivid exploration of the nebulous concept of identity, reminiscent of themes found in Luigi Pirandello's novel <em>One,</em> <em>No One, and One Hundred Thousand</em>. The thematic undercurrents are deeply ontological, a philosophical discourse on the self and its relationship with the other. We are a certain someone, but only from a specific perspective: a lovable fool to siblings, a ne'er-do-well to teachers, a deceptive partner to an ex, a warm presence to parents… a crafty spy to the espionage operatives.&nbsp;</p><p>Yet, this very multiplicity makes it such that is is impossible to identify a single, unadulterated version of ourselves. There is no omniscient perspective, no intrinsic essence, an "I-particle" from which one could chisel out the "true" self. As Luigi Pirandello himself puts it: “You want to know, finally, what everything is based on? I’ll tell you. On the presumption that God will always keep you. The presumption that reality, as it is for you, must be and is the same for everyone else.”&nbsp;</p><p>Verdery had constructed a self-perception or identity as 'Verdery the Ethnographer', and yet, from another perspective, she is seamlessly recast as 'VERA the American Spy' by her observers. This is Pirandello's premise; we perceive ourselves from within while others perceive us from without; from an exterior standpoint. Yet the exterior, characterised by our appearance, speech, and actions, does not always correspond to our internal self-concept. Ironically, the one person incapable of viewing us from this external angle is ourselves, as we can never entirely step outside our persona.</p><p>We construct our identities much like architects design buildings, crafting edifices that can never be fully understood by anyone else, not even those closest to us. All the while others do the same, creating their own versions of that identity which we cannot fully understand either. When a significant dissonance arises between these internal and external constructs—as when you construct for yourself the identity of a serious academic out to conduct serious research, while others construct that same identity as a treacherous spy—it can drive some to the brink of frenzy, crying out to the world "I AM NOT A SPY, I AM AN ETHNOGRAPHER". Verdery encountered this dissonance head-on, finding herself face-to-face with various strange doppelgängers who she vehemently denies being—the ‘Folklorist’ or ‘VERA’: a cunning, calculating spy, at times disguised as a Hungarian.&nbsp;</p><p>Yet, how could Verdery—or any of her perceived alter-egos—definitively argue against the notion that she was, in some sense, a spy? Her research did yield sociopolitical data which lead her to conclusions that didn't necessarily flatter the Romanian state. Her actions, irrespective of her “actual” identity, could very well be construed as spying.</p><p>The secret files ultimately leave Verdery questioning her own perception of her identity, asking “with all these identities was I “the same” person?” Her answer is a resolute “…no. There were several of me, at any one time (the child, the surrogate daughter, the researcher, the department chair, “the Folklorist,” etc. and across time as well.” One could argue that this very book is Verdery's attempt to finally kill her doppelgängers—an intense longing to shatter the perception held by those she left behind in Romania that still see her as a traitor.</p><h2>The Secret Files</h2><div class="captioned-image-container"><figure><a class="image-link is-viewable-img image2" target="_blank" href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg" data-component-name="Image2ToDOM"><div class="image2-inset"><picture><source type="image/webp" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 1456w" sizes="100vw"><img src="https://substack-post-media.s3.amazonaws.com/public/images/d0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg" width="306" height="448.29" data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/d0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:293,&quot;width&quot;:200,&quot;resizeWidth&quot;:306,&quot;bytes&quot;:22182,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:null,&quot;type&quot;:&quot;image/jpeg&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:true,&quot;topImage&quot;:false,&quot;internalRedirect&quot;:null}" class="sizing-normal" alt="" title="" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0df93c9-e06a-4c65-9930-e59fea7d34d0_200x293.jpeg 1456w" sizes="100vw" loading="lazy"></picture><div class="image-link-expand"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></div></div></a><figcaption class="image-caption">A surveillance photo of Katherine Verdery.</figcaption></figure></div><p>The book’s premise is compelling: the discovery and analysis of one's secret file. This meta-research, studying the study of oneself while one was conducting studies on others, forms the foundation of Verdery’s narrative. But perhaps most intriguing is learning of the schizophrenic approach of the secret police (“patriots … defending the positive image of their country”), treating every innocent action as a suspect, itself adding an element of dark humour to the narrative. Verdery effectively showcases this contrast by juxtaposing her academically-oriented field notes and innocent enough personal diary notes with those of the surveillance officers. The unsettling transparency of the secret police's soviet-style surveillance methods — urging hotel informants to "get close to the student under the pretext of wanting to speak English," or spreading rumours through the grapevine about the author, or the various microphones implanted in her rooms, or sending informant researchers to exercise positive bias on the research, for instance — is somewhat embarrassing and reveals the ugly, naked truth of authoritarian surveillance.</p><p>While surveillance itself is an often-discussed topic, rarely do we glimpse its stark, raw reality such as we do here. Thus, the explicit unveiling of Verdery's secret files is at the same time a paradoxical revelation - such documents, steeped in secrecy, were never meant to be perused by their subjects or the public. Yet, here they stand, starkly exhibited for all to see. The precise, unflinching objectivity of the notes, almost written in a scientific manner, recording her activities and locations down to the exact hour, imbues an eerie sense of meticulousness to the surveillance — a chilling thoroughness of the watchers' gaze that were meant for the scientific bureaucrats’ eyes alone.</p><p>The sheer influence that a foreign researcher's portrayal of a country can have on its international reputation took on a heightened importance during the ideological standoff of the Cold War, with communist and capitalist blocs each aiming to showcase the other's failings while affirming their own values and systems. Even seemingly impartial academic inquiry could be weaponised in the global battle of ideas. Any representation that did not align with the state's self-image had the potential to not only tarnish its global reputation but also fuel Western propaganda. Ironically, then, the state authorities in Romania, as depicted by Verdery, were dealing with the same fundamental problem that Verdery herself faced: the challenge of reconciling the version of themselves (or their country) they had perceived internally with the version others perceived from the outside. Both Verdery and the Romanian state were trying to control the narrative — Verdery, in her struggle to assert her identity as an ethnographer and not a spy; and the Romanian authorities, in their attempts to curate a positive national image. In both cases, they found their identities refracted and potentially distorted by the lens of external observers.</p><p>Even if Verdery wasn't a&nbsp;<em>de jure</em>&nbsp;spy, even when her spies had subsequently realised as much, the impact of her academic work, her narration of Romania's history and culture, was seen as carrying a similar weight to espionage, and further blurs the lines between academic research and intelligence gathering, as well as the tension between self-perception and external perception, both on the personal and national levels.</p><h2>Self-ethnography </h2><p>Though the book delivers a riveting account of a researcher turned "spy", some aspects could have been better. Certain sections of the book veer towards nostalgia, with Verdery dedicating considerable attention to reminiscing about her past (notably in a whole section titled 'Kathy'—her younger self) and her various acquaintances. For the reader, these recurrent references can disrupt the narrative's rhythm and might feel jarring or tiresome. Consequently, the book takes on an autobiographical, or more accurately, self-ethnographic feel, rich with colourful descriptions of Verdery's friends (who, one might conjecture, are mentioned as a tribute), encounters, living conditions, and intimate sex life (ostensibly to illustrate how “self-identification responds to the social relations of the field”). Moreover, portions of Chapters 3 and 4 delve into a stream of consciousness and internal monologues, which again movies the feel of an autobiography.</p><p>Verdery also sometimes appears to use the book as a platform to revisit and immortalise a vibrant and emotionally charged phase of her life, perhaps partly as an attempt to reconcile some persistent psychological complexities, and partly to act as a confession, aiming to rectify the erroneous narrative her former acquaintances may have believed regarding her status as a spy, and to some extent, earn their acceptance. This sentiment is particularly palpable in Chapter 3, where she dramatically faces past friends and informants, perhaps as part of a journey towards closure. </p><p>Though this introspective tone adds an unexpected emotional depth to the narrative, it does sometimes diverge from the original expectations of some readers who were likely anticipating a more focused exploration of surveillance, spy craft and its effects. In this respect I encourage readers to skip most of Chapter 3 and 4, which tend to sway into the domain of gossip, catering more to the author's own interest or that of those directly involved rather than providing substantial value to the general reader. It is almost self-indulgent; dwelling too long on the author's personal fixations or peculiarities, phone conversation transcripts and elaborate accounts of her recent interactions with informants and former secret agents, detailing her schemes for  persuading them to engage in dialogues, verbose descriptions about later encounters with them at specific locations, the ins and outs of conversations, assessments of sincerity based on facial expressions, and subsequent discussions with other individuals about those interactions. It gets tiring.</p><p>Lastly, while Verdery evidently sought to intertwine her anthropological research on Romanian ethnicity, culture, and customs into the narrative, this aspect sometimes feels like a digression from the central espionage intrigue. Granted, this cultural context is crucial for a comprehensive understanding of the surveillance tactics employed by the secret police, but these detours into ethnographic analysis can sidetrack from the suspenseful core of the story, leaving the casual reader yearning for more of the clandestine drama. Nonetheless, her unique perspective and the compelling narrative makes this book a well worthwhile read.</p>
 </div>
