@@ -137,7 +137,27 @@ li {
     cursor: pointer;
 }
 
+/* Style adjustments for #handle-screen to fit within .container */
+#handle-screen {
+    display: none; /* Hide by default, show with JS */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+/* If you want to add some backdrop inside the .container when handle-screen is shown */
+#handle-screen.active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust the opacity as needed */
+    z-index: 10; /* Make sure this is above other contents but below modal screens */
+}
+
+
+        
         
     </style>
 
@@ -203,11 +223,11 @@ li {
     </div>
  
     <!-- Handle Input Screen -->
-<div id="handle-screen" style="display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); z-index: 10000; justify-content: center; align-items: center;">
-    <div style="text-align: center;">
-        <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
-        <input type="text" id="user-handle" style="padding: 5px; margin-top: 10px;">
-        <button onclick="enterChat()">Enter Chat</button>
+    <div id="handle-screen" style="display: block;">
+        <div style="text-align: center;">
+            <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
+            <input type="text" id="user-handle">
+            <button onclick="enterChat()">Enter Chat</button>
     </div>
 </div>
 
@@ -318,8 +338,7 @@ function enterChat() {
 
     if (handle) {
         handleInput.value = handle; // Set the handle in the hidden input
-        handleInput.style.display = 'none'; // Hide the handle input in the chat
-        handleScreen.style.display = 'none'; // Hide the handle screen
+        handleScreen.classList.remove('active'); // Hide the handle screen
     }
 }
 
