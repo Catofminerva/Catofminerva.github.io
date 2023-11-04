@@ -270,31 +270,35 @@ function connectWebSocket() {
         });
     }
 
-        function processMessage(data) {
+function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
 
-        // Check the message type
-        if (messageData.type === 'history' || messageData.type === 'message') {
+        if (messageData.type === 'history') {
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
             messageData.data.forEach(function(message) {
-                // Extract the handle and the text
-                var parts = message.split(': ');
-                var handle = parts.shift(); // Remove and get the handle
-                var text = parts.join(': '); // Re-join the remaining message parts
-
-                // Get a consistent color for the handle
-                var color = stringToColorCode(handle);
-                chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '\n';
+                var parts = message.split(": ");
+                var handle = parts.shift(); // Extract the handle
+                var text = parts.join(": "); // The rest is the message text
+                var color = stringToColorCode(handle); // Get color for the handle
+                chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '<br>'; // Display with color
             });
+        } else if (messageData.type === 'message') {
+            var parts = messageData.data.split(": ");
+            var handle = parts.shift(); // Extract the handle
+            var text = parts.join(": "); // The rest is the message text
+            var color = stringToColorCode(handle); // Get color for the handle
+            chatLog.innerHTML += '<span style="color:' + color + '">' + handle + '</span>: ' + text + '<br>'; // Append new message with color
         }
     } catch (error) {
         console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format\n';
+        chatLog.innerHTML += 'Error in message format<br>';
     }
-    chatLog.scrollTop = chatLog.scrollHeight;
+    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
 }
+
 
 
 // When the document is fully loaded, focus on the handle input
