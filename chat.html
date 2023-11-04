@@ -269,31 +269,53 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
-    function processMessage(data) {
+
+
+        function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
-    try {
-        var messageData = JSON.parse(data);
+    // Check if the received data is a Blob
+    if (data instanceof Blob) {
+        // Handle the Blob data as you did before
+        var reader = new FileReader();
 
-        // Check if the message data is of type 'Buffer'
-        if (messageData.data && messageData.data.type === 'Buffer') {
-            // Convert the Buffer to a string
-            var messageText = new TextDecoder("utf-8").decode(new Uint8Array(messageData.data.data));
-            chatLog.innerHTML += messageText + '\n';
-        } else if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            messageData.data.forEach(function(message) {
-                chatLog.innerHTML += message + '\n';
-            });
-        } else {
-            chatLog.innerHTML += messageData.data + '\n';
-        }
-    } catch (error) {
-        console.error('Error parsing message:', error);
+        reader.onload = function(e) {
+            // Process the text from the Blob
+            var textData = e.target.result;
+            displayMessage(textData); // Process and display the message
+        };
+
+        reader.readAsText(data);
+    } else {
+        // Assume the message is text (or JSON formatted text)
+        displayMessage(data); // Process and display the message
+    }
+}
+
+function displayMessage(messageData) {
+    try {
+        var parsedData = JSON.parse(messageData);
+        // Continue with the previous logic to display the message
+        // Here you would also use the color associated with the message
+        
+        // Create a new div element for each message
+        var messageElement = document.createElement('div');
+        messageElement.innerText = parsedData.handle + ': ' + parsedData.message;
+        
+        // Set the color of the message
+        messageElement.style.color = parsedData.color;
+
+        // Append the message element to the chat log
+        chatLog.appendChild(messageElement);
+    } catch (e) {
+        console.error('Error parsing message:', e);
+        // Append the error as plain text
         chatLog.innerHTML += 'Error in message format\n';
     }
+    // Scroll the chat log to the newest message
     chatLog.scrollTop = chatLog.scrollHeight;
 }
+
 
 
 // When the document is fully loaded, focus on the handle input
@@ -354,22 +376,28 @@ function enterChat() {
 }
 
 
-// Adjusted sendMessage function
+// Adjusted sendMessage function to send JSON
 function sendMessage() {
     var message = document.getElementById('chat-input').value.trim();
 
-    if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
-        console.log('Sending message:', fullMessage);
+    if (socket.handle && message) {
+        var messageObject = {
+            handle: socket.handle,
+            message: message,
+            color: socket.color // Include the color in the sent data
+        };
+        var messageString = JSON.stringify(messageObject);
+        console.log('Sending message:', messageString);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(fullMessage);
+            socket.send(messageString); // Send the JSON string
             document.getElementById('chat-input').value = ''; // Clear the message input
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
     }
 }
+
 
         var input = document.getElementById("chat-input");
         input.addEventListener("keyup", function(event) {
