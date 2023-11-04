@@ -272,29 +272,32 @@ function connectWebSocket() {
 
 
 function processMessage(data) {
-    var chatLog = document.getElementById('chat-log');
+  var chatLog = document.getElementById('chat-log');
 
-    try {
-        var messageData = JSON.parse(data);
-        // ... (previous message handling code remains unchanged)
+  try {
+      var messageData = JSON.parse(data);
 
-        if (messageData.type === 'message') {
-            // The message includes handle, text, and color
-            var handle = messageData.data.split(':')[0].trim();
-            var message = messageData.data.substr(handle.length + 1).trim(); // Message without the handle
-
-            // Append to chatLog with handle colored
-            chatLog.innerHTML += `<span style="color: ${messageData.color};">${handle}</span>: ${message}\n`;
-        } else {
-            // Handle other message types like 'history'
-            chatLog.innerHTML += messageData.data + '\n';
-        }
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format\n';
-    }
-    chatLog.scrollTop = chatLog.scrollHeight;
+      if (messageData.type === 'history') {
+          chatLog.innerHTML = '';
+          messageData.data.forEach(function(messageInfo) {
+              var messageElement = document.createElement('div');
+              messageElement.textContent = messageInfo.message;
+              messageElement.style.color = messageInfo.color; // Apply color
+              chatLog.appendChild(messageElement);
+          });
+      } else if (messageData.type === 'message') {
+          var messageElement = document.createElement('div');
+          messageElement.textContent = messageData.data;
+          messageElement.style.color = messageData.color; // Apply color
+          chatLog.appendChild(messageElement);
+      }
+  } catch (error) {
+      console.error('Error parsing message:', error);
+      chatLog.innerHTML += 'Error in message format\n';
+  }
+  chatLog.scrollTop = chatLog.scrollHeight;
 }
+
 
 
 // When the document is fully loaded, focus on the handle input
