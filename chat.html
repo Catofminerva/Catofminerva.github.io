@@ -127,6 +127,10 @@ li {
 
 </head>
 <body>
+    <div id="loading-screen" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; color: white; text-align: center; padding-top: 20%;">
+    <p>Loading...</p>
+    </div>
+
     <center>
         <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
         <img src="kitty.gif" alt="Kitty Gif" class="kitty-gif">
@@ -176,16 +180,24 @@ li {
         </div>
     </div>
  <script>
+    // Function to handle WebSocket connections with a reconnection strategy
+    function connectWebSocket() {
+        // Display the loading screen
+        document.getElementById('loading-screen').style.display = 'block';
+
         // Initialize the WebSocket
         const socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
         socket.addEventListener('open', function (event) {
             console.log('WebSocket connection established');
+            // Hide the loading screen
+            document.getElementById('loading-screen').style.display = 'none';
             // Request the chat history from the server
             socket.send('request-chat-history');
         });
 
         socket.addEventListener('message', function (event) {
+            // Handle incoming messages
             var chatLog = document.getElementById('chat-log');
 
             // Check if the received data is a Blob
@@ -208,12 +220,15 @@ li {
 
         socket.addEventListener('close', function (event) {
             console.log('WebSocket connection closed');
+            // Show the loading screen and attempt to reconnect after 5 seconds
+            document.getElementById('loading-screen').style.display = 'block';
+            setTimeout(connectWebSocket, 5000);
         });
 
         socket.addEventListener('error', function (event) {
             console.log('WebSocket error:', event);
         });
-
+    }
     function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
@@ -267,6 +282,10 @@ function sendMessage() {
                 sendMessage();
             }
         });
+
+        // Call the connectWebSocket function when the script loads to start the WebSocket connection
+    connectWebSocket();
+
     </script>
     
 </body>
