@@ -270,40 +270,48 @@ function connectWebSocket() {
         });
     }
 
-    function processMessage(data) {
+function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
-        // Parse the incoming data as it's a stringified JSON
         var messageData = JSON.parse(data);
 
-        // Check if messageData.message is a JSON string and parse it as well
-        if (typeof messageData.message === 'string') {
-            messageData = JSON.parse(messageData.message);
+        // Check if the messageData is of type 'message' and contains a data object
+        if (messageData.type === 'message' && messageData.data) {
+            // Create a new element for the message
+            var messageElement = document.createElement('div');
+
+            // Check if the data object has a color property
+            if (messageData.data.color && messageData.data.handle) {
+                // Apply the color to the user handle
+                messageElement.innerHTML = '<span style="color: ' + messageData.data.color + ';">' +
+                                            messageData.data.handle + '</span>: ' + 
+                                            messageData.data.text;
+            } else {
+                // If there is no color, display the message normally
+                messageElement.textContent = messageData.data.handle + ': ' + messageData.data.text;
+            }
+
+            // Append the message element to the chat log
+            chatLog.appendChild(messageElement);
+        } else if (messageData.type === 'history') {
+            // If it's the chat history, loop through each message and append it
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            messageData.data.forEach(function(message) {
+                var historyElement = document.createElement('div');
+                historyElement.textContent = message; // This assumes history messages are plain text
+                chatLog.appendChild(historyElement);
+            });
         }
-
-        // Now messageData is the actual object, not a string, so we can create the message element
-        var messageElement = document.createElement('div');
-
-        // Check if messageData has a color property and apply it to the user handle
-        if (messageData.color && messageData.handle) {
-            messageElement.innerHTML = '<span style="color: ' + messageData.color + ';">' +
-                                       messageData.handle + '</span>: ' + 
-                                       messageData.text;
-        } else {
-            // If there is no color, just display the handle and text
-            messageElement.textContent = messageData.handle + ': ' + messageData.text;
-        }
-
-        // Append the message element to the chat log
-        chatLog.appendChild(messageElement);
-
     } catch (error) {
         console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format\n';
+        var errorElement = document.createElement('div');
+        errorElement.textContent = 'Error in message format';
+        chatLog.appendChild(errorElement);
     }
-    chatLog.scrollTop = chatLog.scrollHeight;
+    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
 }
+
 
 
 // When the document is fully loaded, focus on the handle input
