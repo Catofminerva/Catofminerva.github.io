@@ -301,6 +301,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('user-handle').focus();
 });
 
+
+    function stringToColor(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    var color = '#';
+    for (var i = 0; i < 3; i++) {
+        var value = (hash >> (i * 8)) & 0xFF;
+        color += ('00' + value.toString(16)).substr(-2);
+    }
+    return color;
+}
+
+    function getHandleColor(handle) {
+    let color = localStorage.getItem(handle);
+    if (!color) {
+        color = stringToColor(handle);
+        localStorage.setItem(handle, color);
+    }
+    return color;
+}
+    
+        
 // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
     var handle = document.getElementById('user-handle').value.trim();
@@ -333,9 +357,6 @@ function sendMessage() {
         }
     }
 }
-
-
-
 
         var input = document.getElementById("chat-input");
         input.addEventListener("keyup", function(event) {
