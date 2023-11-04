@@ -302,44 +302,57 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-    function stringToColor(str) {
+function hashString(str) {
     var hash = 0;
     for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        var character = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + character;
+        hash = hash & hash; // Convert to 32bit integer
     }
+    return hash;
+}
+
+ function stringToColor(str) {
+    var hash = hashString(str);
     var color = '#';
+
     for (var i = 0; i < 3; i++) {
         var value = (hash >> (i * 8)) & 0xFF;
         color += ('00' + value.toString(16)).substr(-2);
     }
+
     return color;
+}
+       
+  function getUsernameColor(username) {
+    return stringToColor(username);
 }
 
-    function getHandleColor(handle) {
-    let color = localStorage.getItem(handle);
-    if (!color) {
-        color = stringToColor(handle);
-        localStorage.setItem(handle, color);
-    }
-    return color;
-}
-    
-        
-// Function that gets called when user enters their handle and clicks "Enter Chat"
+
+    // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
     var handle = document.getElementById('user-handle').value.trim();
-    if(handle) {
+    if (handle) {
+        // Generate a color based on the user's handle
+        var color = getUsernameColor(handle);
+
         // Assuming you have a WebSocket connection called 'socket'
-        socket.handle = handle;  // Store the user's handle in the socket object for later use
+        socket.handle = handle; // Store the user's handle in the socket object for later use
+        socket.color = color; // Store the color in the socket object for later use
+
         // Hide handle input screen and show chat input area
         document.getElementById('handle-screen').style.display = 'none';
         document.getElementById('chat-input-area').style.display = 'block';
         document.getElementById('chat-input').focus(); // Focus on the message input
+
+        // Set the user's handle color for the chat input (optional visual feedback)
+        document.getElementById('chat-input').style.color = color;
     } else {
         // Handle the case where handle is not entered
         alert("Please enter a handle to continue.");
     }
 }
+
 
 // Adjusted sendMessage function
 function sendMessage() {
