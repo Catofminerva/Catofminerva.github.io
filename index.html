@@ -103,14 +103,16 @@ body .nav {
     color: #FF33CC;
 }
 
-a:link, a:visited {
-  color: pink; /* or the specific pink color code you are using */
-  text-decoration: none; /* Removes underline from links */
+/* Increased specificity for link styles */
+body a:link, body a:visited {
+  color: pink; /* Replace with your specific color code */
+  text-decoration: none;
 }
 
-a:hover, a:active {
-  color: blue; /* Only changes color when the mouse hovers over the link or it is active */
+body a:hover, body a:active {
+  color: blue; /* Or any other color you wish for the hover and active states */
 }
+
 
     
       </style>
