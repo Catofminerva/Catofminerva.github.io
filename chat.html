@@ -279,26 +279,18 @@ function processMessage(data) {
         var messageData = JSON.parse(data);
         console.log('Parsed message data:', messageData);
 
-        if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            console.log('History items:', messageData.data); // Log the history items for debugging
-            messageData.data.forEach(function(historyItem) {
-                console.log('Current history item:', historyItem); // Log the current history item for debugging
-                var parts = historyItem.split(": ");
-                var color = stringToColorCode(parts[0]);
-                chatLog.innerHTML += '<span style="color:' + color + ';">' + historyItem + '</span><br>';
-            });
-        } else if (messageData.type === 'message') {
-            var parts = messageData.data.split(": ");
-            var color = stringToColorCode(parts[0]);
-            chatLog.innerHTML += '<span style="color:' + color + ';">' + messageData.data + '</span><br>';
-        }
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        chatLog.innerHTML += 'Error in message format<br>';
+if (messageData.type === 'history') {
+  messageData.data.forEach(function(historyItem) {
+    // Check if historyItem is a string before trying to split it
+    if (typeof historyItem === 'string') {
+      // Your existing code to handle the historyItem string
+    } else {
+      // If it's not a string, log it to see what it is
+      console.log('Unexpected data type:', historyItem);
     }
-
-    chatLog.scrollTop = chatLog.scrollHeight;
+  });
+}
+lHeight;
 }
 
 
