@@ -225,23 +225,26 @@ function connectWebSocket() {
     // Get the loading screen within the chat log
     var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
     chatLoadingScreen.style.display = 'block';
-        var handle = localStorage.getItem('userHandle');
-        var color = localStorage.getItem('handleColor');
-        
-        if(handle && color) {
-            socket.handle = handle;
-            socket.color = color;
-            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-            socket.send(colorMessage);
-        }
+
     // Initialize the WebSocket (no const keyword here)
     socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
     socket.addEventListener('open', function (event) {
         console.log('WebSocket connection established');
+
         // Hide the chat loading screen
         chatLoadingScreen.style.display = 'none';
-        // ...
+
+        // Attempt to set handle and color if available in localStorage
+        var handle = localStorage.getItem('userHandle');
+        var color = localStorage.getItem('handleColor');
+        
+        if (handle && color) {
+            socket.handle = handle;
+            socket.color = color;
+            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+            socket.send(colorMessage);
+        }
     });
 
         socket.addEventListener('message', function (event) {
@@ -325,31 +328,37 @@ function enterChat() {
         // Store handle in localStorage
         localStorage.setItem('userHandle', handle);
         
-        // Check if the user already has a color, if not generate a new one
-        if (!localStorage.getItem('handleColor')) {
-            var randomColor = getRandomColor(); // Ensure this function is defined in your client-side code
-            localStorage.setItem('handleColor', randomColor);
+        // Check if the WebSocket is open before assigning handle and sending color
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            // Check if the user already has a color, if not generate a new one
+            var color = localStorage.getItem('handleColor');
+            if (!color) {
+                color = getRandomColor(); // Ensure this function is defined in your client-side code
+                localStorage.setItem('handleColor', color);
+            }
+            
+            // Store the user's handle and color in the WebSocket object for later use
+            socket.handle = handle;
+            socket.color = color;
+
+            // Send color setting to server
+            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+            socket.send(colorMessage);
+
+            // Hide handle input screen and show chat input area
+            document.getElementById('handle-screen').style.display = 'none';
+            document.getElementById('chat-input-area').style.display = 'block';
+            document.getElementById('chat-input').focus(); // Focus on the message input
+        } else {
+            console.log('WebSocket is not open. Cannot set handle or send color.');
+            // You could also choose to reconnect or notify the user here
         }
-        
-        // Store the user's handle and color in the WebSocket object for later use
-        socket.handle = handle;
-        socket.color = localStorage.getItem('handleColor'); 
-
-        // Send color setting to server
-        var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: socket.color });
-        socket.send(colorMessage);
-
-        // Hide handle input screen and show chat input area
-        document.getElementById('handle-screen').style.display = 'none';
-        document.getElementById('chat-input-area').style.display = 'block';
-        document.getElementById('chat-input').focus(); // Focus on the message input
     } else {
         // Handle the case where the handle is not entered
         alert("Please enter a handle to continue.");
     }
 }
 
-// Example getRandomColor function for client-side
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
