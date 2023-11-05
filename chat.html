@@ -270,30 +270,74 @@ function connectWebSocket() {
         });
     }
 
-function processMessage(data) {
-    var chatLog = document.getElementById('chat-log');
+wss.on('connection', (ws) => {
+  // Send the chat history to the client upon connection
+  loadChatHistory((history) => {
+    ws.send(JSON.stringify({ type: 'history', data: history }));
+  });
 
-    try {
-        var messageData = JSON.parse(data);
-
-        // If it's the chat history, reconstruct it with the color
-        if (messageData.type === 'history') {
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
-            messageData.data.forEach(function(message) {
-                var messageElement = document.createElement('div');
-                messageElement.style.color = message.color; // Set the color style
-                messageElement.textContent = message.handle + ": " + message.message;
-                chatLog.appendChild(messageElement);
-            });
-        } else if (messageData.type === 'message') {
-            var messageElement = document.createElement('div');
-            messageElement.style.color = messageData.data.color; // Set the color style
-            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
-            chatLog.appendChild(messageElement);
-        }
-    } catch (e) {
-        console.error("Error processing message: ", e);
+  ws.on('message', (message) => {
+    const [handle, msg] = message.split(':');
+    if (!userColors[handle]) {
+      userColors[handle] = getRandomColor();
     }
+
+    const coloredMessage = {
+      handle: handle,
+      message: msg,
+      color: userColors[handle],
+    };
+
+    saveMessage(handle, msg, userColors[handle]);
+    broadcastMessage(JSON.stringify({ type: 'message', data: coloredMessage }));
+  });
+});
+
+// Start the server
+server.listen(process.env.PORT, () => {
+  console.log(`HTTP and WebSocket server is listening on port ${process.env.PORT}`);
+});
+
+// Close the SQLite database on server stop
+process.on('SIGINT', () => {
+  db.close((err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Close the database connection.');
+    process.exit();
+  });
+});
+Client-side script (relevant part):
+
+javascript
+Copy code
+// ... previous code ...
+
+function processMessage(data) {
+  var chatLog = document.getElementById('chat-log');
+
+  try {
+    var messageData = JSON.parse(data);
+
+    if (messageData.type === 'history') {
+      chatLog.innerHTML = '';
+      messageData.data.forEach(function (message) {
+        var messageElement = document.createElement('div');
+        messageElement.style.color = message.color;
+        messageElement.textContent = message.handle + ': ' + message.message;
+        chatLog.appendChild(messageElement);
+      });
+    } else if (messageData.type === 'message') {
+      var messageElement = document.createElement('div');
+      messageElement.style.color = messageData.data.color;
+      messageElement.textContent = messageData.data.handle + ': ' + messageData.data.message;
+      chatLog.appendChild(messageElement);
+      chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
+    }
+  } catch (e) {
+    console.error('Error processing message:', e);
+  }
 }
 
 
