@@ -275,23 +275,34 @@ function processMessage(data) {
     try {
         var messageData = JSON.parse(data);
 
-        // If it's the chat history, each message will be displayed on its own line
+        // Check if the messageData is a chat history type
         if (messageData.type === 'history') {
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
-            messageData.data.forEach(function(message) {
-                // We append a div for each message in the history here.
-                // You would need to ensure that the message is stored with color coding in the history as well.
-                var messageElement = document.createElement('div');
-                messageElement.textContent = message;
-                chatLog.appendChild(messageElement);
+            // Clear the chat log for incoming history
+            chatLog.innerHTML = '';
+            // Loop over each message and append it with color styling
+            messageData.data.forEach(function(messageObj) {
+                var formattedMessage = '<span style="color:' + messageObj.color + '">' +
+                                       messageObj.handle + ': ' + messageObj.message + '</span>';
+                chatLog.innerHTML += formattedMessage + '\n';
             });
         } else if (messageData.type === 'message') {
-            // If it's a single message, construct an element with the specified color
-            var messageElement = document.createElement('div');
-            messageElement.style.color = messageData.data.color; // Set the color style
-            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
-            chatLog.appendChild(messageElement);
+            // Format individual message with color styling
+            var formattedMessage = '<span style="color:' + messageData.data.color + '">' +
+                                   messageData.data.handle + ': ' + messageData.data.message + '</span>';
+            chatLog.innerHTML += formattedMessage + '\n';
+        } else {
+            // If the messageData is not of a recognized type, log an error
+            console.error('Received unknown message type:', messageData.type);
         }
+    } catch (error) {
+        console.error('Error parsing message:', error);
+        chatLog.innerHTML += 'Error in message format\n';
+    }
+
+    // Scroll to the bottom of the chat log
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
+
 
         // Scroll to the bottom of the chat log
         chatLog.scrollTop = chatLog.scrollHeight;
@@ -326,19 +337,14 @@ function enterChat() {
     }
 }
 
+// Adjusted sendMessage function
 function sendMessage() {
-    var messageText = document.getElementById('chat-input').value.trim();
-    
-    if (socket.handle && messageText) {
-        var messageObj = {
-            handle: socket.handle,
-            message: messageText,
-            color: "black" // you can dynamically set the color if needed
-        };
-        
-        var fullMessage = JSON.stringify({ type: 'message', data: messageObj });
+    var message = document.getElementById('chat-input').value.trim();
+
+    if (socket.handle && message) { // Use the handle from the socket object
+        var fullMessage = socket.handle + ": " + message; // Use the stored handle
         console.log('Sending message:', fullMessage);
-        
+
         if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(fullMessage);
             document.getElementById('chat-input').value = ''; // Clear the message input
@@ -347,7 +353,6 @@ function sendMessage() {
         }
     }
 }
-
 
 
 
