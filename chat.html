@@ -225,7 +225,15 @@ function connectWebSocket() {
     // Get the loading screen within the chat log
     var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
     chatLoadingScreen.style.display = 'block';
-
+        var handle = localStorage.getItem('userHandle');
+        var color = localStorage.getItem('handleColor');
+        
+        if(handle && color) {
+            socket.handle = handle;
+            socket.color = color;
+            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+            socket.send(colorMessage);
+        }
     // Initialize the WebSocket (no const keyword here)
     socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
@@ -313,18 +321,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
     var handle = document.getElementById('user-handle').value.trim();
-    if(handle) {
-        // Assuming you have a WebSocket connection called 'socket'
-        socket.handle = handle;  // Store the user's handle in the socket object for later use
+    if (handle) {
+        // Store handle in localStorage
+        localStorage.setItem('userHandle', handle);
+        
+        // Check if the user already has a color, if not generate a new one
+        if (!localStorage.getItem('handleColor')) {
+            var randomColor = getRandomColor(); // Ensure this function is defined in your client-side code
+            localStorage.setItem('handleColor', randomColor);
+        }
+        
+        // Store the user's handle and color in the WebSocket object for later use
+        socket.handle = handle;
+        socket.color = localStorage.getItem('handleColor'); 
+
+        // Send color setting to server
+        var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: socket.color });
+        socket.send(colorMessage);
+
         // Hide handle input screen and show chat input area
         document.getElementById('handle-screen').style.display = 'none';
         document.getElementById('chat-input-area').style.display = 'block';
         document.getElementById('chat-input').focus(); // Focus on the message input
     } else {
-        // Handle the case where handle is not entered
+        // Handle the case where the handle is not entered
         alert("Please enter a handle to continue.");
     }
 }
+
+// Example getRandomColor function for client-side
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 
 // Adjusted sendMessage function
 function sendMessage() {
