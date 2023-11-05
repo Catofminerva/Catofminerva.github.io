@@ -350,11 +350,14 @@ function processMessage(data) {
         }
 
         chatLog.scrollTop = chatLog.scrollHeight;
+    } catch (error) {
         console.error('Error parsing message:', error);
         var errorMessageElement = document.createElement('div');
         errorMessageElement.textContent = 'Error in message format';
         chatLog.appendChild(errorMessageElement);
     }
+}
+
 
         // Scroll to the bottom of the chat log
         chatLog.scrollTop = chatLog.scrollHeight;
