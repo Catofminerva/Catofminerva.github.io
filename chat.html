@@ -281,15 +281,6 @@ li {
             console.log('WebSocket error:', event);
         });
     }
-
-
-function styleUserMessage(messageElement, handle, color) {
-    if (socket.handle === handle) { // Check if the message handle is the same as the socket handle
-        messageElement.style.color = color; // Apply the user's color to the message
-    }
-}
-
-        
 function restoreChatInterface(handle, color) {
     if (handle && color) {
         // Update UI to reflect user's handle and color
@@ -297,13 +288,13 @@ function restoreChatInterface(handle, color) {
         userHandleInput.value = handle;
         userHandleInput.style.color = color; // This applies the color to the text inside the input
 
-        // Update the send button to have the same color
+        // Assuming you want the send button to have the same color
         var sendButton = document.querySelector('.send-button');
         sendButton.style.backgroundColor = color;
 
-        // Update the user's handle display with the user's color
-        var userHandleDisplay = document.getElementById('handle-display');
-        if (userHandleDisplay) {
+        // Assuming you have an element where the user's handle is displayed and you want it to have the user's color
+        var userHandleDisplay = document.getElementById('handle-display'); // You need to add this element to your HTML
+        if(userHandleDisplay) {
             userHandleDisplay.textContent = handle;
             userHandleDisplay.style.color = color;
         }
@@ -314,15 +305,9 @@ function restoreChatInterface(handle, color) {
 
         // Set the border color of the chat input to the user's color
         var chatInput = document.getElementById('chat-input');
-        chatInput.style.borderColor = color;
+        chatInput.style.borderColor = color; // This changes the border color to the user's color
 
         chatInput.focus();
-
-        // Apply the color to existing messages in the chat log for the user
-        var messages = document.getElementById('chat-log').children;
-        for (var i = 0; i < messages.length; i++) {
-            styleUserMessage(messages[i], handle, color);
-        }
     }
 }
 
@@ -349,17 +334,6 @@ function processMessage(data) {
             messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
             chatLog.appendChild(messageElement);
         }
-
-        // Scroll to the bottom of the chat log
-        chatLog.scrollTop = chatLog.scrollHeight;
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        var errorMessageElement = document.createElement('div');
-        errorMessageElement.textContent = 'Error in message format';
-        chatLog.appendChild(errorMessageElement);
-    }
-}
-
 
         // Scroll to the bottom of the chat log
         chatLog.scrollTop = chatLog.scrollHeight;
