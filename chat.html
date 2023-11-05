@@ -380,7 +380,7 @@ function enterChat() {
 
             // Send color setting to server
             var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-            socket.send(colorMessage);
+socket.send(colorMessage);
 
             // Hide handle input screen and show chat input area
             document.getElementById('handle-screen').style.display = 'none';
