@@ -221,31 +221,28 @@ li {
     var socket;
 
 // Function to handle WebSocket connections with a reconnection strategy
-function connectWebSocket() {
-    // Get the loading screen within the chat log
-    var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
-    chatLoadingScreen.style.display = 'block';
+    function connectWebSocket() {
+        var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
+        chatLoadingScreen.style.display = 'block';
 
-    // Initialize the WebSocket (no const keyword here)
-    socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+        socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-    socket.addEventListener('open', function (event) {
-        console.log('WebSocket connection established');
+        socket.addEventListener('open', function (event) {
+            console.log('WebSocket connection established');
+            chatLoadingScreen.style.display = 'none';
 
-        // Hide the chat loading screen
-        chatLoadingScreen.style.display = 'none';
+            var handle = localStorage.getItem('userHandle');
+            var color = localStorage.getItem('handleColor');
+            
+            if (handle && color) {
+                socket.handle = handle;
+                socket.color = color;
+                var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+                socket.send(colorMessage);
+                restoreChatInterface(handle, color);
+            }
+        });
 
-        // Attempt to set handle and color if available in localStorage
-        var handle = localStorage.getItem('userHandle');
-        var color = localStorage.getItem('handleColor');
-        
-        if (handle && color) {
-            socket.handle = handle;
-            socket.color = color;
-            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-            socket.send(colorMessage);
-        }
-    });
 
         socket.addEventListener('message', function (event) {
             // Handle incoming messages
@@ -279,6 +276,18 @@ function connectWebSocket() {
         socket.addEventListener('error', function (event) {
             console.log('WebSocket error:', event);
         });
+    }
+               function restoreChatInterface(handle, color) {
+            if (handle && color) {
+                // Update UI to reflect user's handle and color
+                document.getElementById('user-handle').value = handle;
+                // If you have other UI elements that reflect the user's color, update them here
+                // Show/hide appropriate UI elements
+                document.getElementById('handle-screen').style.display = 'none';
+                document.getElementById('chat-input-area').style.display = 'block';
+                document.getElementById('chat-input').focus();
+            }
+        }
     }
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
@@ -318,8 +327,14 @@ function processMessage(data) {
 
 // When the document is fully loaded, focus on the handle input
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('user-handle').focus();
-});
+        var handle = localStorage.getItem('userHandle');
+        var color = localStorage.getItem('handleColor');
+        if (handle && color) {
+            restoreChatInterface(handle, color);
+        } else {
+            document.getElementById('user-handle').focus();
+        }
+    });
 
 // Function that gets called when user enters their handle and clicks "Enter Chat"
 function enterChat() {
@@ -389,12 +404,13 @@ function sendMessage() {
 
 
 
-        var input = document.getElementById("chat-input");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                sendMessage();
-            }
-        });
+   var input = document.getElementById("chat-input");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault(); // Prevent the default action to avoid form submission
+            sendMessage();
+        }
+    });
 
         // Call the connectWebSocket function when the script loads to start the WebSocket connection
     connectWebSocket();
