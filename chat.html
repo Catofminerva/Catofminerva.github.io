@@ -269,37 +269,30 @@ function connectWebSocket() {
             console.log('WebSocket error:', event);
         });
     }
+
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
 
     try {
         var messageData = JSON.parse(data);
 
-        // If it's the chat history, each message will be displayed on its own line
+        // If it's the chat history, reconstruct it with the color
         if (messageData.type === 'history') {
             chatLog.innerHTML = ''; // Clear the chat log before appending history
             messageData.data.forEach(function(message) {
-                // We append a div for each message in the history here.
-                // You would need to ensure that the message is stored with color coding in the history as well.
                 var messageElement = document.createElement('div');
-                messageElement.textContent = message;
+                messageElement.style.color = message.color; // Set the color style
+                messageElement.textContent = message.handle + ": " + message.message;
                 chatLog.appendChild(messageElement);
             });
         } else if (messageData.type === 'message') {
-            // If it's a single message, construct an element with the specified color
             var messageElement = document.createElement('div');
             messageElement.style.color = messageData.data.color; // Set the color style
             messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
             chatLog.appendChild(messageElement);
         }
-
-        // Scroll to the bottom of the chat log
-        chatLog.scrollTop = chatLog.scrollHeight;
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        var errorMessageElement = document.createElement('div');
-        errorMessageElement.textContent = 'Error in message format';
-        chatLog.appendChild(errorMessageElement);
+    } catch (e) {
+        console.error("Error processing message: ", e);
     }
 }
 
