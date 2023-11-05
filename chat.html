@@ -217,32 +217,59 @@ li {
 
     
  <script>
+
   // Declare the 'socket' variable in the global scope to be used by all functions
   var socket;
 
   // Function to handle WebSocket connections with a reconnection strategy
   function connectWebSocket() {
-      // Initialize the WebSocket connection to the server
-      socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+    // Get the loading screen within the chat log
+    var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
+    chatLoadingScreen.style.display = 'block';
 
-      socket.addEventListener('open', function (event) {
-          console.log('WebSocket connection established');
-      });
+    // Initialize the WebSocket
+    socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-      socket.addEventListener('message', function (event) {
-          // Process incoming messages
-          processMessage(event.data);
-      });
+    socket.addEventListener('open', function (event) {
+      console.log('WebSocket connection established');
+      // Hide the chat loading screen
+      chatLoadingScreen.style.display = 'none';
+      // ...
+    });
 
-      socket.addEventListener('close', function (event) {
-          console.log('WebSocket connection closed, reconnecting in 5 seconds...');
-          setTimeout(connectWebSocket, 5000);
-      });
+    socket.addEventListener('message', function (event) {
+      // Handle incoming messages
+      var chatLog = document.getElementById('chat-log');
+      // Check if the received data is a Blob
+      if (event.data instanceof Blob) {
+        // Create a FileReader to read the Blob as text
+        var reader = new FileReader();
 
-      socket.addEventListener('error', function (event) {
-          console.error('WebSocket error:', event);
-      });
+        reader.onload = function(e) {
+          // Process the text from the Blob
+          processMessage(e.target.result);
+        };
+
+        // Read the Blob as text
+        reader.readAsText(event.data);
+      } else {
+        // If not a Blob, assume it's text and process it
+        processMessage(event.data);
+      }
+    });
+
+    socket.addEventListener('close', function (event) {
+      console.log('WebSocket connection closed');
+      // Show the chat loading screen and attempt to reconnect after 5 seconds
+      chatLoadingScreen.style.display = 'block';
+      setTimeout(connectWebSocket, 5000);
+    });
+
+    socket.addEventListener('error', function (event) {
+      console.log('WebSocket error:', event);
+    });
   }
+
 
   // Function to process incoming WebSocket messages
   function processMessage(data) {
