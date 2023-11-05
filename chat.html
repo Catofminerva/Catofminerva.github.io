@@ -216,179 +216,110 @@ li {
 
 
     
-    <script>
-   // Declare the 'socket' variable in the global scope to be used by all functions
-    var socket;
+ <script>
+  // Declare the 'socket' variable in the global scope to be used by all functions
+  var socket;
 
-// Function to handle WebSocket connections with a reconnection strategy
-function connectWebSocket() {
-    // Get the loading screen within the chat log
-    var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
-    chatLoadingScreen.style.display = 'block';
+  // Function to handle WebSocket connections with a reconnection strategy
+  function connectWebSocket() {
+      // Initialize the WebSocket connection to the server
+      socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-    // Initialize the WebSocket (no const keyword here)
-    socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
-
-    socket.addEventListener('open', function (event) {
-        console.log('WebSocket connection established');
-        // Hide the chat loading screen
-        chatLoadingScreen.style.display = 'none';
-        // ...
-    });
-
-        socket.addEventListener('message', function (event) {
-            // Handle incoming messages
-            var chatLog = document.getElementById('chat-log');
-
-            // Check if the received data is a Blob
-            if (event.data instanceof Blob) {
-                // Create a FileReader to read the Blob as text
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Process the text from the Blob
-                    processMessage(e.target.result);
-                };
-
-                // Read the Blob as text
-                reader.readAsText(event.data);
-            } else {
-                // If not a Blob, assume it's text and process it
-                processMessage(event.data);
-            }
-        });
-
-    socket.addEventListener('close', function (event) {
-        console.log('WebSocket connection closed');
-        // Show the chat loading screen and attempt to reconnect after 5 seconds
-        chatLoadingScreen.style.display = 'block';
-        setTimeout(connectWebSocket, 5000);
-    });
-
-        socket.addEventListener('error', function (event) {
-            console.log('WebSocket error:', event);
-        });
-    }
-
-wss.on('connection', (ws) => {
-  // Send the chat history to the client upon connection
-  loadChatHistory((history) => {
-    ws.send(JSON.stringify({ type: 'history', data: history }));
-  });
-
-  ws.on('message', (message) => {
-    const [handle, msg] = message.split(':');
-    if (!userColors[handle]) {
-      userColors[handle] = getRandomColor();
-    }
-
-    const coloredMessage = {
-      handle: handle,
-      message: msg,
-      color: userColors[handle],
-    };
-
-    saveMessage(handle, msg, userColors[handle]);
-    broadcastMessage(JSON.stringify({ type: 'message', data: coloredMessage }));
-  });
-});
-
-// Start the server
-server.listen(process.env.PORT, () => {
-  console.log(`HTTP and WebSocket server is listening on port ${process.env.PORT}`);
-});
-
-// Close the SQLite database on server stop
-process.on('SIGINT', () => {
-  db.close((err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log('Close the database connection.');
-    process.exit();
-  });
-});
-
-function processMessage(data) {
-  var chatLog = document.getElementById('chat-log');
-
-  try {
-    var messageData = JSON.parse(data);
-
-    if (messageData.type === 'history') {
-      chatLog.innerHTML = '';
-      messageData.data.forEach(function (message) {
-        var messageElement = document.createElement('div');
-        messageElement.style.color = message.color;
-        messageElement.textContent = message.handle + ': ' + message.message;
-        chatLog.appendChild(messageElement);
+      socket.addEventListener('open', function (event) {
+          console.log('WebSocket connection established');
       });
-    } else if (messageData.type === 'message') {
+
+      socket.addEventListener('message', function (event) {
+          // Process incoming messages
+          processMessage(event.data);
+      });
+
+      socket.addEventListener('close', function (event) {
+          console.log('WebSocket connection closed, reconnecting in 5 seconds...');
+          setTimeout(connectWebSocket, 5000);
+      });
+
+      socket.addEventListener('error', function (event) {
+          console.error('WebSocket error:', event);
+      });
+  }
+
+  // Function to process incoming WebSocket messages
+  function processMessage(data) {
+      var chatLog = document.getElementById('chat-log');
+
+      try {
+          var messageData = JSON.parse(data);
+
+          if (messageData.type === 'history') {
+              chatLog.innerHTML = ''; // Clear the chat log before appending history messages
+              messageData.data.forEach(function (message) {
+                  appendMessageToChatLog(message);
+              });
+          } else if (messageData.type === 'message') {
+              appendMessageToChatLog(messageData.data);
+          }
+      } catch (e) {
+          console.error('Error processing message:', e);
+      }
+  }
+
+  // Function to append messages to the chat log
+  function appendMessageToChatLog(message) {
+      var chatLog = document.getElementById('chat-log');
       var messageElement = document.createElement('div');
-      messageElement.style.color = messageData.data.color;
-      messageElement.textContent = messageData.data.handle + ': ' + messageData.data.message;
+      messageElement.style.color = message.color;
+      messageElement.textContent = message.handle + ': ' + message.message;
       chatLog.appendChild(messageElement);
       chatLog.scrollTop = chatLog.scrollHeight; // Scroll to the bottom of the chat log
-    }
-  } catch (e) {
-    console.error('Error processing message:', e);
   }
-}
 
+  // Function that gets called when user enters their handle and clicks "Enter Chat"
+  function enterChat() {
+      var handle = document.getElementById('user-handle').value.trim();
+      if (handle) {
+          // Store the user's handle in the WebSocket object for later use
+          socket.handle = handle;
+          // Hide handle input screen and show chat input area
+          document.getElementById('handle-screen').style.display = 'none';
+          document.getElementById('chat-input-area').style.display = 'block';
+          document.getElementById('chat-input').focus(); // Focus on the message input
+      } else {
+          // Handle the case where handle is not entered
+          alert("Please enter a handle to continue.");
+      }
+  }
 
+  // Function to send messages through WebSocket
+  function sendMessage() {
+      var message = document.getElementById('chat-input').value.trim();
+      if (message) {
+          var fullMessage = socket.handle + ": " + message; // Use the stored handle
+          if (socket && socket.readyState === WebSocket.OPEN) {
+              socket.send(fullMessage);
+              document.getElementById('chat-input').value = ''; // Clear the message input
+          } else {
+              console.log('WebSocket is not open. readyState:', socket.readyState);
+          }
+      }
+  }
 
-// When the document is fully loaded, focus on the handle input
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('user-handle').focus();
-});
+  // Event listener for the "Enter" key in the input field
+  var input = document.getElementById("chat-input");
+  input.addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+          sendMessage();
+      }
+  });
 
-// Function that gets called when user enters their handle and clicks "Enter Chat"
-function enterChat() {
-    var handle = document.getElementById('user-handle').value.trim();
-    if(handle) {
-        // Assuming you have a WebSocket connection called 'socket'
-        socket.handle = handle;  // Store the user's handle in the socket object for later use
-        // Hide handle input screen and show chat input area
-        document.getElementById('handle-screen').style.display = 'none';
-        document.getElementById('chat-input-area').style.display = 'block';
-        document.getElementById('chat-input').focus(); // Focus on the message input
-    } else {
-        // Handle the case where handle is not entered
-        alert("Please enter a handle to continue.");
-    }
-}
+  // Call the connectWebSocket function when the script loads to start the WebSocket connection
+  connectWebSocket();
 
-// Adjusted sendMessage function
-function sendMessage() {
-    var message = document.getElementById('chat-input').value.trim();
+  // When the document is fully loaded, focus on the handle input
+  document.addEventListener('DOMContentLoaded', (event) => {
+      document.getElementById('user-handle').focus();
+  });
+</script>
 
-    if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
-        console.log('Sending message:', fullMessage);
-
-        if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(fullMessage);
-            document.getElementById('chat-input').value = ''; // Clear the message input
-        } else {
-            console.log('WebSocket is not open. readyState:', socket.readyState);
-        }
-    }
-}
-
-
-
-
-        var input = document.getElementById("chat-input");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                sendMessage();
-            }
-        });
-
-        // Call the connectWebSocket function when the script loads to start the WebSocket connection
-    connectWebSocket();
-
-    </script>
-    
 </body>
 </html>
