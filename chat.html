@@ -406,17 +406,25 @@ function getRandomColor() {
 }
 
 
-// Adjusted sendMessage function
 function sendMessage() {
-    var message = document.getElementById('chat-input').value.trim();
+    var messageInput = document.getElementById('chat-input');
+    var message = messageInput.value.trim();
 
     if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
+        var messageToSend = {
+            type: "message",
+            data: {
+                handle: socket.handle,
+                message: message,
+                color: socket.color // Include the color in the sent message
+            }
+        };
+        var fullMessage = JSON.stringify(messageToSend);
         console.log('Sending message:', fullMessage);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(fullMessage);
-            document.getElementById('chat-input').value = ''; // Clear the message input
+            messageInput.value = ''; // Clear the message input
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
