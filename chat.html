@@ -380,7 +380,7 @@ function enterChat() {
 
             // Send color setting to server
             var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-socket.send(colorMessage);
+            socket.send(colorMessage);
 
             // Hide handle input screen and show chat input area
             document.getElementById('handle-screen').style.display = 'none';
@@ -406,25 +406,17 @@ function getRandomColor() {
 }
 
 
+// Adjusted sendMessage function
 function sendMessage() {
-    var messageInput = document.getElementById('chat-input');
-    var message = messageInput.value.trim();
+    var message = document.getElementById('chat-input').value.trim();
 
     if (socket.handle && message) { // Use the handle from the socket object
-        var messageToSend = {
-            type: "message",
-            data: {
-                handle: socket.handle,
-                message: message,
-                color: socket.color // Include the color in the sent message
-            }
-        };
-        var fullMessage = JSON.stringify(messageToSend);
+        var fullMessage = socket.handle + ": " + message; // Use the stored handle
         console.log('Sending message:', fullMessage);
 
         if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(fullMessage);
-            messageInput.value = ''; // Clear the message input
+            document.getElementById('chat-input').value = ''; // Clear the message input
         } else {
             console.log('WebSocket is not open. readyState:', socket.readyState);
         }
