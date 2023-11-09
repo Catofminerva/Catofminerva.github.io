@@ -3,15 +3,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>Ali's Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
     <style>
-       body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
-            color: #FF33CC;
-            position: relative; 
+        body {
+            background-color: #D3D3D3; /* White background for better readability */
+            font-family:  'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #333333; /* Dark gray color for better contrast */
+            line-height: 1.6; /* Increased line-height for easier reading */
         }
 
         .header {
@@ -76,12 +75,31 @@ li {
 }
 
 .exported-content {
-    background-color: rgba(255, 255, 255, 0.8); /* Black background with 60% opacity */
-    color: black;
-    padding: 15px;
+    background-color: #ffffff; /* White background for the content */
+    color: #000000; /* Black color for the text */
+    padding: 40px 5vw;
     border-radius: 5px;
-    margin: 10px;  /* Adds some space around your content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow for depth */
+    margin: 10px auto; /* Centers the content and adds some space around it */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    max-width: 800px; /* Sets a maximum width for the content area */
+  font-family: 'Noto Serif', serif;
+    font-size: 17px; /* Larger font size for readability */
+    line-height: 1.8; /* Increased line height for easier reading */
+    text-align: left; /* Align text to the left for the usual reading pattern */
+        }
+
+
+@media screen and (max-width: 600px) {
+    .title, .nav, .exported-content {
+        font-size: smaller; /* Adjust font size for smaller screens */
+    }
+    /* Further adjustments for smaller screens */
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
@@ -106,7 +124,7 @@ li {
     <a href="about.html" class="retro-btn nav">About</a>
     <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
     <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-	<img src="post.gif" alt="post GIF" style="vertical-align: middle;">
+    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
     <a href="chat.html" class="retro-btn nav">Chat</a>
     <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
     <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
