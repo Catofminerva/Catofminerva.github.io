@@ -6,12 +6,17 @@
     <title>Ali's Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-              @media screen and (max-width: 600px) {
-    .title, .nav, .exported-content {
-        font-size: smaller; /* Adjust font size for smaller screens */
+ 
+@media screen and (max-width: 600px) {
+    .body-content {
+        font-size: smaller; /* Smaller font size for better readability */
     }
-    /* Further adjustments for smaller screens */
-} 
+
+    /* Adjust image sizes and layout for mobile */
+    .responsive-img {
+        max-width: 100%;
+        height: auto;
+    }
         
         body {
             background-color: black;
@@ -117,7 +122,7 @@ li {
     <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
 </center>
 <br>
-
+    <div class="body-content">
 <center>
 
     <pre>
@@ -217,7 +222,7 @@ li {
                 
             </ul>
         </div>
-
+    </div>
 
 </body>
 </html>
