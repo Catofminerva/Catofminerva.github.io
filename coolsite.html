@@ -6,7 +6,23 @@
     <title>Ali's Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
- 
+ @media only screen and (max-width: 600px) {
+    .header, .nav, .welcome-message, .title {
+        font-size: smaller; /* Adjust font size for smaller screens */
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .column {
+        margin-left: 10px; /* Reduce margin for smaller screens */
+    }
+
+    /* Add more styles specific for mobile here */
+}
+
         
         body {
             background-color: black;
