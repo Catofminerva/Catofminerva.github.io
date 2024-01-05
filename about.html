@@ -6,7 +6,17 @@
     <title>Ali's Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-       body {
+        
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensures that it's a block-level element */
+    margin-left: auto; /* These two lines center the image horizontally */
+    margin-right: auto;
+}
+
+        
+        body {
             background-color: black;
             background-image: url('stars.gif');
             font-family: "Press Start 2", Times, serif;
@@ -112,8 +122,9 @@ li {
 <br>
 
 <center>
-    <img src="me.jpeg" width="500" height="320">
+    <img src="me.jpeg" alt="Image of Ali" class="responsive-image">
 </center>
+
 
 <!-- Welcome Message -->
 
