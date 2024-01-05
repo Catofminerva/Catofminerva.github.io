@@ -11,7 +11,16 @@
     <button id="musicBtn" class="retro-music-btn">Play/Pause Music</button>
     
     <style>
-      
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensures that it's a block-level element */
+    margin-left: auto; /* These two lines center the image horizontally */
+    margin-right: auto;
+}
+
+        
         @media screen and (max-width: 600px) {
     .title, .nav, .exported-content {
         font-size: smaller; /* Adjust font size for smaller screens */
@@ -153,9 +162,10 @@ a:hover, a:focus, a:active {
     <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
 </center>
 <br> 
-    <center>
-        <img src="construction.gif">
-    </center>
+<center>
+    <img src="construction.gif" class="responsive-image">
+</center>
+
 <br>
     <!-- Welcome Message -->
        
