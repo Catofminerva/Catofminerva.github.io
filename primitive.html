@@ -10,158 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
     
     <!-- External CSS -->
-    <style>
-        /* Global Styles */
-        body {
-            background-color: #D3D3D3; /* Light Gray background */
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            color: #333333; /* Dark gray text */
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Container */
-        .container {
-            background-color: #FFFFFF; /* White background for main content */
-            max-width: 1200px;
-            margin: 20px auto; /* Center horizontally with vertical spacing */
-            padding: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            border-radius: 5px; /* Rounded corners */
-        }
-
-        /* Header */
-        header {
-            background-color: #FF33CC; /* Pink header */
-            color: #FFF;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px 5px 0 0; /* Rounded top corners */
-        }
-
-        /* Title with Flip Animation */
-        @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
-
-        .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite; /* Flip animation */
-            margin: 10px 0;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: #FF33CC; /* Match header background */
-            padding: 10px 0;
-            border-radius: 0 0 5px 5px; /* Rounded bottom corners */
-        }
-
-        .nav-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-item {
-            margin: 0 10px;
-            text-align: center;
-        }
-
-        .nav-link {
-            font-family: 'Press Start 2P', cursive;
-            color: #FFF;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-link img {
-            margin-left: 5px;
-            width: 25px;
-            height: 25px;
-        }
-
-        /* Main Content */
-        main {
-            padding: 20px 0;
-        }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        figure {
-            width: 100%;
-            max-width: 768px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        figure img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .content {
-            font-family: 'Noto Serif', serif;
-            font-size: 1.2em;
-            line-height: 1.8;
-            color: #000000;
-        }
-
-        /* Blockquote */
-        blockquote {
-            border-left: 4px solid #ccc;
-            padding-left: 16px;
-            margin: 20px 0;
-            color: #555;
-            font-style: italic;
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 600px) {
-            .title {
-                font-size: 1.5rem;
-            }
-
-            .nav-link {
-                font-size: 0.8em;
-            }
-
-            .nav-link img {
-                width: 20px;
-                height: 20px;
-            }
-
-            .content {
-                font-size: 1em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Header Section -->
         <header>
             <div class="title">Ali's Blog</div>
-            <img src="kitty.gif" alt="Kitty GIF" style="width:100px; height:auto;">
+            <img src="kitty.gif" alt="Kitty GIF" class="header-image">
         </header>
 
         <!-- Navigation -->
@@ -207,6 +63,7 @@
             </figure>
 
             <div class="content">
+
                 <p>17th century philosopher Thomas Hobbes popularised the State of Nature hypothetical construct, in which pre-political humans are framed as selfish, chaotic, and perpetually at war. It’s designed to make the point that, without some central authority, life would descend into total anarchy. From there, it’s a short step away from justifying the need for a powerful, centralised state—the Leviathan—as the only thing standing between humanity and complete disorder.</p>
                 
                 <p>This idea that hunter-gatherers were by nature violent, inefficient, and clueless likely stems from an early prejudice that evolved with the agricultural revolution. Early foragers-turned-farmers 10,000 years ago, observing that hunter-gatherers neither cultivated fields nor built permanent settlements, probably assumed that these societies were ignorant and incapable of 'properly' doing anything productive with the land. This prejudice fuelled justifications for the dispossession of hunter-gatherers, such as what the Europeans did when they landed on the shores of the New World, as exemplified by the rhetoric of Chief Justice John Marshall in 1823:</p>
