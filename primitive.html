@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali's Blog</title>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
     <style>
+        /* Global Styles */
         body {
-            background-color: #FFFFFF; /* White background for better readability */
+            background-color: #D3D3D3; /* Light Gray background */
             font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            color: #333333; /* Dark gray color for better contrast */
-            line-height: 1.6; /* Increased line-height for easier reading */
+            color: #333333; /* Dark gray text */
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
-        .header {
+        /* Container */
+        .container {
+            background-color: #FFFFFF; /* White background for main content */
+            max-width: 1200px;
+            margin: 20px auto; /* Center horizontally with vertical spacing */
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Header */
+        header {
             background-color: #FF33CC; /* Pink header */
             color: #FFF;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
-            font-size: 1.5em;
+            border-radius: 5px 5px 0 0; /* Rounded top corners */
         }
 
+        /* Title with Flip Animation */
         @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
@@ -32,121 +52,181 @@
             font-size: 2rem;
             color: purple;
             animation: flip 4s infinite; /* Flip animation */
+            margin: 10px 0;
         }
 
-        kitty.gif {
-            margin-top: 0px; 
+        /* Navigation */
+        nav {
+            background-color: #FF33CC; /* Match header background */
+            padding: 10px 0;
+            border-radius: 0 0 5px 5px; /* Rounded bottom corners */
         }
 
-        hr {
-            margin-top: -15px;  /* Adjust this value as needed */
-        }
-        
-        ul {
-            list-style-position: inside;
-            padding-left: 0;             
-            margin-left: 0;              
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        li {
-            padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
-            margin-bottom: 20px; /* This will add space below each bullet point */
+        .nav-item {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .nav-link {
+            font-family: 'Press Start 2P', cursive;
+            color: #FFF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link img {
+            margin-left: 5px;
+            width: 25px;
+            height: 25px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
         h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
-        .welcome-message {
-            font-family: Times New Roman, Times, serif;
-            color: yellow;
-            font-size: 1.25em; /* adjust size as desired */
+        figure {
+            width: 100%;
+            max-width: 768px;
+            margin: 20px auto;
+            text-align: center;
         }
 
-        .nav {
-            font-family: 'Press Start 2P', cursive;
-            color: #FF33CC;
-        }
-
-        .exported-content {
-            background-color: #ffffff; /* White background for the content */
-            color: #000000; /* Black color for the text */
-            padding: 40px 5vw;
-            border-radius: 5px;
-            margin: 10px auto; /* Centers the content and adds some space around it */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-            max-width: 1200px; /* Sets a maximum width for the content area */
-            font-family: 'Noto Serif', serif;
-            font-size: 20px; /* Larger font size for readability */
-            line-height: 1.8; /* Increased line height for easier reading */
-            text-align: left; /* Align text to the left for the usual reading pattern */
-        }
-
-        @media screen and (max-width: 600px) {
-            .title, .nav, .exported-content {
-                font-size: smaller; /* Adjust font size for smaller screens */
-            }
-            /* Further adjustments for smaller screens */
-        }
-
-        img {
-            max-width: 100%;
+        figure img {
+            width: 100%;
             height: auto;
+            border-radius: 5px;
+        }
+
+        .content {
+            font-family: 'Noto Serif', serif;
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #000000;
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid #ccc;
+            padding-left: 16px;
+            margin: 20px 0;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .nav-link {
+                font-size: 0.8em;
+            }
+
+            .nav-link img {
+                width: 20px;
+                height: 20px;
+            }
+
+            .content {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
-    <center>
-        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-    <!-- Navigation Buttons -->
-    <center>
-        <a href="index.html" class="retro-btn nav">Home</a>
-        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="about.html" class="retro-btn nav">About</a>
-        <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-        <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-        <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-        <a href="chat.html" class="retro-btn nav">Chat</a>
-        <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-        <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-        <a href="books.html" class="retro-btn nav">Kool Books</a>
-        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-        <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-        <a href="contact.html" class="retro-btn nav">Contact</a>
-        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-    </center>
-    <br>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="title">Ali's Blog</div>
+            <img src="kitty.gif" alt="Kitty GIF" style="width:100px; height:auto;">
+        </header>
 
-    
-<h1>A Primitivist Manifesto&nbsp;<br>&nbsp;</h1>
-<h1 style="margin-left:0cm;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:22px;"><strong>Neolithic Ethnocentrism</strong></span></h1>
-<figure class="image image_resized" style="width:44.79%;"><img style="aspect-ratio:768/600;" src="https://fee.org/wp-content/uploads/2023/12/screen-shot-2019-04-09-at-82424-am-768x600.png" alt="International Trade Refutes Hobbes's Theory about the State of Nature" width="768" height="600"></figure>
+        <!-- Navigation -->
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home<img src="cutehome.gif" alt="Home Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About<img src="about.gif" alt="About Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog_posts.html" class="nav-link">Entries<img src="post.gif" alt="Entries Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="chat.html" class="nav-link">Chat<img src="chattt.gif" alt="Chat Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="coolsite.html" class="nav-link">Kool Webpages<img src="coollinks.gif" alt="Webpages Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="guestbook.html" class="nav-link">Guestbook<img src="book-0037.gif" alt="Guestbook Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="books.html" class="nav-link">Kool Books<img src="catread.gif" alt="Books Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="truthtable.html" class="nav-link">Truth Table<img src="math.gif" alt="Truth Table Icon"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact<img src="phone.gif" alt="Contact Icon"></a>
+                </li>
+            </ul>
+        </nav>
 
-<p>17th century philosopher Thomas Hobbes popularised the State of Nature hypothetical construct, in which pre-political humans are framed as selfish, chaotic, and perpetually at war. It’s designed to make the point that, without some central authority, life would descend into total anarchy. From there, it’s a short step away from justifying the need for a powerful, centralised state—the Leviathan—as the only thing standing between humanity and complete disorder.</p>
+        <!-- Main Content -->
+        <main>
+            <h1>A Primitivist Manifesto</h1>
+            <h2>Neolithic Ethnocentrism</h2>
+            
+            <figure>
+                <img src="https://fee.org/wp-content/uploads/2023/12/screen-shot-2019-04-09-at-82424-am-768x600.png" alt="International Trade Refutes Hobbes's Theory about the State of Nature">
+            </figure>
 
-<p>This idea that hunter-gatherers were by nature violent, inefficient, and clueless likely stems from an early prejudice that evolved with the agricultural revolution. Early foragers-turned-farmers 10,000 years ago, observing that hunter-gatherers neither cultivated fields nor built permanent settlements, probably assumed that these societies were ignorant and incapable of 'properly' doing anything productive with the land. This prejudice fuelled justifications for the dispossession of hunter-gatherers, such as what the Europeans did when they landed on the shores of the New World, as exemplified by the rhetoric of Chief Justice John Marshall in 1823:</p>
-
-<blockquote>
-    <p>“But the tribes of Indians inhabiting this country were fierce savages, whose occupation was war, and whose subsistence was drawn chiefly from the forest. To leave them in possession of their country, was to leave the country a wilderness...”</p>
-</blockquote>
-
-<p>But, as we will see later on, hunter-gatherer groups were not ignorant at all; even when surrounded by farming communities, they actively refused to adopt agriculture because they recognised the vulnerabilities it introduced (e.g., dependence on crop yields, susceptibility to famine) and the benefits they had: less work, more freedom, no lords, no taxes, a more intimate relationship with nature, and more food, and certainly a healthier diet. It’s not as though they failed to grasp basic agricultural principles; understanding that plants grow from seeds under favourable conditions isn’t exactly rocket science (though subsistence farming like large-scale irrigation became much more complicated after the Stone Age). As practically all states eventually found out, the transition from nomadic hunter-gatherer to agriculturalists is not easy; it needed significant institutional and cultural shifts such as private property rights and the weakening of egalitarian communal sharing norms to overcome the free-rider problem and incentivise individual labour. Small-scale nomadic hunter-gatherers simply didn’t find these trade-offs worth it. Farming was only a good option if your population is becoming too high for the local environment to support since crops yield far more tons per acre than berries and nuts.</p>
-
-<p>It was also not true that hunter-gatherers inefficiently managed their environments. In many cases, they practiced sophisticated ecological strategies, like ‘firestick burning’, where they intentionally burned vegetation to improve hunting conditions, encourage biodiversity, and manage resources sustainably. This efficiency was simply invisible to agriculturalists who measured productivity in terms of crop yields and surplus.</p>
-
-<p>Nevertheless, agriculture made land more valuable, labour less so, and created the idea of surplus production to protect against annual variation in crop yield. No longer needing a nomadic lifestyle, agrarian settlements expanded and began to tie the legitimacy of land use to its transformation into private property and productive output. This underlying Neolithic prejudice reached its zenith in the economics of Adam Smith, where the development of property and surplus production was central to economic 'progress', and societies that didn’t fit this mould were therefore inherently deficient. Modern bourgeois thought—seen, for instance, in Steven Pinker’s neo-Hobbesian outlook—builds on the same basic prejudice, but now repackages it to fit the capitalist assumptions that production and consumption must be organised around the principle of scarcity (limited resources) and the belief in infinite human wants. From this perspective, it was no wonder that hunter-gatherer societies, which focused on sufficiency and limited desires rather than surplus accumulation, appear hopelessly inadequate.</p>
-
-<p>If we accept the Hobbesian story that's, as I've argued, grounded on the Neolithic prejudice, then we are also accepting the hierarchies, control systems, and coercive structures of the state as unavoidable, even beneficial. But the entire narrative hinges on speculative philosophy about what we believe life was like before the agricultural revolution. Unfortunately, we do not have time machines to travel back 12,000 years ago and observe pre-contact hunter-gatherer societies as they were then.</p>
-
-<p>Other than recent archaeological data in paleopathology, barely any careful ethnological observations of pre-contact hunter-gatherers exist outside of the meandering, ethnocentric journals of 18th-century European explorers and missionaries. Contact has always been overwhelmingly destructive for these societies. But even so, the ethnological data of the few surviving contemporary hunter-gatherer groups paint an entirely different picture of our traditional understanding of hunter-gatherers.</p>
-    </body>
+            <div class="content">
+                <p>17th century philosopher Thomas Hobbes popularised the State of Nature hypothetical construct, in which pre-political humans are framed as selfish, chaotic, and perpetually at war. It’s designed to make the point that, without some central authority, life would descend into total anarchy. From there, it’s a short step away from justifying the need for a powerful, centralised state—the Leviathan—as the only thing standing between humanity and complete disorder.</p>
+                
+                <p>This idea that hunter-gatherers were by nature violent, inefficient, and clueless likely stems from an early prejudice that evolved with the agricultural revolution. Early foragers-turned-farmers 10,000 years ago, observing that hunter-gatherers neither cultivated fields nor built permanent settlements, probably assumed that these societies were ignorant and incapable of 'properly' doing anything productive with the land. This prejudice fuelled justifications for the dispossession of hunter-gatherers, such as what the Europeans did when they landed on the shores of the New World, as exemplified by the rhetoric of Chief Justice John Marshall in 1823:</p>
+                
+                <blockquote>
+                    <p>“But the tribes of Indians inhabiting this country were fierce savages, whose occupation was war, and whose subsistence was drawn chiefly from the forest. To leave them in possession of their country, was to leave the country a wilderness...”</p>
+                </blockquote>
+                
+                <p>But, as we will see later on, hunter-gatherer groups were not ignorant at all; even when surrounded by farming communities, they actively refused to adopt agriculture because they recognised the vulnerabilities it introduced (e.g., dependence on crop yields, susceptibility to famine) and the benefits they had: less work, more freedom, no lords, no taxes, a more intimate relationship with nature, and more food, and certainly a healthier diet. It’s not as though they failed to grasp basic agricultural principles; understanding that plants grow from seeds under favourable conditions isn’t exactly rocket science (though subsistence farming like large-scale irrigation became much more complicated after the Stone Age). As practically all states eventually found out, the transition from nomadic hunter-gatherer to agriculturalists is not easy; it needed significant institutional and cultural shifts such as private property rights and the weakening of egalitarian communal sharing norms to overcome the free-rider problem and incentivise individual labour. Small-scale nomadic hunter-gatherers simply didn’t find these trade-offs worth it. Farming was only a good option if your population is becoming too high for the local environment to support since crops yield far more tons per acre than berries and nuts.</p>
+                
+                <p>It was also not true that hunter-gatherers inefficiently managed their environments. In many cases, they practiced sophisticated ecological strategies, like ‘firestick burning’, where they intentionally burned vegetation to improve hunting conditions, encourage biodiversity, and manage resources sustainably. This efficiency was simply invisible to agriculturalists who measured productivity in terms of crop yields and surplus.</p>
+                
+                <p>Nevertheless, agriculture made land more valuable, labour less so, and created the idea of surplus production to protect against annual variation in crop yield. No longer needing a nomadic lifestyle, agrarian settlements expanded and began to tie the legitimacy of land use to its transformation into private property and productive output. This underlying Neolithic prejudice reached its zenith in the economics of Adam Smith, where the development of property and surplus production was central to economic 'progress', and societies that didn’t fit this mould were therefore inherently deficient. Modern bourgeois thought—seen, for instance, in Steven Pinker’s neo-Hobbesian outlook—builds on the same basic prejudice, but now repackages it to fit the capitalist assumptions that production and consumption must be organised around the principle of scarcity (limited resources) and the belief in infinite human wants. From this perspective, it was no wonder that hunter-gatherer societies, which focused on sufficiency and limited desires rather than surplus accumulation, appear hopelessly inadequate.</p>
+                
+                <p>If we accept the Hobbesian story that's, as I've argued, grounded on the Neolithic prejudice, then we are also accepting the hierarchies, control systems, and coercive structures of the state as unavoidable, even beneficial. But the entire narrative hinges on speculative philosophy about what we believe life was like before the agricultural revolution. Unfortunately, we do not have time machines to travel back 12,000 years ago and observe pre-contact hunter-gatherer societies as they were then.</p>
+                
+                <p>Other than recent archaeological data in paleopathology, barely any careful ethnological observations of pre-contact hunter-gatherers exist outside of the meandering, ethnocentric journals of 18th-century European explorers and missionaries. Contact has always been overwhelmingly destructive for these societies. But even so, the ethnological data of the few surviving contemporary hunter-gatherer groups paint an entirely different picture of our traditional understanding of hunter-gatherers.</p>
+            </div>
+        </main>
+    </div>
+</body>
 </html>
+
