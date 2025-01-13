@@ -13,9 +13,9 @@
     <style>
         /* Global Styles */
         body {
-            background-color: #FFFFFF; /* Changed to white for a classic look */
+            background-color: #F5F5F5; /* Slightly off-white for a 'reader' feel */
             font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            color: #333333; /* Dark gray for good contrast */
+            color: #333333;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -38,26 +38,26 @@
         }
 
         .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-family: 'Press Start 2P', cursive;
             font-size: 2rem;
             color: purple;
-            animation: flip 4s infinite; /* Flip animation */
+            animation: flip 4s infinite;
             margin: 10px 0;
         }
 
         /* Cat Image Styling */
         .header-image {
-            width: 150px; /* Increased size for better visibility */
+            width: 150px;
             height: auto;
-            margin-top: 10px; /* Space between title and image */
+            margin-top: 10px;
         }
 
         /* Horizontal Rule Styling */
         hr {
             border: none;
-            border-top: 2px solid #FF33CC; /* Match header color */
+            border-top: 2px solid #FF33CC;
             margin: 20px auto;
-            width: 80%; /* Limit the width for aesthetics */
+            width: 80%;
         }
 
         /* Navigation Styling */
@@ -74,35 +74,36 @@
             vertical-align: middle;
             width: 30px;
             height: 30px;
-            margin-left: 5px; /* Space between text and icon */
+            margin-left: 5px;
         }
 
-        /* Main Content Styling */
+        /* Main Content Styling (Reader Mode Emulation) */
         .exported-content {
-            background-color: #FFFFFF; /* White background for content */
-            color: #000000; /* Black text for readability */
-            padding: 40px 5vw;
-            border-radius: 5px;
-            margin: 20px auto; /* Center and add vertical space */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            max-width: 1200px; /* Limit width for readability */
+            background-color: #FAFAFA; /* Neutral background for reading */
+            color: #222; /* Dark text for good contrast */
+            padding: 2em;
+            margin: 40px auto;
+            max-width: 650px; /* Narrower column for easier reading */
+            line-height: 1.8;
             font-family: 'Noto Serif', serif;
             font-size: 20px;
-            line-height: 1.8;
-            text-align: left;
+
+            /* Remove fancy borders/shadows to mimic a clean reading pane */
+            border-radius: 0;
+            box-shadow: none;
         }
 
         /* Responsive Adjustments */
         @media screen and (max-width: 600px) {
             .title, .nav, .exported-content {
-                font-size: 1em; /* Adjust font size for smaller screens */
+                font-size: 1em;
             }
             .nav img {
                 width: 20px;
                 height: 20px;
             }
             .header-image {
-                width: 100px; /* Reduce image size on small screens */
+                width: 100px;
             }
         }
 
@@ -111,7 +112,7 @@
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto; /* Center images */
+            margin: 0 auto;
         }
 
         /* Blockquote Styling */
@@ -127,11 +128,11 @@
 <body>
     <!-- Header Section -->
     <div class="header">
-        <div class="title">Ali's Blog</div> <!-- Title with Flip Animation -->
-        <img src="kitty.gif" alt="Kitty running beneath the title" class="header-image"> <!-- Enlarged Cat Image -->
+        <div class="title">Ali's Blog</div>
+        <img src="kitty.gif" alt="Kitty running beneath the title" class="header-image">
     </div>
     
-    <hr> <!-- Decorative Horizontal Rule -->
+    <hr>
     
     <!-- Navigation Buttons -->
     <div style="text-align: center; margin: 20px 0;">
@@ -145,11 +146,11 @@
         <a href="truthtable.html" class="nav">Truth Table<img src="math.gif" alt="Truth Table Icon"></a>
         <a href="contact.html" class="nav">Contact<img src="phone.gif" alt="Contact Icon"></a>
     </div>
-    
-    <br> <!-- Line Break for Spacing -->
+    <br>
 
     <!-- Main Content Section -->
     <div class="exported-content">
+
         <h1>A Primitivist Manifesto</h1>
         <h1 style="margin-left:0cm;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:22px;"><strong>Neolithic Ethnocentrism</strong></span></h1>
         <figure class="image image_resized" style="width:44.79%;">
