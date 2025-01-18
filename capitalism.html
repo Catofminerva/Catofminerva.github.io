@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D3D3D3; /* Keeping original background color */
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #FF33CC;
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
+        }
+
+        kitty.gif {
+            margin-top: 0px;
+        }
+
+        hr {
+            margin-top: -15px;  /* Adjust this value as needed */
+        }
+  
+        ul {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        li {
+            padding-left: 0.3em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .welcome-message {
+            font-family: Times New Roman, Times, serif;
+            color: yellow;
+            font-size: 1.25em; 
+        }
+
+        .nav {
+            font-family: 'Press Start 2P', cursive;
+            color: #FF33CC;
+        }
+
+        /* Main Content Styling (Adjusted for Centered Reader-Like Layout) */
+        .exported-content {
+            background-color: #ffffff;
+            color: #000000;
+            /* Increase padding slightly for more comfortable reading space */
+            padding: 40px 5vw;
+            /* Center and add vertical space around content */
+            margin: 40px auto;
+            /* Narrower column for a more ‘reader mode’ feel */
+            max-width: 650px;
+            /* Slightly soften the shadow so it’s not distracting */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 5px;
+
+            font-family: 'Noto Serif', serif;
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        @media screen and (max-width: 600px) {
+            .title, .nav, .exported-content {
+                font-size: smaller;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="title">Ali's Blog</div>
+        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
+    </center>
+    <hr>
+    <!-- Navigation Buttons -->
+    <center>
+        <a href="index.html" class="retro-btn nav">Home</a>
+        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+        <a href="about.html" class="retro-btn nav">About</a>
+        <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
+        <a href="blog_posts.html" class="retro-btn nav">Entries</a>
+        <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
+        <a href="chat.html" class="retro-btn nav">Chat</a>
+        <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+        <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
+        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
+        <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
+        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
+        <a href="books.html" class="retro-btn nav">Kool Books</a>
+        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+        <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
+        <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
+        <a href="contact.html" class="retro-btn nav">Contact</a>
+        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
+    </center>
+    <br>
+
+    <!-- Main Content Section -->
+    <div class="exported-content">
+
+      <h1>It’s Not Authoritarianism, It’s Capitalism, Stupid</h1>
+
+      <p>Recently, the United States Supreme Court ordered the ban of TikTok because of its ties with a Chinese parent company and its ‘data collection practices’, with the ban expected to take effect in the coming weeks. Ironically, in response, many users have flocked to a lesser-known application called RedNote, which has an even more direct and unambiguous connection to the Chinese state than TikTok—which, as far as I know, doesn’t really have one in any meaningful sense. Again we are reminded of the futility of outright bans on products and services that enjoy overwhelming demand. There are countless examples in history of similar failures. Think of the Prohibition era in the United States. Think of the attempts to ban online piracy platforms like Napster or The Pirate Bay. Think of any attempt at banning books. Point is, attempting to suppress something people widely desire, will fail, and if they didn’t already desire it, banning it will make them desire it more. To put TikTok’s popularity into perspective, it is used by 170 million people in the United States a month.</p>
+
+      <p>The big question is on data privacy. Is there an asymmetry between the way TikTok and, let’s say Meta, harvest and sell our data? The rhetoric coming from the United States government and media is essentially this: “The issue here isn’t tied to capitalism at all; it’s about authoritarianism, specifically Chinese communist authoritarianism”. Chinese platforms therefore have an inherent incentive to hoard your data for nefarious authoritarian purposes. What are these purposes? Authoritarianism! They leave the idea ambiguous for the audience to fill in the gaps with their own Orientalist fantasies. Simply invoking “China” now is enough to do that.</p>
+
+      <p>The United States, on the other hand, would never do anything of that sorts; it is a liberal democracy with public scrutiny, the rule of law, and just the right mechanisms to expose bad actors. If unscrupulous practices occur, they’ll eventually be revealed and corrected. (Does anyone honestly believe that the Snowden revelations were a one-time off thing?)</p>
+
+      <p>Regardless of the US government’s vested interest in surveillance under the guise of ‘national security’ (jargon for maintaining US hegemony and extending its power), the real issue is the system under which these apps operate under. And I would argue, the US fairs much worse than its Chinese counterpart.</p>
+
+      <p>The US functions almost like an anarcho-capitalist oligarchy where people like Trump, Elon Musk, and Mark Zuckerberg hold enormous power. It is such that, we have come to the point where their platforms can now be considered essential services: connecting with family, accessing news and even organizing grassroots movements to oppose this oligarchy. Yes, Musk may give you crumbles of free political speech here and there, but it’s not because he’s altruistic. He operates within a capitalist system that compels him to prioritise profit. This is why we find that, when they are established, these platforms inevitably become isomorphic: they look almost exactly the same, because they’ve figured out the exact human tendencies needed to extract the maximum value, which include monetising user data in ways that users cannot understand, anticipate or control.</p>
+
+      <p>In other words, the market they exist in simply incentivises invasive data practices because personal data is an incredibly lucrative commodity. The platforms that succeed are those that collect and monetise data most effectively. Almost everyone is aware of the trade-offs; they know their privacy is being compromised. But they’ve been desensitised over time and continue using these platforms (the pop-up that forces you to accept your data collection if you want to view the website contributes to this alarm fatigue) because participation has become essential. Social media is no longer just an option; it’s a quasi-public utility. Choosing not to participate is increasingly unrealistic just the same as avoiding cars has become impractical in many urban cities because the cities themselves have been designed around driving. What started as a choice between walking or not has become a systemic necessity enforced by the design of modern living.</p>
+
+      <p>People criticising users for flocking to RedNote as complacent and ignorant of the supposed dangers both strip users from their agency and knowledge of tradeoffs and ignore the real problem, which isn’t individual choice; it’s the structural coercion. People participate because there are no meaningful alternatives; and by-far, Chinese platform have been much better with balancing freedom of speech and hate speech than any of the Western platforms, who have for the past year and a half mass censored content about the ongoing genocide in Gaza. At any rate, users know that platforms that prioritise privacy can’t compete in a market that rewards data extraction. Both individuals and platforms are trapped in a system that enforces these dynamics.</p>
+
+      <p>Calling for people to avoid certain apps or withdrawing from social media won’t solve the problem because the system remains intact. The capitalist logic that drives invasive data practices ensures that any successful platform that succeeds an alternative will eventually adopt the same exploitative model. In short, the common denominator here is capitalism.</p>
+
+    </div>
+</body>
+</html>
