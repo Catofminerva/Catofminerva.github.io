@@ -221,223 +221,127 @@ li {
 
     
     <script>
-   // Declare the 'socket' variable in the global scope to be used by all functions
-    var socket;
+// Global WebSocket instance
+let socket;
 
-// Function to handle WebSocket connections with a reconnection strategy
-    function connectWebSocket() {
-        var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
-        chatLoadingScreen.style.display = 'block';
+// Persistent color storage using handle as key
+const getStoredColor = (handle) => localStorage.getItem(`userColor_${handle}`);
+const storeColor = (handle, color) => localStorage.setItem(`userColor_${handle}`, color);
 
-        socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
+function connectWebSocket() {
+    const chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
+    chatLoadingScreen.style.display = 'block';
 
-        socket.addEventListener('open', function (event) {
-            console.log('WebSocket connection established');
-            chatLoadingScreen.style.display = 'none';
+    socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-            var handle = localStorage.getItem('userHandle');
-            var color = localStorage.getItem('handleColor');
-            
-            if (handle && color) {
-                socket.handle = handle;
-                socket.color = color;
-                var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-                socket.send(colorMessage);
-                restoreChatInterface(handle, color);
-            }
-        });
-
-
-        socket.addEventListener('message', function (event) {
-            // Handle incoming messages
-            var chatLog = document.getElementById('chat-log');
-
-            // Check if the received data is a Blob
-            if (event.data instanceof Blob) {
-                // Create a FileReader to read the Blob as text
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Process the text from the Blob
-                    processMessage(e.target.result);
-                };
-
-                // Read the Blob as text
-                reader.readAsText(event.data);
-            } else {
-                // If not a Blob, assume it's text and process it
-                processMessage(event.data);
-            }
-        });
-
-    socket.addEventListener('close', function (event) {
-        console.log('WebSocket connection closed');
-        // Show the chat loading screen and attempt to reconnect after 5 seconds
-        chatLoadingScreen.style.display = 'block';
-        setTimeout(connectWebSocket, 5000);
+    socket.addEventListener('open', () => {
+        console.log('WebSocket connected');
+        chatLoadingScreen.style.display = 'none';
+        
+        const handle = localStorage.getItem('currentUser');
+        if (handle) {
+            const color = getStoredColor(handle);
+            if (color) restoreChatInterface(handle, color);
+        }
     });
 
-        socket.addEventListener('error', function (event) {
-            console.log('WebSocket error:', event);
-        });
-    }
+    socket.addEventListener('message', (event) => {
+        const data = event.data instanceof Blob ? 
+            await event.data.text() : event.data;
+        processMessage(data);
+    });
+
+    socket.addEventListener('close', () => {
+        console.log('WebSocket disconnected');
+        setTimeout(connectWebSocket, 5000);
+    });
+}
+
 function restoreChatInterface(handle, color) {
-    if (handle && color) {
-        // Update UI to reflect user's handle and color
-        var userHandleInput = document.getElementById('user-handle');
-        userHandleInput.value = handle;
-        userHandleInput.style.color = color; // This applies the color to the text inside the input
-
-        // Assuming you want the send button to have the same color
-        var sendButton = document.querySelector('.send-button');
-        sendButton.style.backgroundColor = color;
-
-        // Assuming you have an element where the user's handle is displayed and you want it to have the user's color
-        var userHandleDisplay = document.getElementById('handle-display'); // You need to add this element to your HTML
-        if(userHandleDisplay) {
-            userHandleDisplay.textContent = handle;
-            userHandleDisplay.style.color = color;
-        }
-        
-        // Hide handle input screen and show chat input area
-        document.getElementById('handle-screen').style.display = 'none';
-        document.getElementById('chat-input-area').style.display = 'block';
-
-        // Set the border color of the chat input to the user's color
-        var chatInput = document.getElementById('chat-input');
-        chatInput.style.borderColor = color; // This changes the border color to the user's color
-
-        chatInput.focus();
-    }
+    document.getElementById('user-handle').value = handle;
+    document.getElementById('handle-display').textContent = handle;
+    document.getElementById('handle-display').style.color = color;
+    document.querySelector('.send-button').style.backgroundColor = color;
+    document.getElementById('chat-input').style.borderColor = color;
+    document.getElementById('handle-screen').style.display = 'none';
+    document.getElementById('chat-input-area').style.display = 'block';
 }
 
 function processMessage(data) {
-    var chatLog = document.getElementById('chat-log');
-
+    const chatLog = document.getElementById('chat-log');
     try {
-        var messageData = JSON.parse(data);
-
-        // If it's the chat history, each message will be displayed on its own line
-        if (messageData.type === 'history') {
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
-            messageData.data.forEach(function(message) {
-                // We append a div for each message in the history here.
-                // You would need to ensure that the message is stored with color coding in the history as well.
-                var messageElement = document.createElement('div');
-                messageElement.textContent = message;
-                chatLog.appendChild(messageElement);
-            });
-        } else if (messageData.type === 'message') {
-            // If it's a single message, construct an element with the specified color
-            var messageElement = document.createElement('div');
-            messageElement.style.color = messageData.data.color; // Set the color style
-            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
-            chatLog.appendChild(messageElement);
-        }
-
-        // Scroll to the bottom of the chat log
-        chatLog.scrollTop = chatLog.scrollHeight;
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        var errorMessageElement = document.createElement('div');
-        errorMessageElement.textContent = 'Error in message format';
-        chatLog.appendChild(errorMessageElement);
-    }
-}
-
-
-
-// When the document is fully loaded, focus on the handle input
-document.addEventListener('DOMContentLoaded', (event) => {
-        var handle = localStorage.getItem('userHandle');
-        var color = localStorage.getItem('handleColor');
-        if (handle && color) {
-            restoreChatInterface(handle, color);
-        } else {
-            document.getElementById('user-handle').focus();
-        }
-    });
-
-// Function that gets called when user enters their handle and clicks "Enter Chat"
-function enterChat() {
-    var handle = document.getElementById('user-handle').value.trim();
-    if (handle) {
-        // Store handle in localStorage
-        localStorage.setItem('userHandle', handle);
+        const msg = JSON.parse(data);
         
-        // Check if the WebSocket is open before assigning handle and sending color
-        if (socket && socket.readyState === WebSocket.OPEN) {
-            // Check if the user already has a color, if not generate a new one
-            var color = localStorage.getItem('handleColor');
-            if (!color) {
-                color = getRandomColor(); // Ensure this function is defined in your client-side code
-                localStorage.setItem('handleColor', color);
-            }
-            
-            // Store the user's handle and color in the WebSocket object for later use
-            socket.handle = handle;
-            socket.color = color;
-
-            // Send color setting to server
-            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
-            socket.send(colorMessage);
-
-            // Hide handle input screen and show chat input area
-            document.getElementById('handle-screen').style.display = 'none';
-            document.getElementById('chat-input-area').style.display = 'block';
-            document.getElementById('chat-input').focus(); // Focus on the message input
-        } else {
-            console.log('WebSocket is not open. Cannot set handle or send color.');
-            // You could also choose to reconnect or notify the user here
+        if (msg.type === 'history') {
+            chatLog.innerHTML = msg.data.map(message => 
+                `<div style="color:${message.color}">${message.handle}: ${message.message}</div>`
+            ).join('');
+        } 
+        else if (msg.type === 'message') {
+            const div = document.createElement('div');
+            div.style.color = msg.color;
+            div.textContent = `${msg.handle}: ${msg.message}`;
+            chatLog.appendChild(div);
         }
-    } else {
-        // Handle the case where the handle is not entered
-        alert("Please enter a handle to continue.");
+        
+        chatLog.scrollTop = chatLog.scrollHeight;
+    } catch (e) {
+        console.error('Message processing error:', e);
     }
 }
 
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
+function enterChat() {
+    const handle = document.getElementById('user-handle').value.trim();
+    if (!handle) return alert("Please enter a handle");
+    
+    let color = getStoredColor(handle);
+    if (!color) {
+        color = getRandomColor();
+        storeColor(handle, color);
     }
-    return color;
+    
+    localStorage.setItem('currentUser', handle);
+    localStorage.setItem('currentColor', color);
+    
+    if (socket?.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({
+            type: "setColor",
+            handle: handle,
+            color: color
+        }));
+    }
+    
+    restoreChatInterface(handle, color);
 }
 
-
-// Adjusted sendMessage function
 function sendMessage() {
-    var message = document.getElementById('chat-input').value.trim();
+    const message = document.getElementById('chat-input').value.trim();
+    if (!message) return;
 
-    if (socket.handle && message) { // Use the handle from the socket object
-        var fullMessage = socket.handle + ": " + message; // Use the stored handle
-        console.log('Sending message:', fullMessage);
-
-        if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(fullMessage);
-            document.getElementById('chat-input').value = ''; // Clear the message input
-        } else {
-            console.log('WebSocket is not open. readyState:', socket.readyState);
-        }
+    const handle = localStorage.getItem('currentUser');
+    const color = localStorage.getItem('currentColor');
+    
+    if (socket?.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({
+            type: "message",
+            handle: handle,
+            message: message,
+            color: color
+        }));
+        document.getElementById('chat-input').value = '';
     }
 }
 
+// Utilities
+const getRandomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16);
 
-
-
-   var input = document.getElementById("chat-input");
-    input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault(); // Prevent the default action to avoid form submission
-            sendMessage();
-        }
-    });
-
-        // Call the connectWebSocket function when the script loads to start the WebSocket connection
+document.addEventListener('DOMContentLoaded', () => {
     connectWebSocket();
-
-    </script>
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+});
+</script>
     
 </body>
 </html>
