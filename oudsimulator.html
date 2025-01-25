@@ -1,58 +1,137 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tuned Synth Oud</title>
-    <style>
-        /* ... (keep existing styles unchanged) ... */
-    </style>
+    <title>Physical Model Oud</title>
+    <!-- Keep previous styles unchanged -->
 </head>
 <body>
-    <button id="start" style="margin: 20px">Click to Initialize Audio</button>
-    <!-- ... (keep rest of HTML structure unchanged) ... -->
+    <!-- Keep HTML structure from previous version -->
 
     <script>
-        // Initialize audio context only after user interaction
         let audioContext;
-        let initialized = false;
+        const baseFrequencies = [174.61, 220.00, 277.18, 349.23, 440.00, 554.37]; // Traditional Arabic tuning
 
-        const startButton = document.getElementById('start');
-        startButton.addEventListener('click', async () => {
+        document.getElementById('start').addEventListener('click', async () => {
             try {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                await audioContext.resume();
-                startButton.textContent = "Audio ready!";
-                initialized = true;
-                initializeApp();
+                
+                // Set up effects chain
+                const globalVolume = audioContext.createGain();
+                const convolver = audioContext.createConvolver();
+                const wetGain = audioContext.createGain();
+                
+                // Create realistic oud body resonance
+                const irDuration = 1.2;
+                const sampleRate = audioContext.sampleRate;
+                const length = sampleRate * irDuration;
+                const buffer = audioContext.createBuffer(2, length, sampleRate);
+                for (let channel = 0; channel < 2; channel++) {
+                    const data = buffer.getChannelData(channel);
+                    for (let i = 0; i < length; i++) {
+                        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 4);
+                    }
+                }
+                convolver.buffer = buffer;
+
+                // Connect audio nodes
+                globalVolume.connect(audioContext.destination);
+                convolver.connect(wetGain);
+                wetGain.connect(audioContext.destination);
+                globalVolume.gain.value = 0.5;
+                wetGain.gain.value = 0.3;
+
+                // Initialize controls
+                document.getElementById('volume').addEventListener('input', e => {
+                    globalVolume.gain.value = e.target.value;
+                });
+                document.getElementById('reverb').addEventListener('input', e => {
+                    wetGain.gain.value = e.target.value;
+                });
+
+                // Create string physical models
+                document.querySelectorAll('.string').forEach((string, index) => {
+                    string.style.cursor = 'pointer';
+                    
+                    let currentSources = [];
+
+                    const createPluck = (frequency) => {
+                        // Main components
+                        const noise = audioContext.createBufferSource();
+                        const noiseBuffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate);
+                        const noiseData = noiseBuffer.getChannelData(0);
+                        for (let i = 0; i < 4096; i++) {
+                            noiseData[i] = Math.random() * 2 - 1;
+                        }
+                        noise.buffer = noiseBuffer;
+
+                        const filter = audioContext.createBiquadFilter();
+                        filter.type = 'bandpass';
+                        filter.frequency.value = frequency;
+                        filter.Q.value = 30;
+
+                        const decay = audioContext.createGain();
+                        decay.gain.value = 0.5;
+
+                        // Body resonance
+                        const delay = audioContext.createDelay();
+                        delay.delayTime.value = 1 / frequency;
+                        
+                        const feedback = audioContext.createGain();
+                        feedback.gain.value = 0.95;
+
+                        // Connect nodes
+                        noise.connect(filter);
+                        filter.connect(decay);
+                        decay.connect(delay);
+                        delay.connect(feedback);
+                        feedback.connect(delay);
+                        decay.connect(globalVolume);
+                        decay.connect(convolver);
+
+                        // Envelope
+                        decay.gain.setValueAtTime(0.5, audioContext.currentTime);
+                        decay.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 2.5);
+
+                        noise.start();
+                        noise.stop(audioContext.currentTime + 0.02);
+                        
+                        return { noise, filter, decay, delay, feedback };
+                    };
+
+                    string.addEventListener('mousedown', () => {
+                        const tune = document.getElementById('tune').value;
+                        const freq = baseFrequencies[index] * tune;
+                        currentSources = [createPluck(freq), createPluck(freq * 2.01)];
+                        string.classList.add('active');
+                    });
+
+                    string.addEventListener('mouseup', () => {
+                        currentSources.forEach(source => {
+                            source.noise.stop();
+                            source.decay.gain.cancelScheduledValues(audioContext.currentTime);
+                            source.decay.gain.setValueAtTime(0, audioContext.currentTime);
+                        });
+                        string.classList.remove('active');
+                    });
+                });
+
+                // Show interface
+                document.getElementById('start').style.display = 'none';
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelectorAll('.controls, .oud-body').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+
             } catch (error) {
-                startButton.textContent = "Audio failed to start";
-                console.error('Audio init error:', error);
+                console.error('Initialization failed:', error);
+                document.querySelector('.loading').textContent = 'Error initializing audio!';
             }
         });
 
-        async function initializeApp() {
-            const samples = [
-                // Updated sample URLs with working CORS headers
-                {note: 'C2', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'},
-                {note: 'F2', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'},
-                {note: 'A2', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'},
-                {note: 'D3', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'},
-                {note: 'G3', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'},
-                {note: 'C4', url: 'https://actions.google.com/sounds/v1/musical_instruments/guitar_pick_pluck.ogg'}
-            ];
-
-            // ... (keep rest of the JavaScript code but replace sample URLs) ...
-            
-            // Add click sound for testing
-            document.body.addEventListener('click', () => {
-                if (initialized) {
-                    const osc = audioContext.createOscillator();
-                    osc.connect(audioContext.destination);
-                    osc.frequency.value = 440;
-                    osc.start();
-                    osc.stop(audioContext.currentTime + 0.1);
-                }
-            });
-        }
+        // Initial interface state
+        document.querySelector('.controls').style.visibility = 'hidden';
+        document.querySelector('.oud-body').style.visibility = 'hidden';
+        document.querySelector('.loading').style.display = 'none';
     </script>
 </body>
 </html>
