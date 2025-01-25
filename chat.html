@@ -6,197 +6,438 @@
     <title>Ali's Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* ADDED MISSING LOADING SCREEN STYLES */
-        #global-loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
+        body {
+            background-color: black;
+            background-image: url('stars.gif');
+            font-family: 'Press Start 2P', cursive;
             color: #FF33CC;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
         }
-
-        /* RESTORED VISIBLE ELEMENTS */
         .container {
-            /* Previous container styles */
-            opacity: 1 !important; /* Force visibility */
+            position: relative;
+            width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #000; /* Changed to black */
+            border: 2px solid #FF33CC; /* Pink border */
+            margin-top: 50px;
+            box-shadow: 0 0 10px #FF33CC; /* Pink glow */
+        }
+        .header {
+            background-color: #FF33CC; /* Pink header */
+            color: #FFF;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+.chat-log {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border: 1px solid #FF33CC; /* Pink border */
+    padding: 5px;
+    margin: 10px 0;
+    overflow-y: scroll;
+    background-color: #000; /* Black background */
+    color: #33FFA1; /* Neon green text */
+    font-family: 'Press Start 2P', cursive; /* Retro font */
+    white-space: pre-wrap; /* Allows text wrapping and maintains formatting */
+}
+        .chat-input {
+            width: calc(70% - 10px);
+            padding: 5px;
+            margin: 5px;
+            background: #333; /* Darker background for inputs */
+            border: 1px solid #FF33CC; /* Pink border */
+            color: #FFF;
+        }
+        .send-button {
+            width: calc(25% - 10px);
+            padding: 5px;
+            background-color: #FF33CC; /* Pink button */
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #FFF;
         }
 
-        /* FIXED HIDDEN ELEMENT INITIAL STATES */
-        #chat-input-area {
-            display: none; /* Should be hidden initially */
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
         }
 
-        #handle-screen {
-            display: flex; /* Should be visible initially */
+        .title {
+            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite; /* Flip animation */
         }
+
+.kitty-gif {
+    margin-top: 0px; 
+}
+
+hr {
+    margin-top: -15px;  /* Adjust this value as needed */
+}
+  
+ul {
+    list-style-position: inside; /
+    padding-left: 0;             
+    margin-left: 0;              
+}
+
+li {
+    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
+    margin-bottom: 20px; /* This will add space below each bullet point */
+}
+
+       .columns-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 0.1%;
+            padding: 10px 2%;
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+
+        .column {
+            flex: 1;
+            padding: 25px;
+            text-align: justify;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+
+#user-handle {
+    padding: 5px;
+    margin-top: 10px;
+    background: #333; /* Dark background for input */
+    border: 1px solid #FF33CC; /* Pink border */
+    color: #FFF;
+}
+
+#handle-screen button {
+    padding: 5px;
+    margin-top: 10px;
+    background-color: #FF33CC; /* Pink button */
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+}
+
+
+        
     </style>
+
+
+
+
+
 </head>
 <body>
-    <!-- RESTORED MISSING LOADING SCREEN MARKUP -->
-    <div id="global-loading-screen">
-        <p>Connecting to chat server...</p>
+<div id="global-loading-screen" style="display: none; position: fixed; ...">
+    <p>Loading...</p>
+</div>
+
+    <center>
+        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
+        <img src="kitty.gif" alt="Kitty Gif" class="kitty-gif">
+    </center>
+    <hr>
+    <!-- Navigation Buttons -->
+    <center>
+    <a href="index.html" class="retro-btn nav">Home</a>
+    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="about.html" class="retro-btn nav">About</a>
+    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
+    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
+    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
+    <a href="chat.html" class="retro-btn nav">Chat</a>
+    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
+    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
+    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
+    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
+    <a href="books.html" class="retro-btn nav">Kool Books</a>
+    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
+    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
+    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
+    <a href="contact.html" class="retro-btn nav">Contact</a>
+    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
+    </center>
+<br>
+
+
+    
+<!-- Chat Container -->
+<div class="container">
+    <div class="header">Ali's Chat Room</div>
+    
+    <div class="chat-log" id="chat-log">
+        <!-- Chat log will be displayed here -->
+        <div id="loading-screen" style="display: none; ...">
+            <p>Loading...</p>
+        </div>
     </div>
 
-    <!-- RESTORED VISIBLE CONTAINER STRUCTURE -->
-    <div class="container">
-        <div class="header">
-            Ali's Chat Room
-            <div class="connection-status">Status: connecting...</div>
-        </div>
-        
-        <!-- CHAT LOG WITH INITIAL CONTENT -->
-        <div class="chat-log" id="chat-log">
-            <div class="system-message">Chat initialized...</div>
-        </div>
-
-        <!-- HANDLE INPUT SCREEN -->
-        <div id="handle-screen">
-            <div class="handle-form">
-                <label for="user-handle">Enter your handle:</label>
-                <input type="text" id="user-handle" placeholder="Chat handle...">
-                <button onclick="enterChat()">Join Chat</button>
-            </div>
-        </div>
-
-        <!-- CHAT INPUT AREA -->
-        <div id="chat-input-area">
-            <input type="text" id="chat-input" class="chat-input">
-            <button class="send-button" onclick="sendMessage()">Send</button>
+    <!-- Handle Input Screen - Initially shown -->
+    <div id="handle-screen" style="display: flex; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); z-index: 2; justify-content: center; align-items: center;">
+        <div style="text-align: center;">
+            <label for="user-handle" style="display: block; color: white;">Enter your handle to start chatting:</label>
+            <input type="text" id="user-handle" placeholder="Enter your handle here" style="padding: 5px; margin-top: 10px;">
+            <button onclick="enterChat()">Enter Chat</button>
         </div>
     </div>
 
-<script>
-// UPDATED INITIALIZATION SEQUENCE
-document.addEventListener('DOMContentLoaded', () => {
-    // Show loading screen immediately
-    document.getElementById('global-loading-screen').style.display = 'flex';
-    
-    // Initialize WebSocket connection
-    connectWebSocket();
+<!-- Chat Input - Initially hidden -->
+<div id="chat-input-area" style="display: none;">
+    <!-- Element to display the user's handle -->
+    <div id="handle-display" style="color: white;"><!-- The color will be set by the restoreChatInterface function --></div>
 
-    // Check for existing handle
-    const savedHandle = localStorage.getItem('userHandle');
-    if(savedHandle) {
-        document.getElementById('user-handle').value = savedHandle;
-    }
-});
+    <input type="text" id="handle-input" class="chat-input" placeholder="Enter your handle..." hidden>
+    <input type="text" id="chat-input" class="chat-input" placeholder="Type your message here...">
+    <button class="send-button" onclick="sendMessage()">Send</button>
+</div>
 
-// MODIFIED WEBSOCKET HANDLING
-function connectWebSocket() {
-    const loadingScreen = document.getElementById('global-loading-screen');
+
+    <div class="footer">
+        © 1996 Ali's Chat. All rights reserved.
+    </div>
+</div>
+
+
     
-    try {
+    <script>
+   // Declare the 'socket' variable in the global scope to be used by all functions
+    var socket;
+
+// Function to handle WebSocket connections with a reconnection strategy
+    function connectWebSocket() {
+        var chatLoadingScreen = document.querySelector('#chat-log #loading-screen');
+        chatLoadingScreen.style.display = 'block';
+
         socket = new WebSocket('wss://wave-sand-raisin.glitch.me');
 
-        socket.onopen = () => {
-            loadingScreen.style.display = 'none';
-            document.getElementById('handle-screen').style.display = 'flex';
-            updateConnectionStatus('connected');
-        };
+        socket.addEventListener('open', function (event) {
+            console.log('WebSocket connection established');
+            chatLoadingScreen.style.display = 'none';
 
-        socket.onmessage = (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                // Handle different message types
-                if(data.type === 'history') {
-                    handleHistory(data.messages);
-                } else if(data.type === 'message') {
-                    appendMessage(data);
-                }
-            } catch(e) {
-                console.error('Message parsing error:', e);
+            var handle = localStorage.getItem('userHandle');
+            var color = localStorage.getItem('handleColor');
+            
+            if (handle && color) {
+                socket.handle = handle;
+                socket.color = color;
+                var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+                socket.send(colorMessage);
+                restoreChatInterface(handle, color);
             }
-        };
+        });
 
-        socket.onclose = () => {
-            loadingScreen.style.display = 'flex';
-            updateConnectionStatus('disconnected');
-            setTimeout(connectWebSocket, 5000);
-        };
 
-        socket.onerror = (error) => {
-            console.error('WebSocket error:', error);
-            updateConnectionStatus('error');
-        };
+        socket.addEventListener('message', function (event) {
+            // Handle incoming messages
+            var chatLog = document.getElementById('chat-log');
 
-    } catch(error) {
-        console.error('WebSocket initialization failed:', error);
-        loadingScreen.textContent = 'Connection failed - refresh to retry';
+            // Check if the received data is a Blob
+            if (event.data instanceof Blob) {
+                // Create a FileReader to read the Blob as text
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Process the text from the Blob
+                    processMessage(e.target.result);
+                };
+
+                // Read the Blob as text
+                reader.readAsText(event.data);
+            } else {
+                // If not a Blob, assume it's text and process it
+                processMessage(event.data);
+            }
+        });
+
+    socket.addEventListener('close', function (event) {
+        console.log('WebSocket connection closed');
+        // Show the chat loading screen and attempt to reconnect after 5 seconds
+        chatLoadingScreen.style.display = 'block';
+        setTimeout(connectWebSocket, 5000);
+    });
+
+        socket.addEventListener('error', function (event) {
+            console.log('WebSocket error:', event);
+        });
+    }
+function restoreChatInterface(handle, color) {
+    if (handle && color) {
+        // Update UI to reflect user's handle and color
+        var userHandleInput = document.getElementById('user-handle');
+        userHandleInput.value = handle;
+        userHandleInput.style.color = color; // This applies the color to the text inside the input
+
+        // Assuming you want the send button to have the same color
+        var sendButton = document.querySelector('.send-button');
+        sendButton.style.backgroundColor = color;
+
+        // Assuming you have an element where the user's handle is displayed and you want it to have the user's color
+        var userHandleDisplay = document.getElementById('handle-display'); // You need to add this element to your HTML
+        if(userHandleDisplay) {
+            userHandleDisplay.textContent = handle;
+            userHandleDisplay.style.color = color;
+        }
+        
+        // Hide handle input screen and show chat input area
+        document.getElementById('handle-screen').style.display = 'none';
+        document.getElementById('chat-input-area').style.display = 'block';
+
+        // Set the border color of the chat input to the user's color
+        var chatInput = document.getElementById('chat-input');
+        chatInput.style.borderColor = color; // This changes the border color to the user's color
+
+        chatInput.focus();
     }
 }
 
-// ADDED VISIBLE MESSAGE HANDLING
-function appendMessage(data) {
-    const chatLog = document.getElementById('chat-log');
-    const messageDiv = document.createElement('div');
-    
-    messageDiv.innerHTML = `
-        <span style="color: ${data.color}">${data.handle}:</span>
-        <span style="color: #33FFA1">${escapeHTML(data.content)}</span>
-    `;
-    
-    chatLog.appendChild(messageDiv);
-    chatLog.scrollTop = chatLog.scrollHeight;
-}
+function processMessage(data) {
+    var chatLog = document.getElementById('chat-log');
 
-// BASIC MESSAGE HISTORY HANDLING
-function handleHistory(messages) {
-    const chatLog = document.getElementById('chat-log');
-    chatLog.innerHTML = ''; // Clear loading message
-    messages.forEach(appendMessage);
-}
+    try {
+        var messageData = JSON.parse(data);
 
-// RESTORED MISSING HELPER FUNCTIONS
-function escapeHTML(str) {
-    return str.replace(/&/g, '&amp;')
-             .replace(/</g, '&lt;')
-             .replace(/>/g, '&gt;');
-}
+        // If it's the chat history, each message will be displayed on its own line
+        if (messageData.type === 'history') {
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            messageData.data.forEach(function(message) {
+                // We append a div for each message in the history here.
+                // You would need to ensure that the message is stored with color coding in the history as well.
+                var messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                chatLog.appendChild(messageElement);
+            });
+        } else if (messageData.type === 'message') {
+            // If it's a single message, construct an element with the specified color
+            var messageElement = document.createElement('div');
+            messageElement.style.color = messageData.data.color; // Set the color style
+            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
+            chatLog.appendChild(messageElement);
+        }
 
-function updateConnectionStatus(status) {
-    const statusElement = document.querySelector('.connection-status');
-    if(statusElement) {
-        statusElement.textContent = `Status: ${status}`;
-        statusElement.style.color = 
-            status === 'connected' ? '#0F0' :
-            status === 'disconnected' ? '#F00' : '#FF0';
+        // Scroll to the bottom of the chat log
+        chatLog.scrollTop = chatLog.scrollHeight;
+    } catch (error) {
+        console.error('Error parsing message:', error);
+        var errorMessageElement = document.createElement('div');
+        errorMessageElement.textContent = 'Error in message format';
+        chatLog.appendChild(errorMessageElement);
     }
 }
 
-// ENSURE THESE FUNCTIONS ARE GLOBAL
-window.enterChat = function() {
-    const handle = document.getElementById('user-handle').value.trim();
-    if(handle.length < 1 || handle.length > 20) {
-        alert('Handle must be 1-20 characters');
-        return;
-    }
-    
-    localStorage.setItem('userHandle', handle);
-    document.getElementById('handle-screen').style.display = 'none';
-    document.getElementById('chat-input-area').style.display = 'block';
-    document.getElementById('chat-input').focus();
-};
 
-window.sendMessage = function() {
-    const input = document.getElementById('chat-input');
-    const message = input.value.trim();
-    
-    if(message && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({
-            type: 'message',
-            content: message,
-            handle: localStorage.getItem('userHandle'),
-            color: localStorage.getItem('handleColor') || '#FF33CC'
-        }));
-        input.value = '';
+
+// When the document is fully loaded, focus on the handle input
+document.addEventListener('DOMContentLoaded', (event) => {
+        var handle = localStorage.getItem('userHandle');
+        var color = localStorage.getItem('handleColor');
+        if (handle && color) {
+            restoreChatInterface(handle, color);
+        } else {
+            document.getElementById('user-handle').focus();
+        }
+    });
+
+// Function that gets called when user enters their handle and clicks "Enter Chat"
+function enterChat() {
+    var handle = document.getElementById('user-handle').value.trim();
+    if (handle) {
+        // Store handle in localStorage
+        localStorage.setItem('userHandle', handle);
+        
+        // Check if the WebSocket is open before assigning handle and sending color
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            // Check if the user already has a color, if not generate a new one
+            var color = localStorage.getItem('handleColor');
+            if (!color) {
+                color = getRandomColor(); // Ensure this function is defined in your client-side code
+                localStorage.setItem('handleColor', color);
+            }
+            
+            // Store the user's handle and color in the WebSocket object for later use
+            socket.handle = handle;
+            socket.color = color;
+
+            // Send color setting to server
+            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+            socket.send(colorMessage);
+
+            // Hide handle input screen and show chat input area
+            document.getElementById('handle-screen').style.display = 'none';
+            document.getElementById('chat-input-area').style.display = 'block';
+            document.getElementById('chat-input').focus(); // Focus on the message input
+        } else {
+            console.log('WebSocket is not open. Cannot set handle or send color.');
+            // You could also choose to reconnect or notify the user here
+        }
+    } else {
+        // Handle the case where the handle is not entered
+        alert("Please enter a handle to continue.");
     }
-};
-</script>
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+// Adjusted sendMessage function
+function sendMessage() {
+    var message = document.getElementById('chat-input').value.trim();
+
+    if (socket.handle && message) { // Use the handle from the socket object
+        var fullMessage = socket.handle + ": " + message; // Use the stored handle
+        console.log('Sending message:', fullMessage);
+
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(fullMessage);
+            document.getElementById('chat-input').value = ''; // Clear the message input
+        } else {
+            console.log('WebSocket is not open. readyState:', socket.readyState);
+        }
+    }
+}
+
+
+
+
+   var input = document.getElementById("chat-input");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault(); // Prevent the default action to avoid form submission
+            sendMessage();
+        }
+    });
+
+        // Call the connectWebSocket function when the script loads to start the WebSocket connection
+    connectWebSocket();
+
+    </script>
+    
 </body>
 </html>
