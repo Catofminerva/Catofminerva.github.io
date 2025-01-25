@@ -1,0 +1,191 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tuned Synth Oud</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #2c3e50;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .controls {
+            background: #34495e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .control-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        .oud-body {
+            width: 400px;
+            height: 500px;
+            background: #8b4513;
+            border-radius: 20% 20% 40% 40%;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .string {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to right, #eee 0%, #ccc 100%);
+            height: 80%;
+            top: 10%;
+            transform-origin: top;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .string.active {
+            background: linear-gradient(to right, #ffd700 0%, #daa520 100%);
+        }
+
+        input[type="range"] {
+            width: 200px;
+        }
+
+        .loading {
+            color: white;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label>Volume:</label>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div class="control-group">
+            <label>Reverb:</label>
+            <input type="range" id="reverb" min="0" max="1" step="0.1" value="0.3">
+        </div>
+        <div class="control-group">
+            <label>Tuning:</label>
+            <input type="range" id="tune" min="0.8" max="1.2" step="0.01" value="1">
+        </div>
+    </div>
+
+    <div class="oud-body">
+        <div class="string" style="left: 10%"></div>
+        <div class="string" style="left: 23%"></div>
+        <div class="string" style="left: 36%"></div>
+        <div class="string" style="left: 49%"></div>
+        <div class="string" style="left: 62%"></div>
+        <div class="string" style="left: 75%"></div>
+    </div>
+
+    <div class="loading">Loading samples...</div>
+
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const strings = document.querySelectorAll('.string');
+        const samples = [
+            {note: 'C2', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-C2_very-long-pizzicato.wav'},
+            {note: 'F2', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-F2_very-long-pizzicato.wav'},
+            {note: 'A2', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-A2_very-long-pizzicato.wav'},
+            {note: 'D3', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-D3_very-long-pizzicato.wav'},
+            {note: 'G3', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-G3_very-long-pizzicato.wav'},
+            {note: 'C4', url: 'https://cdn.jsdelivr.net/gh/urswhale/arabic-instruments-samples@main/Oud/SalamanderOUD-C4_very-long-pizzicato.wav'}
+        ];
+
+        let sampleBuffers = [];
+        const globalVolume = audioContext.createGain();
+        const convolver = audioContext.createConvolver();
+        const wetGain = audioContext.createGain();
+
+        globalVolume.connect(audioContext.destination);
+        convolver.connect(wetGain);
+        wetGain.connect(audioContext.destination);
+
+        // Load impulse response
+        (async function() {
+            try {
+                const response = await fetch('https://cdn.jsdelivr.net/gh/hoch/impulse-responses@master/IRCAM/IRC_1002_R1_RIR_16k_trimmed.wav');
+                const buffer = await response.arrayBuffer();
+                convolver.buffer = await audioContext.decodeAudioData(buffer);
+            } catch (error) {
+                console.error('Error loading reverb:', error);
+            }
+        })();
+
+        // Load samples with error handling
+        Promise.all(samples.map(async (sample, index) => {
+            try {
+                const response = await fetch(sample.url);
+                const buffer = await response.arrayBuffer();
+                sampleBuffers[index] = await audioContext.decodeAudioData(buffer);
+            } catch (error) {
+                console.error('Error loading sample:', sample.note, error);
+            }
+        }))
+        .then(() => {
+            document.querySelector('.loading').style.display = 'none';
+            strings.forEach(string => string.style.cursor = 'pointer');
+        })
+        .catch(error => console.error('Sample loading failed:', error));
+
+        document.getElementById('volume').addEventListener('input', e => {
+            globalVolume.gain.value = e.target.value;
+        });
+
+        document.getElementById('reverb').addEventListener('input', e => {
+            wetGain.gain.value = e.target.value;
+        });
+
+        strings.forEach((string, index) => {
+            let audioSource = null;
+
+            const playSample = () => {
+                if (sampleBuffers[index]) {
+                    if (audioSource) audioSource.stop();
+                    
+                    audioSource = audioContext.createBufferSource();
+                    const gainNode = audioContext.createGain();
+                    const tune = document.getElementById('tune').value;
+
+                    audioSource.buffer = sampleBuffers[index];
+                    audioSource.playbackRate.value = tune;
+                    
+                    gainNode.gain.value = 0.5;
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
+
+                    audioSource.connect(gainNode);
+                    gainNode.connect(globalVolume);
+                    gainNode.connect(convolver);
+
+                    audioSource.start();
+                    string.classList.add('active');
+
+                    audioSource.addEventListener('ended', () => {
+                        string.classList.remove('active');
+                    });
+                }
+            };
+
+            string.addEventListener('mousedown', playSample);
+            string.addEventListener('mouseup', () => {
+                if (audioSource) audioSource.stop();
+            });
+        });
+    </script>
+</body>
+</html>
