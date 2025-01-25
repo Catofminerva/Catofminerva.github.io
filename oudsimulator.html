@@ -1,137 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Physical Model Oud</title>
-    <!-- Keep previous styles unchanged -->
+    <title>Virtual Oud Player</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(45deg, #1a1a1a, #2c3e50);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+        }
+
+        #start {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            background: #d4af37;
+            border: none;
+            border-radius: 25px;
+            color: #2c1b0a;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .loading {
+            color: #d4af37;
+            font-size: 1.2em;
+            margin: 30px;
+            display: none;
+        }
+
+        .controls {
+            background: rgba(52, 73, 94, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+            width: 80%;
+            max-width: 600px;
+            display: none;
+        }
+
+        .oud-body {
+            width: 500px;
+            height: 600px;
+            background: #8b4513;
+            border-radius: 20% 20% 40% 40%;
+            position: relative;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .string {
+            position: absolute;
+            width: 2px;
+            background: #d4af37;
+            height: 80%;
+            top: 12%;
+            transform-origin: top;
+            cursor: pointer;
+        }
+
+        .string:nth-child(1) { left: 12%; }
+        .string:nth-child(2) { left: 26%; }
+        .string:nth-child(3) { left: 40%; }
+        .string:nth-child(4) { left: 54%; }
+        .string:nth-child(5) { left: 68%; }
+        .string:nth-child(6) { left: 82%; }
+    </style>
 </head>
 <body>
-    <!-- Keep HTML structure from previous version -->
+    <button id="start">🎵 Initialize Oud Player</button>
+    <div class="loading">🔄 Loading Oud Samples...</div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>🔈 Volume</label>
+            <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div class="control-group">
+            <label>🎚️ Tuning</label>
+            <input type="range" id="tune" min="0.8" max="1.2" step="0.01" value="1">
+        </div>
+    </div>
+
+    <div class="oud-body">
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+    </div>
 
     <script>
-        let audioContext;
-        const baseFrequencies = [174.61, 220.00, 277.18, 349.23, 440.00, 554.37]; // Traditional Arabic tuning
+        const sampleURL = 'https://upload.wikimedia.org/wikipedia/commons/7/77/Oud_open_Strings.ogg';
+        const stringTimes = [
+            { start: 0.2, end: 1.0 }, { start: 1.2, end: 2.0 },
+            { start: 2.2, end: 3.0 }, { start: 3.2, end: 4.0 },
+            { start: 4.2, end: 5.0 }, { start: 5.2, end: 5.75 }
+        ];
 
         document.getElementById('start').addEventListener('click', async () => {
             try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log('Initialization started');
+                const startBtn = document.getElementById('start');
+                const loading = document.querySelector('.loading');
                 
-                // Set up effects chain
+                // Initial UI state
+                startBtn.style.display = 'none';
+                loading.style.display = 'block';
+
+                // Initialize audio context
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log('AudioContext created');
+                
+                // Load audio sample
+                console.log('Fetching audio sample...');
+                const response = await fetch(sampleURL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                console.log('Sample fetched');
+
+                const arrayBuffer = await response.arrayBuffer();
+                console.log('Decoding audio...');
+                const masterBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                console.log('Audio decoded');
+
+                // Initialize audio nodes
                 const globalVolume = audioContext.createGain();
-                const convolver = audioContext.createConvolver();
-                const wetGain = audioContext.createGain();
-                
-                // Create realistic oud body resonance
-                const irDuration = 1.2;
-                const sampleRate = audioContext.sampleRate;
-                const length = sampleRate * irDuration;
-                const buffer = audioContext.createBuffer(2, length, sampleRate);
-                for (let channel = 0; channel < 2; channel++) {
-                    const data = buffer.getChannelData(channel);
-                    for (let i = 0; i < length; i++) {
-                        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 4);
-                    }
-                }
-                convolver.buffer = buffer;
-
-                // Connect audio nodes
                 globalVolume.connect(audioContext.destination);
-                convolver.connect(wetGain);
-                wetGain.connect(audioContext.destination);
                 globalVolume.gain.value = 0.5;
-                wetGain.gain.value = 0.3;
 
-                // Initialize controls
+                // Setup controls
                 document.getElementById('volume').addEventListener('input', e => {
                     globalVolume.gain.value = e.target.value;
                 });
-                document.getElementById('reverb').addEventListener('input', e => {
-                    wetGain.gain.value = e.target.value;
-                });
 
-                // Create string physical models
+                // Initialize strings
+                console.log('Setting up strings...');
                 document.querySelectorAll('.string').forEach((string, index) => {
-                    string.style.cursor = 'pointer';
-                    
-                    let currentSources = [];
+                    let currentSource = null;
 
-                    const createPluck = (frequency) => {
-                        // Main components
-                        const noise = audioContext.createBufferSource();
-                        const noiseBuffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate);
-                        const noiseData = noiseBuffer.getChannelData(0);
-                        for (let i = 0; i < 4096; i++) {
-                            noiseData[i] = Math.random() * 2 - 1;
-                        }
-                        noise.buffer = noiseBuffer;
-
-                        const filter = audioContext.createBiquadFilter();
-                        filter.type = 'bandpass';
-                        filter.frequency.value = frequency;
-                        filter.Q.value = 30;
-
-                        const decay = audioContext.createGain();
-                        decay.gain.value = 0.5;
-
-                        // Body resonance
-                        const delay = audioContext.createDelay();
-                        delay.delayTime.value = 1 / frequency;
+                    const playNote = () => {
+                        if (currentSource) currentSource.stop();
                         
-                        const feedback = audioContext.createGain();
-                        feedback.gain.value = 0.95;
+                        const source = audioContext.createBufferSource();
+                        const gainNode = audioContext.createGain();
+                        const tune = document.getElementById('tune').value;
 
-                        // Connect nodes
-                        noise.connect(filter);
-                        filter.connect(decay);
-                        decay.connect(delay);
-                        delay.connect(feedback);
-                        feedback.connect(delay);
-                        decay.connect(globalVolume);
-                        decay.connect(convolver);
-
-                        // Envelope
-                        decay.gain.setValueAtTime(0.5, audioContext.currentTime);
-                        decay.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 2.5);
-
-                        noise.start();
-                        noise.stop(audioContext.currentTime + 0.02);
+                        source.buffer = masterBuffer;
+                        source.playbackRate.value = tune;
                         
-                        return { noise, filter, decay, delay, feedback };
+                        const startTime = stringTimes[index].start;
+                        const endTime = stringTimes[index].end;
+                        const duration = endTime - startTime;
+
+                        gainNode.gain.setValueAtTime(0.8, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, 
+                            audioContext.currentTime + duration * (1/tune));
+
+                        source.connect(gainNode);
+                        gainNode.connect(globalVolume);
+
+                        source.start(0, startTime, duration);
+                        currentSource = source;
+                        string.style.background = '#ffd700';
+
+                        source.addEventListener('ended', () => {
+                            string.style.background = '#d4af37';
+                        });
                     };
 
-                    string.addEventListener('mousedown', () => {
-                        const tune = document.getElementById('tune').value;
-                        const freq = baseFrequencies[index] * tune;
-                        currentSources = [createPluck(freq), createPluck(freq * 2.01)];
-                        string.classList.add('active');
-                    });
-
+                    string.addEventListener('mousedown', playNote);
                     string.addEventListener('mouseup', () => {
-                        currentSources.forEach(source => {
-                            source.noise.stop();
-                            source.decay.gain.cancelScheduledValues(audioContext.currentTime);
-                            source.decay.gain.setValueAtTime(0, audioContext.currentTime);
-                        });
-                        string.classList.remove('active');
+                        if (currentSource) currentSource.stop();
+                        string.style.background = '#d4af37';
                     });
                 });
 
                 // Show interface
-                document.getElementById('start').style.display = 'none';
-                document.querySelector('.loading').style.display = 'none';
-                document.querySelectorAll('.controls, .oud-body').forEach(el => {
-                    el.style.visibility = 'visible';
-                });
+                console.log('Showing interface...');
+                loading.style.display = 'none';
+                document.querySelector('.controls').style.display = 'block';
+                document.querySelector('.oud-body').style.display = 'block';
 
             } catch (error) {
-                console.error('Initialization failed:', error);
-                document.querySelector('.loading').textContent = 'Error initializing audio!';
+                console.error('Initialization error:', error);
+                document.querySelector('.loading').innerHTML = 
+                    `❌ Error: ${error.message}<br>Please refresh the page`;
+                document.getElementById('start').style.display = 'block';
             }
         });
-
-        // Initial interface state
-        document.querySelector('.controls').style.visibility = 'hidden';
-        document.querySelector('.oud-body').style.visibility = 'hidden';
-        document.querySelector('.loading').style.display = 'none';
     </script>
 </body>
 </html>
