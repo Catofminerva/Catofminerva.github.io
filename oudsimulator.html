@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +49,6 @@
             height: 80%;
             top: 10%;
             transform-origin: top;
-            cursor: pointer;
             transition: background 0.2s;
         }
 
@@ -69,6 +67,8 @@
     </style>
 </head>
 <body>
+    <button id="start" style="margin: 20px">Click to Start Audio</button>
+
     <div class="controls">
         <div class="control-group">
             <label>Volume:</label>
@@ -112,9 +112,17 @@
         const convolver = audioContext.createConvolver();
         const wetGain = audioContext.createGain();
 
+        // Setup audio routing
         globalVolume.connect(audioContext.destination);
         convolver.connect(wetGain);
         wetGain.connect(audioContext.destination);
+
+        // Initialize audio context on user click
+        const startButton = document.getElementById('start');
+        startButton.addEventListener('click', async () => {
+            await audioContext.resume();
+            startButton.remove();
+        });
 
         // Load impulse response
         (async function() {
@@ -143,6 +151,7 @@
         })
         .catch(error => console.error('Sample loading failed:', error));
 
+        // Control handlers
         document.getElementById('volume').addEventListener('input', e => {
             globalVolume.gain.value = e.target.value;
         });
@@ -151,6 +160,7 @@
             wetGain.gain.value = e.target.value;
         });
 
+        // String interaction
         strings.forEach((string, index) => {
             let audioSource = null;
 
@@ -169,8 +179,8 @@
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
 
                     audioSource.connect(gainNode);
-                    gainNode.connect(globalVolume);
-                    gainNode.connect(convolver);
+                    gainNode.connect(globalVolume);  // Dry signal
+                    gainNode.connect(convolver);     // Wet signal
 
                     audioSource.start();
                     string.classList.add('active');
