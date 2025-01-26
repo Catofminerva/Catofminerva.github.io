@@ -1,77 +1,128 @@
+<!-- Updated index.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Retro Chat</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: black;
-            color: #33FFA1;
-            font-family: 'Press Start 2P', cursive;
-            padding: 20px;
-        }
-        .crt {
+        /* Add modal styles */
+        #username-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
             border: 3px solid #FF33CC;
-            padding: 15px;
-            box-shadow: 0 0 15px #FF33CC;
+            padding: 20px;
+            z-index: 1000;
         }
-        #chat-log {
-            height: 400px;
-            overflow-y: scroll;
-            border-bottom: 2px dashed #FF33CC;
-            margin-bottom: 10px;
-        }
-        button {
-            background: black;
-            color: #FF33CC;
-            border: 2px solid #FF33CC;
-            padding: 8px;
-            cursor: pointer;
-        }
-        #message-input {
-            background: black;
-            color: #33FFA1;
-            border: 2px solid #FF33CC;
-            padding: 8px;
-            margin-right: 10px;
-        }
+        
+        /* Rest of your existing styles */
     </style>
 </head>
 <body>
+    <!-- Username Modal -->
+    <div id="username-modal" style="display: none;">
+        <h2>ENTER YOUR NAME</h2>
+        <input type="text" id="username-input" placeholder="8-bit warrior...">
+        <button onclick="setUsername()">START</button>
+    </div>
+
+    <!-- Chat Interface -->
     <div class="crt">
         <div id="chat-log"></div>
-        <input type="text" id="message-input" placeholder="Type message...">
-        <button onclick="sendMessage()">SEND</button>
+        <input type="text" id="message-input" disabled>
+        <button onclick="sendMessage()" disabled>SEND</button>
     </div>
 
     <script>
-        // Connect to Glitch server - MAKE SURE TO UPDATE THIS URL!
-        const ws = new WebSocket('wss://wave-sand-raisin.glitch.me');
+        let ws;
+        let username = localStorage.getItem('username') || '';
+        let userColor = localStorage.getItem('userColor') || generateColor();
+        
+        function generateColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
 
-        // Set random color
-        let userColor = localStorage.getItem('userColor') || 
-                        '#' + Math.floor(Math.random()*16777215).toString(16);
-        localStorage.setItem('userColor', userColor);
+        // Show username modal if needed
+        function init() {
+            const modal = document.getElementById('username-modal');
+            if (!username) {
+                modal.style.display = 'block';
+            } else {
+                connectWebSocket();
+                enableChat();
+            }
+        }
 
-        ws.onmessage = function(event) {
-            const msg = JSON.parse(event.data);
+        function setUsername() {
+            const input = document.getElementById('username-input');
+            if (input.value.trim()) {
+                username = input.value.trim();
+                localStorage.setItem('username', username);
+                localStorage.setItem('userColor', userColor);
+                document.getElementById('username-modal').style.display = 'none';
+                connectWebSocket();
+                enableChat();
+            }
+        }
+
+        function enableChat() {
+            document.getElementById('message-input').disabled = false;
+            document.querySelector('button').disabled = false;
+        }
+
+        function connectWebSocket() {
+            ws = new WebSocket('wss://wave-sand-raisin.glitch.me');
+
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'history') {
+                    // Handle chat history
+                    data.data.forEach(msg => {
+                        appendMessage(msg);
+                    });
+                } else {
+                    // Handle new messages
+                    appendMessage(data);
+                }
+            };
+
+            ws.onclose = function() {
+                setTimeout(connectWebSocket, 1000);
+            };
+        }
+
+        function appendMessage(msg) {
             const chatLog = document.getElementById('chat-log');
-            chatLog.innerHTML += `<p style="color:${msg.color}">${msg.username}: ${msg.text}</p>`;
-            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll
-        };
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `
+                <span style="color: ${msg.color || '#33FFA1'}">
+                    ${msg.username}: 
+                </span>
+                <span>${msg.content}</span>
+            `;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
 
         function sendMessage() {
             const input = document.getElementById('message-input');
             const message = {
-                username: 'User',  // Temporary username
+                username: username,
                 color: userColor,
                 text: input.value
             };
-            if (ws.readyState === WebSocket.OPEN) {
+            
+            if (ws.readyState === WebSocket.OPEN && input.value.trim()) {
                 ws.send(JSON.stringify(message));
+                input.value = '';
             }
-            input.value = '';
         }
+
+        // Start the app
+        init();
     </script>
 </body>
 </html>
