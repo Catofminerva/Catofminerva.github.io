@@ -90,6 +90,22 @@
             localStorage.setItem('retroColor', userColor);
         }
 
+    // ADD THESE LINES RIGHT HERE ▼
+    console.log('=== FIRST-TIME SETUP ===');
+    console.log('Generated Username:', username);
+    console.log('Generated Color:', userColor);
+}
+
+// ADD THESE LINES RIGHT HERE ▼
+console.log('=== CURRENT USER INFO ===');
+console.log('Username:', username);
+console.log('Color:', userColor);
+console.log('LocalStorage:', {
+    name: localStorage.getItem('retroUsername'),
+    color: localStorage.getItem('retroColor')
+});
+
+        
         // GUARANTEED UNIQUE COLOR GENERATION (REPLACE THIS FUNCTION)
         function generateUniqueColor(username) {
             let hash = 0;
