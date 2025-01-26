@@ -77,18 +77,26 @@
         const WS_URL = 'https://wave-sand-raisin.glitch.me/'; // 🔴 REPLACE THIS
         let ws;
         let chatPassword = prompt("ENTER CHAT PASSWORD:") || "retrochat123";
-        let username = localStorage.getItem('retroUsername') || 
-                      prompt("ENTER YOUR CODENAME:") || 
-                      "AGENT_" + Math.floor(Math.random() * 1000);
-        let userColor = localStorage.getItem('retroColor') || generateNeonColor();
-
-        // Color Generation
-        function generateNeonColor() {
-            const neonColors = ['#FF33CC', '#33FFA1', '#FF5733', '#33FFFC'];
-            return neonColors[Math.floor(Math.random() * neonColors.length)];
+        
+        // USERNAME AND COLOR INITIALIZATION
+        let username = localStorage.getItem('retroUsername');
+        let userColor = localStorage.getItem('retroColor');
+        
+        if (!username || !userColor) {
+            username = prompt("ENTER YOUR CODENAME:") || 
+                     "AGENT_" + Math.floor(Math.random() * 1000);
+            userColor = generateNeonColor();
+            localStorage.setItem('retroUsername', username);
+            localStorage.setItem('retroColor', userColor);
         }
 
-        // Encryption/Decryption
+        // IMPROVED COLOR GENERATION
+        function generateNeonColor() {
+            const hue = Math.floor(Math.random() * 360);
+            return `hsl(${hue}, 100%, 70%)`;
+        }
+
+        // ENCRYPTION/DECRYPTION FUNCTIONS
         async function encryptMessage(text) {
             const encoder = new TextEncoder();
             const data = encoder.encode(text);
@@ -166,14 +174,14 @@
             }
         }
 
-        // WebSocket Setup
+        // WEBSOCKET CONNECTION
         function connect() {
             ws = new WebSocket(WS_URL);
             
             ws.onopen = () => {
-                localStorage.setItem('retroUsername', username);
-                localStorage.setItem('retroColor', userColor);
                 console.log("CONNECTION ESTABLISHED");
+                document.getElementById('message-input').disabled = false;
+                document.querySelector('button').disabled = false;
             };
 
             ws.onmessage = async (event) => {
@@ -207,7 +215,7 @@
             };
         }
 
-        // Message Handling
+        // MESSAGE HANDLING
         async function sendMessage() {
             const input = document.getElementById('message-input');
             if (!input.value.trim()) return;
@@ -215,7 +223,7 @@
             try {
                 const encrypted = await encryptMessage(input.value);
                 ws.send(JSON.stringify({
-                    username,
+                    username: username,
                     color: userColor,
                     text: encrypted
                 }));
@@ -225,7 +233,7 @@
             }
         }
 
-        // Initialize
+        // INITIALIZE
         connect();
     </script>
 </body>
