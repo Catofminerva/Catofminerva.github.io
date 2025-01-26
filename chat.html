@@ -1,86 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Retro Chat</title>
+    <title>Debug Chat</title>
     <style>
-        body { background: #000; color: #33FFA1; font-family: 'Courier New', monospace; }
-        #chat-log { height: 300px; overflow-y: scroll; border: 2px solid #FF33CC; padding: 10px; }
-        input, button { background: #000; color: #33FFA1; border: 2px solid #FF33CC; padding: 5px; }
+        body { background: black; color: white; }
+        #chat-log { height: 200px; overflow-y: scroll; border: 1px solid red; }
     </style>
 </head>
 <body>
     <div id="chat-log"></div>
-    <input type="text" id="message-input" placeholder="Type message...">
+    <input type="text" id="message-input">
     <button onclick="sendMessage()">SEND</button>
 
     <script>
-        // Configuration
-        const WS_URL = 'wss://YOUR-GLITCH-URL.glitch.me'; // 🔴 REPLACE THIS
-        let ws;
-        let username = localStorage.getItem('username') || prompt("Username:") || "Guest";
-        let userColor = localStorage.getItem('userColor') || generateColor();
+        // Connection status
+        let connected = false;
         
-        function generateColor() {
-            return '#' + Math.floor(Math.random()*16777215).toString(16);
-        }
-
-        // WebSocket Setup
-        function connect() {
-            ws = new WebSocket(WS_URL);
+        // Get username
+        let username = prompt("Enter username:") || "Anonymous";
+        alert("Your username is: " + username);
+        
+        // Connect to server
+        const ws = new WebSocket('wss://YOUR-GLITCH-URL.glitch.me');
+        
+        ws.onopen = () => {
+            connected = true;
+            alert("Connected to server!");
+        };
+        
+        ws.onmessage = (event) => {
+            alert("Received message: " + event.data);
+            const msg = JSON.parse(event.data);
             
-            ws.onopen = () => {
-                console.log('Connected to server');
-                localStorage.setItem('username', username);
-                localStorage.setItem('userColor', userColor);
-            };
-
-            ws.onmessage = (event) => {
-                const msg = JSON.parse(event.data);
-                const chatLog = document.getElementById('chat-log');
-                
-                if (msg.type === 'history') {
-                    msg.data.forEach(m => {
-                        chatLog.innerHTML += `
-                            <div style="color: ${m.color}">
-                                [${m.username}] ${m.text}
-                            </div>
-                        `;
-                    });
-                } else {
-                    chatLog.innerHTML += `
-                        <div style="color: ${msg.color}">
-                            [${msg.username}] ${msg.text}
-                        </div>
-                    `;
-                }
-                
-                chatLog.scrollTop = chatLog.scrollHeight;
-            };
-
-            ws.onerror = (error) => {
-                console.error('WebSocket error:', error);
-                setTimeout(connect, 2000); // Reconnect
-            };
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('message-input');
-            if (!input.value.trim()) return;
-
-            const message = {
-                username: username,
-                color: userColor,
-                text: input.value
-            };
-
-            if (ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify(message));
-                input.value = '';
+            if (msg.type === 'history') {
+                alert("Loading " + msg.data.length + " old messages");
+                msg.data.forEach(m => {
+                    document.getElementById('chat-log').innerHTML += 
+                        m.username + ": " + m.text + "<br>";
+                });
+            } else {
+                document.getElementById('chat-log').innerHTML += 
+                    msg.username + ": " + msg.text + "<br>";
             }
+        };
+        
+        ws.onerror = (error) => {
+            alert("Connection error: " + error.message);
+        };
+        
+        function sendMessage() {
+            if (!connected) {
+                alert("Not connected!");
+                return;
+            }
+            
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            
+            if (!text) {
+                alert("Empty message!");
+                return;
+            }
+            
+            const msg = {
+                username: username,
+                text: text
+            };
+            
+            ws.send(JSON.stringify(msg));
+            alert("Message sent: " + JSON.stringify(msg));
+            input.value = '';
         }
-
-        // Start connection
-        connect();
     </script>
 </body>
 </html>
