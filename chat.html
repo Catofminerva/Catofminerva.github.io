@@ -3,7 +3,39 @@
 <head>
     <title>Retro Chat</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+            background: black;
+            color: #33FFA1;
+            font-family: 'Press Start 2P', cursive;
+            padding: 20px;
+        }
+        .crt {
+            border: 3px solid #FF33CC;
+            padding: 15px;
+            box-shadow: 0 0 15px #FF33CC;
+        }
+        #chat-log {
+            height: 400px;
+            overflow-y: scroll;
+            border-bottom: 2px dashed #FF33CC;
+            margin-bottom: 10px;
+        }
+        button {
+            background: black;
+            color: #FF33CC;
+            border: 2px solid #FF33CC;
+            padding: 8px;
+            cursor: pointer;
+        }
+        #message-input {
+            background: black;
+            color: #33FFA1;
+            border: 2px solid #FF33CC;
+            padding: 8px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="crt">
@@ -11,63 +43,35 @@
         <input type="text" id="message-input" placeholder="Type message...">
         <button onclick="sendMessage()">SEND</button>
     </div>
-    <script src="app.js"></script>
+
+    <script>
+        // Connect to Glitch server - MAKE SURE TO UPDATE THIS URL!
+        const ws = new WebSocket('wss://wave-sand-raisin.glitch.me');
+
+        // Set random color
+        let userColor = localStorage.getItem('userColor') || 
+                        '#' + Math.floor(Math.random()*16777215).toString(16);
+        localStorage.setItem('userColor', userColor);
+
+        ws.onmessage = function(event) {
+            const msg = JSON.parse(event.data);
+            const chatLog = document.getElementById('chat-log');
+            chatLog.innerHTML += `<p style="color:${msg.color}">${msg.username}: ${msg.text}</p>`;
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = {
+                username: 'User',  // Temporary username
+                color: userColor,
+                text: input.value
+            };
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(message));
+            }
+            input.value = '';
+        }
+    </script>
 </body>
 </html>
-
-
-body {
-    background: black;
-    color: #33FFA1;
-    font-family: 'Press Start 2P', cursive;
-    padding: 20px;
-}
-
-.crt {
-    border: 3px solid #FF33CC;
-    padding: 15px;
-    box-shadow: 0 0 15px #FF33CC;
-}
-
-#chat-log {
-    height: 400px;
-    overflow-y: scroll;
-    border-bottom: 2px dashed #FF33CC;
-    margin-bottom: 10px;
-}
-
-button {
-    background: black;
-    color: #FF33CC;
-    border: 2px solid #FF33CC;
-    padding: 8px;
-    cursor: pointer;
-}
-
-
-
-
-// Connect to Glitch server
-const ws = new WebSocket('https://wave-sand-raisin.glitch.me/');
-
-// Set random color
-let userColor = localStorage.getItem('userColor') || 
-                '#' + Math.floor(Math.random()*16777215).toString(16);
-localStorage.setItem('userColor', userColor);
-
-ws.onmessage = function(event) {
-    const msg = JSON.parse(event.data);
-    const chatLog = document.getElementById('chat-log');
-    chatLog.innerHTML += `<p style="color:${msg.color}">${msg.username}: ${msg.text}</p>`;
-};
-
-function sendMessage() {
-    const input = document.getElementById('message-input');
-    const message = {
-        username: 'User',  // You can add username input later
-        color: userColor,
-        text: input.value
-    };
-    ws.send(JSON.stringify(message));
-    input.value = '';
-}
