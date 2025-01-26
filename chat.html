@@ -304,27 +304,35 @@ function restoreChatInterface(handle, color) {
 
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
-
+    
     try {
         var messageData = JSON.parse(data);
 
-        // If it's the chat history, each message will be displayed on its own line
         if (messageData.type === 'history') {
-            chatLog.innerHTML = ''; // Clear the chat log before appending history
-            messageData.data.forEach(function(message) {
-                // We append a div for each message in the history here.
-                // You would need to ensure that the message is stored with color coding in the history as well.
+            chatLog.innerHTML = '';
+            messageData.data.forEach(function(msg) {
+                // Handle both new and legacy message formats
+                var color = msg.color || '#33FFA1'; // Fallback to neon green
+                var handle = msg.handle || 'Unknown';
+                var content = msg.message || msg; // Fallback for legacy "handle:message" strings
+
                 var messageElement = document.createElement('div');
-                messageElement.textContent = message;
+                messageElement.style.color = color;
+                messageElement.textContent = `${handle}: ${content}`;
                 chatLog.appendChild(messageElement);
             });
         } else if (messageData.type === 'message') {
-            // If it's a single message, construct an element with the specified color
             var messageElement = document.createElement('div');
-            messageElement.style.color = messageData.data.color; // Set the color style
-            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
+            messageElement.style.color = messageData.data.color;
+            messageElement.textContent = `${messageData.data.handle}: ${messageData.data.message}`;
             chatLog.appendChild(messageElement);
         }
+
+        chatLog.scrollTop = chatLog.scrollHeight;
+    } catch (error) {
+        console.error('Error parsing message:', error);
+    }
+}
 
         // Scroll to the bottom of the chat log
         chatLog.scrollTop = chatLog.scrollHeight;
