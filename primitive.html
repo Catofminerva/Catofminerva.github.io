@@ -123,6 +123,105 @@
             color: #555;
             font-style: italic;
         }
+   
+    .societal-evolution {
+    margin: 2rem 0;
+}
+
+.societal-evolution h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.societal-evolution table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.societal-evolution th, .societal-evolution td {
+    padding: 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.societal-evolution th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.societal-evolution tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.societal-evolution tr:hover {
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease;
+}
+
+.societal-evolution td {
+    font-size: 0.95rem;
+    vertical-align: top;
+}
+
+.societal-evolution .stage-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .societal-evolution {
+        padding: 1rem;
+    }
+    
+    .societal-evolution th, .societal-evolution td {
+        padding: 0.8rem;
+    }
+
+    .societal-evolution {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .societal-evolution table {
+        display: block;
+    }
+    
+    .societal-evolution tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-bottom: 2px solid #e0e0e0;
+        padding: 1rem 0;
+    }
+
+    .societal-evolution td {
+        display: block;
+        padding: 0.5rem 1rem;
+        border: none;
+    }
+
+    .societal-evolution td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 600;
+        color: #3498db;
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .societal-evolution th {
+        display: none;
+    }
+}
+
+    
+    
     </style>
 </head>
 <body>
@@ -451,19 +550,64 @@
     </picture>
 </p>
 
-<p>
-    <picture>
-        <source srcset="https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/175.webp 175w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/350.webp 350w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/525.webp 525w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/700.webp 700w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/875.webp 875w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1050.webp 1050w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1225.webp 1225w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1400.webp 1400w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1575.webp 1575w,https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1744.webp 1744w"
-                type="image/webp"
-                sizes="(max-width: 1744px) 100vw, 1744px">
-        <img src="https://ckbox.cloud/b4fabe1d710ee5b53970/assets/PLiB7WlkO1Xg/images/1744.png"
-             alt="pastedGraphic_7.png"
-             data-ckbox-resource-id="PLiB7WlkO1Xg"
-             width="1744"
-             height="995"
-             uploadprocessed="true">
-    </picture>
-</p>
+<div class="societal-evolution">
+    <h1>Evolution of Human Societies</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Stage</th>
+                <th>Hierarchy</th>
+                <th>Ontological Mode</th>
+                <th>Driving Force</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Stage" class="stage-title">Paleolithic (Hunter-Gatherer Bands)</td>
+                <td data-label="Hierarchy">Minimal/Situational Hierarchy</td>
+                <td data-label="Ontological Mode">Interdependence and Survival</td>
+                <td data-label="Driving Force">Lack of surplus; communal survival</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">Neolithic (Early Agricultural Societies)</td>
+                <td data-label="Hierarchy">Emergent Stratification</td>
+                <td data-label="Ontological Mode">Subsistence, Sedentism, and Surplus Accumulation</td>
+                <td data-label="Driving Force">Surplus production and sedentism</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">City-State and Early Empires (Urban Societies)</td>
+                <td data-label="Hierarchy">Early Bureaucracies and Resource Control</td>
+                <td data-label="Ontological Mode">Civic Obligation, Early Governance, and Religious Authority</td>
+                <td data-label="Driving Force">Trade, conquest, and centralized resource control</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">Proto-Class (Gerontocratic and Ranked Societies)</td>
+                <td data-label="Hierarchy">Ranked Societies and Kinship-Based Elites</td>
+                <td data-label="Ontological Mode">Obligation, Kinship, and Hierarchy</td>
+                <td data-label="Driving Force">Division of labor and hereditary power</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">Feudal (Tributary Societies)</td>
+                <td data-label="Hierarchy">Clear Class Divisions with Religious Legitimization</td>
+                <td data-label="Ontological Mode">Divine Order, Servitude, and Land Ownership</td>
+                <td data-label="Driving Force">Land ownership, tribute systems, and religious ideology</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">Industrial Societies</td>
+                <td data-label="Hierarchy">Capitalist Class System with Industrial Stratification</td>
+                <td data-label="Ontological Mode">Instrumentality, Consumerism, and Mechanized Labor</td>
+                <td data-label="Driving Force">Industrialization and capital accumulation</td>
+            </tr>
+            <tr>
+                <td data-label="Stage" class="stage-title">Late Capitalist (Consumer and Globalized Societies)</td>
+                <td data-label="Hierarchy">Technocratic and Financial Elites; Global Inequalities</td>
+                <td data-label="Ontological Mode">Hyper-Individualism, Financialization, and Spectacle</td>
+                <td data-label="Driving Force">Globalization, digital economies, and ecological crises</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <p>&nbsp;</p>
 
