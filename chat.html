@@ -72,38 +72,47 @@
         <button onclick="sendMessage()">SEND</button>
     </div>
 
-    <script>
-        // Configuration
-        const WS_URL = 'https://wave-sand-raisin.glitch.me/'; // 🔴 REPLACE THIS
-        let ws;
-        let chatPassword = prompt("ENTER CHAT PASSWORD:") || "retrochat123";
+  <script>
+    // Configuration
+    const WS_URL = 'wss://wave-sand-raisin.glitch.me/'; // 🔴 
+    let ws;
+    let chatPassword = prompt("ENTER CHAT PASSWORD:") || "retrochat123";
+    
+    // COLOR INITIALIZATION
+    let username = localStorage.getItem('retroUsername');
+    let userColor = localStorage.getItem('retroColor');
+    
+    if (!username || !userColor) {
+        username = prompt("ENTER YOUR CODENAME:") || 
+                 "AGENT_" + Math.floor(Math.random() * 1000);
+        userColor = generateUniqueColor(username);
+        localStorage.setItem('retroUsername', username);
+        localStorage.setItem('retroColor', userColor);
         
-               // COLOR INITIALIZATION FIX (REPLACE ONLY THIS SECTION)
-        let username = localStorage.getItem('retroUsername');
-        let userColor = localStorage.getItem('retroColor');
-        
-        if (!username || !userColor) {
-            username = prompt("ENTER YOUR CODENAME:") || 
-                     "AGENT_" + Math.floor(Math.random() * 1000);
-            userColor = generateUniqueColor(username);
-            localStorage.setItem('retroUsername', username);
-            localStorage.setItem('retroColor', userColor);
+        // Debug logs inside the if block
+        console.log('=== FIRST-TIME SETUP ===');
+        console.log('Generated Username:', username);
+        console.log('Generated Color:', userColor);
+    }
+
+    // Debug logs outside the if block (runs every time)
+    console.log('=== CURRENT USER INFO ===');
+    console.log('Username:', username);
+    console.log('Color:', userColor);
+    console.log('LocalStorage:', {
+        name: localStorage.getItem('retroUsername'),
+        color: localStorage.getItem('retroColor')
+    });
+
+    // GUARANTEED UNIQUE COLOR GENERATION
+    function generateUniqueColor(username) {
+        let hash = 0;
+        for (let i = 0; i < username.length; i++) {
+            hash = username.charCodeAt(i) + ((hash << 5) - hash);
         }
-
-    // ADD THESE LINES RIGHT HERE ▼
-    console.log('=== FIRST-TIME SETUP ===');
-    console.log('Generated Username:', username);
-    console.log('Generated Color:', userColor);
-}
-
-// ADD THESE LINES RIGHT HERE ▼
-console.log('=== CURRENT USER INFO ===');
-console.log('Username:', username);
-console.log('Color:', userColor);
-console.log('LocalStorage:', {
-    name: localStorage.getItem('retroUsername'),
-    color: localStorage.getItem('retroColor')
-});
+        const hue = Math.abs(hash % 360);
+        return `hsl(${hue}, 100%, 70%)`;
+    }
 
         
         // GUARANTEED UNIQUE COLOR GENERATION (REPLACE THIS FUNCTION)
