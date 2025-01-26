@@ -30,6 +30,43 @@
     <button onclick="sendMessage()">SEND</button>
 
     <script>
+        // Add these at the top
+let userColor = localStorage.getItem('chatColor') || generateColor();
+localStorage.setItem('chatColor', userColor);
+
+function generateColor() {
+    // Generate neon-ish colors
+    const hue = Math.floor(Math.random() * 360);
+    return `hsl(${hue}, 100%, 70%)`; // More vibrant than hex
+}
+
+// Modify the message creation
+function sendMessage() {
+    const input = document.getElementById('message-input');
+    const message = {
+        username: username,
+        color: userColor, // Add color to messages
+        text: input.value
+    };
+    ws.send(JSON.stringify(message));
+    input.value = '';
+}
+
+// Update message display
+ws.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    const chatLog = document.getElementById('chat-log');
+    
+    // Add style with user color
+    chatLog.innerHTML += `
+        <div style="color: ${msg.color}">
+            [${msg.username}] ${msg.text}
+        </div>
+    `;
+    
+    chatLog.scrollTop = chatLog.scrollHeight;
+};
+        
         // Get your Glitch server URL here!
         const ws = new WebSocket('https://wave-sand-raisin.glitch.me/');
         let username = prompt("Enter your username:") || "Anonymous";
