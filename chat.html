@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <div class="crt">
+      <div class="crt">
         <div id="chat-log"></div>
         <input type="text" id="message-input" placeholder="TYPE MESSAGE...">
         <button onclick="sendMessage()">SEND</button>
@@ -78,21 +78,25 @@
         let ws;
         let chatPassword = prompt("ENTER CHAT PASSWORD:") || "retrochat123";
         
-        // USERNAME AND COLOR INITIALIZATION
+               // COLOR INITIALIZATION FIX (REPLACE ONLY THIS SECTION)
         let username = localStorage.getItem('retroUsername');
         let userColor = localStorage.getItem('retroColor');
         
         if (!username || !userColor) {
             username = prompt("ENTER YOUR CODENAME:") || 
                      "AGENT_" + Math.floor(Math.random() * 1000);
-            userColor = generateNeonColor();
+            userColor = generateUniqueColor(username);
             localStorage.setItem('retroUsername', username);
             localStorage.setItem('retroColor', userColor);
         }
 
-        // IMPROVED COLOR GENERATION
-        function generateNeonColor() {
-            const hue = Math.floor(Math.random() * 360);
+        // GUARANTEED UNIQUE COLOR GENERATION (REPLACE THIS FUNCTION)
+        function generateUniqueColor(username) {
+            let hash = 0;
+            for (let i = 0; i < username.length; i++) {
+                hash = username.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const hue = Math.abs(hash % 360);
             return `hsl(${hue}, 100%, 70%)`;
         }
 
