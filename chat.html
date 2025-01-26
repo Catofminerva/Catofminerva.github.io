@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -244,6 +242,7 @@ li {
                 socket.handle = handle;
                 socket.color = color;
                 var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+                socket.send(colorMessage);
                 restoreChatInterface(handle, color);
             }
         });
@@ -284,58 +283,57 @@ li {
     }
 function restoreChatInterface(handle, color) {
     if (handle && color) {
-        // Update UI elements
-        document.getElementById('user-handle').value = handle;
-        document.getElementById('user-handle').style.color = color;
-        document.querySelector('.send-button').style.backgroundColor = color;
-        
-        const userHandleDisplay = document.getElementById('handle-display');
-        if (userHandleDisplay) {
+        // Update UI to reflect user's handle and color
+        var userHandleInput = document.getElementById('user-handle');
+        userHandleInput.value = handle;
+        userHandleInput.style.color = color; // This applies the color to the text inside the input
+
+        // Assuming you want the send button to have the same color
+        var sendButton = document.querySelector('.send-button');
+        sendButton.style.backgroundColor = color;
+
+        // Assuming you have an element where the user's handle is displayed and you want it to have the user's color
+        var userHandleDisplay = document.getElementById('handle-display'); // You need to add this element to your HTML
+        if(userHandleDisplay) {
             userHandleDisplay.textContent = handle;
             userHandleDisplay.style.color = color;
         }
-
-        document.getElementById('chat-input').style.borderColor = color;
+        
+        // Hide handle input screen and show chat input area
         document.getElementById('handle-screen').style.display = 'none';
         document.getElementById('chat-input-area').style.display = 'block';
-        document.getElementById('chat-input').focus();
+
+        // Set the border color of the chat input to the user's color
+        var chatInput = document.getElementById('chat-input');
+        chatInput.style.borderColor = color; // This changes the border color to the user's color
+
+        chatInput.focus();
     }
 }
 
 function processMessage(data) {
     var chatLog = document.getElementById('chat-log');
-    
+
     try {
         var messageData = JSON.parse(data);
 
+        // If it's the chat history, each message will be displayed on its own line
         if (messageData.type === 'history') {
-            chatLog.innerHTML = '';
-            messageData.data.forEach(function(msg) {
-                // Handle both new and legacy message formats
-                var color = msg.color || '#33FFA1';
-                var handle = msg.handle || 'Unknown';
-                var content = msg.message || msg;
-
+            chatLog.innerHTML = ''; // Clear the chat log before appending history
+            messageData.data.forEach(function(message) {
+                // We append a div for each message in the history here.
+                // You would need to ensure that the message is stored with color coding in the history as well.
                 var messageElement = document.createElement('div');
-                messageElement.style.color = color;
-                messageElement.textContent = `${handle}: ${content}`;
+                messageElement.textContent = message;
                 chatLog.appendChild(messageElement);
             });
         } else if (messageData.type === 'message') {
+            // If it's a single message, construct an element with the specified color
             var messageElement = document.createElement('div');
-            messageElement.style.color = messageData.data.color;
-            messageElement.textContent = `${messageData.data.handle}: ${messageData.data.message}`;
+            messageElement.style.color = messageData.data.color; // Set the color style
+            messageElement.textContent = messageData.data.handle + ": " + messageData.data.message;
             chatLog.appendChild(messageElement);
         }
-
-        chatLog.scrollTop = chatLog.scrollHeight;
-    } catch (error) {
-        console.error('Error parsing message:', error);
-        var errorMessageElement = document.createElement('div');
-        errorMessageElement.textContent = 'Error in message format';
-        chatLog.appendChild(errorMessageElement);
-    }
-}
 
         // Scroll to the bottom of the chat log
         chatLog.scrollTop = chatLog.scrollHeight;
@@ -381,6 +379,8 @@ function enterChat() {
             socket.color = color;
 
             // Send color setting to server
+            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
+            socket.send(colorMessage);
 
             // Hide handle input screen and show chat input area
             document.getElementById('handle-screen').style.display = 'none';
@@ -409,19 +409,16 @@ function getRandomColor() {
 // Adjusted sendMessage function
 function sendMessage() {
     var message = document.getElementById('chat-input').value.trim();
-    var handle = localStorage.getItem('userHandle');
-    var color = localStorage.getItem('handleColor');
 
-    if (handle && message && color) {
-        var messageData = {
-            type: "message",
-            handle: handle,
-            message: message,
-            color: color
-        };
+    if (socket.handle && message) { // Use the handle from the socket object
+        var fullMessage = socket.handle + ": " + message; // Use the stored handle
+        console.log('Sending message:', fullMessage);
+
         if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send(JSON.stringify(messageData));
-            document.getElementById('chat-input').value = '';
+            socket.send(fullMessage);
+            document.getElementById('chat-input').value = ''; // Clear the message input
+        } else {
+            console.log('WebSocket is not open. readyState:', socket.readyState);
         }
     }
 }
