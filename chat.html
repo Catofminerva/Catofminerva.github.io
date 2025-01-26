@@ -3,25 +3,9 @@
 <head>
     <title>Retro Chat</title>
     <style>
-        body {
-            background: black;
-            color: #33FFA1;
-            font-family: monospace;
-            padding: 20px;
-        }
-        #chat-log {
-            height: 300px;
-            overflow-y: scroll;
-            border: 2px solid #FF33CC;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        input, button {
-            background: black;
-            color: #33FFA1;
-            border: 2px solid #FF33CC;
-            padding: 5px;
-        }
+        body { background: #000; color: #33FFA1; font-family: 'Courier New', monospace; }
+        #chat-log { height: 300px; overflow-y: scroll; border: 2px solid #FF33CC; padding: 10px; }
+        input, button { background: #000; color: #33FFA1; border: 2px solid #FF33CC; padding: 5px; }
     </style>
 </head>
 <body>
@@ -30,72 +14,73 @@
     <button onclick="sendMessage()">SEND</button>
 
     <script>
-        // Add these at the top
-let userColor = localStorage.getItem('chatColor') || generateColor();
-localStorage.setItem('chatColor', userColor);
-
-function generateColor() {
-    // Generate neon-ish colors
-    const hue = Math.floor(Math.random() * 360);
-    return `hsl(${hue}, 100%, 70%)`; // More vibrant than hex
-}
-
-// Modify the message creation
-function sendMessage() {
-    const input = document.getElementById('message-input');
-    const message = {
-        username: username,
-        color: userColor, // Add color to messages
-        text: input.value
-    };
-    ws.send(JSON.stringify(message));
-    input.value = '';
-}
-
-// Update message display
-ws.onmessage = (event) => {
-    const msg = JSON.parse(event.data);
-    const chatLog = document.getElementById('chat-log');
-    
-    // Add style with user color
-    chatLog.innerHTML += `
-        <div style="color: ${msg.color}">
-            [${msg.username}] ${msg.text}
-        </div>
-    `;
-    
-    chatLog.scrollTop = chatLog.scrollHeight;
-};
+        // Configuration
+        const WS_URL = 'wss://YOUR-GLITCH-URL.glitch.me'; // 🔴 REPLACE THIS
+        let ws;
+        let username = localStorage.getItem('username') || prompt("Username:") || "Guest";
+        let userColor = localStorage.getItem('userColor') || generateColor();
         
-        // Get your Glitch server URL here!
-        const ws = new WebSocket('https://wave-sand-raisin.glitch.me/');
-        let username = prompt("Enter your username:") || "Anonymous";
-        
-        // Basic message handling
-        ws.onmessage = (event) => {
-            const msg = JSON.parse(event.data);
-            const chatLog = document.getElementById('chat-log');
+        function generateColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        // WebSocket Setup
+        function connect() {
+            ws = new WebSocket(WS_URL);
             
-            if (msg.type === 'history') {
-                msg.data.forEach(m => {
-                    chatLog.innerHTML += `<div>[${m.username}] ${m.text}</div>`;
-                });
-            } else {
-                chatLog.innerHTML += `<div>[${msg.username}] ${msg.text}</div>`;
-            }
-            
-            chatLog.scrollTop = chatLog.scrollHeight;
-        };
+            ws.onopen = () => {
+                console.log('Connected to server');
+                localStorage.setItem('username', username);
+                localStorage.setItem('userColor', userColor);
+            };
+
+            ws.onmessage = (event) => {
+                const msg = JSON.parse(event.data);
+                const chatLog = document.getElementById('chat-log');
+                
+                if (msg.type === 'history') {
+                    msg.data.forEach(m => {
+                        chatLog.innerHTML += `
+                            <div style="color: ${m.color}">
+                                [${m.username}] ${m.text}
+                            </div>
+                        `;
+                    });
+                } else {
+                    chatLog.innerHTML += `
+                        <div style="color: ${msg.color}">
+                            [${msg.username}] ${msg.text}
+                        </div>
+                    `;
+                }
+                
+                chatLog.scrollTop = chatLog.scrollHeight;
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                setTimeout(connect, 2000); // Reconnect
+            };
+        }
 
         function sendMessage() {
             const input = document.getElementById('message-input');
+            if (!input.value.trim()) return;
+
             const message = {
                 username: username,
+                color: userColor,
                 text: input.value
             };
-            ws.send(JSON.stringify(message));
-            input.value = '';
+
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(message));
+                input.value = '';
+            }
         }
+
+        // Start connection
+        connect();
     </script>
 </body>
 </html>
