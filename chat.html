@@ -312,9 +312,9 @@ function processMessage(data) {
             chatLog.innerHTML = '';
             messageData.data.forEach(function(msg) {
                 // Handle both new and legacy message formats
-                var color = msg.color || '#33FFA1'; // Fallback to neon green
+                var color = msg.color || '#33FFA1';
                 var handle = msg.handle || 'Unknown';
-                var content = msg.message || msg; // Fallback for legacy "handle:message" strings
+                var content = msg.message || msg;
 
                 var messageElement = document.createElement('div');
                 messageElement.style.color = color;
@@ -331,6 +331,9 @@ function processMessage(data) {
         chatLog.scrollTop = chatLog.scrollHeight;
     } catch (error) {
         console.error('Error parsing message:', error);
+        var errorMessageElement = document.createElement('div');
+        errorMessageElement.textContent = 'Error in message format';
+        chatLog.appendChild(errorMessageElement);
     }
 }
 
@@ -378,7 +381,6 @@ function enterChat() {
             socket.color = color;
 
             // Send color setting to server
-            var colorMessage = JSON.stringify({ type: "setColor", handle: handle, color: color });
 
             // Hide handle input screen and show chat input area
             document.getElementById('handle-screen').style.display = 'none';
