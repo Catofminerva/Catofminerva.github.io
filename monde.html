@@ -1,164 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Retro Title Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-    rel="stylesheet"
-  />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Typical Substack-Like Body Font (Georgia, with fallbacks) -->
-  <style>
-    /* Overall Page */
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff; /* Substack-like white background */
-      color: #333333;           /* Dark gray text for contrast */
-      font-family: Georgia, 'Times New Roman', Times, serif; /* Substack's typical serif vibe */
-      line-height: 1.6;
-      font-size: 17px;
-    }
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap"
+      rel="stylesheet"
+    />
 
-    /* Header and Title */
-    @keyframes flip {
-      0%   { transform: rotateY(0deg); }
-      50%  { transform: rotateY(180deg); }
-      100% { transform: rotateY(0deg); }
-    }
+    <style>
+        /* Page and Global Text */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #D3D3D3;
+            font-family: Georgia, 'Times New Roman', Times, serif; /* A readable serif font for body */
+            color: #333333;
+            line-height: 1.8; /* Increased spacing for readability */
+            font-size: 18px;  /* Larger base font size than before */
+        }
 
-    .blog-title {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 2rem;
-      color: purple;
-      animation: flip 4s infinite;
-      margin: 0;
-      padding: 20px 0 0 0;
-    }
+        /* Title (Retro) */
+        @keyframes flip {
+            0%   { transform: rotateY(0deg); }
+            50%  { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        .title {
+            font-family: 'Press Start 2P', cursive; 
+            font-size: 2rem;
+            color: purple;
+            animation: flip 4s infinite;
+            margin: 0;  
+        }
 
-    .pink-header {
-      background-color: #FF33CC; /* Retains your pink theme */
-      text-align: center;
-      padding-bottom: 10px; 
-    }
+        hr {
+            margin-top: -15px;
+        }
 
-    hr {
-      margin-top: -15px;
-      border: none;
-      border-top: 1px solid #ddd; 
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        /* Nav Bar */
+        .nav {
+            font-family: 'Press Start 2P', cursive;
+            color: #FF33CC;
+            text-decoration: none;
+            margin: 0 5px;
+        }
 
-    /* Navigation */
-    .nav-links {
-      text-align: center;
-      margin: 10px 0;
-    }
+        /* Main Content Container */
+        .exported-content {
+            background-color: #ffffff; 
+            color: #000000; 
+            max-width: 640px; /* Narrower container for good line length */
+            margin: 20px auto; /* Centers on the page */
+            padding: 40px 5vw; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: left; 
+        }
 
-    .nav-links a {
-      font-family: 'Press Start 2P', cursive;
-      color: #FF33CC;
-      text-decoration: none;
-      margin: 0 5px;
-    }
+        /* Responsive Adjustments for Smaller Screens */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 16px; /* Slightly smaller on mobile if desired */
+            }
+            .title {
+                font-size: 1.5rem;
+            }
+        }
 
-    /* Content Container (Substack-like) */
-    .content-wrapper {
-      max-width: 680px; /* Narrow enough for comfortable reading */
-      margin: 40px auto; 
-      padding: 0 20px;   /* Side padding for a clean single column */
-    }
-
-    .content-wrapper p {
-      margin-bottom: 1em;
-    }
-
-    /* Make images fluid */
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block; 
-      margin: 0 auto; /* Center images for a typical Substack feel */
-    }
-
-    /* Small Screen Adjustments */
-    @media (max-width: 600px) {
-      body {
-        font-size: 16px;
-      }
-      .blog-title {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
-<body>
-  <!-- Pink Retro Header -->
-  <div class="pink-header">
-    <div class="blog-title">Ali's Blog</div>
-    <img
-      src="kitty.gif"
-      alt="Kitty Gif"
-      style="display: block; margin: 10px auto; max-height: 60px;"
-    />
-  </div>
-  <hr />
 
-  <!-- Nav Links -->
-          <center>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <img
-      src="cutehome.gif"
-      alt="Home GIF"
-      style="vertical-align: middle; width: 30px; height: 30px;"
-    />
-    <a href="about.html">About</a>
-    <img src="about.gif" alt="About GIF" style="vertical-align: middle;" />
-    <a href="blog_posts.html">Entries</a>
-    <img src="post.gif" alt="Post GIF" style="vertical-align: middle;" />
-    <a href="chat.html">Chat</a>
-    <img
-      src="chattt.gif"
-      alt="Chat GIF"
-      style="vertical-align: middle; width: 30px; height: 30px;"
-    />
-    <a href="coolsite.html">Kool Webpages</a>
-    <img
-      src="coollinks.gif"
-      alt="Cool GIF"
-      style="vertical-align: middle;"
-    />
-    <a href="guestbook.html">Guestbook</a>
-    <img
-      src="book-0037.gif"
-      alt="Guestbook GIF"
-      style="vertical-align: middle;"
-    />
-    <a href="books.html">Kool Books</a>
-    <img
-      src="catread.gif"
-      alt="Reading GIF"
-      style="vertical-align: middle; width: 30px; height: 30px;"
-    />
-    <a href="truthtable.html">Truth Table</a>
-    <img
-      src="math.gif"
-      alt="Math GIF"
-      style="vertical-align: middle;"
-    />
-    <a href="contact.html">Contact</a>
-    <img
-      src="phone.gif"
-      alt="Phone GIF"
-      style="vertical-align: middle;"
-    />
-  </div>
+<body>
+    <!-- Header Title -->
+    <center>
+        <div class="title">Ali's Blog</div>
+        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif" />
+    </center>
+    <hr />
+
+    <!-- Navigation -->
+    <center>
+        <a href="index.html" class="nav">Home</a>
+        <img
+          src="cutehome.gif"
+          alt="home GIF"
+          style="vertical-align: middle; width: 30px; height: 30px;"
+        />
+        <a href="about.html" class="nav">About</a>
+        <img src="about.gif" alt="about GIF" style="vertical-align: middle;" />
+        <a href="blog_posts.html" class="nav">Entries</a>
+        <img src="post.gif" alt="post GIF" style="vertical-align: middle;" />
+        <a href="chat.html" class="nav">Chat</a>
+        <img
+          src="chattt.gif"
+          alt="chat GIF"
+          style="vertical-align: middle; width: 30px; height: 30px;"
+        />
+        <a href="coolsite.html" class="nav">Kool Webpages</a>
+        <img
+          src="coollinks.gif"
+          alt="cool GIF"
+          style="vertical-align: middle;"
+        />
+        <a href="guestbook.html" class="nav">Guestbook</a>
+        <img
+          src="book-0037.gif"
+          alt="Guestbook GIF"
+          style="vertical-align: middle;"
+        />
+        <a href="books.html" class="nav">Kool Books</a>
+        <img
+          src="catread.gif"
+          alt="reading GIF"
+          style="vertical-align: middle; width: 30px; height: 30px;"
+        />
+        <a href="truthtable.html" class="nav">Truth Table</a>
+        <img
+          src="math.gif"
+          alt="math GIF"
+          style="vertical-align: middle;"
+        />
+        <a href="contact.html" class="nav">Contact</a>
+        <img
+          src="phone.gif"
+          alt="Phone GIF"
+          style="vertical-align: middle;"
+        />
     </center>
     <br />
 
