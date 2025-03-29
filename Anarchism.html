@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali's Blog</title>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+    
+    <!-- Internal CSS -->
     <style>
+        /* Global Styles */
         body {
-            background-color: #D3D3D3; /* Keeping original background color */
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background-color: #F5F5F5; /* Slightly off-white for a 'reader' feel */
+            font-family: Georgia, 'Times New Roman', Times, serif;
             color: #333333;
-            line-height: 1.6;
+            line-height: 1.8;
+	      font-size: 17px;
+            margin: 0;
+            padding: 0;
         }
 
+        /* Header Styling */
         .header {
-            background-color: #FF33CC;
-            color: #FFF;
-            padding: 10px;
+            background-color: #FF33CC; /* Pink header */
+            color: #FFFFFF; /* White text for contrast */
+            padding: 20px 0;
             text-align: center;
             font-size: 1.5em;
         }
 
+        /* Title Styling with Animation */
         @keyframes flip {
             0% { transform: rotateY(0deg); }
             50% { transform: rotateY(180deg); }
@@ -28,111 +39,218 @@
         }
 
         .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
+            font-family: 'Press Start 2P', cursive;
             font-size: 2rem;
             color: purple;
-            animation: flip 4s infinite; /* Flip animation */
+            animation: flip 4s infinite;
+            margin: 10px 0;
         }
 
-        kitty.gif {
-            margin-top: 0px;
+        /* Cat Image Styling */
+        .header-image {
+            width: 150px;
+            height: auto;
+            margin-top: 10px;
         }
 
+        /* Horizontal Rule Styling */
         hr {
-            margin-top: -15px;  /* Adjust this value as needed */
-        }
-  
-        ul {
-            list-style-position: inside;
-            padding-left: 0;
-            margin-left: 0;
+            border: none;
+            border-top: 2px solid #FF33CC;
+            margin: 20px auto;
+            width: 80%;
         }
 
-        li {
-            padding-left: 0.3em;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .welcome-message {
-            font-family: Times New Roman, Times, serif;
-            color: yellow;
-            font-size: 1.25em; 
-        }
-
+        /* Navigation Styling */
         .nav {
             font-family: 'Press Start 2P', cursive;
             color: #FF33CC;
+            text-decoration: none;
+            margin: 0 15px;
+            display: inline-block;
+            position: relative;
         }
 
-        /* Main Content Styling (Adjusted for Centered Reader-Like Layout) */
+        .nav img {
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+        }
+
+        /* Main Content Styling (Reader Mode Emulation) */
         .exported-content {
-            background-color: #ffffff;
-            color: #000000;
-            /* Increase padding slightly for more comfortable reading space */
-            padding: 40px 5vw;
-            /* Center and add vertical space around content */
+            background-color: #FAFAFA; /* Neutral background for reading */
+            color: #222; /* Dark text for good contrast */
+            padding: 2em;
             margin: 40px auto;
-            /* Narrower column for a more ‘reader mode’ feel */
-            max-width: 650px;
-            /* Slightly soften the shadow so it’s not distracting */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-            border-radius: 5px;
-
-            font-family: 'Noto Serif', serif;
-            font-size: 17px;
+            max-width: 800px; /* Narrower column for easier reading */
             line-height: 1.8;
-            text-align: left;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 18px;
+
+            /* Remove fancy borders/shadows to mimic a clean reading pane */
+            border-radius: 0;
+            box-shadow: none;
         }
 
+        /* Responsive Adjustments */
         @media screen and (max-width: 600px) {
             .title, .nav, .exported-content {
-                font-size: smaller;
+                font-size: 1em;
+            }
+            .nav img {
+                width: 20px;
+                height: 20px;
+            }
+            .header-image {
+                width: 100px;
             }
         }
 
+        /* Image Styling */
         img {
             max-width: 100%;
             height: auto;
+            display: block;
+            margin: 0 auto;
         }
+
+        /* Blockquote Styling */
+        blockquote {
+            border-left: 4px solid #ccc;
+            padding-left: 16px;
+            margin: 20px 0;
+            color: #555;
+            font-style: italic;
+        }
+   
+    .societal-evolution {
+    margin: 2rem 0;
+}
+
+.societal-evolution h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.societal-evolution table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.societal-evolution th, .societal-evolution td {
+    padding: 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.societal-evolution th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.societal-evolution tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.societal-evolution tr:hover {
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease;
+}
+
+.societal-evolution td {
+    font-size: 0.95rem;
+    vertical-align: top;
+}
+
+.societal-evolution .stage-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .societal-evolution {
+        padding: 1rem;
+    }
+    
+    .societal-evolution th, .societal-evolution td {
+        padding: 0.8rem;
+    }
+
+    .societal-evolution {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .societal-evolution table {
+        display: block;
+    }
+    
+    .societal-evolution tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-bottom: 2px solid #e0e0e0;
+        padding: 1rem 0;
+    }
+
+    .societal-evolution td {
+        display: block;
+        padding: 0.5rem 1rem;
+        border: none;
+    }
+
+    .societal-evolution td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 600;
+        color: #3498db;
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .societal-evolution th {
+        display: none;
+    }
+}
+
+    
+    
     </style>
 </head>
 <body>
-    <center>
+    <!-- Header Section -->
+    <div class="header">
         <div class="title">Ali's Blog</div>
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
+        <img src="kitty.gif" alt="Kitty running beneath the title" class="header-image">
+    </div>
+    
     <hr>
+    
     <!-- Navigation Buttons -->
-    <center>
-        <a href="index.html" class="retro-btn nav">Home</a>
-        <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="about.html" class="retro-btn nav">About</a>
-        <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-        <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-        <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-        <a href="chat.html" class="retro-btn nav">Chat</a>
-        <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-        <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-        <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-        <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-        <a href="books.html" class="retro-btn nav">Kool Books</a>
-        <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-        <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-        <a href="contact.html" class="retro-btn nav">Contact</a>
-        <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-    </center>
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="index.html" class="nav">Home<img src="cutehome.gif" alt="Home Icon"></a>
+        <a href="about.html" class="nav">About<img src="about.gif" alt="About Icon"></a>
+        <a href="blog_posts.html" class="nav">Entries<img src="post.gif" alt="Entries Icon"></a>
+        <a href="chat.html" class="nav">Chat<img src="chattt.gif" alt="Chat Icon"></a>
+        <a href="coolsite.html" class="nav">Kool Webpages<img src="coollinks.gif" alt="Webpages Icon"></a>
+        <a href="guestbook.html" class="nav">Guestbook<img src="book-0037.gif" alt="Guestbook Icon"></a>
+        <a href="books.html" class="nav">Kool Books<img src="catread.gif" alt="Books Icon"></a>
+        <a href="truthtable.html" class="nav">Truth Table<img src="math.gif" alt="Truth Table Icon"></a>
+        <a href="contact.html" class="nav">Contact<img src="phone.gif" alt="Contact Icon"></a>
+    </div>
     <br>
 
     <!-- Main Content Section -->
-    <div class="exported-content">
+
+   <div class="exported-content">
 
 <h1>The State's Obsession with Legibility</h1>
 <p>
