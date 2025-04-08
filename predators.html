@@ -103,6 +103,16 @@ img {
 }
 
 
+    .t1 {
+      border-collapse: separate;
+      border-spacing: 0.5em 1em; /* Adjust vertical and horizontal spacing */
+    }
+    .t1 th,
+    .t1 td {
+      padding: 0.5em;
+      border: 1px solid #ccc; /* Optional: adds visible borders to cells */
+    }
+	    
         
       </style>
 
@@ -269,42 +279,42 @@ img {
 <p class="p1"><strong>grass → grasshopper (herbivore) → frog → snake → eagle</strong></p>
 <p class="p1">Each level is numbered sequentially, with the herbivore at position <strong>(a)</strong>. The predators are then labeled according to whom they prey upon:</p>
 
-<table class="t1" cellspacing="0" cellpadding="0">
-  <thead>
-    <tr>
-      <th class="td1" style="vertical-align:top;">Position</th>
-      <th class="td1" style="vertical-align:top;">Organism</th>
-      <th class="td1" style="vertical-align:top;">Role</th>
-      <th class="td1" style="vertical-align:top;">Preys On</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="td1" style="vertical-align:top;"><strong>(a)</strong></td>
-      <td class="td1" style="vertical-align:top;">Grasshopper</td>
-      <td class="td1" style="vertical-align:top;">Herbivore</td>
-      <td class="td1" style="vertical-align:top;">Grass (producer)</td>
-    </tr>
-    <tr>
-      <td class="td1" style="vertical-align:top;"><strong>1</strong></td>
-      <td class="td1" style="vertical-align:top;">Frog</td>
-      <td class="td1" style="vertical-align:top;">1st-order carnivore</td>
-      <td class="td1" style="vertical-align:top;">Grasshopper (a)</td>
-    </tr>
-    <tr>
-      <td class="td1" style="vertical-align:top;"><strong>2</strong></td>
-      <td class="td1" style="vertical-align:top;">Snake</td>
-      <td class="td1" style="vertical-align:top;">2nd-order carnivore</td>
-      <td class="td1" style="vertical-align:top;">Frog (1)</td>
-    </tr>
-    <tr>
-      <td class="td1" style="vertical-align:top;"><strong>3</strong></td>
-      <td class="td1" style="vertical-align:top;">Eagle</td>
-      <td class="td1" style="vertical-align:top;">3rd-order carnivore</td>
-      <td class="td1" style="vertical-align:top;">Snake (2)</td>
-    </tr>
-  </tbody>
-</table>
+	  <table class="t1">
+    <thead>
+      <tr>
+        <th style="vertical-align:top;">Position</th>
+        <th style="vertical-align:top;">Organism</th>
+        <th style="vertical-align:top;">Role</th>
+        <th style="vertical-align:top;">Preys On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="vertical-align:top;"><strong>(a)</strong></td>
+        <td style="vertical-align:top;">Grasshopper</td>
+        <td style="vertical-align:top;">Herbivore</td>
+        <td style="vertical-align:top;">Grass (producer)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;"><strong>1</strong></td>
+        <td style="vertical-align:top;">Frog</td>
+        <td style="vertical-align:top;">1st-order carnivore</td>
+        <td style="vertical-align:top;">Grasshopper (a)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;"><strong>2</strong></td>
+        <td style="vertical-align:top;">Snake</td>
+        <td style="vertical-align:top;">2nd-order carnivore</td>
+        <td style="vertical-align:top;">Frog (1)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;"><strong>3</strong></td>
+        <td style="vertical-align:top;">Eagle</td>
+        <td style="vertical-align:top;">3rd-order carnivore</td>
+        <td style="vertical-align:top;">Snake (2)</td>
+      </tr>
+    </tbody>
+  </table>
 
 <p class="p1">Odd-order predators occupy positions <strong>1, 3, 5...</strong> in the chain. In this example:</p>
 <ul class="ul1">
