@@ -1,3 +1,8 @@
+---
+layout: post
+title: "Blog Entries"
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +151,19 @@ li {
     
             <!-- ... Add more as you create more posts ... -->
         </ul>
+<h3>New Markdown entries</h3>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span style="opacity:.7; font-size:.9em;">
+        {{ post.date | date: "%-d %b %Y" }}
+      </span>
+    </li>
+  {% endfor %}
+</ul>
+
+        
     </center>
 </body>
 </html>
