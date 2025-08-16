@@ -37,15 +37,10 @@ permalink: /blog_posts.html
     
             <!-- ... Add more as you create more posts ... -->
         </ul>
-<h3>New 2025 Entries</h3>
+<h3>New Entries</h3>
 <ul>
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span style="opacity:.7; font-size:.9em;">
-          {{ post.date | date: "%-d %b %Y" }}
-        </span>
-      </li>
-    {% endfor %}
-  </ul>
+  {% for post in site.posts %}
+    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
 </center>
