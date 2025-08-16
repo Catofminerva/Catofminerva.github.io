@@ -1,1 +1,5 @@
+title: My Blog
+description: Random notes and essays
+baseurl: ""   # keep empty for root
+url: "https://catofminerva.com"   # replace with your site URL
 
