@@ -1,5 +1,11 @@
-title: My Blog
-description: Random notes and essays
-baseurl: ""   # keep empty for root
-url: "https://catofminerva.com"   # replace with your site URL
+title: Ali’s notes
+description: My blog
+timezone: Europe/London
 
+# If you’re using a custom domain (you have a CNAME file), set it here:
+url: https://catofminerva.com
+baseurl: ""                  # keep empty
+
+
+theme: minima                # use GitHub’s built-in theme
+permalink: /:title/          # cleaner post URLs
