@@ -1,16 +1,13 @@
 ---
-layout: post
+layout: entries
 title: "Blog Entries"
 permalink: /blog_posts.html
 ---
 
-<br>
-
-<body>
-    <center>
-        <h2>Blog Entries</h2>
-        <ul>
-            <p>Ranking from best to wost? hm:</p>
+<center>
+  <h2>Blog Entries</h2>
+  <p>Ranking from best to worst? hm:</p>
+  <ul>
                         <li><a href="predators.html">Should we kill predators?</a></li>
                                                 <li><a href="Anarchism.html">Pre-State Anarchism in the Arabian Peninsula</a></li>
                         <li><a href="primitive.html">Civilisation sucks?</a></li>
@@ -40,19 +37,15 @@ permalink: /blog_posts.html
     
             <!-- ... Add more as you create more posts ... -->
         </ul>
-<h3>New Markdown entries</h3>
+<h3>New 2025 Entries</h3>
 <ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <span style="opacity:.7; font-size:.9em;">
-        {{ post.date | date: "%-d %b %Y" }}
-      </span>
-    </li>
-  {% endfor %}
-</ul>
-
-        
-    </center>
-</body>
-</html>
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span style="opacity:.7; font-size:.9em;">
+          {{ post.date | date: "%-d %b %Y" }}
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+</center>
