@@ -3,3 +3,842 @@ layout: post
 title: "A Culturally Relativist Worldcup"
 permalink: /worldcup.html
 ---
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::: exported-content
+::: captioned-image-container
+<figure>
+<a
+href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg"
+class="image-link image2 is-viewable-img" target="_blank"
+data-component-name="Image2ToDOM"></a>
+<div class="image2-inset">
+<img
+src="https://substack-post-media.s3.amazonaws.com/public/images/78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg"
+class="sizing-normal"
+data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:675,&quot;width&quot;:1200,&quot;resizeWidth&quot;:null,&quot;bytes&quot;:65057,&quot;alt&quot;:null,&quot;title&quot;:null,&quot;type&quot;:&quot;image/jpeg&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:false,&quot;topImage&quot;:true,&quot;internalRedirect&quot;:null,&quot;isProcessing&quot;:false}"
+srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78841091-3f91-430a-a67d-661dcb56c555_1200x675.jpeg 1456w"
+sizes="100vw" data-fetchpriority="high" width="1200" height="675" />
+<div class="image-link-expand">
+<div class="pencraft pc-display-flex pc-gap-8 pc-reset">
+<div class="pencraft pc-reset icon-container restack-image">
+<img
+src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJlZnJlc2gtY3ciPjxwYXRoIGQ9Ik0zIDEyYTkgOSAwIDAgMSA5LTkgOS43NSA5Ljc1IDAgMCAxIDYuNzQgMi43NEwyMSA4IiAvPjxwYXRoIGQ9Ik0yMSAzdjVoLTUiIC8+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDAgMS05IDkgOS43NSA5Ljc1IDAgMCAxLTYuNzQtMi43NEwzIDE2IiAvPjxwYXRoIGQ9Ik04IDE2SDN2NSIgLz48L3N2Zz4="
+class="lucide lucide-refresh-cw" />
+</div>
+<div class="pencraft pc-reset icon-container view-image">
+<img
+src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1heGltaXplMiI+PHBvbHlsaW5lIHBvaW50cz0iMTUgMyAyMSAzIDIxIDkiPjwvcG9seWxpbmU+PHBvbHlsaW5lIHBvaW50cz0iOSAyMSAzIDIxIDMgMTUiPjwvcG9seWxpbmU+PGxpbmUgeDE9IjIxIiB4Mj0iMTQiIHkxPSIzIiB5Mj0iMTAiPjwvbGluZT48bGluZSB4MT0iMyIgeDI9IjEwIiB5MT0iMjEiIHkyPSIxNCI+PC9saW5lPjwvc3ZnPg=="
+class="lucide lucide-maximize2" />
+</div>
+</div>
+</div>
+</div>
+</figure>
+:::
+
+### The Human Rights Discourse during the Qatar World Cup
+
+So, i was all set to indulge in a glorious world cup opening ceremony,
+complete with a seitan double burger and fries (don\'t @ me) but, of
+course, the universe (the UK) had other plans. Instead of the usual pomp
+and circumstance, i was greeted with a bunch of talking heads yapping
+about Qatar\'s human rights record. look. i'm not saying hoomanno
+riotghts aren't important. but CAN WE NOT??? for ONE (1) day??? just let
+me scream "GOOOOAL" into the void without the crushing guilt that
+migrant workers built this stadium and my soul is now ethically
+complicit in football capitalism??? I mean, i\'m a Qatari, and i\'ve
+been waiting for this moment for a decade but no, the BBC had to go and
+boycott the ceremony "...but the homaaio riots, karen". Thanks for
+ruining the party, bbc. I\'m left feeling all conflicted; part of me
+wants to just enjoy the beautiful game, but another part of me is all
+like \"but wait they have a point, what about the human rights?!\".
+Can\'t we just have a simple, uncomplicated world cup experience? is
+that too much to ask?
+
+Let me lay this out: I am, unambiguously, pro-human rights. When the
+world suddenly decided to scrutinize my country's flaws---the kefala
+system, regressive guardianship laws, the state's hostility toward
+LGBTQ+ communities---part of me thought, Good. Let the pressure mount.
+\<i\>Let the cracks show \</i\>. All the abuses of capitlaism,
+everywhere, demand attention.
+
+But then I watched the coverage. The \<i\>way\</i\> it was done, the
+choreographed outrage, the lazy generalisations, the way \'humanonan
+abuses\' rolled off tongues like a scripted trigger phrase rather than a
+lived reality, all left me queasy. It wasn't critique; it was a
+theatrical production. A pantomime of morality where Qatar served as the
+exotic villain, and the West played both judge and jury, conveniently
+editing out their own complicity in the systems they denounced.
+
+I agreed with the substance. The kefala system was exploitative. The
+persecution of queer people is indefensible. But when criticism is
+delivered with all the nuance of a colonial museum exhibit---Behold the
+Barbaric East!---it stops being solidarity and starts becoming
+intellectual tourism. It's the rhetorical equivalent of posting a black
+square on Instagram and calling it activism. The message isn't wrong,
+but the performative sheen of it all, the unspoken hierarchy of
+civilized versus backward, all reeks of the same Orientalism that's
+painted this region as a project for Western salvation since the 19th
+century.
+
+Turns out, my Spidey senses were spot on. The moment the World Cup final
+whistle blew, the global "homo sapien rights" chatter evaporated. As if
+the outrage was never about justice, but about having a socially
+acceptable excuse to wag fingers at those quaint, primitive Arabs while
+the spotlight was hot. Today, the stadiums are empty, the confetti's
+swept away, and the moral crusaders have moved on to the next trending
+outrage. Meanwhile, the rest of us are left wondering: was any of this
+for us, or were we just the set dressing for another round of Western
+savior theater?
+
+As I originally wrote in another essay, much of human rights rhetoric
+seems to come from a position of rationalist condescension, and hardly
+ever seeks to manipulate the sentiments and sympathies of unconvinced
+populations (in practical terms, this convincing would have been, for
+example, interviewing migrant workers, Qatari women and sexual
+minorities about their narrative so that their fellows can more easily
+sympathise). It is not enough that we simply howl out expressions such
+as 'X is a human right!'.
+
+Unfortunately, it was British broadcasters preaching to a mostly British
+choir; a monologue about a projected other, instead of a genuine
+dialogue. Though the audience (and me with it) were already bought into
+the human rights presuppositions and were pre-convinced of the
+conclusions which Gary Lineker & co.'s were sermonising, I knew that
+this form of rationalist moral posturing will not persuade anyone else,
+especially the people who most need convincing.
+
+### Was it a Clash of Civilisations?
+
+It did far worse than not persuade them. The larger rhetoric around
+human rights seemed to have triggered an effectively anti-human rights
+reaction from many Qataris, if only out of spite. A moral panic among
+Qataris ensued about the infiltration of sexual minorities into Qatar,
+as if none already existed. Suddenly, rainbows were public enemy number
+one, feared as if they were some sort of demonic gateway for an invasion
+of gay zombies. And charges of orientalism, western exceptionalism,
+cultural imperialism and hypocrisy (the stock and trade of what is now
+called "post-colonial studies") were the main rhetorical weapons of
+deflection in Qatar's toolkit. The discourse descended into a pantomime
+of East vs. West, each side essentialising the other, each reducing the
+complexity of human experience to caricature.
+
+:::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/qatari/status/1597323062743293955?s=61&t=jQpueXqiE1w8qYOO42qjjQ\",\"full_text\":\"You come to our country and you know what makes us angry and you do it?\",\"username\":\"Qatari\",\"name\":\"محمد الكعبي\",\"date\":\"Mon Nov 28 20:14:29 +0000 2022\",\"photos\":[],\"quoted_tweet\":{},\"retweet_count\":18580,\"like_count\":137369,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/qatari/status/1597323062743293955?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@Qatari](https://substackcdn.com/image/twitter_name/w_96/Qatari.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[محمد الكعبي ]{.tweet-author-name}[\@Qatari]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+You come to our country and you know what makes us angry and you do it?
+:::
+
+[](https://twitter.com/qatari/status/1597323062743293955?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[8:14 PM ∙ Nov 28, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[137,369]{.like-count}Likes]{.likes
+href="https://twitter.com/qatari/status/1597323062743293955?s=61&t=jQpueXqiE1w8qYOO42qjjQ/likes"}[[18,580]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/qatari/status/1597323062743293955?s=61&t=jQpueXqiE1w8qYOO42qjjQ/retweets"}
+:::
+::::
+::::::::
+
+::: captioned-image-container
+<figure>
+<a
+href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg"
+class="image-link image2 is-viewable-img" target="_blank"
+data-component-name="Image2ToDOM"></a>
+<div class="image2-inset">
+<img
+src="https://substack-post-media.s3.amazonaws.com/public/images/2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg"
+class="sizing-normal"
+data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:1350,&quot;width&quot;:1080,&quot;resizeWidth&quot;:304,&quot;bytes&quot;:598474,&quot;alt&quot;:null,&quot;title&quot;:null,&quot;type&quot;:&quot;image/jpeg&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:true,&quot;topImage&quot;:false,&quot;internalRedirect&quot;:null,&quot;isProcessing&quot;:false}"
+srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e034920-916b-4d3a-8450-ae63b9fa00ce_1080x1350.jpeg 1456w"
+sizes="100vw" loading="lazy" width="304" height="380" />
+<div class="image-link-expand">
+<div class="pencraft pc-display-flex pc-gap-8 pc-reset">
+<div class="pencraft pc-reset icon-container restack-image">
+<img
+src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJlZnJlc2gtY3ciPjxwYXRoIGQ9Ik0zIDEyYTkgOSAwIDAgMSA5LTkgOS43NSA5Ljc1IDAgMCAxIDYuNzQgMi43NEwyMSA4IiAvPjxwYXRoIGQ9Ik0yMSAzdjVoLTUiIC8+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDAgMS05IDkgOS43NSA5Ljc1IDAgMCAxLTYuNzQtMi43NEwzIDE2IiAvPjxwYXRoIGQ9Ik04IDE2SDN2NSIgLz48L3N2Zz4="
+class="lucide lucide-refresh-cw" />
+</div>
+<div class="pencraft pc-reset icon-container view-image">
+<img
+src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld2JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1heGltaXplMiI+PHBvbHlsaW5lIHBvaW50cz0iMTUgMyAyMSAzIDIxIDkiPjwvcG9seWxpbmU+PHBvbHlsaW5lIHBvaW50cz0iOSAyMSAzIDIxIDMgMTUiPjwvcG9seWxpbmU+PGxpbmUgeDE9IjIxIiB4Mj0iMTQiIHkxPSIzIiB5Mj0iMTAiPjwvbGluZT48bGluZSB4MT0iMyIgeDI9IjEwIiB5MT0iMjEiIHkyPSIxNCI+PC9saW5lPjwvc3ZnPg=="
+class="lucide lucide-maximize2" />
+</div>
+</div>
+</div>
+</div>
+</figure>
+:::
+
+And then, low and behold, I saw it again. Samuel Huntington\'s \"Clash
+of Civilizations\" theory was suddenly trending again, and not in a good
+way. His ghost must have been chuckling in his grave, seeing his
+belligerent theory come to life about the so-called clash of monolithic
+entities, 'Islam vs the West'. Superficially, it seemed to have been
+instantiated and Huntington\'s prediction vindicated. Scenes of Qatari
+imams on evangelising rampages, Muslims in Rohingya lifting portraits of
+MBS and cheering for Saudi Arabia's national team, tournament officials
+confiscating rainbow flags, Palestine armbands being turned into
+anti-LGBT symbols, a talk of sports teams as colonisers and colonised,
+the German national team gesturing protests about LGBT persecution.
+Islam as the unyielding "Other," the West as missionary of progress,
+both trapped in a feedback loop of mutual provocation. In none of this
+did the the lived realities of migrant workers, women, and queer Qataris
+rendered visible, they were simply casualties of a rhetorical war waged
+between two hegemonic narratives.
+
+As I watched the madness unfold, I couldn\'t help but think of these
+totalising, grand stories that began circulating in the 90's about such
+soppused civilisational clashes, uncommunicating communities, moral and
+cultural incommensurablites and so on. "The great divisions among human
+kind and the dominating source of conflict," wrote Huntington, "will be
+cultural". "The clash of civilizations will dominate global politics.
+The fault lines between civilizations will be the battle lines of the
+future."
+
+::::::::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/tariqpanja/status/1595786945757593602?s=61&t=jQpueXqiE1w8qYOO42qjjQ\",\"full_text\":\"Taking their lead from the German interior minister who sported a One Love armband at Japan game. So today some Qataris in the protocol seats wearing armbands to support Palestinian cause. \",\"username\":\"tariqpanja\",\"name\":\"tariq panja\",\"date\":\"Thu Nov 24 14:30:30 +0000 2022\",\"photos\":[{\"img_url\":\"https://pbs.substack.com/media/FiVfwy1WAAAW5AU.jpg\",\"link_url\":\"https://t.co/IwOlQlbtag\",\"alt_text\":null},{\"img_url\":\"https://pbs.substack.com/media/FiVfwy6WAAA7kJz.jpg\",\"link_url\":\"https://t.co/IwOlQlbtag\",\"alt_text\":null}],\"quoted_tweet\":{},\"retweet_count\":4864,\"like_count\":27189,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/tariqpanja/status/1595786945757593602?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@tariqpanja](https://substackcdn.com/image/twitter_name/w_96/tariqpanja.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[tariq panja ]{.tweet-author-name}[\@tariqpanja]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+Taking their lead from the German interior minister who sported a One
+Love armband at Japan game. So today some Qataris in the protocol seats
+wearing armbands to support Palestinian cause.
+:::
+
+::::::: {.tweet-photos-container .two}
+:::: tweet-photos-column
+::: tweet-photo-wrapper
+![Image](https://pbs.substack.com/media/FiVfwy1WAAAW5AU.jpg){.tweet-photo
+loading="lazy"}
+:::
+::::
+
+:::: tweet-photos-column
+::: tweet-photo-wrapper
+![Image](https://pbs.substack.com/media/FiVfwy6WAAA7kJz.jpg){.tweet-photo
+loading="lazy"}
+:::
+::::
+:::::::
+
+[](https://twitter.com/tariqpanja/status/1595786945757593602?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[2:30 PM ∙ Nov 24, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[27,189]{.like-count}Likes]{.likes
+href="https://twitter.com/tariqpanja/status/1595786945757593602?s=61&t=jQpueXqiE1w8qYOO42qjjQ/likes"}[[4,864]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/tariqpanja/status/1595786945757593602?s=61&t=jQpueXqiE1w8qYOO42qjjQ/retweets"}
+:::
+::::
+:::::::::::::
+
+:::::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/brasiledition/status/1595074157439602693?s=61&t=jQpueXqiE1w8qYOO42qjjQ\",\"full_text\":\"🚨Globo: \\n\\nFans were approached by Qatari officials and volunteers after the flag of Pernambuco (Brazilian state) was confused with a pride symbol. \",\"username\":\"BrasilEdition\",\"name\":\"Brasil Football 🇧🇷\",\"date\":\"Tue Nov 22 15:18:08 +0000 2022\",\"photos\":[{\"img_url\":\"https://pbs.substack.com/media/FiLXfa0WYAIRHfH.jpg\",\"link_url\":\"https://t.co/UJayVNKnFV\",\"alt_text\":null}],\"quoted_tweet\":{},\"retweet_count\":142,\"like_count\":2022,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/brasiledition/status/1595074157439602693?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@BrasilEdition](https://substackcdn.com/image/twitter_name/w_96/BrasilEdition.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[Brasil Football 🇧🇷
+]{.tweet-author-name}[\@BrasilEdition]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+🚨Globo: Fans were approached by Qatari officials and volunteers after
+the flag of Pernambuco (Brazilian state) was confused with a pride
+symbol.
+:::
+
+:::: {.tweet-photos-container .one}
+::: tweet-photo-wrapper
+![Image](https://pbs.substack.com/media/FiLXfa0WYAIRHfH.jpg){.tweet-photo
+loading="lazy"}
+:::
+::::
+
+[](https://twitter.com/brasiledition/status/1595074157439602693?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[3:18 PM ∙ Nov 22, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[2,022]{.like-count}Likes]{.likes
+href="https://twitter.com/brasiledition/status/1595074157439602693?s=61&t=jQpueXqiE1w8qYOO42qjjQ/likes"}[[142]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/brasiledition/status/1595074157439602693?s=61&t=jQpueXqiE1w8qYOO42qjjQ/retweets"}
+:::
+::::
+::::::::::
+
+:::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/justin_d_martin/status/1594757374279041038?s=61&t=jQpueXqiE1w8qYOO42qjjQ\",\"full_text\":\"Had a postcard-size rainbow cloth in my hand on metro &amp; man in Qatar shawl (don’t think he’s Qatari) shouted at me &amp; pushed me into the door. <span class=\\\"tweet-fake-link\\\">#FIFAWorldCup</span> volunteer called me “disgusting.” Qatari in thobe shouted at me, &amp; Polish fan told me that man said he was going to kill me\",\"username\":\"Justin_D_Martin\",\"name\":\"Justin D. Martin | جاستن مارتن\",\"date\":\"Mon Nov 21 18:19:21 +0000 2022\",\"photos\":[],\"quoted_tweet\":{},\"retweet_count\":53,\"like_count\":179,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/justin_d_martin/status/1594757374279041038?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@Justin_D_Martin](https://substackcdn.com/image/twitter_name/w_96/Justin_D_Martin.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[Justin D. Martin \| جاستن مارتن
+]{.tweet-author-name}[\@Justin_D_Martin]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+Had a postcard-size rainbow cloth in my hand on metro & man in Qatar
+shawl (don't think he's Qatari) shouted at me & pushed me into the door.
+[#FIFAWorldCup]{.tweet-fake-link} volunteer called me "disgusting."
+Qatari in thobe shouted at me, & Polish fan told me that man said he was
+going to kill me
+:::
+
+[](https://twitter.com/justin_d_martin/status/1594757374279041038?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[6:19 PM ∙ Nov 21, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[179]{.like-count}Likes]{.likes
+href="https://twitter.com/justin_d_martin/status/1594757374279041038?s=61&t=jQpueXqiE1w8qYOO42qjjQ/likes"}[[53]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/justin_d_martin/status/1594757374279041038?s=61&t=jQpueXqiE1w8qYOO42qjjQ/retweets"}
+:::
+::::
+::::::::
+
+Whether or not we\'re starring in some cosmic civilisational showdown
+(I\'m leaning towards \"not\"), there\'s no denying our world is a
+patchwork of different culturally-rooted perspectives. But the World Cup
+laid bare not a clash of civilisations, but a crisis of translation.
+I\'m lucky enough to have a front-row seat to this global potluck,
+watching as people from all walks of life scratch their heads in
+confusion over each other\'s thoughts and behaviours, mainly as a result
+of a failure to set the conditions for a fruitful social negotiation
+about our global village (and the global events that are held within
+it). In this particular case, journalists and commentators to government
+officials and football audiences, all were largely convergent on their
+confusion about what 'human rights' are and how to go pragmatically
+negotiate them.
+
+When Western NGOs and broadcasters demand Qatar 'reform', they invoke an
+entire teleology of progress that positions their own culture as the
+apex of moral evolution. Small wonder, then, that such demands are met
+with defiance that calcifies into reactionary paranoia. This is not to
+absolve Qatar, or any society, of its oppressions. The kefala system,
+the persecution of queer bodies, the subjugation of women: these are not
+'cultural differences' but violences to be dismantled everywhere,
+including in the Euro-American world. To the Western gaze, the migrant
+work is a victim of 'Qatari barbarism', a pawn in the NGO's narrative of
+salvation. To the Qatari state, he is an economic actor, a temporary
+guest enmeshed in a contract of mutual benefit. But what if we listened
+to his narrative, to the dreams that propelled him from Dhaka to Doha,
+the kinship networks that sustain him, the indignities he endures not as
+a 'rights' violation abstractly defined, but as a rupture in his
+understanding of dignity? And why is the conversation of the structural
+issues always ignored? That of global capitalism where individuals are
+compelled to migrate from their underdeveloped countries, exploited by
+recruitment agencies in those countries, and made to accept low wages
+simply to live. For that conversation to happen, the critical lens would
+have to be turned inward, and the World Cup was a missed opportunity for
+that, because we are extremely ill-equipped to even begin to name the
+actual issues at hand.
+
+In the following, main concern will be in untangling the intellectual
+knots we\'ve tied ourselves into, the arguments and rejoinders utilised
+by both camps and how they are often mischaracterised. The conviction
+which underpins the essay is that we must first seek a higher level of
+critical self-understanding of the philosophical presuppositions we hold
+as human rights advocates in order to engage with other populations in
+good faith. I am specifically concerned with making explicit the
+normative and metanormative understanding of human rights in the hopes
+of unclouding mutual communication, at the very least on an intellectual
+level.
+
+### Cultural Boundaries are Chimeras
+
+Meaningful cross-cultural communication cannot thrive in the stuffy
+confines of the traditionalists\' cultural isolationism on the one hand,
+and UNESCO\'s \"windowless\" cultural relativism on the other hand (as
+cheekily dubbed by anthropologist Clifford Geertz, where human
+communities are in his words "semantic monads"). To speak of cultural
+boundaries as fixed, impermeable entities is to indulge in a fiction.
+Cultures are palimpsests, they are always borrowing and fusing ideas,
+food, fashion, and so on. One may go so far as saying, with Geertz, that
+other cultures are constitutive of one another, that routes supervene on
+roots. Static "natives", anchored in place and untouched by outside
+contact have probably never existed outside the misguided writings of
+meandering 20th century European anthropologists.
+
+And so in that sense, in the words of philosopher Paul Feyerabend,
+"potentially, every culture is all cultures." That is to stay that, at
+the boundaries of cultures, you always find ambiguities, contradictions
+and pluralities; you find people juggling their cultural identities,
+whether it\'s me balancing my Qatari socialisation with my Western
+education - moving in and out of different cultural prototypes, mixing
+and matching - or gay and feminist Muslims navigating their faith,
+gender and sexuality. People tolerate such ambiguity, and they settle
+apparent contradictions by simply dissolving them. So if we accept that
+boundaries are what they are as chimeras, we can start treating any
+culture\'s practices as our own practice. Torture, for example, is an
+offence regardless of the culture in which it occurs and not some
+mysterious \"other cultural\" practice. And we\'ll always find local
+voices condemning it, and those voices is where any sort of intervention
+should begin.
+
+This requires a humility alien to both the missionary and the nativist:
+a willingness to see that the gay Muslim, the feminist imam, or the
+Qatari liberal are not oxymorons. The promise of such an approach is not
+consensus, but translation: the arduous, imperfect work of finding
+equivalences across difference. When a Qatari woman demands autonomy
+from male guardianship, she may couch her plea in the language of
+Islamic equity rather than liberal feminism. But to dismiss her demand
+because it invokes hadith rather than Hobbes is to privilege form over
+substance. Conversely, when Western activists invoke "LGBTQ+ rights" in
+Doha they may simultaneously conflate queer liberation with the
+universalisation of Western identity categories.
+
+As Joseph Massad showed, this activism doesn't just describe a struggle;
+it prescribes one, insofar as it imposes the rigid binaries of
+"closeted" versus "out," "heterosexual" versus "homosexual," onto
+societies where same-sex desire has historically been organized
+differently: not as identity, but as practice; not as a political
+collective, but as a fluid social reality. To demand they "come out" in
+the style of Stonewall is to demand they surrender their cultural
+grammar to a foreign lexicon; it is to make them casualties of a "rescue
+narrative" that serves the activist's savior complex more than the
+actual needs of the oppressed, in just another empire singing "We Are
+the World" while the marginalized write their anthems in the margins. It
+becomes such that, when Qatar confiscates rainbow flags or bans
+"political" armbands, it does so under the pretext of repelling foreign
+interference---a pretext handed to them by the ham-fisted moralizing of
+outsiders. The state's crackdown becomes a performance of "cultural
+sovereignty," while local queer communities pay the price.
+
+To translate across difference, we must ask: What does queer resistance
+look like in their idiom? How does a feminist critique sound in their
+register? In short, cultures, in the final analysis, are verbs, not
+nouns. They are performed, not inherited. They are remade daily in the
+choices of individual performances that have no qualms with apparent
+contradictions of their moment, as contradictions imply cultures as
+reified entities with boundaries.
+
+:::::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/qatari/status/1598420088285265920?s=61&t=jQpueXqiE1w8qYOO42qjjQ\",\"full_text\":\"Don’t leave your flags behind 🫢🤣 \",\"username\":\"Qatari\",\"name\":\"محمد الكعبي\",\"date\":\"Thu Dec 01 20:53:40 +0000 2022\",\"photos\":[{\"img_url\":\"https://pbs.substack.com/media/Fi66mH2WIAc-FfP.jpg\",\"link_url\":\"https://t.co/XxabtHka4k\",\"alt_text\":null}],\"quoted_tweet\":{},\"retweet_count\":71043,\"like_count\":480558,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/qatari/status/1598420088285265920?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@Qatari](https://substackcdn.com/image/twitter_name/w_96/Qatari.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[محمد الكعبي ]{.tweet-author-name}[\@Qatari]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+Don't leave your flags behind 🫢🤣
+:::
+
+:::: {.tweet-photos-container .one}
+::: tweet-photo-wrapper
+![Image](https://pbs.substack.com/media/Fi66mH2WIAc-FfP.jpg){.tweet-photo
+loading="lazy"}
+:::
+::::
+
+[](https://twitter.com/qatari/status/1598420088285265920?s=61&t=jQpueXqiE1w8qYOO42qjjQ){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[8:53 PM ∙ Dec 1, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[480,558]{.like-count}Likes]{.likes
+href="https://twitter.com/qatari/status/1598420088285265920?s=61&t=jQpueXqiE1w8qYOO42qjjQ/likes"}[[71,043]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/qatari/status/1598420088285265920?s=61&t=jQpueXqiE1w8qYOO42qjjQ/retweets"}
+:::
+::::
+::::::::::
+
+<div>
+
+------------------------------------------------------------------------
+
+</div>
+
+## Universalism vs. Relativism
+
+In the human rights discourse, we find two teams on the playing field.
+Bear in mind, we\'re painting with broad strokes here, but such
+simplification is sometimes needed for analysis.
+
+Team West features a motley crew of Western journalists, human rights
+activists, liberals of all flavours, and mostly individuals from WEIRD
+(acronym) populations who got over their bipartisanism to condemn the
+other team. They\'re often found shouting from their moral high ground,
+hurling phrases like \"X is a violation of human rights!\" as if
+they\'re tossing confetti at a parade.
+
+Team Qatar includes 'subaltern' petro-rich Qataris, PR-savvy social
+media firms, aggrieved non-WEIRD audiences, postcolonial professors, and
+FIFA. This team retorts by (understandably) throwing around accusations
+of cultural imperialism, Western exceptionalism, and hypocrisy. Some go
+on to then weaponise outdated liberal values like \"non-judgment\" to
+legitimate illiberal practices and hush up dissenters. When it suits
+them, they\'ll also cosy up to normative cultural relativism---a
+prescription for tolerating the moral practices of other cultures no
+matter how much they might disagree with them.
+
+This was exemplified by the FIFA president's pre-tournament address to
+the press when he claimed that the 'West' is being hypocritical when
+criticising Qatar for the conditions it puts migrant workers and
+exclaims that \"for what we Europeans have been doing for 3,000 years
+around the world, we should be apologising for the next 3,000 years
+before starting to give moral lessons to people\".
+
+::::::::::: {.tweet component-name="Twitter2ToDOM" attrs="{\"url\":\"https://twitter.com/binnahar85/status/1594764842220617728?s=46&t=bW0L9hi5uek9wR_GXSSf8g\",\"full_text\":\"As a Qatari I’m proud of what happened. \\nI don’t know when will the westerners realize that their values aren’t universal. There are other cultures with different values that should be equally respected.\\n\\nLet’s not forget that the West is not the spokesperson for humanity. \",\"username\":\"binnahar85\",\"name\":\"د. نايف بن نهار\",\"date\":\"Mon Nov 21 18:49:02 +0000 2022\",\"photos\":[],\"quoted_tweet\":{\"full_text\":\"Just now: Security guard refusing to let me into the stadium for USA-Wales. “You have to change your shirt. It’s not allowed.” https://t.co/TvSGThMYq8\",\"username\":\"GrantWahl\",\"name\":\"Subscribe to GrantWahl.com\"},\"retweet_count\":170609,\"like_count\":726720,\"expanded_url\":{},\"video_url\":null,\"belowTheFold\":true}"}
+[](https://twitter.com/binnahar85/status/1594764842220617728?s=46&t=bW0L9hi5uek9wR_GXSSf8g){.tweet-link-top
+target="_blank"}
+
+:::: tweet-header
+![Twitter avatar for
+\@binnahar85](https://substackcdn.com/image/twitter_name/w_96/binnahar85.jpg){.tweet-header-avatar
+loading="lazy"}
+
+::: tweet-header-text
+[د. نايف بن نهار
+]{.tweet-author-name}[\@binnahar85]{.tweet-author-handle}
+:::
+::::
+
+::: tweet-text
+As a Qatari I'm proud of what happened. I don't know when will the
+westerners realize that their values aren't universal. There are other
+cultures with different values that should be equally respected. Let's
+not forget that the West is not the spokesperson for humanity.
+:::
+
+::::: quote-tweet
+:::: quote-tweet-header
+![Twitter avatar for
+\@GrantWahl](https://substackcdn.com/image/twitter_name/w_40/GrantWahl.jpg){.quote-tweet-header-avatar
+loading="lazy"}
+
+::: quote-tweet-header-text
+[Subscribe to GrantWahl.com
+]{.quote-tweet-name}[\@GrantWahl]{.quote-tweet-username}
+:::
+::::
+
+Just now: Security guard refusing to let me into the stadium for
+USA-Wales. "You have to change your shirt. It's not allowed."
+https://t.co/TvSGThMYq8
+:::::
+
+[](https://twitter.com/binnahar85/status/1594764842220617728?s=46&t=bW0L9hi5uek9wR_GXSSf8g){.tweet-link-bottom
+target="_blank"}
+
+:::: tweet-footer
+[6:49 PM ∙ Nov 21, 2022]{.tweet-date}
+
+------------------------------------------------------------------------
+
+::: tweet-ufi
+[[726,720]{.like-count}Likes]{.likes
+href="https://twitter.com/binnahar85/status/1594764842220617728?s=46&t=bW0L9hi5uek9wR_GXSSf8g/likes"}[[170,609]{.rt-count}Retweets]{.retweets
+href="https://twitter.com/binnahar85/status/1594764842220617728?s=46&t=bW0L9hi5uek9wR_GXSSf8g/retweets"}
+:::
+::::
+:::::::::::
+
+The retort made by the Qatar team, when assessed charitably, is intended
+to be a sort of internal critique against the 'West' party, as no one in
+the 'Qatar' team is sincerely a normative relativist. It was made
+possible because 'the West' team was framed as holding two untenable
+positions, though never explicitly defined. And when you don't
+explicitly define your position, people will define it---and
+mischaracterise it if that furthers their goals---for you. These
+positions are as follows.
+
+### Right above Culture (normative universalism):
+
+On the one hand, human rights advocates, in wanting to make universal
+prescriptions and "ground" (i.e., defend the philosophical position
+behind) normative universalism and a universal procedural justice
+system, they (in my view, mistakenly) affirm *metaethical* realism. The
+latter is the view that there are moral facts (e.g. human rights) that
+are not made true by anyone's stances. In the context of human rights,
+that there are these 'natural' moral obligations which we might call
+'rights' that come about simply in virtue of being a featherless biped,
+and these moral obligations are made true independent of anything anyone
+thinks about them---are not made the case by our perspectives.
+
+Or to put it in terms of normative 'reasons', all individuals are
+universally conferred with minimum moral obligations that cannot be
+trampled by the interests of their culture or group. The justification
+for these moral obligations is that they are backed up by
+stance-independent normative reasons. So to say that there are human
+rights against torturing babies for fun is to say that you have a
+normative reason to not torture babies for fun. This relies on the idea
+that there are reasons for action independent of our desires, attitudes,
+beliefs, choices etc., as in you have a reason to not spend your life
+counting spades of grass whether you like doing so or not. (See my
+critique of this view
+[here](https://alialmaadeed.substack.com/p/i-dont-care-about-the-moral-facts)).
+
+### Right to Culture (normative relativism):
+
+On the other hand, human rights advocates of whom Claud Levi-Strauss had
+approvingly called 'UNESCO cosmopolitanists' affirm a naive *normative*
+cultural relativism, a prescriptive position popularly held among early
+20th century anthropologists which holds that we must tolerate the moral
+practices of different cultures (principles of non-interference and
+non-judgment). This is exemplified in UNESCO's *Our Creative Diversity*
+1995 report which reiterates the tweet above in saying that cultures
+deserve to be treated "with respect" (as if there's clearly bounded
+'cultures' that are not further divisible into contradictory
+subcultures), and frames the issue not as 'human rights vs culture' but
+as 'a human right to culture', and then equivocates on the word
+'culture' between 'a way of life' and 'an aesthetic work'. This 'respect
+our culture' rhetoric is exactly the type of rhetoric which the Saudi
+government in its treatment of women, nationalists in their demand for
+stricter border controls, the genital mutilators in Somalia, the Islamic
+State and ethnocentrists all over the world can all happily rejoice
+with.
+
+Taken together, the human rights advocates express the following
+propositions:
+
+> 1.  We hold that human rights norms are universally applicable, and
+>     they are 'grounded' by stance-independent moral reasons.
+>
+> 2.  We ought not judge the moral norms of other cultures.
+
+### Can't Have Your Cake and Eat it Too
+
+Seting aside the metaethical point (i.e., the 'grounding' part), clearly
+there is a contradiction here; human rights advocates are endorsing
+normative universalism and normative relativism simultaneously. That is,
+there are claiming that we ought to tolerate other individuals or groups
+that act against human rights because such an act is a cultural act, and
+that we ought not tolerate individuals or groups that act against human
+rights irrespective of culture. Human rights advocates are thus framed
+as moral schizophrenics and condemned as hypocrites for making two
+contradicting normative claims. They can't have their cake and eat it
+too; they can either affirm normative universalism or normative
+relativism, buy not both at once.
+
+I suggest that human rights advocates jettison normative cultural
+relativism as there is no good reason to uphold a position which
+precludes a capacity of moral indignation and contempt---or interference
+if the situation so needs. It is antithetical to a 'human rights'
+project.
+
+Human rights, by their nature, involve universal prescriptive norms that
+are insensitive to the cultural standards of the actant individual or
+group. If Siberian Shamans had historically developed a ritual to kill
+odd-ordered born babies for fun, then presumably, the human rights
+project aims to in some sense interfere with that ritual. After all, the
+*Universal* Declaration explicitly confers rights to individuals (the
+odd-order babies), not groups (the Shamans). And all human rights start
+off with some universal normative judgment, such as 'no distinction
+*shall* be made on the basis of \...etc.'
+
+Or consider a real historical example: the practices of the early Ache
+tribe of Paraguay as described in 1972 by anthropologist Pierre Clastres
+in his *Chronicle of the Guayaki Indians*. The tribe was reported by
+Pierre to practice cannibalism, kill elderly people with Alzheimer
+because they are thought to have harboured dangerous vengeful spirits,
+have pre-pubertal sex, abandon their aged, beat menarcheal girls with
+tapir penises and cut them with broken glass, and what's more, they held
+'clubfights' where men would fight sometimes to the death, similar to
+Roman gladiator contests. It would be rather odd to say that the human
+rights project was intended to protect the 'right to culture' of the
+Ache tribal men rather than protecting the menarcheal girls' 'right
+above culture', viz. their right from an abusive cultural practice. The
+retort by the men that such a practice is a "cultural" practice to which
+they have the right to will fly in the face of the girls' rights above
+such culture.
+
+### Human Rights Advocates Should Not "Ground" Normative Universalism
+
+As discussed earlier, human rights advocate often wish to "ground" the
+normative universalism which the human rights culture is based on with
+metaethical realism, that is, by saying that they are backed up by
+stance-independent moral facts that apply to everyone, at all times,
+everywhere and independent of any perspectives or cultures. I suggest
+human rights advocates give up on metaethical moral realism for they
+would otherwise be opening themselves up to accusations of smuggling in
+their own social practices into something ineluctable and transcendental
+that is intrinsic to all humans and then calling it 'true independent of
+any stances'. I suggest that human rights advocates abandon the attempt
+to "ground" universalism altogether and instead endorse a pragmatist
+approach to human rights without ever eluding to the metaphysical nature
+of such rights.
+
+A better reformulation of the human rights advocates' position would
+thus be the total inversion of the characterisation above, i.e., by
+affirming metaethical cultural relativism (with a deflationary account
+of truth) across the board accompanied by a normative universalism
+(while allowing a plurality of culturally-specific values; such as, for
+example, the right to own a goat or the right to die among family,
+etc.):
+
+> We hold that the cluster of moral norms we call 'human rights' are
+> true and ought to be prescribed universally. We also affirm that we
+> ought to not tolerate cultures and individuals that act in opposition
+> to those norms.
+>
+> We do not wish to 'ground' the truth of the human rights norms, nor
+> the subsequent normative claims on universal prescription and
+> non-tolerance. Any attempt to do so will be circular.
+>
+> Instead, we acknowledge that human rights norms (and the subsequent
+> normative claims) are true or false relative to standards. When
+> indexed to our standards as human rights advocates, they are true.
+> When indexed to the standards of Medieval Christians, they are mostly
+> false. Yet, we are none the worse for that.
+
+The fear often expressed when endorsing such metaethical relativism is a
+common rhetorical sleight of hand which equivocates metaethical
+considerations ('the truth of human rights is relative to standards')
+with normative considerations ('we ought not judge cultures with
+different standards'). But *metaethical* relativism does not logically
+entail any *normative* consequences (the clue is in the name).
+Acknowledging human rights as stance-dependent norms that are indexed to
+our standards doesn't mean that we are precluded from normatively
+judging practices that contravene them.
+
+To use an analogy, we acknowledge food or music taste as being relative
+to preferences but that doesn't impede our ability of having strong food
+or music preferences or in judging, or even going to war against, people
+with contravening preferences if we are so inclined. Remember, the
+comparison between human rights and food/music is their *meta-normative*
+characteristics, and specifically **NOT** how important they are or what
+ought be done about them or how much they should be imposed on
+others---those are all normative, not metanormative, stances. It just so
+happens that a feature of music/food preferences is that they are not
+typically imposed on others and people do not usually 'judge' others for
+holding different music and taste preference. But, in principle, someone
+can be a meta-normative anti-realist about music/taste/aesthetics etc.
+*and* simultaneously hold a normative stance that their preferences
+ought be imposed on everyone. This is the view I advocate for with
+respect to human rights. We can be anti-realist about human rights and
+simultaneously hold a normative stance that human rights are extremely
+important and prefer that everyone else follows those norms.
+
+Unfortunately, many human rights activists think that in order to be
+rhetorically effective they must adopt, even if implicitly, moral
+realism as a metaethical stance, in which moral sentences are 'made
+true' by the intrinsic nature of the world and not by our evaluative
+standards.[1](#footnote-1){#footnote-anchor-1 .footnote-anchor
+component-name="FootnoteAnchorToDOM" target="_self"} They think that
+they must insist that rules for action *really* matter only if those
+rules were independent from us, in which case they will only
+'psuedomatter', and that this will win them more rhetorical points among
+unconvinced populations. They think that maintaining a metaethical
+relativism or constructivism will make those rules arbitrary and deprive
+them from their necessary 'oomph'.
+
+Philosopher Richard Rorty
+[highlights](https://www.cambridge.org/core/books/objectivity-relativism-and-truth/04DFAEAC5991EC3C403C50B83C6F4086)
+this psychological dilemma within liberals who use rationalist rhetoric
+of the Enlightenment to justify their liberal convictions:
+
+> These liberals hold on to the Enlightenment notion that there is
+> something called a common human nature, a metaphysical substrate in
+> which things called "rights" are embedded, and that this substrate
+> takes moral precedence over all merely "cultural" superstructures.
+> Preserving this idea produces self-referential paradox as soon as
+> liberals begin to ask themselves whether their belief in such a
+> substrate is itself a cultural bias. Liberals who are both
+> connoisseurs of diversity and Enlightenment rationalists cannot get
+> out of this bind. Their rationalism com­mits them to making sense of
+> the distinction between rational judgment and cultural bias. Their
+> liberalism forces them to call any doubts about human equality a
+> result of such irrational bias. Yet their connoisseurship forces them
+> to realize that most of the globe's inhabitants simply do not believe
+> in human equality, that such a belief is a Western eccentricity. Since
+> they think it would be shockingly ethnocentric to say "So what? We
+> Western liberals do believe in it, and so much the better for us,"
+> they are stuck.
+
+Rorty's advice follows the line of thought I'm getting at, which is to
+say 'yes, our cultural practices are not universally held nor are they
+etched into the fabrics of the cosmos, but so what?' There is no
+principled distinction between cultural bias and rational judgment if we
+acknowledge that we cannot reach out from under our cultural practices
+and institutions into a God's eye view. We cannot, in other words, shed
+our frame of reference temporarily and rise up into a neutral,
+omniscient point of view and then start to compare all frames of
+references. The terms we fall back on are, after all, always
+self-consciously ethnocentric: 'as a... Qatari'.., 'Marxist', 'Liberal',
+'Muslim', 'anthropologist' I think thus and so. And so Rorty urges human
+rights advocates "to take with full seriousness the fact that the ideals
+of procedural justice and human equality are parochial, recent,
+eccentric cultural developments, and then to recognize that this does
+not mean they are any the less worth fighting for . . . \[and\] the best
+hope of the species". In this construal of what Rorty calls 'liberal
+ironism', Rorty is echoing the liberalism philosopher Isaiah Berlin when
+he ended his famous essay *Two Concepts of Liberty* by saying that his
+ideal political community is one that realises 'the relative validity of
+\[its\] convictions and yet stand for them unflinchingly'.
+
+:::: {.footnote component-name="FootnoteToDOM"}
+[1](#footnote-anchor-1){#footnote-1 .footnote-number
+contenteditable="false" target="_self"}
+
+::: footnote-content
+In technical jargon, that there are antecedently existing 'truth-makers'
+tracked by some truth-tracking faculty. Usually the truth-makers are how
+human beings are *qua* humans i.e., *qua* some alleged intrinsic 'human
+nature' that's truth-tracked by 'human reason'.
+:::
+::::
+:::::::::::::::::::::::::::::::::::::::::::::::::
