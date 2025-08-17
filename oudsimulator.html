@@ -1,246 +1,346 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ali's Blog - Virtual Oud</title>
-    <style>
-        /* ==== Global Styles ==== */
-        body {
-            background: #000066;
-            margin: 0;
-            padding: 20px;
-            font-family: 'Comic Sans MS', cursive;
-            color: #00FFEE;
-        }
-
-        /* ==== Header Styles ==== */
-        .title {
-            font-size: 48px;
-            color: #FF00FF;
-            text-shadow: 0 0 10px #00FFFF;
-            margin: 20px 0;
-            animation: flip 2s infinite;
-        }
-
-        @keyframes flip {
-            0% { transform: perspective(400px) rotateY(0); }
-            50% { transform: perspective(400px) rotateY(180deg); }
-            100% { transform: perspective(400px) rotateY(360deg); }
-        }
-
-        .kitty-gif {
-            border: 3px solid #00FF00;
-            padding: 5px;
-            background: #000;
-            margin: 10px;
-        }
-
-        .retro-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            margin: 5px;
-            background: #0000FF;
-            color: #FFFFFF !important;
-            border: 3px outset #CCCCCC;
-            text-decoration: none;
-        }
-
-        .retro-btn:hover {
-            background: #FF00FF;
-            border-style: inset;
-            text-decoration: underline;
-        }
-
-        hr {
-            height: 3px;
-            background: linear-gradient(90deg, 
-                #FF0000 0%,
-                #FF9900 20%,
-                #FFFF00 40%,
-                #00FF00 60%,
-                #0099FF 80%,
-                #6633FF 100%
-            );
-            border: none;
-            margin: 20px 0;
-        }
-
-        /* ==== Oud Simulator Styles ==== */
-        .crt-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg, 
-                rgba(0, 255, 0, 0.1) 0px,
-                rgba(0, 255, 0, 0.1) 2px,
-                transparent 2px,
-                transparent 4px
-            );
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        .oud-container {
-            border: 3px solid #FF00FF;
-            background: #000;
-            padding: 20px;
-            margin: 20px auto;
-            width: 600px;
-        }
-
-        .string {
-            background: linear-gradient(45deg,
-                #FF0000 0%, #FF9900 20%, #FFFF00 40%,
-                #00FF00 60%, #0099FF 80%, #6633FF 100%
-            );
-            width: 4px;
-            height: 200px;
-            margin: 10px;
-            cursor: pointer;
-            box-shadow: 0 0 10px #00FFFF;
-        }
-    </style>
+<meta charset="utf-8">
+<title>Ali's Blog — Virtual Oud</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+    --ink:#a7ffff; --panel:rgba(0,0,0,.78); --sideA:#0d0022; --sideB:#12002e; --marquee:#001a4d;
+  }
+  html,body{margin:0;padding:0;background:#000 url('stars.gif') repeat;color:var(--ink);
+    font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;image-rendering:pixelated;filter:contrast(115%) saturate(125%);}
+  .page{width:860px;max-width:98vw;margin:18px auto 32px;position:relative;left:6px;
+    border:6px ridge var(--neon-blue);outline:4px solid #00131a;background:var(--panel);
+    box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;padding-bottom:10px}
+  h1{margin:0;padding:16px 10px 8px;text-align:center;color:var(--neon-blue);
+    text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);font-size:42px}
+  .nav{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:6px 8px 10px}
+  .nav a{display:inline-block;padding:6px 8px;border:3px outset #6af7ff;background:#0e0e33;color:#a7ffff;text-decoration:none;
+    text-shadow:0 0 4px var(--neon-blue);box-shadow:2px 2px 0 #000}
+  .nav a:hover{border-style:inset;color:var(--neon-green);background:#140043;transform:translate(1px,1px)}
+  .nav img{vertical-align:middle;width:22px;height:22px;margin-right:4px;image-rendering:pixelated}
+  .marquee{margin:8px 12px;border:6px groove var(--neon-blue);background:var(--marquee)}
+  marquee{color:var(--neon-yellow);font-weight:bold}
+  .grid{display:grid;grid-template-columns:240px 1fr;gap:10px;padding:10px}
+  .sidebar{background:repeating-linear-gradient(135deg,var(--sideA) 0 12px,var(--sideB) 12px 24px);border-right:6px ridge var(--neon-purple);padding:8px}
+  fieldset{border:3px groove var(--neon-purple);margin:8px 0;padding:8px}
+  legend{color:var(--neon-purple);text-shadow:0 0 6px var(--neon-purple);padding:0 6px}
+  label{font-size:13px}
+  input[type=range]{width:100%}
+  .content{padding:8px 10px}
+  .row{display:flex;align-items:center;gap:8px;margin:10px 0}
+  .name{width:70px;text-align:right;color:#bfe}
+  .string{position:relative;flex:1;height:26px;border:3px ridge var(--neon-blue);background:linear-gradient(90deg,#061b2e 0%,#0b2740 100%);
+    box-shadow:inset 0 0 8px #000,0 0 12px #003b5a;cursor:crosshair}
+  .string::after{content:"";position:absolute;left:0;top:50%;right:0;height:2px;background:linear-gradient(90deg,#39ff1455,#00e5ff55);transform:translateY(-50%)}
+  .marker{position:absolute;top:-6px;width:2px;height:38px;background:var(--neon-yellow);opacity:.8;pointer-events:none}
+  .readout{min-width:130px;font-size:12px;color:#ffe}
+  .btn{display:inline-block;padding:6px 10px;border:3px outset #6af7ff;background:#0e0e33;color:#a7ffff;text-decoration:none;cursor:pointer}
+  .btn:hover{border-style:inset;color:var(--neon-green);background:#140043}
+  .split{display:flex;gap:8px;flex-wrap:wrap}
+  .hr{height:12px;border:0;margin:10px 8px;background-image:repeating-linear-gradient(90deg,#ff0000 0 14px,#ffa500 14px 28px,#ffff00 28 42px,#00cc00 42 56px,#00aaff 56 70px,#0000ff 70 84px,#8000ff 84 98px)}
+  .note{font-size:12px;color:#ccf}
+</style>
 </head>
 <body>
-    <div class="crt-overlay"></div>
-    
-    <!-- Blog Header -->
-    <header>
-        <center>
-            <div class="title">Ali's Blog</div>
-            <img src="kitty.gif" alt="kitty Gif" class="kitty-gif" style="width: 100px; height: 80px;">
-        </center>
-        <hr>
-        <!-- Navigation -->
-        <center>
-            <a href="index.html" class="retro-btn nav">Home</a>
-            <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="about.html" class="retro-btn nav">About</a>
-            <img src="about.gif" alt="about GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-            <img src="post.gif" alt="post GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="chat.html" class="retro-btn nav">Chat</a>
-            <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-            <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-            <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="books.html" class="retro-btn nav">Kool Books</a>
-            <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-            <img src="math.gif" alt="math GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-            <a href="contact.html" class="retro-btn nav">Contact</a>
-            <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-        </center>
-        <hr>
-    </header>
+<div class="page">
+  <h1>Virtual Oud</h1>
+  <div class="nav">
+    <a href="index.html"><img src="cutehome.gif" alt="">Home</a>
+    <a href="about.html"><img src="about.gif" alt="">About</a>
+    <a href="blog_posts.html"><img src="post.gif" alt="">Entries</a>
+    <a href="chat.html"><img src="chattt.gif" alt="">Chat</a>
+    <a href="coolsite.html"><img src="coollinks.gif" alt="">Kool Webpages</a>
+    <a href="guestbook.html"><img src="book-0037.gif" alt="">Guestbook</a>
+    <a href="books.html"><img src="catread.gif" alt="">Kool Books</a>
+    <a href="Truth2.html"><img src="math.gif" alt="">Truth Table</a>
+    <a href="contact.html"><img src="phone.gif" alt="">Contact</a>
+  </div>
 
-    <!-- Oud Simulator -->
-    <div id="splash" style="text-align: center; margin: 50px;">
-        <div style="width: 400px; height: 50px; background: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2m+VLNEWyED7T3aLEGFhIBiHwMUghUAqJQAQAOw==') repeat;"></div>
-        <marquee behavior="scroll" direction="left" scrollamount="10">
-            <h1>VIRTUAL OUD SIMULATOR v1.1</h1>
-        </marquee>
-        <button onclick="initApp()" style="
-            font-size:24px; 
-            padding:15px; 
-            background:#0000FF; 
-            color:#FFFFFF; 
-            border:3px outset #CCCCCC;">
-            START OUD
-        </button>
-    </div>
+  <div class="marquee"><marquee scrollamount="5">★ click along a string to change pitch • tuning: arabic C F A d g c′ • toggle drone + metronome for practice ★</marquee></div>
 
-    <div id="main-interface" style="display: none;">
-        <div class="oud-container">
-            <div style="display: flex; justify-content: center;">
-                <div class="string" data-time="0.2-1.0"></div>
-                <div class="string" data-time="1.2-2.0"></div>
-                <div class="string" data-time="2.2-3.0"></div>
-                <div class="string" data-time="3.2-4.0"></div>
-                <div class="string" data-time="4.2-5.0"></div>
-                <div class="string" data-time="5.2-5.75"></div>
-            </div>
-            
-            <div class="controls">
-                <div style="color:#FF00FF; font-size:18px;">
-                    <label>VOLUME: </label>
-                    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
-                </div>
-                <div style="color:#00FF00; margin-top:15px;">
-                    <label>TUNING: </label>
-                    <input type="range" id="tune" min="0.8" max="1.2" step="0.01" value="1">
-                </div>
-            </div>
+  <div class="grid">
+    <div class="sidebar">
+      <fieldset>
+        <legend>Audio</legend>
+        <div><label>Volume</label><input id="vol" type="range" min="0" max="1" step="0.01" value="0.5"></div>
+        <div><label>Fine-tune (cents)</label><input id="cents" type="range" min="-50" max="50" step="1" value="0"></div>
+        <div><label>Transpose (semitones)</label><input id="transpose" type="range" min="-2" max="2" step="1" value="0"></div>
+        <div><label>String range (↑ semitones)</label><input id="range" type="range" min="6" max="12" step="1" value="12"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tuning</legend>
+        <div class="note">Preset applies to labels + base pitch.</div>
+        <select id="preset" style="width:100%;margin-top:6px">
+          <option value="arabic" selected>Arabic 6-course (C2 F2 A2 D3 G3 C4)</option>
+          <option value="turkish">Turkish (E2 A2 B2 E3 A3 D4)</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Practice</legend>
+        <div class="split">
+          <button class="btn" id="droneBtn">Start Drone</button>
+          <button class="btn" id="metroBtn">Start Metronome</button>
         </div>
+        <div style="margin-top:6px">
+          <label>BPM</label>
+          <input id="bpm" type="range" min="40" max="180" step="1" value="80">
+          <span id="bpmOut">80</span>
+        </div>
+        <div class="note">Drone uses lowest string tonic + fifth.</div>
+      </fieldset>
+
+      <div class="note">Tip: click near the **left** end for open string; further **right** = higher pitch (up to one octave by default).</div>
     </div>
 
-    <script>
-        // Audio Setup
-        let audioContext;
-        let masterBuffer;
-        const stringTimes = [
-            { start: 0.2, end: 1.0 },
-            { start: 1.2, end: 2.0 },
-            { start: 2.2, end: 3.0 },
-            { start: 3.2, end: 4.0 },
-            { start: 4.2, end: 5.0 },
-            { start: 5.2, end: 5.75 }
-        ];
+    <div class="content">
+      <div class="hr"></div>
 
-        async function initApp() {
-            try {
-                document.getElementById('splash').style.display = 'none';
-                document.getElementById('main-interface').style.display = 'block';
-                
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                await audioContext.resume();
-                
-                const response = await fetch('https://upload.wikimedia.org/wikipedia/commons/7/77/Oud_open_Strings.ogg');
-                const arrayBuffer = await response.arrayBuffer();
-                masterBuffer = await audioContext.decodeAudioData(arrayBuffer);
+      <!-- Strings top = highest -->
+      <div id="strings"></div>
 
-                document.querySelectorAll('.string').forEach((string, index) => {
-                    let currentSource = null;
-                    const { start, end } = stringTimes[index];
-                    const duration = end - start;
+      <div class="hr"></div>
+      <div id="lastNote" class="note">—</div>
+    </div>
+  </div>
+</div>
 
-                    string.addEventListener('mousedown', () => {
-                        if(currentSource) currentSource.stop();
-                        
-                        const source = audioContext.createBufferSource();
-                        const gainNode = audioContext.createGain();
-                        const tune = document.getElementById('tune').value;
+<script>
+(() => {
+  // ----------- Audio plumbing -----------
+  const AC = window.AudioContext || window.webkitAudioContext;
+  const ctx = new AC();
+  let started = false;
 
-                        source.buffer = masterBuffer;
-                        source.playbackRate.value = tune;
-                        
-                        gainNode.gain.setValueAtTime(0.8, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.001, 
-                            audioContext.currentTime + duration * (1/tune));
+  const master = ctx.createGain();
+  master.gain.value = 0.5;
+  master.connect(ctx.destination);
 
-                        source.connect(gainNode);
-                        gainNode.connect(audioContext.destination);
-                        source.start(0, start, duration);
-                        currentSource = source;
-                    });
+  function now(){ return ctx.currentTime; }
 
-                    string.addEventListener('mouseup', () => currentSource?.stop());
-                });
+  // Short click buffer for metronome
+  function makeClickBuffer(){
+    const len = Math.floor(ctx.sampleRate * 0.02);
+    const b = ctx.createBuffer(1, len, ctx.sampleRate);
+    const d = b.getChannelData(0);
+    for (let i=0;i<len;i++){
+      const env = Math.exp(-i/(len/8));
+      d[i] = (Math.random()*2-1)*env;
+    }
+    return b;
+  }
+  const clickBuf = makeClickBuffer();
 
-                const volumeControl = document.getElementById('volume');
-                const masterGain = audioContext.createGain();
-                masterGain.connect(audioContext.destination);
-                masterGain.gain.value = volumeControl.value;
-                volumeControl.addEventListener('input', () => {
-                    masterGain.gain.value = volumeControl.value;
-                });
+  // Karplus–Strong: offline pluck buffer
+  function makePluckBuffer(freq, durSec, damping=0.997){
+    const sr = ctx.sampleRate;
+    const length = Math.max(1,Math.floor(durSec*sr));
+    const delay = Math.max(2, Math.floor(sr/freq));
+    const b = ctx.createBuffer(1, length, sr);
+    const d = b.getChannelData(0);
+    // seed with noise for one delay length
+    for (let i=0;i<delay;i++) d[i] = Math.random()*2-1;
+    let prev = 0;
+    for (let i=delay;i<length;i++){
+      const avg = 0.5*(d[i-delay] + d[i-delay+1-1] || d[i-delay]);
+      const y = avg * damping;
+      // gentle low-pass to warm the tone
+      d[i] = 0.5*(y + prev);
+      prev = d[i];
+    }
+    return b;
+  }
 
-            } catch(error) {
-                alert(`ERROR: ${error.message}\nPlease try refreshing!`);
-            }
-        }
-    </script>
+  function playPluck(freq, cents=0, dur=2.2){
+    const detuneA = Math.pow(2, (cents-5)/1200);
+    const detuneB = Math.pow(2, (cents+5)/1200);
+    const buf = makePluckBuffer(freq, dur);
+    const s1 = ctx.createBufferSource(); s1.buffer = buf; s1.playbackRate.value = detuneA;
+    const s2 = ctx.createBufferSource(); s2.buffer = buf; s2.playbackRate.value = detuneB;
+    const g = ctx.createGain();
+    g.gain.value = 1.0;
+    s1.connect(g); s2.connect(g); g.connect(master);
+    const t = now();
+    // tiny attack to avoid clicks
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(master.gain.value, t+0.01);
+    s1.start(t); s2.start(t);
+    // auto stop
+    s1.stop(t+dur); s2.stop(t+dur);
+  }
+
+  // ----------- Music helpers -----------
+  const NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+  function freqToNoteName(f){
+    const a4 = 440;
+    const n = 12*Math.log2(f/a4);
+    const midi = Math.round(n)+69;
+    const name = NOTE_NAMES[(midi+1200)%12];
+    const octave = Math.floor(midi/12)-1;
+    const exact = a4 * Math.pow(2,(midi-69)/12);
+    const cents = Math.round(1200*Math.log2(f/exact));
+    return `${name}${octave} (${cents>=0?'+':''}${cents}¢)`;
+  }
+  function noteFreq(name){
+    // minimal parser e.g. "C2", "D#3"
+    const m = name.match(/^([A-G])(#?)(-?\d)$/);
+    if(!m) return 0;
+    const i = NOTE_NAMES.indexOf(m[1] + (m[2]||""));
+    const octave = parseInt(m[3],10);
+    const midi = i + (octave+1)*12;
+    return 440 * Math.pow(2, (midi-69)/12);
+  }
+
+  // ----------- UI / State -----------
+  const stringsDiv = document.getElementById('strings');
+  const vol = document.getElementById('vol');
+  const cents = document.getElementById('cents');
+  const transpose = document.getElementById('transpose');
+  const range = document.getElementById('range');
+  const presetSel = document.getElementById('preset');
+  const bpm = document.getElementById('bpm');
+  const bpmOut = document.getElementById('bpmOut');
+  const lastNote = document.getElementById('lastNote');
+
+  vol.addEventListener('input', ()=> master.gain.value = parseFloat(vol.value));
+  bpm.addEventListener('input', ()=> bpmOut.textContent = bpm.value);
+
+  let tuning = [];
+  function setPreset(which){
+    if(which === 'turkish'){
+      tuning = [
+        {name:'E2', freq: noteFreq('E2')},
+        {name:'A2', freq: noteFreq('A2')},
+        {name:'B2', freq: noteFreq('B2')},
+        {name:'E3', freq: noteFreq('E3')},
+        {name:'A3', freq: noteFreq('A3')},
+        {name:'D4', freq: noteFreq('D4')}
+      ];
+    } else { // arabic default
+      tuning = [
+        {name:'C2', freq: noteFreq('C2')},
+        {name:'F2', freq: noteFreq('F2')},
+        {name:'A2', freq: noteFreq('A2')},
+        {name:'D3', freq: noteFreq('D3')},
+        {name:'G3', freq: noteFreq('G3')},
+        {name:'C4', freq: noteFreq('C4')}
+      ];
+    }
+    renderStrings();
+  }
+  presetSel.addEventListener('change', e=> setPreset(e.target.value));
+
+  function renderStrings(){
+    stringsDiv.innerHTML = '';
+    // Highest at top
+    const list = [...tuning].reverse();
+    list.forEach((s, idx)=>{
+      const row = document.createElement('div'); row.className = 'row';
+      const name = document.createElement('div'); name.className='name'; name.textContent = s.name;
+      const bar = document.createElement('div'); bar.className='string';
+      const marker = document.createElement('div'); marker.className='marker'; marker.style.left='0px';
+      const ro = document.createElement('div'); ro.className='readout'; ro.textContent = '—';
+      bar.appendChild(marker);
+      row.appendChild(name); row.appendChild(bar); row.appendChild(ro);
+      stringsDiv.appendChild(row);
+
+      function playAt(clientX){
+        const rect = bar.getBoundingClientRect();
+        let x = (clientX - rect.left) / rect.width;
+        x = Math.min(0.999, Math.max(0, x));
+        marker.style.left = (x*100)+'%';
+        const semisUp = parseInt(range.value,10) * x;  // 0..range semitones
+        const tr = parseInt(transpose.value,10);
+        const cen = parseInt(cents.value,10);
+        const freq = s.freq * Math.pow(2, (semisUp + tr)/12);
+        const centsTotal = cen; // applied inside playPluck via playbackRate
+        lastNote.textContent = `String ${s.name} → ~${freqToNoteName(freq)} | pos ${(semisUp).toFixed(2)} st`;
+        ro.textContent = freqToNoteName(freq);
+        playPluck(freq, centsTotal, 2.4);
+      }
+
+      bar.addEventListener('pointerdown', e=>{
+        startAudioIfNeeded().then(()=> playAt(e.clientX));
+      });
+    });
+  }
+
+  async function startAudioIfNeeded(){
+    if (!started){
+      try{ await ctx.resume(); }catch(e){}
+      started = true;
+    }
+  }
+
+  // ----------- Drone -----------
+  let droneOn = false, droneNodes = [];
+  function startDrone(){
+    stopDrone();
+    // tonic = lowest course; fifth above
+    const base = tuning[0].freq * Math.pow(2, parseInt(transpose.value,10)/12);
+    const tonic = ctx.createOscillator(); tonic.type = 'sine'; tonic.frequency.value = base;
+    const fifth = ctx.createOscillator(); fifth.type = 'sine'; fifth.frequency.value = base*1.5;
+    const g = ctx.createGain(); g.gain.value = 0.08;
+    const trem = ctx.createOscillator(); trem.type='sine'; trem.frequency.value = 5;
+    const tremGain = ctx.createGain(); tremGain.gain.value = 0.04;
+    trem.connect(tremGain); tremGain.connect(g.gain);
+    tonic.connect(g); fifth.connect(g); g.connect(master);
+    const t = now();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.12, t+0.4);
+    tonic.start(); fifth.start(); trem.start();
+    droneNodes = [tonic,fifth,trem,g];
+    droneOn = true;
+    document.getElementById('droneBtn').textContent = 'Stop Drone';
+  }
+  function stopDrone(){
+    if(!droneOn) return;
+    const t = now();
+    const g = droneNodes[3];
+    g.gain.cancelScheduledValues(t);
+    g.gain.setTargetAtTime(0, t, 0.15);
+    setTimeout(()=> droneNodes.forEach(n=>{try{n.stop();}catch{}}), 400);
+    droneOn = false;
+    document.getElementById('droneBtn').textContent = 'Start Drone';
+  }
+  document.getElementById('droneBtn').addEventListener('click', async ()=>{
+    await startAudioIfNeeded();
+    droneOn ? stopDrone() : startDrone();
+  });
+
+  // ----------- Metronome -----------
+  let metroOn = false, metroTimer = null;
+  function startMetro(){
+    stopMetro();
+    const schedule = ()=>{
+      const src = ctx.createBufferSource();
+      src.buffer = clickBuf;
+      const g = ctx.createGain(); g.gain.value = 0.5;
+      src.connect(g); g.connect(master);
+      src.start();
+    };
+    const period = ()=> 60000/parseInt(bpm.value,10);
+    schedule();
+    metroTimer = setInterval(schedule, period());
+    metroOn = true;
+    document.getElementById('metroBtn').textContent = 'Stop Metronome';
+  }
+  function stopMetro(){
+    if(metroTimer){ clearInterval(metroTimer); metroTimer = null; }
+    metroOn = false;
+    document.getElementById('metroBtn').textContent = 'Start Metronome';
+  }
+  document.getElementById('metroBtn').addEventListener('click', async ()=>{
+    await startAudioIfNeeded();
+    metroOn ? stopMetro() : startMetro();
+  });
+
+  // init
+  setPreset('arabic');
+})();
+</script>
 </body>
 </html>
