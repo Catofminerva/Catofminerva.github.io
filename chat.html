@@ -59,6 +59,10 @@
 .emote { font-style: italic; }
 #typing { color:#555; margin-left:8px; }
 
+    .tips{ font-size:11px; color:#444; margin-top:4px; line-height:1.35; }
+.tips a{ color:#000; text-decoration:underline; cursor:pointer; }
+.tips code{ background:#f2f2f2; border:1px solid #ddd; padding:0 2px; }
+
     
   </style>
 </head>
@@ -144,6 +148,17 @@
         </div>
       </div>
 
+      <div class="tips" id="tips">
+  <strong>Tips:</strong>
+  Enter sends, Shift+Enter makes a new line.
+  Type <code>/me waves</code> for an emote.
+  Right-click a name to whisper or ignore.
+  Double-click the topic to edit, or use <em>IM → Set Topic…</em>.
+  Pick Color or Font with no selection to set your default style.
+  View → Show/Hide Timestamps, File → Join Room.
+  <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
+</div>
+      
       <div class="right">
         <div class="menubar">People in Room</div>
         <div id="roster"></div>
@@ -543,6 +558,24 @@ function onMessage(e){
       }
     }
 
+// Tips bar controls
+const tipsEl = document.getElementById("tips");
+const hideTipsBtn = document.getElementById("hideTips");
+const moreHelpBtn = document.getElementById("moreHelp");
+const TIPS_KEY = "aolchat_tips_hidden";
+
+if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
+
+hideTipsBtn.onclick = (e) => {
+  e.preventDefault();
+  const hidden = tipsEl.style.display !== "none";
+  tipsEl.style.display = hidden ? "none" : "";
+  if (hidden) localStorage.setItem(TIPS_KEY, "1"); else localStorage.removeItem(TIPS_KEY);
+};
+
+moreHelpBtn.onclick = (e) => { e.preventDefault(); showHelp(); };
+
+    
     // Actions
     function saveLog(){
       const text = Array.from(logEl.children).map(d=>d.textContent).join("\n");
