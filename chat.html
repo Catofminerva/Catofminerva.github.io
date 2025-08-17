@@ -92,6 +92,7 @@
         <a data-action="zoom-out">Zoom Out</a>
         <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
         <a data-action="toggle-roster">Show/Hide Roster</a>
+        <a data-action="toggle-tips">Show/Hide Tips</a>
       </div>
       <div class="dropdown" id="menu-im">
         <a data-action="toggle-beep">Beep on New Message</a>
@@ -554,6 +555,7 @@ function onMessage(e){
         case "select-all": return selectAllLog();
         case "zoom-in": return zoom(1);
         case "zoom-out": return zoom(-1);
+        case "toggle-tips": return toggleTips();
         case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
         case "toggle-roster": return rightPane.classList.toggle("hidden");
         case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
@@ -691,6 +693,15 @@ document.getElementById("ctx-ignore").onclick = (e) => {
   alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser);
 };
 
+function toggleTips() {
+  const tips = document.getElementById("tips");
+  if (!tips) return;
+  const TIPS_KEY = "aolchat_tips_hidden";
+  const isHidden = tips.style.display === "none";
+  tips.style.display = isHidden ? "" : "none";
+  if (isHidden) localStorage.removeItem(TIPS_KEY);
+  else localStorage.setItem(TIPS_KEY, "1");
+}
 
     
   </script>
