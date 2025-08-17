@@ -72,8 +72,6 @@
       <button class="menu-btn" data-menu="im">IM ▾</button>
       <button class="menu-btn" data-menu="help">Help ▾</button>
 
-      <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
-
       <div class="dropdown" id="menu-file">
         <a data-action="save-log">Save Log…</a>
         <a data-action="print">Print…</a>
@@ -100,7 +98,10 @@
         <a data-action="about">About…</a>
       </div>
     </div>
+     
+    <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
 
+    
     <div class="layout">
       <div class="left">
         <div id="log" aria-live="polite"></div>
@@ -594,13 +595,14 @@ document.getElementById("ctx-ignore").onclick = (e) => {
   alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser);
 };
 
-    
-  </script>
-  
   <div id="ctx" style="position:absolute;display:none;background:#fff;border:1px solid #9a9a9a;z-index:20;min-width:160px;">
   <a href="#" id="ctx-whisper" style="display:block;padding:6px 10px;">Whisper…</a>
   <a href="#" id="ctx-ignore"  style="display:block;padding:6px 10px;">Ignore/Unignore</a>
 </div>
+    
+  </script>
+  
+
 
 </body>
 </html>
