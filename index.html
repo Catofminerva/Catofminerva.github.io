@@ -140,21 +140,32 @@ hr.retro {
   overflow: visible;   /* so the cat can start off-screen */
 }
 
-/* Kitty overlay on the same bar */
-hr.retro::after {
+/* target the FIRST rainbow bar in the main content */
+.content > hr.retro:first-of-type {
+  position: relative;
+  overflow: visible;        /* let the cat start off-screen */
+}
+
+/* bigger cat, above the bar, slower run */
+.content > hr.retro:first-of-type::after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: -48px;                          /* start just off the left edge */
-  width: 28px;
-  height: 28px;
-  transform: translateY(-50%);
-  background: url("kitty.gif?v=5") no-repeat center / contain;
+  left: -64px;              /* start just off the left edge */
+  top: -56px;               /* place ABOVE the bar; tweak this */
+  width: 64px;              /* cat size — increase for larger */
+  height: 64px;
+  background: url("kitty.gif?v=10") center / contain no-repeat;
   image-rendering: pixelated;
-  animation: kitty-on-rail 7s linear infinite;
+  animation: kitty-rail 12s linear infinite;  /* increase seconds = slower */
   pointer-events: none;
-  z-index: 2;
+  z-index: 9;
 }
+
+@keyframes kitty-rail {
+  from { left: -64px; }
+  to   { left: 100%; }      /* runs across the same bar */
+}
+
 
 @keyframes kitty-on-rail {
   from { left: -48px; }
