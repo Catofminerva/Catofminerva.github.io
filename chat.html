@@ -157,7 +157,12 @@
 </div>
 
   </div>
-
+  
+  <div id="ctx" style="position:absolute;display:none;background:#fff;border:1px solid #9a9a9a;z-index:20;min-width:160px;">
+  <a href="#" id="ctx-whisper" style="display:block;padding:6px 10px;">Whisper…</a>
+  <a href="#" id="ctx-ignore"  style="display:block;padding:6px 10px;">Ignore/Unignore</a>
+</div>
+  
   <script>
     // ===== Config =====
     const WORKER_HOST = "chat.asalmaadeed.workers.dev"; // change if your worker hostname differs
@@ -171,6 +176,8 @@
     $("nick").value = nick;
 
     let ws;
+
+    let beepOn = true;
 
   let typingTimer = null;
 let ignored = new Set(JSON.parse(localStorage.getItem("ignored") || "[]"));
@@ -490,7 +497,6 @@ function onMessage(e){
     const logEl = document.getElementById("log");
     const rightPane = document.querySelector(".right");
     let openMenu = null;
-    let beepOn = true;
     let currentZoom = 13;
 
     menubarEl.addEventListener("click", (e) => {
@@ -630,10 +636,7 @@ document.getElementById("ctx-ignore").onclick = (e) => {
   alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser);
 };
 
-  <div id="ctx" style="position:absolute;display:none;background:#fff;border:1px solid #9a9a9a;z-index:20;min-width:160px;">
-  <a href="#" id="ctx-whisper" style="display:block;padding:6px 10px;">Whisper…</a>
-  <a href="#" id="ctx-ignore"  style="display:block;padding:6px 10px;">Ignore/Unignore</a>
-</div>
+
     
   </script>
   
