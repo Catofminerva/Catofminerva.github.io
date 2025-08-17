@@ -107,57 +107,64 @@
 
     
     <div class="layout">
-      <div class="left">
-        <div id="log" aria-live="polite"></div>
-        <div class="inputbar">
-          <div class="row">
-            <label for="nick" style="align-self:center;">Nick:</label>
-            <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
-            <button id="setNick">Set</button>
-          </div>
-          <div class="row toolbar">
-            <button id="bBtn"><b>B</b></button>
-            <button id="iBtn"><i>I</i></button>
-            <button id="uBtn"><u>U</u></button>
-            <label>Color:
-              <select id="colorSel">
-                <option value="">—</option>
-                <option>black</option><option>red</option><option>blue</option>
-                <option>green</option><option>maroon</option><option>purple</option>
-                <option>teal</option><option>navy</option>
-              </select>
-            </label>
-            <label>Font:
-              <select id="fontSel">
-                <option value="">—</option>
-                <option>Arial</option><option>Times New Roman</option>
-                <option>Courier New</option><option>Verdana</option>
-              </select>
-            </label>
-            <label>Size:
-              <select id="sizeSel">
-                <option value="">—</option>
-                <option>10</option><option>12</option><option>14</option><option>16</option><option>18</option>
-              </select>
-            </label>
-          </div>
-          <div class="row">
-<div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
-            <button id="send">Send</button>
-          </div>
-        </div>
-      </div>
+<div class="left">
+  <div id="log" aria-live="polite"></div>
 
-          <div class="tips" id="tips">
-        <strong>Tips:</strong>
-        Enter sends, Shift+Enter makes a new line.
-        Type <code>/me waves</code> for an emote.
-        Right-click a name to whisper or ignore.
-        Double-click the topic to edit, or use IM → Set Topic….
-        Pick Color/Font with no selection to set your default style.
-        View → Show/Hide Timestamps, File → Join Room.
-        <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
-      </div>
+  <div class="inputbar">
+    <div class="row">
+      <label for="nick" style="align-self:center;">Nick:</label>
+      <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
+      <button id="setNick">Set</button>
+    </div>
+
+    <div class="row toolbar">
+      <button id="bBtn"><b>B</b></button>
+      <button id="iBtn"><i>I</i></button>
+      <button id="uBtn"><u>U</u></button>
+      <label>Color:
+        <select id="colorSel">
+          <option value="">—</option>
+          <option>black</option><option>red</option><option>blue</option>
+          <option>green</option><option>maroon</option><option>purple</option>
+          <option>teal</option><option>navy</option>
+        </select>
+      </label>
+      <label>Font:
+        <select id="fontSel">
+          <option value="">—</option>
+          <option>Arial</option><option>Times New Roman</option>
+          <option>Courier New</option><option>Verdana</option>
+        </select>
+      </label>
+      <label>Size:
+        <select id="sizeSel">
+          <option value="">—</option>
+          <option>10</option><option>12</option><option>14</option>
+          <option>16</option><option>18</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="row">
+      <div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
+      <button id="send">Send</button>
+    </div>
+
+    <!-- Tips live INSIDE .inputbar, under the Send row -->
+    <div class="tips" id="tips">
+      <strong>Tips:</strong>
+      Enter sends, Shift+Enter makes a new line.
+      Type <code>/me waves</code> for an emote.
+      Right-click a name to whisper or ignore.
+      Double-click the topic to edit, or use IM → Set Topic….
+      Pick Color/Font with no selection to set your default style.
+      View → Show/Hide Timestamps, File → Join Room.
+      <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
+    </div>
+  </div> <!-- /.inputbar -->
+</div> <!-- /.left -->
+
+
       
       <div class="right">
         <div class="menubar">People in Room</div>
