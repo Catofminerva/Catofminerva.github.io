@@ -331,6 +331,143 @@ function renderMessage(m){
 
     // Go
     connect();
+    <script>
+// ===== Menus: open/close and actions =====
+let openMenu = null;
+let beepOn = true;
+let currentZoom = 13; // px
+const rightPane = document.querySelector(".right");
+const menubarEl = document.getElementById("menubar");
+const logEl = document.getElementById("log");
+
+// Open the matching dropdown next to the clicked button
+menubarEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".menu-btn");
+  const item = e.target.closest(".dropdown a");
+  if (btn) {
+    const id = "menu-" + btn.dataset.menu;
+    toggleMenu(btn, document.getElementById(id));
+  } else if (item) {
+    handleAction(item.getAttribute("data-action"));
+    closeMenus();
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!menubarEl.contains(e.target)) closeMenus();
+});
+
+function toggleMenu(btn, menu) {
+  const rect = btn.getBoundingClientRect();
+  const host = menubarEl.getBoundingClientRect();
+  menu.style.left = (rect.left - host.left) + "px";
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+  // close any other open menu
+  if (openMenu && openMenu !== menu) openMenu.style.display = "none";
+  openMenu = menu.style.display === "block" ? menu : null;
+}
+function closeMenus() {
+  document.querySelectorAll(".dropdown").forEach(d => d.style.display = "none");
+  openMenu = null;
+}
+
+function handleAction(a) {
+  switch (a) {
+    case "save-log": return saveLog();
+    case "print": return window.print();
+    case "clear-log": return clearLog();
+    case "join-room": return joinRoom();
+    case "copy-log": return copyLog();
+    case "find": return findInLog();
+    case "select-all": return selectAllLog();
+    case "zoom-in": return zoom(1);
+    case "zoom-out": return zoom(-1);
+    case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
+    case "toggle-roster": return rightPane.classList.toggle("hidden");
+    case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
+    case "help": return showHelp();
+    case "about": return alert("Web Chat • simple AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
+  }
+}
+
+// ===== Menu action implementations =====
+function saveLog() {
+  const text = Array.from(logEl.children).map(d => d.textContent).join("\n");
+  const blob = new Blob([text], { type: "text/plain" });
+  const a = document.createElement("a");
+  const stamp = new Date().toISOString().replace(/[:.]/g,"-");
+  a.href = URL.createObjectURL(blob);
+  a.download = `chat-${ROOM}-${stamp}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function clearLog() { logEl.innerHTML = ""; }
+
+function joinRoom() {
+  const room = prompt("Join room:", ROOM);
+  if (room && room !== ROOM) {
+    const url = new URL(location.href);
+    url.searchParams.set("room", room);
+    location.href = url.toString();
+  }
+}
+
+async function copyLog() {
+  const text = Array.from(logEl.children).map(d => d.textContent).join("\n");
+  try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); }
+}
+
+function selectAllLog() {
+  const range = document.createRange();
+  range.selectNodeContents(logEl);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function findInLog() {
+  const term = prompt("Find:"); if (!term) return;
+  const lower = term.toLowerCase();
+  // remove old highlights
+  logEl.querySelectorAll(".hilite").forEach(x => x.classList.remove("hilite"));
+  for (const div of logEl.children) {
+    if (div.textContent.toLowerCase().includes(lower)) {
+      div.classList.add("hilite");
+      div.scrollIntoView({ block: "nearest" });
+      break;
+    }
+  }
+}
+
+function zoom(delta) {
+  currentZoom = Math.max(10, Math.min(22, currentZoom + delta));
+  logEl.style.fontSize = currentZoom + "px";
+}
+
+// ===== Beep on incoming messages not from me =====
+function ding() {
+  try {
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.type = "square"; o.frequency.value = 880;
+    g.gain.setValueAtTime(0.0001, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.15);
+    o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.16);
+  } catch {}
+}
+
+// Hook the beep into your onMessage handler:
+// Find your existing onMessage and after you parse payload, in the branch where you render a chat message,
+// add:
+///   if (payload.type === "chat" && payload.username !== nick && beepOn) { ding(); }
+
+</script>
+
   </script>
 </body>
 </html>
