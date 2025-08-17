@@ -4,129 +4,149 @@
   <meta charset="UTF-8">
   <title>Ali's World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    /* General reset and retro background */
+    :root{
+      /* tweak these if you want different neons later */
+      --neon-blue:   #00e5ff;
+      --neon-green:  #39ff14;
+      --neon-yellow: #ffff33;
+      --neon-purple: #8f00ff;
+
+      --ink:         #00ffea;          /* base text */
+      --panel-bg:    rgba(0,0,0,0.78);  /* content panel */
+      --sidebar-a:   #0d0022;           /* stripe A */
+      --sidebar-b:   #12002e;           /* stripe B */
+      --marquee-bg:  #001a4d;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       background-image: url('stars.gif');
       background-repeat: repeat;
-      color: #00ffea;
-      font-family: "Comic Sans MS", "Courier New", "Lucida Console", "MS Sans Serif", monospace;
+      color: var(--ink);
+      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
+      image-rendering: pixelated;
+      cursor: crosshair;
+      filter: contrast(115%) saturate(125%);
     }
 
-    /* Central page container */
     .page {
       width: 760px;
-      margin: 20px auto;
-      border: 6px ridge #ff00ff;
-      background: rgba(0, 0, 0, 0.75);
-      box-shadow: 0 0 40px #ff00ff, inset 0 0 10px #00ffff;
+      margin: 18px auto 32px;
+      position: relative;
+      left: 7px; /* tiny off-center nudge */
+      border: 6px ridge var(--neon-blue);
+      outline: 4px solid #00131a;
+      background: var(--panel-bg);
+      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
     }
 
-    /* Glittery page title */
     #glitter-title {
-      font-size: 64px;
+      font-size: 60px;
       text-align: center;
-      color: #ff69b4;
-      text-shadow: 0 0 6px #fff, 0 0 12px #ff00ff, 0 0 20px #00ffff;
+      color: var(--neon-blue);
+      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
       margin: 0;
-      padding: 20px 10px 0;
+      padding: 18px 10px 0;
+      letter-spacing: 0.5px;
     }
 
-    /* Marquee banner styling */
     .marquee-wrap {
       margin: 10px 20px;
-      border: 4px groove #00ffff;
-      background: #000044;
+      border: 6px groove var(--neon-blue);
+      background: var(--marquee-bg);
     }
-    marquee {
-      color: #ffff00;
-      font-weight: bold;
-      font-size: 18px;
-    }
+    .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
+    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
 
-    /* Layout structure */
-    .layout {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    .layout { width: 100%; border-collapse: collapse; }
     .sidebar {
-      width: 200px;
-      background: #220022;
-      border-right: 4px ridge #ff00ff;
+      width: 210px;
+      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right: 6px ridge var(--neon-purple);
       vertical-align: top;
     }
     .content {
       padding: 10px 14px 20px;
       vertical-align: top;
+      background: rgba(15,0,20,0.45);
+      border-left: 4px solid #21003a;
     }
 
-    /* Navigation links */
     .nav a {
       display: block;
-      margin: 8px;
-      padding: 8px;
-      border: 3px outset #00ffff;
-      background: #111133;
-      color: #00ffff;
+      margin: 10px 6px;
+      padding: 6px 8px;
+      border: 3px outset #6af7ff;
+      background: #0e0e33;
+      color: #a7ffff;
       text-decoration: none;
-      text-align: center;
+      text-align: left;
       text-transform: uppercase;
-      text-shadow: 0 0 4px #00ffff;
+      text-shadow: 0 0 4px var(--neon-blue);
+      box-shadow: 2px 2px 0 #000;
     }
     .nav a:hover {
       border-style: inset;
-      color: #ff69b4;
-      background: #330033;
+      color: var(--neon-green);
+      background: #140043;
+      transform: translate(1px,1px);
     }
-
-    /* Size and alignment for navigation icons */
     .nav-icon {
       vertical-align: middle;
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       margin-right: 6px;
+      image-rendering: pixelated;
     }
 
-    /* Post containers */
     .post {
-      margin: 16px 0 24px;
-      padding: 10px;
-      border: 4px groove #ff69b4;
-      background: rgba(30, 0, 30, 0.6);
+      margin: 14px 0 28px;
+      padding: 10px 10px 14px;
+      border: 4px groove var(--neon-purple);
+      background: rgba(20,0,30,0.62);
     }
     .post h3 {
       margin: 0 0 6px 0;
-      color: #ff69b4;
-      text-shadow: 0 0 6px #ff69b4;
+      color: var(--neon-purple);
+      text-shadow: 0 0 6px var(--neon-purple);
     }
-    .post .meta {
-      font-size: 12px;
-      color: #ffff66;
+    .post .meta { font-size: 12px; color: var(--neon-yellow); }
+
+    hr.retro {
+      height: 12px; border: 0; margin: 10px 0 14px;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,
+        #ffa500 14px 28px,
+        #ffff00 28px 42px,
+        #00cc00 42px 56px,
+        #00aaff 56px 70px,
+        #0000ff 70px 84px,
+        #8000ff 84px 98px
+      );
     }
 
-    /* Footer styling */
-    .footer {
-      padding: 12px;
-      text-align: center;
-      color: #fff;
-    }
+    .blink { animation: blink 0.9s steps(1,end) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .footer { padding: 8px; text-align: center; color: #fff; }
   </style>
 </head>
-
 <body>
   <div class="page">
     <h1 id="glitter-title">Ali's World</h1>
+
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
-        ★ Welcome to Ali's cosmic webspace ★ Best viewed in Netscape 4.0 ★
+        ★ welcome to ali's cosmic webspace ★ best viewed in netscape 4.0 ★
       </marquee>
     </div>
 
     <table class="layout">
       <tr>
-        <!-- Sidebar with navigation and counter -->
         <td class="sidebar">
           <div class="nav">
             <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
@@ -140,10 +160,12 @@
             <a href="oudsimulator.html">Oud Simulator</a>
             <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
           </div>
+
           <div style="text-align:center; padding:10px">
-            <span style="font-size:12px; color:#ff0">You are visitor #</span>
-            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #aaa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
+            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
+            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
           </div>
+
           <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
             <div><a href="#" onclick="alert('Email me!'); return false;">Email Me</a></div>
             <div style="margin-top:6px"><a href="#" onclick="alert('Guestbook coming soon!'); return false;">Sign my Guestbook</a></div>
@@ -151,24 +173,34 @@
           </div>
         </td>
 
-        <!-- Main content area -->
         <td class="content">
+          <hr class="retro">
+
           <div class="post">
-            <h3>Welcome</h3>
+            <h3>Welcome <span class="blink">!</span></h3>
             <div class="meta">1999 · Ali's cosmic home</div>
-<p>welcome to my page.. still figuring this out lol</p>
-<p>&nbsp;</p>
-<p>i’ve been messing with the html and it kinda works?? don’t click around too much yet coz half the links are broken ;-)</p>
-<br><br>
-<p>chat room is up now (!!!) but if it crashes it’s probly just my server being moody again haha.</p>
-<p>&nbsp;</p><p>&nbsp;</p>
-<p>i’m gonna add more posts when i finish typing them out from my notebook (yeah i still write stuff on paper, wild huh).</p>
+            <p>welcome to my page.. still figuring this out lol</p>
+            <p>&nbsp;</p>
+            <p>i’ve been messing with the html and it kinda works?? don’t click around too much yet coz half the links are broken ;-)</p>
+            <br><br>
+            <p>chat room is up now (!!!) but if it crashes it’s probly just my server being moody again haha.</p>
+            <p>&nbsp;</p><p>&nbsp;</p>
+            <p>i’m gonna add more posts when i finish typing them out from my notebook (yeah i still write stuff on paper, wild huh).</p>
           </div>
+
           <div class="post">
             <h3>Pet and feed Zaki</h3>
             <div class="meta">Virtual pet</div>
             <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
           </div>
+
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">
+              under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678
+            </marquee>
+          </div>
+
+          <hr class="retro">
         </td>
       </tr>
     </table>
@@ -186,13 +218,22 @@
         localStorage.setItem(key, n);
         var s = String(n).padStart(6, '0');
         document.getElementById('hitCount').textContent = s;
-      } catch (e) {
-        // If localStorage is unavailable, do nothing.
-      }
+      } catch (e) {}
     })();
 
-    // Display last modified date
     document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+
+    /* tiny nav misalignment so it doesn't feel grid-perfect */
+    (function () {
+      var links = document.querySelectorAll('.nav a');
+      links.forEach(function(a){
+        var ml = 6 + Math.floor(Math.random()*7); // 6–12px
+        var fs = 12 + Math.floor(Math.random()*3); // 12–14px
+        a.style.marginLeft = ml + 'px';
+        a.style.fontSize   = fs + 'px';
+        if (Math.random() < 0.4) a.style.letterSpacing = '1px';
+      });
+    })();
   </script>
 </body>
 </html>
