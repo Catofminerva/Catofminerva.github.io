@@ -57,8 +57,6 @@
       margin: 10px 20px;
       border: 6px groove var(--neon-blue);
       background: var(--marquee-bg);
-        position: relative;      /* NEW */
-  overflow: hidden;        /* NEW */
     }
     .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
     marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
@@ -136,9 +134,17 @@
 
     .footer { padding: 8px; text-align: center; color: #fff; }
   
+  /* Kitty runner under the title */
+.runner {
+  position: relative;
+  height: 34px;
+  margin: 6px 20px 10px;
+  overflow: hidden;
+}
 
-/* rainbow line */
-.kitty-line {
+/* the colored line */
+.runner::before {
+  content: "";
   position: absolute;
   left: 0; right: 0;
   top: 50%;
@@ -158,38 +164,42 @@
   box-shadow: 0 0 10px var(--neon-blue);
 }
 
-/* the moving cat */
-.marquee-cat {
+/* the cat */
+.runner img {
   position: absolute;
   top: 50%;
-  left: -60px;             /* start off-screen */
   transform: translateY(-50%);
-  height: 28px;
+  height: 28px;             /* adjust if your gif is taller */
   image-rendering: pixelated;
-  animation: kitty-run 8s linear infinite;
-  pointer-events: none;
-  z-index: 2;
-}
-@keyframes kitty-run {
-  from { left: -60px; }
-  to   { left: 100%; }
+  animation: cat-run 6s linear infinite;
 }
 
+@keyframes cat-run {
+  0%   { left: -60px; }
+  100% { left: calc(100% + 60px); }
+}
+
+/* optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .runner img { animation: none; left: 0; }
+}
 
   
   </style>
 </head>
 <body>
   <div class="page">
-<h1 id="glitter-title">Ali's World</h1>
+    <h1 id="glitter-title">Ali's World</h1>
 
-<div class="kitty-track">
-  <div class="kitty-line"></div>
-  <marquee class="kitty-marquee" scrollamount="8" direction="right">
-    <img src="kitty.gif" alt="kitty running" class="kitty-img">
-  </marquee>
+    <div class="runner">
+  <img src="kitty.gif" alt="kitty running">
 </div>
 
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">
+        ★ welcome to ali's cosmic webspace ★ best viewed in netscape 4.0 ★
+      </marquee>
+    </div>
 
     <table class="layout">
       <tr>
@@ -244,7 +254,6 @@
             <marquee scrollamount="4" direction="right">
               under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678
             </marquee>
-         <img class="marquee-cat" src="kitty.gif?v=2" alt="kitty running">
           </div>
 
           <hr class="retro">
