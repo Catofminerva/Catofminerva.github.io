@@ -57,6 +57,8 @@
       margin: 10px 20px;
       border: 6px groove var(--neon-blue);
       background: var(--marquee-bg);
+        position: relative;      /* NEW */
+  overflow: hidden;        /* NEW */
     }
     .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
     marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
@@ -134,12 +136,6 @@
 
     .footer { padding: 8px; text-align: center; color: #fff; }
   
-/* Kitty track under the title */
-.kitty-track {
-  position: relative;
-  height: 34px;
-  margin: 6px 20px 10px;
-}
 
 /* rainbow line */
 .kitty-line {
@@ -163,19 +159,20 @@
 }
 
 /* the moving cat */
-.kitty-marquee {
+.marquee-cat {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: 0;
-}
-.kitty-img {
+  top: 50%;
+  left: -60px;             /* start off-screen */
+  transform: translateY(-50%);
   height: 28px;
   image-rendering: pixelated;
-  position: relative;
+  animation: kitty-run 8s linear infinite;
+  pointer-events: none;
   z-index: 2;
+}
+@keyframes kitty-run {
+  from { left: -60px; }
+  to   { left: 100%; }
 }
 
 
@@ -247,6 +244,7 @@
             <marquee scrollamount="4" direction="right">
               under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678
             </marquee>
+         <img class="marquee-cat" src="kitty.gif?v=2" alt="kitty running">
           </div>
 
           <hr class="retro">
