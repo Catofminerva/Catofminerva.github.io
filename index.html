@@ -133,6 +133,34 @@
     @keyframes blink { 50% { opacity: 0; } }
 
     .footer { padding: 8px; text-align: center; color: #fff; }
+
+    /* Let the rainbow bar host the cat */
+hr.retro {
+  position: relative;
+  overflow: visible;   /* so the cat can start off-screen */
+}
+
+/* Kitty overlay on the same bar */
+hr.retro::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -48px;                          /* start just off the left edge */
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  background: url("kitty.gif?v=5") no-repeat center / contain;
+  image-rendering: pixelated;
+  animation: kitty-on-rail 7s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes kitty-on-rail {
+  from { left: -48px; }
+  to   { left: 100%; }                  /* run across the existing bar */
+}
+
   </style>
 </head>
 <body>
