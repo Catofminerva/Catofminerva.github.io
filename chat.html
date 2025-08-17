@@ -192,22 +192,56 @@ document.getElementById("bBtn").onclick = () => document.execCommand("bold");
 document.getElementById("iBtn").onclick = () => document.execCommand("italic");
 document.getElementById("uBtn").onclick = () => document.execCommand("underline");
 
-// Color / font / size selectors
+// Keep these at the top near your editor setup
+const editor = document.getElementById("msgEdit");
+let defaultColor = "";
+let defaultFont  = "";
+let defaultSize  = ""; // optional
+
+// Bold / italic / underline: still selection-based
+document.getElementById("bBtn").onclick = () => document.execCommand("bold");
+document.getElementById("iBtn").onclick = () => document.execCommand("italic");
+document.getElementById("uBtn").onclick = () => document.execCommand("underline");
+
+// Helper: is there a selection *inside* the editor?
+function hasEditorSelection() {
+  const sel = document.getSelection();
+  return sel && !sel.isCollapsed && editor.contains(sel.anchorNode);
+}
+
+// Color: selection → color that selection; no selection → set default for whole message
 document.getElementById("colorSel").onchange = (e) => {
-  const v = e.target.value; if (!v) return;
-  document.execCommand("foreColor", false, v);
-  e.target.value = "";
+  const v = e.target.value; if (v === null) return;
+  if (hasEditorSelection()) {
+    if (v) document.execCommand("foreColor", false, v);
+  } else {
+    defaultColor = v || "";
+    editor.style.color = defaultColor || "";   // live preview while typing
+  }
 };
+
+// Font: selection → font for selection; no selection → set default for whole message
 document.getElementById("fontSel").onchange = (e) => {
-  const v = e.target.value; if (!v) return;
-  document.execCommand("fontName", false, v);
-  e.target.value = "";
+  const v = e.target.value; if (v === null) return;
+  if (hasEditorSelection()) {
+    if (v) document.execCommand("fontName", false, v);
+  } else {
+    defaultFont = v || "";
+    editor.style.fontFamily = defaultFont || "";  // live preview
+  }
 };
+
+// Size (optional): same pattern. Remove if you want size to stay selection-only.
 document.getElementById("sizeSel").onchange = (e) => {
-  const v = e.target.value; if (!v) return;
-  document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10)));
-  e.target.value = "";
+  const v = e.target.value; if (v === null) return;
+  if (hasEditorSelection()) {
+    if (v) document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10)));
+  } else {
+    defaultSize = v || "";
+    editor.style.fontSize = defaultSize ? `${parseInt(defaultSize,10)}px` : "";
+  }
 };
+
 
 // Enter sends; Shift+Enter makes a newline
 editor.addEventListener("keydown", (e) => {
