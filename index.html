@@ -133,11 +133,67 @@
     @keyframes blink { 50% { opacity: 0; } }
 
     .footer { padding: 8px; text-align: center; color: #fff; }
+  
+  /* Kitty runner under the title */
+.runner {
+  position: relative;
+  height: 34px;
+  margin: 6px 20px 10px;
+  overflow: hidden;
+}
+
+/* the colored line */
+.runner::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  background-image: repeating-linear-gradient(
+    90deg,
+    #ff0000 0 14px,
+    #ffa500 14px 28px,
+    #ffff00 28px 42px,
+    #00cc00 42px 56px,
+    #00aaff 56px 70px,
+    #0000ff 70px 84px,
+    #8000ff 84px 98px
+  );
+  border: 2px ridge var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* the cat */
+.runner img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 28px;             /* adjust if your gif is taller */
+  image-rendering: pixelated;
+  animation: cat-run 6s linear infinite;
+}
+
+@keyframes cat-run {
+  0%   { left: -60px; }
+  100% { left: calc(100% + 60px); }
+}
+
+/* optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .runner img { animation: none; left: 0; }
+}
+
+  
   </style>
 </head>
 <body>
   <div class="page">
     <h1 id="glitter-title">Ali's World</h1>
+
+    <div class="runner">
+  <img src="kitty.gif" alt="kitty running">
+</div>
 
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
