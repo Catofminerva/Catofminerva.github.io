@@ -54,6 +54,12 @@
 /* placeholder */
 .edit:empty:before{ content: attr(data-ph); color:#777; }
 
+.topicbar { background:#f3f3f3; border-bottom:1px solid #d0d0d0; padding:4px 8px; font-size:12px; }
+.whisper { color: purple; font-style: italic; }
+.emote { font-style: italic; }
+#typing { color:#555; margin-left:8px; }
+
+    
   </style>
 </head>
 <body>
@@ -65,6 +71,8 @@
       <button class="menu-btn" data-menu="view">View ▾</button>
       <button class="menu-btn" data-menu="im">IM ▾</button>
       <button class="menu-btn" data-menu="help">Help ▾</button>
+
+      <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
 
       <div class="dropdown" id="menu-file">
         <a data-action="save-log">Save Log…</a>
@@ -85,6 +93,7 @@
       </div>
       <div class="dropdown" id="menu-im">
         <a data-action="toggle-beep">Beep on New Message</a>
+        <a data-action="set-topic">Set Topic…</a>
       </div>
       <div class="dropdown" id="menu-help">
         <a data-action="help">Formatting Help…</a>
@@ -140,10 +149,12 @@
       </div>
     </div>
 
-    <div class="statusbar">
-      <div id="status">Connecting…</div>
-      <div id="roomLabel"></div>
-    </div>
+<div class="statusbar">
+  <div id="status">Connecting…</div>
+  <div id="typing"></div>
+  <div id="roomLabel"></div>
+</div>
+
   </div>
 
   <script>
@@ -159,6 +170,10 @@
     $("nick").value = nick;
 
     let ws;
+
+  let typingTimer = null;
+let ignored = new Set(JSON.parse(localStorage.getItem("ignored") || "[]"));
+const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ignored]));
 
     // ===== Connect =====
     function wsUrl(){ return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM); }
@@ -254,6 +269,13 @@ function sizeToLegacy(n){
   return (n<=10?2:n<=12?3:n<=14?4:n<=16?5:n<=18?6:7);
 }
 
+function sendTyping() {
+  try { ws && ws.readyState === 1 && ws.send(JSON.stringify({ type:"typing", username:nick })); } catch {}
+}
+let typingThrottle = false;
+editor.addEventListener("input", () => {
+  if (!typingThrottle) { typingThrottle = true; sendTyping(); setTimeout(()=>typingThrottle=false, 1500); }
+});
 
    
 
@@ -262,19 +284,27 @@ function sendChat(){
   const base = htmlToBB(html).trim();
   if (!base || !ws || ws.readyState !== 1) return;
 
-  // Apply persistent defaults (outer wrappers). Inner tags still override as needed.
+  // emote: /me waves
+  if (base.startsWith("/me ")) {
+    send({ type:"emote", username:nick, text: base.slice(4) });
+    editor.innerHTML = "";
+    if (defaultColor) editor.style.color = defaultColor;
+    if (defaultFont)  editor.style.fontFamily = defaultFont;
+    if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
+    return;
+  }
+
   let bb = base;
   if (defaultFont)  bb = `[font=${defaultFont}]${bb}[/font]`;
   if (defaultSize)  bb = `[size=${parseInt(defaultSize,10)}]${bb}[/size]`;
   if (defaultColor) bb = `[color=${defaultColor}]${bb}[/color]`;
-
   send({ type:"chat", username:nick, text: bb });
-  editor.innerHTML = "";                // clear editor
-  // keep your identity styles for the next message:
+  editor.innerHTML = "";
   if (defaultColor) editor.style.color = defaultColor;
   if (defaultFont)  editor.style.fontFamily = defaultFont;
   if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
 }
+
 
 
 // Safe HTML → BBCode (b/i/u + <font color|face|size> + <br>/<div>)
@@ -355,28 +385,66 @@ function htmlToBB(html){
       const log = $("log"); log.appendChild(div); log.scrollTop = log.scrollHeight;
     }
     function renderMessage(m){
-      const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
-      const name = m.username || "Anon";
-      const log = $("log");
-      const div = document.createElement("div");
-      const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
-      const nick = document.createElement("span"); nick.textContent = "<" + name + "> ";
-      const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
-      div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
-      log.appendChild(div); log.scrollTop = log.scrollHeight;
-    }
+  const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
+  const log = document.getElementById("log");
+  const div = document.createElement("div");
+  if (m._class) div.className = m._class;
+
+  const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
+
+  if (m._class === "emote") {
+    const msg = document.createElement("span");
+    msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || "");
+    div.appendChild(ts); div.appendChild(msg);
+  } else if (m._class === "whisper") {
+    const who = document.createElement("span"); who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
+    const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
+    div.appendChild(ts); div.appendChild(who); div.appendChild(msg);
+  } else {
+    const nick = document.createElement("span"); nick.textContent = "<" + (m.username || "Anon") + "> ";
+    const msg  = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
+    div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
+  }
+
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
     function renderRoster(list){
       const box = $("roster"); box.innerHTML = "";
       for (const u of list) { const d = document.createElement("div"); d.className = "user"; d.textContent = u; box.appendChild(d); }
     }
 
-    async function onMessage(e){
-      let payload; try { payload = JSON.parse(e.data); } catch { return; }
-      if (payload.type === "history" && Array.isArray(payload.data)) { for (const m of payload.data) renderMessage(m); return; }
-      if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
-      if (payload.type === "chat") { renderMessage(payload); if (payload.username !== nick && beepOn) ding(); return; }
-      if (payload.username && payload.text) { renderMessage(payload); }
-    }
+async function onMessage(e){
+  let payload; try { payload = JSON.parse(e.data); } catch { return; }
+
+  if (payload.type === "history" && Array.isArray(payload.data)) {
+    for (const m of payload.data) if (!ignored.has(m.username)) renderMessage(m);
+    return;
+  }
+  if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
+  if (payload.type === "topic") { setTopicUI(payload.topic); return; }
+  if (payload.type === "typing") {
+    const t = document.getElementById("typing");
+    t.textContent = `${payload.username} is typing…`;
+    clearTimeout(typingTimer); typingTimer = setTimeout(()=> t.textContent="", 2000);
+    return;
+  }
+  if (payload.type === "whisper") {
+    if (!ignored.has(payload.from)) renderMessage({ ...payload, _class:"whisper" });
+    ding(); return;
+  }
+  if (payload.type === "emote") {
+    if (!ignored.has(payload.username)) renderMessage({ ...payload, _class:"emote" });
+    return;
+  }
+  if (payload.type === "chat") {
+    if (!ignored.has(payload.username)) renderMessage(payload);
+    return;
+  }
+  if (payload.username && payload.text) { if (!ignored.has(payload.username)) renderMessage(payload); }
+}
+
 
     // Start
     connect();
@@ -425,6 +493,11 @@ function htmlToBB(html){
         case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
         case "help": return showHelp();
         case "about": return alert("Web Chat • AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
+        case "set-topic": {
+  const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
+  if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
+  return;
+}
       }
     }
 
@@ -486,6 +559,48 @@ Toolbar inserts these tags for you.`);
         o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.16);
       } catch {}
     }
+
+    function setTopicUI(t){ document.getElementById("topicText").textContent = t || "(none)"; }
+document.getElementById("topicText").addEventListener("dblclick", () => {
+  const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
+  if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
+});
+
+const rosterEl = document.getElementById("roster");
+const ctx = document.getElementById("ctx");
+let ctxUser = null;
+
+rosterEl.addEventListener("contextmenu", (e) => {
+  const item = e.target.closest(".user"); if (!item) return;
+  e.preventDefault();
+  ctxUser = item.textContent;
+  ctx.style.left = e.pageX + "px";
+  ctx.style.top  = e.pageY + "px";
+  ctx.style.display = "block";
+});
+document.addEventListener("click", () => ctx.style.display = "none");
+
+document.getElementById("ctx-whisper").onclick = (e) => {
+  e.preventDefault();
+  if (!ctxUser) return;
+  const txt = prompt("Whisper to " + ctxUser + ":");
+  if (txt) send({ type:"whisper", username:nick, to: ctxUser, text: txt });
+};
+document.getElementById("ctx-ignore").onclick = (e) => {
+  e.preventDefault();
+  if (!ctxUser) return;
+  if (ignored.has(ctxUser)) ignored.delete(ctxUser); else ignored.add(ctxUser);
+  saveIgnored();
+  alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser);
+};
+
+    
   </script>
+  
+  <div id="ctx" style="position:absolute;display:none;background:#fff;border:1px solid #9a9a9a;z-index:20;min-width:160px;">
+  <a href="#" id="ctx-whisper" style="display:block;padding:6px 10px;">Whisper…</a>
+  <a href="#" id="ctx-ignore"  style="display:block;padding:6px 10px;">Ignore/Unignore</a>
+</div>
+
 </body>
 </html>
