@@ -20,8 +20,19 @@
               "icon": "lucide-file",
               "title": "2022-11-21-worldcup"
             }
+          },
+          {
+            "id": "17cc1a88e2e5f512",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -95,7 +106,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2022-11-21-worldcup.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +115,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 2022-11-21-worldcup"
+              "title": "Backlinks"
             }
           },
           {
@@ -114,12 +124,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2022-11-21-worldcup.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 2022-11-21-worldcup"
+              "title": "Outgoing links"
             }
           },
           {
@@ -143,13 +152,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2022-11-21-worldcup.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2022-11-21-worldcup"
+              "title": "Outline"
             }
           }
         ]
@@ -169,7 +177,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2a5fd71485a90f32",
+  "active": "17cc1a88e2e5f512",
   "lastOpenFiles": [
     "_posts/2022-11-21-worldcup.md",
     "brain.jpeg",
