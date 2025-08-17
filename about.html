@@ -1,136 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Ali's Chat Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        
-.responsive-image {
-    max-width: 100%;
-    height: auto;
-    display: block; /* Ensures that it's a block-level element */
-    margin-left: auto; /* These two lines center the image horizontally */
-    margin-right: auto;
-}
+  <meta charset="UTF-8">
+  <title>About Ali</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        
-        body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
-            color: #FF33CC;
-            position: relative; 
-        }
+  <style>
+    :root{
+      --neon-blue:   #00e5ff;
+      --neon-green:  #39ff14;
+      --neon-yellow: #ffff33;
+      --neon-purple: #8f00ff;
 
-        .header {
-            background-color: #FF33CC; /* Pink header */
-            color: #FFF;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.5em;
-        }
+      --ink:         #00ffea;
+      --panel-bg:    rgba(0,0,0,0.78);
+      --sidebar-a:   #0d0022;
+      --sidebar-b:   #12002e;
+      --marquee-bg:  #001a4d;
+    }
 
-    @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-image: url('stars.gif');
+      background-repeat: repeat;
+      color: var(--ink);
+      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
+      image-rendering: pixelated;
+      cursor: crosshair;
+      filter: contrast(115%) saturate(125%);
+    }
 
-        .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite; /* Flip animation */
-        }
+    .page {
+      width: 760px;
+      margin: 18px auto 32px;
+      position: relative;
+      left: 7px; /* tiny off-center nudge */
+      border: 6px ridge var(--neon-blue);
+      outline: 4px solid #00131a;
+      background: var(--panel-bg);
+      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
 
-kitty.gif {
-    margin-top: 0px; 
-}
+    #glitter-title {
+      font-size: 60px;
+      text-align: center;
+      color: var(--neon-blue);
+      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
+      margin: 0;
+      padding: 18px 10px 0;
+      letter-spacing: 0.5px;
+    }
 
-hr {
-    margin-top: -15px;  /* Adjust this value as needed */
-}
-  
-ul {
-    list-style-position: inside; /
-    padding-left: 0;             
-    margin-left: 0;              
-}
+    .marquee-wrap {
+      margin: 10px 20px;
+      border: 6px groove var(--neon-blue);
+      background: var(--marquee-bg);
+    }
+    .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
+    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
 
-li {
-    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
-    margin-bottom: 20px; /* This will add space below each bullet point */
-}
+    .layout { width: 100%; border-collapse: collapse; }
+    .sidebar {
+      width: 210px;
+      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right: 6px ridge var(--neon-purple);
+      vertical-align: top;
+    }
+    .content {
+      padding: 10px 14px 20px;
+      vertical-align: top;
+      background: rgba(15,0,20,0.45);
+      border-left: 4px solid #21003a;
+    }
 
+    .nav a {
+      display: block;
+      margin: 10px 6px;
+      padding: 6px 8px;
+      border: 3px outset #6af7ff;
+      background: #0e0e33;
+      color: #a7ffff;
+      text-decoration: none;
+      text-align: left;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px var(--neon-blue);
+      box-shadow: 2px 2px 0 #000;
+    }
+    .nav a:hover {
+      border-style: inset;
+      color: var(--neon-green);
+      background: #140043;
+      transform: translate(1px,1px);
+    }
+    .nav-icon {
+      vertical-align: middle;
+      width: 26px;
+      height: 26px;
+      margin-right: 6px;
+      image-rendering: pixelated;
+    }
 
+    .post {
+      margin: 14px 0 28px;
+      padding: 10px 10px 14px;
+      border: 4px groove var(--neon-purple);
+      background: rgba(20,0,30,0.62);
+    }
+    .post h3 {
+      margin: 0 0 6px 0;
+      color: var(--neon-purple);
+      text-shadow: 0 0 6px var(--neon-purple);
+    }
+    .post .meta { font-size: 12px; color: var(--neon-yellow); }
 
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    
+    hr.retro {
+      height: 12px; border: 0; margin: 10px 0 14px;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,
+        #ffa500 14px 28px,
+        #ffff00 28px 42px,
+        #00cc00 42px 56px,
+        #00aaff 56px 70px,
+        #0000ff 70px 84px,
+        #8000ff 84px 98px
+      );
+    }
 
-.welcome-message {
-    font-family: Times New Roman, Times, serif;
-    color: yellow;
-    font-size: 1.25em; /* adjust size as desired */
-}
+    .blink { animation: blink 0.9s steps(1,end) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
 
+    /* dominant portrait */
+    .hero {
+      display: block;
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border: 6px ridge var(--neon-purple);
+      box-shadow: 0 0 18px var(--neon-purple);
+      image-rendering: pixelated;
+    }
+    .caption {
+      text-align:center;
+      font-size: 12px;
+      color: #bff;
+      margin-top: 6px;
+    }
 
-        .nav {
-    font-family: 'Press Start 2P', cursive;
-    color: #FF33CC;
-}
-        
-      </style>
-
-
-
-
-
+    .footer { padding: 8px; text-align: center; color: #fff; }
+  </style>
 </head>
 <body>
-    <center>
-        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-    <!-- Navigation Buttons -->
-<center>
-    <a href="index.html" class="retro-btn nav">Home</a>
-    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="about.html" class="retro-btn nav">About</a>
-    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-    <a href="chat.html" class="retro-btn nav">Chat</a>
-    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-    <a href="books.html" class="retro-btn nav">Kool Books</a>
-    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-    <a href="contact.html" class="retro-btn nav">Contact</a>
-    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-</center>
-<br>
+  <div class="page">
+    <h1 id="glitter-title">About Ali</h1>
 
-<center>
-    <img src="me.jpeg" alt="Image of Ali" class="responsive-image">
-</center>
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">
+        ★ hi you found the about page ★ welcome welcome ★
+      </marquee>
+    </div>
 
+    <table class="layout">
+      <tr>
+        <!-- Sidebar -->
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="chat.html"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="oudsimulator.html">Oud Simulator</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
 
-<!-- Welcome Message -->
+          <div style="text-align:center; padding:10px">
+            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
+            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
+          </div>
 
-    <center>
-   <font face="Press Start 2P" size="4" color="yellow">
-<div class="meta">1999 · Ali's cosmic home</div>
+          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
+            <div><a href="#" onclick="alert('Email me!'); return false;">Email Me</a></div>
+            <div style="margin-top:6px"><a href="#" onclick="alert('Guestbook coming soon!'); return false;">Sign my Guestbook</a></div>
+            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
+          </div>
+        </td>
+
+        <!-- Content -->
+        <td class="content">
+          <hr class="retro">
+
+          <!-- Dominant picture -->
+          <div class="post">
+            <img src="me.jpeg" alt="Ali" class="hero">
+            <div class="caption">that’s me. photo probably taken between reading &amp; pacing.</div>
+          </div>
+
+          <!-- About me text (authentic spacing) -->
+          <div class="post">
+            <h3>about me <span class="blink">!</span></h3>
+            <div class="meta">1999 · Ali's cosmic home</div>
 
 <p>hi, i’m ali. this is my corner of the net. i dump notes from whatever books & articles i’m tangled up in, then try to turn the mess into little posts so future-me (and maybe you) can find them again. it wanders: politics, sociology, pop stuff, philosophy, plus the odd story that has no business being as funny as it was at the time.</p>
 
@@ -149,6 +222,48 @@ li {
 <p>&nbsp;</p>
 
 <p>say hi if you feel like it.<br>fiat lux.</p>
+          </div>
 
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">
+              under construction ★ if something looks weird blame netscape ★
+            </marquee>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+
+    <div class="footer">
+      <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
     </div>
-</center>
+  </div>
+
+  <script>
+    (function() {
+      try {
+        var key = 'geocities_hit_counter';
+        var n = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+        localStorage.setItem(key, n);
+        var s = String(n).padStart(6, '0');
+        document.getElementById('hitCount').textContent = s;
+      } catch (e) {}
+    })();
+
+    document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+
+    /* tiny nav misalignment so it doesn't feel grid-perfect */
+    (function () {
+      var links = document.querySelectorAll('.nav a');
+      links.forEach(function(a){
+        var ml = 6 + Math.floor(Math.random()*7); // 6–12px
+        var fs = 12 + Math.floor(Math.random()*3); // 12–14px
+        a.style.marginLeft = ml + 'px';
+        a.style.fontSize   = fs + 'px';
+        if (Math.random() < 0.4) a.style.letterSpacing = '1px';
+      });
+    })();
+  </script>
+</body>
+</html>
