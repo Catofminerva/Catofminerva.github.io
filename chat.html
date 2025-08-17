@@ -436,41 +436,50 @@ function htmlToBB(html){
       div.className = "sys"; div.textContent = t;
       const log = $("log"); log.appendChild(div); log.scrollTop = log.scrollHeight;
     }
+
     function renderMessage(m){
   const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
-  const log = document.getElementById("log");
-  const div = document.createElement("div");
+  const log  = document.getElementById("log");
+  const div  = document.createElement("div");
   if (m._class) div.className = m._class;
 
-  const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
+  const ts = document.createElement("span");
+  ts.className = "ts";
+  ts.textContent = "[" + time + "] ";
 
-if (m._class === "emote") {
-  const msg = document.createElement("span");
+  if (m._class === "emote") {
+    const msg = document.createElement("span");
+    if (m.kaomoji) {
+      msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || "");
+    } else {
+      msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || "");
+    }
+    div.appendChild(ts); 
+    div.appendChild(msg);
 
-  if (m.kaomoji) {
-    // Show as a real emote next to the nick
-    msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || "");
-  } else {
-    // Fallback to classic “* nick action”
-    msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || "");
-  }
-
-  div.appendChild(ts); 
-  div.appendChild(msg);
-}
   } else if (m._class === "whisper") {
-    const who = document.createElement("span"); who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
-    const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
-    div.appendChild(ts); div.appendChild(who); div.appendChild(msg);
+    const who = document.createElement("span");
+    who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
+    const msg = document.createElement("span");
+    msg.innerHTML = bbcodeToHtml(m.text || "");
+    div.appendChild(ts); 
+    div.appendChild(who); 
+    div.appendChild(msg);
+
   } else {
-    const nick = document.createElement("span"); nick.textContent = "<" + (m.username || "Anon") + "> ";
-    const msg  = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
-    div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
+    const nick = document.createElement("span");
+    nick.textContent = "<" + (m.username || "Anon") + "> ";
+    const msg = document.createElement("span");
+    msg.innerHTML = bbcodeToHtml(m.text || "");
+    div.appendChild(ts); 
+    div.appendChild(nick); 
+    div.appendChild(msg);
   }
 
   log.appendChild(div);
   log.scrollTop = log.scrollHeight;
 }
+
 
     function renderRoster(list){
       const box = $("roster"); box.innerHTML = "";
