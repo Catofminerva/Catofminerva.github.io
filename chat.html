@@ -37,6 +37,14 @@
     #log.hide-ts .ts { display:none; }
     #log .hilite { background:#fff59d; }
     .hidden { display:none !important; }
+
+  .edit{
+  min-height:28px; border:1px solid #999; background:#fff; padding:6px;
+  white-space:pre-wrap; word-break:break-word; outline:none; overflow-y:auto;
+}
+/* placeholder */
+.edit:empty:before{ content: attr(data-ph); color:#777; }
+
   </style>
 </head>
 <body>
@@ -111,7 +119,7 @@
             </label>
           </div>
           <div class="row">
-            <input type="text" id="msg" placeholder="Type message">
+<div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
             <button id="send">Send</button>
           </div>
         </div>
@@ -166,41 +174,109 @@
     };
 
     $("send").onclick = sendChat;
-    $("msg").addEventListener("keydown", e => {
-      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
-    });
 
-    $("bBtn").onclick = () => wrap("[b]", "[/b]");
-    $("iBtn").onclick = () => wrap("[i]", "[/i]");
-    $("uBtn").onclick = () => wrap("[u]", "[/u]");
-    $("colorSel").onchange = () => applyWrap("color", $("colorSel").value);
-    $("fontSel").onchange  = () => applyWrap("font", $("fontSel").value);
-    $("sizeSel").onchange  = () => applyWrap("size", $("sizeSel").value);
+// ---- Rich text editor wiring ----
+const editor = document.getElementById("msgEdit");
 
-    function wrap(open, close){
-      const input = $("msg");
-      const s = input.selectionStart, e = input.selectionEnd;
-      const before = input.value.slice(0, s);
-      const sel = input.value.slice(s, e);
-      const after = input.value.slice(e);
-      input.value = before + open + sel + close + after;
-      input.focus(); input.selectionStart = input.selectionEnd = (before + open + sel + close).length;
-    }
-    function applyWrap(kind, val){
-      if (!val) return;
-      wrap("[" + kind + "=" + val + "]", "[/" + kind + "]");
-      if (kind==="color") $("colorSel").value = "";
-      if (kind==="font")  $("fontSel").value  = "";
-      if (kind==="size")  $("sizeSel").value  = "";
-    }
+// Toggle bold/italic/underline visually
+document.getElementById("bBtn").onclick = () => document.execCommand("bold");
+document.getElementById("iBtn").onclick = () => document.execCommand("italic");
+document.getElementById("uBtn").onclick = () => document.execCommand("underline");
 
-    function sendChat(){
-      const input = $("msg");
-      const text = input.value.trim();
-      if (!text || !ws || ws.readyState !== 1) return;
-      send({ type:"chat", username:nick, text });
-      input.value = "";
+// Color / font / size selectors
+document.getElementById("colorSel").onchange = (e) => {
+  const v = e.target.value; if (!v) return;
+  document.execCommand("foreColor", false, v);
+  e.target.value = "";
+};
+document.getElementById("fontSel").onchange = (e) => {
+  const v = e.target.value; if (!v) return;
+  document.execCommand("fontName", false, v);
+  e.target.value = "";
+};
+document.getElementById("sizeSel").onchange = (e) => {
+  const v = e.target.value; if (!v) return;
+  document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10)));
+  e.target.value = "";
+};
+
+// Enter sends; Shift+Enter makes a newline
+editor.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
+
+// Paste as plain text to avoid weird HTML
+editor.addEventListener("paste", (e) => {
+  e.preventDefault();
+  const t = (e.clipboardData || window.clipboardData).getData("text/plain");
+  document.execCommand("insertText", false, t);
+});
+
+// Map px → legacy fontSize (1..7) used by execCommand
+function sizeToLegacy(n){
+  return (n<=10?2:n<=12?3:n<=14?4:n<=16?5:n<=18?6:7);
+}
+
+
+   
+
+function sendChat(){
+  const html = editor.innerHTML.trim();
+  const text = htmlToBB(html).trim();
+  if (!text || !ws || ws.readyState !== 1) return;
+  send({ type:"chat", username:nick, text });
+  editor.innerHTML = "";
+}
+
+// Safe HTML → BBCode (b/i/u + <font color|face|size> + <br>/<div>)
+function htmlToBB(html){
+  const container = document.createElement("div");
+  container.innerHTML = html;
+
+  const pxFromLegacy = {1:10,2:10,3:12,4:14,5:16,6:18,7:20};
+
+  const walk = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
+    if (node.nodeType !== Node.ELEMENT_NODE) return "";
+
+    const tag = node.tagName.toLowerCase();
+    let open = "", close = "";
+
+    if (tag === "b" || tag === "strong") { open="[b]"; close="[/b]"; }
+    else if (tag === "i" || tag === "em") { open="[i]"; close="[/i]"; }
+    else if (tag === "u") { open="[u]"; close="[/u]"; }
+    else if (tag === "br") { return "\n"; }
+    else if (tag === "div" || tag === "p") {
+      // treat block as content + newline
+      const inner = Array.from(node.childNodes).map(walk).join("");
+      return inner + "\n";
     }
+    else if (tag === "font") {
+      const color = node.getAttribute("color");
+      const face  = node.getAttribute("face");
+      const size  = node.getAttribute("size");
+      if (color) { open += `[color=${color}]`; close = `[/color]` + close; }
+      if (face)  { open += `[font=${face}]`;   close = `[/font]` + close;  }
+      if (size)  { const px = pxFromLegacy[size] || 12;
+                   open += `[size=${px}]`;      close = `[/size]` + close;  }
+    }
+    else if (tag === "span") {
+      const style = node.getAttribute("style") || "";
+      const mColor = style.match(/color\s*:\s*([^;]+)/i);
+      const mFace  = style.match(/font-family\s*:\s*([^;]+)/i);
+      const mSize  = style.match(/font-size\s*:\s*(\d+)/i);
+      if (mColor) { open += `[color=${mColor[1]}]`; close = `[/color]` + close; }
+      if (mFace)  { open += `[font=${mFace[1]}]`;  close = `[/font]` + close;  }
+      if (mSize)  { open += `[size=${parseInt(mSize[1],10)}]`; close = `[/size]` + close; }
+    }
+    const inner = Array.from(node.childNodes).map(walk).join("");
+    return open + inner + close;
+  };
+
+  // Join top-level nodes and trim trailing newlines added by div/p handling
+  return Array.from(container.childNodes).map(walk).join("").replace(/\n+$/,"");
+}
+    
     function send(obj){ try { ws.send(JSON.stringify(obj)); } catch {} }
 
     // ===== Render =====
