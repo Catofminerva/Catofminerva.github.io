@@ -134,17 +134,15 @@
 
     .footer { padding: 8px; text-align: center; color: #fff; }
   
-  /* Kitty runner under the title */
-.runner {
+/* Kitty track under the title */
+.kitty-track {
   position: relative;
   height: 34px;
   margin: 6px 20px 10px;
-  overflow: hidden;
 }
 
-/* the colored line */
-.runner::before {
-  content: "";
+/* rainbow line */
+.kitty-line {
   position: absolute;
   left: 0; right: 0;
   top: 50%;
@@ -164,42 +162,37 @@
   box-shadow: 0 0 10px var(--neon-blue);
 }
 
-/* the cat */
-.runner img {
+/* the moving cat */
+.kitty-marquee {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 28px;             /* adjust if your gif is taller */
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+}
+.kitty-img {
+  height: 28px;
   image-rendering: pixelated;
-  animation: cat-run 6s linear infinite;
+  position: relative;
+  z-index: 2;
 }
 
-@keyframes cat-run {
-  0%   { left: -60px; }
-  100% { left: calc(100% + 60px); }
-}
-
-/* optional: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .runner img { animation: none; left: 0; }
-}
 
   
   </style>
 </head>
 <body>
   <div class="page">
-    <h1 id="glitter-title">Ali's World</h1>
+<h1 id="glitter-title">Ali's World</h1>
 
-    <div class="runner">
-  <img src="kitty.gif" alt="kitty running">
+<div class="kitty-track">
+  <div class="kitty-line"></div>
+  <marquee class="kitty-marquee" scrollamount="8" direction="right">
+    <img src="kitty.gif" alt="kitty running" class="kitty-img">
+  </marquee>
 </div>
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">
-        ★ welcome to ali's cosmic webspace ★ best viewed in netscape 4.0 ★
-      </marquee>
-    </div>
 
     <table class="layout">
       <tr>
