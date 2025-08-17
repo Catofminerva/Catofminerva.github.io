@@ -2,172 +2,260 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Web Chat</title>
+  <title>AOL-ish Web Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* 1990s-ish defaults: grey page, simple borders, system fonts */
-    html, body { height: 100%; }
-    body {
-      margin: 0; padding: 20px;
-      background: #c0c0c0;
-      color: #000;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    .wrap {
-      width: 680px; max-width: 100%;
-      margin: 0 auto; background: #ffffff;
-      border: 1px solid #999;
-    }
-    .bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 10px; border-bottom: 1px solid #ccc;
-      background: #f2f2f2; font-size: 12px;
-    }
-    .bar .status { color: #333; }
-    .bar .room { color: #555; }
-    #log {
-      height: 380px; overflow-y: auto; padding: 10px;
-      background: #fff; font-family: "Courier New", Courier, monospace; font-size: 13px;
-      line-height: 1.3; white-space: pre-wrap; word-break: break-word;
-      border-bottom: 1px solid #ccc;
-    }
-    .controls { padding: 10px; }
-    .row { display: flex; gap: 6px; margin-bottom: 6px; }
-    label { font-size: 12px; color: #333; }
-    input[type="text"] {
-      flex: 1; padding: 6px; border: 1px solid #999; font-family: Arial, Helvetica, sans-serif; font-size: 13px;
-      background: #fff; color: #000;
-    }
-    input[name="nick"] { flex: 0 0 180px; }
-    button {
-      padding: 6px 10px; border: 1px solid #666; background: #e6e6e6; color: #000;
-      font-size: 13px; cursor: pointer;
-    }
-    button:active { background: #d9d9d9; }
-    .hint { font-size: 11px; color: #666; padding: 0 10px 10px; }
+    /* 90s desktop vibe */
+    body { margin:0; background:#c0c0c0; font:13px Arial, Helvetica, sans-serif; color:#000; }
+    .window { width:900px; max-width:100%; margin:20px auto; border:1px solid #808080; background:#f0f0f0; }
+    .menubar { background:#e0e0e0; border-bottom:1px solid #a0a0a0; padding:4px 8px; font-size:12px; color:#000; }
+    .menubar span { margin-right:14px; }
+    .statusbar { background:#eaeaea; border-top:1px solid #c0c0c0; padding:4px 8px; font-size:12px; color:#333; display:flex; justify-content:space-between; }
+    .layout { display:grid; grid-template-columns: 1fr 220px; gap:0; }
+    .left { border-right:1px solid #bdbdbd; background:#fff; }
+    .right { background:#fff; }
+    #log { height:420px; overflow-y:auto; padding:8px; font:13px "Courier New", Courier, monospace; white-space:pre-wrap; word-break:break-word; }
+    .sys { color:#666; }
+    .inputbar { padding:6px; background:#f5f5f5; border-top:1px solid #bdbdbd; }
+    .row { display:flex; gap:6px; margin-bottom:6px; }
+    input[type="text"] { flex:1; padding:6px; border:1px solid #999; background:#fff; color:#000; font:13px Arial, Helvetica, sans-serif; }
+    input[name="nick"] { flex:0 0 180px; }
+    button { padding:5px 10px; border:1px solid #666; background:#e6e6e6; cursor:pointer; }
+    button:active { background:#d9d9d9; }
+    .toolbar { display:flex; gap:6px; align-items:center; font-size:12px; }
+    select { border:1px solid #999; background:#fff; padding:2px 4px; font-size:12px; }
+    #roster { height:420px; overflow-y:auto; padding:8px; font:12px Arial, Helvetica, sans-serif; }
+    #roster .user { padding:2px 0; border-bottom:1px dotted #ddd; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="bar">
-      <div class="status" id="status">Connecting…</div>
-      <div class="room" id="roomLabel"></div>
+  <div class="window">
+    <div class="menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>IM</span><span>Help</span>
     </div>
 
-    <div id="log" aria-live="polite"></div>
-
-    <div class="controls">
-      <div class="row">
-        <label for="nick" style="align-self:center;">Nick:</label>
-        <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
-        <button id="saveNick" title="Save nick">Set</button>
+    <div class="layout">
+      <div class="left">
+        <div id="log" aria-live="polite"></div>
+        <div class="inputbar">
+          <div class="row">
+            <label for="nick" style="align-self:center;">Nick:</label>
+            <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
+            <button id="setNick">Set</button>
+          </div>
+          <div class="row toolbar">
+            <button id="bBtn"><b>B</b></button>
+            <button id="iBtn"><i>I</i></button>
+            <button id="uBtn"><u>U</u></button>
+            <label>Color:
+              <select id="colorSel">
+                <option value="">—</option>
+                <option>black</option><option>red</option><option>blue</option>
+                <option>green</option><option>maroon</option><option>purple</option>
+                <option>teal</option><option>navy</option>
+              </select>
+            </label>
+            <label>Font:
+              <select id="fontSel">
+                <option value="">—</option>
+                <option>Arial</option>
+                <option>Times New Roman</option>
+                <option>Courier New</option>
+                <option>Verdana</option>
+              </select>
+            </label>
+            <label>Size:
+              <select id="sizeSel">
+                <option value="">—</option>
+                <option>10</option><option>12</option><option>14</option><option>16</option><option>18</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <input type="text" id="msg" placeholder="Type message">
+            <button id="send">Send</button>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <input type="text" id="msg" placeholder="Type message">
-        <button id="send">Send</button>
+
+      <div class="right">
+        <div class="menubar">People in Room</div>
+        <div id="roster"></div>
       </div>
     </div>
-    <div class="hint">
-      Tip: Press Enter to send. Open this page in two tabs with the same <code>?room=</code> value to test.
+
+    <div class="statusbar">
+      <div id="status">Connecting…</div>
+      <div id="roomLabel"></div>
     </div>
   </div>
 
   <script>
     // ===== Config =====
-    // If your Worker hostname is different, change this value.
-    const WORKER_HOST = "chat.asalmaadeed.workers.dev";
-
-    // Room from ?room=... (default "lobby")
+    const WORKER_HOST = "chat.asalmaadeed.workers.dev"; // change if your worker hostname differs
     const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
     document.getElementById("roomLabel").textContent = "Room: " + ROOM;
 
-    // Nickname stored locally
-    const NICK_KEY = "chat_nick";
+    // ===== State =====
+    const NICK_KEY = "aolchat_nick";
     let nick = localStorage.getItem(NICK_KEY) || ("User" + Math.floor(Math.random()*1000));
     const $ = id => document.getElementById(id);
     $("nick").value = nick;
 
-    $("saveNick").onclick = () => {
-      const v = $("nick").value.trim();
-      if (!v) return;
-      nick = v.slice(0, 24);
-      localStorage.setItem(NICK_KEY, nick);
-      appendLine("* nick set to " + nick);
-    };
-
-    // WebSocket helpers
     let ws;
-    function wsUrl() {
-      return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM);
-    }
-    function setStatus(s) { $("status").textContent = s; }
 
-    function connect() {
-      try {
-        ws = new WebSocket(wsUrl());
-      } catch (e) {
-        setStatus("Error");
-        return;
-      }
+    // ===== Connect =====
+    function wsUrl(){ return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM); }
+    function setStatus(s){ $("status").textContent = s; }
+    function connect(){
+      ws = new WebSocket(wsUrl());
       setStatus("Connecting");
-      ws.onopen = () => setStatus("Online");
+      ws.onopen = () => { setStatus("Online"); send({ type:"hello", username:nick }); };
       ws.onclose = () => { setStatus("Disconnected"); setTimeout(connect, 1200); };
       ws.onerror = () => { setStatus("Error"); try { ws.close(); } catch {} };
       ws.onmessage = onMessage;
     }
 
-    function sendPlain() {
+    // ===== UI actions =====
+    $("setNick").onclick = () => {
+      const v = $("nick").value.trim();
+      if (!v) return;
+      nick = v.slice(0, 24);
+      localStorage.setItem(NICK_KEY, nick);
+      send({ type:"nick", username:nick });
+      sysLine("* nick set to " + nick);
+    };
+
+    $("send").onclick = sendChat;
+    $("msg").addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
+    });
+
+    $("bBtn").onclick = () => wrap("[b]", "[/b]");
+    $("iBtn").onclick = () => wrap("[i]", "[/i]");
+    $("uBtn").onclick = () => wrap("[u]", "[/u]");
+    $("colorSel").onchange = () => applyWrap("color", $("colorSel").value);
+    $("fontSel").onchange  = () => applyWrap("font", $("fontSel").value);
+    $("sizeSel").onchange  = () => applyWrap("size", $("sizeSel").value);
+
+    function wrap(open, close){
+      const input = $("msg");
+      const s = input.selectionStart, e = input.selectionEnd;
+      const before = input.value.slice(0, s);
+      const sel = input.value.slice(s, e);
+      const after = input.value.slice(e);
+      input.value = before + open + sel + close + after;
+      input.focus(); input.selectionStart = input.selectionEnd = (before + open + sel + close).length;
+    }
+    function applyWrap(kind, val){
+      if (!val) return;
+      wrap("[" + kind + "=" + val + "]", "[/" + kind + "]");
+      // reset selects to placeholder to mimic old UIs
+      if (kind==="color") $("colorSel").value = "";
+      if (kind==="font")  $("fontSel").value  = "";
+      if (kind==="size")  $("sizeSel").value  = "";
+    }
+
+    function sendChat(){
       const input = $("msg");
       const text = input.value.trim();
       if (!text || !ws || ws.readyState !== 1) return;
-      const payload = { username: nick, color: "hsl(0,0%,0%)", text };
-      try { ws.send(JSON.stringify(payload)); } catch {}
+      send({ type:"chat", username:nick, text });
       input.value = "";
     }
 
-    $("send").onclick = sendPlain;
-    $("msg").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        sendPlain();
-      }
-    });
+    function send(obj){
+      try { ws.send(JSON.stringify(obj)); } catch {}
+    }
 
-    // Rendering
-    function appendLine(text) {
+    // ===== Render =====
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // Safe BBCode → HTML (only allow a tiny subset)
+    function bbcodeToHtml(src){
+      let s = escapeHtml(src);
+
+      // [b] [i] [u]
+      s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1</strong>");
+      s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1</em>");
+      s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1</u>");
+
+      // [color=...] allow named colors or hex
+      s = s.replace(/\[color=(#[0-9a-fA-F]{3,6}|[a-zA-Z]{1,15})\]([\s\S]*?)\[\/color\]/gi,
+        (m, color, inner) => `<span style="color:${color}">${inner}</span>`);
+
+      // [size=10..24] in px
+      s = s.replace(/\[size=(\d{1,2})\]([\s\S]*?)\[\/size\]/gi,
+        (m, n, inner) => {
+          const px = Math.max(8, Math.min(24, parseInt(n,10)));
+          return `<span style="font-size:${px}px">${inner}</span>`;
+        });
+
+      // [font=whitelist]
+      s = s.replace(/\[font=([A-Za-z0-9 ,'-]{1,30})\]([\s\S]*?)\[\/font\]/gi,
+        (m, name, inner) => {
+          const allowed = ["Arial","Times New Roman","Courier New","Verdana"];
+          const pick = allowed.find(f => f.toLowerCase() === name.toLowerCase());
+          return pick ? `<span style="font-family:'${pick}'">${inner}</span>` : inner;
+        });
+
+      return s;
+    }
+
+    function sysLine(t){
       const log = $("log");
-      const line = document.createElement("div");
-      line.textContent = text;     // safe text insertion
-      log.appendChild(line);
+      const div = document.createElement("div");
+      div.className = "sys";
+      div.textContent = t;
+      log.appendChild(div);
       log.scrollTop = log.scrollHeight;
     }
 
-    function formatTime(ms) {
-      try {
-        const d = new Date(ms || Date.now());
-        return d.toLocaleTimeString();
-      } catch { return ""; }
-    }
-
-    function renderMessage(m) {
-      const time = formatTime(m.time);
+    function renderMessage(m){
+      const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
       const name = m.username || "Anon";
-      const line = "[" + time + "] <" + name + "> " + (m.text || "");
-      appendLine(line);
+      const html = "[" + time + "] <" + escapeHtml(name) + "> " + bbcodeToHtml(m.text || "");
+      const log = $("log");
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
     }
 
-    async function onMessage(event) {
-      let payload;
-      try { payload = JSON.parse(event.data); } catch { return; }
+    function renderRoster(list){
+      const box = $("roster");
+      box.innerHTML = "";
+      for (const u of list) {
+        const d = document.createElement("div");
+        d.className = "user";
+        d.textContent = u;
+        box.appendChild(d);
+      }
+    }
+
+    async function onMessage(e){
+      let payload; try { payload = JSON.parse(e.data); } catch { return; }
 
       if (payload.type === "history" && Array.isArray(payload.data)) {
         for (const m of payload.data) renderMessage(m);
         return;
       }
-      renderMessage(payload);
+      if (payload.type === "roster" && Array.isArray(payload.users)) {
+        renderRoster(payload.users);
+        return;
+      }
+      if (payload.type === "chat") {
+        renderMessage(payload);
+        return;
+      }
+
+      // Legacy fallback: shape without "type"
+      if (payload.username && payload.text) renderMessage(payload);
     }
 
-    // Start
+    // Go
     connect();
   </script>
 </body>
