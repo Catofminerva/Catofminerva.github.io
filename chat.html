@@ -1,258 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Retro Encrypted Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Web Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root { --fg:#33FFA1; --accent:#FF33CC; --bg:#000; }
-    html,body { height:100%; }
+    /* 1990s-ish defaults: grey page, simple borders, system fonts */
+    html, body { height: 100%; }
     body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Press Start 2P', cursive;
       margin: 0; padding: 20px;
+      background: #c0c0c0;
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif;
     }
-    .crt {
-      border: 3px solid var(--accent);
-      background: #000; padding: 20px;
-      box-shadow: 0 0 15px var(--accent);
-      position: relative; max-width: 900px; margin: 0 auto;
+    .wrap {
+      width: 680px; max-width: 100%;
+      margin: 0 auto; background: #ffffff;
+      border: 1px solid #999;
     }
-    .crt::after {
-      content: ""; position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0,0,0,0.15) 0px,
-        rgba(0,0,0,0.15) 1px,
-        transparent 1px,
-        transparent 2px
-      );
-      pointer-events: none;
+    .bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px; border-bottom: 1px solid #ccc;
+      background: #f2f2f2; font-size: 12px;
     }
-    .topbar { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; margin-bottom:10px; font-size:12px; }
-    #status { color: var(--accent); }
-    #roomLabel { opacity: 0.8; }
-    button, input {
-      background:#000; color:var(--fg); border:2px solid var(--accent);
-      padding:10px; font-family:'Press Start 2P', cursive;
+    .bar .status { color: #333; }
+    .bar .room { color: #555; }
+    #log {
+      height: 380px; overflow-y: auto; padding: 10px;
+      background: #fff; font-family: "Courier New", Courier, monospace; font-size: 13px;
+      line-height: 1.3; white-space: pre-wrap; word-break: break-word;
+      border-bottom: 1px solid #ccc;
     }
-    button:hover { background:var(--accent); color:#000; cursor:pointer; }
-    #chat-log {
-      height: 420px; overflow-y: auto; border-bottom: 2px dashed var(--accent);
-      padding: 10px 0; list-style: none; margin: 0 0 12px 0;
+    .controls { padding: 10px; }
+    .row { display: flex; gap: 6px; margin-bottom: 6px; }
+    label { font-size: 12px; color: #333; }
+    input[type="text"] {
+      flex: 1; padding: 6px; border: 1px solid #999; font-family: Arial, Helvetica, sans-serif; font-size: 13px;
+      background: #fff; color: #000;
     }
-    .message { display:grid; grid-template-columns: 180px 1fr; gap:8px; margin:8px 0; align-items:start; }
-    .meta { opacity:.8; font-size:11px; }
-    .text { white-space: pre-wrap; word-break: break-word; }
-    .encrypted::before { content:"🔒 "; filter: drop-shadow(0 0 2px var(--fg)); }
-    .controls { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; }
-    .inputs { display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:8px; }
+    input[name="nick"] { flex: 0 0 180px; }
+    button {
+      padding: 6px 10px; border: 1px solid #666; background: #e6e6e6; color: #000;
+      font-size: 13px; cursor: pointer;
+    }
+    button:active { background: #d9d9d9; }
+    .hint { font-size: 11px; color: #666; padding: 0 10px 10px; }
   </style>
 </head>
 <body>
-  <div class="crt">
-    <div class="topbar">
-      <div id="status">CONNECTING…</div>
-      <div id="roomLabel"></div>
-      <button id="share">COPY LINK</button>
+  <div class="wrap">
+    <div class="bar">
+      <div class="status" id="status">Connecting…</div>
+      <div class="room" id="roomLabel"></div>
     </div>
 
-    <ul id="chat-log" aria-live="polite"></ul>
+    <div id="log" aria-live="polite"></div>
 
-    <div class="inputs">
-      <input type="text" id="message-input" placeholder="TYPE MESSAGE…" autocomplete="off" />
-      <button id="send">SEND</button>
+    <div class="controls">
+      <div class="row">
+        <label for="nick" style="align-self:center;">Nick:</label>
+        <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
+        <button id="saveNick" title="Save nick">Set</button>
+      </div>
+      <div class="row">
+        <input type="text" id="msg" placeholder="Type message">
+        <button id="send">Send</button>
+      </div>
+    </div>
+    <div class="hint">
+      Tip: Press Enter to send. Open this page in two tabs with the same <code>?room=</code> value to test.
     </div>
   </div>
 
   <script>
-  "use strict";
+    // ===== Config =====
+    // If your Worker hostname is different, change this value.
+    const WORKER_HOST = "chat.asalmaadeed.workers.dev";
 
-  // ====== CONFIG ======
-  // If your worker name is different, change this hostname.
-  const WORKER_HOST = "chat.asalmaadeed.workers.dev";
+    // Room from ?room=... (default "lobby")
+    const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
+    document.getElementById("roomLabel").textContent = "Room: " + ROOM;
 
-  // Room from ?room=... (defaults to "lobby")
-  const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
-  document.getElementById("roomLabel").textContent = "ROOM: " + ROOM;
+    // Nickname stored locally
+    const NICK_KEY = "chat_nick";
+    let nick = localStorage.getItem(NICK_KEY) || ("User" + Math.floor(Math.random()*1000));
+    const $ = id => document.getElementById(id);
+    $("nick").value = nick;
 
-  // Prompt for password on load
-  let chatPassword = prompt("ENTER CHAT PASSWORD:") || "retrochat123";
+    $("saveNick").onclick = () => {
+      const v = $("nick").value.trim();
+      if (!v) return;
+      nick = v.slice(0, 24);
+      localStorage.setItem(NICK_KEY, nick);
+      appendLine("* nick set to " + nick);
+    };
 
-  // Username and color from localStorage
-  let username = localStorage.getItem("retroUsername");
-  let userColor = localStorage.getItem("retroColor");
-  if (!username) {
-    username = prompt("ENTER YOUR CODENAME:") || ("AGENT_" + Math.floor(Math.random()*1000));
-    localStorage.setItem("retroUsername", username);
-  }
-  if (!userColor) {
-    userColor = generateUniqueColor(username);
-    localStorage.setItem("retroColor", userColor);
-  }
-
-  // Status helpers
-  const $ = (id) => document.getElementById(id);
-  function setStatus(s){ $("status").textContent = s; }
-
-  // Share link
-  $("share").addEventListener("click", async () => {
-    const shareUrl = location.origin + location.pathname + "?room=" + encodeURIComponent(ROOM);
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      $("share").textContent = "COPIED";
-      setTimeout(() => $("share").textContent = "COPY LINK", 1000);
-    } catch {
-      prompt("Copy this URL:", shareUrl);
+    // WebSocket helpers
+    let ws;
+    function wsUrl() {
+      return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM);
     }
-  });
+    function setStatus(s) { $("status").textContent = s; }
 
-  // Connect to Worker WebSocket
-  let ws;
-  function wsUrl() {
-    return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM);
-  }
-  function connect() {
-    ws = new WebSocket(wsUrl());
-    setStatus("CONNECTING");
-    ws.addEventListener("open", () => setStatus("ONLINE"));
-    ws.addEventListener("close", () => { setStatus("DISCONNECTED"); setTimeout(connect, 1500); });
-    ws.addEventListener("error", () => { setStatus("ERROR"); try{ ws.close(); }catch{} });
-    ws.addEventListener("message", onMessage);
-  }
-
-  // Send message
-  $("send").addEventListener("click", sendMessage);
-  $("message-input").addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  });
-
-  async function sendMessage() {
-    const input = $("message-input");
-    const msg = input.value.trim();
-    if (!msg || !ws || ws.readyState !== 1) return;
-    try {
-      const encrypted = await encryptMessage(msg, chatPassword);
-      ws.send(JSON.stringify({ username, color: userColor, text: encrypted }));
-      input.value = "";
-    } catch (e) {
-      console.error("ENCRYPTION ERROR:", e);
-    }
-  }
-
-  // Render messages safely
-  function addMessage({ username, color, text, time }) {
-    const list = $("chat-log");
-    const li = document.createElement("li");
-    li.className = "message";
-
-    const meta = document.createElement("div");
-    meta.className = "meta";
-    const timeStr = time ? new Date(time).toLocaleTimeString() : "";
-    const tspan = document.createElement("span");
-    tspan.textContent = timeStr + " ";
-    const nspan = document.createElement("span");
-    nspan.textContent = "[" + username + "]";
-    nspan.style.color = color || "#33FFA1";
-    meta.appendChild(tspan);
-    meta.appendChild(nspan);
-
-    const body = document.createElement("div");
-    body.className = "text encrypted";
-    body.textContent = text; // safe text insertion
-
-    li.appendChild(meta);
-    li.appendChild(body);
-    list.appendChild(li);
-    list.scrollTop = list.scrollHeight;
-  }
-
-  // Handle incoming messages
-  async function onMessage(event) {
-    let payload;
-    try { payload = JSON.parse(event.data); } catch { return; }
-
-    if (payload.type === "history") {
-      for (const m of payload.data) {
-        const d = await decryptMessage(m.text, chatPassword);
-        addMessage({ username: m.username, color: m.color, text: d, time: m.time });
+    function connect() {
+      try {
+        ws = new WebSocket(wsUrl());
+      } catch (e) {
+        setStatus("Error");
+        return;
       }
-      return;
+      setStatus("Connecting");
+      ws.onopen = () => setStatus("Online");
+      ws.onclose = () => { setStatus("Disconnected"); setTimeout(connect, 1200); };
+      ws.onerror = () => { setStatus("Error"); try { ws.close(); } catch {} };
+      ws.onmessage = onMessage;
     }
 
-    const d = await decryptMessage(payload.text, chatPassword);
-    addMessage({ username: payload.username, color: payload.color, text: d, time: payload.time });
-  }
-
-  // === Color from DJB2 hash ===
-  function generateUniqueColor(name) {
-    let hash = 5381;
-    for (let i = 0; i < name.length; i++) {
-      hash = ((hash << 5) + hash) + name.charCodeAt(i);
+    function sendPlain() {
+      const input = $("msg");
+      const text = input.value.trim();
+      if (!text || !ws || ws.readyState !== 1) return;
+      const payload = { username: nick, color: "hsl(0,0%,0%)", text };
+      try { ws.send(JSON.stringify(payload)); } catch {}
+      input.value = "";
     }
-    const hue = Math.abs(hash % 360);
-    return "hsl(" + hue + ", 100%, 70%)";
-  }
 
-  // === Crypto helpers: PBKDF2 + AES-GCM, per-message salt and iv ===
-  async function deriveKey(password, salt) {
-    const enc = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      "raw",
-      enc.encode(password),
-      { name: "PBKDF2" },
-      false,
-      ["deriveKey"]
-    );
-    return crypto.subtle.deriveKey(
-      { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
-      keyMaterial,
-      { name: "AES-GCM", length: 256 },
-      false,
-      ["encrypt","decrypt"]
-    );
-  }
+    $("send").onclick = sendPlain;
+    $("msg").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendPlain();
+      }
+    });
 
-  function u8ToB64(u8) {
-    let s = ""; for (let i=0;i<u8.length;i++) s += String.fromCharCode(u8[i]); return btoa(s);
-  }
-  function b64ToU8(b64) {
-    const s = atob(b64); const u = new Uint8Array(s.length);
-    for (let i=0;i<s.length;i++) u[i] = s.charCodeAt(i); return u;
-  }
-
-  async function encryptMessage(text, password) {
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    const iv   = crypto.getRandomValues(new Uint8Array(12));
-    const key  = await deriveKey(password, salt);
-    const ct   = await crypto.subtle.encrypt({ name:"AES-GCM", iv }, key, data);
-    const combined = new Uint8Array(16 + 12 + ct.byteLength);
-    combined.set(salt, 0);
-    combined.set(iv, 16);
-    combined.set(new Uint8Array(ct), 28);
-    return u8ToB64(combined);
-  }
-
-  async function decryptMessage(b64, password) {
-    try {
-      const combined = b64ToU8(b64);
-      const salt = combined.slice(0,16);
-      const iv   = combined.slice(16,28);
-      const ct   = combined.slice(28);
-      const key  = await deriveKey(password, salt);
-      const pt   = await crypto.subtle.decrypt({ name:"AES-GCM", iv }, key, ct);
-      return new TextDecoder().decode(pt);
-    } catch {
-      return "🔒 DECRYPTION FAILED";
+    // Rendering
+    function appendLine(text) {
+      const log = $("log");
+      const line = document.createElement("div");
+      line.textContent = text;     // safe text insertion
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
     }
-  }
 
-  // Go time
-  connect();
+    function formatTime(ms) {
+      try {
+        const d = new Date(ms || Date.now());
+        return d.toLocaleTimeString();
+      } catch { return ""; }
+    }
+
+    function renderMessage(m) {
+      const time = formatTime(m.time);
+      const name = m.username || "Anon";
+      const line = "[" + time + "] <" + name + "> " + (m.text || "");
+      appendLine(line);
+    }
+
+    async function onMessage(event) {
+      let payload;
+      try { payload = JSON.parse(event.data); } catch { return; }
+
+      if (payload.type === "history" && Array.isArray(payload.data)) {
+        for (const m of payload.data) renderMessage(m);
+        return;
+      }
+      renderMessage(payload);
+    }
+
+    // Start
+    connect();
   </script>
 </body>
 </html>
