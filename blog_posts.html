@@ -10,7 +10,7 @@ permalink: /blog_posts.html
 <ul>
   {% for post in site.posts %}
     <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
- 
+  {% endfor %}
 </ul>
   <ul>
                         <li><a href="predators.html">Should we kill predators?</a></li>
