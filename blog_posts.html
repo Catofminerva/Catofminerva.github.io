@@ -7,6 +7,12 @@ permalink: /blog_posts.html
 <center>
   <h2>Blog Entries</h2>
   <p>Ranking from best to worst? hm:</p>
+  <h3>New Entries</h3>
+<ul>
+  {% for post in site.posts %}
+    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
   <ul>
                         <li><a href="predators.html">Should we kill predators?</a></li>
                                                 <li><a href="Anarchism.html">Pre-State Anarchism in the Arabian Peninsula</a></li>
@@ -37,10 +43,5 @@ permalink: /blog_posts.html
     
             <!-- ... Add more as you create more posts ... -->
         </ul>
-<h3>New Entries</h3>
-<ul>
-  {% for post in site.posts %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+
 </center>
