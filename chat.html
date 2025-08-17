@@ -570,15 +570,22 @@ const tipsEl = document.getElementById("tips");
 const hideTipsBtn = document.getElementById("hideTips");
 const moreHelpBtn = document.getElementById("moreHelp");
 const TIPS_KEY = "aolchat_tips_hidden";
+const tipsEl = document.getElementById("tips");
+if (tipsEl) {
+  const hideTipsBtn = document.getElementById("hideTips");
+  const moreHelpBtn = document.getElementById("moreHelp");
 
-if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
+  if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
 
-hideTipsBtn.onclick = (e) => {
-  e.preventDefault();
-  const hidden = tipsEl.style.display !== "none";
-  tipsEl.style.display = hidden ? "none" : "";
-  if (hidden) localStorage.setItem(TIPS_KEY, "1"); else localStorage.removeItem(TIPS_KEY);
-};
+  hideTipsBtn && (hideTipsBtn.onclick = (e) => {
+    e.preventDefault();
+    const nowHidden = tipsEl.style.display !== "none";
+    tipsEl.style.display = nowHidden ? "none" : "";
+    if (nowHidden) localStorage.setItem(TIPS_KEY, "1"); else localStorage.removeItem(TIPS_KEY);
+  });
+
+  moreHelpBtn && (moreHelpBtn.onclick = (e) => { e.preventDefault(); showHelp(); });
+}
 
 moreHelpBtn.onclick = (e) => { e.preventDefault(); showHelp(); };
 
