@@ -8,8 +8,6 @@
     /* 90s desktop vibe */
     body { margin:0; background:#c0c0c0; font:13px Arial, Helvetica, sans-serif; color:#000; }
     .window { width:900px; max-width:100%; margin:20px auto; border:1px solid #808080; background:#f0f0f0; }
-    .menubar { background:#e0e0e0; border-bottom:1px solid #a0a0a0; padding:4px 8px; font-size:12px; color:#000; }
-    .menubar span { margin-right:14px; }
     .statusbar { background:#eaeaea; border-top:1px solid #c0c0c0; padding:4px 8px; font-size:12px; color:#333; display:flex; justify-content:space-between; }
     .layout { display:grid; grid-template-columns: 1fr 220px; gap:0; }
     .left { border-right:1px solid #bdbdbd; background:#fff; }
@@ -27,71 +25,54 @@
     #roster { height:420px; overflow-y:auto; padding:8px; font:12px Arial, Helvetica, sans-serif; }
     #roster .user { padding:2px 0; border-bottom:1px dotted #ddd; }
 
-.menubar { position: relative; background:#e0e0e0; border-bottom:1px solid #a0a0a0; padding:4px 6px; }
-.menu-btn { border:1px solid #9a9a9a; background:#e6e6e6; padding:2px 8px; font-size:12px; margin-right:6px; cursor:pointer; }
-.menu-btn:active { background:#d9d9d9; }
+    /* Menus */
+    .menubar { position: relative; background:#e0e0e0; border-bottom:1px solid #a0a0a0; padding:4px 6px; }
+    .menu-btn { border:1px solid #9a9a9a; background:#e6e6e6; padding:2px 8px; font-size:12px; margin-right:6px; cursor:pointer; }
+    .menu-btn:active { background:#d9d9d9; }
+    .dropdown { position:absolute; top:26px; left:0; display:none; background:#fff; border:1px solid #9a9a9a; min-width:210px; z-index:10; box-shadow: 0 1px 0 #ccc inset; }
+    .dropdown a { display:block; padding:6px 10px; font-size:12px; color:#000; cursor:pointer; }
+    .dropdown a:hover { background:#e8e8e8; }
 
-.dropdown {
-  position: absolute; top: 26px; left: 0; display: none;
-  background:#fff; border:1px solid #9a9a9a; min-width: 210px; z-index: 10;
-  box-shadow: 0 1px 0 #ccc inset;
-}
-.dropdown a {
-  display:block; padding:6px 10px; font-size:12px; color:#000; cursor:pointer;
-}
-.dropdown a:hover { background:#e8e8e8; }
-
-#log.hide-ts .ts { display: none; }
-#log .hilite { background: #fff59d; }
-.hidden { display: none !important; }
-
-    
+    /* Toggles */
+    #log.hide-ts .ts { display:none; }
+    #log .hilite { background:#fff59d; }
+    .hidden { display:none !important; }
   </style>
 </head>
 <body>
   <div class="window">
+    <!-- Menubar with ONE set of dropdowns -->
     <div class="menubar" id="menubar">
-  <button class="menu-btn" data-menu="file">File ▾</button>
-  <button class="menu-btn" data-menu="edit">Edit ▾</button>
-  <button class="menu-btn" data-menu="view">View ▾</button>
-  <button class="menu-btn" data-menu="im">IM ▾</button>
-  <button class="menu-btn" data-menu="help">Help ▾</button>
+      <button class="menu-btn" data-menu="file">File ▾</button>
+      <button class="menu-btn" data-menu="edit">Edit ▾</button>
+      <button class="menu-btn" data-menu="view">View ▾</button>
+      <button class="menu-btn" data-menu="im">IM ▾</button>
+      <button class="menu-btn" data-menu="help">Help ▾</button>
 
-  <!-- File -->
-  <div class="dropdown" id="menu-file">
-    <a data-action="save-log">Save Log…</a>
-    <a data-action="print">Print…</a>
-    <a data-action="clear-log">Clear Log</a>
-    <a data-action="join-room">Join Room…</a>
-  </div>
-
-  <!-- Edit -->
-  <div class="dropdown" id="menu-edit">
-    <a data-action="copy-log">Copy Log to Clipboard</a>
-    <a data-action="find">Find…</a>
-    <a data-action="select-all">Select All</a>
-  </div>
-
-  <!-- View -->
-  <div class="dropdown" id="menu-view">
-    <a data-action="zoom-in">Zoom In</a>
-    <a data-action="zoom-out">Zoom Out</a>
-    <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
-    <a data-action="toggle-roster">Show/Hide Roster</a>
-  </div>
-
-  <!-- IM -->
-  <div class="dropdown" id="menu-im">
-    <a data-action="toggle-beep">Beep on New Message</a>
-  </div>
-
-  <!-- Help -->
-  <div class="dropdown" id="menu-help">
-    <a data-action="help">Formatting Help…</a>
-    <a data-action="about">About…</a>
-  </div>
-
-
+      <div class="dropdown" id="menu-file">
+        <a data-action="save-log">Save Log…</a>
+        <a data-action="print">Print…</a>
+        <a data-action="clear-log">Clear Log</a>
+        <a data-action="join-room">Join Room…</a>
+      </div>
+      <div class="dropdown" id="menu-edit">
+        <a data-action="copy-log">Copy Log to Clipboard</a>
+        <a data-action="find">Find…</a>
+        <a data-action="select-all">Select All</a>
+      </div>
+      <div class="dropdown" id="menu-view">
+        <a data-action="zoom-in">Zoom In</a>
+        <a data-action="zoom-out">Zoom Out</a>
+        <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
+        <a data-action="toggle-roster">Show/Hide Roster</a>
+      </div>
+      <div class="dropdown" id="menu-im">
+        <a data-action="toggle-beep">Beep on New Message</a>
+      </div>
+      <div class="dropdown" id="menu-help">
+        <a data-action="help">Formatting Help…</a>
+        <a data-action="about">About…</a>
+      </div>
     </div>
 
     <div class="layout">
@@ -118,10 +99,8 @@
             <label>Font:
               <select id="fontSel">
                 <option value="">—</option>
-                <option>Arial</option>
-                <option>Times New Roman</option>
-                <option>Courier New</option>
-                <option>Verdana</option>
+                <option>Arial</option><option>Times New Roman</option>
+                <option>Courier New</option><option>Verdana</option>
               </select>
             </label>
             <label>Size:
@@ -210,7 +189,6 @@
     function applyWrap(kind, val){
       if (!val) return;
       wrap("[" + kind + "=" + val + "]", "[/" + kind + "]");
-      // reset selects to placeholder to mimic old UIs
       if (kind==="color") $("colorSel").value = "";
       if (kind==="font")  $("fontSel").value  = "";
       if (kind==="size")  $("sizeSel").value  = "";
@@ -223,252 +201,166 @@
       send({ type:"chat", username:nick, text });
       input.value = "";
     }
-
-    function send(obj){
-      try { ws.send(JSON.stringify(obj)); } catch {}
-    }
+    function send(obj){ try { ws.send(JSON.stringify(obj)); } catch {} }
 
     // ===== Render =====
     function escapeHtml(s){
       return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
-
-    // Safe BBCode → HTML (only allow a tiny subset)
     function bbcodeToHtml(src){
       let s = escapeHtml(src);
-
-      // [b] [i] [u]
       s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1</strong>");
       s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1</em>");
       s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1</u>");
-
-      // [color=...] allow named colors or hex
       s = s.replace(/\[color=(#[0-9a-fA-F]{3,6}|[a-zA-Z]{1,15})\]([\s\S]*?)\[\/color\]/gi,
         (m, color, inner) => `<span style="color:${color}">${inner}</span>`);
-
-      // [size=10..24] in px
       s = s.replace(/\[size=(\d{1,2})\]([\s\S]*?)\[\/size\]/gi,
-        (m, n, inner) => {
-          const px = Math.max(8, Math.min(24, parseInt(n,10)));
-          return `<span style="font-size:${px}px">${inner}</span>`;
-        });
-
-      // [font=whitelist]
+        (m, n, inner) => `<span style="font-size:${Math.max(8, Math.min(24, parseInt(n,10)))}px">${inner}</span>`);
       s = s.replace(/\[font=([A-Za-z0-9 ,'-]{1,30})\]([\s\S]*?)\[\/font\]/gi,
         (m, name, inner) => {
           const allowed = ["Arial","Times New Roman","Courier New","Verdana"];
           const pick = allowed.find(f => f.toLowerCase() === name.toLowerCase());
           return pick ? `<span style="font-family:'${pick}'">${inner}</span>` : inner;
         });
-
       return s;
     }
-
     function sysLine(t){
+      const div = document.createElement("div");
+      div.className = "sys"; div.textContent = t;
+      const log = $("log"); log.appendChild(div); log.scrollTop = log.scrollHeight;
+    }
+    function renderMessage(m){
+      const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
+      const name = m.username || "Anon";
       const log = $("log");
       const div = document.createElement("div");
-      div.className = "sys";
-      div.textContent = t;
-      log.appendChild(div);
-      log.scrollTop = log.scrollHeight;
+      const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
+      const nick = document.createElement("span"); nick.textContent = "<" + name + "> ";
+      const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
+      div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
+      log.appendChild(div); log.scrollTop = log.scrollHeight;
     }
-
-function renderMessage(m){
-  const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
-  const name = m.username || "Anon";
-
-  const log = document.getElementById("log");
-  const div = document.createElement("div");
-
-  const ts = document.createElement("span");
-  ts.textContent = "[" + time + "] ";
-
-  const nick = document.createElement("span");
-  nick.textContent = "<" + name + "> ";
-
-  const msg = document.createElement("span");
-  msg.innerHTML = bbcodeToHtml(m.text || "");   // safe because bbcodeToHtml escapes first
-
-  div.appendChild(ts);
-  div.appendChild(nick);
-  div.appendChild(msg);
-
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
-}
-
-
     function renderRoster(list){
-      const box = $("roster");
-      box.innerHTML = "";
-      for (const u of list) {
-        const d = document.createElement("div");
-        d.className = "user";
-        d.textContent = u;
-        box.appendChild(d);
-      }
+      const box = $("roster"); box.innerHTML = "";
+      for (const u of list) { const d = document.createElement("div"); d.className = "user"; d.textContent = u; box.appendChild(d); }
     }
 
     async function onMessage(e){
       let payload; try { payload = JSON.parse(e.data); } catch { return; }
-
-      if (payload.type === "history" && Array.isArray(payload.data)) {
-        for (const m of payload.data) renderMessage(m);
-        return;
-      }
-      if (payload.type === "roster" && Array.isArray(payload.users)) {
-        renderRoster(payload.users);
-        return;
-      }
-      if (payload.type === "chat") {
-        renderMessage(payload);
-        return;
-      }
-
-      // Legacy fallback: shape without "type"
-      if (payload.username && payload.text) renderMessage(payload);
+      if (payload.type === "history" && Array.isArray(payload.data)) { for (const m of payload.data) renderMessage(m); return; }
+      if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
+      if (payload.type === "chat") { renderMessage(payload); if (payload.username !== nick && beepOn) ding(); return; }
+      if (payload.username && payload.text) { renderMessage(payload); }
     }
 
-    // Go
+    // Start
     connect();
 
-    
-// ===== Menus: open/close and actions =====
-let openMenu = null;
-let beepOn = true;
-let currentZoom = 13; // px
-const rightPane = document.querySelector(".right");
-const menubarEl = document.getElementById("menubar");
-const logEl = document.getElementById("log");
+    // ===== Menus: open/close and actions =====
+    const menubarEl = document.getElementById("menubar");
+    const logEl = document.getElementById("log");
+    const rightPane = document.querySelector(".right");
+    let openMenu = null;
+    let beepOn = true;
+    let currentZoom = 13;
 
-// Open the matching dropdown next to the clicked button
-menubarEl.addEventListener("click", (e) => {
-  const btn = e.target.closest(".menu-btn");
-  const item = e.target.closest(".dropdown a");
-  if (btn) {
-    const id = "menu-" + btn.dataset.menu;
-    toggleMenu(btn, document.getElementById(id));
-  } else if (item) {
-    handleAction(item.getAttribute("data-action"));
-    closeMenus();
-  }
-});
+    menubarEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".menu-btn");
+      const item = e.target.closest(".dropdown a");
+      if (btn) {
+        const id = "menu-" + btn.dataset.menu;
+        const menu = document.getElementById(id);
+        const rect = btn.getBoundingClientRect();
+        const host = menubarEl.getBoundingClientRect();
+        menu.style.left = (rect.left - host.left) + "px";
+        menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        if (openMenu && openMenu !== menu) openMenu.style.display = "none";
+        openMenu = menu.style.display === "block" ? menu : null;
+      } else if (item) {
+        handleAction(item.dataset.action);
+        closeMenus();
+      }
+    });
+    document.addEventListener("click", (e) => { if (!menubarEl.contains(e.target)) closeMenus(); });
+    function closeMenus(){ document.querySelectorAll(".dropdown").forEach(d=>d.style.display="none"); openMenu=null; }
 
-document.addEventListener("click", (e) => {
-  if (!menubarEl.contains(e.target)) closeMenus();
-});
-
-function toggleMenu(btn, menu) {
-  const rect = btn.getBoundingClientRect();
-  const host = menubarEl.getBoundingClientRect();
-  menu.style.left = (rect.left - host.left) + "px";
-  menu.style.display = (menu.style.display === "block") ? "none" : "block";
-
-  // close any other open menu
-  if (openMenu && openMenu !== menu) openMenu.style.display = "none";
-  openMenu = menu.style.display === "block" ? menu : null;
-}
-function closeMenus() {
-  document.querySelectorAll(".dropdown").forEach(d => d.style.display = "none");
-  openMenu = null;
-}
-
-function handleAction(a) {
-  switch (a) {
-    case "save-log": return saveLog();
-    case "print": return window.print();
-    case "clear-log": return clearLog();
-    case "join-room": return joinRoom();
-    case "copy-log": return copyLog();
-    case "find": return findInLog();
-    case "select-all": return selectAllLog();
-    case "zoom-in": return zoom(1);
-    case "zoom-out": return zoom(-1);
-    case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
-    case "toggle-roster": return rightPane.classList.toggle("hidden");
-    case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
-    case "help": return showHelp();
-    case "about": return alert("Web Chat • simple AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
-  }
-}
-
-// ===== Menu action implementations =====
-function saveLog() {
-  const text = Array.from(logEl.children).map(d => d.textContent).join("\n");
-  const blob = new Blob([text], { type: "text/plain" });
-  const a = document.createElement("a");
-  const stamp = new Date().toISOString().replace(/[:.]/g,"-");
-  a.href = URL.createObjectURL(blob);
-  a.download = `chat-${ROOM}-${stamp}.txt`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-
-function clearLog() { logEl.innerHTML = ""; }
-
-function joinRoom() {
-  const room = prompt("Join room:", ROOM);
-  if (room && room !== ROOM) {
-    const url = new URL(location.href);
-    url.searchParams.set("room", room);
-    location.href = url.toString();
-  }
-}
-
-async function copyLog() {
-  const text = Array.from(logEl.children).map(d => d.textContent).join("\n");
-  try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); }
-}
-
-function selectAllLog() {
-  const range = document.createRange();
-  range.selectNodeContents(logEl);
-  const sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
-}
-
-function findInLog() {
-  const term = prompt("Find:"); if (!term) return;
-  const lower = term.toLowerCase();
-  // remove old highlights
-  logEl.querySelectorAll(".hilite").forEach(x => x.classList.remove("hilite"));
-  for (const div of logEl.children) {
-    if (div.textContent.toLowerCase().includes(lower)) {
-      div.classList.add("hilite");
-      div.scrollIntoView({ block: "nearest" });
-      break;
+    function handleAction(a){
+      switch(a){
+        case "save-log": return saveLog();
+        case "print": return window.print();
+        case "clear-log": return (logEl.innerHTML = "");
+        case "join-room": return joinRoom();
+        case "copy-log": return copyLog();
+        case "find": return findInLog();
+        case "select-all": return selectAllLog();
+        case "zoom-in": return zoom(1);
+        case "zoom-out": return zoom(-1);
+        case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
+        case "toggle-roster": return rightPane.classList.toggle("hidden");
+        case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
+        case "help": return showHelp();
+        case "about": return alert("Web Chat • AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
+      }
     }
-  }
-}
 
-function zoom(delta) {
-  currentZoom = Math.max(10, Math.min(22, currentZoom + delta));
-  logEl.style.fontSize = currentZoom + "px";
-}
+    // Actions
+    function saveLog(){
+      const text = Array.from(logEl.children).map(d=>d.textContent).join("\n");
+      const blob = new Blob([text], { type:"text/plain" });
+      const a = document.createElement("a");
+      const stamp = new Date().toISOString().replace(/[:.]/g,"-");
+      a.href = URL.createObjectURL(blob);
+      a.download = `chat-${ROOM}-${stamp}.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+    function joinRoom(){
+      const room = prompt("Join room:", ROOM);
+      if (room && room !== ROOM) {
+        const url = new URL(location.href);
+        url.searchParams.set("room", room);
+        location.href = url.toString();
+      }
+    }
+    async function copyLog(){
+      const text = Array.from(logEl.children).map(d=>d.textContent).join("\n");
+      try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); }
+    }
+    function selectAllLog(){
+      const r = document.createRange(); r.selectNodeContents(logEl);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+    function findInLog(){
+      const term = prompt("Find:"); if (!term) return;
+      const lower = term.toLowerCase();
+      logEl.querySelectorAll(".hilite").forEach(x=>x.classList.remove("hilite"));
+      for (const div of logEl.children) {
+        if (div.textContent.toLowerCase().includes(lower)) { div.classList.add("hilite"); div.scrollIntoView({block:"nearest"}); break; }
+      }
+    }
+    function zoom(delta){ currentZoom = Math.max(10, Math.min(22, currentZoom + delta)); logEl.style.fontSize = currentZoom + "px"; }
+    function showHelp(){
+      alert(
+`Formatting:
+  [b]bold[/b]  [i]italic[/i]  [u]underline[/u]
+  [color=red]red text[/color]
+  [size=14]14px text[/size]
+  [font=Courier New]Courier text[/font]
 
-// ===== Beep on incoming messages not from me =====
-function ding() {
-  try {
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const o = ac.createOscillator();
-    const g = ac.createGain();
-    o.type = "square"; o.frequency.value = 880;
-    g.gain.setValueAtTime(0.0001, ac.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.15);
-    o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.16);
-  } catch {}
-}
+Toolbar inserts these tags for you.`);
+    }
 
-// Hook the beep into your onMessage handler:
-// Find your existing onMessage and after you parse payload, in the branch where you render a chat message,
-// add:
-///   if (payload.type === "chat" && payload.username !== nick && beepOn) { ding(); }
-
-
-
+    // Beep
+    function ding(){
+      try {
+        const ac = new (window.AudioContext||window.webkitAudioContext)();
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type="square"; o.frequency.value=880;
+        g.gain.setValueAtTime(0.0001, ac.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime+0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+0.15);
+        o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.16);
+      } catch {}
+    }
   </script>
 </body>
 </html>
