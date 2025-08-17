@@ -193,12 +193,24 @@
     const WORKER_HOST = "chat.asalmaadeed.workers.dev"; // change if your worker hostname differs
     const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
     document.getElementById("roomLabel").textContent = "Room: " + ROOM;
-
+    
     // ===== State =====
     const NICK_KEY = "aolchat_nick";
     let nick = localStorage.getItem(NICK_KEY) || ("User" + Math.floor(Math.random()*1000));
     const $ = id => document.getElementById(id);
     $("nick").value = nick;
+
+  // Kaomoji for /me actions
+const EMOTE_MAP = {
+  waves: '(^.^)/',
+  wave:  '(^.^)/',
+  yay:   '\\o/',          // backslash must be escaped
+  shrug: '¯\\_(ツ)_/¯',
+  flip:  '(╯°□°）╯︵ ┻━┻',
+  lenny: '( ͡° ͜ʖ ͡°)',
+  happy: '(^‿^)',
+  heart: '<3'
+};
 
     let ws;
 
@@ -317,15 +329,22 @@ function sendChat(){
   const base = htmlToBB(html).trim();
   if (!base || !ws || ws.readyState !== 1) return;
 
-  // emote: /me waves
-  if (base.startsWith("/me ")) {
-    send({ type:"emote", username:nick, text: base.slice(4) });
-    editor.innerHTML = "";
-    if (defaultColor) editor.style.color = defaultColor;
-    if (defaultFont)  editor.style.fontFamily = defaultFont;
-    if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
-    return;
-  }
+// emote: /me something
+if (base.startsWith("/me ")) {
+  const action = base.slice(4).trim();
+  const key = action.toLowerCase();
+  const kaomoji = EMOTE_MAP[key];
+
+  // If we know it, send the kaomoji; otherwise send the plain action
+  send({ type: "emote", username: nick, text: kaomoji || action, kaomoji: !!kaomoji });
+
+  editor.innerHTML = "";
+  if (defaultColor) editor.style.color = defaultColor;
+  if (defaultFont)  editor.style.fontFamily = defaultFont;
+  if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
+  return;
+}
+
 
   let bb = base;
   if (defaultFont)  bb = `[font=${defaultFont}]${bb}[/font]`;
@@ -425,10 +444,20 @@ function htmlToBB(html){
 
   const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
 
-  if (m._class === "emote") {
-    const msg = document.createElement("span");
+if (m._class === "emote") {
+  const msg = document.createElement("span");
+
+  if (m.kaomoji) {
+    // Show as a real emote next to the nick
+    msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || "");
+  } else {
+    // Fallback to classic “* nick action”
     msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || "");
-    div.appendChild(ts); div.appendChild(msg);
+  }
+
+  div.appendChild(ts); 
+  div.appendChild(msg);
+}
   } else if (m._class === "whisper") {
     const who = document.createElement("span"); who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
     const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
