@@ -416,35 +416,70 @@ function htmlToBB(html){
       for (const u of list) { const d = document.createElement("div"); d.className = "user"; d.textContent = u; box.appendChild(d); }
     }
 
-async function onMessage(e){
+function onMessage(e){
   let payload; try { payload = JSON.parse(e.data); } catch { return; }
 
+  // History: show past messages, including emotes
   if (payload.type === "history" && Array.isArray(payload.data)) {
-    for (const m of payload.data) if (!ignored.has(m.username)) renderMessage(m);
+    for (let m of payload.data) {
+      if (m && m.type === "emote") m = { ...m, _class: "emote" };
+      if (!m || ignored.has(m.username)) continue;
+      renderMessage(m);
+    }
     return;
   }
-  if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
-  if (payload.type === "topic") { setTopicUI(payload.topic); return; }
+
+  // Roster
+  if (payload.type === "roster" && Array.isArray(payload.users)) {
+    renderRoster(payload.users);
+    return;
+  }
+
+  // Topic
+  if (payload.type === "topic") {
+    setTopicUI(payload.topic);
+    return;
+  }
+
+  // Typing
   if (payload.type === "typing") {
     const t = document.getElementById("typing");
     t.textContent = `${payload.username} is typing…`;
-    clearTimeout(typingTimer); typingTimer = setTimeout(()=> t.textContent="", 2000);
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => t.textContent = "", 2000);
     return;
   }
+
+  // Whisper (respect ignore + beep setting)
   if (payload.type === "whisper") {
-    if (!ignored.has(payload.from)) renderMessage({ ...payload, _class:"whisper" });
-    ding(); return;
+    if (!ignored.has(payload.from)) {
+      renderMessage({ ...payload, _class: "whisper" });
+      if (beepOn) ding();
+    }
+    return;
   }
+
+  // Emote
   if (payload.type === "emote") {
-    if (!ignored.has(payload.username)) renderMessage({ ...payload, _class:"emote" });
+    if (!ignored.has(payload.username)) renderMessage({ ...payload, _class: "emote" });
     return;
   }
+
+  // Chat (respect ignore + beep setting)
   if (payload.type === "chat") {
-    if (!ignored.has(payload.username)) renderMessage(payload);
+    if (!ignored.has(payload.username)) {
+      renderMessage(payload);
+      if (payload.username !== nick && beepOn) ding();
+    }
     return;
   }
-  if (payload.username && payload.text) { if (!ignored.has(payload.username)) renderMessage(payload); }
+
+  // Legacy shape (no type)
+  if (payload.username && payload.text) {
+    if (!ignored.has(payload.username)) renderMessage(payload);
+  }
 }
+
 
 
     // Start
