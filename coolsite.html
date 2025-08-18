@@ -1,228 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ali's Chat Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: Times, serif;
-            color: #FF33CC;
-            position: relative; 
-        }
+  <meta charset="UTF-8" />
+  <title>Ali’s Kool Webpages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        .title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite;
-        }
+  <style>
+    /* === borrow the index.html look === */
+    :root{
+      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
+    }
+    html, body {
+      margin:0; padding:0;
+      background-image:url('stars.gif'); background-repeat:repeat;
+      color:var(--ink);
+      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
+    }
+    .page {
+      width:760px; margin:18px auto 32px; position:relative; left:7px;
+      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
+      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
 
-        @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
+    #glitter-title{
+      font-size:60px; text-align:center; color:var(--neon-blue);
+      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
+    }
 
-        .header {
-            background-color: #FF33CC;
-            color: #FFF;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.5em;
-        }
+    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
+    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
+    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+    .layout{ width:100%; border-collapse:collapse; }
+    .sidebar{
+      width:210px;
+      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right:6px ridge var(--neon-purple); vertical-align:top;
+    }
+    .content{
+      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
+    }
 
-        ul {
-            list-style-position: inside;
-            padding-left: 0;
-            margin-left: 0;
-        }
+    .nav a{
+      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+    }
+    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
+    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
-        li {
-            padding-left: 0.3em;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: yellow;
-        }
-
-        .nav {
-            font-family: 'Press Start 2P', cursive;
-            color: #FF33CC;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .header, .nav, .title {
-                font-size: smaller;
-            }
-
-            .column {
-                margin-left: 10px;
-            }
-        }
-
-pre {
-    max-width: 100%;
-    overflow-x: auto; /* Allows horizontal scrolling */
-    white-space: pre; /* Keeps original whitespace and line breaks */
-}
-
-
-    
-    </style>
-</head>
-<body>
-    <center>
-        <div class="title">Ali's Blog</div>
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-
-    <!-- Navigation Buttons -->
-    <div style="text-align: center;">
-    <a href="index.html" class="retro-btn nav">Home</a>
-    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="about.html" class="retro-btn nav">About</a>
-    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-    <a href="chat.html" class="retro-btn nav">Chat</a>
-    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-    <a href="books.html" class="retro-btn nav">Kool Books</a>
-    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-    <a href="contact.html" class="retro-btn nav">Contact</a>
-    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-    </div>
-    <br>
-
-    <div class="column">
-
-    <pre>
-   _______________                        |*\_/*|________
-  |  ___________  |     .-.     .-.      ||_/-\_|______  |
-  | |           | |    .****. .****.     | |           | |
-  | |   0   0   | |    .*****.*****.     | |   0   0   | |
-  | |     -     | |     .*********.      | |     -     | |
-  | |   \___/   | |      .*******.       | |   \___/   | |
-  | |___     ___| |       .*****.        | |___________| |
-  |_____|\_/|_____|        .***.         |_______________|
-    _|__|/ \|_|_.............*.............._|________|_
-   / ********** \                          / ********** \
- /  ************  \                      /  ************  \
---------------------                    --------------------
-</pre>
-
-
-
-
-         <div style="flex: 1; padding: 20px; text-align: justify;">
-         <!-- Second Column -->
-            <div class="column">
-            <h2 style="font-size: 1.5rem; color: yellow;">Academic:</h2>
-            <img src="teacher.gif">
-            <ul>
-            <li><strong><a href="https://www.newleftreview.org">New Left Review</a></strong>: High-imact factor leftist Pol Sci. magazine.</li>
-            <li><strong><a href="https://www.jhiblog.org/">Journey of History of Ideas Blog</a></strong>: i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</li>
-            <li><strong><a href="https://thefunambulist.net/">The Funambulist Magazine</a></strong>: "Our hope is to provide a useful platform where activist/academic/practitioner voices can meet and build solidarities across geographical scales. . . anticolonial, antiracist, queer, and feminist" topics.</li>
-            <li><strong><a href="https://www.e-ir.info">E-International Relations</a></strong>: sum short articles on IR, many written by undergrad-grad students</li>
-            <li><strong><a href="https://plato.stanford.edu/index.html">Stanford Encyclopedia of Philosophy</a></strong>: this is the Philosophy holy book that every student reads before bed</li>
-            <li><strong><a href="https://iep.utm.edu/">Internet Encyclopedia of Philosophy</a></strong>: another philosophy wiki/holybook.</li>
-            <li><strong><a href="https://lesswrong.com/">LessWrong</a></strong>: basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</li>
-            <li><strong><a href="https://www.astralcodexten.com/">Astral Codex Ten</a></strong>: a guy who is basically 'the father' of the above website who talks about psychology and philosophy (i no longer read it because his politics are extra horribe!)</li>
-            <li><strong><a href="https://rationalwiki.org/wiki/Main_Page">RationalWiki</a></strong>: a wiki for 'sceptics', i think it was build during the early era of new atheism but its still updated and has some cool entries, for e.g <a href="https://rationalwiki.org/wiki/Just_asking_questions">Just asking questions</a>.</li>
-            <li><strong><a href="https://www.lanceindependent.com/">Lance Independent</a></strong>: lance is a philosophy phd that writes in a super accessible way, he has a cool youtube channel too. he debates metaethics</li>
-            <li><strong><a href="https://peasoupblog.com/">PEA Soup</a></strong>: another philosophy blog with short accessible posts</li>
-            <li><strong><a href="https://webhome.phy.duke.edu/~rgb/index.php">Robert Brown</a></strong>: i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</li>
-            <li><strong><a href="https://www.lrb.co.uk/">London Review of Books</a></strong>: you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</li>
-            <li><strong><a href="https://www.nybooks.com/">The New York Review of Books</a></strong>: another notable literary magazine, the american competitor to the above (lrb wins...)</li>
-            <li><strong><a href="https://philosophynow.org">Philosophy Magazine</a></strong>: yet another accessible philosophy website</li>
-            <li><strong><a href="https://social-epistemology.com/">Social Epistemology Review</a></strong>: a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</li>
-            <li><strong><a href="https://allthingslinguistic.com">Linguistic Blog</a></strong>: a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</li>
-            </ul>
-        </div>
-        
-
-         <div style="flex: 1; padding: 20px; text-align: justify;">
-         <!-- Second Column -->
-            <div class="column">
-            <h2 style="font-size: 1.5rem; color: yellow;">Retro Webmaster Tools:</h2>
-            <ul>
-            <li><strong><a href="https://gifcities.org/?q=cat">GIF cities</a></strong>: the motherload of classic gifs.</li>
-                <li><strong><a href="https://melonland.net//">Melon Land</a></strong>: lots of classic cute gifs, textures, pets and other tools for webmasters</li>
-                <li><strong><a href="https://tholman.com/cursor-effects/">Cursor effects</a></strong>: adds cool 90s cursor effects to your cursor</li>
-                <li><strong><a href="https://geocities/?q=cat">Geocities</a></strong>: perfect if youre looking for ideas for your webpage</li>
-                <li><strong><a href="nineties.website">Nineties</a></strong>: 90s aesthetic html ideas. if link broken just go to nineties dot website</li>
-                <li><strong><a href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833">Git & GitHub Guide</a></strong>: if youre new to git and github, this is a good guide.</li>
-             <li><strong><a href="http://mikesdigitalpogpage.com/">POGS</a></strong>: digital POGS are back baby</li>
-     <li><strong><a href="https://lookscanned.io/en/scan">LOOKS SCANNED</a></strong>: gives you a PDF of any screenshot to make it look like it was scanned on a scanner!!!</li>
-
-
-
-
-            </ul>
-        </div>
-
-
-             <div style="flex: 1; padding: 20px; text-align: justify;">
-         <!-- Third Column -->
-            <div class="column">
-            <h2 style="font-size: 1.5rem; color: yellow;">Nostalgia Trips:</h2>
-            <ul>
-    <li><strong><a href="https://www.pcjs.org/">PCJS</a></strong>: uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</li>
-    <li><strong><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/">Old Web Today</a></strong>: now you can relive the old internet days with these classic browsers :D </li>
-    <li><strong><a href="https://theoldnet.com/">The Old Net</a></strong>: basically a search engine that only indexes old websites, how cool is that???</li>
-    <li><strong><a href="http://www.textfiles.com/directory.html">Text Files Directory</a></strong>: this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</li>
-    <li><strong><a href="https://www.wiby.org/">Wiby</a></strong>: another search engine that only indexes Web.10 websites ooo la la</li>
-    <li><strong><a href="https://oldcomputers.net/">Old Computers</a></strong>: a musuem of classic computers and internet</li>
-    <li><strong><a href="https://geocities.restorativland.org/">Geocities Restorative</a></strong>: i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</li>
-    <li><strong><a href="https://my90stv.com/#zbi7oQITpDo">My90sTV</a></strong>: 90s TV simulator, what else can i say</li>
-    <li><strong><a href="https://www.my80stv.com/">My80sTV</a></strong>: 90s? pff here's am 80s TV simulator</li>
-    <li><strong><a href="https://wiby.me/surprise/">Wiby Surprise</a></strong>: paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</li>
-    <li><strong><a href="https://flashmuseum.org/">Flash Musuem</a></strong>: archive of thousands of old flash games find your fave miniclip game here</li>      
-    <li><strong><a href="https://www.makewordart.com/">WORD ART IS BACK</a></strong>: return to monkey! (website where you can make wordart again!)</li> 
-    <li><strong><a href="https://walzr.com/IMG_0001">IMG_0001</a></strong>: ill just let them explain this one: "Between 2009 and 2012, iPhones had a built-in "Send to YouTube" button in the Photos app. Many of these uploads kept their default IMG_XXXX filenames, creating a time capsule of raw, unedited moments from random lives."</li>      
-    <li><strong><a href="https://geocities.live/">90'S WEBSITE MAKER</a></strong>: another return to monkey! put in any website and it turns it into its 90's versionn</li> 
-
-                
-
-            </ul>
-        </div>
-
-
-
-             
-             <div style="flex: 1; padding: 20px; text-align: justify;">
-         <!-- Third Column -->
-            <div class="column">
-            <h2 style="font-size: 1.5rem; color: yellow;">Miscellaneous:</h2>
-            <ul>
-    <li><strong><a href="https://www.chronophoto.app/game.html">Chronophoto</a></strong>: guess the date of random photos, fun lil game</li>
-    <li><strong><a href="https://cloudhiker.net/explore">Cloud Hiker</a></strong>: surf the most intersting hyperlinks on the web</li>
-    <li><strong><a href="https://neal.fun/">Neal Fun</a></strong>: collection of super fun interactive projects</li>
-    <li><strong><a href="https://www.codingame.com/ide/puzzle/onboarding">CodinGame Onboarding</a></strong>: learn to code via playing a game</li>
-    <li><strong><a href="https://pointerpointer.com/">Pointer Pointer</a></strong>: an interactive site that finds a photo pointing to your cursor no matter where it is</li>
-    <li><strong><a href="https://busysimulator.com/">Busy Simulator</a></strong>: play notifications to make you look busy at work hehehehe</li>
-    <li><strong><a href="https://www.geo-fs.com/">Flight Simulator</a></strong>: the clue is in the name genius!
-    <li><strong><a href="https://www.youhaventlived.com/">Boomer blog</a></strong>: a super old blog that somehow (!!!) is updated daily???? give this man an award</li>
-                
-            </ul>
-    </div>
-</body>
-</html>
-
+    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
+    .post
