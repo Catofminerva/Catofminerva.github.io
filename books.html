@@ -1,289 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Ali's Chat Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-       body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
-            color: #FF33CC;
-            position: relative; 
-        }
+  <meta charset="UTF-8" />
+  <title>Ali’s Bookshelf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        .header {
-            background-color: #FF33CC; /* Pink header */
-            color: #FFF;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.5em;
-        }
+  <style>
+    /* ==== borrow the index.html look ==== */
+    :root{
+      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
+    }
+    html, body {
+      margin:0; padding:0;
+      background-image:url('stars.gif'); background-repeat:repeat;
+      color:var(--ink);
+      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
+    }
+    .page {
+      width:760px; margin:18px auto 32px; position:relative; left:7px;
+      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
+      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
+    #glitter-title{
+      font-size:60px; text-align:center; color:var(--neon-blue);
+      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
+    }
+    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
+    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
+    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
 
-    @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
+    .layout{ width:100%; border-collapse:collapse; }
+    .sidebar{
+      width:210px;
+      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right:6px ridge var(--neon-purple); vertical-align:top;
+    }
+    .content{
+      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
+    }
 
-        .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite; /* Flip animation */
-        }
+    .nav a{
+      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+    }
+    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
+    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
-kitty.gif {
-    margin-top: 0px; 
-}
+    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
+    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
+    .post .meta{ font-size:12px; color:var(--neon-yellow); }
 
-hr {
-    margin-top: -15px;  /* Adjust this value as needed */
-}
-  
-ul {
-    list-style-position: inside; /
-    padding-left: 0;             
-    margin-left: 0;              
-}
+    hr.retro{
+      height:12px; border:0; margin:10px 0 14px;
+      background-image:repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
+      );
+      position:relative; overflow:visible;
+    }
+    /* kitty on the first rainbow bar */
+    .content > hr.retro:first-of-type::after{
+      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
+      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
+      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
+    }
+    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
 
-li {
-    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
-    margin-bottom: 20px; /* This will add space below each bullet point */
-}
+    /* title ships like index */
+    #glitter-title::before,#glitter-title::after{
+      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
+      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
+      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+    }
+    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
+    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
 
+    /* sticker wall */
+    .sticker-wall{
+      margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
+      display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; justify-items:center; align-items:center;
+    }
+    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; }
+    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
+    .sticker-wall .wide{ grid-column: span 2; width:188px; }
 
+    /* ==== bookshelf UI ==== */
+    .shelf-toolbar{
+      display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:8px 0 2px;
+    }
+    .btn{
+      padding:6px 10px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
+    }
+    .btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+    .seg{
+      display:inline-flex; border:3px outset #6af7ff; background:#0e0e33; box-shadow:2px 2px 0 #000; overflow:hidden;
+    }
+    .seg button{
+      border:0; padding:6px 10px; background:transparent; color:#a7ffff; cursor:pointer;
+    }
+    .seg button.active{ color:var(--neon-green); background:#140043; }
+    .search{
+      flex:1 1 180px; min-width:180px;
+      padding:6px 8px; border:3px inset #6af7ff; background:#000820; color:#a7ffff; box-shadow:2px 2px 0 #000;
+      font-family:inherit;
+    }
+    .tiny{ font-size:12px; color:var(--neon-yellow); }
 
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    
+    .book-grid{
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap:12px;
+    }
+    .book{
+      border:3px ridge #6af7ff; background:rgba(0,0,0,0.35); padding:8px; box-shadow: inset 0 0 6px #000;
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .cover{
+      width:100%; height:0; padding-top:150px; position:relative; border:3px inset #6af7ff; background:#000; box-shadow:2px 2px 0 #000;
+    }
+    .cover img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; image-rendering:auto;
+    }
+    .book h4{ margin:0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); font-size:16px; }
+    .book .desc{ font-size:12px; color:#eee; }
+    .book .more{
+      align-self:flex-start; text-decoration:none; display:inline-block; margin-top:2px;
+      border:3px outset #6af7ff; background:#140043; color:#a7ffff; padding:4px 8px; box-shadow:2px 2px 0 #000;
+    }
+    .book .more:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
 
-.welcome-message {
-    font-family: Times New Roman, Times, serif;
-    color: yellow;
-    font-size: 1.25em; /* adjust size as desired */
-}
+    /* collapse long text with details for tidy cards */
+    details{ background:rgba(0,0,0,0.25); padding:6px; border:2px solid #21003a; }
+    details>summary{ cursor:pointer; color:var(--neon-yellow); }
+    details[open]{ border-color:#6af7ff; }
 
-
-        .nav {
-    font-family: 'Press Start 2P', cursive;
-    color: #FF33CC;
-}
-        
-      </style>
-
-
-
-
-
+    /* VHS overlay for internal hops */
+    .vhs::after{
+      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+  </style>
 </head>
 <body>
-    <center>
-        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-    <!-- Navigation Buttons -->
-<center>
-    <a href="index.html" class="retro-btn nav">Home</a>
-    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="about.html" class="retro-btn nav">About</a>
-    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-    <a href="chat.html" class="retro-btn nav">Chat</a>
-    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-    <a href="books.html" class="retro-btn nav">Kool Books</a>
-    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-    <a href="contact.html" class="retro-btn nav">Contact</a>
-    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-</center>
-<br>
+  <div class="page">
+    <h1 id="glitter-title">Ali's World</h1>
 
-
-    <header>
-        <center>
-            <nav>
-                <ul>
-                    <li><a href="#non-fiction">Non-Fiction</a></li>
-                    <li><a href="#fiction">Fiction</a></li>
-                </ul>
-            </nav>
-            <!-- Include search functionality as appropriate -->
-        </center>
-    </header>
-    <center>
-    <main>
-    <section id="non-fiction" class="genre-section">
-        <h1>Non-Fiction Books</h1>
-        <div class="book-container">
-            <!-- Non-Fiction Books here -->
-
-    <!-- Book Cards -->    
-
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>My Past and Thoughts</h3>
-        <img src="herzen.jpeg" alt="Herzen Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>800-page memoirs of the 19th century Russian intellectual and revolutionary, Alexander Herzen. It is deeply personable, vibrant with life and history. I have read dozens of memoirs and autobiographies, this one is a literary masterpiece.</p>
-        <a href="https://www.goodreads.com/book/show/70069.My_Past_and_Thoughts?ref=nav_sb_ss_1_16" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-    </div>
-    
-
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Defying Hitler</h3>
-        <img src="hitler.jpg" alt="Defying Hitler Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Diary written by Sebastian Haffner, a young German Jew, as he watches his country descend into Nazism. The litereary style and writing is particularly brilliant.</p>
-        <a href="https://www.goodreads.com/book/show/65458.Defying_Hitler?ref=nav_sb_ss_1_14" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-
-</div>
-        
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Available Light: Anthropological Reflections on Philosophical Topics.</h3>
-        <img src="geertz.jpg" alt="Geertz" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Clifford Geertz doing philosophy, what's not to like? Philosophy of anthropology, anthropology of philosophy? Being a work of *reflection*, Clifford isn’t afraid of going on tangents. Im hesitant to recommend this because a lot of background knolwedge is needed to appreaciate some of the essays. But the literary style makes it accessible to most people.</p>
-        <a href="https://www.goodreads.com/book/show/330007.Available_Light" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-
-        </div>
-        
-        <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Russian Thinkers</h3>
-        <img src="russian.jpg" alt="russian thinkers" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Fascinating inights into 19th century Russian Intelligentsia. Was particularly amused on how many of them used literature as a tool for liberation, seeing that it was the only medium available to them for social criticism. Isaiah Berlin, the writer, does a profoundly good job at making such a dense subject extremely entertaining.</p>
-        <a https://www.goodreads.com/book/show/84707.Russian_Thinkers#:~:text=Russian%20Thinkers%20is%20a%20classic,The%20Hedgehog%20and%20the%20Fox." style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-
-</div>
-            
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Achieving Our Country: Leftist Thought in Twentieth-Century America</h3>
-        <img src="left.jpg" alt="Book cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Philosopher Richard Rorty critiques the American Left for straying from its pragmatic roots of hope and inclusive, class-centered  patriotism, towards abstract critique and passive cynicism. He reminisces about an earlier Left, aligned with figures like Dewey and Whitman, which championed solidarity and progress. Rorty acknowledges America's dual history of progress and atrocity but sees these as failures of imagination rather than inherent sin, arguing for continued constructive engagement over condemnation. He sees America as an evolving project that should learn from past injustices without being paralyzed by them, urging a move away from theoretical detachment towards active policy-making and reform.</p>
-        <a https://www.goodreads.com/book/show/86103.Achieving_Our_Country" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
-
-    
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Philosophy and Social Hope</h3>
-        <img src="hope.jpeg" alt="Fevre Dream Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Initially drawn to uncovering a universal law to explain historical and political phenomena, I was once captivated by theories suggesting that humans operated under fixed principles. Over time, and influenced by Rorty, my perspective shifted. I came to reject essentialism and foundationalism and embraced a more pluralistic, dynamic understanding of human behaviour. I cam to also recognise language and discourse as central to our interaction with the world.
-<p>This book is the best possible introduction to Rorty, clear and digestible philosophy that is relevant to people’s everyday thinking. Rorty's relativistic view, which might unsettle some, resonates deeply with me, as it reveals a world where fixed truths give way to discourse and practical utility. He argues that our beliefs do not mirror reality but are responses to cope with it. This framework dismisses the need for a unified appearance-reality distinction, given that we assess our beliefs based on their usefulness in achieving our goals. In this light, the sciences and religion serve different purposes and need not be reconciled.
-<p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. Consider this quote:
-<p>”We pragmatists cannot make sense of the idea that we should pursue truth for its own sake. We cannot regard truth as a goal of inquiry. The purpose of inquiry is to achieve agreement among human beings about what to do, to bring about consensus on the ends to be achieved and the means to be used to achieve those ends. Inquiry that does not achieve coordination of behaviour is not inquiry but simply wordplay. To argue for a certain theory about the microstructure of material bodies, or about the proper balance of powers between branches of government, is to argue about what we should do: how we should use the tools at our disposal in order to make technological, or political, progress. So, for pragmatists there is no sharp break between natural science and social science, nor between social science and politics, nor between politics, philosophy and literature. All areas of culture are parts of the same endeavour to make life better.”  </p>
-        <a https://www.goodreads.com/book/show/86099.Philosophy_and_Social_Hope" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">★ library cart squeaking by ★ pixels smell like old paperbacks ★</marquee>
     </div>
 
-            <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>The Utopia of Rules: On Technology, Stupidity, and the Secret Joys of Bureaucracy</h3>
-        <img src="Bureaucracy.jpeg" alt="Bureaucracy Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>Premise: Paperwork sucks and bureaucracy stifles all creativity, imagination, and innovation. Oh and also there has barely been any technological progressive in the past century. Also capitalism sucks. Also the assumption that capitalism = free market = deregulation = anti-bureaucracy = libertarianism or right wing, is not sound.
-<p>Of course the book is much more nuanced and interesting than this straw man version and definitely worth reading.</p>
-        <a https://www.goodreads.com/book/show/22245334-the-utopia-of-rules" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
+    <table class="layout">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
 
-</div>
+          <div class="sticker-wall">
+            <img src="arabic.gif" alt="Arabic">
+            <img src="qatar.gif" alt="Qatar">
+            <img src="pali.gif" alt="Palestine">
+            <img src="sleepycat.gif" alt="Sleepy cat">
+            <img src="peta.gif" alt="PETA">
+            <img src="fist.gif" alt="Fist">
+            <img src="freespeechonline.gif" alt="Free Speech Online">
+            <img src="scifi.gif" alt="Sci-Fi" class="wide">
+          </div>
+        </td>
 
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>The Social Construction of What?</h3>
-    <img src="socialconstruction.jpg" alt="The Social Construction of What? Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>So, you know how there's always been this big ol' debate between scientists and philosophers about what's real and what's just a social construct? Well, Hacking jumps right into the middle of that mess and starts poking around for some answers. He's got a great way of breaking things down, using anecdotes and analysis to make some pretty complex ideas feel a lot more accessible.
-<p>One thing that caught my attention was how he compares this Science Wars business to the old nominalist vs. structuralist debate. Now, I don't want to get too bogged down in the details here, but basically, nominalists think that reality is whatever we say it is, while structuralists believe that there's some deeper truth beneath the surface. Hacking's take is that, yeah, there might be some objectivity to science, but the way we go about figuring out what's true is definitely influenced by society.
-<p>What Hacking's trying to do here is get us to think more critically about how we categorize things. He wants us to look beyond the obvious and consider all the social forces that shape our understanding of reality.
-<p>Now, I know some people might be thinking, "But wait, isn't this social construction stuff just a bunch of postmodern mumbo-jumbo?" And, honestly, I can see why you might think that. But Hacking's approach is different. He's not trying to tear down the whole system or anything - he just wants us to be more aware of how our beliefs and values influence the way we see the world. The book is a referee's whistle in the culture wars. 
-</p>
-    <a href="https://www.goodreads.com/book/show/841374.The_Social_Construction_of_What_" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+        <td class="content">
+          <hr class="retro">
 
-        <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Why We Love Dogs, Eat Pigs, and Wear Cows</h3>
-    <img src="dogs.jpeg" alt="Why We Love Dogs, Eat Pigs, and Wear Cows Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Melanie Joy delves into the psychological and societal mechanisms that lead to selective compassion when it comes to animals. A provocative and enlightening read that questions the ethics and traditions of our food choices.</p>
-    <a href="https://www.goodreads.com/book/show/6532109-why-we-love-dogs-eat-pigs-and-wear-cows" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+          <div class="post">
+            <h3>Browse Books</h3>
+            <div class="meta">Filter by genre, search titles or shuffle</div>
 
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Animal Liberation</h3>
-    <img src="animal.jpeg" alt="Animal Liberation Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Peter Singer's groundbreaking work, 'Animal Liberation', has been a vital force in the animal rights movement. Challenging the ethical foundation of our treatment of animals, it remains a thought-provoking resource on the subject of animal ethics.</p>
-    <a href="https://www.goodreads.com/book/show/29380.Animal_Liberation" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+            <div class="shelf-toolbar">
+              <div class="seg" role="tablist" aria-label="Genre">
+                <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
+                <button data-filter="nonfiction" role="tab" aria-selected="false">Non-Fiction</button>
+                <button data-filter="fiction" role="tab" aria-selected="false">Fiction</button>
+              </div>
+              <input id="search" class="search" type="search" placeholder="Search title or text">
+              <button id="shuffle" class="btn">🔀 Shuffle</button>
+              <button id="random" class="btn">🎲 Random Book</button>
+              <span class="tiny">Tip: “Enter” focuses search, “Esc” clears it.</span>
+            </div>
+          </div>
 
-</div>
-</section>
+          <!-- Non-Fiction -->
+          <div class="post" id="non-fiction">
+            <h3>Non-Fiction Books</h3>
+            <div class="book-grid" id="grid-nf">
+              <!-- My Past and Thoughts -->
+              <article class="book" data-genre="nonfiction" data-title="My Past and Thoughts">
+                <div class="cover"><img src="herzen.jpeg" alt="My Past and Thoughts cover"></div>
+                <h4>My Past and Thoughts</h4>
+                <details open>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>800-page memoirs of the 19th century Russian intellectual and revolutionary, Alexander Herzen. It is deeply personable, vibrant with life and history. I have read dozens of memoirs and autobiographies, this one is a literary masterpiece.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/70069.My_Past_and_Thoughts?ref=nav_sb_ss_1_16">More Info</a>
+              </article>
 
-<section id="fiction" class="genre-section">
-    <h1>Fiction Books</h1>
-    <div class="book-container">
-                <!-- Fiction Books here -->
+              <!-- Defying Hitler -->
+              <article class="book" data-genre="nonfiction" data-title="Defying Hitler">
+                <div class="cover"><img src="hitler.jpg" alt="Defying Hitler cover"></div>
+                <h4>Defying Hitler</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Diary written by Sebastian Haffner, a young German Jew, as he watches his country descend into Nazism. The litereary style and writing is particularly brilliant.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/65458.Defying_Hitler?ref=nav_sb_ss_1_14">More Info</a>
+              </article>
 
-<div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Songs of a Dead Dreamer and Grimscribe</h3>
-    <img src="ligotti1.jpeg" alt="Songs of a Dead Dreamer and Grimscribe Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Thomas Ligotti is now mentioned in the same breath among the greats like Poe, Lovecraft, and Kafka. But he's got a pretty unique style that sets him apart, too. In this anthology of 33 stories, is a window into his eerie genius.
-<p> Now, I know some people might call his stuff "cosmic horror," but honestly, it's so much more than that. Sure, there's some sci-fi elements and ancient mythology thrown in, but ultimately, Ligotti's work is all about exploring the human condition. And its not always pretty.  You need to check this out. Trust me, the writing itself is worth it, even if you're not a fan of the 'weird fiction' genre. </p>
-    <a href="https://www.goodreads.com/book/show/24611567-songs-of-a-dead-dreamer-and-grimscribe" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+              <!-- Available Light -->
+              <article class="book" data-genre="nonfiction" data-title="Available Light">
+                <div class="cover"><img src="geertz.jpg" alt="Available Light cover"></div>
+                <h4>Available Light: Anthropological Reflections on Philosophical Topics.</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Clifford Geertz doing philosophy, what's not to like? Philosophy of anthropology, anthropology of philosophy? Being a work of *reflection*, Clifford isn’t afraid of going on tangents. Im hesitant to recommend this because a lot of background knolwedge is needed to appreaciate some of the essays. But the literary style makes it accessible to most people.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/330007.Available_Light">More Info</a>
+              </article>
 
-    <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Teatro Grottesco</h3>
-    <img src="ligotti2.jpeg" alt="Teatro Grottesco Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Kafka meets Poe, but without the sappy romance. Ligotti's stories are laced with black humour but don't expect to be scared in a traditional way. These tales are quite cerebral, they really dig deep into that grey matter between your ears, and not meant to merely entertain you.
-His prose, at times wry, pessimistic, or bitingly sarcastic, is nonetheless beautiful. Chef's kiss. More than perfect. <p>You'll encounter stories that are both metaphorical and allegorical, set in strange towns, surreal scenarios, and the monotonous cruelty of daily life. In short, Ligotti's collection isn't just a bunch of horror stories – it's a reflection on life itself. It's like he's holding up a mirror to society and saying, "Look, this is what we are – deal with it."</p>
-    <a href="https://www.goodreads.com/book/show/2452401.Teatro_Grottesco" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+              <!-- Russian Thinkers -->
+              <article class="book" data-genre="nonfiction" data-title="Russian Thinkers">
+                <div class="cover"><img src="russian.jpg" alt="Russian Thinkers cover"></div>
+                <h4>Russian Thinkers</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Fascinating inights into 19th century Russian Intelligentsia. Was particularly amused on how many of them used literature as a tool for liberation, seeing that it was the only medium available to them for social criticism. Isaiah Berlin, the writer, does a profoundly good job at making such a dense subject extremely entertaining.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/84707.Russian_Thinkers">More Info</a>
+              </article>
 
+              <!-- Achieving Our Country -->
+              <article class="book" data-genre="nonfiction" data-title="Achieving Our Country">
+                <div class="cover"><img src="left.jpg" alt="Achieving Our Country cover"></div>
+                <h4>Achieving Our Country: Leftist Thought in Twentieth-Century America</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Philosopher Richard Rorty critiques the American Left for straying from its pragmatic roots of hope and inclusive, class-centered  patriotism, towards abstract critique and passive cynicism. He reminisces about an earlier Left, aligned with figures like Dewey and Whitman, which championed solidarity and progress. Rorty acknowledges America's dual history of progress and atrocity but sees these as failures of imagination rather than inherent sin, arguing for continued constructive engagement over condemnation. He sees America as an evolving project that should learn from past injustices without being paralyzed by them, urging a move away from theoretical detachment towards active policy-making and reform.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86103.Achieving_Our_Country">More Info</a>
+              </article>
 
+              <!-- Philosophy and Social Hope -->
+              <article class="book" data-genre="nonfiction" data-title="Philosophy and Social Hope">
+                <div class="cover"><img src="hope.jpeg" alt="Philosophy and Social Hope cover"></div>
+                <h4>Philosophy and Social Hope</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Initially drawn to uncovering a universal law to explain historical and political phenomena, I was once captivated by theories suggesting that humans operated under fixed principles. Over time, and influenced by Rorty, my perspective shifted. I came to reject essentialism and foundationalism and embraced a more pluralistic, dynamic understanding of human behaviour. I cam to also recognise language and discourse as central to our interaction with the world.</p>
+                    <p>This book is the best possible introduction to Rorty, clear and digestible philosophy that is relevant to people’s everyday thinking. Rorty's relativistic view, which might unsettle some, resonates deeply with me, as it reveals a world where fixed truths give way to discourse and practical utility. He argues that our beliefs do not mirror reality but are responses to cope with it. This framework dismisses the need for a unified appearance-reality distinction, given that we assess our beliefs based on their usefulness in achieving our goals. In this light, the sciences and religion serve different purposes and need not be reconciled.</p>
+                    <p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. Consider this quote:</p>
+                    <p>”We pragmatists cannot make sense of the idea that we should pursue truth for its own sake. We cannot regard truth as a goal of inquiry. The purpose of inquiry is to achieve agreement among human beings about what to do, to bring about consensus on the ends to be achieved and the means to be used to achieve those ends. Inquiry that does not achieve coordination of behaviour is not inquiry but simply wordplay. To argue for a certain theory about the microstructure of material bodies, or about the proper balance of powers between branches of government, is to argue about what we should do: how we should use the tools at our disposal in order to make technological, or political, progress. So, for pragmatists there is no sharp break between natural science and social science, nor between social science and politics, nor between politics, philosophy and literature. All areas of culture are parts of the same endeavour to make life better.”</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86099.Philosophy_and_Social_Hope">More Info</a>
+              </article>
 
-<div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Dark Entries</h3>
-    <img src="dark.jpeg" alt="Dark Entries Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Aickman's stories are super immersive, with a richness that'll suck you right in. But, they're also kinda... weird. Like, you'll be reading along, and suddenly, things get a little (okay, a lot) inexplicable. You'll be left wondering, "Wait, what just happened? Did I miss something?". These aren't your usual bump-in-the-night kind of stories. They're not Steven King type horrors. There's no gore, no cheap scares, and no obvious villains. They're a bit more refined, yet no less chilling for their subtlety. Aickman builds worlds that you feel you know... only to slip through the cracks of reality when you least expect it. So, if you're lookin' for somethin' a little different, a little odd, a little WTF, then this collection is for you.</p>
-    <a href="https://www.goodreads.com/book/show/10552013-dark-entries" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+              <!-- The Utopia of Rules -->
+              <article class="book" data-genre="nonfiction" data-title="The Utopia of Rules">
+                <div class="cover"><img src="Bureaucracy.jpeg" alt="The Utopia of Rules cover"></div>
+                <h4>The Utopia of Rules: On Technology, Stupidity, and the Secret Joys of Bureaucracy</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Premise: Paperwork sucks and bureaucracy stifles all creativity, imagination, and innovation. Oh and also there has barely been any technological progressive in the past century. Also capitalism sucks. Also the assumption that capitalism = free market = deregulation = anti-bureaucracy = libertarianism or right wing, is not sound.</p>
+                    <p>Of course the book is much more nuanced and interesting than this straw man version and definitely worth reading.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/22245334-the-utopia-of-rules">More Info</a>
+              </article>
 
-<div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-    <h3>Song for the Unraveling of the World</h3>
-    <img src="song.jpeg" alt="Song for the Unraveling of the World Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-    <p>Brian Evenson's collection is totally impossible to pin down. Again this book is like, horror, but not the usual jump-scare stuff. Some of them have aliens and weird shenanigans that feel more at home in sci-fi, but they're not really that either. And the atmosphere is quite uncanny. It's got this timeless, eerie feeling like it's going down in some parallel universe. You're never sure if you're in the past, the future, or some other creepy dimension that's just a stone's throw away from our own. And the details. Evenson doesn't give you everything at once; he drops little breadcrumbs that make your skin crawl and leaves the rest for your brain to trip over later. There's this one story about a girl with no face, or a dude who's convinced he's being watched all the time - it's freaky because you start seeing those things out of the corner of your eye even after you finish the book.</p>
-    <a href="https://www.goodreads.com/book/show/41888678-song-for-the-unraveling-of-the-world" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-</div>
+              <!-- The Social Construction of What? -->
+              <article class="book" data-genre="nonfiction" data-title="The Social Construction of What?">
+                <div class="cover"><img src="socialconstruction.jpg" alt="The Social Construction of What? cover"></div>
+                <h4>The Social Construction of What?</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>So, you know how there's always been this big ol' debate between scientists and philosophers about what's real and what's just a social construct? Well, Hacking jumps right into the middle of that mess and starts poking around for some answers. He's got a great way of breaking things down, using anecdotes and analysis to make some pretty complex ideas feel a lot more accessible.</p>
+                    <p>One thing that caught my attention was how he compares this Science Wars business to the old nominalist vs. structuralist debate. Now, I don't want to get too bogged down in the details here, but basically, nominalists think that reality is whatever we say it is, while structuralists believe that there's some deeper truth beneath the surface. Hacking's take is that, yeah, there might be some objectivity to science, but the way we go about figuring out what's true is definitely influenced by society.</p>
+                    <p>What Hacking's trying to do here is get us to think more critically about how we categorize things. He wants us to look beyond the obvious and consider all the social forces that shape our understanding of reality.</p>
+                    <p>Now, I know some people might be thinking, "But wait, isn't this social construction stuff just a bunch of postmodern mumbo-jumbo?" And, honestly, I can see why you might think that. But Hacking's approach is different. He's not trying to tear down the whole system or anything - he just wants us to be more aware of how our beliefs and values influence the way we see the world. The book is a referee's whistle in the culture wars.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/841374.The_Social_Construction_of_What_">More Info</a>
+              </article>
 
-        <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Fevre Dream</h3>
-        <img src="Fevre_dream.jpeg" alt="Fevre Dream Cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>A vampire novel by George RR Martin, and not the cheesy 500 year old vampire falling for a highschool girl type (ahem, Twighlight). </p>
-        <a href="https://www.goodreads.com/book/show/382450.Fevre_Dream?ref=nav_sb_ss_1_10" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-    </div>
+              <!-- Why We Love Dogs -->
+              <article class="book" data-genre="nonfiction" data-title="Why We Love Dogs, Eat Pigs, and Wear Cows">
+                <div class="cover"><img src="dogs.jpeg" alt="Why We Love Dogs cover"></div>
+                <h4>Why We Love Dogs, Eat Pigs, and Wear Cows</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Melanie Joy delves into the psychological and societal mechanisms that lead to selective compassion when it comes to animals. A provocative and enlightening read that questions the ethics and traditions of our food choices.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/6532109-why-we-love-dogs-eat-pigs-and-wear-cows">More Info</a>
+              </article>
 
-     <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>Disgrace</h3>
-        <img src="disgrace.jpeg" alt="Disgrace cover" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p>In post-apartheid South Africa, Lurie, a university lecturer, is disgraced for hooking up with his student. He retreats to the country to live with his daughter. There, they experience her gruelling rape. He turns to working in an "Animal Welfare" clinic whose main role is to kill dogs and cats. He takes it upon himself to incinerate the animals himself, to save them from posthumous humiliation. The book is full of allegories, human emotions and insights on the post-apartheid transitory period and shifting racial power dynamics between whites and blacks who both undergo instances of disgrace.</p>
-        <a href="https://www.goodreads.com/en/book/show/6192" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-    </div>
+              <!-- Animal Liberation -->
+              <article class="book" data-genre="nonfiction" data-title="Animal Liberation">
+                <div class="cover"><img src="animal.jpeg" alt="Animal Liberation cover"></div>
+                <h4>Animal Liberation</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Peter Singer's groundbreaking work, 'Animal Liberation', has been a vital force in the animal rights movement. Challenging the ethical foundation of our treatment of animals, it remains a thought-provoking resource on the subject of animal ethics.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/29380.Animal_Liberation">More Info</a>
+              </article>
+            </div>
+          </div>
 
-        </div>
+          <!-- Fiction -->
+          <div class="post" id="fiction">
+            <h3>Fiction Books</h3>
+            <div class="book-grid" id="grid-fic">
+              <!-- Songs of a Dead Dreamer and Grimscribe -->
+              <article class="book" data-genre="fiction" data-title="Songs of a Dead Dreamer and Grimscribe">
+                <div class="cover"><img src="ligotti1.jpeg" alt="Songs of a Dead Dreamer and Grimscribe cover"></div>
+                <h4>Songs of a Dead Dreamer and Grimscribe</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Thomas Ligotti is now mentioned in the same breath among the greats like Poe, Lovecraft, and Kafka. But he's got a pretty unique style that sets him apart, too. In this anthology of 33 stories, is a window into his eerie genius.</p>
+                    <p>Now, I know some people might call his stuff "cosmic horror," but honestly, it's so much more than that. Sure, there's some sci-fi elements and ancient mythology thrown in, but ultimately, Ligotti's work is all about exploring the human condition. And its not always pretty.  You need to check this out. Trust me, the writing itself is worth it, even if you're not a fan of the 'weird fiction' genre.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/24611567-songs-of-a-dead-dreamer-and-grimscribe">More Info</a>
+              </article>
 
-         <div style="display: inline-block; border: 2px solid #FF33CC; padding: 10px; margin: 10px;">
-        <h3>They Shoot Horses, Don't They?</h3>
-        <img src="25B9F568-3DE5-4A72-B256-094897C3DC63_1_201_a.jpeg" alt="They Shoot Horses, Don't They?" style="width: 120px; border: 2px solid #FF33CC; padding: 5px;">
-        <p> Written in 1935, this is an existential novel set during the Great Depression. Gloria Beatty and her boyfriend particpate in a gruelling and long dance marathon contest that drags for weeks, all to win the $1000 prize money or be noticed by studio producers and movie stars. At one point, Gloria asks ”Why are these high-powered scientists always screwing around trying to prolong life instead of finding pleasant ways to end it?”. The novel ends with one of the most bleak questions in all of literature, which is the title of the book. It is meant to depict the helplessness people felt during the Depression, who worked really hard in a rat-race marathon to the top but ended up nowhere.</p>
-        <a href="https://www.goodreads.com/book/show/152052.They_Shoot_Horses_Don_t_They_?ref=nav_sb_ss_1_17" style="background-color: #FF33CC; color: black; padding: 5px 10px; text-decoration: none;">More Info</a>
-    </div>
-</div>
-        </section>
-    
-    <!-- ... Add more book cards here ... -->
+              <!-- Teatro Grottesco -->
+              <article class="book" data-genre="fiction" data-title="Teatro Grottesco">
+                <div class="cover"><img src="ligotti2.jpeg" alt="Teatro Grottesco cover"></div>
+                <h4>Teatro Grottesco</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Kafka meets Poe, but without the sappy romance. Ligotti's stories are laced with black humour but don't expect to be scared in a traditional way. These tales are quite cerebral, they really dig deep into that grey matter between your ears, and not meant to merely entertain you.
+                    His prose, at times wry, pessimistic, or bitingly sarcastic, is nonetheless beautiful. Chef's kiss. More than perfect.</p>
+                    <p>You'll encounter stories that are both metaphorical and allegorical, set in strange towns, surreal scenarios, and the monotonous cruelty of daily life. In short, Ligotti's collection isn't just a bunch of horror stories – it's a reflection on life itself. It's like he's holding up a mirror to society and saying, "Look, this is what we are – deal with it."</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/2452401.Teatro_Grottesco">More Info</a>
+              </article>
 
-</main>
-<footer>
-    <p>Looking for more? Visit the guestbook and leave a suggestion!</p>
-</footer>
+              <!-- Dark Entries -->
+              <article class="book" data-genre="fiction" data-title="Dark Entries">
+                <div class="cover"><img src="dark.jpeg" alt="Dark Entries cover"></div>
+                <h4>Dark Entries</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Aickman's stories are super immersive, with a richness that'll suck you right in. But, they're also kinda... weird. Like, you'll be reading along, and suddenly, things get a little (okay, a lot) inexplicable. You'll be left wondering, "Wait, what just happened? Did I miss something?". These aren't your usual bump-in-the-night kind of stories. They're not Steven King type horrors. There's no gore, no cheap scares, and no obvious villains. They're a bit more refined, yet no less chilling for their subtlety. Aickman builds worlds that you feel you know... only to slip through the cracks of reality when you least expect it. So, if you're lookin' for somethin' a little different, a little odd, a little WTF, then this collection is for you.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/10552013-dark-entries">More Info</a>
+              </article>
+
+              <!-- Song for the Unraveling of the World -->
+              <article class="book" data-genre="fiction" data-title="Song for the Unraveling of the World">
+                <div class="cover"><img src="song.jpeg" alt="Song for the Unraveling of the World cover"></div>
+                <h4>Song for the Unraveling of the World</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Brian Evenson's collection is totally impossible to pin down. Again this book is like, horror, but not the usual jump-scare stuff. Some of them have aliens and weird shenanigans that feel more at home in sci-fi, but they're not really that either. And the atmosphere is quite uncanny. It's got this timeless, eerie feeling like it's going down in some parallel universe. You're never sure if you're in the past, the future, or some other creepy dimension that's just a stone's throw away from our own. And the details. Evenson doesn't give you everything at once; he drops little breadcrumbs that make your skin crawl and leaves the rest for your brain to trip over later. There's this one story about a girl with no face, or a dude who's convinced he's being watched all the time - it's freaky because you start seeing those things out of the corner of your eye even after you finish the book.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/41888678-song-for-the-unraveling-of-the-world">More Info</a>
+              </article>
+
+              <!-- Fevre Dream -->
+              <article class="book" data-genre="fiction" data-title="Fevre Dream">
+                <div class="cover"><img src="Fevre_dream.jpeg" alt="Fevre Dream cover"></div>
+                <h4>Fevre Dream</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>A vampire novel by George RR Martin, and not the cheesy 500 year old vampire falling for a highschool girl type (ahem, Twighlight).</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/382450.Fevre_Dream?ref=nav_sb_ss_1_10">More Info</a>
+              </article>
+
+              <!-- Disgrace -->
+              <article class="book" data-genre="fiction" data-title="Disgrace">
+                <div class="cover"><img src="disgrace.jpeg" alt="Disgrace cover"></div>
+                <h4>Disgrace</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>In post-apartheid South Africa, Lurie, a university lecturer, is disgraced for hooking up with his student. He retreats to the country to live with his daughter. There, they experience her gruelling rape. He turns to working in an "Animal Welfare" clinic whose main role is to kill dogs and cats. He takes it upon himself to incinerate the animals himself, to save them from posthumous humiliation. The book is full of allegories, human emotions and insights on the post-apartheid transitory period and shifting racial power dynamics between whites and blacks who both undergo instances of disgrace.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/en/book/show/6192">More Info</a>
+              </article>
+
+              <!-- They Shoot Horses, Don't They? -->
+              <article class="book" data-genre="fiction" data-title="They Shoot Horses, Don't They?">
+                <div class="cover"><img src="25B9F568-3DE5-4A72-B256-094897C3DC63_1_201_a.jpeg" alt="They Shoot Horses, Don't They? cover"></div>
+                <h4>They Shoot Horses, Don't They?</h4>
+                <details>
+                  <summary>Description</summary>
+                  <div class="desc">
+                    <p>Written in 1935, this is an existential novel set during the Great Depression. Gloria Beatty and her boyfriend particpate in a gruelling and long dance marathon contest that drags for weeks, all to win the $1000 prize money or be noticed by studio producers and movie stars. At one point, Gloria asks ”Why are these high-powered scientists always screwing around trying to prolong life instead of finding pleasant ways to end it?”. The novel ends with one of the most bleak questions in all of literature, which is the title of the book. It is meant to depict the helplessness people felt during the Depression, who worked really hard in a rat-race marathon to the top but ended up nowhere.</p>
+                  </div>
+                </details>
+                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/152052.They_Shoot_Horses_Don_t_They_?ref=nav_sb_ss_1_17">More Info</a>
+              </article>
+            </div>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Internal VHS transition for relative links -->
+  <script>
+    document.querySelectorAll('.page a[href]').forEach(a => {
+      const url = a.getAttribute('href') || '';
+      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.documentElement.classList.add('vhs');
+        setTimeout(() => { window.location.href = url; }, 200);
+      });
+    });
+
+    // Genre filter, search, shuffle, random
+    const seg = document.querySelector('.seg');
+    const buttons = seg.querySelectorAll('button');
+    const search = document.getElementById('search');
+    const allBooks = Array.from(document.querySelectorAll('.book'));
+    const shuffleBtn = document.getElementById('shuffle');
+    const randomBtn  = document.getElementById('random');
+
+    function applyFilter(){
+      const genre = seg.querySelector('button.active')?.dataset.filter || 'all';
+      const q = (search.value || '').toLowerCase();
+      allBooks.forEach(b => {
+        const g = b.dataset.genre;
+        const text = (b.dataset.title + ' ' + b.textContent).toLowerCase();
+        const matchGenre = genre === 'all' || g === genre;
+        const matchText  = !q || text.includes(q);
+        b.style.display = (matchGenre && matchText) ? '' : 'none';
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter();
+      });
+    });
+
+    search.addEventListener('input', applyFilter);
+    search.addEventListener('keydown', e => {
+      if (e.key === 'Escape'){ search.value=''; applyFilter(); }
+    });
+
+    function shuffleGrid(gridEl){
+      const cards = Array.from(gridEl.children);
+      for (let i = cards.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        gridEl.appendChild(cards[j]);
+        cards.splice(j,1);
+      }
+    }
+    shuffleBtn.addEventListener('click', () => {
+      shuffleGrid(document.getElementById('grid-nf'));
+      shuffleGrid(document.getElementById('grid-fic'));
+    });
+
+    randomBtn.addEventListener('click', () => {
+      const visible = allBooks.filter(b => b.style.display !== 'none');
+      if (!visible.length) return;
+      const pick = visible[Math.floor(Math.random()*visible.length)];
+      pick.scrollIntoView({behavior:'smooth', block:'center'});
+      pick.animate([{transform:'scale(1.0)'},{transform:'scale(1.03)'},{transform:'scale(1.0)'}], {duration:500});
+    });
+
+    // Remember last filter
+    const FILT_KEY='books_filter'; const SEARCH_KEY='books_search';
+    const savedF = localStorage.getItem(FILT_KEY); const savedQ = localStorage.getItem(SEARCH_KEY);
+    if (savedF) { buttons.forEach(b => b.classList.toggle('active', b.dataset.filter===savedF)); }
+    if (savedQ) { search.value = savedQ; }
+    applyFilter();
+    buttons.forEach(b => b.addEventListener('click', () => localStorage.setItem(FILT_KEY, b.dataset.filter)));
+    search.addEventListener('input', () => localStorage.setItem(SEARCH_KEY, search.value));
+  </script>
+</body>
+</html>
