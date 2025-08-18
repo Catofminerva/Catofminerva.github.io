@@ -192,6 +192,35 @@ hr.retro {
   display: block;
 }
 
+
+
+/* sidebar sticker wall */
+.sticker-wall{
+  margin: 10px 8px 14px;
+  padding: 8px;
+  border: 3px inset #6af7ff;
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  justify-items: center;
+  align-items: center;
+}
+.sticker-wall img{
+  width: 88px;          /* classic button size; scales different gifs uniformly */
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+}
+.sticker-wall img:hover{
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 6px var(--neon-green));
+}
+.sticker-wall .wide{
+  grid-column: span 2;  /* let a wide one span the row */
+  width: 188px;
+}
+
     
   </style>
 </head>
@@ -231,6 +260,16 @@ hr.retro {
             <div style="margin-top:6px"><a href="#" onclick="alert('Guestbook coming soon!'); return false;">Sign my Guestbook</a></div>
             <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
           </div>
+          <div class="sticker-wall">
+  <img src="arabic.gif" alt="Arabic">
+  <img src="qatar.gif" alt="Qatar">
+  <img src="pali.gif" alt="Palestine">
+  <img src="sleepycat.gif" alt="Sleepy cat">
+  <img src="peta.gif" alt="PETA">
+  <img src="fist.gif" alt="Fist">
+  <img src="freespeechonline.gif" alt="Free Speech Online">
+  <img src="scifi.gif" alt="Sci-Fi" class="wide">
+</div>
         </td>
 
         <td class="content">
