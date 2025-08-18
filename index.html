@@ -261,6 +261,8 @@ hr.retro {
 }
 .sticker-wall.free img {
   position: absolute; cursor: grab; user-select: none;
+  opacity: 0;                       /* hidden while we place them */
+  transition: opacity 120ms ease, left 70ms linear, top 70ms linear;
 }
 .sticker-wall.free img:active { cursor: grabbing; }
 
@@ -434,7 +436,7 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
   });
 })();
 
-/* sticker wall: press F to toggle free mode, drag to reposition (saved in localStorage) */
+/* sticker wall: F = edit, Esc = exit, R = shuffle (in edit) */
 (() => {
   const wall = document.querySelector('.sticker-wall');
   if (!wall) return;
@@ -445,7 +447,6 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
 
   function enterFree() {
     const wallRect = wall.getBoundingClientRect();
-    // snapshot current screen positions before switching layout
     const snap = imgs.map(img => {
       const r = img.getBoundingClientRect();
       return { img, x: r.left - wallRect.left, y: r.top - wallRect.top, w: img.offsetWidth, h: img.offsetHeight };
@@ -456,13 +457,14 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
       snap.forEach(s => {
         const saved = JSON.parse(localStorage.getItem(keyFor(s.img)) || 'null');
         const w = s.w, h = s.h;
-        s.img.style.width = w + 'px'; // freeze size so grid→absolute does not reflow
+        s.img.style.width = w + 'px';                   // freeze size
         const maxX = wall.clientWidth  - w;
         const maxY = wall.clientHeight - h;
-        const x = saved ? saved.x : s.x;
-        const y = saved ? saved.y : s.y;
-        s.img.style.left = clamp(x, 0, maxX) + 'px';
-        s.img.style.top  = clamp(y, 0, maxY) + 'px';
+        const x = clamp((saved?.x ?? s.x), 0, maxX);
+        const y = clamp((saved?.y ?? s.y), 0, maxY);
+        s.img.style.left = x + 'px';
+        s.img.style.top  = y + 'px';
+        s.img.style.opacity = '1';                      // reveal after positioned
         makeDraggable(s.img, w, h);
       });
     });
@@ -474,6 +476,7 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
       img.style.removeProperty('left');
       img.style.removeProperty('top');
       img.style.removeProperty('width');
+      img.style.removeProperty('opacity');
     });
   }
 
@@ -512,10 +515,11 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
   document.addEventListener('keydown', e => {
     const k = e.key;
     if (k.toLowerCase() === 'f') { wall.classList.contains('free') ? exitFree() : enterFree(); }
-    if (k === 'Escape'        ) { if (wall.classList.contains('free')) exitFree(); }
-    if (k.toLowerCase() === 'r' && wall.classList.contains('free')) { randomize(); }
+    if (k === 'Escape')          { if (wall.classList.contains('free')) exitFree(); }
+    if (k.toLowerCase() === 'r' && wall.classList.contains('free')) randomize();
   });
 })();
+
 
 /* Konami hyperspace: up up down down left right left right B A */
 (() => {
@@ -556,29 +560,52 @@ setInterval(() => {
   document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
 })();
 
-/* nav hover blip — press M to mute */
+/* UI sounds: opt-in with button; play on click (pointerdown) */
 (() => {
   const a = document.getElementById('blip');
   const btn = document.getElementById('soundToggle');
   if (!a || !btn) return;
+
+  // Ensure the audio element has a concrete src, even if only <source> was provided
+  if (!a.currentSrc) { a.src = 'kawaii%208bit.mp3'; a.load(); }
+
   let enabled = false;
-  a.volume = 0.2;
+  a.volume = 0.5;
 
   btn.addEventListener('click', () => {
     enabled = !enabled;
     btn.setAttribute('aria-pressed', String(enabled));
     btn.textContent = enabled ? '🔊 sound' : '🔇 sound';
-    // prime audio on first enable
-    try { a.play().then(()=>{ a.pause(); a.currentTime = 0; }).catch(()=>{}); } catch(_){}
+    // prime audio without making noise
+    try { a.play().then(() => { a.pause(); a.currentTime = 0; }).catch(()=>{}); } catch(_){}
   });
 
+  const beep = () => {
+    if (!enabled) return;
+    try { a.currentTime = 0; a.play(); } catch(_){}
+  };
+
+  // fire on pointerdown so it plays before navigation
   document.querySelectorAll('.nav a').forEach(el => {
-    el.addEventListener('click', () => {
-      if (!enabled) return;
-      try { a.currentTime = 0; a.play(); } catch(_){}
+    el.addEventListener('pointerdown', beep);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') beep();
+    });
+  });
+
+  // give the beep a hair more time before the VHS transition navigates
+  const links = document.querySelectorAll('.page a[href]');
+  links.forEach(aTag => {
+    const url = aTag.getAttribute('href') || '';
+    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+    aTag.addEventListener('click', e => {
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(() => { window.location.href = url; }, 350); // was 200
     });
   });
 })();
+
 
 </script>
 
