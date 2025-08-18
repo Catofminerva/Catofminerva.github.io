@@ -84,6 +84,26 @@
     .gb-list .entry{ padding:8px; border:3px ridge #6af7ff; background:rgba(0,0,0,0.35); margin:10px 0; }
     .gb-list .who{ color:var(--neon-yellow); font-size:12px; }
     .gb-list .when{ color:#c9f; font-size:11px; margin-left:6px; }
+  
+  /* guestbook title row with gif */
+.title-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px 0;   /* keeps the spacing your posts use */
+}
+.title-row h3{ margin: 0; }
+.gb-gif{
+  width: 80px;          /* tweak size */
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+}
+@media (max-width: 480px){
+  .gb-gif{ width: 60px; }
+}
+
+  
   </style>
 </head>
 <body>
@@ -119,8 +139,12 @@
           <hr class="retro">
 
           <div class="post" id="sign">
-            <h3>Sign the Guestbook</h3>
-            <div class="meta">Say hello and drop a note</div>
+<div class="title-row">
+  <h3>Sign the Guestbook</h3>
+  <img src="guestbookcute.gif" alt="Guestbook badge" class="gb-gif">
+</div>
+<div class="meta">say hello friend</div>
+
 
             <form id="guestbookForm" class="gb-form" autocomplete="off">
               <label for="username">Name</label>
