@@ -1,138 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Ali's Chat Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-       body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
-            color: #FF33CC;
-            position: relative; 
-        }
+  <meta charset="UTF-8" />
+  <title>Contact · Ali’s World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        .header {
-            background-color: #FF33CC; /* Pink header */
-            color: #FFF;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.5em;
-        }
+  <style>
+    /* === borrow the index.html look === */
+    :root{
+      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
+    }
+    html, body {
+      margin:0; padding:0;
+      background-image:url('stars.gif'); background-repeat:repeat;
+      color:var(--ink);
+      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
+    }
+    .page {
+      width:760px; margin:18px auto 32px; position:relative; left:7px;
+      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
+      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
 
-    @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
+    #glitter-title{
+      font-size:60px; text-align:center; color:var(--neon-blue);
+      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
+    }
 
-        .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite; /* Flip animation */
-        }
+    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
+    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
+    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
 
-kitty.gif {
-    margin-top: 0px; 
-}
+    .layout{ width:100%; border-collapse:collapse; }
+    .sidebar{
+      width:210px;
+      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right:6px ridge var(--neon-purple); vertical-align:top;
+    }
+    .content{
+      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
+    }
 
-hr {
-    margin-top: -15px;  /* Adjust this value as needed */
-}
-  
-ul {
-    list-style-position: inside; /
-    padding-left: 0;             
-    margin-left: 0;              
-}
+    .nav a{
+      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+    }
+    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
+    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
-li {
-    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
-    margin-bottom: 20px; /* This will add space below each bullet point */
-}
+    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
+    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
+    .post .meta{ font-size:12px; color:var(--neon-yellow); }
 
+    hr.retro{
+      height:12px; border:0; margin:10px 0 14px;
+      background-image:repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
+      );
+      position:relative; overflow:visible;
+    }
+    /* kitty runs across the first rainbow bar */
+    .content > hr.retro:first-of-type::after{
+      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
+      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
+      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
+    }
+    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
 
+    /* title ships like home */
+    #glitter-title::before,#glitter-title::after{
+      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
+      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
+      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+    }
+    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
+    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
 
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    
+    /* === postcard contact form === */
+    .mail-panel{
+      display:grid; grid-template-columns: 1fr 210px; gap:12px;
+    }
+    @media (max-width:620px){ .mail-panel{ grid-template-columns: 1fr; } }
 
-.welcome-message {
-    font-family: Times New Roman, Times, serif;
-    color: yellow;
-    font-size: 1.25em; /* adjust size as desired */
-}
+    .postcard{
+      border:4px double #6af7ff;
+      background:
+        repeating-linear-gradient(135deg, rgba(0,229,255,0.08) 0 8px, transparent 8px 16px),
+        rgba(0,0,0,0.35);
+      padding:10px;
+      box-shadow: inset 0 0 8px #000, 0 0 10px rgba(0,229,255,.25);
+    }
+    .fields{
+      display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+    }
+    .fields .full{ grid-column: 1 / -1; }
+    @media (max-width:520px){ .fields{ grid-template-columns: 1fr; } }
 
+    label{ font-size:12px; color:var(--neon-yellow); display:block; margin-bottom:2px; }
+    input[type="text"], input[type="email"], textarea{
+      width:100%; padding:8px;
+      border:3px inset #6af7ff; background:#000820; color:#a7ffff;
+      box-shadow:2px 2px 0 #000; font-family:inherit; font-size:14px;
+    }
+    textarea{ min-height:140px; resize:vertical; }
 
-        .nav {
-    font-family: 'Press Start 2P', cursive;
-    color: #FF33CC;
-}
-        
-      </style>
+    .send-bar{
+      display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:6px;
+    }
+    .btn{
+      padding:8px 14px; border:3px outset #6af7ff; background:#140043; color:#a7ffff;
+      box-shadow:2px 2px 0 #000; cursor:pointer; text-transform:uppercase; letter-spacing:1px;
+    }
+    .btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
 
+    .tiny{ font-size:12px; color:var(--neon-yellow); }
+    .count{ font-variant-numeric: tabular-nums; }
 
+    /* right column: stickered mail stack */
+    .mail-wall{
+      border:3px inset #6af7ff; background:rgba(0,0,0,0.35); padding:8px;
+      display:grid; gap:8px; justify-items:center;
+    }
+    .mail-wall .stamp{
+      width:160px; height:auto; image-rendering:pixelated; display:block;
+      transform: rotate(-2deg);
+      filter: drop-shadow(0 0 6px rgba(0,229,255,.35));
+    }
+    .mail-wall .stamp:nth-child(2){ transform: rotate(3deg); }
+    .mail-wall .stamp:nth-child(3){ transform: rotate(-1deg); }
 
+    .ok{
+      padding:10px; background:rgba(0,40,20,0.6); border:3px ridge #27ff9f; color:#baffdb; margin-top:8px;
+    }
+    .err{
+      padding:10px; background:rgba(40,0,0,0.6); border:3px ridge #ff5c5c; color:#ffd0d0; margin-top:8px;
+    }
 
-
+    /* minimal VHS transition for internal links */
+    .vhs::after{
+      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+  </style>
 </head>
 <body>
-    <center>
-        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-    <!-- Navigation Buttons -->
-<center>
-    <a href="index.html" class="retro-btn nav">Home</a>
-    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="about.html" class="retro-btn nav">About</a>
-    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-    <a href="chat.html" class="retro-btn nav">Chat</a>
-    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-    <a href="books.html" class="retro-btn nav">Kool Books</a>
-    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-    <a href="contact.html" class="retro-btn nav">Contact</a>
-    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-</center>
-<br>
-<img src="email2.gif" alt="mail GIF"> <img src="mail.gif" alt="eemail GIF">
+  <div class="page">
+    <h1 id="glitter-title">Ali's World</h1>
 
-<form action="https://formspree.io/f/myyqoang" method="POST">
-  <!-- Example: Existing name field -->
-  <label>
-    Your Name:
-    <input type="text" name="name">
-  </label>
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">
+        ★ slide into my inbox like it’s 1999 ★ stamp approved ★ ICQ vibes, modern pipes ★
+      </marquee>
+    </div>
 
-  <!-- Formspree email field -->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
+    <table class="layout">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
 
-  <!-- Formspree message field -->
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
+          <div class="mail-wall" aria-label="mail stickers">
+            <img src="email2.gif" alt="Email animation" class="stamp">
+            <img src="mail.gif" alt="Mail animation" class="stamp">
+            <img src="book-0037.gif" alt="Guestbook book icon" class="stamp">
+          </div>
+        </td>
 
-  <!-- You can continue to add more fields as needed -->
+        <td class="content">
+          <hr class="retro">
 
-  <!-- Submit button -->
-  <button type="submit">Send</button>
-</form>
+          <div class="post">
+            <h3>Send a Postcard</h3>
+            <div class="meta">This form uses Formspree · no login needed</div>
+
+            <div class="mail-panel">
+              <form id="contactForm" class="postcard" action="https://formspree.io/f/myyqoang" method="POST">
+                <!-- Honeypot for bots -->
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+
+                <div class="fields">
+                  <div>
+                    <label for="name">Your Name</label>
+                    <input id="name" name="name" type="text" required maxlength="80" autocomplete="name">
+                  </div>
+
+                  <div>
+                    <label for="email">Your Email</label>
+                    <input id="email" name="email" type="email" required maxlength="120" autocomplete="email">
+                  </div>
+
+                  <div class="full">
+                    <label for="subject">Subject</label>
+                    <input id="subject" name="subject" type="text" maxlength="120" placeholder="Hello from the web…">
+                  </div>
+
+                  <div class="full">
+                    <label for="message">Your Message <span class="tiny">(<span id="count" class="count">0</span>/2000)</span></label>
+                    <textarea id="message" name="message" required maxlength="2000" placeholder="Type like it’s a glittery guestbook."></textarea>
+                  </div>
+                </div>
+
+                <div class="send-bar">
+                  <button type="submit" class="btn">Send ✉️</button>
+                  <button type="reset" class="btn" id="clearBtn">Clear</button>
+                  <span class="tiny">I’ll reply soon. Check your spam folder just in case.</span>
+                </div>
+
+                <div id="msgArea" aria-live="polite"></div>
+              </form>
+
+              <div>
+                <div class="postcard">
+                  <p style="margin:0 0 6px 0">Prefer direct links?</p>
+                  <ul style="margin:0 0 6px 18px; padding:0; color:#fff; font-size:13px;">
+                    <li><a href="mailto:" style="color:#a7ffff" onclick="alert('Use the form to avoid spam harvesters 😊'); return false;">Email client</a></li>
+                    <li><a href="guestbook.html" style="color:#a7ffff">Sign the Guestbook</a></li>
+                  </ul>
+                  <p class="tiny" style="margin:6px 0 0 0">Your message is sent over HTTPS through Formspree.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="retro">
+
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">
+              replies powered by stardust · if this page looks weird blame netscape
+            </marquee>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="marquee-wrap small">
+      <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring</marquee>
+    </div>
+  </div>
+
+  <!-- Internal VHS transition for relative links -->
+  <script>
+    document.querySelectorAll('.page a[href]').forEach(a => {
+      const url = a.getAttribute('href') || '';
+      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.documentElement.classList.add('vhs');
+        setTimeout(() => { window.location.href = url; }, 200);
+      });
+    });
+  </script>
+
+  <!-- Form: live counter, AJAX submit to Formspree, friendly messages -->
+  <script>
+    const form = document.getElementById('contactForm');
+    const message = document.getElementById('message');
+    const count = document.getElementById('count');
+    const msgArea = document.getElementById('msgArea');
+
+    function updateCount(){
+      count.textContent = (message.value || '').length.toString();
+    }
+    message.addEventListener('input', updateCount);
+    updateCount();
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      setTimeout(updateCount, 0);
+      msgArea.innerHTML = '';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      // Progressive enhancement: AJAX; falls back if blocked
+      e.preventDefault();
+      msgArea.innerHTML = '';
+
+      const fd = new FormData(form);
+      // if honeypot filled, quietly succeed
+      if ((fd.get('_gotcha')||'').trim() !== '') {
+        form.reset(); updateCount();
+        msgArea.innerHTML = '<div class="ok">Thanks! Your postcard has been filed.</div>';
+        return;
+      }
+
+      try{
+        const res = await fetch(form.action, { method:'POST', body:fd, headers:{ 'Accept':'application/json' }});
+        if (res.ok){
+          form.reset(); updateCount();
+          msgArea.innerHTML = '<div class="ok">✨ Message sent! I’ll get back to you soon.</div>';
+          // brief sparkle
+          document.documentElement.classList.add('vhs');
+          setTimeout(()=>document.documentElement.classList.remove('vhs'), 260);
+        } else {
+          msgArea.innerHTML = '<div class="err">Hmm, Formspree did not accept that. Try again or email via your client.</div>';
+        }
+      } catch{
+        msgArea.innerHTML = '<div class="err">Network hiccup. Please try again in a moment.</div>';
+      }
+    });
+  </script>
+</body>
+</html>
