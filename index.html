@@ -252,7 +252,54 @@ hr.retro {
 /* Optional gentle hover wiggle – remove if you want them static */
 #glitter-title:hover::before { transform: translateY(-50%) rotate(-3deg); }
 #glitter-title:hover::after  { transform: translateY(-50%) rotate(3deg); }
-  
+
+
+
+.sticker-wall.free {
+  display: block; position: relative; height: 320px; overflow: hidden;
+}
+.sticker-wall.free img {
+  position: absolute; cursor: grab; user-select: none;
+}
+.sticker-wall.free img:active { cursor: grabbing; }
+
+
+  .hyperspace::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
+  animation: warp 600ms ease-in-out;
+}
+@keyframes warp{
+  0% { opacity:0; transform: scaleX(1) }
+  40%{ opacity:1; transform: scaleX(1.8) }
+  100%{ opacity:0; transform: scaleX(1) }
+}
+
+.vhs::after{
+  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background:
+    linear-gradient(#000,transparent 12%,#0000 88%,#000),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+  animation: vhs 240ms steps(2,end);
+}
+@keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+
+    @keyframes flybyL { 0%{ transform:translate(-120%, -10px) rotate(8deg) }
+  70%{ transform:translate(10%, 4px) rotate(-6deg) } 100%{ transform:none } }
+@keyframes flybyR { 0%{ transform:translate(120%, 10px) rotate(-8deg) }
+  70%{ transform:translate(-10%, -6px) rotate(6deg) } 100%{ transform:none } }
+
+/* trigger class you can add via JS */
+.flyby #glitter-title::before { animation: flybyL 1.6s ease-out; }
+.flyby #glitter-title::after  { animation: flybyR 1.6s ease-out; }
+
+
+:root.morning { --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
+:root.night   { --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
+
+    
   </style>
 </head>
 <body>
@@ -347,6 +394,9 @@ hr.retro {
     <div class="footer">
       <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
     </div>
+  <audio id="blip" preload="auto">
+  <source src="kawaii%208bit.mp3" type="audio/mpeg">
+</audio>
   </div>
 
   <script>
@@ -373,6 +423,135 @@ hr.retro {
         if (Math.random() < 0.4) a.style.letterSpacing = '1px';
       });
     })();
+
+
+
+(function(){
+  const wall = document.querySelector('.sticker-wall');
+  if(!wall) return;
+
+  // press F to toggle free mode
+  let seeded = false;
+  document.addEventListener('keydown', e=>{
+    if(e.key.toLowerCase() !== 'f') return;
+    wall.classList.toggle('free');
+    if(wall.classList.contains('free') && !seeded){ seed(); seeded = true; }
+  });
+
+  function keyFor(img){ return 'sticker:'+ (img.getAttribute('src')||img.alt); }
+
+  function seed(){
+    const rect = wall.getBoundingClientRect();
+    wall.querySelectorAll('img').forEach((img,i)=>{
+      const saved = JSON.parse(localStorage.getItem(keyFor(img))||'null');
+      const w = img.naturalWidth || 80, h = img.naturalHeight || 80;
+      const x = saved?.x ?? Math.random()*(rect.width - w);
+      const y = saved?.y ?? Math.random()*(rect.height - h);
+      img.style.left = Math.max(0,x) + 'px';
+      img.style.top  = Math.max(0,y) + 'px';
+      makeDraggable(img);
+    });
+  }
+
+  function makeDraggable(img){
+    let sx=0, sy=0, ox=0, oy=0, moving=false;
+    img.addEventListener('pointerdown', e=>{
+      if(!wall.classList.contains('free')) return;
+      moving = true; img.setPointerCapture(e.pointerId);
+      sx = e.clientX; sy = e.clientY;
+      ox = parseFloat(img.style.left)||0; oy = parseFloat(img.style.top)||0;
+    });
+    img.addEventListener('pointermove', e=>{
+      if(!moving) return;
+      const nx = ox + (e.clientX - sx);
+      const ny = oy + (e.clientY - sy);
+      img.style.left = nx + 'px';
+      img.style.top  = ny + 'px';
+    });
+    img.addEventListener('pointerup', e=>{
+      if(!moving) return; moving = false;
+      localStorage.setItem(keyFor(img), JSON.stringify({
+        x: parseFloat(img.style.left)||0,
+        y: parseFloat(img.style.top)||0
+      }));
+    });
+  }
+})();
+
+
+(function(){
+  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let buf = [];
+  document.addEventListener('keydown', e=>{
+    buf.push(e.key.length===1 ? e.key.toLowerCase() : e.key);
+    buf = buf.slice(-seq.length);
+    if(seq.every((k,i)=>k===buf[i])){
+      document.documentElement.classList.add('hyperspace');
+      setTimeout(()=>document.documentElement.classList.remove('hyperspace'), 650);
+    }
+  });
+})();
+    
+
+(function(){
+  document.querySelectorAll('.page a[href]').forEach(a=>{
+    const url = a.getAttribute('href');
+    const isHash = url.startsWith('#');
+    const isExternal = /^(https?:)?\/\//i.test(url);
+    if(isHash || isExternal) return;
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(()=>{ window.location.href = url; }, 200);
+    });
+  });
+})();
+
+
+  // Run a flyby once in a while
+  setInterval(()=>{
+    document.documentElement.classList.add('flyby');
+    setTimeout(()=>document.documentElement.classList.remove('flyby'), 1700);
+  }, 14000);
+
+
+
+    (function(){
+  const h = new Date().getHours();
+  const cls = (h>=6 && h<17) ? 'morning' : 'night';
+  document.documentElement.classList.add(cls);
+})();
+
+<script>
+(function(){
+  const a = document.getElementById('blip');
+  if(!a) return;
+  a.volume = 0.25;             // softer by default
+  let muted = false;
+
+  // press M to mute/unmute
+  document.addEventListener('keydown', e=>{
+    if(e.key.toLowerCase() === 'm') muted = !muted;
+  });
+
+  // play on hover and on keyboard focus
+  const links = document.querySelectorAll('.nav a');
+  links.forEach(el=>{
+    function ping(){
+      if(muted) return;
+      try { a.currentTime = 0; a.play(); } catch(e){}
+    }
+    el.addEventListener('mouseenter', ping);
+    el.addEventListener('focus', ping);
+  });
+})();
+</script>
+
+    
   </script>
+
+
+
+
 </body>
 </html>
