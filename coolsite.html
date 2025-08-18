@@ -52,4 +52,421 @@
     .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
     .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
-    .post
+    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
+    .post .meta{ font-size:12px; color:var(--neon-yellow); }
+
+    hr.retro{
+      height:12px; border:0; margin:10px 0 14px;
+      background-image:repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
+      );
+      position:relative; overflow:visible;
+    }
+
+    /* starships like index */
+    #glitter-title::before,#glitter-title::after{
+      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
+      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
+      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+    }
+    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
+    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
+
+    /* Let the rainbow bar host the cat (like index) */
+    .content > hr.retro:first-of-type::after{
+      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
+      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
+      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
+    }
+    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
+
+    /* ASCII panel */
+    .ascii{
+      background:#000; color:#0f0; border:3px inset #6af7ff; padding:8px; overflow:auto; max-height:280px;
+      font-family:"Courier New",monospace; font-size:12px; white-space:pre; box-shadow:2px 2px 0 #000;
+    }
+
+    /* Toolbar for surfing */
+    .toolbar{
+      display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:8px 0 2px;
+    }
+    .tool-btn{
+      padding:6px 10px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
+    }
+    .tool-btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+    .note{ font-size:12px; color:var(--neon-yellow); }
+
+    /* Link grid with “blinkie badge” headers */
+    .link-grid{
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap:12px;
+    }
+    .card{
+      background:rgba(0,0,0,0.35); border:3px ridge #6af7ff; padding:8px; box-shadow: inset 0 0 6px #000;
+    }
+    .badge{
+      display:inline-block;
+      min-width: 138px; height:34px; line-height:32px; padding:0 8px;
+      border:2px solid #222; box-shadow: inset 0 0 0 2px #fff, 0 0 8px rgba(0,255,255,.35);
+      background:
+        linear-gradient(180deg,#c0faff 0%,#6aefff 60%,#00e5ff 100%);
+      color:#000; text-shadow:0 0 0 transparent; font-weight:bold; font-size:14px; text-decoration:none;
+      image-rendering:pixelated;
+    }
+    .badge:hover{ filter: hue-rotate(25deg) saturate(120%); transform: translateY(-1px); }
+    .desc{ font-size:12px; color:#eee; margin-top:6px; }
+
+    /* sticker wall in sidebar */
+    .sticker-wall{
+      margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
+      display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; justify-items:center; align-items:center;
+    }
+    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; }
+    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
+    .sticker-wall .wide{ grid-column: span 2; width:188px; }
+
+    /* minimal VHS overlay for internal hops */
+    .vhs::after{
+      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 id="glitter-title">Ali's World</h1>
+
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">★ portal to kool webpages ★ under construction forever ★ powered by stardust and iframes ★</marquee>
+    </div>
+
+    <table class="layout">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
+
+          <div class="sticker-wall">
+            <img src="arabic.gif" alt="Arabic">
+            <img src="qatar.gif" alt="Qatar">
+            <img src="pali.gif" alt="Palestine">
+            <img src="sleepycat.gif" alt="Sleepy cat">
+            <img src="peta.gif" alt="PETA">
+            <img src="fist.gif" alt="Fist">
+            <img src="freespeechonline.gif" alt="Free Speech Online">
+            <img src="scifi.gif" alt="Sci-Fi" class="wide">
+          </div>
+        </td>
+
+        <td class="content">
+          <hr class="retro">
+
+          <div class="post">
+            <h3>Surf the Cosmic Web</h3>
+            <div class="meta">A lovingly chaotic link portal</div>
+
+            <div class="toolbar">
+              <button id="randomBtn" class="tool-btn">🎲 Random Site</button>
+              <button id="shuffleBtn" class="tool-btn">🔀 Shuffle Lists</button>
+              <span class="note">Tip: links open in a new tab. Shuffle remixes the order.</span>
+            </div>
+
+            <div class="ascii">
+   _______________                        |*\_/*|________
+  |  ___________  |     .-.     .-.      ||_/-\_|______  |
+  | |           | |    .****. .****.     | |           | |
+  | |   0   0   | |    .*****.*****.     | |   0   0   | |
+  | |     -     | |     .*********.      | |     -     | |
+  | |   \___/   | |      .*******.       | |   \___/   | |
+  | |___     ___| |       .*****.        | |___________| |
+  |_____|\_/|_____|        .***.         |_______________|
+    _|__|/ \|_|_.............*.............._|________|_
+   / ********** \                          / ********** \
+ /  ************  \                      /  ************  \
+--------------------                    --------------------
+            </div>
+          </div>
+
+          <div class="post" id="academic">
+            <h3>Academic</h3>
+            <div class="meta">Blogs, mags, and philosophy rabbit holes</div>
+            <div class="link-grid">
+              <div class="card">
+                <a class="badge" href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a>
+                <div class="desc">High-imact factor leftist Pol Sci. magazine.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.jhiblog.org/" target="_blank" rel="noopener">Journey of History of Ideas Blog</a>
+                <div class="desc">i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://thefunambulist.net/" target="_blank" rel="noopener">The Funambulist Magazine</a>
+                <div class="desc">"Our hope is to provide a useful platform where activist/academic/practitioner voices can meet and build solidarities across geographical scales. . . anticolonial, antiracist, queer, and feminist" topics.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.e-ir.info" target="_blank" rel="noopener">E-International Relations</a>
+                <div class="desc">sum short articles on IR, many written by undergrad-grad students</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a>
+                <div class="desc">this is the Philosophy holy book that every student reads before bed</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a>
+                <div class="desc">another philosophy wiki/holybook.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://lesswrong.com/" target="_blank" rel="noopener">LessWrong</a>
+                <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.astralcodexten.com/" target="_blank" rel="noopener">Astral Codex Ten</a>
+                <div class="desc">a guy who is basically 'the father' of the above website who talks about psychology and philosophy (i no longer read it because his politics are extra horribe!)</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://rationalwiki.org/wiki/Main_Page" target="_blank" rel="noopener">RationalWiki</a>
+                <div class="desc">a wiki for 'sceptics', i think it was build during the early era of new atheism but its still updated and has some cool entries, for e.g <a href="https://rationalwiki.org/wiki/Just_asking_questions" target="_blank" rel="noopener">Just asking questions</a>.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.lanceindependent.com/" target="_blank" rel="noopener">Lance Independent</a>
+                <div class="desc">lance is a philosophy phd that writes in a super accessible way, he has a cool youtube channel too. he debates metaethics</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://peasoupblog.com/" target="_blank" rel="noopener">PEA Soup</a>
+                <div class="desc">another philosophy blog with short accessible posts</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a>
+                <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a>
+                <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a>
+                <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://philosophynow.org" target="_blank" rel="noopener">Philosophy Magazine</a>
+                <div class="desc">yet another accessible philosophy website</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://social-epistemology.com/" target="_blank" rel="noopener">Social Epistemology Review</a>
+                <div class="desc">a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a>
+                <div class="desc">a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="post" id="retro">
+            <h3>Retro Webmaster Tools</h3>
+            <div class="meta">Textures, pets, cursors, and pixel mischief</div>
+            <div class="link-grid">
+              <div class="card">
+                <a class="badge" href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a>
+                <div class="desc">the motherload of classic gifs.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a>
+                <div class="desc">lots of classic cute gifs, textures, pets and other tools for webmasters</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://tholman.com/cursor-effects/" target="_blank" rel="noopener">Cursor effects</a>
+                <div class="desc">adds cool 90s cursor effects to your cursor</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://geocities/?q=cat" target="_blank" rel="noopener">Geocities</a>
+                <div class="desc">perfect if youre looking for ideas for your webpage</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://nineties.website" target="_blank" rel="noopener">Nineties</a>
+                <div class="desc">90s aesthetic html ideas. if link broken just go to nineties dot website</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833" target="_blank" rel="noopener">Git & GitHub Guide</a>
+                <div class="desc">if youre new to git and github, this is a good guide.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="http://mikesdigitalpogpage.com/" target="_blank" rel="noopener">POGS</a>
+                <div class="desc">digital POGS are back baby</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://lookscanned.io/en/scan" target="_blank" rel="noopener">LOOKS SCANNED</a>
+                <div class="desc">gives you a PDF of any screenshot to make it look like it was scanned on a scanner!!!</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="post" id="nostalgia">
+            <h3>Nostalgia Trips</h3>
+            <div class="meta">Emulators, time capsules, and long-lost links</div>
+            <div class="link-grid">
+              <div class="card">
+                <a class="badge" href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a>
+                <div class="desc">uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a>
+                <div class="desc">now you can relive the old internet days with these classic browsers :D </div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://theoldnet.com/" target="_blank" rel="noopener">The Old Net</a>
+                <div class="desc">basically a search engine that only indexes old websites, how cool is that???</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a>
+                <div class="desc">this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.wiby.org/" target="_blank" rel="noopener">Wiby</a>
+                <div class="desc">another search engine that only indexes Web.10 websites ooo la la</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://oldcomputers.net/" target="_blank" rel="noopener">Old Computers</a>
+                <div class="desc">a musuem of classic computers and internet</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a>
+                <div class="desc">i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://my90stv.com/#zbi7oQITpDo" target="_blank" rel="noopener">My90sTV</a>
+                <div class="desc">90s TV simulator, what else can i say</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.my80stv.com/" target="_blank" rel="noopener">My80sTV</a>
+                <div class="desc">90s? pff here's am 80s TV simulator</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a>
+                <div class="desc">paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://flashmuseum.org/" target="_blank" rel="noopener">Flash Musuem</a>
+                <div class="desc">archive of thousands of old flash games find your fave miniclip game here</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.makewordart.com/" target="_blank" rel="noopener">WORD ART IS BACK</a>
+                <div class="desc">return to monkey! (website where you can make wordart again!)</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://walzr.com/IMG_0001" target="_blank" rel="noopener">IMG_0001</a>
+                <div class="desc">ill just let them explain this one: "Between 2009 and 2012, iPhones had a built-in "Send to YouTube" button in the Photos app. Many of these uploads kept their default IMG_XXXX filenames, creating a time capsule of raw, unedited moments from random lives."</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://geocities.live/" target="_blank" rel="noopener">90'S WEBSITE MAKER</a>
+                <div class="desc">another return to monkey! put in any website and it turns it into its 90's versionn</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="post" id="misc">
+            <h3>Miscellaneous</h3>
+            <div class="meta">Playful, weird, and wonderful</div>
+            <div class="link-grid">
+              <div class="card">
+                <a class="badge" href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a>
+                <div class="desc">guess the date of random photos, fun lil game</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://cloudhiker.net/explore" target="_blank" rel="noopener">Cloud Hiker</a>
+                <div class="desc">surf the most intersting hyperlinks on the web</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a>
+                <div class="desc">collection of super fun interactive projects</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.codingame.com/ide/puzzle/onboarding" target="_blank" rel="noopener">CodinGame Onboarding</a>
+                <div class="desc">learn to code via playing a game</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a>
+                <div class="desc">an interactive site that finds a photo pointing to your cursor no matter where it is</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://busysimulator.com/" target="_blank" rel="noopener">Busy Simulator</a>
+                <div class="desc">play notifications to make you look busy at work hehehehe</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.geo-fs.com/" target="_blank" rel="noopener">Flight Simulator</a>
+                <div class="desc">the clue is in the name genius!</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.youhaventlived.com/" target="_blank" rel="noopener">Boomer blog</a>
+                <div class="desc">a super old blog that somehow (!!!) is updated daily???? give this man an award</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Internal VHS transition for relative links -->
+  <script>
+    document.querySelectorAll('.page a[href]').forEach(a => {
+      const url = a.getAttribute('href') || '';
+      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.documentElement.classList.add('vhs');
+        setTimeout(() => { window.location.href = url; }, 200);
+      });
+    });
+
+    // Random Site + Shuffle
+    const pickRandom = () => {
+      const links = Array.from(document.querySelectorAll('.link-grid .card .badge'));
+      if (!links.length) return;
+      const pick = links[Math.floor(Math.random() * links.length)];
+      window.open(pick.href, '_blank', 'noopener');
+    };
+
+    const shuffleAll = () => {
+      document.querySelectorAll('.link-grid').forEach(grid => {
+        const cards = Array.from(grid.children);
+        for (let i = cards.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          grid.appendChild(cards[j]);
+          cards.splice(j,1);
+        }
+      });
+    };
+
+    document.getElementById('randomBtn')?.addEventListener('click', pickRandom);
+    document.getElementById('shuffleBtn')?.addEventListener('click', shuffleAll);
+  </script>
+
+  <!-- minimal VHS effect class -->
+  <style>
+    .vhs::after{
+      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+  </style>
+</body>
+</html>
