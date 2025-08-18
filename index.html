@@ -205,6 +205,7 @@ hr.retro {
   gap: 8px;
   justify-items: center;
   align-items: center;
+  position: relative;
 }
 .sticker-wall img{
   width: 88px;          /* classic button size; scales different gifs uniformly */
@@ -299,7 +300,14 @@ hr.retro {
 :root.morning { --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
 :root.night   { --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
 
-    
+    .sound-toggle{
+  margin: 6px auto 12px; display:block;
+  background:#0e0e33; color:#a7ffff;
+  border:2px outset #6af7ff; padding:6px 10px;
+  font-family: inherit; cursor: pointer; box-shadow: 2px 2px 0 #000;
+}
+.sound-toggle[aria-pressed="true"]{ border-style: inset; color: var(--neon-green); }
+
   </style>
 </head>
 <body>
@@ -397,6 +405,7 @@ hr.retro {
   <audio id="blip" preload="auto">
   <source src="kawaii%208bit.mp3" type="audio/mpeg">
 </audio>
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
   </div>
 
 <script>
@@ -429,45 +438,83 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
 (() => {
   const wall = document.querySelector('.sticker-wall');
   if (!wall) return;
-  let seeded = false;
-  document.addEventListener('keydown', e => {
-    if (e.key.toLowerCase() !== 'f') return;
-    wall.classList.toggle('free');
-    if (wall.classList.contains('free') && !seeded) { seed(); seeded = true; }
-  });
-  function keyFor(img){ return 'sticker:' + (img.getAttribute('src') || img.alt); }
-  function seed(){
-    const rect = wall.getBoundingClientRect();
-    wall.querySelectorAll('img').forEach(img => {
-      const saved = JSON.parse(localStorage.getItem(keyFor(img)) || 'null');
-      const w = img.naturalWidth || 80, h = img.naturalHeight || 80;
-      const x = saved?.x ?? Math.random()*(rect.width  - w);
-      const y = saved?.y ?? Math.random()*(rect.height - h);
-      img.style.left = Math.max(0,x) + 'px';
-      img.style.top  = Math.max(0,y) + 'px';
-      makeDraggable(img);
+
+  const imgs = [...wall.querySelectorAll('img')];
+  const keyFor = img => 'sticker:' + (img.getAttribute('src') || img.alt);
+  const clamp = (v,min,max) => Math.max(min, Math.min(max, v));
+
+  function enterFree() {
+    const wallRect = wall.getBoundingClientRect();
+    // snapshot current screen positions before switching layout
+    const snap = imgs.map(img => {
+      const r = img.getBoundingClientRect();
+      return { img, x: r.left - wallRect.left, y: r.top - wallRect.top, w: img.offsetWidth, h: img.offsetHeight };
+    });
+
+    wall.classList.add('free');
+    requestAnimationFrame(() => {
+      snap.forEach(s => {
+        const saved = JSON.parse(localStorage.getItem(keyFor(s.img)) || 'null');
+        const w = s.w, h = s.h;
+        s.img.style.width = w + 'px'; // freeze size so grid→absolute does not reflow
+        const maxX = wall.clientWidth  - w;
+        const maxY = wall.clientHeight - h;
+        const x = saved ? saved.x : s.x;
+        const y = saved ? saved.y : s.y;
+        s.img.style.left = clamp(x, 0, maxX) + 'px';
+        s.img.style.top  = clamp(y, 0, maxY) + 'px';
+        makeDraggable(s.img, w, h);
+      });
     });
   }
-  function makeDraggable(img){
+
+  function exitFree() {
+    wall.classList.remove('free');
+    imgs.forEach(img => {
+      img.style.removeProperty('left');
+      img.style.removeProperty('top');
+      img.style.removeProperty('width');
+    });
+  }
+
+  function randomize() {
+    const W = wall.clientWidth, H = wall.clientHeight;
+    imgs.forEach(img => {
+      const w = img.offsetWidth, h = img.offsetHeight;
+      const x = Math.random() * (W - w), y = Math.random() * (H - h);
+      img.style.left = x + 'px'; img.style.top = y + 'px';
+      localStorage.setItem(keyFor(img), JSON.stringify({ x, y }));
+    });
+  }
+
+  function makeDraggable(img, w, h) {
     let sx=0, sy=0, ox=0, oy=0, moving=false;
     img.addEventListener('pointerdown', e => {
       if (!wall.classList.contains('free')) return;
       moving = true; img.setPointerCapture(e.pointerId);
-      sx = e.clientX; sy = e.clientY; ox = parseFloat(img.style.left)||0; oy = parseFloat(img.style.top)||0;
+      sx = e.clientX; sy = e.clientY;
+      ox = parseFloat(img.style.left)||0; oy = parseFloat(img.style.top)||0;
     });
     img.addEventListener('pointermove', e => {
       if (!moving) return;
-      img.style.left = (ox + (e.clientX - sx)) + 'px';
-      img.style.top  = (oy + (e.clientY - sy)) + 'px';
+      const nx = clamp(ox + (e.clientX - sx), 0, wall.clientWidth  - (w || img.offsetWidth));
+      const ny = clamp(oy + (e.clientY - sy), 0, wall.clientHeight - (h || img.offsetHeight));
+      img.style.left = nx + 'px'; img.style.top  = ny + 'px';
     });
     img.addEventListener('pointerup', () => {
       if (!moving) return; moving = false;
       localStorage.setItem(keyFor(img), JSON.stringify({
-        x: parseFloat(img.style.left)||0,
-        y: parseFloat(img.style.top)||0
+        x: parseFloat(img.style.left)||0, y: parseFloat(img.style.top)||0
       }));
     });
   }
+
+  document.addEventListener('keydown', e => {
+    const k = e.key;
+    if (k.toLowerCase() === 'f') { wall.classList.contains('free') ? exitFree() : enterFree(); }
+    if (k === 'Escape'        ) { if (wall.classList.contains('free')) exitFree(); }
+    if (k.toLowerCase() === 'r' && wall.classList.contains('free')) { randomize(); }
+  });
 })();
 
 /* Konami hyperspace: up up down down left right left right B A */
@@ -512,18 +559,27 @@ setInterval(() => {
 /* nav hover blip — press M to mute */
 (() => {
   const a = document.getElementById('blip');
-  if (!a) return;
-  a.volume = 0.25;
-  let muted = false;
-  document.addEventListener('keydown', e => {
-    if (e.key.toLowerCase() === 'm') muted = !muted;
+  const btn = document.getElementById('soundToggle');
+  if (!a || !btn) return;
+  let enabled = false;
+  a.volume = 0.2;
+
+  btn.addEventListener('click', () => {
+    enabled = !enabled;
+    btn.setAttribute('aria-pressed', String(enabled));
+    btn.textContent = enabled ? '🔊 sound' : '🔇 sound';
+    // prime audio on first enable
+    try { a.play().then(()=>{ a.pause(); a.currentTime = 0; }).catch(()=>{}); } catch(_){}
   });
+
   document.querySelectorAll('.nav a').forEach(el => {
-    const ping = () => { if (!muted) { try { a.currentTime = 0; a.play(); } catch(_){} } };
-    el.addEventListener('mouseenter', ping);
-    el.addEventListener('focus', ping);
+    el.addEventListener('click', () => {
+      if (!enabled) return;
+      try { a.currentTime = 0; a.play(); } catch(_){}
+    });
   });
 })();
+
 </script>
 
 
