@@ -315,6 +315,19 @@ hr.retro {
 @keyframes pop { 50% { transform: scale(1.08) } }
 .sticker-wall.shuffled img{ animation: pop 180ms; }
 
+
+/* homepage-embedded chat */
+.chat-frame {
+  width: 100%;
+  height: 720px;         /* tweak to taste */
+  border: 4px groove var(--neon-blue);
+  background: #000;
+}
+@media (max-width: 800px){
+  .chat-frame { height: 85vh; }
+}
+
+
     
   </style>
 </head>
@@ -335,7 +348,7 @@ hr.retro {
             <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
             <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
             <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="chat.html"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+<a href="#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
             <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
             <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
             <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
@@ -400,6 +413,18 @@ hr.retro {
           </div>
 
           <hr class="retro">
+          <div class="post" id="chat-room">
+  <h3>Live Chat</h3>
+  <div class="meta">AOL-era web chat · room=lobby</div>
+  <iframe
+    class="chat-frame"
+    src="chat.html?room=lobby"
+    title="Ali’s Web Chat"
+    loading="lazy"
+    referrerpolicy="no-referrer">
+  </iframe>
+</div>
+
         </td>
       </tr>
     </table>
