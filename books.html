@@ -169,6 +169,76 @@
       animation:vhs 240ms steps(2,end);
     }
     @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+
+    /* Compact vertical covers that sit neatly beside the text */
+:root{
+  --cover-w: 110px;   /* tweak 90–130 for smaller/larger */
+  --cover-ratio: 2 / 3;
+}
+
+.book{
+  display: grid;
+  grid-template-columns: var(--cover-w) 1fr;  /* cover | text */
+  grid-template-rows: auto 1fr auto;
+  gap: 10px 12px;
+  align-items: start;
+  border: 3px ridge #6af7ff;
+  background: rgba(0,0,0,0.35);
+  padding: 8px;
+  box-shadow: inset 0 0 6px #000;
+}
+
+/* Cover column stays small and vertical */
+.cover{
+  grid-row: 1 / span 3;   /* spans title, details, button */
+  grid-column: 1;
+  width: var(--cover-w);
+  aspect-ratio: var(--cover-ratio);
+  border: 3px inset #6af7ff;
+  background: #000;
+  display: grid;
+  place-items: center;
+  padding: 4px;           /* thin inner frame */
+}
+
+.cover img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;     /* full image visible */
+  object-position: center top;
+  background: #000;
+}
+
+/* Text lives in the flexible column */
+.book h4,
+.book details,
+.book .more{
+  grid-column: 2;
+}
+
+.book h4{
+  margin: 0;
+  color: var(--neon-purple);
+  text-shadow: 0 0 6px var(--neon-purple);
+  font-size: 16px;
+}
+.book details{ margin: 0; }
+.book .more{ align-self: start; }
+
+/* Stack on small screens */
+@media (max-width: 520px){
+  .book{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .cover{
+    grid-row: auto; grid-column: auto;
+    width: 100%;
+    aspect-ratio: var(--cover-ratio);
+  }
+  .book h4, .book details, .book .more{ grid-column: auto; }
+}
+
   </style>
 </head>
 <body>
