@@ -256,15 +256,6 @@ hr.retro {
 
 
 
-.sticker-wall.free {
-  display: block; position: relative; height: 320px; overflow: hidden;
-}
-.sticker-wall.free img {
-  position: absolute; cursor: grab; user-select: none;
-  opacity: 0;                       /* hidden while we place them */
-  transition: opacity 120ms ease, left 70ms linear, top 70ms linear;
-}
-.sticker-wall.free img:active { cursor: grabbing; }
 
 
   .hyperspace::before{
@@ -310,6 +301,21 @@ hr.retro {
 }
 .sound-toggle[aria-pressed="true"]{ border-style: inset; color: var(--neon-green); }
 
+
+.sticker-controls{
+  display:flex; gap:8px; justify-content:center; margin:6px 0 10px;
+}
+.sticker-controls button{
+  padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+  font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000;
+}
+.sticker-controls button:active{ border-style: inset; color:var(--neon-green); }
+
+.sticker-wall img{ transition: transform 120ms ease; }   /* keep your existing rule, add this line */
+@keyframes pop { 50% { transform: scale(1.08) } }
+.sticker-wall.shuffled img{ animation: pop 180ms; }
+
+    
   </style>
 </head>
 <body>
@@ -358,6 +364,12 @@ hr.retro {
   <img src="freespeechonline.gif" alt="Free Speech Online">
   <img src="scifi.gif" alt="Sci-Fi" class="wide">
 </div>
+
+          <div class="sticker-controls">
+  <button id="shuffleStickers">Shuffle</button>
+  <button id="resetStickers"   title="Put them back how they were">Reset</button>
+</div>
+
         </td>
 
         <td class="content">
@@ -436,89 +448,7 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
   });
 })();
 
-/* sticker wall: F = edit, Esc = exit, R = shuffle (in edit) */
-(() => {
-  const wall = document.querySelector('.sticker-wall');
-  if (!wall) return;
 
-  const imgs = [...wall.querySelectorAll('img')];
-  const keyFor = img => 'sticker:' + (img.getAttribute('src') || img.alt);
-  const clamp = (v,min,max) => Math.max(min, Math.min(max, v));
-
-  function enterFree() {
-    const wallRect = wall.getBoundingClientRect();
-    const snap = imgs.map(img => {
-      const r = img.getBoundingClientRect();
-      return { img, x: r.left - wallRect.left, y: r.top - wallRect.top, w: img.offsetWidth, h: img.offsetHeight };
-    });
-
-    wall.classList.add('free');
-    requestAnimationFrame(() => {
-      snap.forEach(s => {
-        const saved = JSON.parse(localStorage.getItem(keyFor(s.img)) || 'null');
-        const w = s.w, h = s.h;
-        s.img.style.width = w + 'px';                   // freeze size
-        const maxX = wall.clientWidth  - w;
-        const maxY = wall.clientHeight - h;
-        const x = clamp((saved?.x ?? s.x), 0, maxX);
-        const y = clamp((saved?.y ?? s.y), 0, maxY);
-        s.img.style.left = x + 'px';
-        s.img.style.top  = y + 'px';
-        s.img.style.opacity = '1';                      // reveal after positioned
-        makeDraggable(s.img, w, h);
-      });
-    });
-  }
-
-  function exitFree() {
-    wall.classList.remove('free');
-    imgs.forEach(img => {
-      img.style.removeProperty('left');
-      img.style.removeProperty('top');
-      img.style.removeProperty('width');
-      img.style.removeProperty('opacity');
-    });
-  }
-
-  function randomize() {
-    const W = wall.clientWidth, H = wall.clientHeight;
-    imgs.forEach(img => {
-      const w = img.offsetWidth, h = img.offsetHeight;
-      const x = Math.random() * (W - w), y = Math.random() * (H - h);
-      img.style.left = x + 'px'; img.style.top = y + 'px';
-      localStorage.setItem(keyFor(img), JSON.stringify({ x, y }));
-    });
-  }
-
-  function makeDraggable(img, w, h) {
-    let sx=0, sy=0, ox=0, oy=0, moving=false;
-    img.addEventListener('pointerdown', e => {
-      if (!wall.classList.contains('free')) return;
-      moving = true; img.setPointerCapture(e.pointerId);
-      sx = e.clientX; sy = e.clientY;
-      ox = parseFloat(img.style.left)||0; oy = parseFloat(img.style.top)||0;
-    });
-    img.addEventListener('pointermove', e => {
-      if (!moving) return;
-      const nx = clamp(ox + (e.clientX - sx), 0, wall.clientWidth  - (w || img.offsetWidth));
-      const ny = clamp(oy + (e.clientY - sy), 0, wall.clientHeight - (h || img.offsetHeight));
-      img.style.left = nx + 'px'; img.style.top  = ny + 'px';
-    });
-    img.addEventListener('pointerup', () => {
-      if (!moving) return; moving = false;
-      localStorage.setItem(keyFor(img), JSON.stringify({
-        x: parseFloat(img.style.left)||0, y: parseFloat(img.style.top)||0
-      }));
-    });
-  }
-
-  document.addEventListener('keydown', e => {
-    const k = e.key;
-    if (k.toLowerCase() === 'f') { wall.classList.contains('free') ? exitFree() : enterFree(); }
-    if (k === 'Escape')          { if (wall.classList.contains('free')) exitFree(); }
-    if (k.toLowerCase() === 'r' && wall.classList.contains('free')) randomize();
-  });
-})();
 
 
 /* Konami hyperspace: up up down down left right left right B A */
@@ -604,6 +534,50 @@ setInterval(() => {
       setTimeout(() => { window.location.href = url; }, 350); // was 200
     });
   });
+})();
+
+
+  /* Sticker shuffle with visible buttons; remembers order */
+(() => {
+  const wall = document.querySelector('.sticker-wall');
+  if (!wall) return;
+
+  const key = 'sticker_order_v1';
+  const imgs = Array.from(wall.querySelectorAll('img'));
+  const idOf = img => img.getAttribute('src') || img.alt;
+
+  // Save the original order once
+  const original = imgs.map(idOf);
+
+  function apply(order){
+    const map = new Map(imgs.map(img => [idOf(img), img]));
+    order.forEach(id => { const img = map.get(id); if (img) wall.appendChild(img); });
+  }
+
+  // Load saved order if present
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || 'null');
+    if (Array.isArray(saved) && saved.length) apply(saved);
+  } catch(_) {}
+
+  function shuffle(){
+    const order = Array.from(wall.querySelectorAll('img')).map(idOf);
+    for (let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    apply(order);
+    localStorage.setItem(key, JSON.stringify(order));
+    wall.classList.add('shuffled'); setTimeout(()=>wall.classList.remove('shuffled'), 220);
+  }
+
+  function reset(){
+    apply(original);
+    localStorage.setItem(key, JSON.stringify(original));
+  }
+
+  document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
+  document.getElementById('resetStickers')?.addEventListener('click', reset);
 })();
 
 
