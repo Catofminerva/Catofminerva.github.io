@@ -172,6 +172,27 @@ hr.retro {
   to   { left: 100%; }                  /* run across the existing bar */
 }
 
+
+/* bottom button strip */
+.button-strip {
+  margin: 8px 20px 12px;
+  padding: 10px;
+  border: 4px groove var(--neon-blue);
+  background: rgba(10, 0, 25, 0.6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-strip img {
+  height: 31px;                 /* bump to 40px if you want bigger badges */
+  image-rendering: pixelated;
+  display: block;
+}
+
+    
   </style>
 </head>
 <body>
@@ -243,6 +264,15 @@ hr.retro {
         </td>
       </tr>
     </table>
+
+    <div class="button-strip" aria-label="buttons">
+  <img src="icc.gif" alt="ICC">
+  <img src="dp.gif" alt="DP">
+  <img src="anarchynow.jpeg" alt="Anarchy Now">
+  <img src="freespeech.gif" alt="Free Speech">
+  <img src="privacy.gif" alt="Privacy">
+  <img src="piracy.png" alt="Piracy">
+</div>
 
     <div class="footer">
       <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
