@@ -1,196 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Ali's Chat Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-       body {
-            background-color: black;
-            background-image: url('stars.gif');
-            font-family: "Press Start 2", Times, serif;
-            color: #FF33CC;
-            position: relative; 
-        }
+  <meta charset="UTF-8" />
+  <title>Ali’s Guestbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        .header {
-            background-color: #FF33CC; /* Pink header */
-            color: #FFF;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.5em;
-        }
+  <style>
+    /* === borrow the index.html look === */
+    :root{
+      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
+    }
+    html, body {
+      margin:0; padding:0;
+      background-image:url('stars.gif'); background-repeat:repeat;
+      color:var(--ink);
+      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
+    }
+    .page {
+      width:760px; margin:18px auto 32px; position:relative; left:7px;
+      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
+      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
+    #glitter-title{
+      font-size:60px; text-align:center; color:var(--neon-blue);
+      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
+    }
+    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
+    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
+    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
 
-    @keyframes flip {
-            0% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
-            100% { transform: rotateY(0deg); }
-        }
+    .layout{ width:100%; border-collapse:collapse; }
+    .sidebar{
+      width:210px;
+      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right:6px ridge var(--neon-purple); vertical-align:top;
+    }
+    .content{
+      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
+    }
 
-        .title {
-            font-family: 'Press Start 2P', cursive; /* Retro font */
-            font-size: 2rem;
-            color: purple;
-            animation: flip 4s infinite; /* Flip animation */
-        }
+    .nav a{
+      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+    }
+    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
+    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
-kitty.gif {
-    margin-top: 0px; 
-}
+    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
+    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
+    .post .meta{ font-size:12px; color:var(--neon-yellow); }
+    hr.retro{
+      height:12px; border:0; margin:10px 0 14px;
+      background-image:repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
+      );
+    }
 
-hr {
-    margin-top: -15px;  /* Adjust this value as needed */
-}
-  
-ul {
-    list-style-position: inside; /
-    padding-left: 0;             
-    margin-left: 0;              
-}
+    /* tiny sparkle ships like index (optional images present there) */
+    #glitter-title::before,#glitter-title::after{
+      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
+      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
+      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+    }
+    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
+    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
 
-li {
-    padding-left: 0.3em;  /* This adds a small space between the bullet and the text */
-    margin-bottom: 20px; /* This will add space below each bullet point */
-}
+    /* guestbook form styling to match */
+    .gb-form label{ display:block; font-size:12px; color:var(--neon-yellow); margin:6px 0 2px; }
+    .gb-input, .gb-textarea{
+      width:100%; box-sizing:border-box; background:#0e0e33; color:#a7ffff; border:3px inset #6af7ff;
+      padding:6px 8px; font-family:inherit; font-size:14px; box-shadow:2px 2px 0 #000;
+    }
+    .gb-textarea{ min-height:110px; resize:vertical; }
+    .gb-btn{
+      margin-top:8px; padding:6px 10px; border:3px outset #6af7ff; background:#140043; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
+    }
+    .gb-btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
 
-
-
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    
-
-.welcome-message {
-    font-family: Times New Roman, Times, serif;
-    color: yellow;
-    font-size: 1.25em; /* adjust size as desired */
-}
-
-
-        .nav {
-    font-family: 'Press Start 2P', cursive;
-    color: #FF33CC;
-}
-        
-      </style>
-
-
-
-
-
+    .gb-list .entry{ padding:8px; border:3px ridge #6af7ff; background:rgba(0,0,0,0.35); margin:10px 0; }
+    .gb-list .who{ color:var(--neon-yellow); font-size:12px; }
+    .gb-list .when{ color:#c9f; font-size:11px; margin-left:6px; }
+  </style>
 </head>
 <body>
-    <center>
-        <div class="title">Ali's Blog</div> <!-- Updated title with flip effect -->
-        <img src="kitty.gif" alt="kitty Gif" class="kitty-gif">
-    </center>
-    <hr>
-    <!-- Navigation Buttons -->
-<center>
-    <a href="index.html" class="retro-btn nav">Home</a>
-    <img src="cutehome.gif" alt="home GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="about.html" class="retro-btn nav">About</a>
-    <img src="about.gif" alt="about GIF" style="vertical-align: middle;">
-    <a href="blog_posts.html" class="retro-btn nav">Entries</a>
-    <img src="post.gif" alt="post GIF" style="vertical-align: middle;">
-    <a href="chat.html" class="retro-btn nav">Chat</a>
-    <img src="chattt.gif" alt="chat GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="coolsite.html" class="retro-btn nav">Kool Webpages</a>
-    <img src="coollinks.gif" alt="cool GIF" style="vertical-align: middle;">
-    <a href="guestbook.html" class="retro-btn nav">Guestbook</a>
-    <img src="book-0037.gif" alt="Guestbook GIF" style="vertical-align: middle;">
-    <a href="books.html" class="retro-btn nav">Kool Books</a>
-    <img src="catread.gif" alt="reading GIF" style="vertical-align: middle; width: 30px; height: 30px;">
-    <a href="truthtable.html" class="retro-btn nav">Truth Table</a>
-    <img src="math.gif" alt="math GIF" style="vertical-align: middle;">
-    <a href="contact.html" class="retro-btn nav">Contact</a>
-    <img src="phone.gif" alt="Phone GIF" style="vertical-align: middle;">
-</center>
+  <div class="page">
+    <h1 id="glitter-title">Ali's World</h1>
 
-    <center>
-        <img src="guestbookcute.gif">
-    </center>
-        
-
-<br>
-
-</html>
-
-<body>
-
-<center>
-    <form id="guestbookForm">
-        <input type="text" id="username" placeholder="Your Name"><br>
-        <textarea id="message" rows="4" cols="50" placeholder="Write your message here"></textarea><br>
-        <input type="submit" value="Submit" class="retro-btn">
-    </form>
-    <div id="messages">
-        <!-- Messages will appear here -->
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">★ sign my guestbook ★ leave a cosmic trace ★</marquee>
     </div>
-</center>
 
-    <!-- Initialize Firebase -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-      import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-      
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyA-m-KcbjUB3TQnMY3WfimJ8-TkNmSik00",
-        authDomain: "blog-d7401.firebaseapp.com",
-        projectId: "blog-d7401",
-        storageBucket: "blog-d7401.appspot.com",
-        messagingSenderId: "860631594502",
-        appId: "1:860631594502:web:febfe89706d410f0143587",
-        measurementId: "G-0RVMMB3QJ0"
-      };
+    <table class="layout">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
+            <div><a href="https://catofminerva.com/contact.html">Email Me</a></div>
+            <div style="margin-top:6px"><a href="#sign">Sign my Guestbook</a></div>
+          </div>
+        </td>
 
-// Adding a new message to Firestore
-document.getElementById('guestbookForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const messageText = document.getElementById('message').value;
-    const timestamp = new Date();
-    await addDoc(collection(db, 'guestbook'), {
-        username: username,
-        message: messageText,
-        timestamp: timestamp.toISOString()  // Store as an ISO string
+        <td class="content">
+          <hr class="retro">
+
+          <div class="post" id="sign">
+            <h3>Sign the Guestbook</h3>
+            <div class="meta">Say hello and drop a note</div>
+
+            <form id="guestbookForm" class="gb-form" autocomplete="off">
+              <label for="username">Name</label>
+              <input class="gb-input" type="text" id="username" placeholder="Your name" maxlength="60" />
+
+              <label for="message">Message</label>
+              <textarea class="gb-textarea" id="message" placeholder="Write your message here"></textarea>
+
+              <button class="gb-btn" type="submit">Submit</button>
+            </form>
+          </div>
+
+          <div class="post">
+            <h3>Messages</h3>
+            <div class="meta">Newest first</div>
+            <div id="messages" class="gb-list"></div>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- VHS-style internal nav like index: only intercepts relative links -->
+  <script>
+    document.querySelectorAll('.page a[href]').forEach(a => {
+      const url = a.getAttribute('href') || '';
+      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.documentElement.classList.add('vhs');
+        setTimeout(() => { window.location.href = url; }, 200);
+      });
     });
-    document.getElementById('username').value = '';
-    document.getElementById('message').value = '';
-});
+  </script>
 
+  <!-- Firebase guestbook (kept simple, ordered by ISO timestamp) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
-// Reading messages from Firestore
-async function loadMessages() {
-    const querySnapshot = await getDocs(collection(db, 'guestbook'));
+    const firebaseConfig = {
+      apiKey: "AIzaSyA-m-KcbjUB3TQnMY3WfimJ8-TkNmSik00",
+      authDomain: "blog-d7401.firebaseapp.com",
+      projectId: "blog-d7401",
+      storageBucket: "blog-d7401.appspot.com",
+      messagingSenderId: "860631594502",
+      appId: "1:860631594502:web:febfe89706d410f0143587",
+      measurementId: "G-0RVMMB3QJ0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const form = document.getElementById('guestbookForm');
     const messagesDiv = document.getElementById('messages');
-    messagesDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const timestamp = new Date(data.timestamp).toLocaleString();  // Convert ISO string to local date and time
-        messagesDiv.innerHTML += `<p><strong>${data.username}</strong> (${timestamp}): ${data.message}</p>`;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim() || 'Anonymous';
+      const messageText = document.getElementById('message').value.trim();
+      if (!messageText) return;
+
+      const timestamp = new Date().toISOString(); // ISO sorts correctly as a string
+      try {
+        await addDoc(collection(db, 'guestbook'), { username, message: messageText, timestamp });
+        form.reset();
+        await loadMessages(); // refresh after submit
+      } catch (err) {
+        alert('Failed to save message.');
+      }
     });
-}
 
+    async function loadMessages(){
+      const q = query(collection(db, 'guestbook'), orderBy('timestamp','desc'));
+      const snap = await getDocs(q);
+      messagesDiv.innerHTML = '';
+      snap.forEach(doc => {
+        const d = doc.data();
+        const when = new Date(d.timestamp).toLocaleString();
+        const el = document.createElement('div');
+        el.className = 'entry';
+        el.innerHTML = `
+          <div class="who"><strong>${escapeHtml(d.username || 'Anonymous')}</strong>
+            <span class="when">(${when})</span>
+          </div>
+          <div class="msg">${escapeHtml(d.message || '')}</div>`;
+        messagesDiv.appendChild(el);
+      });
+    }
 
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
 
-      // Initially load messages
-      loadMessages();
-    </script>
+    loadMessages();
+  </script>
+
+  <!-- minimal VHS effect class -->
+  <style>
+    .vhs::after{
+      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+  </style>
 </body>
-
-</html>
-
-
-    </script>
-</body>
-
 </html>
