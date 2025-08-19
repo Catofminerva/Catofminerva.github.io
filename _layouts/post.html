@@ -235,7 +235,50 @@
   *{ animation: none !important; transition: none !important; }
 }
 
-  
+
+
+/* 1) Put stars on their own layer on mobile, remove root filter */
+@media (max-width: 900px){
+  html, body{
+    background: none;
+    filter: none;
+  }
+  body::before{
+    content:"";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: url({{ '/stars.gif' | relative_url }}) repeat;
+    image-rendering: pixelated;
+    transform: translateZ(0); /* own composited layer */
+    will-change: transform;
+  }
+  /* keep the neon pop ONLY on content */
+  .page{ filter: contrast(115%) saturate(125%); }
+}
+
+/* 2) Make big images cheap to paint and prevent layout jumps */
+.post img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  image-rendering:auto;           /* override any pixelation on images */
+}
+
+/* Mobile-only extra guards */
+@media (max-width: 900px){
+  .post img{
+    content-visibility: auto;     /* skip offscreen work */
+    contain-intrinsic-size: 800px auto; /* placeholder to avoid reflow while decoding */
+    transform: translateZ(0);     /* isolate while scrolling */
+    backface-visibility: hidden;
+  }
+}
+
+/* Motion preference: swap animated bg for a still frame if available */
+@media (prefers-reduced-motion: reduce){
+  body::before{ background-image: url({{ '/stars-still.png' | relative_url }}); }
+}
+
+    
   </style>
 </head>
 <body>
@@ -432,6 +475,27 @@ setInterval(()=>{ document.documentElement.classList.add('flyby');
   document.querySelectorAll('.nav a').forEach(el=>{
     el.addEventListener('pointerdown',beep);
     el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') beep(); });
+  });
+})();
+
+  (function(){
+  // Make post images lazy and decode off the main thread
+  document.querySelectorAll('.post img').forEach(function(img){
+    if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
+    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+
+    // Help the browser choose smaller files if you use srcset
+    if(img.hasAttribute('srcset') && !img.hasAttribute('sizes')){
+      // blog column width: adjust if yours differs
+      img.setAttribute('sizes','(max-width: 900px) 100vw, 720px');
+    }
+
+    // Reserve space to avoid jumps once we know intrinsic size
+    function setAR(){
+      var w = img.naturalWidth, h = img.naturalHeight;
+      if(w && h){ img.style.aspectRatio = w + ' / ' + h; }
+    }
+    if (img.complete) setAR(); else img.addEventListener('load', setAR, { once:true });
   });
 })();
 </script>
