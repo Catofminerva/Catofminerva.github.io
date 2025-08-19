@@ -217,9 +217,36 @@
       opacity:0.6;
       pointer-events:none;
     }
+  
+    /* ===== EMBED MODE (for iframe) ===== */
+    .embed html, .embed body { background: transparent; filter: none; }
+    .embed .page { border: 0; outline: 0; background: transparent; box-shadow: none; width: auto; margin: 0; left: 0; }
+    .embed #glitter-title,
+    .embed .marquee-wrap,
+    .embed .sidebar,
+    .embed .footer,
+    .embed .sticker-controls,
+    .embed .sticker-wall,
+    .embed .content > hr.retro,
+    .embed .content > .marquee-wrap,
+    .embed .content > .post:not(#chat-room) { display: none !important; }
+    .embed .layout { width: auto; }
+    .embed .content { padding: 0; border: 0; background: transparent; }
+    .embed #chat-room { margin: 0; padding: 0; border: 0; background: transparent; }
+    .embed .chat-window { border: 0; background: transparent; box-shadow: none; }
   </style>
 </head>
 <body>
+  <script>
+    // Switch to embedded mode if ?embed=1 or iframes are detected
+    (function(){
+      try{
+        const p = new URL(location.href).searchParams;
+        const embed = p.get('embed') === '1' || (window.top !== window.self);
+        if (embed) document.documentElement.classList.add('embed');
+      }catch(_){ /* best-effort */ }
+    })();
+  </script>
   <div class="page">
     <h1 id="glitter-title">Ali's World</h1>
 
