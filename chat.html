@@ -233,6 +233,9 @@
     .embed .layout { width: auto; }
     .embed .content { padding: 0; border: 0; background: transparent; }
     .embed #chat-room { margin: 0; padding: 0; border: 0; background: transparent; }
+    /* hide the post header + meta inside the embed */
+    .embed #chat-room > h3,
+    .embed #chat-room > .meta { display:none !important; }
     .embed .chat-window { border: 0; background: transparent; box-shadow: none; }
   </style>
 </head>
@@ -243,7 +246,13 @@
       try{
         const p = new URL(location.href).searchParams;
         const embed = p.get('embed') === '1' || (window.top !== window.self);
-        if (embed) document.documentElement.classList.add('embed');
+        if (embed) {
+          document.documentElement.classList.add('embed');
+          // remove header + meta from the chat post entirely
+          const host = document.getElementById('chat-room');
+          host?.querySelector('h3')?.remove();
+          host?.querySelector('.meta')?.remove();
+        }
       }catch(_){ /* best-effort */ }
     })();
   </script>
