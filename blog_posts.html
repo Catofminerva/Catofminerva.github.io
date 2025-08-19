@@ -4,28 +4,152 @@ title: "Blog Entries"
 permalink: /blog_posts.html
 ---
 
+<!-- Author note, styled apart from the list -->
+<section class="author-note">
+  <h3 class="note-title">
+    <img src="/warning.gif" class="warn" alt="!">
+    Author’s Note
+    <img src="/warning.gif" class="warn" alt="!">
+  </h3>
+  <p> there's still a lot of formatting issues in the posts, many images nor rendering etc. also some of these posts have been written ages ago. some of my views have changed to become more radical, others have tempered down, etc. though many posts are disjointed string of ideas formed in a stream of consciousness, the worst of that kind i refrained from uploading at all :)</p>
+</section>
+
 <h3>All Entries <span class="blink">★</span></h3>
 
-<p> there's still a lot of formatting issues in the posts, many images nor rendering etc. also some of these posts have been written ages ago. some of my views have changed to become more radical, others have tempered down, etc. though many posts are disjointed string of ideas formed in a stream of consciousness, the worst of that kind i refrained from uploading at all :)</p>
+<div class="timeline-wrap">
+{% assign current_year = nil %}
+{% for post in site.posts %}
+  {% capture y %}{{ post.date | date: "%Y" }}{% endcapture %}
 
-<ul class="entries">
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <time class="date-badge" datetime="{{ post.date | date_to_xmlschema }}">
-        {{ post.date | date: "%d/%m/%Y" }}
-      </time>
-    </li>
-  {% endfor %}
-</ul>
+  {% if y != current_year %}
+    {% if current_year %}</ul>{% endif %}
+    <h4 class="year-chip">{{ y }}</h4>
+    <ul class="timeline">
+    {% assign current_year = y %}
+  {% endif %}
+
+  <li>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <time class="date-badge" datetime="{{ post.date | date_to_xmlschema }}">
+      {{ post.date | date: "%d/%m/%Y" }}
+    </time>
+  </li>
+{% endfor %}
+{% if current_year %}</ul>{% endif %}
+</div>
 
 <style>
+  /* Author note panel */
+  .author-note{
+    border: 4px groove var(--neon-green, #39ff14);
+    background: rgba(5, 40, 20, 0.55);
+    padding: 12px 14px;
+    margin: 0 0 20px 0;
+    position: relative;
+    box-shadow: inset 0 0 8px #000, 0 0 18px var(--neon-green, #39ff14);
+  }
+  .note-title{
+    margin: 0 0 6px 0;
+    text-align: center;
+    color: var(--neon-yellow, #ffff33);
+    text-shadow: 0 0 8px var(--neon-yellow, #ffff33);
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+  .warn{
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    image-rendering: pixelated;
+    margin: 0 6px;
+  }
+  .author-note p{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  /* Year chip */
+  .year-chip{
+    display: inline-block;
+    margin: 18px 0 6px 0;
+    padding: 3px 8px;
+    border: 2px solid var(--neon-purple, #8f00ff);
+    color: var(--neon-purple, #8f00ff);
+    background: rgba(20, 0, 30, 0.5);
+    text-shadow: 0 0 6px var(--neon-purple, #8f00ff);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  /* Neon timeline */
+  .timeline-wrap{ position: relative; }
+  .timeline{
+    list-style: none;
+    padding: 0 0 0 28px;
+    margin: 0 0 8px 0;
+    position: relative;
+  }
+  .timeline:before{
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--neon-blue, #00e5ff), var(--neon-purple, #8f00ff));
+    box-shadow: 0 0 8px var(--neon-blue, #00e5ff);
+    opacity: 0.9;
+  }
+  .timeline li{
+    position: relative;
+    margin: 14px 0;
+    padding-left: 8px;
+  }
+  .timeline li::before{
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 0.65em;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-blue, #00e5ff);
+    background: #000;
+    box-shadow: 0 0 10px var(--neon-blue, #00e5ff);
+    animation: pulse 2.4s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes pulse{
+    50%{ box-shadow: 0 0 12px var(--neon-green, #39ff14); }
+  }
+
+  .timeline a{
+    text-decoration: none;
+    color: #a7ffff;
+  }
+  .timeline a:hover{
+    color: var(--neon-green, #39ff14);
+  }
+
+  /* Date chip next to titles */
   .date-badge{
-    margin-left:8px;
-    font-size:12px;
+    margin-left: 8px;
+    font-size: 12px;
     color: var(--neon-yellow, #ffff33);
     white-space: nowrap;
     vertical-align: baseline;
-    opacity: 0.9;
+    opacity: 0.95;
   }
 </style>
+
+<script>
+  // tiny sparkle: stagger the pulse of timeline dots
+  (function(){
+    var items = document.querySelectorAll('.timeline li');
+    items.forEach(function(li, i){
+      li.style.setProperty('--delay', (i % 12) * 0.06 + 's');
+    });
+  })();
+</script>
