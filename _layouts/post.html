@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>{{ page.title }} · {{ site.title | default: "Ali's World" }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <style>
     :root{
@@ -118,6 +118,124 @@
 
     .post p{ margin:0 0 14px; } .post ul,.post ol{ padding-left:20px; }
     .post blockquote{ margin:10px 0; padding:8px 12px; border-left:4px solid var(--neon-blue); background:rgba(0,0,0,0.35); }
+  
+  /* === RESPONSIVE + ACCESSIBILITY TWEAKS === */
+
+/* fluid title size */
+#glitter-title{
+  font-size: clamp(28px, 7vw, 60px);
+  padding: clamp(12px, 3vw, 18px) 10px 0;
+}
+
+/* keep code and long lines from overflowing */
+.post pre,
+.post code{
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* phone and small tablets */
+@media (max-width: 900px){
+  /* container */
+  .page{
+    width: min(960px, 100% - 12px) !important;
+    margin: 10px auto 20px;
+    left: 0;
+  }
+
+  /* stack the table layout */
+  .layout,
+  .layout tr,
+  .layout td{
+    display: block;
+    width: 100%;
+  }
+
+  /* sidebar becomes a top band */
+  .sidebar{
+    width: 100%;
+    border-right: 0;
+    border-bottom: 6px ridge var(--neon-purple);
+  }
+  .content{ border-left: 0; }
+
+  /* nav becomes a grid of big tap targets */
+  .nav{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+  }
+  .nav a{
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.2;
+    touch-action: manipulation;
+  }
+  .nav-icon{ width: 22px; height: 22px; }
+
+  /* headline decorations shrink */
+  #glitter-title::before,
+  #glitter-title::after{
+    width: 76px; height: 48px;
+    filter: drop-shadow(0 0 4px var(--neon-blue));
+    left: 16px; right: 16px;
+  }
+
+  /* tighten chrome */
+  .marquee-wrap{ margin: 8px 10px; border-width: 4px; }
+  .marquee-wrap.small{ margin: 6px 10px 10px; border-width: 3px; }
+
+  /* posts and embeds */
+  .post{ margin: 10px 0 20px; padding: 8px 8px 12px; }
+  .post iframe,
+  .post embed,
+  .post object{ height: auto; }
+  .post iframe[src*="substack.com"]{ min-height: 340px; }
+
+  /* sticker grid and buttons */
+  .sticker-wall{ grid-template-columns: repeat(3, 1fr); }
+  .sticker-wall img{ width: 72px; }
+  .sticker-wall .wide{ grid-column: span 3; width: 160px; }
+
+  .button-strip{
+    padding: 8px;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .button-strip img{ height: 28px; flex: 0 0 auto; }
+
+  /* the rail cat can sit out on small screens */
+  .content > hr.retro:first-of-type::after{ display: none; }
+}
+
+/* very small phones */
+@media (max-width: 600px){
+  .nav{ grid-template-columns: 1fr; }
+  #glitter-title{ font-size: clamp(24px, 9vw, 40px); }
+  #glitter-title::before,
+  #glitter-title::after{ display: none; }
+  marquee{ font-size: 16px; }
+
+  .sticker-wall{ grid-template-columns: repeat(2, 1fr); }
+  .sticker-wall img{ width: 64px; }
+  .sticker-wall .wide{ grid-column: span 2; width: 140px; }
+}
+
+/* tiniest screens */
+@media (max-width: 380px){
+  .button-strip img{ height: 24px; }
+  marquee{ font-size: 14px; }
+}
+
+/* reduce motion for folks who prefer it */
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+
+  
   </style>
 </head>
 <body>
