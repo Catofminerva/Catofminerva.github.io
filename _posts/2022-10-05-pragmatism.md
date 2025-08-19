@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "What is Truth Part 2: Pragmatism"
+title: "What is Truth Part 3: Pragmatism"
 permalink: /pragmatism
 ---  
 
-The concept 'truth' has troubled philosophers for ages. We are in the habit of using the predicate "is true" of some statements we utter, but not other ones. In fact, other statements are considered the very opposite. We come up with statements such as "it is true that Boston is in New York" or “it is true that there is a knife on the kitchen table”. When we talk about logical propositions or about beliefs, we say that they are “truth-apt” in that these statements are a special kind of statements insofar as they can be true or false. But what does it mean for a statements to be 'true'? 
+The concept 'truth' has troubled philosophers for ages. We are in the habit of using the predicate "is true" of some statements we utter, but not other ones. In fact, other statements are considered the very opposite. We come up with statements such as "it is true that Boston is in New York" or “it is true that there is a knife on the kitchen table”. When we talk about logical propositions or about beliefs, we say that they are “truth-apt” in that these statements are a special kind of statements insofar as they can be true or false. But what does it mean for a statements to be 'true'?  
 
 **The Correspondence Theory of Truth**  
 ----------------------------------------
