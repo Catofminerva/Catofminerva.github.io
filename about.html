@@ -149,6 +149,39 @@
     }
 
     .footer { padding: 8px; text-align: center; color: #fff; }
+  
+  /* === MOBILE JITTER FIX: isolate stars + remove root filter === */
+@media (max-width: 900px){
+  /* stop repainting the whole page every GIF frame */
+  html, body{
+    background: none;
+    filter: none;
+  }
+
+  /* draw stars on a separate composited layer */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('stars.gif') repeat;
+    image-rendering: pixelated;
+    will-change: transform;
+    transform: translateZ(0);          /* iOS: force its own layer */
+  }
+
+  /* keep the neon pop on your content only */
+  .page{
+    filter: contrast(115%) saturate(125%);
+  }
+}
+
+/* motion-friendly fallback */
+@media (prefers-reduced-motion: reduce){
+  body::before{ background-image: url('stars-still.png'); } /* first frame PNG */
+}
+
   </style>
 </head>
 <body>
