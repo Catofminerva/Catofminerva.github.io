@@ -327,6 +327,23 @@ hr.retro {
   .chat-frame { height: 85vh; }
 }
 
+/* inline warning banner */
+.warnline{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color: var(--neon-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 4px #000, 0 0 8px var(--neon-purple);
+}
+.warn-ico{
+  width: 28px;           /* tweak size */
+  height: 28px;
+  image-rendering: pixelated;
+  display: inline-block;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+}
 
     
   </style>
@@ -402,7 +419,13 @@ hr.retro {
             <div class="meta">1999 · Ali's cosmic home</div>
             <p>welcome to my page.. still figuring this out lol</p>
             <p>&nbsp;</p>
-            <p>i’ve been messing with the html and it kinda works?? don’t click around too much yet coz half the links are broken ;-) also THIS SITE IS NOT OPTIMISED FOR MOBILE VIEW!!</p>
+<p class="warnline">
+  <img src="warning.gif" alt="Warning" class="warn-ico">
+  <span>WARNING: THIS SITE IS NOT OPTIMISED FOR MOBILE VIEW!!</span>
+  <img src="warning.gif" alt="" class="warn-ico" aria-hidden="true">
+</p>
+            <p>&nbsp;</p>
+            <p>i’ve been messing with the html and it kinda works?? don’t click around too much yet coz half the links are broken ;-)</p>
             <br><br>
             <p>chat room is up now (!!!) but if it crashes it’s probly just my server being moody again haha.</p>
             <p>&nbsp;</p><p>&nbsp;</p>
