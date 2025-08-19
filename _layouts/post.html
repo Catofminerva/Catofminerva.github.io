@@ -7,56 +7,38 @@
 
   <style>
     :root{
-      --neon-blue:#00e5ff;
-      --neon-green:#39ff14;
-      --neon-yellow:#ffff33;
-      --neon-purple:#8f00ff;
-
-      --ink:#00ffea;
-      --panel-bg:rgba(0,0,0,0.78);
-      --sidebar-a:#0d0022;
-      --sidebar-b:#12002e;
-      --marquee-bg:#001a4d;
+      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
+      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
     }
-
     html, body{
       margin:0; padding:0;
-      background-image: url({{ '/stars.gif' | relative_url }});
-      background-repeat: repeat;
-      color: var(--ink);
-      font-family: "Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering: pixelated;
-      cursor: crosshair;
-      filter: contrast(115%) saturate(125%);
+      background-image:url({{ '/stars.gif' | relative_url }}); background-repeat:repeat;
+      color:var(--ink); font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
     }
 
     /* wider than index */
     .page{
-      width: min(980px, calc(100vw - 24px));
-      margin:18px auto 32px;
-      position:relative; left:7px;
-      border:6px ridge var(--neon-blue);
-      outline:4px solid #00131a;
-      background: var(--panel-bg);
-      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
+      width:min(1120px, calc(100vw - 24px)) !important;
+      margin:18px auto 32px; position:relative; left:7px;
+      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
+      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
     }
 
     #glitter-title{
       font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px;
-      position:relative;
+      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
     }
-    #glitter-title::before, #glitter-title::after{
+    #glitter-title::before,#glitter-title::after{
       content:""; position:absolute; top:50%; transform:translateY(-50%);
-      width:110px; height:70px; background-repeat:no-repeat; background-position:center;
-      background-size:contain; image-rendering:pixelated; filter:drop-shadow(0 0 6px var(--neon-blue));
-      pointer-events:none;
+      width:110px; height:70px; background-repeat:no-repeat; background-position:center; background-size:contain;
+      image-rendering:pixelated; filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
     }
     #glitter-title::before{ left:35px;  background-image:url({{ '/starwar1.gif?v=1' | relative_url }}); }
-    #glitter-title::after{  right:30px; background-image:url({{ '/starwar2.jpg?v=1' | relative_url }}); }
+    #glitter-title::after { right:30px; background-image:url({{ '/starwar2.jpg?v=1' | relative_url }}); }
     #glitter-title:hover::before{ transform:translateY(-50%) rotate(-3deg); }
-    #glitter-title:hover::after{  transform:translateY(-50%) rotate(3deg); }
+    #glitter-title:hover::after { transform:translateY(-50%) rotate(3deg); }
 
     .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
     .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
@@ -65,107 +47,76 @@
     .layout{ width:100%; border-collapse:collapse; }
     .sidebar{
       width:210px;
-      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple);
-      vertical-align:top;
+      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right:6px ridge var(--neon-purple); vertical-align:top;
     }
-    .content{
-      padding:10px 14px 20px; vertical-align:top;
-      background: rgba(15,0,20,0.45);
-      border-left:4px solid #21003a;
-    }
+    .content{ padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a; }
 
     .nav a{
-      display:block; margin:10px 6px; padding:6px 8px;
-      border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff; text-decoration:none;
-      text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
     }
     .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
     .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
 
     .post{
-      margin:14px 0 28px; padding:10px 10px 14px;
-      border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62);
+      margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62);
       line-height:1.85;
     }
-    .post h1, .post h2, .post h3{ color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); margin-top:0; }
+    .post h1,.post h2,.post h3{ color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); margin-top:0; }
     .post .meta{ font-size:12px; color:var(--neon-yellow); margin-bottom:10px; }
 
+    /* embeds & media */
     .post img{ max-width:100%; height:auto; }
-    .post pre, .post code{ background:#0e0e33; color:#a7ffff; padding:2px 4px; }
-    .post blockquote.twitter-tweet{ margin: 1em auto; }
-    .post iframe, .post embed, .post object{
-      max-width:100%;
-      width:100%;
-      border:0;
-    }
-    /* Substack frames are short by default; give them breathing room */
+    .post a > img{ display:block; margin:12px auto; }   /* makes linked images visible and centered */
+    .post pre,.post code{ background:#0e0e33; color:#a7ffff; padding:2px 4px; }
+    .post iframe,.post embed,.post object{ width:100%; max-width:100%; border:0; }
     .post iframe[src*="substack.com"]{ min-height:420px; }
+    .post blockquote.twitter-tweet{ margin:1em auto; display:block !important; visibility:visible !important; }
 
     hr.retro{
       height:12px; border:0; margin:10px 0 14px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px, #ffa500 14px 28px, #ffff00 28px 42px,
-        #00cc00 42px 56px, #00aaff 56px 70px, #0000ff 70px 84px, #8000ff 84px 98px
-      );
+      background-image:repeating-linear-gradient(90deg,#ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px);
       position:relative; overflow:visible;
     }
-
     .content > hr.retro:first-of-type{ position:relative; overflow:visible; }
     .content > hr.retro:first-of-type::after{
       content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
-      background: url({{ '/kitty.gif?v=10' | relative_url }}) center / contain no-repeat;
-      image-rendering:pixelated; animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
+      background:url({{ '/kitty.gif?v=10' | relative_url }}) center/contain no-repeat;
+      image-rendering:pixelated; animation:kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
     }
-    @keyframes kitty-rail{ from{ left:-64px } to{ left:100% } }
+    @keyframes kitty-rail{ from{left:-64px} to{left:100%} }
 
-    .blink{ animation: blink .9s steps(1,end) infinite; }
-    @keyframes blink{ 50%{ opacity:0 } }
+    .blink{ animation:blink .9s steps(1,end) infinite; } @keyframes blink{ 50%{ opacity:0 } }
 
-    .button-strip{
-      margin:8px 20px 12px; padding:10px; border:4px groove var(--neon-blue);
-      background: rgba(10,0,25,0.6); display:flex; flex-wrap:wrap; gap:10px 12px;
-      justify-content:center; align-items:center;
-    }
+    .button-strip{ margin:8px 20px 12px; padding:10px; border:4px groove var(--neon-blue);
+      background:rgba(10,0,25,0.6); display:flex; flex-wrap:wrap; gap:10px 12px; justify-content:center; align-items:center; }
     .button-strip img{ height:31px; image-rendering:pixelated; display:block; }
 
-    .sticker-wall{
-      margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
-      display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center;
-      position:relative;
-    }
-    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; transition: transform 120ms ease; }
-    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
-    .sticker-wall .wide{ grid-column: span 2; width:188px; }
+    .sticker-wall{ margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
+      display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center; position:relative; }
+    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; transition:transform 120ms ease; }
+    .sticker-wall img:hover{ transform:translateY(-1px); filter:drop-shadow(0 0 6px var(--neon-green)); }
+    .sticker-wall .wide{ grid-column:span 2; width:188px; }
 
     .sticker-controls{ display:flex; gap:8px; justify-content:center; margin:6px 0 10px; }
-    .sticker-controls button{
-      padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000;
-    }
+    .sticker-controls button{ padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
     .sticker-controls button:active{ border-style:inset; color:var(--neon-green); }
-    .sticker-wall.shuffled img{ animation: pop 180ms; }
-    @keyframes pop{ 50%{ transform: scale(1.08) } }
+    .sticker-wall.shuffled img{ animation:pop 180ms; } @keyframes pop{ 50%{ transform:scale(1.08) } }
 
     .footer{ padding:8px; text-align:center; color:#fff; }
 
-    .sound-toggle{
-      margin: 6px auto 12px; display:block; background:#0e0e33; color:#a7ffff;
-      border:2px outset #6af7ff; padding:6px 10px; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000;
-    }
+    .sound-toggle{ margin:6px auto 12px; display:block; background:#0e0e33; color:#a7ffff;
+      border:2px outset #6af7ff; padding:6px 10px; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
     .sound-toggle[aria-pressed="true"]{ border-style:inset; color:var(--neon-green); }
 
-    @keyframes flybyL{ 0%{ transform:translate(-120%, -10px) rotate(8deg) } 70%{ transform:translate(10%, 4px) rotate(-6deg) } 100%{ transform:none } }
-    @keyframes flybyR{ 0%{ transform:translate(120%, 10px) rotate(-8deg) } 70%{ transform:translate(-10%, -6px) rotate(6deg) } 100%{ transform:none } }
-    .flyby #glitter-title::before{ animation: flybyL 1.6s ease-out; }
-    .flyby #glitter-title::after{  animation: flybyR 1.6s ease-out; }
+    @keyframes flybyL{ 0%{transform:translate(-120%, -10px) rotate(8deg)} 70%{transform:translate(10%, 4px) rotate(-6deg)} 100%{transform:none} }
+    @keyframes flybyR{ 0%{transform:translate(120%, 10px) rotate(-8deg)} 70%{transform:translate(-10%, -6px) rotate(6deg)} 100%{transform:none} }
+    .flyby #glitter-title::before{ animation:flybyL 1.6s ease-out; } .flyby #glitter-title::after{ animation:flybyR 1.6s ease-out; }
 
-    :root.morning{ --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
-    :root.night{   --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
+    :root.morning{ --neon-blue:#00e5ff; --neon-purple:#00b2ff; } :root.night{ --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
 
-    .post p{ margin: 0 0 14px; }
-    .post ul, .post ol{ padding-left: 20px; }
+    .post p{ margin:0 0 14px; } .post ul,.post ol{ padding-left:20px; }
     .post blockquote{ margin:10px 0; padding:8px 12px; border-left:4px solid var(--neon-blue); background:rgba(0,0,0,0.35); }
   </style>
 </head>
@@ -174,9 +125,7 @@
     <h1 id="glitter-title">Ali's World</h1>
 
     <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">
-        ★ welcome to my webspace ★ best viewed on desktop ★
-      </marquee>
+      <marquee behavior="alternate" scrollamount="6">★ welcome to my webspace ★ best viewed on desktop ★</marquee>
     </div>
 
     <table class="layout" role="presentation">
@@ -232,9 +181,7 @@
               <h1 itemprop="headline">{{ page.title }}</h1>
               <div class="meta">
                 {% if page.date %}
-                  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                    {{ page.date | date: "%Y-%m-%d" }}
-                  </time>
+                  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
                 {% endif %}
                 {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
               </div>
@@ -246,9 +193,7 @@
           </article>
 
           <div class="marquee-wrap small">
-            <marquee scrollamount="4" direction="right">
-              under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678
-            </marquee>
+            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
           </div>
 
           <hr class="retro">
@@ -266,187 +211,126 @@
     </div>
 
     <div class="footer">
-      <marquee scrollamount="3" direction="right">
-        © 1999–2000 Ali's Blog · Part of the Galactic Webring ·
+      <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog · Part of the Galactic Webring ·
         <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> |
-        <a href="#" onclick="alert('Next page loading...'); return false;">Next</a>
-      </marquee>
+        <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
     </div>
 
-    <audio id="blip" preload="auto">
-      <source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg">
-    </audio>
+    <audio id="blip" preload="auto"><source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg"></audio>
     <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
   </div>
 
-<!-- Twitter widgets to render <blockquote class="twitter-tweet"> -->
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!-- Robust Twitter loader -->
+<script>
+  /* load widgets.js if missing, then render any blockquotes */
+  window.twttr = (function(d,s,id){
+    var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};
+    if (d.getElementById(id)) return t;
+    js=d.createElement(s); js.id=id; js.async=true;
+    js.src="https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js,fjs);
+    t._e=[]; t.ready=function(f){ t._e.push(f); };
+    return t;
+  }(document,"script","twitter-wjs"));
+  twttr.ready(function(t){ t.widgets.load(document.querySelector('.post')); });
+
+  /* also retry on DOM ready and bfcache restore */
+  const rehydrate = () => { try { twttr.widgets.load(document.querySelector('.post')); } catch(_){} };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rehydrate); else rehydrate();
+  window.addEventListener('pageshow', rehydrate);
+</script>
 
 <script>
 /* hit counter */
-(() => {
-  try {
-    const key = 'geocities_hit_counter';
-    const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
-    localStorage.setItem(key, n);
-    document.getElementById('hitCount').textContent = String(n).padStart(6,'0');
-  } catch(e){}
-})();
+(() => { try {
+  const key='geocities_hit_counter';
+  const n=(parseInt(localStorage.getItem(key)||'0',10)+1);
+  localStorage.setItem(key,n);
+  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
+} catch(e){} })();
 
 /* last updated label */
 document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
 
 /* tiny nav misalignment */
 (() => {
-  const links = document.querySelectorAll('.nav a');
-  links.forEach(a => {
-    const ml = 6 + Math.floor(Math.random()*7);
-    const fs = 12 + Math.floor(Math.random()*3);
-    a.style.marginLeft = ml + 'px';
-    a.style.fontSize   = fs + 'px';
-    if (Math.random() < 0.4) a.style.letterSpacing = '1px';
+  const links=document.querySelectorAll('.nav a');
+  links.forEach(a=>{
+    const ml=6+Math.floor(Math.random()*7);
+    const fs=12+Math.floor(Math.random()*3);
+    a.style.marginLeft=ml+'px';
+    a.style.fontSize=fs+'px';
+    if (Math.random()<0.4) a.style.letterSpacing='1px';
   });
 })();
 
 /* Konami hyperspace */
 (() => {
-  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let buf = [];
-  document.addEventListener('keydown', e => {
-    buf.push(e.key.length===1 ? e.key.toLowerCase() : e.key);
-    buf = buf.slice(-seq.length);
+  const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let buf=[];
+  document.addEventListener('keydown',e=>{
+    buf.push(e.key.length===1?e.key.toLowerCase():e.key);
+    buf=buf.slice(-seq.length);
     if (seq.every((k,i)=>k===buf[i])) {
       document.documentElement.classList.add('hyperspace');
-      setTimeout(() => document.documentElement.classList.remove('hyperspace'), 650);
+      setTimeout(()=>document.documentElement.classList.remove('hyperspace'),650);
     }
   });
 })();
 
 /* VHS transition on internal links */
 (() => {
-  document.querySelectorAll('.page a[href]').forEach(a => {
-    const url = a.getAttribute('href') || '';
+  document.querySelectorAll('.page a[href]').forEach(a=>{
+    const url=a.getAttribute('href')||'';
     if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-    a.addEventListener('click', e => {
+    a.addEventListener('click',e=>{
       e.preventDefault();
       document.documentElement.classList.add('vhs');
-      setTimeout(() => { window.location.href = url; }, 200);
+      setTimeout(()=>{ window.location.href=url; },200);
     });
   });
 })();
 
 /* periodic title flyby */
-setInterval(() => {
-  document.documentElement.classList.add('flyby');
-  setTimeout(() => document.documentElement.classList.remove('flyby'), 1700);
-}, 14000);
+setInterval(()=>{ document.documentElement.classList.add('flyby');
+  setTimeout(()=>document.documentElement.classList.remove('flyby'),1700);
+},14000);
 
 /* time-of-day palette */
-(() => {
-  const h = new Date().getHours();
-  document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
-})();
+(() => { const h=new Date().getHours(); document.documentElement.classList.add((h>=6&&h<17)?'morning':'night'); })();
 
 /* UI sounds */
 (() => {
-  const a = document.getElementById('blip');
-  const btn = document.getElementById('soundToggle');
-  if (!a || !btn) return;
-
-  if (!a.currentSrc) { a.src = "{{ '/kawaii%208bit.mp3' | relative_url }}"; a.load(); }
-  let enabled = false;
-  a.volume = 0.5;
-
-  btn.addEventListener('click', () => {
-    enabled = !enabled;
-    btn.setAttribute('aria-pressed', String(enabled));
-    btn.textContent = enabled ? '🔊 sound' : '🔇 sound';
-    try { a.play().then(() => { a.pause(); a.currentTime = 0; }).catch(()=>{}); } catch(_){}
+  const a=document.getElementById('blip'); const btn=document.getElementById('soundToggle');
+  if(!a||!btn) return;
+  if(!a.currentSrc){ a.src="{{ '/kawaii%208bit.mp3' | relative_url }}"; a.load(); }
+  let enabled=false; a.volume=0.5;
+  btn.addEventListener('click',()=>{
+    enabled=!enabled; btn.setAttribute('aria-pressed',String(enabled));
+    btn.textContent=enabled?'🔊 sound':'🔇 sound';
+    try{ a.play().then(()=>{ a.pause(); a.currentTime=0; }).catch(()=>{}); }catch(_){}
   });
-
-  const beep = () => { if (!enabled) return; try { a.currentTime = 0; a.play(); } catch(_){ } };
-
-  document.querySelectorAll('.nav a').forEach(el => {
-    el.addEventListener('pointerdown', beep);
-    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') beep(); });
+  const beep=()=>{ if(!enabled) return; try{ a.currentTime=0; a.play(); }catch(_){}};;
+  document.querySelectorAll('.nav a').forEach(el=>{
+    el.addEventListener('pointerdown',beep);
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') beep(); });
   });
-
-  const links = document.querySelectorAll('.page a[href]');
-  links.forEach(aTag => {
-    const url = aTag.getAttribute('href') || '';
-    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-    aTag.addEventListener('click', e => {
-      e.preventDefault();
-      document.documentElement.classList.add('vhs');
-      setTimeout(() => { window.location.href = url; }, 350);
-    });
-  });
-})();
-
-/* Sticker shuffle with memory */
-(() => {
-  const wall = document.querySelector('.sticker-wall');
-  if (!wall) return;
-
-  const key = 'sticker_order_v1';
-  const imgs = Array.from(wall.querySelectorAll('img'));
-  const idOf = img => img.getAttribute('src') || img.alt;
-  const original = imgs.map(idOf);
-
-  function apply(order){
-    const map = new Map(imgs.map(img => [idOf(img), img]));
-    order.forEach(id => { const img = map.get(id); if (img) wall.appendChild(img); });
-  }
-
-  try {
-    const saved = JSON.parse(localStorage.getItem(key) || 'null');
-    if (Array.isArray(saved) && saved.length) apply(saved);
-  } catch(_) {}
-
-  function shuffle(){
-    const order = Array.from(wall.querySelectorAll('img')).map(idOf);
-    for (let i = order.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
-    }
-    apply(order);
-    localStorage.setItem(key, JSON.stringify(order));
-    wall.classList.add('shuffled'); setTimeout(()=>wall.classList.remove('shuffled'), 220);
-  }
-
-  function reset(){
-    apply(original);
-    localStorage.setItem(key, JSON.stringify(original));
-  }
-
-  document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
-  document.getElementById('resetStickers')?.addEventListener('click', reset);
-})();
-
-/* Make sure Twitter embeds render after Jekyll injects content */
-(() => {
-  const boot = () => { try { window.twttr && twttr.widgets && twttr.widgets.load(); } catch(_){} };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
 })();
 </script>
 
-<!-- visual effects styles for hyperspace+vhs -->
+<!-- hyperspace + vhs visuals -->
 <style>
   .hyperspace::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
-      repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
+                repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
     animation: warp 600ms ease-in-out;
   }
   @keyframes warp{ 0%{opacity:0; transform:scaleX(1)} 40%{opacity:1; transform:scaleX(1.8)} 100%{opacity:0; transform:scaleX(1)} }
-
   .vhs::after{
     content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-    background:
-      linear-gradient(#000,transparent 12%,#0000 88%,#000),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+    background: linear-gradient(#000,transparent 12%,#0000 88%,#000),
+                repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
     animation: vhs 240ms steps(2,end);
   }
   @keyframes vhs{ from{opacity:0} to{opacity:1} }
