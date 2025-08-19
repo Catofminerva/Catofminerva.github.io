@@ -147,6 +147,40 @@
     opacity: 0.9;
   }
     .footer { padding: 8px; text-align: center; color: #fff; }
+  
+  
+  /* --- MOBILE JITTER FIX: isolate animated background + drop root filter --- */
+@media (max-width: 900px){
+  /* Remove animated bg from the root paint layer */
+  html, body{
+    background: none;
+    filter: none;               /* stop filtering the entire page each GIF frame */
+  }
+
+  /* Put the stars on their own composited layer */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('/stars.gif') repeat;
+    image-rendering: pixelated;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Keep the neon punch on your content only */
+  .page{
+    filter: contrast(115%) saturate(125%);
+  }
+}
+
+/* Respect motion preferences or fall back if the device is struggling */
+@media (prefers-reduced-motion: reduce){
+  body::before{ background-image: url('/stars-still.png'); } /* first frame as PNG works great */
+}
+
   </style>
 </head>
 <body>
@@ -233,6 +267,22 @@
         if (Math.random() < 0.4) a.style.letterSpacing = '1px';
       });
     })();
+  
+  
+  <script>
+(function(){
+  if (matchMedia('(max-width:900px)').matches){
+    document.querySelectorAll('marquee').forEach(function(m){
+      var n = parseInt(m.getAttribute('scrollamount')||'6',10);
+      m.setAttribute('scrollamount', String(Math.max(1, Math.floor(n/2))));
+    });
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('marquee').forEach(function(m){ m.setAttribute('scrollamount','1'); });
+  }
+})();
+</script>
+
   </script>
 </body>
 </html>
