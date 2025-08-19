@@ -9,13 +9,9 @@ The concept 'truth' has troubled philosophers for ages. We are in the habit of u
 **The Correspondence Theory of Truth**  
 ----------------------------------------
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/d9105f9b-97a9-4f7b-9235-40817dca2037_308x141.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd9105f9b-97a9-4f7b-9235-40817dca2037_308x141.jpeg)
 
 If your answer was something to the effect of “well all it means is that Boston _actually is_ in New York and that there _actually is_ a knife on the kitchen table”, then you may endorse the correspondence theory of truth. This theory seems to be intuitive to many people at first glance. A statement P is true just in case P corresponds to the world (to some fact/states of affair). In this sense, all it means for it to be true that the knife is on the kitchen table is for the the knife to be on the kitchen table, where the statement ‘the knife is on the kitchen table’ pictures the state of affairs in the world where a knife is sat on top of a kitchen table.
 
@@ -30,9 +26,6 @@ Pragmatism
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/b8fa02f3-bc02-4c84-9e2b-8f21f2826fcb_471x581.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb8fa02f3-bc02-4c84-9e2b-8f21f2826fcb_471x581.jpeg)
 
 Pragmatists, on the other hand, hold that only _statements_ can be true or false, not ‘states of affairs’ or ‘a world out there’, and, crucially, statements are elements of human languages, and languages, in turn, are human constructs. Thus, truth is a human construct. There is indeed a world “out there” that causally exists independent of human minds, but ‘truth’ is not an element of that world. It is an element of human creation.
 
@@ -63,13 +56,9 @@ This attitude towards truth was originally construed by the American philosopher
 
 To illustrate this, think of a car. We like to imagine ourselves, like the car, as being brutally 'there'. But there's also this world that exists outside of us. Not being a solipsist, James acknowledges brute objective facts outside of us that exist mind-independently, but his idea was that, whenever we contemplate about anything, we are always positioned as the drivers of the car, looking out into the world from our subjective experience. It is not that we aren't part of the world, it's just that every time we do anything, we always begin from our subjective experience, looking out into the world. 
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/461949fa-dba3-4ac1-a48c-50422612e69c_385x217.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F461949fa-dba3-4ac1-a48c-50422612e69c_385x217.jpeg)
 
 For James, truth is not a property of the world, or a property of an idea that mirrors the world but rather a subjective experience we have of an idea that makes us think of it that "it is true". His concern was: What is it about an idea that has to happen in order for us to experience this idea as ‘True’? James says:
 
@@ -81,13 +70,9 @@ Likewise for James, truth is not a property of an object or an idea, but a descr
 
 ### Richard Rorty on Truth
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/9621578d-47a3-4716-9f62-6d55c09f333e_1088x725.webp)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9621578d-47a3-4716-9f62-6d55c09f333e_1088x725.webp)
 
 The neo/pragmatist philosopher Richard Rorty added a postmodern and Wittgensteinean slant to this. Rorty's neo/pragamtism is a variation of 'traditional' pragmatism but is more conscious of language, instead of experience, and is accompanied with a kind of Nietzschean perspectivalism and a Kantian contextualism.
 
@@ -118,13 +103,8 @@ Again, to be clear, 'ethnos' here does not refer to race, ethnicity, nationality
 Thomas Kuhn on Truth
 --------------------
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/4301036b-94cc-4753-a652-1d3c1e8bf726_600x740.png)
-
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4301036b-94cc-4753-a652-1d3c1e8bf726_600x740.png)
 
 Philosopher/Historian Thomas Kuhn, well known for his revolutionary ideas about the progress of scientific knowledge, also shared a pragmatist posture towards ‘truth’ when he [wrote](https://press.uchicago.edu/ucp/books/book/chicago/R/bo3639271.html) that
 
@@ -162,5 +142,3 @@ Take metaethics as an example. McPherson and Plunkket (2018: 1) admirably summar
 Likewise, whether people are realists or anti-realist about the metaphysics of numbers does not tell us what we should do with numbers, and mathematicians can go on with their job as mathematicians without taking a position between Platonism or Empiricism vs whatever the competitive positions are, be they nominalism, intuitionism or whatever.
 
 The same pragmatist critique can be translated perfectly easily to the field of meta-epistemology, too. Metaepistemological questions, when given a second-order reading, do not stretch into normative first-order questions about (for e.g.) how we should form justified belief nor do they account for our various sources of knowledge.
-
-Ali Al Maadeed is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
