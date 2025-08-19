@@ -3,7 +3,7 @@ layout: post
 title: "Pre-state Anarchism in the Arabian Peninsula"
 permalink: /anarchism
 ---  
-  
+   
 <h1>The State's Obsession with Legibility</h1>
 
 ![](https://ribbonfarm.wpenginepowered.com/wp-content/uploads/2010/07/scottForestry.jpg "scottForestry")
