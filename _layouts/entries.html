@@ -135,8 +135,17 @@
     .entries li { margin: 10px 0; font-size: 1rem; }
     .entries li a { text-decoration: none; color: #a7ffff; }
     .entries li a:hover { color: var(--neon-green); }
-    .badge { font-size: 10px; padding: 1px 4px; border: 1px solid var(--neon-green); color: var(--neon-green); }
+      .badge { font-size: 10px; padding: 1px 4px; border: 1px solid var(--neon-green); color: var(--neon-green); }
 
+  /* date chip for entries */
+  .date-badge{
+    margin-left:8px;
+    font-size:12px;
+    color: var(--neon-yellow);
+    white-space: nowrap;
+    vertical-align: baseline;
+    opacity: 0.9;
+  }
     .footer { padding: 8px; text-align: center; color: #fff; }
   </style>
 </head>
@@ -188,18 +197,7 @@
             {{ content }}
           </div>
 
-          <!-- Auto list of newest posts from _posts (if you use Jekyll posts) -->
-          <div class="post">
-            <h3>New Entries <span class="blink">★</span></h3>
-            <ul class="entries">
-              {% for post in site.posts limit: 12 %}
-                <li>
-                  <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                  {% if forloop.index <= 3 %} <span class="badge">new</span>{% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
+         
 
           <hr class="retro">
         </td>
