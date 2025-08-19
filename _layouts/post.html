@@ -30,8 +30,9 @@
       filter: contrast(115%) saturate(125%);
     }
 
+    /* wider than index */
     .page{
-      width:760px;
+      width: min(980px, calc(100vw - 24px));
       margin:18px auto 32px;
       position:relative; left:7px;
       border:6px ridge var(--neon-blue);
@@ -46,8 +47,6 @@
       margin:0; padding:18px 10px 0; letter-spacing:.5px;
       position:relative;
     }
-
-    /* starships around the title */
     #glitter-title::before, #glitter-title::after{
       content:""; position:absolute; top:50%; transform:translateY(-50%);
       width:110px; height:70px; background-repeat:no-repeat; background-position:center;
@@ -87,12 +86,21 @@
     .post{
       margin:14px 0 28px; padding:10px 10px 14px;
       border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62);
+      line-height:1.85;
     }
     .post h1, .post h2, .post h3{ color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); margin-top:0; }
     .post .meta{ font-size:12px; color:var(--neon-yellow); margin-bottom:10px; }
 
     .post img{ max-width:100%; height:auto; }
     .post pre, .post code{ background:#0e0e33; color:#a7ffff; padding:2px 4px; }
+    .post blockquote.twitter-tweet{ margin: 1em auto; }
+    .post iframe, .post embed, .post object{
+      max-width:100%;
+      width:100%;
+      border:0;
+    }
+    /* Substack frames are short by default; give them breathing room */
+    .post iframe[src*="substack.com"]{ min-height:420px; }
 
     hr.retro{
       height:12px; border:0; margin:10px 0 14px;
@@ -104,7 +112,6 @@
       position:relative; overflow:visible;
     }
 
-    /* kitty rides the first rainbow bar */
     .content > hr.retro:first-of-type{ position:relative; overflow:visible; }
     .content > hr.retro:first-of-type::after{
       content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
@@ -157,7 +164,6 @@
     :root.morning{ --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
     :root.night{   --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
 
-    /* simple markdown spacing harmony inside .post */
     .post p{ margin: 0 0 14px; }
     .post ul, .post ol{ padding-left: 20px; }
     .post blockquote{ margin:10px 0; padding:8px 12px; border-left:4px solid var(--neon-blue); background:rgba(0,0,0,0.35); }
@@ -221,7 +227,6 @@
         <td class="content">
           <hr class="retro">
 
-          <!-- Post body -->
           <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
             <header>
               <h1 itemprop="headline">{{ page.title }}</h1>
@@ -262,7 +267,7 @@
 
     <div class="footer">
       <marquee scrollamount="3" direction="right">
-        © 1999–2000 Ali's Blog — Part of the Galactic Webring ·
+        © 1999–2000 Ali's Blog · Part of the Galactic Webring ·
         <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> |
         <a href="#" onclick="alert('Next page loading...'); return false;">Next</a>
       </marquee>
@@ -273,6 +278,9 @@
     </audio>
     <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
   </div>
+
+<!-- Twitter widgets to render <blockquote class="twitter-tweet"> -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <script>
 /* hit counter */
@@ -414,9 +422,16 @@ setInterval(() => {
   document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
   document.getElementById('resetStickers')?.addEventListener('click', reset);
 })();
+
+/* Make sure Twitter embeds render after Jekyll injects content */
+(() => {
+  const boot = () => { try { window.twttr && twttr.widgets && twttr.widgets.load(); } catch(_){} };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
 </script>
 
-<!-- hyperspace + vhs filters -->
+<!-- visual effects styles for hyperspace+vhs -->
 <style>
   .hyperspace::before{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
