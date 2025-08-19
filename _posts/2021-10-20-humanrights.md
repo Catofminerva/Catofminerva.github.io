@@ -4,13 +4,9 @@ title: "Human rights suck?"
 permalink: /humanrights
 ---  
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/f68e3f56-6669-46d6-b383-e6a39a1c865c_2400x1350.png)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff68e3f56-6669-46d6-b383-e6a39a1c865c_2400x1350.png)
 
 * * *
 
@@ -76,37 +72,26 @@ We don’t think in thoughts (i.e., in intentional mental states) first and then
 
 What the human rights culture attempts to do is restructure the parochial “we” into \[the superset of all human beings\] so that loyalty is owed to a convergent, monolithic ‘human’ community. What this means is that it asks of people to change their moral identity and adopt a new one. The way it goes about doing so is by espousing universalisable moral principles that all humans are claimed to share in virtue of being human. Having been given no reason to accept changing their loyalties and identities other than being presented with a document entitled ‘Universal Declaration of Human Rights’, people not enculturated in those principles safely ignore such principles no matter how much human rights activists huff and puff that these principle are, in fact, Human Rights Principles, and not just any principles.
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/c929d947-5ba2-45b9-bfd6-9fe9f78d0ab8_1673x778.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc929d947-5ba2-45b9-bfd6-9fe9f78d0ab8_1673x778.jpeg)
 
 Darker shades = more individualistic psychologies. Hatched areas = lack of data. ([Source](https://en.wikipedia.org/wiki/The_WEIRDest_People_in_the_World)). The contrast here is counties where human rights is espoused tend to be more individualistic, i.e. their identity is less tied to a community.
 
 Where someone’s loyalty, obligation and commitment to a community, one that relies on its self-image as not being the good sort of people— the people who are not queers or Jews or infidels or apostates etc. —conflicts with a proclaimed universal principle, then simply reiterating that the universal principle in question _is_ a universal principle just leaves the question begged on its knees. The phrase ‘Human rights!’ is commonly invoked like a magic spell as if its simple invocation will alter the current practices of those whom we do not agree with. Admonishments with formulaic and impotent—because universalist—statements such as “This is a violation of Human Rights!” does not provide those who have not been enculturated into our social practices with the conceptual resources necessary to evoke the desired emotional reaction which we seek, it doesn’t give them any reason to change their moral and practical identities. They are rhetorically bunk.
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/21f5336d-439a-442a-b17a-ac1a4169e600_1167x825.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F21f5336d-439a-442a-b17a-ac1a4169e600_1167x825.jpeg)
 
 Self-identity based on social-relational attributes (Ibid).
 
 Non-WEIRD populations, many of whom are non-pluralistic and less individualistic, have no reason to change their loyalties and practical identities because many wish to belong to more particularistic and identifiable groups. The emergence and continuation of nation-states and the principle of self-determination so widely held today seems to evidence this fact. The need to belong—whether to a church, class, or even a small clique—is a psychological [human need](https://psycnet.apa.org/doiLanding?doi=10.1037/0033-2909.117.3.497). It is hardly attainable without forming an in-group which is constitutively exclusionary, i.e., which is identifiable by not being the out-group. That is not to imply that “sticking to” A group means “sticking it to” B group, but it _is_ to imply that our first-order obligations will be indexed to a particularistic community, and that we almost never reject the moral views of the community (say, about sex outside of marriage) in favour of a broad general principle. Given that morality is in part the expression of a constitutively exclusionary identity that’s derivative from one’s linguistic community, and a moral identity one had been enculturated into, hope for universal human rights will continue to be frustrated absent the convergence of a monolithic global community. In other terms, most of the world’s population will happily recite with Kipling that “All nice people like Us are We / And everybody else is They”.
 
-[
+
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/7cc3237b-244a-40f5-8aff-a76f17ecd002_1674x1193.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7cc3237b-244a-40f5-8aff-a76f17ecd002_1674x1193.jpeg)
 
 WEIRD = Western Educated Industrialised and Rich. (Ibid).
 
@@ -122,13 +107,9 @@ This equally applied—and to some degree still does—to skin colour. Writing i
 
 > \[The\] widening of the idea of common humanity is of slow growth and today but dimly realized. We grant full citizenship in the World Commonwealth to the “Anglo-Saxon” (whatever that may mean), the Teuton and Latin; then with just a shade of reluctance, we extend it to the Celt and Slav. We half deny it to the yellow races of Asia, admit the brown Indians to an ante-room only on the strength of an undeniable past; but with the Negroes of Africa we come to a full stop, and in its heart _the civilized world denies that these come within the pale of nineteenth-century Humanity_. (My emphasis).
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/759d9ec3-c305-447a-a14f-e7f78e0f3615_1200x900.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759d9ec3-c305-447a-a14f-e7f78e0f3615_1200x900.jpeg)
 
 And so all moral principles that purport to be universal can be easily sidestepped by claiming that the relevant group in question is not part of the moral community. Historically, this has usually played out by claiming that the group is not human—or not fully human. This is why the first thing that groups do in order to justify their actions to themselves and others is _dehumanise_ their victims, to show that they are not 'us'. Australian military personnel had to dehumanise Afghans as ‘ragheads’ in order to [murder 39 Afghan civilians](https://en.wikipedia.org/wiki/Brereton_Report#Report) in cold blood for sport. The Hutus in Rwanda had to refer to Tutsis as cockroaches and snakes in order to hunt them down with machetes and genocide a million of them, as one participant of the genocide later remarked: "We no longer saw a human being when we turned up a Tutsi in the swamps”. Similarly, the Allied forced in Japan had to dehumanise Japanese people in order to firebomb Tokyo and murder a hundred thousand innocent civilians, something which an Allied commander testified at the time in saying that "we are dealing with something primitive. Our troops have the right view of the Japs. They regard them as vermin." The Japanese, in turn, had to dehumanise the Chinese in order for the Rape of Nanjing to occur, as one participant of the massacre later [remarked](https://en.wikipedia.org/wiki/The_Rape_of_Nanking_(book)) when interviewed, “perhaps when we were raping her, we looked at her as a woman . . . but when we killed her, we just thought of her as something like a pig”. Likewise, a Japanese private who was ordered to bayonet a Chinese civilian for practice gave the following [testimony](https://en.wikipedia.org/wiki/The_Rape_of_Nanking_(book));
 
@@ -156,13 +137,9 @@ The Human Rights culture is predicated on ‘inalienable’ rights extended to a
 
 ### Human Rights are Constructed, and That’s Okay
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/32e67e48-a143-48b5-a401-0566c889a315_640x312.jpeg)
 
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F32e67e48-a143-48b5-a401-0566c889a315_640x312.jpeg)
 
 A lucky happenstance, by our current lights, is a contemporary Human Rights culture with ideas inherited from some Enlightenment thinkers whose ideals are egalitarian in principle (even if they were applied arbitrarily) which culminated in building institutions and practices grounded on those ideals. What emerged is a self-questioning culture which actively attempts to be anti-ethnocentric and seeks to expand the notion of who counts as ‘us’, and one that prides itself in including those who previously did not count and who’s interests were not considered (e.g. women, the disabled, ethnic minorities, nonhuman animals, sexual minorities, transgender persons).
 
