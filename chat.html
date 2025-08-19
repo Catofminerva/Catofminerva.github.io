@@ -4,251 +4,499 @@
   <meta charset="utf-8">
   <title>Ali's Web Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    /* 90s desktop vibe */
-    body { margin:0; background:#c0c0c0; font:13px Arial, Helvetica, sans-serif; color:#000; }
-    .window { width:900px; max-width:100%; margin:20px auto; border:1px solid #808080; background:#f0f0f0; }
-    .statusbar { background:#eaeaea; border-top:1px solid #c0c0c0; padding:4px 8px; font-size:12px; color:#333; display:flex; justify-content:space-between; }
-    .layout { display:grid; grid-template-columns: 1fr 220px; gap:0; }
-    .left { border-right:1px solid #bdbdbd; background:#fff; }
-    .right { background:#fff; }
-    #log { height:420px; overflow-y:auto; padding:8px; font:13px "Courier New", Courier, monospace; white-space:pre-wrap; word-break:break-word; }
-    .sys { color:#666; }
-    .inputbar { padding:6px; background:#f5f5f5; border-top:1px solid #bdbdbd; }
-.row { display:flex; gap:6px; margin-bottom:6px; align-items: center; }
-    input[type="text"] { flex:1; padding:6px; border:1px solid #999; background:#fff; color:#000; font:13px Arial, Helvetica, sans-serif; }
-    input[name="nick"] { flex:0 0 180px; }
-    button { padding:5px 10px; border:1px solid #666; background:#e6e6e6; cursor:pointer; }
-    button:active { background:#d9d9d9; }
-    .toolbar { display:flex; gap:6px; align-items:center; font-size:12px; }
-    select { border:1px solid #999; background:#fff; padding:2px 4px; font-size:12px; }
-    #roster { height:420px; overflow-y:auto; padding:8px; font:12px Arial, Helvetica, sans-serif; }
-    #roster .user { padding:2px 0; border-bottom:1px dotted #ddd; }
+    /* ========== THEME FROM index.html ========== */
+    :root{
+      --neon-blue:   #00e5ff;
+      --neon-green:  #39ff14;
+      --neon-yellow: #ffff33;
+      --neon-purple: #8f00ff;
 
-    /* Menus */
-    .menubar { position: relative; background:#e0e0e0; border-bottom:1px solid #a0a0a0; padding:4px 6px; }
-    .menu-btn { border:1px solid #9a9a9a; background:#e6e6e6; padding:2px 8px; font-size:12px; margin-right:6px; cursor:pointer; }
-    .menu-btn:active { background:#d9d9d9; }
-    .dropdown { position:absolute; top:26px; left:0; display:none; background:#fff; border:1px solid #9a9a9a; min-width:210px; z-index:10; box-shadow: 0 1px 0 #ccc inset; }
-    .dropdown a { display:block; padding:6px 10px; font-size:12px; color:#000; cursor:pointer; }
-    .dropdown a:hover { background:#e8e8e8; }
+      --ink:         #00ffea;
+      --panel-bg:    rgba(0,0,0,0.78);
+      --sidebar-a:   #0d0022;
+      --sidebar-b:   #12002e;
+      --marquee-bg:  #001a4d;
+    }
 
-    /* Toggles */
-    #log.hide-ts .ts { display:none; }
-    #log .hilite { background:#fff59d; }
-    .hidden { display:none !important; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-image: url('stars.gif');
+      background-repeat: repeat;
+      color: var(--ink);
+      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
+      image-rendering: pixelated;
+      cursor: crosshair;
+      filter: contrast(115%) saturate(125%);
+    }
 
-.edit{
-  flex: 1;
-  height: 42px;          /* fixed default height (tweak to taste) */
-  max-height: 120px;     /* never grow beyond this */
-  overflow-y: auto;      /* scroll inside instead of expanding */
-  border: 1px solid #999;
-  background: #fff;
-  padding: 6px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  outline: none;
-  box-sizing: border-box;
-}
-/* placeholder */
-.edit:empty:before{ content: attr(data-ph); color:#777; }
+    .page {
+      width: 760px;
+      margin: 18px auto 32px;
+      position: relative;
+      left: 7px;
+      border: 6px ridge var(--neon-blue);
+      outline: 4px solid #00131a;
+      background: var(--panel-bg);
+      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
+    }
 
-.topicbar { background:#f3f3f3; border-bottom:1px solid #d0d0d0; padding:4px 8px; font-size:12px; }
-.whisper { color: purple; font-style: italic; }
-.emote { font-style: italic; }
-#typing { color:#555; margin-left:8px; }
+    #glitter-title {
+      font-size: 60px;
+      text-align: center;
+      color: var(--neon-blue);
+      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
+      margin: 0;
+      padding: 18px 10px 0;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
 
-    .tips{ font-size:11px; color:#444; margin-top:4px; line-height:1.35; }
-.tips a{ color:#000; text-decoration:underline; cursor:pointer; }
-.tips code{ background:#f2f2f2; border:1px solid #ddd; padding:0 2px; }
+    .marquee-wrap { margin: 10px 20px; border: 6px groove var(--neon-blue); background: var(--marquee-bg); }
+    .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
+    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
 
-    
+    /* Sidebar + content table layout (as in index.html) */
+    .layout { width: 100%; border-collapse: collapse; }
+    .sidebar {
+      width: 210px;
+      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right: 6px ridge var(--neon-purple);
+      vertical-align: top;
+    }
+    .content {
+      padding: 10px 14px 20px;
+      vertical-align: top;
+      background: rgba(15,0,20,0.45);
+      border-left: 4px solid #21003a;
+    }
+
+    .nav a {
+      display: block;
+      margin: 10px 6px;
+      padding: 6px 8px;
+      border: 3px outset #6af7ff;
+      background: #0e0e33;
+      color: #a7ffff;
+      text-decoration: none;
+      text-align: left;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px var(--neon-blue);
+      box-shadow: 2px 2px 0 #000;
+    }
+    .nav a:hover { border-style: inset; color: var(--neon-green); background: #140043; transform: translate(1px,1px); }
+    .nav-icon { vertical-align: middle; width: 26px; height: 26px; margin-right: 6px; image-rendering: pixelated; }
+
+    .post { margin: 14px 0 28px; padding: 10px 10px 14px; border: 4px groove var(--neon-purple); background: rgba(20,0,30,0.62); }
+    .post h3 { margin: 0 0 6px 0; color: var(--neon-purple); text-shadow: 0 0 6px var(--neon-purple); }
+    .post .meta { font-size: 12px; color: var(--neon-yellow); }
+
+    hr.retro {
+      height: 12px; border: 0; margin: 10px 0 14px;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,
+        #ffa500 14px 28px,
+        #ffff00 28px 42px,
+        #00cc00 42px 56px,
+        #00aaff 56px 70px,
+        #0000ff 70px 84px,
+        #8000ff 84px 98px
+      );
+      position: relative;
+      overflow: visible;
+    }
+
+    /* Running kitty across first rainbow bar in content */
+    .content > hr.retro:first-of-type::after {
+      content: "";
+      position: absolute;
+      left: -64px;
+      top: -60px;
+      width: 160px; height: 160px;
+      background: url("kitty.gif?v=10") center / contain no-repeat;
+      image-rendering: pixelated;
+      animation: kitty-rail 12s linear infinite;
+      pointer-events: none;
+      z-index: 9;
+    }
+    @keyframes kitty-rail { from { left: -64px; } to { left: 100%; } }
+
+    /* Sidebar sticker wall (from index) */
+    .sticker-wall{ margin: 10px 8px 14px; padding: 8px; border: 3px inset #6af7ff; background: rgba(0,0,0,0.35); display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; justify-items: center; align-items: center; position: relative; }
+    .sticker-wall img{ width: 88px; height: auto; image-rendering: pixelated; display: block; transition: transform 120ms ease; }
+    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
+    .sticker-wall .wide{ grid-column: span 2; width: 188px; }
+    .sticker-controls{ display:flex; gap:8px; justify-content:center; margin:6px 0 10px; }
+    .sticker-controls button{ padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
+    .sticker-controls button:active{ border-style: inset; color:var(--neon-green); }
+    .sticker-wall.shuffled img{ animation: pop 180ms; }
+    @keyframes pop { 50% { transform: scale(1.08) } }
+
+    /* Title ships (from index) */
+    #glitter-title::before, #glitter-title::after {
+      content: ""; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 110px; height: 70px; background-repeat: no-repeat; background-position: center; background-size: contain; image-rendering: pixelated; filter: drop-shadow(0 0 6px var(--neon-blue)); pointer-events: none;
+    }
+    #glitter-title::before { left: 35px;  background-image: url("starwar1.gif?v=1"); }
+    #glitter-title::after  { right: 30px; background-image: url("starwar2.jpg?v=1"); }
+    @keyframes flybyL { 0%{ transform:translate(-120%, -10px) rotate(8deg) } 70%{ transform:translate(10%, 4px) rotate(-6deg) } 100%{ transform:none } }
+    @keyframes flybyR { 0%{ transform:translate(120%, 10px) rotate(-8deg) } 70%{ transform:translate(-10%, -6px) rotate(6deg) } 100%{ transform:none } }
+    .flyby #glitter-title::before { animation: flybyL 1.6s ease-out; }
+    .flyby #glitter-title::after  { animation: flybyR 1.6s ease-out; }
+
+    :root.morning { --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
+    :root.night   { --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
+
+    .footer { padding: 8px; text-align: center; color: #fff; }
+
+    /* ========== CHAT UI — namespaced to avoid conflicts ========== */
+    .chat-window{ border: 4px groove var(--neon-blue); background: rgba(0,0,0,0.6); box-shadow: inset 0 0 8px #000; }
+    .chat-menubar{ position: relative; background:#0e0e33; border-bottom:1px solid #6af7ff; padding:4px 6px; color:#a7ffff; }
+    .chat-menubar .menu-btn{ border:1px solid #6af7ff; background:#140043; color:#a7ffff; padding:2px 8px; font-size:12px; margin-right:6px; cursor:pointer; box-shadow: 1px 1px 0 #000; }
+    .chat-menubar .menu-btn:active{ background:#0e0e33; }
+    .chat-dropdown{ position:absolute; top:26px; left:0; display:none; background:#000; border:1px solid #6af7ff; min-width:210px; z-index:10; box-shadow: 0 0 10px rgba(0,229,255,0.25); }
+    .chat-dropdown a{ display:block; padding:6px 10px; font-size:12px; color:#a7ffff; cursor:pointer; text-decoration:none; }
+    .chat-dropdown a:hover{ background:#140043; }
+
+    .topicbar{ background:#0e0e33; border-bottom:1px solid #6af7ff; padding:4px 8px; font-size:12px; color:#a7ffff; }
+
+    .chat-layout{ display:grid; grid-template-columns: 1fr 220px; gap:0; }
+    .chat-left{ border-right:1px solid #6af7ff; background:rgba(0,0,0,0.35); }
+    .chat-right{ background:rgba(0,0,0,0.25); }
+
+    #log{ height:420px; overflow-y:auto; padding:8px; font:13px "Courier New", Courier, monospace; white-space:pre-wrap; word-break:break-word; color:#a7ffff; }
+    #log .sys{ color:#ffff99; }
+    #log.hide-ts .ts{ display:none; }
+    #log .hilite{ background:#003344; }
+
+    .inputbar{ padding:6px; background:#0b0b2a; border-top:1px solid #6af7ff; }
+    .row{ display:flex; gap:6px; margin-bottom:6px; align-items:center; }
+    input[type="text"]{ flex:1; padding:6px; border:1px solid #6af7ff; background:#000; color:#a7ffff; font:13px Arial, Helvetica, sans-serif; }
+    input[name="nick"]{ flex:0 0 180px; }
+    button{ padding:5px 10px; border:1px solid #6af7ff; background:#140043; color:#a7ffff; cursor:pointer; box-shadow: 1px 1px 0 #000; }
+    button:active{ background:#0e0e33; }
+    .toolbar{ display:flex; gap:6px; align-items:center; font-size:12px; }
+    select{ border:1px solid #6af7ff; background:#000; color:#a7ffff; padding:2px 4px; font-size:12px; }
+
+    #roster{ height:420px; overflow-y:auto; padding:8px; font:12px Arial, Helvetica, sans-serif; color:#fff; }
+    #roster .user{ padding:2px 0; border-bottom:1px dotted #335; }
+
+    .tips{ font-size:11px; color:#cfe; margin:6px; line-height:1.35; }
+    .tips a{ color:#a7ffff; text-decoration:underline; cursor:pointer; }
+    .tips code{ background:#000; border:1px solid #335; padding:0 2px; }
+
+    .statusbar{ background:#0e0e33; border-top:1px solid #6af7ff; padding:4px 8px; font-size:12px; color:#a7ffff; display:flex; justify-content:space-between; }
+    #typing{ color:#9fe; }
+
+    /* Context menu */
+    #ctx{ position:absolute; display:none; background:#000; border:1px solid #6af7ff; z-index:20; min-width:160px; }
+    #ctx a{ display:block; padding:6px 10px; color:#a7ffff; text-decoration:none; }
+    #ctx a:hover{ background:#140043; }
   </style>
 </head>
 <body>
-  <div class="window">
-    <!-- Menubar with ONE set of dropdowns -->
-    <div class="menubar" id="menubar">
-      <button class="menu-btn" data-menu="file">File ▾</button>
-      <button class="menu-btn" data-menu="edit">Edit ▾</button>
-      <button class="menu-btn" data-menu="view">View ▾</button>
-      <button class="menu-btn" data-menu="im">IM ▾</button>
-      <button class="menu-btn" data-menu="help">Help ▾</button>
+  <div class="page">
+    <h1 id="glitter-title">Ali's World</h1>
 
-      <div class="dropdown" id="menu-file">
-        <a data-action="save-log">Save Log…</a>
-        <a data-action="print">Print…</a>
-        <a data-action="clear-log">Clear Log</a>
-        <a data-action="join-room">Join Room…</a>
-      </div>
-      <div class="dropdown" id="menu-edit">
-        <a data-action="copy-log">Copy Log to Clipboard</a>
-        <a data-action="find">Find…</a>
-        <a data-action="select-all">Select All</a>
-      </div>
-      <div class="dropdown" id="menu-view">
-        <a data-action="zoom-in">Zoom In</a>
-        <a data-action="zoom-out">Zoom Out</a>
-        <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
-        <a data-action="toggle-roster">Show/Hide Roster</a>
-        <a data-action="toggle-tips">Show/Hide Tips</a>
-      </div>
-      <div class="dropdown" id="menu-im">
-        <a data-action="toggle-beep">Beep on New Message</a>
-        <a data-action="set-topic">Set Topic…</a>
-      </div>
-      <div class="dropdown" id="menu-help">
-        <a data-action="help">Formatting Help…</a>
-        <a data-action="about">About…</a>
-      </div>
-    </div>
-     
-    <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
-
-    
-    <div class="layout">
-<div class="left">
-  <div id="log" aria-live="polite"></div>
-
-  <div class="inputbar">
-    <div class="row">
-      <label for="nick" style="align-self:center;">Nick:</label>
-      <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
-      <button id="setNick">Set</button>
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">
+        ★ welcome to ali's cosmic webspace ★ chat client with geocities drip ★
+      </marquee>
     </div>
 
-    <div class="row toolbar">
-      <button id="bBtn"><b>B</b></button>
-      <button id="iBtn"><i>I</i></button>
-      <button id="uBtn"><u>U</u></button>
-      <label>Color:
-        <select id="colorSel">
-          <option value="">—</option>
-          <option>black</option><option>red</option><option>blue</option>
-          <option>green</option><option>maroon</option><option>purple</option>
-          <option>teal</option><option>navy</option>
-        </select>
-      </label>
-      <label>Font:
-        <select id="fontSel">
-          <option value="">—</option>
-          <option>Arial</option><option>Times New Roman</option>
-          <option>Courier New</option><option>Verdana</option>
-        </select>
-      </label>
-      <label>Size:
-        <select id="sizeSel">
-          <option value="">—</option>
-          <option>10</option><option>12</option><option>14</option>
-          <option>16</option><option>18</option>
-        </select>
-      </label>
+    <table class="layout">
+      <tr>
+        <!-- SIDEBAR (copied from index.html) -->
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+            <a href="chat.html?room=lobby"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="oudsimulator.html">Oud Simulator</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
+
+          <div style="text-align:center; padding:10px">
+            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
+            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
+          </div>
+
+          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
+            <div><a href="https://catofminerva.com/contact.html">Email Me</a></div>
+            <div style="margin-top:6px"><a href="https://catofminerva.com/guestbook.html">Sign my Guestbook</a></div>
+            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
+          </div>
+
+          <div class="sticker-wall">
+            <img src="arabic.gif" alt="Arabic">
+            <img src="qatar.gif" alt="Qatar">
+            <img src="pali.gif" alt="Palestine">
+            <img src="sleepycat.gif" alt="Sleepy cat">
+            <img src="peta.gif" alt="PETA">
+            <img src="fist.gif" alt="Fist">
+            <img src="freespeechonline.gif" alt="Free Speech Online">
+            <img src="scifi.gif" alt="Sci-Fi" class="wide">
+            <img src="pals.png" alt="Sci-Fi" class="wide">
+          </div>
+
+          <div class="sticker-controls">
+            <button id="shuffleStickers">Shuffle</button>
+            <button id="resetStickers" title="Put them back how they were">Reset</button>
+          </div>
+        </td>
+
+        <!-- CONTENT -->
+        <td class="content">
+          <hr class="retro">
+
+          <div class="post" id="chat-room">
+            <h3>Live Chat</h3>
+            <div class="meta">AOL-era web chat · room=<span id="roomLabel"></span></div>
+
+            <div class="chat-window">
+              <!-- Menubar -->
+              <div class="chat-menubar" id="menubar">
+                <button class="menu-btn" data-menu="file">File ▾</button>
+                <button class="menu-btn" data-menu="edit">Edit ▾</button>
+                <button class="menu-btn" data-menu="view">View ▾</button>
+                <button class="menu-btn" data-menu="im">IM ▾</button>
+                <button class="menu-btn" data-menu="help">Help ▾</button>
+
+                <div class="chat-dropdown" id="menu-file">
+                  <a data-action="save-log">Save Log…</a>
+                  <a data-action="print">Print…</a>
+                  <a data-action="clear-log">Clear Log</a>
+                  <a data-action="join-room">Join Room…</a>
+                </div>
+                <div class="chat-dropdown" id="menu-edit">
+                  <a data-action="copy-log">Copy Log to Clipboard</a>
+                  <a data-action="find">Find…</a>
+                  <a data-action="select-all">Select All</a>
+                </div>
+                <div class="chat-dropdown" id="menu-view">
+                  <a data-action="zoom-in">Zoom In</a>
+                  <a data-action="zoom-out">Zoom Out</a>
+                  <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
+                  <a data-action="toggle-roster">Show/Hide Roster</a>
+                  <a data-action="toggle-tips">Show/Hide Tips</a>
+                </div>
+                <div class="chat-dropdown" id="menu-im">
+                  <a data-action="toggle-beep">Beep on New Message</a>
+                  <a data-action="set-topic">Set Topic…</a>
+                </div>
+                <div class="chat-dropdown" id="menu-help">
+                  <a data-action="help">Formatting Help…</a>
+                  <a data-action="about">About…</a>
+                </div>
+              </div>
+
+              <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
+
+              <div class="chat-layout">
+                <div class="chat-left">
+                  <div id="log" aria-live="polite"></div>
+
+                  <div class="inputbar">
+                    <div class="row">
+                      <label for="nick" style="align-self:center;">Nick:</label>
+                      <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
+                      <button id="setNick">Set</button>
+                    </div>
+
+                    <div class="row toolbar">
+                      <button id="bBtn"><b>B</b></button>
+                      <button id="iBtn"><i>I</i></button>
+                      <button id="uBtn"><u>U</u></button>
+                      <label>Color:
+                        <select id="colorSel">
+                          <option value="">—</option>
+                          <option>black</option><option>red</option><option>blue</option>
+                          <option>green</option><option>maroon</option><option>purple</option>
+                          <option>teal</option><option>navy</option>
+                        </select>
+                      </label>
+                      <label>Font:
+                        <select id="fontSel">
+                          <option value="">—</option>
+                          <option>Arial</option><option>Times New Roman</option>
+                          <option>Courier New</option><option>Verdana</option>
+                        </select>
+                      </label>
+                      <label>Size:
+                        <select id="sizeSel">
+                          <option value="">—</option>
+                          <option>10</option><option>12</option><option>14</option>
+                          <option>16</option><option>18</option>
+                        </select>
+                      </label>
+                    </div>
+
+                    <div class="row">
+                      <div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
+                      <button id="send">Send</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="chat-right">
+                  <div class="chat-menubar">People in Room</div>
+                  <div id="roster"></div>
+                </div>
+              </div>
+
+              <div class="tips" id="tips">
+                <strong>Tips:</strong>
+                Enter sends, Shift+Enter = newline.
+                <span>Emotes:</span>
+                <div id="emoteList"></div>
+                Right-click a name to whisper/ignore. Double-click the topic to edit, or use IM → Set Topic….
+                Pick Color/Font with no selection to set your default style. View → Show/Hide Timestamps, File → Join Room.
+                <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
+              </div>
+
+              <div class="statusbar">
+                <div id="status">Connecting…</div>
+                <div id="typing"></div>
+                <div id="roomLabelTail"></div>
+              </div>
+            </div> <!-- /.chat-window -->
+          </div>
+
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+
+    <div class="footer">
+      <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
     </div>
-
-    <div class="row">
-      <div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
-      <button id="send">Send</button>
-    </div>
-
-    <!-- Tips live INSIDE .inputbar, under the Send row -->
-    
-  </div> <!-- /.inputbar -->
-</div> <!-- /.left -->
-
-
-      
-      <div class="right">
-        <div class="menubar">People in Room</div>
-        <div id="roster"></div>
-      </div>
-    </div>
-
- <div class="tips" id="tips">
-  <strong>Tips:</strong>
-  Enter sends, Shift+Enter = newline.  
-  <span>Emotes:</span>
-  <div id="emoteList"></div>
-  Right-click a name to whisper/ignore. Double-click the topic to edit, or use IM → Set Topic….  
-  Pick Color/Font with no selection to set your default style. View → Show/Hide Timestamps, File → Join Room.  
-  <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
-</div>
-    
-<div class="statusbar">
-  <div id="status">Connecting…</div>
-  <div id="typing"></div>
-  <div id="roomLabel"></div>
-</div>
-
   </div>
-  
-  <div id="ctx" style="position:absolute;display:none;background:#fff;border:1px solid #9a9a9a;z-index:20;min-width:160px;">
-  <a href="#" id="ctx-whisper" style="display:block;padding:6px 10px;">Whisper…</a>
-  <a href="#" id="ctx-ignore"  style="display:block;padding:6px 10px;">Ignore/Unignore</a>
-</div>
-  
+
+  <!-- Context menu for roster -->
+  <div id="ctx">
+    <a href="#" id="ctx-whisper">Whisper…</a>
+    <a href="#" id="ctx-ignore">Ignore/Unignore</a>
+  </div>
+
+  <!-- Page SFX audio (same id as index for re-use of UI code, optional) -->
+  <audio id="blip" preload="auto">
+    <source src="kawaii%208bit.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    // ===== Config =====
+    /* ===== index.html niceties (trimmed to single, non-duplicated versions) ===== */
+    /* hit counter */
+    (() => {
+      try {
+        const key = 'geocities_hit_counter';
+        const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
+        localStorage.setItem(key, n);
+        document.getElementById('hitCount').textContent = String(n).padStart(6,'0');
+      } catch(e){}
+    })();
+
+    /* last updated label */
+    document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+
+    /* tiny nav misalignment */
+    (() => {
+      const links = document.querySelectorAll('.nav a');
+      links.forEach(a => {
+        const ml = 6 + Math.floor(Math.random()*7);
+        const fs = 12 + Math.floor(Math.random()*3);
+        a.style.marginLeft = ml + 'px';
+        a.style.fontSize   = fs + 'px';
+        if (Math.random() < 0.4) a.style.letterSpacing = '1px';
+      });
+    })();
+
+    /* VHS page transition on internal links */
+    (() => {
+      document.querySelectorAll('.page a[href]').forEach(a => {
+        const url = a.getAttribute('href') || '';
+        if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          document.documentElement.classList.add('vhs');
+          setTimeout(() => { window.location.href = url; }, 200);
+        });
+      });
+    })();
+
+    /* periodic title flyby */
+    setInterval(() => {
+      document.documentElement.classList.add('flyby');
+      setTimeout(() => document.documentElement.classList.remove('flyby'), 1700);
+    }, 14000);
+
+    /* time-of-day palette */
+    (() => {
+      const h = new Date().getHours();
+      document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
+    })();
+
+    /* Sticker shuffle with visible buttons; remembers order */
+    (() => {
+      const wall = document.querySelector('.sticker-wall');
+      if (!wall) return;
+      const key = 'sticker_order_v1';
+      const imgs = Array.from(wall.querySelectorAll('img'));
+      const idOf = img => img.getAttribute('src') || img.alt;
+      const original = imgs.map(idOf);
+      function apply(order){ const map = new Map(imgs.map(img => [idOf(img), img])); order.forEach(id => { const img = map.get(id); if (img) wall.appendChild(img); }); }
+      try { const saved = JSON.parse(localStorage.getItem(key) || 'null'); if (Array.isArray(saved) && saved.length) apply(saved); } catch(_) {}
+      function shuffle(){ const order = Array.from(wall.querySelectorAll('img')).map(idOf); for (let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]];} apply(order); localStorage.setItem(key, JSON.stringify(order)); wall.classList.add('shuffled'); setTimeout(()=>wall.classList.remove('shuffled'), 220); }
+      function reset(){ apply(original); localStorage.setItem(key, JSON.stringify(original)); }
+      document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
+      document.getElementById('resetStickers')?.addEventListener('click', reset);
+    })();
+  </script>
+
+  <script>
+    /* ===== CHAT APP (your original logic, adapted to namespaced layout) ===== */
     const WORKER_HOST = "chat.asalmaadeed.workers.dev"; // change if your worker hostname differs
     const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
-    document.getElementById("roomLabel").textContent = "Room: " + ROOM;
-    
+    document.getElementById("roomLabel").textContent = ROOM;
+    document.getElementById("roomLabelTail").textContent = "Room: " + ROOM;
+
     // ===== State =====
     const NICK_KEY = "aolchat_nick";
     let nick = localStorage.getItem(NICK_KEY) || ("User" + Math.floor(Math.random()*1000));
     const $ = id => document.getElementById(id);
     $("nick").value = nick;
 
-  // Kaomoji for /me actions
-const EMOTE_MAP = {
-  waves: '(^.^)/',
-  wave:  '(^.^)/',
-  yay:   '\\o/',          // backslash must be escaped
-  shrug: '¯\\_(ツ)_/¯',
-  flip:  '(╯°□°）╯︵ ┻━┻',
-  lenny: '( ͡° ͜ʖ ͡°)',
-  happy: '(^‿^)',
-  heart: '<3'
-};
+    // Kaomoji for /me actions
+    const EMOTE_MAP = { waves:'(^.^)/', wave:'(^.^)/', yay:'\\o/', shrug:'¯\\_(ツ)_/¯', flip:'(╯°□°）╯︵ ┻━┻', lenny:'( ͡° ͜ʖ ͡°)', happy:'(^‿^)', heart:'<3' };
 
-    // Build the emote list in the Tips bar from EMOTE_MAP
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function renderEmoteTips(){
-  const host = document.getElementById("emoteList");
-  if (!host) return;
+    function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
+    function renderEmoteTips(){
+      const host = document.getElementById("emoteList"); if (!host) return;
+      const byFace = new Map();
+      for (const [name, face] of Object.entries(EMOTE_MAP)) { if (!byFace.has(face)) byFace.set(face, []); byFace.get(face).push(name); }
+      const items = [];
+      for (const [face, names] of byFace.entries()) { const namesHtml = names.map(n => `<code>/me ${escapeHTML(n)}</code>`).join(" or "); items.push(`<li>${namesHtml} → <code>${escapeHTML(face)}</code></li>`); }
+      host.innerHTML = `<ul style="margin:4px 0 0 16px; padding:0">${items.join("")}</ul>`;
+    }
+    renderEmoteTips();
 
-  // Group aliases that map to the same face (e.g., wave/waves)
-  const byFace = new Map();
-  for (const [name, face] of Object.entries(EMOTE_MAP)) {
-    const key = face; // group by emoji/kaomoji
-    if (!byFace.has(key)) byFace.set(key, []);
-    byFace.get(key).push(name);
-  }
-
-  const items = [];
-  for (const [face, names] of byFace.entries()) {
-    const namesHtml = names
-      .map(n => `<code>/me ${escapeHTML(n)}</code>`)
-      .join(" or ");
-    items.push(`<li>${namesHtml} → <code>${escapeHTML(face)}</code></li>`);
-  }
-
-  host.innerHTML = `<ul style="margin:4px 0 0 16px; padding:0">${items.join("")}</ul>`;
-}
-renderEmoteTips();
-
-    
     let ws;
-
     let beepOn = true;
+    let typingTimer = null;
+    let ignored = new Set(JSON.parse(localStorage.getItem("ignored") || "[]"));
+    const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ignored]));
 
-  let typingTimer = null;
-let ignored = new Set(JSON.parse(localStorage.getItem("ignored") || "[]"));
-const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ignored]));
-
-    // ===== Connect =====
     function wsUrl(){ return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM); }
     function setStatus(s){ $("status").textContent = s; }
     function connect(){
@@ -260,7 +508,6 @@ const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ign
       ws.onmessage = onMessage;
     }
 
-    // ===== UI actions =====
     $("setNick").onclick = () => {
       const v = $("nick").value.trim();
       if (!v) return;
@@ -269,330 +516,162 @@ const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ign
       send({ type:"nick", username:nick });
       sysLine("* nick set to " + nick);
     };
-
     $("send").onclick = sendChat;
 
+    // Editor setup
+    const editor = document.getElementById("msgEdit");
+    let defaultColor = ""; let defaultFont = ""; let defaultSize = "";
+    document.getElementById("bBtn").onclick = () => document.execCommand("bold");
+    document.getElementById("iBtn").onclick = () => document.execCommand("italic");
+    document.getElementById("uBtn").onclick = () => document.execCommand("underline");
 
+    function hasEditorSelection(){ const sel = document.getSelection(); return sel && !sel.isCollapsed && editor.contains(sel.anchorNode); }
+    document.getElementById("colorSel").onchange = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("foreColor", false, v);} else { defaultColor=v||""; editor.style.color = defaultColor || ""; } };
+    document.getElementById("fontSel").onchange  = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("fontName", false, v);} else { defaultFont=v||""; editor.style.fontFamily = defaultFont || ""; } };
+    document.getElementById("sizeSel").onchange  = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10))); } else { defaultSize=v||""; editor.style.fontSize = defaultSize ? `${parseInt(defaultSize,10)}px` : ""; } };
 
-// Keep these at the top near your editor setup
-const editor = document.getElementById("msgEdit");
-let defaultColor = "";
-let defaultFont  = "";
-let defaultSize  = ""; // optional
+    editor.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); } });
+    editor.addEventListener("paste", (e) => { e.preventDefault(); const t=(e.clipboardData||window.clipboardData).getData("text/plain"); document.execCommand("insertText", false, t); });
+    function sizeToLegacy(n){ return (n<=10?2:n<=12?3:n<=14?4:n<=16?5:n<=18?6:7); }
 
-// Bold / italic / underline: still selection-based
-document.getElementById("bBtn").onclick = () => document.execCommand("bold");
-document.getElementById("iBtn").onclick = () => document.execCommand("italic");
-document.getElementById("uBtn").onclick = () => document.execCommand("underline");
+    function sendTyping(){ try { ws && ws.readyState === 1 && ws.send(JSON.stringify({ type:"typing", username:nick })); } catch {} }
+    let typingThrottle=false;
+    editor.addEventListener("input", () => { if (!typingThrottle){ typingThrottle=true; sendTyping(); setTimeout(()=>typingThrottle=false, 1500); } });
 
-// Helper: is there a selection *inside* the editor?
-function hasEditorSelection() {
-  const sel = document.getSelection();
-  return sel && !sel.isCollapsed && editor.contains(sel.anchorNode);
-}
-
-// Color: selection → color that selection; no selection → set default for whole message
-document.getElementById("colorSel").onchange = (e) => {
-  const v = e.target.value; if (v === null) return;
-  if (hasEditorSelection()) {
-    if (v) document.execCommand("foreColor", false, v);
-  } else {
-    defaultColor = v || "";
-    editor.style.color = defaultColor || "";   // live preview while typing
-  }
-};
-
-// Font: selection → font for selection; no selection → set default for whole message
-document.getElementById("fontSel").onchange = (e) => {
-  const v = e.target.value; if (v === null) return;
-  if (hasEditorSelection()) {
-    if (v) document.execCommand("fontName", false, v);
-  } else {
-    defaultFont = v || "";
-    editor.style.fontFamily = defaultFont || "";  // live preview
-  }
-};
-
-// Size (optional): same pattern. Remove if you want size to stay selection-only.
-document.getElementById("sizeSel").onchange = (e) => {
-  const v = e.target.value; if (v === null) return;
-  if (hasEditorSelection()) {
-    if (v) document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10)));
-  } else {
-    defaultSize = v || "";
-    editor.style.fontSize = defaultSize ? `${parseInt(defaultSize,10)}px` : "";
-  }
-};
-
-
-// Enter sends; Shift+Enter makes a newline
-editor.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
-});
-
-// Paste as plain text to avoid weird HTML
-editor.addEventListener("paste", (e) => {
-  e.preventDefault();
-  const t = (e.clipboardData || window.clipboardData).getData("text/plain");
-  document.execCommand("insertText", false, t);
-});
-
-// Map px → legacy fontSize (1..7) used by execCommand
-function sizeToLegacy(n){
-  return (n<=10?2:n<=12?3:n<=14?4:n<=16?5:n<=18?6:7);
-}
-
-function sendTyping() {
-  try { ws && ws.readyState === 1 && ws.send(JSON.stringify({ type:"typing", username:nick })); } catch {}
-}
-let typingThrottle = false;
-editor.addEventListener("input", () => {
-  if (!typingThrottle) { typingThrottle = true; sendTyping(); setTimeout(()=>typingThrottle=false, 1500); }
-});
-
-   
-
-function sendChat(){
-  const html = editor.innerHTML.trim();
-  const base = htmlToBB(html).trim();
-  if (!base || !ws || ws.readyState !== 1) return;
-
-// emote: /me something
-if (base.startsWith("/me ")) {
-  const action = base.slice(4).trim();
-  const key = action.toLowerCase();
-  const kaomoji = EMOTE_MAP[key];
-
-  // If we know it, send the kaomoji; otherwise send the plain action
-  send({ type: "emote", username: nick, text: kaomoji || action, kaomoji: !!kaomoji });
-
-  editor.innerHTML = "";
-  if (defaultColor) editor.style.color = defaultColor;
-  if (defaultFont)  editor.style.fontFamily = defaultFont;
-  if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
-  return;
-}
-
-
-  let bb = base;
-  if (defaultFont)  bb = `[font=${defaultFont}]${bb}[/font]`;
-  if (defaultSize)  bb = `[size=${parseInt(defaultSize,10)}]${bb}[/size]`;
-  if (defaultColor) bb = `[color=${defaultColor}]${bb}[/color]`;
-  send({ type:"chat", username:nick, text: bb });
-  editor.innerHTML = "";
-  if (defaultColor) editor.style.color = defaultColor;
-  if (defaultFont)  editor.style.fontFamily = defaultFont;
-  if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
-}
-
-
-
-// Safe HTML → BBCode (b/i/u + <font color|face|size> + <br>/<div>)
-function htmlToBB(html){
-  const container = document.createElement("div");
-  container.innerHTML = html;
-
-  const pxFromLegacy = {1:10,2:10,3:12,4:14,5:16,6:18,7:20};
-
-  const walk = (node) => {
-    if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
-    if (node.nodeType !== Node.ELEMENT_NODE) return "";
-
-    const tag = node.tagName.toLowerCase();
-    let open = "", close = "";
-
-    if (tag === "b" || tag === "strong") { open="[b]"; close="[/b]"; }
-    else if (tag === "i" || tag === "em") { open="[i]"; close="[/i]"; }
-    else if (tag === "u") { open="[u]"; close="[/u]"; }
-    else if (tag === "br") { return "\n"; }
-    else if (tag === "div" || tag === "p") {
-      // treat block as content + newline
-      const inner = Array.from(node.childNodes).map(walk).join("");
-      return inner + "\n";
+    function sendChat(){
+      const html = editor.innerHTML.trim();
+      const base = htmlToBB(html).trim();
+      if (!base || !ws || ws.readyState !== 1) return;
+      if (base.startsWith("/me ")){
+        const action = base.slice(4).trim();
+        const key = action.toLowerCase();
+        const kaomoji = EMOTE_MAP[key];
+        send({ type:"emote", username:nick, text: kaomoji || action, kaomoji: !!kaomoji });
+        editor.innerHTML = "";
+        if (defaultColor) editor.style.color = defaultColor;
+        if (defaultFont)  editor.style.fontFamily = defaultFont;
+        if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
+        return;
+      }
+      let bb = base;
+      if (defaultFont)  bb = `[font=${defaultFont}]${bb}[/font]`;
+      if (defaultSize)  bb = `[size=${parseInt(defaultSize,10)}]${bb}[/size]`;
+      if (defaultColor) bb = `[color=${defaultColor}]${bb}[/color]`;
+      send({ type:"chat", username:nick, text: bb });
+      editor.innerHTML = "";
+      if (defaultColor) editor.style.color = defaultColor;
+      if (defaultFont)  editor.style.fontFamily = defaultFont;
+      if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
     }
-    else if (tag === "font") {
-      const color = node.getAttribute("color");
-      const face  = node.getAttribute("face");
-      const size  = node.getAttribute("size");
-      if (color) { open += `[color=${color}]`; close = `[/color]` + close; }
-      if (face)  { open += `[font=${face}]`;   close = `[/font]` + close;  }
-      if (size)  { const px = pxFromLegacy[size] || 12;
-                   open += `[size=${px}]`;      close = `[/size]` + close;  }
-    }
-    else if (tag === "span") {
-      const style = node.getAttribute("style") || "";
-      const mColor = style.match(/color\s*:\s*([^;]+)/i);
-      const mFace  = style.match(/font-family\s*:\s*([^;]+)/i);
-      const mSize  = style.match(/font-size\s*:\s*(\d+)/i);
-      if (mColor) { open += `[color=${mColor[1]}]`; close = `[/color]` + close; }
-      if (mFace)  { open += `[font=${mFace[1]}]`;  close = `[/font]` + close;  }
-      if (mSize)  { open += `[size=${parseInt(mSize[1],10)}]`; close = `[/size]` + close; }
-    }
-    const inner = Array.from(node.childNodes).map(walk).join("");
-    return open + inner + close;
-  };
 
-  // Join top-level nodes and trim trailing newlines added by div/p handling
-  return Array.from(container.childNodes).map(walk).join("").replace(/\n+$/,"");
-}
-    
+    function htmlToBB(html){
+      const container = document.createElement("div"); container.innerHTML = html;
+      const pxFromLegacy = {1:10,2:10,3:12,4:14,5:16,6:18,7:20};
+      const walk = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
+        if (node.nodeType !== Node.ELEMENT_NODE) return "";
+        const tag = node.tagName.toLowerCase();
+        let open = "", close = "";
+        if (tag === "b" || tag === "strong") { open="[b]"; close="[/b]"; }
+        else if (tag === "i" || tag === "em") { open="[i]"; close="[/i]"; }
+        else if (tag === "u") { open="[u]"; close="[/u]"; }
+        else if (tag === "br") { return "\n"; }
+        else if (tag === "div" || tag === "p") { const inner = Array.from(node.childNodes).map(walk).join(""); return inner + "\n"; }
+        else if (tag === "font") {
+          const color = node.getAttribute("color");
+          const face  = node.getAttribute("face");
+          const size  = node.getAttribute("size");
+          if (color) { open += `[color=${color}]`; close = `[/color]` + close; }
+          if (face)  { open += `[font=${face}]`;   close = `[/font]` + close; }
+          if (size)  { const px = pxFromLegacy[size] || 12; open += `[size=${px}]`; close = `[/size]` + close; }
+        }
+        else if (tag === "span") {
+          const style = node.getAttribute("style") || "";
+          const mColor = style.match(/color\s*:\s*([^;]+)/i);
+          const mFace  = style.match(/font-family\s*:\s*([^;]+)/i);
+          const mSize  = style.match(/font-size\s*:\s*(\d+)/i);
+          if (mColor) { open += `[color=${mColor[1]}]`; close = `[/color]` + close; }
+          if (mFace)  { open += `[font=${mFace[1]}]`;  close = `[/font]` + close; }
+          if (mSize)  { open += `[size=${parseInt(mSize[1],10)}]`; close = `[/size]` + close; }
+        }
+        const inner = Array.from(node.childNodes).map(walk).join("");
+        return open + inner + close;
+      };
+      return Array.from(container.childNodes).map(walk).join("").replace(/\n+$/,"");
+    }
+
     function send(obj){ try { ws.send(JSON.stringify(obj)); } catch {} }
 
-    // ===== Render =====
-    function escapeHtml(s){
-      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
     function bbcodeToHtml(src){
       let s = escapeHtml(src);
-      s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1</strong>");
-      s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1</em>");
-      s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1</u>");
+      s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1<\/strong>");
+      s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1<\/em>");
+      s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1<\/u>");
       s = s.replace(/\[color=(#[0-9a-fA-F]{3,6}|[a-zA-Z]{1,15})\]([\s\S]*?)\[\/color\]/gi,
-        (m, color, inner) => `<span style="color:${color}">${inner}</span>`);
+        (m, color, inner) => `<span style="color:${color}">${inner}<\/span>`);
       s = s.replace(/\[size=(\d{1,2})\]([\s\S]*?)\[\/size\]/gi,
-        (m, n, inner) => `<span style="font-size:${Math.max(8, Math.min(24, parseInt(n,10)))}px">${inner}</span>`);
-      s = s.replace(/\[font=([A-Za-z0-9 ,'-]{1,30})\]([\s\S]*?)\[\/font\]/gi,
+        (m, n, inner) => `<span style="font-size:${Math.max(8, Math.min(24, parseInt(n,10)))}px">${inner}<\/span>`);
+      s = s.replace(/\[font=([A-Za-z0-9 ,'\-]{1,30})\]([\s\S]*?)\[\/font\]/gi,
         (m, name, inner) => {
           const allowed = ["Arial","Times New Roman","Courier New","Verdana"];
           const pick = allowed.find(f => f.toLowerCase() === name.toLowerCase());
-          return pick ? `<span style="font-family:'${pick}'">${inner}</span>` : inner;
+          return pick ? `<span style="font-family:'${pick}'">${inner}<\/span>` : inner;
         });
       return s;
     }
-    function sysLine(t){
-      const div = document.createElement("div");
-      div.className = "sys"; div.textContent = t;
-      const log = $("log"); log.appendChild(div); log.scrollTop = log.scrollHeight;
-    }
+
+    function sysLine(t){ const div=document.createElement("div"); div.className="sys"; div.textContent=t; const log=$("log"); log.appendChild(div); log.scrollTop = log.scrollHeight; }
 
     function renderMessage(m){
-  const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
-  const log  = document.getElementById("log");
-  const div  = document.createElement("div");
-  if (m._class) div.className = m._class;
-
-  const ts = document.createElement("span");
-  ts.className = "ts";
-  ts.textContent = "[" + time + "] ";
-
-  if (m._class === "emote") {
-    const msg = document.createElement("span");
-    if (m.kaomoji) {
-      msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || "");
-    } else {
-      msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || "");
-    }
-    div.appendChild(ts); 
-    div.appendChild(msg);
-
-  } else if (m._class === "whisper") {
-    const who = document.createElement("span");
-    who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
-    const msg = document.createElement("span");
-    msg.innerHTML = bbcodeToHtml(m.text || "");
-    div.appendChild(ts); 
-    div.appendChild(who); 
-    div.appendChild(msg);
-
-  } else {
-    const nick = document.createElement("span");
-    nick.textContent = "<" + (m.username || "Anon") + "> ";
-    const msg = document.createElement("span");
-    msg.innerHTML = bbcodeToHtml(m.text || "");
-    div.appendChild(ts); 
-    div.appendChild(nick); 
-    div.appendChild(msg);
-  }
-
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
-}
-
-
-    function renderRoster(list){
-      const box = $("roster"); box.innerHTML = "";
-      for (const u of list) { const d = document.createElement("div"); d.className = "user"; d.textContent = u; box.appendChild(d); }
+      const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
+      const log  = document.getElementById("log");
+      const div  = document.createElement("div");
+      if (m._class) div.className = m._class;
+      const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
+      if (m._class === "emote"){
+        const msg = document.createElement("span");
+        if (m.kaomoji){ msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || ""); }
+        else { msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || ""); }
+        div.appendChild(ts); div.appendChild(msg);
+      } else if (m._class === "whisper"){
+        const who = document.createElement("span"); who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
+        const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
+        div.appendChild(ts); div.appendChild(who); div.appendChild(msg);
+      } else {
+        const nick = document.createElement("span"); nick.textContent = "<" + (m.username || "Anon") + "> ";
+        const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
+        div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
+      }
+      log.appendChild(div); log.scrollTop = log.scrollHeight;
     }
 
-function onMessage(e){
-  let payload; try { payload = JSON.parse(e.data); } catch { return; }
+    function renderRoster(list){ const box = $("roster"); box.innerHTML = ""; for (const u of list){ const d=document.createElement("div"); d.className="user"; d.textContent=u; box.appendChild(d); } }
 
-  // History: show past messages, including emotes
-  if (payload.type === "history" && Array.isArray(payload.data)) {
-    for (let m of payload.data) {
-      if (m && m.type === "emote") m = { ...m, _class: "emote" };
-      if (!m || ignored.has(m.username)) continue;
-      renderMessage(m);
+    function onMessage(e){
+      let payload; try { payload = JSON.parse(e.data); } catch { return; }
+      if (payload.type === "history" && Array.isArray(payload.data)) { for (let m of payload.data){ if (m && m.type === "emote") m = { ...m, _class: "emote" }; if (!m || ignored.has(m.username)) continue; renderMessage(m);} return; }
+      if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
+      if (payload.type === "topic") { setTopicUI(payload.topic); return; }
+      if (payload.type === "typing") { const t=$("typing"); t.textContent = `${payload.username} is typing…`; clearTimeout(typingTimer); typingTimer = setTimeout(() => t.textContent = "", 2000); return; }
+      if (payload.type === "whisper") { if (!ignored.has(payload.from)) { renderMessage({ ...payload, _class: "whisper" }); if (beepOn) ding(); } return; }
+      if (payload.type === "emote") { if (!ignored.has(payload.username)) renderMessage({ ...payload, _class: "emote" }); return; }
+      if (payload.type === "chat") { if (!ignored.has(payload.username)) { renderMessage(payload); if (payload.username !== nick && beepOn) ding(); } return; }
+      if (payload.username && payload.text) { if (!ignored.has(payload.username)) renderMessage(payload); }
     }
-    return;
-  }
 
-  // Roster
-  if (payload.type === "roster" && Array.isArray(payload.users)) {
-    renderRoster(payload.users);
-    return;
-  }
-
-  // Topic
-  if (payload.type === "topic") {
-    setTopicUI(payload.topic);
-    return;
-  }
-
-  // Typing
-  if (payload.type === "typing") {
-    const t = document.getElementById("typing");
-    t.textContent = `${payload.username} is typing…`;
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(() => t.textContent = "", 2000);
-    return;
-  }
-
-  // Whisper (respect ignore + beep setting)
-  if (payload.type === "whisper") {
-    if (!ignored.has(payload.from)) {
-      renderMessage({ ...payload, _class: "whisper" });
-      if (beepOn) ding();
-    }
-    return;
-  }
-
-  // Emote
-  if (payload.type === "emote") {
-    if (!ignored.has(payload.username)) renderMessage({ ...payload, _class: "emote" });
-    return;
-  }
-
-  // Chat (respect ignore + beep setting)
-  if (payload.type === "chat") {
-    if (!ignored.has(payload.username)) {
-      renderMessage(payload);
-      if (payload.username !== nick && beepOn) ding();
-    }
-    return;
-  }
-
-  // Legacy shape (no type)
-  if (payload.username && payload.text) {
-    if (!ignored.has(payload.username)) renderMessage(payload);
-  }
-}
-
-
-
-    // Start
     connect();
 
-    // ===== Menus: open/close and actions =====
+    // ===== Menus =====
     const menubarEl = document.getElementById("menubar");
     const logEl = document.getElementById("log");
-    const rightPane = document.querySelector(".right");
+    const rightPane = document.querySelector(".chat-right");
     let openMenu = null;
     let currentZoom = 13;
 
     menubarEl.addEventListener("click", (e) => {
       const btn = e.target.closest(".menu-btn");
-      const item = e.target.closest(".dropdown a");
+      const item = e.target.closest(".chat-dropdown a");
       if (btn) {
         const id = "menu-" + btn.dataset.menu;
         const menu = document.getElementById(id);
@@ -608,7 +687,7 @@ function onMessage(e){
       }
     });
     document.addEventListener("click", (e) => { if (!menubarEl.contains(e.target)) closeMenus(); });
-    function closeMenus(){ document.querySelectorAll(".dropdown").forEach(d=>d.style.display="none"); openMenu=null; }
+    function closeMenus(){ document.querySelectorAll(".chat-dropdown").forEach(d=>d.style.display="none"); openMenu=null; }
 
     function handleAction(a){
       switch(a){
@@ -628,151 +707,50 @@ function onMessage(e){
         case "help": return showHelp();
         case "about": return alert("Web Chat • AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
         case "set-topic": {
-  const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
-  if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
-  return;
-}
+          const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
+          if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
+          return;
+        }
       }
     }
 
-// Tips bar controls (safe single-definition version)
-(() => {
-  const TIPS_KEY = "aolchat_tips_hidden";
-  const tipsEl = document.getElementById("tips");
-  const hideTipsBtn = document.getElementById("hideTips");
-  const moreHelpBtn = document.getElementById("moreHelp");
+    // Tips bar controls
+    (() => {
+      const TIPS_KEY = "aolchat_tips_hidden";
+      const tipsEl = document.getElementById("tips");
+      const hideTipsBtn = document.getElementById("hideTips");
+      const moreHelpBtn = document.getElementById("moreHelp");
+      if (!tipsEl) return;
+      if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
+      hideTipsBtn?.addEventListener("click", (e) => { e.preventDefault(); const hidden = tipsEl.style.display !== "none"; tipsEl.style.display = hidden ? "none" : ""; if (hidden) localStorage.setItem(TIPS_KEY, "1"); else localStorage.removeItem(TIPS_KEY); });
+      moreHelpBtn?.addEventListener("click", (e) => { e.preventDefault(); showHelp(); });
+    })();
 
-  if (!tipsEl) return; // tips not on this page
-
-  // Respect previous hide choice
-  if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
-
-  if (hideTipsBtn) {
-    hideTipsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const hidden = tipsEl.style.display !== "none";
-      tipsEl.style.display = hidden ? "none" : "";
-      if (hidden) localStorage.setItem(TIPS_KEY, "1");
-      else localStorage.removeItem(TIPS_KEY);
-    });
-  }
-
-  if (moreHelpBtn) {
-    moreHelpBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showHelp();
-    });
-  }
-})();
-
-    
     // Actions
-    function saveLog(){
-      const text = Array.from(logEl.children).map(d=>d.textContent).join("\n");
-      const blob = new Blob([text], { type:"text/plain" });
-      const a = document.createElement("a");
-      const stamp = new Date().toISOString().replace(/[:.]/g,"-");
-      a.href = URL.createObjectURL(blob);
-      a.download = `chat-${ROOM}-${stamp}.txt`;
-      document.body.appendChild(a); a.click(); a.remove();
-    }
-    function joinRoom(){
-      const room = prompt("Join room:", ROOM);
-      if (room && room !== ROOM) {
-        const url = new URL(location.href);
-        url.searchParams.set("room", room);
-        location.href = url.toString();
-      }
-    }
-    async function copyLog(){
-      const text = Array.from(logEl.children).map(d=>d.textContent).join("\n");
-      try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); }
-    }
-    function selectAllLog(){
-      const r = document.createRange(); r.selectNodeContents(logEl);
-      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-    }
-    function findInLog(){
-      const term = prompt("Find:"); if (!term) return;
-      const lower = term.toLowerCase();
-      logEl.querySelectorAll(".hilite").forEach(x=>x.classList.remove("hilite"));
-      for (const div of logEl.children) {
-        if (div.textContent.toLowerCase().includes(lower)) { div.classList.add("hilite"); div.scrollIntoView({block:"nearest"}); break; }
-      }
-    }
+    function saveLog(){ const text = Array.from(logEl.children).map(d=>d.textContent).join("\n"); const blob = new Blob([text], { type:"text/plain" }); const a = document.createElement("a"); const stamp = new Date().toISOString().replace(/[:.]/g,"-"); a.href = URL.createObjectURL(blob); a.download = `chat-${ROOM}-${stamp}.txt`; document.body.appendChild(a); a.click(); a.remove(); }
+    function joinRoom(){ const room = prompt("Join room:", ROOM); if (room && room !== ROOM) { const url = new URL(location.href); url.searchParams.set("room", room); location.href = url.toString(); } }
+    async function copyLog(){ const text = Array.from(logEl.children).map(d=>d.textContent).join("\n"); try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); } }
+    function selectAllLog(){ const r = document.createRange(); r.selectNodeContents(logEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    function findInLog(){ const term = prompt("Find:"); if (!term) return; const lower = term.toLowerCase(); logEl.querySelectorAll(".hilite").forEach(x=>x.classList.remove("hilite")); for (const div of logEl.children) { if (div.textContent.toLowerCase().includes(lower)) { div.classList.add("hilite"); div.scrollIntoView({block:"nearest"}); break; } } }
     function zoom(delta){ currentZoom = Math.max(10, Math.min(22, currentZoom + delta)); logEl.style.fontSize = currentZoom + "px"; }
-    function showHelp(){
-      alert(
-`Formatting:
-  [b]bold[/b]  [i]italic[/i]  [u]underline[/u]
-  [color=red]red text[/color]
-  [size=14]14px text[/size]
-  [font=Courier New]Courier text[/font]
-
-Toolbar inserts these tags for you.`);
-    }
+    function showHelp(){ alert(`Formatting:\n  [b]bold[/b]  [i]italic[/i]  [u]underline[/u]\n  [color=red]red text[/color]\n  [size=14]14px text[/size]\n  [font=Courier New]Courier text[/font]\n\nToolbar inserts these tags for you.`); }
 
     // Beep
-    function ding(){
-      try {
-        const ac = new (window.AudioContext||window.webkitAudioContext)();
-        const o = ac.createOscillator(), g = ac.createGain();
-        o.type="square"; o.frequency.value=880;
-        g.gain.setValueAtTime(0.0001, ac.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime+0.01);
-        g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+0.15);
-        o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.16);
-      } catch {}
-    }
+    function ding(){ try { const ac = new (window.AudioContext||window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type="square"; o.frequency.value=880; g.gain.setValueAtTime(0.0001, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime+0.01); g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+0.15); o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.16); } catch {} }
 
     function setTopicUI(t){ document.getElementById("topicText").textContent = t || "(none)"; }
-document.getElementById("topicText").addEventListener("dblclick", () => {
-  const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
-  if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
-});
+    document.getElementById("topicText").addEventListener("dblclick", () => { const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || ""); if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick }); });
 
-const rosterEl = document.getElementById("roster");
-const ctx = document.getElementById("ctx");
-let ctxUser = null;
+    // Roster context menu
+    const rosterEl = document.getElementById("roster");
+    const ctx = document.getElementById("ctx");
+    let ctxUser = null;
+    rosterEl.addEventListener("contextmenu", (e) => { const item = e.target.closest(".user"); if (!item) return; e.preventDefault(); ctxUser = item.textContent; ctx.style.left = e.pageX + "px"; ctx.style.top  = e.pageY + "px"; ctx.style.display = "block"; });
+    document.addEventListener("click", () => ctx.style.display = "none");
+    document.getElementById("ctx-whisper").onclick = (e) => { e.preventDefault(); if (!ctxUser) return; const txt = prompt("Whisper to " + ctxUser + ":"); if (txt) send({ type:"whisper", username:nick, to: ctxUser, text: txt }); };
+    document.getElementById("ctx-ignore").onclick  = (e) => { e.preventDefault(); if (!ctxUser) return; if (ignored.has(ctxUser)) ignored.delete(ctxUser); else ignored.add(ctxUser); saveIgnored(); alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser); };
 
-rosterEl.addEventListener("contextmenu", (e) => {
-  const item = e.target.closest(".user"); if (!item) return;
-  e.preventDefault();
-  ctxUser = item.textContent;
-  ctx.style.left = e.pageX + "px";
-  ctx.style.top  = e.pageY + "px";
-  ctx.style.display = "block";
-});
-document.addEventListener("click", () => ctx.style.display = "none");
-
-document.getElementById("ctx-whisper").onclick = (e) => {
-  e.preventDefault();
-  if (!ctxUser) return;
-  const txt = prompt("Whisper to " + ctxUser + ":");
-  if (txt) send({ type:"whisper", username:nick, to: ctxUser, text: txt });
-};
-document.getElementById("ctx-ignore").onclick = (e) => {
-  e.preventDefault();
-  if (!ctxUser) return;
-  if (ignored.has(ctxUser)) ignored.delete(ctxUser); else ignored.add(ctxUser);
-  saveIgnored();
-  alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser);
-};
-
-function toggleTips() {
-  const tips = document.getElementById("tips");
-  if (!tips) return;
-  const TIPS_KEY = "aolchat_tips_hidden";
-  const isHidden = tips.style.display === "none";
-  tips.style.display = isHidden ? "" : "none";
-  if (isHidden) localStorage.removeItem(TIPS_KEY);
-  else localStorage.setItem(TIPS_KEY, "1");
-}
-
-    
+    function toggleTips() { const tips = document.getElementById("tips"); if (!tips) return; const TIPS_KEY = "aolchat_tips_hidden"; const isHidden = tips.style.display === "none"; tips.style.display = isHidden ? "" : "none"; if (isHidden) localStorage.removeItem(TIPS_KEY); else localStorage.setItem(TIPS_KEY, "1"); }
   </script>
-  
-
-
 </body>
 </html>
