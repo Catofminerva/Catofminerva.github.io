@@ -25,9 +25,7 @@ Scott’s sympathies sit with people who slip the net. A pastoralist moves befor
 The Illegible Bedouins
 ----------------------
 
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/vQghFmFDDGIL/images/1586.jpeg)
-
-_A 1910 photo by Lehnert & Landrock showing a camel caravan migration in the desert._
+![A 1910 photo by Lehnert & Landrock showing a camel caravan migration in the desert](caravan.jpeg)
 
 Arab nomadic pastoralists, scattered from North Africa to the Arabian Peninsula, have long embodied what James Scott might call the _“illegible”_ par excellence: their social order, forged over millennia in spaces of hyper-aridity, rejected the fixities of territorial states. Organised into autonomous tribal units bound by a collective ethos of desert adaptation, Bedouin societies thrived on mobility, reciprocity, and finely tuned ecological knowledge. Their territories sprawled defiantly across modern frontiers; their seasonal migrations ignored the cartographic fictions of nation-states; their loyalties answered to tribal sheikhs, not tax collectors or land registries. For centuries they have evaded state administrations under various Caliphates and Ottoman empires, in a sense, having in Scott’s words _“stayed out of the archives.”_ If you find them in the archives, this means something terribly wrong has taken place.
 
