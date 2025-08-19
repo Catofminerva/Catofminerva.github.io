@@ -4,62 +4,28 @@ title: "Blog Entries"
 permalink: /blog_posts.html
 ---
 
-<center>
-  <h2>Blog Entries</h2>
-  <p> there's still a lot of formatting issues in the posts, many images nor rendering etc. also some of these posts have been written ages ago. some of my views have changed to become more radical, others have tempered down, etc. though many posts are disjointed string of ideas formed in a stream of consciousness, the worst of that kind i refrained from uploading at all :)</p>
+<h3>All Entries <span class="blink">★</span></h3>
 
-  <!-- Real posts: show their actual dates -->
-  <ul>
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span class="date-badge">{{ post.date | date: "%d/%m/%Y" }}</span>
-      </li>
-    {% endfor %}
-  </ul>
+<p> there's still a lot of formatting issues in the posts, many images nor rendering etc. also some of these posts have been written ages ago. some of my views have changed to become more radical, others have tempered down, etc. though many posts are disjointed string of ideas formed in a stream of consciousness, the worst of that kind i refrained from uploading at all :)</p>
 
-  <!-- Manual pages: dates will be injected below -->
-  <ul id="manual-entries">
-     </ul>
+<ul class="entries">
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time class="date-badge" datetime="{{ post.date | date_to_xmlschema }}">
+        {{ post.date | date: "%d/%m/%Y" }}
+      </time>
+    </li>
+  {% endfor %}
+</ul>
 
-  <!-- tiny style for the date chips -->
-  <style>
-    .date-badge{
-      margin-left:8px;
-      font-size:12px;
-      color: var(--neon-yellow, #ffff33);
-      white-space: nowrap;
-    }
-  </style>
-
-<script>
-
-  // optional: sort items by date, newest first
-  const items = Array.from(list.children);
-  items.sort((A, B) => {
-    const da = new Date(A.querySelector('a').dataset.date || 0);
-    const db = new Date(B.querySelector('a').dataset.date || 0);
-    return db - da;
-  });
-  items.forEach(li => list.appendChild(li));
-
-  // render dd/mm/yyyy chips
-  list.querySelectorAll('li > a').forEach(a => {
-    const raw = a.dataset.date;
-    if (!raw) return;
-    const d = new Date(raw + 'T00:00:00Z');
-    if (isNaN(d)) return;
-
-    const dd = String(d.getUTCDate()).padStart(2,'0');
-    const mm = String(d.getUTCMonth()+1).padStart(2,'0');
-    const yyyy = d.getUTCFullYear();
-
-    const tag = document.createElement('time');
-    tag.className = 'date-badge';
-    tag.setAttribute('datetime', d.toISOString());
-    tag.textContent = `${dd}/${mm}/${yyyy}`;
-    a.insertAdjacentElement('afterend', tag);
-  });
-})();
-  </script>
-</center>
+<style>
+  .date-badge{
+    margin-left:8px;
+    font-size:12px;
+    color: var(--neon-yellow, #ffff33);
+    white-space: nowrap;
+    vertical-align: baseline;
+    opacity: 0.9;
+  }
+</style>
