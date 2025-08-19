@@ -4,7 +4,6 @@ title: "Should we Kill Predators?"
 permalink: /predators
 ---  
 
-<h1>Should We Kill Predators?</h1> 
 =========================
 
 ![16 of the Fiercest Apex Predators in the World](https://www.treehugger.com/thmb/AJU4UPiXTfHjpLhVq_k8k3I5Nj8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-LION.143919694-5a3bd0bd5c434b4db96b05142ad5da12.jpg)
