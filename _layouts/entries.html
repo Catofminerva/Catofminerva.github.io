@@ -181,12 +181,41 @@
   body::before{ background-image: url('/stars-still.png'); } /* first frame as PNG works great */
 }
 
+
+
+/* title + penguin layout */
+.title-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+/* big, crisp penguin; scales down on small screens */
+.title-penguin{
+  width: clamp(140px, 22vw, 320px);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 12px var(--neon-blue));
+}
+
+/* stack on phones so it never cramps the heading */
+@media (max-width: 700px){
+  .title-row{ flex-direction: column; gap: 8px; }
+}
+
+    
   </style>
 </head>
 <body>
   <div class="page">
-    <h1 id="glitter-title">{{ page.title }}</h1>
-
+<div class="title-row">
+  <h1 id="glitter-title">{{ page.title }}</h1>
+  <img src="/penguin.gif"
+       alt="Penguin furiously typing"
+       class="title-penguin">
+</div>
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
         ★ browse the archive ★ newest up top ★ blink if you remember icq ★
@@ -269,7 +298,7 @@
     })();
   
   
-  <script>
+ 
 (function(){
   if (matchMedia('(max-width:900px)').matches){
     document.querySelectorAll('marquee').forEach(function(m){
@@ -281,7 +310,7 @@
     document.querySelectorAll('marquee').forEach(function(m){ m.setAttribute('scrollamount','1'); });
   }
 })();
-</script>
+
 
   </script>
 </body>
