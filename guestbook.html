@@ -103,6 +103,29 @@
   .gb-gif{ width: 60px; }
 }
 
+    /* === BBCode toolbar + smileys === */
+.ubb{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; align-items:center; }
+.ubb button{
+  cursor:pointer; padding:3px 6px; border:3px outset #6af7ff;
+  background:#0e0e33; color:#a7ffff; box-shadow:2px 2px 0 #000;
+  font-family:inherit; font-size:14px;
+}
+.ubb button:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+
+#smiley-panel{
+  display:flex; flex-wrap:wrap; gap:4px; padding:6px; margin-top:6px;
+  border:3px inset #6af7ff; background:#0b0b2a;
+}
+#smiley-panel[hidden]{ display:none; }
+#smiley-panel [data-smiley]{
+  cursor:pointer; font-size:20px; line-height:1; padding:2px 4px;
+  border:2px outset #6af7ff; background:#140043;
+}
+#smiley-panel [data-smiley]:active{ border-style:inset; transform:translate(1px,1px); }
+
+/* make links inside messages readable */
+.gb-list .entry .msg a{ color:#7ff; text-decoration:underline; }
+
   
   </style>
 </head>
@@ -151,7 +174,26 @@
               <input class="gb-input" type="text" id="username" placeholder="Your name" maxlength="60" />
 
               <label for="message">Message</label>
-              <textarea class="gb-textarea" id="message" placeholder="Write your message here"></textarea>
+<label for="message">Message</label>
+
+<div class="ubb" aria-label="Formatting toolbar">
+  <button type="button" data-tag="b" title="Bold"><strong>B</strong></button>
+  <button type="button" data-tag="i" title="Italic"><em>I</em></button>
+  <button type="button" data-tag="u" title="Underline"><span style="text-decoration:underline">U</span></button>
+  <button type="button" id="btn-link" title="Link">Link</button>
+  <button type="button" id="btn-smileys" title="Smileys">🙂</button>
+</div>
+
+<div id="smiley-panel" hidden>
+  <span data-smiley=":)">🙂</span>
+  <span data-smiley=":D">😄</span>
+  <span data-smiley=";)">😉</span>
+  <span data-smiley=":(">🙁</span>
+  <span data-smiley=":P">😛</span>
+  <span data-smiley="&lt;3">❤️</span>
+</div>
+
+<textarea class="gb-textarea" id="message" placeholder="Write your message here"></textarea>
 
               <button class="gb-btn" type="submit">Submit</button>
             </form>
@@ -241,6 +283,85 @@
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
+
+/* === insert BBCode tags around selection === */
+function insertAround(tag){
+  const ta = document.getElementById('message');
+  const [start, end] = [ta.selectionStart, ta.selectionEnd];
+  const before = ta.value.slice(0, start);
+  const sel    = ta.value.slice(start, end) || 'text';
+  const after  = ta.value.slice(end);
+  const open = `[${tag}]`, close = `[/${tag}]`;
+  ta.value = before + open + sel + close + after;
+  ta.focus();
+  const pos = before.length + open.length + sel.length;
+  ta.selectionStart = ta.selectionEnd = pos;
+}
+
+/* toolbar buttons */
+document.querySelector('.ubb').addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const tag = btn.dataset.tag;
+  if(tag) insertAround(tag);
+});
+
+document.getElementById('btn-link').addEventListener('click', ()=>{
+  const url = prompt('Enter URL (include http/https):','https://');
+  if(!url) return;
+  const ta = document.getElementById('message');
+  const [s,e] = [ta.selectionStart, ta.selectionEnd];
+  const txt = ta.value.slice(s,e) || 'link';
+  const bb  = `[url=${url}]${txt}[/url]`;
+  ta.setRangeText(bb, s, e, 'end');
+  ta.focus();
+});
+
+/* smiley picker */
+const smileBtn = document.getElementById('btn-smileys');
+const smileBox = document.getElementById('smiley-panel');
+smileBtn.addEventListener('click', ()=> { smileBox.hidden = !smileBox.hidden; });
+smileBox.addEventListener('click', e=>{
+  const s = e.target.getAttribute('data-smiley');
+  if(!s) return;
+  const ta = document.getElementById('message');
+  const pos = ta.selectionEnd;
+  ta.setRangeText(` ${s} `, pos, pos, 'end');
+  ta.focus();
+});
+
+/* === safe BBCode → HTML for display ===
+   We escape first, then replace a small whitelist of tags. */
+function renderMessage(raw){
+  let s = String(raw || '');
+  s = escapeHtml(s);
+
+  // line breaks
+  s = s.replace(/\r?\n/g, '<br>');
+
+  // BBCode
+  s = s.replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>');
+  s = s.replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>');
+  s = s.replace(/\[u\](.*?)\[\/u\]/gis, '<span style="text-decoration:underline">$1</span>');
+  s = s.replace(/\[url=(https?:\/\/[^\s\]]+)\](.*?)\[\/url\]/gis,
+                '<a href="$1" target="_blank" rel="nofollow noopener">$2</a>');
+
+  // emoticons → emoji (keeps it asset-free)
+  const emotes = [
+    {re:/(^|[\s])\:\)(?=$|[\s])/g, rep:'$1🙂'},
+    {re:/(^|[\s])\:D(?=$|[\s])/g, rep:'$1😄'},
+    {re:/(^|[\s])\;\)(?=$|[\s])/g, rep:'$1😉'},
+    {re:/(^|[\s])\:\((?=$|[\s])/g, rep:'$1🙁'},
+    {re:/(^|[\s])\:P(?=$|[\s])/g, rep:'$1😛'},
+    {re:/&lt;3/g, rep:'❤️'},
+  ];
+  emotes.forEach(({re,rep})=> s = s.replace(re, rep));
+
+  return s;
+}
+
+
+    
     loadMessages();
   </script>
 
