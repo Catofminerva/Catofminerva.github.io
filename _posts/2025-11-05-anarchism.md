@@ -5,7 +5,7 @@ permalink: /anarchism
 ---  
   
 <h1>The State's Obsession with Legibility</h1>
- 
+
 ![](https://ribbonfarm.wpenginepowered.com/wp-content/uploads/2010/07/scottForestry.jpg "scottForestry")
 
 Last night I was watching Severance. The clean corridors, the numbered floors, the rituals that turn people into neat halves. It’s a show about control disguised as order, and it made me think about how often tidiness passes for care. I kept thinking about something I read in James C. Scott’s _Seeing Like a State_, and again in histories of Prussian “scientific forestry”. Inspectors walked into old-growth and saw confusion, they saw deadwood, fungi, shade, animals, uneven spacing, more species than an any book could hold. They replanted for clarity. Norway spruce in straight rows, same age, same distance, a forest that matched a table.
