@@ -5,6 +5,17 @@
   <title>Ali's Web Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Early embed switch so CSS applies before paint -->
+  <script>
+    (function(){
+      try{
+        var p = new URL(location.href).searchParams;
+        var embed = p.get('embed') === '1' || (window.top !== window.self);
+        if (embed) document.documentElement.classList.add('embed');
+      }catch(_){}
+    })();
+  </script>
+
   <style>
     /* ========== THEME FROM index.html ========== */
     :root{
@@ -219,7 +230,7 @@
     }
   
     /* ===== EMBED MODE (for iframe) ===== */
-    .embed html, .embed body { background: transparent; filter: none; }
+    html.embed, html.embed body { background: transparent; filter: none; }
     .embed .page { border: 0; outline: 0; background: transparent; box-shadow: none; width: auto; margin: 0; left: 0; }
     .embed #glitter-title,
     .embed .marquee-wrap,
@@ -247,11 +258,12 @@
         const p = new URL(location.href).searchParams;
         const embed = p.get('embed') === '1' || (window.top !== window.self);
         if (embed) {
-          document.documentElement.classList.add('embed');
-          // remove header + meta from the chat post entirely
-          const host = document.getElementById('chat-room');
-          host?.querySelector('h3')?.remove();
-          host?.querySelector('.meta')?.remove();
+          // after DOM is ready, prune header/meta inside the chat post
+          document.addEventListener('DOMContentLoaded', function(){
+            const host = document.getElementById('chat-room');
+            host?.querySelector('h3')?.remove();
+            host?.querySelector('.meta')?.remove();
+          });
         }
       }catch(_){ /* best-effort */ }
     })();
