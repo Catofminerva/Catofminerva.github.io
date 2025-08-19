@@ -195,6 +195,28 @@
     #ctx{ position:absolute; display:none; background:#000; border:1px solid #6af7ff; z-index:20; min-width:160px; }
     #ctx a{ display:block; padding:6px 10px; color:#a7ffff; text-decoration:none; }
     #ctx a:hover{ background:#140043; }
+
+    /* Message editor + placeholder */
+    .edit{
+      flex: 1;
+      min-height: 42px;
+      max-height: 140px;
+      overflow-y: auto;
+      border: 1px solid #6af7ff;
+      background: #000;
+      color: #a7ffff;
+      padding: 6px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .edit.is-empty::before{
+      content: attr(data-ph);
+      color:#6af7ff;
+      opacity:0.6;
+      pointer-events:none;
+    }
   </style>
 </head>
 <body>
@@ -520,6 +542,11 @@
 
     // Editor setup
     const editor = document.getElementById("msgEdit");
+    function updatePlaceholder(){ editor.classList.toggle('is-empty', editor.textContent.trim().length === 0); }
+    updatePlaceholder();
+    editor.addEventListener('input', updatePlaceholder);
+    editor.addEventListener('blur', updatePlaceholder);
+    editor.addEventListener('focus', updatePlaceholder);
     let defaultColor = ""; let defaultFont = ""; let defaultSize = "";
     document.getElementById("bBtn").onclick = () => document.execCommand("bold");
     document.getElementById("iBtn").onclick = () => document.execCommand("italic");
@@ -547,7 +574,7 @@
         const key = action.toLowerCase();
         const kaomoji = EMOTE_MAP[key];
         send({ type:"emote", username:nick, text: kaomoji || action, kaomoji: !!kaomoji });
-        editor.innerHTML = "";
+        editor.innerHTML = ""; updatePlaceholder();
         if (defaultColor) editor.style.color = defaultColor;
         if (defaultFont)  editor.style.fontFamily = defaultFont;
         if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
@@ -558,7 +585,7 @@
       if (defaultSize)  bb = `[size=${parseInt(defaultSize,10)}]${bb}[/size]`;
       if (defaultColor) bb = `[color=${defaultColor}]${bb}[/color]`;
       send({ type:"chat", username:nick, text: bb });
-      editor.innerHTML = "";
+      editor.innerHTML = ""; updatePlaceholder();
       if (defaultColor) editor.style.color = defaultColor;
       if (defaultFont)  editor.style.fontFamily = defaultFont;
       if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
