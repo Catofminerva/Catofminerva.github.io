@@ -22,7 +22,6 @@ Ali Al Maadeed is a reader-supported publication. To receive new posts and suppo
 Pragmatism
 ----------
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/b8fa02f3-bc02-4c84-9e2b-8f21f2826fcb_471x581.jpeg)
 
@@ -42,13 +41,8 @@ Consider the statement, "The Earth revolves around the Sun." A correspondence th
 William James
 -------------
 
-[
 
 ![](https://substack-post-media.s3.amazonaws.com/public/images/e8a3f622-a7f5-4ec1-a3f8-42a7760f1898_500x690.jpeg)
-
-
-
-](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe8a3f622-a7f5-4ec1-a3f8-42a7760f1898_500x690.jpeg)
 
 As mentioned, in rejecting the correspondence theory, some pragmatists may also affirm a positive semantic thesis of the concept ‘truth’ as being a ‘useful statement’ in which usefulness is measured as the coherence of a statement with a web of other prior statements that achieved justification by a group of language users (or by an individual language user). Pragmatists argue that correspondence theorists can't tell us whether a given statement is useful because it stands in a relationship of correspondence or whether the statement is useful independent of this relationship, just in the same way theists can’t tell us whether [the good is loved by God because it is good or it is good because it is loved by God](https://en.wikipedia.org/wiki/Euthyphro_dilemma).
 
