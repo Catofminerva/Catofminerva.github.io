@@ -278,7 +278,33 @@
   body::before{ background-image: url({{ '/stars-still.png' | relative_url }}); }
 }
 
-    
+    /* 1) Never let long links/words force a mega-wide layout */
+.post p,
+.post li,
+.post blockquote {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+.post a,
+.post code,
+.post pre {
+  word-break: break-all;     /* URLs and long tokens */
+  overflow-wrap: anywhere;
+}
+
+/* 2) Treat touch devices as “mobile” regardless of zoom level */
+@media (max-width: 900px), (hover: none) and (pointer: coarse){
+  .layout,
+  .layout tr,
+  .layout td { display: block; width: 100%; }  /* always stacked on phones */
+}
+
+/* 3) Make the table layout more resilient to wide content */
+.layout { table-layout: fixed; width: 100%; }
+.sidebar { width: 210px; }         /* fixed first column width hint */
+.content { width: auto; min-width: 0; }  /* allow wrapping inside */
+
   </style>
 </head>
 <body>
