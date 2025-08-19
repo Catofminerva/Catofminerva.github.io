@@ -26,12 +26,11 @@ The Illegible Bedouins
 ----------------------
 
 ![A 1910 photo by Lehnert & Landrock showing a camel caravan migration in the desert](caravan.jpeg)
+*A 1910 photo by Lehnert & Landrock showing a camel caravan migration in the desert*
 
 Arab nomadic pastoralists, scattered from North Africa to the Arabian Peninsula, have long embodied what James Scott might call the _“illegible”_ par excellence: their social order, forged over millennia in spaces of hyper-aridity, rejected the fixities of territorial states. Organised into autonomous tribal units bound by a collective ethos of desert adaptation, Bedouin societies thrived on mobility, reciprocity, and finely tuned ecological knowledge. Their territories sprawled defiantly across modern frontiers; their seasonal migrations ignored the cartographic fictions of nation-states; their loyalties answered to tribal sheikhs, not tax collectors or land registries. For centuries they have evaded state administrations under various Caliphates and Ottoman empires, in a sense, having in Scott’s words _“stayed out of the archives.”_ If you find them in the archives, this means something terribly wrong has taken place.
 
 Postcolonial modernity, however, would declare war on this opacity. Emerging from the wreckage of colonial rule, mid-20th-century Middle Eastern states, obsessed with territorial consolidation and nationalist homogeneity, saw in the Bedouin active threats. Their cross-border movements muddied the fiction of sovereign control; their disregard for cadastral laws mocked the state’s claim to monopolise space; their tribal allegiances fractured the myth of a unified citizenry. As Cole (2003) notes, sedentarisation became the reflexive ‘solution’ to this perceived crisis: a High Modernist calculation to erase nomadic legacies and imprint state authority onto the desert. Beneath the veneer of humanitarian rhetoric of offering education, healthcare, and the ‘gift’ of permanent settlements lay a self-serving calculus. Land-use laws criminalised traditional migration routes; agricultural schemes replaced camel herds with cash crops; urban planning manuals recast pastoralists as taxpayers, conscripts, and legible subjects.
-
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/_l2UST9acL1u/images/1296.jpeg)
 
 Yet these efforts of the early 20th century largely faltered. Sedentarisation programmes, whether framed as civilising missions or brute territorial grabs, underestimated the tenacity of Bedouin _metis_—the embodied knowledge of desert ecology, herd management, and social reciprocity honed over centuries. State-built settlements invariably collapsed under the weight of their own artifice, and pastoralists slipped back into the deserts. It was only with the advent of oil commodity capitalism that nomadic life was finally destroyed, in which industrialised agriculture devoured pasturelands, mechanised irrigation reengineered arid ecologies, and urban labour markets pulled Bedouins into wage economies. Essentially, it achieved what early state bureaucracies could not. But as Galaty and Salzman (1981) argue, capitalist modernity did not merely sedentarise the Bedouin; it dissolved the material and epistemic foundations of their world and replaced the desert’s fluid logic with the extractive grid of global markets.
 
@@ -44,9 +43,8 @@ In his influential 1928 publication _Modern History of Najd and Its Appendices_,
 
 In doing so, ownership of herds and the autonomy of pastoralists had been severely curtailed; their freedom of movement and control over their herds, one being the product of the other, were steadily eroded in favor of the new state’s unification goals. Ibn Saud tackled this by instituting a massive sedentarisation program that combined civilisational and religious ambitions, effectively seeking to transform the Bedouins’ traditional, mobile pastoral existence into settled agricultural and urban lives. This was encapsulated in the push to move them, metaphorically and literally, _“from tents of hair to homes built of mud and stone,”_ and to tether them to private property so, in Ibn Saud’s words, they could be “chained with the chains of ownership so we can benefit them, and if they sin, we can discipline them.” By binding their survival to the state—through dependency on the land, housing subsidies, the forced sale of camels, and other coercive measures—their longstanding self-reliance, rooted primarily in camel herding, was systematically dismantled. As a result, when the state found itself with the largest nomadic community in the world (by far the most numerous demographic within its borders) these newly settled populations struggled with the processes of modernity and remained largely unproductive. Bedouins generally held a culturally instituted prejudice against all kinds of agriculture, and this is found in various Bedouin poems.
 
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/3_OsEYzLFze2/images/386.webp)
-
-_From the 1959 Danish anthropological expedition to Qatar, in Ferdinand, Klaus. Bedouins of Qatar. Edited by Ida Nicolaisen, Thames & Hudson, 1993._
+![Danish Expedition](bedu.jpeg)
+*From the 1959 Danish anthropological expedition to Qatar, in Ferdinand, Klaus. Bedouins of Qatar. Edited by Ida Nicolaisen, Thames & Hudson, 1993.*
 
 Legally, the reforms extended toward abolishing tribal _dirahs_ (collectively owned tribal land) and eventually, long after the dismantlement of the Ikhwan, culminated in the 1968 _Public Land Distribution Ordinance_, that is, giving the ruler’s or Imam’s right to allocate land as a form of patronage and reward for loyalty. The transition was also manifested in the shift from collective to private land ownership, with the tribe effectively losing its _dirah_ and becoming client to the central authority, paying religious taxes to it.
 
@@ -66,25 +64,7 @@ Nonetheless, the contradictions between the Ikhwan’s religious fervor and its 
 
 **anyway, this is why i'm an anarchist.**
 
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/ubdcC8YU_rYe/images/639.webp)
 
-From the 1959 Danish anthropological expedition to Qatar, in Ferdinand, Klaus. <em>Bedouins of Qatar</em>. Edited by Ida Nicolaisen, Thames & Hudson, 1993.
-
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/wJhCxSNJYDwI/images/640.webp)
-
-_From the 1959 Danish anthropological expedition to Qatar._
-
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/opzD5fsEoWoJ/images/640.webp)
-
-_ibid._
-
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/92NmUAiQITTG/images/484.webp)
-
-_ibid_
-
-![](https://ckbox.cloud/ec92b32c2b7b54a7ff09/assets/xsEU4wI9-wQY/images/614.webp)
-
-A Bedouin woman from the 1959 Danish expedition to Qatar throwing gang signs at the anthropologists telling them to eff off (lol idk if this is true).
 
 References
 ----------
@@ -97,3 +77,4 @@ References
 6.  Hacking, Ian. _The Social Construction of What?_ Harvard University Press, 1999.
 7.  Montigny, Anie. "Bedouins from the Eastern Arabia to the Gulf Ports." In _Nomad Lives_, edited by Aline Averbouh, Nejma Goutas, and Sophie Méry, 133–151. Publications scientifiques du Muséum, 2021. [Link](https://books.openedition.org/mnhn/10500?lang=en)
 8.  Mehanni, Benjamin. "Walking the Walk: An Examination of Āl Murrah Bedouin's Motives for Continued Nomadism." Honors Thesis, University of South Florida, 2009. [Link](https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1003&context=honors_gast)
+9.  From the 1959 Danish anthropological expedition to Qatar, in Ferdinand, Klaus. <em>Bedouins of Qatar</em>. Edited by Ida Nicolaisen, Thames & Hudson, 1993.
