@@ -141,6 +141,19 @@
       box-shadow: 0 0 18px var(--neon-purple);
       image-rendering: pixelated;
     }
+    
+    .meme {
+  display: block;
+  width: 100%;
+  max-height: 360px;       /* adjust if you want it taller/shorter */
+  object-fit: contain;     /* keep the full GIF visible */
+  border: 6px ridge var(--neon-purple);
+  box-shadow: 0 0 18px var(--neon-purple);
+  image-rendering: pixelated;
+  margin-top: 12px;
+}
+    
+    
     .caption {
       text-align:center;
       font-size: 12px;
@@ -149,7 +162,10 @@
     }
 
     .footer { padding: 8px; text-align: center; color: #fff; }
-  
+
+
+
+    
   /* === MOBILE JITTER FIX: isolate stars + remove root filter === */
 @media (max-width: 900px){
   /* stop repainting the whole page every GIF frame */
@@ -232,7 +248,11 @@
             <img src="me.jpeg" alt="Ali" class="hero">
             <div class="caption">me when i was a kid cause i dont want google to index my face, and thats my first dog bobby (yh super weird random name lol)</div>
           </div>
-
+  
+          <!-- new GIF + caption -->
+  <img src="meme.gif" alt="what i look like now" class="meme" loading="lazy">
+  <div class="caption">what i look like now - or close enough</div>
+</div>
           <!-- About me text (authentic spacing) -->
           <div class="post">
             <h3>about me <span class="blink">!</span></h3>
