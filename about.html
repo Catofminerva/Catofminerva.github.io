@@ -52,6 +52,20 @@
       letter-spacing: 0.5px;
     }
 
+  /* GIF next to the title */
+#glitter-title .title-gif{
+  height: clamp(64px, 8vw, 120px);
+  width: auto;
+  vertical-align: middle;
+  margin-left: 12px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px var(--neon-blue)) drop-shadow(0 0 12px var(--neon-green));
+}
+
+@media (max-width: 520px){
+  #glitter-title .title-gif{ height: clamp(44px, 12vw, 72px); }
+}
+
     .marquee-wrap {
       margin: 10px 20px;
       border: 6px groove var(--neon-blue);
@@ -202,7 +216,10 @@
 </head>
 <body>
   <div class="page">
-    <h1 id="glitter-title">About Ali</h1>
+    <h1 id="glitter-title">
+  About Ali
+  <img src="aboutme.gif" class="title-gif" alt="" role="presentation">
+</h1>
 
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
