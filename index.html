@@ -41,6 +41,7 @@
       outline: 4px solid #00131a;
       background: var(--panel-bg);
       box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
+        z-index: 1; /* keep content above the nebula canvas */
     }
 
     #glitter-title {
@@ -501,6 +502,14 @@ html[data-crt="on"]::before {
   </style>
 </head>
 <body>
+  <canvas id="neoNebula" aria-hidden="true"></canvas>
+
+<div id="neoBar" role="toolbar" aria-label="Neo controls">
+  <button id="neoAltBtn" type="button" title="Toggle alt skin">ALT SKIN</button>
+  <button id="neoCRTBtn" type="button" title="Toggle scanlines">CRT</button>
+  <button id="neoMotionBtn" type="button" title="Toggle motion">FULL MOTION</button>
+</div>
+  
   <div class="page">
     <h1 id="glitter-title">Ali's World</h1>
 
@@ -899,7 +908,147 @@ setInterval(() => {
 })();
 
 
-  
+
+/* === NEO LAYER: canvas, CRT, motion toggle — zero deps === */
+(() => {
+  const root = document.documentElement;
+
+  // Grab existing elements (from step 1). If missing, create them.
+  let cv = document.getElementById('neoNebula');
+  if (!cv) {
+    cv = document.createElement('canvas');
+    cv.id = 'neoNebula';
+    document.body.prepend(cv);
+  }
+  let bar = document.getElementById('neoBar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'neoBar';
+    bar.innerHTML = `
+      <button id="neoAltBtn" type="button">ALT SKIN</button>
+      <button id="neoCRTBtn" type="button">CRT</button>
+      <button id="neoMotionBtn" type="button">FULL MOTION</button>
+    `;
+    document.body.appendChild(bar);
+  }
+
+  const altBtn = document.getElementById('neoAltBtn');
+  const crtBtn = document.getElementById('neoCRTBtn');
+  const motBtn = document.getElementById('neoMotionBtn');
+
+  // Respect OS preference but allow override
+  let lowMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Make sure the canvas actually draws behind your content
+  const ctx = cv.getContext('2d');
+  const DPR = Math.max(1, devicePixelRatio || 1);
+  function fit() {
+    cv.width = Math.floor(innerWidth * DPR);
+    cv.height = Math.floor(innerHeight * DPR);
+    cv.style.width = innerWidth + 'px';
+    cv.style.height = innerHeight + 'px';
+  }
+  fit(); addEventListener('resize', fit);
+
+  // Procedural nebula-bubbles
+  const MAX = 26;
+  const blobs = [];
+  const R = (a,b)=> a + Math.random()*(b-a);
+  function make() {
+    return {
+      x: R(0, cv.width), y: R(cv.height*0.9, cv.height*1.3),
+      r: R(28*DPR, 84*DPR),
+      vy: R(-0.55*DPR, -0.18*DPR),
+      hue: R(180, 320),
+      sway: R(0.25*DPR, 0.9*DPR),
+      t: R(0, Math.PI*2)
+    };
+  }
+  for (let i=0;i<MAX;i++) blobs.push(make());
+
+  function tick() {
+    // If alt skin is off, keep canvas invisible and idle
+    if (root.dataset.skin !== 'neo') {
+      ctx.clearRect(0,0,cv.width,cv.height);
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    // Draw
+    ctx.clearRect(0,0,cv.width,cv.height);
+
+    if (lowMotion) {
+      // Static gradient when motion is reduced
+      const g = ctx.createLinearGradient(0,0,0,cv.height);
+      g.addColorStop(0,'rgba(120,200,255,.12)');
+      g.addColorStop(1,'rgba(200,120,255,.10)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,cv.width,cv.height);
+    } else {
+      for (const b of blobs) {
+        b.y += b.vy;
+        b.x += Math.sin(b.t += 0.012) * b.sway * 0.25;
+        if (b.y + b.r < -40) Object.assign(b, make(), { y: cv.height + b.r });
+
+        const g = ctx.createRadialGradient(
+          b.x - b.r*0.35, b.y - b.r*0.35, b.r*0.05,
+          b.x, b.y, b.r
+        );
+        g.addColorStop(0, `hsla(${b.hue},95%,88%,.35)`);
+        g.addColorStop(.55, `hsla(${b.hue},85%,60%,.14)`);
+        g.addColorStop(1, 'transparent');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
+
+        // highlight
+        ctx.fillStyle = 'rgba(255,255,255,.16)';
+        ctx.beginPath();
+        ctx.ellipse(b.x - b.r*0.35, b.y - b.r*0.45, b.r*0.22, b.r*0.14, 0, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Cursor sparkles (only when alt skin is on and motion allowed)
+  let last = 0;
+  addEventListener('pointermove', e => {
+    if (root.dataset.skin !== 'neo' || lowMotion) return;
+    const now = performance.now();
+    if (now - last < 16) return; // throttle
+    last = now;
+    const d = document.createElement('div');
+    d.className = 'neo-sparkle';
+    d.style.left = e.clientX + 'px';
+    d.style.top  = e.clientY + 'px';
+    document.body.appendChild(d);
+    requestAnimationFrame(() => {
+      d.style.transform = 'translate(-50%,-50%) scale(0.2)';
+      d.style.opacity = '0';
+    });
+    setTimeout(() => d.remove(), 700);
+  }, {passive:true});
+
+  // Buttons
+  altBtn?.addEventListener('click', () => {
+    const on = root.dataset.skin === 'neo';
+    root.dataset.skin = on ? '' : 'neo';
+    // Make the canvas visible via CSS when on
+  });
+  crtBtn?.addEventListener('click', () => {
+    root.dataset.crt = root.dataset.crt === 'on' ? '' : 'on';
+  });
+  motBtn?.addEventListener('click', () => {
+    lowMotion = !lowMotion;
+    motBtn.textContent = lowMotion ? 'LOW MOTION' : 'FULL MOTION';
+  });
+
+  // Start with ALT SKIN on so you can see it immediately
+  root.dataset.skin = 'neo';
+})();
+
+ 
 </script>
 
 
