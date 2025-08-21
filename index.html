@@ -538,17 +538,78 @@ html[data-skin="neo"] .nav a:hover {
 }
 
 
-#statuscafe {
-    padding: .5em;
-    background-color: black;
-    border: 1px solid midnightblue;
+/* === Status Cafe: speech bubble widget === */
+.status-say {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin: 10px 8px 14px;
+  padding: 8px;
+  border: 3px inset #6af7ff;
+  background: rgba(0,0,0,0.35);
 }
-#statuscafe-username {
-    margin-bottom: .5em;
+
+.status-avatar {
+  width: 72px; height: 72px;
+  border: 3px outset #6af7ff;
+  background: #0e0e33;
+  box-shadow: 2px 2px 0 #000;
+  overflow: hidden;
 }
-#statuscafe-content {
-    margin: 0 1em 0.5em 1em;
+.status-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
 }
+
+.status-bubble {
+  position: relative;
+  padding: 8px 10px;
+  border: 4px groove var(--neon-purple);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,0.06), transparent 40%),
+    rgba(20,0,30,0.70);
+  color: var(--ink);
+  box-shadow: 0 0 10px rgba(143,0,255,0.35) inset;
+}
+.status-bubble::after {
+  /* speech-tail */
+  content: "";
+  position: absolute;
+  left: -12px; top: 18px;
+  width: 0; height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 12px solid rgba(20,0,30,0.70);
+  filter: drop-shadow(0 0 2px rgba(143,0,255,0.6));
+}
+
+.status-head {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--neon-yellow);
+}
+.status-head a {
+  color: var(--neon-blue); text-decoration: none;
+  text-shadow: 0 0 4px var(--neon-blue);
+}
+.status-text {
+  font-size: 14px; line-height: 1.35;
+  white-space: pre-wrap;            /* keep line breaks from the feed */
+}
+
+/* tiny “pop” when a new status arrives */
+.status-bubble.pop { animation: say-pop 260ms ease-out; }
+@keyframes say-pop { 0%{ transform: scale(0.98); box-shadow: 0 0 0 rgba(143,0,255,0) inset; }
+  100%{ transform: scale(1); box-shadow: 0 0 10px rgba(143,0,255,0.35) inset; } }
+
+/* Optional: match your alt skin a bit louder */
+html[data-skin="neo"] .status-bubble {
+  box-shadow: 0 0 18px rgba(0,238,255,.35) inset, 0 0 2px #000 inset;
+}
+
     
   </style>
 </head>
@@ -619,7 +680,21 @@ html[data-skin="neo"] .nav a:hover {
   <button id="resetStickers"   title="Put them back how they were">Reset</button>
 </div>
 
-<div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div><script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
+<!-- Status Cafe speaking widget -->
+<div class="status-say">
+  <a class="status-avatar" href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">
+    <img src="meme.gif" alt="avatar" loading="lazy"
+         onerror="this.src='sleepycat.gif'">
+  </a>
+
+  <div class="status-bubble" id="statuscafe">
+    <div class="status-head">
+      <span id="statuscafe-username"></span>
+      <a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">open</a>
+    </div>
+    <div id="statuscafe-content" class="status-text"></div>
+  </div>
+</div>
           
         </td>
 
@@ -1015,7 +1090,23 @@ setInterval(() => {
 
 
 
-
+/* Make the username a link and “pop” the bubble when the feed updates */
+window.addEventListener('load', () => {
+  const u = document.getElementById('statuscafe-username');
+  if (u && u.textContent.trim()) {
+    const name = u.textContent.trim();
+    u.innerHTML = `<a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">@${name}</a>`;
+  }
+  const bubble = document.querySelector('.status-bubble');
+  const content = document.getElementById('statuscafe-content');
+  if (bubble && content) {
+    const obs = new MutationObserver(() => {
+      bubble.classList.add('pop');
+      setTimeout(() => bubble.classList.remove('pop'), 280);
+    });
+    obs.observe(content, { childList: true, characterData: true, subtree: true });
+  }
+});
  
 </script>
 
