@@ -469,17 +469,21 @@ html[data-skin="neo"] .post::after {
   pointer-events: none;
 }
 html[data-skin="neo"] .post:hover::after { opacity: .25; }
-
+    
 /* CRT scanlines toggle on the whole page */
-html[data-crt="on"]::before {
+/* CRT overlay that works even with body filters */
+body[data-crt="on"]::before {
   content: "";
-  position: fixed; inset: 0; pointer-events: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483647;
   background:
-    linear-gradient(transparent 96%, rgba(0,0,0,.4)),
+    linear-gradient(transparent 96%, rgba(0,0,0,.35)),
     repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,0) 2px 4px);
-  opacity: .65;
-  z-index: 10001;
+  mix-blend-mode: multiply;
 }
+
 
 /* Cursor sparkles */
 .neo-sparkle {
@@ -497,6 +501,40 @@ html[data-crt="on"]::before {
 @media (prefers-reduced-motion: reduce) {
   #neoNebula { display: none; }
   .neo-sparkle { display: none; }
+}
+
+
+    /* Neon grid and soft glow behind everything when alt skin is on */
+html[data-skin="neo"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5000;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(0,255,221,.08), transparent 60%),
+    radial-gradient(1200px 700px at 120% 120%, rgba(255,0,200,.06), transparent 60%),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  opacity: .55;
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift {
+  to { background-position: 0 0, 0 0, 1000px 0, 0 1000px; }
+}
+
+/* Page gets a subtle 3D tilt in alt skin */
+html[data-skin="neo"] .page {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Louder nav hover in alt skin */
+html[data-skin="neo"] .nav a:hover {
+  box-shadow: 0 0 18px rgba(0,238,255,.6), 0 0 36px rgba(143,0,255,.4);
+  text-shadow: 0 0 6px var(--neon-blue), 0 0 14px var(--neon-purple);
 }
 
   </style>
@@ -799,36 +837,36 @@ setInterval(() => {
 
 
 /* === NEO FINAL — single source of truth for alt skin, CRT, motion, sparkles === */
+
 (() => {
   const root  = document.documentElement;
-  const STORE = 'neo_prefs_v1';
+  const STORE = 'neo_prefs_v2';
 
-  // Prefs
+  // Load prefs or seed them
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'{}'); }catch(_){ return {}; } }
   function save(s){ localStorage.setItem(STORE, JSON.stringify(s)); }
   let state = load();
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (state.motion == null) state.motion = !prefersReduced; // true = animate
-  if (state.skin   == null) state.skin   = false;           // alt skin default OFF
+  if (state.motion == null) state.motion = !prefersReduced; // animate by default unless OS says reduce
+  if (state.skin   == null) state.skin   = false;           // alt skin off by default
   if (state.crt    == null) state.crt    = false;
 
-  // Ensure required nodes exist (or reuse if you added them manually)
+  // Ensure helpers exist
   let canvas = document.getElementById('neoNebula');
   if (!canvas) { canvas = document.createElement('canvas'); canvas.id = 'neoNebula'; document.body.prepend(canvas); }
   let bar = document.getElementById('neoBar');
   if (!bar) {
     bar = document.createElement('div'); bar.id = 'neoBar';
-    bar.innerHTML = `
-      <button id="neoAltBtn"    type="button">ALT SKIN</button>
-      <button id="neoCRTBtn"    type="button">CRT</button>
-      <button id="neoMotionBtn" type="button">MOTION</button>`;
+    bar.innerHTML = `<button id="neoAltBtn" type="button">ALT SKIN</button>
+                     <button id="neoCRTBtn" type="button">CRT</button>
+                     <button id="neoMotionBtn" type="button">MOTION</button>`;
     document.body.appendChild(bar);
   }
   const altBtn = document.getElementById('neoAltBtn');
   const crtBtn = document.getElementById('neoCRTBtn');
   const motBtn = document.getElementById('neoMotionBtn');
 
-  // Canvas
+  // Canvas starfield + aurora (cleaner than bubbles)
   const ctx = canvas.getContext('2d');
   let DPR = Math.max(1, window.devicePixelRatio || 1);
   function fit(){
@@ -840,7 +878,6 @@ setInterval(() => {
   }
   fit(); addEventListener('resize', fit);
 
-  // Parallax starfield + gentle aurora
   const layers = [];
   function initStars(){
     layers.length = 0;
@@ -895,7 +932,7 @@ setInterval(() => {
   }
   requestAnimationFrame(render);
 
-  // Sparkles that persist after scroll
+  // Sparkles that keep working after scroll (outside iframes)
   let sparkleRoot = document.getElementById('neoSparkles');
   if (!sparkleRoot){
     sparkleRoot = document.createElement('div');
@@ -903,33 +940,52 @@ setInterval(() => {
     sparkleRoot.style.position = 'fixed';
     sparkleRoot.style.inset = '0';
     sparkleRoot.style.pointerEvents = 'none';
-    sparkleRoot.style.zIndex = '10000';
+    sparkleRoot.style.zIndex = '100000';
     document.body.appendChild(sparkleRoot);
   }
-  let last = 0;
+  let last = 0, lastX = innerWidth/2, lastY = innerHeight/2;
   function sparkle(ev){
     if (!state.skin || !state.motion) return;
+    const x = ('clientX' in ev) ? ev.clientX : lastX;
+    const y = ('clientY' in ev) ? ev.clientY : lastY;
+    lastX = x; lastY = y;
+
     const now = performance.now();
     if (now - last < 16) return; last = now;
+
     const d = document.createElement('div');
     d.className = 'neo-sparkle';
-    d.style.left = ev.clientX + 'px';
-    d.style.top  = ev.clientY + 'px';
+    d.style.left = x + 'px';
+    d.style.top  = y + 'px';
     sparkleRoot.appendChild(d);
     requestAnimationFrame(()=>{ d.style.transform='translate(-50%,-50%) scale(0.2)'; d.style.opacity='0'; });
     setTimeout(()=> d.remove(), 700);
   }
-  document.addEventListener('pointermove', sparkle, {passive:true});
-  document.addEventListener('mousemove', sparkle, {passive:true});
-  document.addEventListener('scroll', () => { last = 0; }, {passive:true});
+  // Use window-level listeners so they continue after scroll; iframes cannot dispatch to parent
+  window.addEventListener('pointermove', sparkle, {passive:true});
+  window.addEventListener('mousemove', sparkle, {passive:true});
+  window.addEventListener('wheel', () => sparkle({clientX:lastX, clientY:lastY}), {passive:true});
+
+  // Subtle 3D tilt on the page in alt skin
+  const page = document.querySelector('.page');
+  function tilt(ev){
+    if (!page || !state.skin) { if(page) page.style.transform='none'; return; }
+    if (!state.motion) { page.style.transform='none'; return; }
+    const rx = ((ev.clientY / innerHeight) - 0.5) * -6; // degrees
+    const ry = ((ev.clientX / innerWidth)  - 0.5) *  6;
+    page.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+  }
+  window.addEventListener('pointermove', tilt, {passive:true});
 
   // Apply prefs to DOM and buttons
   function apply(){
     root.dataset.skin = state.skin ? 'neo' : '';
     root.dataset.crt  = state.crt  ? 'on'  : '';
-    altBtn && (altBtn.textContent = state.skin   ? 'ALT SKIN: ON' : 'ALT SKIN: OFF');
-    crtBtn && (crtBtn.textContent = state.crt    ? 'CRT: ON'      : 'CRT: OFF');
-    motBtn && (motBtn.textContent = state.motion ? 'MOTION: ON'   : 'MOTION: OFF');
+    document.body.dataset.crt = root.dataset.crt; // for the CRT CSS
+    if (altBtn) altBtn.textContent = state.skin   ? 'ALT SKIN: ON' : 'ALT SKIN: OFF';
+    if (crtBtn) crtBtn.textContent = state.crt    ? 'CRT: ON'      : 'CRT: OFF';
+    if (motBtn) motBtn.textContent = state.motion ? 'MOTION: ON'   : 'MOTION: OFF';
+    if (!state.skin && page) page.style.transform = 'none';
   }
   apply();
 
@@ -941,6 +997,7 @@ setInterval(() => {
     if (id === 'neoMotionBtn') { state.motion = !state.motion; apply(); save(state); }
   });
 })();
+
 
 
 
