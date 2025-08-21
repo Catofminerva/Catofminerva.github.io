@@ -538,7 +538,7 @@ html[data-skin="neo"] .nav a:hover {
 }
 
 
-/* === Status Cafe: speech bubble widget === */
+/* === Status Cafe: speaker + speech bubble === */
 .status-say {
   display: grid;
   grid-template-columns: 72px 1fr;
@@ -574,7 +574,7 @@ html[data-skin="neo"] .nav a:hover {
   box-shadow: 0 0 10px rgba(143,0,255,0.35) inset;
 }
 .status-bubble::after {
-  /* speech-tail */
+  /* tail pointing from bubble to avatar */
   content: "";
   position: absolute;
   left: -12px; top: 18px;
@@ -585,30 +585,31 @@ html[data-skin="neo"] .nav a:hover {
   filter: drop-shadow(0 0 2px rgba(143,0,255,0.6));
 }
 
-.status-head {
-  display: flex; align-items: baseline; gap: 8px;
-  margin-bottom: 6px;
+/* Style the official embed’s nodes */
+#statuscafe-username {
+  margin: 0 0 6px 0;
   font-size: 13px;
   color: var(--neon-yellow);
 }
-.status-head a {
-  color: var(--neon-blue); text-decoration: none;
+#statuscafe-username a {
+  color: var(--neon-blue);
+  text-decoration: none;
   text-shadow: 0 0 4px var(--neon-blue);
 }
-.status-text {
-  font-size: 14px; line-height: 1.35;
-  white-space: pre-wrap;            /* keep line breaks from the feed */
+#statuscafe-content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  white-space: pre-wrap; /* keep line breaks from feed */
 }
 
-/* tiny “pop” when a new status arrives */
+/* Subtle pop when new content arrives */
 .status-bubble.pop { animation: say-pop 260ms ease-out; }
-@keyframes say-pop { 0%{ transform: scale(0.98); box-shadow: 0 0 0 rgba(143,0,255,0) inset; }
-  100%{ transform: scale(1); box-shadow: 0 0 10px rgba(143,0,255,0.35) inset; } }
-
-/* Optional: match your alt skin a bit louder */
-html[data-skin="neo"] .status-bubble {
-  box-shadow: 0 0 18px rgba(0,238,255,.35) inset, 0 0 2px #000 inset;
+@keyframes say-pop {
+  0% { transform: scale(0.98); box-shadow: 0 0 0 rgba(143,0,255,0) inset; }
+  100%{ transform: scale(1);    box-shadow: 0 0 10px rgba(143,0,255,0.35) inset; }
 }
+
 
     
   </style>
@@ -683,18 +684,20 @@ html[data-skin="neo"] .status-bubble {
 <!-- Status Cafe speaking widget -->
 <div class="status-say">
   <a class="status-avatar" href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">
-    <img src="meme.gif" alt="avatar" loading="lazy"
-         onerror="this.src='sleepycat.gif'">
+    <img src="meme.gif" alt="speaker" loading="lazy" onerror="this.src='sleepycat.gif'">
   </a>
 
-  <div class="status-bubble" id="statuscafe">
-    <div class="status-head">
-      <span id="statuscafe-username"></span>
-      <a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">open</a>
+  <div class="status-bubble">
+    <!-- official embed, unchanged -->
+    <div id="statuscafe">
+      <div id="statuscafe-username"></div>
+      <div id="statuscafe-content">loading…</div>
     </div>
-    <div id="statuscafe-content" class="status-text"></div>
   </div>
 </div>
+
+<script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
+
           
         </td>
 
