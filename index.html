@@ -1110,6 +1110,22 @@ window.addEventListener('load', () => {
     obs.observe(content, { childList: true, characterData: true, subtree: true });
   }
 });
+
+  window.addEventListener('load', () => {
+  const u = document.getElementById('statuscafe-username');
+  if (u && u.textContent.trim() && !u.querySelector('a')) {
+    const name = u.textContent.trim();
+    u.innerHTML = `<a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">@${name}</a>`;
+  }
+  const bubble = document.querySelector('.status-bubble');
+  const content = document.getElementById('statuscafe-content');
+  if (bubble && content) {
+    new MutationObserver(() => {
+      bubble.classList.add('pop');
+      setTimeout(() => bubble.classList.remove('pop'), 280);
+    }).observe(content, { childList: true, characterData: true, subtree: true });
+  }
+});
  
 </script>
 
