@@ -538,14 +538,17 @@ html[data-skin="neo"] .nav a:hover {
 }
 
 
-
-    .status-cafe-box { padding: 8px 10px 14px; text-align: center; }
-.status-cafe-box img {
-  width: 180px; height: auto; image-rendering: pixelated;
-  border: 3px inset #6af7ff; background: #0e0e33; box-shadow: 2px 2px 0 #000;
+#statuscafe {
+    padding: .5em;
+    background-color: azure;
+    border: 1px solid midnightblue;
 }
-.status-cafe-box img:hover { transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
- 
+#statuscafe-username {
+    margin-bottom: .5em;
+}
+#statuscafe-content {
+    margin: 0 1em 0.5em 1em;
+}
   </style>
 </head>
 <body>
@@ -615,12 +618,7 @@ html[data-skin="neo"] .nav a:hover {
   <button id="resetStickers"   title="Put them back how they were">Reset</button>
 </div>
 
-<div class="status-cafe-box">
-  <a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">
-    <img src="https://status.cafe/users/catofminerva/badge.png"
-         alt="Status Cafe Profile" loading="lazy">
-  </a>
-</div>
+<div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div><script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
           
         </td>
 
