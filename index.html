@@ -611,6 +611,39 @@ html[data-skin="neo"] .nav a:hover {
 }
 
 
+    /* === Dancing Cat mascot === */
+#dancecat {
+  position: fixed;
+  right: 14px;
+  bottom: 12px;
+  width: min(28vmin, 260px);  /* large, but scales with viewport */
+  height: auto;
+  z-index: 12000;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,.65));
+  transition: transform .15s ease, opacity .2s ease;
+  animation: cat-bob 2.2s ease-in-out infinite;
+  cursor: grab;
+}
+#dancecat:active { cursor: grabbing; }
+#dancecat.snooze { opacity: .25; }
+
+@keyframes cat-bob {
+  0%,100% { transform: translateY(0) }
+  50%     { transform: translateY(-6px) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dancecat { animation: none; }
+}
+
+/* neon glow when your alt skin is on */
+html[data-skin="neo"] #dancecat {
+  filter:
+    drop-shadow(0 0 10px var(--neon-blue))
+    drop-shadow(0 0 22px rgba(143,0,255,.5));
+}
+
     
   </style>
 </head>
@@ -1126,11 +1159,65 @@ window.addEventListener('load', () => {
     }).observe(content, { childList: true, characterData: true, subtree: true });
   }
 });
- 
+
+
+
+  /* drag to move; double-click to snooze; position saved locally */
+(() => {
+  const cat = document.getElementById('dancecat');
+  if (!cat) return;
+
+  const KEY = 'dancecat_pos_v1';
+
+  // restore last position
+  try {
+    const pos = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (pos && typeof pos.x === 'number' && typeof pos.y === 'number') {
+      cat.style.left = pos.x + 'px';
+      cat.style.top  = pos.y + 'px';
+      cat.style.right = 'auto';
+      cat.style.bottom = 'auto';
+    }
+  } catch(_) {}
+
+  let dragging = false, offX = 0, offY = 0;
+
+  cat.addEventListener('pointerdown', e => {
+    dragging = true;
+    const r = cat.getBoundingClientRect();
+    offX = e.clientX - r.left;
+    offY = e.clientY - r.top;
+    cat.setPointerCapture?.(e.pointerId);
+  });
+
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const w = cat.getBoundingClientRect().width;
+    const h = cat.getBoundingClientRect().height;
+    const x = Math.max(0, Math.min(innerWidth  - w, e.clientX - offX));
+    const y = Math.max(0, Math.min(innerHeight - h, e.clientY - offY));
+    cat.style.left = x + 'px';
+    cat.style.top  = y + 'px';
+    cat.style.right = 'auto';
+    cat.style.bottom = 'auto';
+  }, {passive:true});
+
+  window.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging = false;
+    cat.releasePointerCapture?.(e.pointerId);
+    const r = cat.getBoundingClientRect();
+    localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top }));
+  });
+
+  // double-click to dim, double-click again to wake
+  cat.addEventListener('dblclick', () => cat.classList.toggle('snooze'));
+})();
 </script>
 
 
-  
+  <img id="dancecat" src="dancingcat.gif" alt="dancing cat" draggable="false">
+
 
 
 
