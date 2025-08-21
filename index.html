@@ -20,17 +20,22 @@
       --marquee-bg:  #001a4d;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-image: url('stars.gif');
-      background-repeat: repeat;
-      color: var(--ink);
-      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
-      image-rendering: pixelated;
-      cursor: crosshair;
-      filter: contrast(115%) saturate(125%);
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  background-image: url('stars.gif');
+  background-repeat: repeat;
+  color: var(--ink);
+  font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
+  image-rendering: pixelated;
+  cursor: crosshair;
+}
+
+/* put the color pop on the page box instead */
+.page {
+  filter: contrast(115%) saturate(125%);
+}
+
 
     .page {
       width: 760px;
@@ -1162,26 +1167,49 @@ window.addEventListener('load', () => {
 
 
 
-  /* drag to move; double-click to snooze; position saved locally */
+
 (() => {
   const cat = document.getElementById('dancecat');
   if (!cat) return;
 
   const KEY = 'dancecat_pos_v1';
 
-  // restore last position
-  try {
-    const pos = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (pos && typeof pos.x === 'number' && typeof pos.y === 'number') {
-      cat.style.left = pos.x + 'px';
-      cat.style.top  = pos.y + 'px';
-      cat.style.right = 'auto';
-      cat.style.bottom = 'auto';
+  // default: fixed to bottom-right
+  function resetToCorner() {
+    cat.style.right = '14px';
+    cat.style.bottom = '12px';
+    cat.style.left = 'auto';
+    cat.style.top = 'auto';
+    try { localStorage.removeItem(KEY); } catch(_) {}
+  }
+
+  // try to restore, but clamp to viewport; if absurd, reset
+  function restore() {
+    let pos = null;
+    try { pos = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(_){}
+    if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number') {
+      resetToCorner(); return;
     }
-  } catch(_) {}
+    const rect = cat.getBoundingClientRect();
+    const maxX = Math.max(0, innerWidth  - rect.width);
+    const maxY = Math.max(0, innerHeight - rect.height);
 
+    // clamp
+    const x = Math.min(Math.max(0, pos.x), maxX);
+    const y = Math.min(Math.max(0, pos.y), maxY);
+
+    // if clamping changed anything a lot (old doc-anchored coords), drop them
+    if (Math.abs(x - pos.x) > 100 || Math.abs(y - pos.y) > 100) {
+      resetToCorner(); return;
+    }
+    cat.style.left = x + 'px';
+    cat.style.top  = y + 'px';
+    cat.style.right = 'auto';
+    cat.style.bottom = 'auto';
+  }
+
+  // drag to move
   let dragging = false, offX = 0, offY = 0;
-
   cat.addEventListener('pointerdown', e => {
     dragging = true;
     const r = cat.getBoundingClientRect();
@@ -1189,11 +1217,10 @@ window.addEventListener('load', () => {
     offY = e.clientY - r.top;
     cat.setPointerCapture?.(e.pointerId);
   });
-
   window.addEventListener('pointermove', e => {
     if (!dragging) return;
-    const w = cat.getBoundingClientRect().width;
-    const h = cat.getBoundingClientRect().height;
+    const r = cat.getBoundingClientRect();
+    const w = r.width, h = r.height;
     const x = Math.max(0, Math.min(innerWidth  - w, e.clientX - offX));
     const y = Math.max(0, Math.min(innerHeight - h, e.clientY - offY));
     cat.style.left = x + 'px';
@@ -1201,18 +1228,25 @@ window.addEventListener('load', () => {
     cat.style.right = 'auto';
     cat.style.bottom = 'auto';
   }, {passive:true});
-
   window.addEventListener('pointerup', e => {
     if (!dragging) return;
     dragging = false;
     cat.releasePointerCapture?.(e.pointerId);
     const r = cat.getBoundingClientRect();
-    localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top }));
+    try { localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top })); } catch(_){}
   });
 
-  // double-click to dim, double-click again to wake
-  cat.addEventListener('dblclick', () => cat.classList.toggle('snooze'));
+  // handy reset: Shift + double-click
+  cat.addEventListener('dblclick', e => {
+    if (e.shiftKey) resetToCorner();
+    else cat.classList.toggle('snooze');
+  });
+
+  // first layout, then restore
+  window.requestAnimationFrame(restore);
 })();
+
+
 </script>
 
 
