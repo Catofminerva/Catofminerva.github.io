@@ -649,7 +649,40 @@ html[data-skin="neo"] #dancecat {
     drop-shadow(0 0 22px rgba(143,0,255,.5));
 }
 
-    
+
+    /* Shared mascot base */
+#dancecat, #spinguy {
+  position: fixed;
+  width: min(28vmin, 260px);
+  height: auto;
+  z-index: 12000;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,.65));
+  transition: transform .15s ease, opacity .2s ease;
+  cursor: grab;
+}
+#dancecat:active, #spinguy:active { cursor: grabbing; }
+#dancecat.snooze, #spinguy.snooze { opacity: .25; }
+
+/* Individual defaults */
+#dancecat { right: 14px; bottom: 12px; animation: cat-bob 2.2s ease-in-out infinite; }
+#spinguy  { left: 14px;  bottom: 12px; animation: spin 6s linear infinite; }
+
+@keyframes cat-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes spin    { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+
+@media (prefers-reduced-motion: reduce) {
+  #dancecat, #spinguy { animation: none; }
+}
+
+/* Extra glow in alt skin */
+html[data-skin="neo"] #dancecat,
+html[data-skin="neo"] #spinguy {
+  filter:
+    drop-shadow(0 0 10px var(--neon-blue))
+    drop-shadow(0 0 22px rgba(143,0,255,.5));
+}
+
   </style>
 </head>
 <body>
@@ -1247,10 +1280,97 @@ window.addEventListener('load', () => {
 })();
 
 
+  (() => {
+  // Viewport-anchored fixed elements need body without a filter.
+  // You already moved your filter onto .page, so we're good.
+
+  function wireMascot(id, corner) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const KEY = 'mascot_' + id + '_pos_v1';
+
+    function setCorner(c) {
+      el.style.top = el.style.left = el.style.right = el.style.bottom = 'auto';
+      if (c.includes('bottom')) el.style.bottom = '12px'; else el.style.top = '12px';
+      if (c.includes('right'))  el.style.right  = '14px'; else el.style.left = '14px';
+    }
+
+    function clampToViewport(x, y) {
+      const r = el.getBoundingClientRect();
+      const maxX = Math.max(0, innerWidth  - r.width);
+      const maxY = Math.max(0, innerHeight - r.height);
+      return { x: Math.min(Math.max(0, x), maxX), y: Math.min(Math.max(0, y), maxY) };
+    }
+
+    function reset() {
+      setCorner(corner);
+      try { localStorage.removeItem(KEY); } catch(_) {}
+    }
+
+    function restore() {
+      let pos = null;
+      try { pos = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(_) {}
+      if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number') { reset(); return; }
+      const clamped = clampToViewport(pos.x, pos.y);
+      if (Math.abs(clamped.x - pos.x) > 100 || Math.abs(clamped.y - pos.y) > 100) { reset(); return; }
+      el.style.left = clamped.x + 'px';
+      el.style.top  = clamped.y + 'px';
+      el.style.right = el.style.bottom = 'auto';
+    }
+
+    // Dragging
+    let dragging = false, offX = 0, offY = 0;
+    el.addEventListener('pointerdown', e => {
+      dragging = true;
+      const r = el.getBoundingClientRect();
+      offX = e.clientX - r.left;
+      offY = e.clientY - r.top;
+      el.setPointerCapture?.(e.pointerId);
+    });
+    window.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const r = el.getBoundingClientRect();
+      const pos = clampToViewport(e.clientX - offX, e.clientY - offY);
+      el.style.left = pos.x + 'px';
+      el.style.top  = pos.y + 'px';
+      el.style.right = el.style.bottom = 'auto';
+    }, { passive: true });
+    window.addEventListener('pointerup', e => {
+      if (!dragging) return;
+      dragging = false;
+      el.releasePointerCapture?.(e.pointerId);
+      const r = el.getBoundingClientRect();
+      try { localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top })); } catch(_) {}
+    });
+
+    // Double-click to snooze; Shift + double-click to reset to corner
+    el.addEventListener('dblclick', e => {
+      if (e.shiftKey) reset();
+      else el.classList.toggle('snooze');
+    });
+
+    // Keep inside viewport on resize
+    window.addEventListener('resize', () => {
+      const r = el.getBoundingClientRect();
+      const pos = clampToViewport(r.left, r.top);
+      el.style.left = pos.x + 'px';
+      el.style.top  = pos.y + 'px';
+    }, { passive: true });
+
+    // First layout, then restore
+    requestAnimationFrame(restore);
+  }
+
+  wireMascot('dancecat', 'bottom-right');
+  wireMascot('spinguy',  'bottom-left');
+})();
+
 </script>
 
 
   <img id="dancecat" src="dancingcat.gif" alt="dancing cat" draggable="false">
+<img id="spinguy" src="spin.gif" alt="spinning guy" draggable="false">
 
 
 
