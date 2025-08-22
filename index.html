@@ -20,6 +20,18 @@
       --marquee-bg:  #001a4d;
     }
 
+/* === Ithaca webfont === */
+@font-face{
+  font-family: "IthacaLVB";
+  src:
+    url("/fonts/Ithaca-LVB75.woff2") format("woff2"),
+    url("/fonts/Ithaca-LVB75.woff") format("woff"),
+    url("/fonts/Ithaca-LVB75.ttf") format("truetype"); /* optional fallback */
+  font-weight: 400;           /* change if the font is a bold cut */
+  font-style: normal;
+  font-display: swap;         /* no invisible text while it loads */
+}
+    
 html, body {
   margin: 0;
   padding: 0;
@@ -50,13 +62,12 @@ z-index: 1;
     }
 
     #glitter-title {
-      font-size: 60px;
-      text-align: center;
-      color: var(--neon-blue);
-      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
-      margin: 0;
-      padding: 18px 10px 0;
-      letter-spacing: 0.5px;
+  font-family: "IthacaLVB", "Arial Rounded MT Bold", "Helvetica Rounded",
+               "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
+  /* optional: tighten/scale if the new font feels big */
+  font-size: clamp(44px, 7vw, 86px);
+  line-height: 1.05;
+  letter-spacing: 0.5px;
     }
 
     .marquee-wrap {
