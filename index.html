@@ -758,8 +758,6 @@ html:not([data-space="on"]) #space3d { filter: saturate(1.2); }
 <body>
 
 <canvas id="space3d" aria-hidden="true"></canvas>
-<button id="spaceToggle" type="button">🪐 Space Mode</button>
-<div id="spaceHint">Click the canvas to capture the mouse. WASD to move, Space/Shift = up/down. Drop an image anywhere to spawn a billboard. Press Esc to exit.</div>
 
   <canvas id="neoNebula" aria-hidden="true"></canvas>
 <div id="neoBar" role="toolbar" aria-label="Neo controls">
@@ -1624,23 +1622,26 @@ window.addEventListener('load', () => {
     }
   });
 
-  /* ---------- button + pointer lock wiring ---------- */
-  function enterSpace(){
-    root.dataset.space = 'on';
-    hint.style.display = 'block';
-    // capture pointer only on user gesture
-    controls.lock();
-  }
-  function exitSpace(){
-    root.dataset.space = '';
-    hint.style.display = 'none';
-    controls.unlock();
-  }
-  btn.addEventListener('click', () => {
-    if (root.dataset.space === 'on') exitSpace();
-    else enterSpace();
-  });
-  controls.addEventListener('unlock', () => { root.dataset.space = ''; hint.style.display = 'none'; });
+/* ---------- always-on background; dbl-click to enter fly mode ---------- */
+function enterSpace(){
+  if (controls.isLocked) return;
+  root.dataset.space = 'on';          // bring canvas above page & accept input
+  controls.lock();                    // pointer-lock the canvas
+}
+function exitSpace(){
+  root.dataset.space = '';            // drop canvas back under the page
+  controls.unlock();
+}
+
+// double-click the canvas OR any empty background around .page to enter
+canvas.addEventListener('dblclick', enterSpace);
+document.addEventListener('dblclick', (e) => {
+  if (!e.target.closest('.page')) enterSpace();
+});
+
+// leave when pointer lock is released (Esc)
+controls.addEventListener('unlock', () => { root.dataset.space=''; });
+
 
   /* ---------- animation loop ---------- */
   let last = performance.now();
