@@ -1397,116 +1397,318 @@ window.addEventListener('load', () => {
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script>
 (() => {
-  const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const motion = !prefersReduce;
-
+  const motionOK = !matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('threebg');
   if (!canvas) return;
 
+  // Set up renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-  // Pixelate a bit for “retro” feel
   renderer.setPixelRatio(1);
   canvas.style.imageRendering = 'pixelated';
 
+  // Scene, camera, fog
   const scene = new THREE.Scene();
-  // Cool, chalky fog to unify colours
   const FOG = 0xcad4cf;
-  scene.fog = new THREE.Fog(FOG, 6, 38);
+  scene.fog = new THREE.Fog(FOG, 6, 42);
 
-  // Camera
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 200);
   camera.position.set(0, 2.2, 9);
 
-  function fit(){
-    const w = innerWidth, h = innerHeight;
-    renderer.setSize(Math.floor(w/1.2), Math.floor(h/1.2), false); // downscale internal res
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  fit(); addEventListener('resize', fit);
+  // Retro render target sizing (fixed "internal" height ~240px)
+  let retro = { w: 320, h: 240, scale: 1 };
+  let target = null;
 
-  // Lights: simple, old-school
+  function computeRetro() {
+    const targetH = 240;
+    const scale = Math.max(1, Math.floor(innerHeight / targetH));
+    const w = Math.max(1, Math.floor(innerWidth / scale));
+    const h = Math.max(1, Math.floor(innerHeight / scale));
+    retro = { w, h, scale };
+    if (target) target.dispose();
+    target = new THREE.WebGLRenderTarget(w, h, {
+      minFilter: THREE.NearestFilter,
+      magFilter: THREE.NearestFilter,
+      depthBuffer: true,
+      stencilBuffer: false
+    });
+  }
+
+  function fit() {
+    renderer.setSize(innerWidth, innerHeight, false);
+    canvas.style.width = innerWidth + 'px';
+    canvas.style.height = innerHeight + 'px';
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    computeRetro();
+    // update wobble uniform for all snapped materials
+    snappedMats.forEach(m => m.userData && m.userData.retroRes && m.userData.retroRes.value.set(retro.w, retro.h));
+    if (postMat) postMat.uniforms.res.value.set(retro.w, retro.h);
+  }
+  fit();
+  addEventListener('resize', fit);
+
+  // Lights
   const hemi = new THREE.HemisphereLight(0xeff7ff, 0x48504a, 0.6);
   scene.add(hemi);
   const dir = new THREE.DirectionalLight(0xffffff, 0.8);
   dir.position.set(3, 5, 2);
   scene.add(dir);
 
-  // A shared material palette (flat shading sells the “PS1” look)
-  const mintStone = new THREE.MeshLambertMaterial({ color: 0x9fb2aa, flatShading: true, dithering: true });
-  const darkStone = new THREE.MeshLambertMaterial({ color: 0x6f7c76, flatShading: true, dithering: true });
-  const ringMetal = new THREE.MeshLambertMaterial({ color: 0x7da3a0, flatShading: true, dithering: true });
+  // Materials with flat shading
+  function lambert(color) { return new THREE.MeshLambertMaterial({ color, flatShading: true, dithering: true }); }
+  const mintStone = lambert(0x9fb2aa);
+  const darkStone = lambert(0x6f7c76);
+  const ringMetal = lambert(0x7da3a0);
 
-  // Floor disc
+  // PS1 vertex-snap wobble (clip-space pixel snapping)
+  const snappedMats = [];
+  function addPS1Snap(mat) {
+    mat.onBeforeCompile = (shader) => {
+      shader.uniforms.retroRes = { value: new THREE.Vector2(retro.w, retro.h) };
+      mat.userData.retroRes = shader.uniforms.retroRes;
+      // Quantize gl_Position.xy in clip space based on retro resolution
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <project_vertex>',
+        `
+        // default transform
+        vec4 mvPosition = vec4( transformed, 1.0 );
+        #ifdef USE_INSTANCING
+          mvPosition = instanceMatrix * mvPosition;
+        #endif
+        mvPosition = modelViewMatrix * mvPosition;
+        vec4 proj = projectionMatrix * mvPosition;
+
+        // pixel size in clip coordinates depends on w (pre-divide)
+        vec2 px = (2.0 / retroRes) * proj.w;
+        proj.xy = floor(proj.xy / px) * px;
+
+        gl_Position = proj;
+        `
+      );
+    };
+    snappedMats.push(mat);
+    return mat;
+  }
+
+  // apply to our core mats
+  addPS1Snap(mintStone);
+  addPS1Snap(darkStone);
+  addPS1Snap(ringMetal);
+
+  // Geometry: floor disc, ring, columns
   const floor = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 0.4, 28), darkStone);
   floor.position.y = -0.2;
   scene.add(floor);
 
-  // Ring walkway
   const ring = new THREE.Mesh(new THREE.TorusGeometry(7.6, 0.22, 8, 64), ringMetal);
-  ring.rotation.x = -Math.PI/2;
+  ring.rotation.x = -Math.PI / 2;
   ring.position.y = 0.05;
   scene.add(ring);
 
-  // Columns around the ring
   const colGeo = new THREE.CylinderGeometry(0.42, 0.48, 4.6, 8);
-  for (let i=0;i<10;i++){
-    const a = i / 10 * Math.PI*2;
-    const c = new THREE.Mesh(colGeo, mintStone.clone());
-    c.position.set(Math.cos(a)*8.6, 2.3, Math.sin(a)*8.6);
-    c.rotation.y = a*0.5;
+  for (let i = 0; i < 10; i++) {
+    const a = i / 10 * Math.PI * 2;
+    const c = new THREE.Mesh(colGeo, addPS1Snap(lambert(0x9fb2aa)));
+    c.position.set(Math.cos(a) * 8.6, 2.3, Math.sin(a) * 8.6);
+    c.rotation.y = a * 0.5;
     scene.add(c);
   }
 
-  // Pedestal + “friend” (low-poly little guy)
+  // Pedestal + "friend"
   const pedestal = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.2), darkStone);
   pedestal.position.set(-3.2, 0.2, -1.2);
   scene.add(pedestal);
 
   const friend = new THREE.Mesh(new THREE.TetrahedronGeometry(1.0, 0), mintStone.clone());
+  addPS1Snap(friend.material);
   friend.position.set(-3.2, 1.2, -1.2);
   scene.add(friend);
 
-  // A leaning slab on the other side
+  // Leaning slab
   const slab = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.6, 0.2), mintStone);
   slab.position.set(2.8, 1.0, 0.8);
   slab.rotation.set(0.05, -0.2, -0.08);
   scene.add(slab);
 
-  // Mouse parallax (canvas has pointer-events:none, so just read global pointer)
+  // Extra ornaments: planet, shards, runner
+  const planet = new THREE.Mesh(new THREE.IcosahedronGeometry(6, 0), addPS1Snap(lambert(0x8aa39a)));
+  planet.position.set(0, -7.5, -28);
+  scene.add(planet);
+
+  // drifting shards
+  const shards = [];
+  for (let i = 0; i < 14; i++) {
+    const g = new THREE.TetrahedronGeometry(0.25 + Math.random() * 0.35, 0);
+    const m = addPS1Snap(lambert(0x98b8b0));
+    const mesh = new THREE.Mesh(g, m);
+    mesh.userData = {
+      r: 6.5 + Math.random() * 4.0,
+      a: Math.random() * Math.PI * 2,
+      y: 0.6 + Math.random() * 2.2,
+      s: 0.2 + Math.random() * 0.5
+    };
+    mesh.position.set(Math.cos(mesh.userData.a) * mesh.userData.r, mesh.userData.y, Math.sin(mesh.userData.a) * mesh.userData.r);
+    scene.add(mesh);
+    shards.push(mesh);
+  }
+
+  // little runner around the ring
+  const runner = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.24, 0.8), addPS1Snap(lambert(0xa7cfc9)));
+  runner.position.y = 0.22;
+  scene.add(runner);
+
+  // Postprocess: 15-bit color + 4×4 Bayer ordered dithering, nearest upscale
+  const quadGeo = new THREE.PlaneGeometry(2, 2);
+  const postScene = new THREE.Scene();
+  const postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const postMat = new THREE.ShaderMaterial({
+    uniforms: {
+      tColor: { value: null },
+      res:    { value: new THREE.Vector2(retro.w, retro.h) },
+      enable: { value: true },
+      time:   { value: 0 }
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      precision highp float;
+      uniform sampler2D tColor;
+      uniform vec2  res;
+      uniform bool  enable;
+      uniform float time;
+      varying vec2 vUv;
+
+      // 4x4 Bayer value in [0..1)
+      float bayer4(vec2 p){
+        // compute index without lookups
+        vec2 f1 = mod(p, 2.0);
+        float i1 = f1.x + f1.y*2.0;
+        vec2 f2 = mod(floor(p/2.0), 2.0);
+        float i2 = f2.x + f2.y*2.0;
+        return (i1 + 4.0*i2) / 16.0;
+      }
+
+      void main(){
+        // sample at pixel centers for crisp upscale
+        vec2 uv = (floor(vUv * res) + 0.5) / res;
+        vec4 c = texture2D(tColor, uv);
+
+        if (!enable){
+          gl_FragColor = c;
+          return;
+        }
+
+        // simulate 15-bit color (5 bits per channel) with ordered dithering
+        vec2 frag = vUv * res;
+        float d = bayer4(frag);
+        vec3 q = floor(c.rgb * 31.0 + d) / 31.0;
+
+        // gentle contrast to mimic CRT pop
+        q = pow(q, vec3(0.95));
+
+        gl_FragColor = vec4(q, 1.0);
+      }
+    `,
+    depthWrite: false,
+    depthTest: false
+  });
+  const quad = new THREE.Mesh(quadGeo, postMat);
+  postScene.add(quad);
+
+  // Toolbar toggle
+  let ps1On = true;
+  {
+    let bar = document.getElementById('neoBar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'neoBar';
+      bar.innerHTML = `<button id="neoAltBtn" type="button">ALT SKIN</button>
+                       <button id="neoCRTBtn" type="button">CRT</button>
+                       <button id="neoMotionBtn" type="button">MOTION</button>`;
+      document.body.appendChild(bar);
+    }
+    const btn = document.createElement('button');
+    btn.id = 'neoPS1Btn';
+    btn.type = 'button';
+    btn.textContent = 'PS1++: ON';
+    btn.addEventListener('click', () => {
+      ps1On = !ps1On;
+      btn.textContent = ps1On ? 'PS1++: ON' : 'PS1++: OFF';
+      postMat.uniforms.enable.value = ps1On;
+      // snap wobble only when ON
+      snappedMats.forEach(m => { m.wireframe = false; }); // harmless touch, forces recompile if needed
+    });
+    bar.appendChild(btn);
+  }
+
+  // Mouse parallax
   let mx = 0, my = 0;
   addEventListener('pointermove', e => {
     mx = (e.clientX / innerWidth  - 0.5);
     my = (e.clientY / innerHeight - 0.5);
-  }, {passive:true});
+  }, { passive: true });
 
-  // Slow camera orbit with subtle sway
+  // Animate
   let t0 = performance.now();
+
   renderer.setAnimationLoop(() => {
     const t = (performance.now() - t0) / 1000;
 
-    // Orbit around the centre
+    // Camera orbit
     const orbit = 9;
-    const speed = 0.12;
-    const angle = motion ? t*speed : 0.0;
+    const speed = motionOK ? 0.12 : 0.0;
+    const angle = t * speed;
     camera.position.x = Math.cos(angle) * orbit;
     camera.position.z = Math.sin(angle) * orbit;
-    camera.position.y = 2.2 + (motion ? Math.sin(t*0.6)*0.1 : 0);
+    camera.position.y = 2.2 + (motionOK ? Math.sin(t * 0.6) * 0.1 : 0);
 
-    // Look at the centre with tiny mouse steering
     camera.lookAt(0, 1.2, 0);
     camera.rotation.y += mx * 0.08;
     camera.rotation.x += -my * 0.04;
 
-    // Little bob on the “friend”
-    if (motion) friend.position.y = 1.2 + Math.sin(t*1.4)*0.08;
+    // Friend bob
+    if (motionOK) friend.position.y = 1.2 + Math.sin(t * 1.4) * 0.08;
 
-    renderer.setClearColor(FOG, 1); // match fog as “sky”
+    // Planet slow spin
+    if (motionOK) planet.rotation.y = t * 0.08;
+
+    // Shards drift
+    if (motionOK) {
+      for (const s of shards) {
+        s.userData.a += 0.06 * s.userData.s * 0.6 * (0.8 + 0.4*Math.sin(t*0.5));
+        s.position.x = Math.cos(s.userData.a) * s.userData.r;
+        s.position.z = Math.sin(s.userData.a) * s.userData.r;
+        s.rotation.x += 0.01 * s.userData.s;
+        s.rotation.y -= 0.014 * s.userData.s;
+      }
+    }
+
+    // Runner around the ring
+    const lap = motionOK ? t * 0.4 : 0.0;
+    const rr = 7.6;
+    runner.position.set(Math.cos(lap) * rr, 0.22, Math.sin(lap) * rr);
+    runner.rotation.y = -lap + Math.PI * 0.5;
+
+    // Render to low-res target, then upscale with shader
+    renderer.setRenderTarget(target);
+    renderer.setClearColor(FOG, 1);
+    renderer.clear();
     renderer.render(scene, camera);
+
+    renderer.setRenderTarget(null);
+    postMat.uniforms.tColor.value = target.texture;
+    postMat.uniforms.res.value.set(retro.w, retro.h);
+    postMat.uniforms.time.value = t;
+    renderer.render(postScene, postCam);
   });
 })();
+</script>
+
 </script>
 
 
