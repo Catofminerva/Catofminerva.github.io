@@ -729,26 +729,43 @@ html, body{ height: 100%; }
 /* reduce accidental zoom on taps without blocking accessibility zoom */
 body{ touch-action: manipulation; }
 
-  /* Welcome row with Apple 'hello' on the far right */
-.post h3.welcome-row{
-  display: grid;
-  grid-template-columns: 1fr auto;   /* text grows, gif hugs the right */
+/* Y2K rainbow headline + hello.gif layout */
+.welcome-flex{
+  display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;                 /* drops the gif underneath on narrow screens */
+  margin: 0 0 6px 0;
+}
+
+.y2k-welcome{
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  font-family:
+    "Arial Rounded MT Bold", "Helvetica Rounded", "VAG Rounded",
+    "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
+  /* soft bevel + long shadow like the reference */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.9),
+    0 12px 10px rgba(0,0,0,.35);
 }
 
 .hello-gif{
-  width: clamp(140px, 22vw, 300px);  /* “fairly large” but responsive */
+  width: clamp(150px, 24vw, 300px);
   height: auto;
   image-rendering: pixelated;
   filter: drop-shadow(0 0 6px var(--neon-blue));
-  pointer-events: none;              /* decorative */
+  flex: 0 0 auto;
 }
 
-/* Slightly smaller on narrower phones so it never crowds the text */
-@media (max-width: 480px){
-  .hello-gif{ width: clamp(120px, 38vw, 220px); }
+@media (max-width: 560px){
+  .hello-gif{ width: clamp(120px, 36vw, 220px); }
 }
+
 
   
   </style>
@@ -769,7 +786,7 @@ body{ touch-action: manipulation; }
 
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
-        ★ welcome to my webspace ★ best viewed on desktop ★
+        ★ cool people zone ★ best viewed on desktop ★
       </marquee>
     </div>
 
@@ -847,10 +864,18 @@ body{ touch-action: manipulation; }
           <hr class="retro">
 
           <div class="post">
-<h3 class="welcome-row">
-  Welcome <span class="blink">!</span>
+<div class="welcome-flex">
+  <h3 class="y2k-welcome">
+    <span style="color:#FF0000">w</span><span style="color:#FF5100">e</span><span style="color:#FFA100">l</span><span style="color:#FFF200">c</span><span style="color:#BCFF00">o</span><span style="color:#6BFF00">m</span><span style="color:#1BFF00">e</span>
+    <span style="color:#00FF36">t</span><span style="color:#00FF86">o</span>
+    <span style="color:#00FFD7">m</span><span style="color:#00D7FF">y</span>
+    <span style="color:#0086FF">w</span><span style="color:#0036FF">e</span><span style="color:#1B00FF">b</span><span style="color:#6B00FF">s</span><span style="color:#BC00FF">p</span><span style="color:#FF00F2">a</span><span style="color:#FF00A1">c</span><span style="color:#FF0051">e</span>
+    <!-- keep your blinking ! if you want -->
+    <!-- <span class="blink" style="color:#fff">!</span> -->
+  </h3>
   <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
-</h3>
+</div>
+
             <div class="meta">1999 ·</div>
 <p class="warnline">
   <img src="warning.gif" alt="Warning" class="warn-ico">
