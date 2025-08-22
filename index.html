@@ -1726,13 +1726,20 @@ let mx = 0, my = 0, mxTarget = 0, myTarget = 0;
     function animate(){
       const dt = clock.getDelta();
 
+camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08;
+world.rotation.y += SPIN_RATE * dt;
+const dz = SPEED * dt;
+      
 const SMOOTH = isTouch ? 0.10 : 0.28;   // desktop snaps quicker, touch stays gentle
 mx += (mxTarget - mx) * SMOOTH;
 my += (myTarget - my) * SMOOTH;
 
-const DESKTOP_MULT = 2.4;           // bump for stronger mouse steering on desktop
+
+const DESKTOP_MULT = 2.6;           // raise for wilder mouse steering on desktop
 const YAW_STEER   = isTouch ? 0.010 : 0.010 * DESKTOP_MULT;
 const PITCH_STEER = isTouch ? 0.005 : 0.005 * DESKTOP_MULT;
+      
+
       
       // Camera
       camera.position.y = 3.0 + (motion ? Math.sin(performance.now()*0.001)*0.08 : 0);
