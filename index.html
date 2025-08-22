@@ -71,8 +71,8 @@ z-index: 1;
   margin: 8px 0 6px;
   color: #fff; /* fallback if inline colors fail */
   text-shadow: 0 1px 0 rgba(255,255,255,.30), 0 0 8px rgba(0,0,0,.45);
-  position: relative;            /* anchor ships */
-  padding-inline: 120px;         /* reserves space so ships stay inside */
+  position: relative;            /* anchor gifs */
+  padding-inline: 120px;         /* reserves space so gifs stay inside */
 }
 @media (max-width: 560px){
   #glitter-title{ padding-inline: 80px; font-size: clamp(32px, 8vw, 60px); }
@@ -249,18 +249,18 @@ hr.retro {
   width: 188px;
 }
 
-  /* Star Wars ships flanking the site title */
-/* Centered title, space reserved for ships */
+  /* gifs flanking the site title */
+/* Centered title, space reserved for gifs */
 #glitter-title{
   text-align:center;
-  padding-inline:120px;         /* room for the ships */
+  padding-inline:120px;         /* room for the gifs */
   margin:12px auto 0;
   color: var(--neon-green);
   text-shadow: 0 1px 0 rgba(255,255,255,.35), 0 0 4px rgba(57,255,20,.55);
-  position: relative;           /* anchor for ships */
+  position: relative;           /* anchor for gifs */
 }
 
-/* Ships INSIDE the title box */
+/* gifs INSIDE the title box */
 #glitter-title::before,
 #glitter-title::after{
   content:"";
@@ -273,7 +273,7 @@ hr.retro {
   pointer-events:none;
 }
 #glitter-title::before{ left:12px;  background-image:url("angel.gif?v=1"); }
-#glitter-title::after { right:12px; background-image:url("gamer.gif?v=1"); }
+#glitter-title::after { right:12px; background-image:url("kirby.gif?v=1"); }
 
 /* keep the wiggle without moving outside */
 #glitter-title:hover::before{ transform: translateY(-50%) rotate(-3deg); }
@@ -1043,7 +1043,7 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
   });
 })();
 
-/* periodic title flyby for the ships */
+/* periodic title flyby for the gifs flanking */
 setInterval(() => {
   document.documentElement.classList.add('flyby');
   setTimeout(() => document.documentElement.classList.remove('flyby'), 1700);
