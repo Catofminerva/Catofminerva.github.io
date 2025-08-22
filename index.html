@@ -730,80 +730,25 @@ html, body{ height: 100%; }
 body{ touch-action: manipulation; }
 
   /* Welcome row with Apple 'hello' on the far right */
-/* Welcome row with Apple 'hello' on the far right */
 .post h3.welcome-row{
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto;   /* text grows, gif hugs the right */
   align-items: center;
   gap: 8px;
 }
+
 .hello-gif{
-  width: clamp(140px, 22vw, 300px);
+  width: clamp(140px, 22vw, 300px);  /* “fairly large” but responsive */
   height: auto;
   image-rendering: pixelated;
   filter: drop-shadow(0 0 6px var(--neon-blue));
-  pointer-events: none;
+  pointer-events: none;              /* decorative */
 }
+
+/* Slightly smaller on narrower phones so it never crowds the text */
 @media (max-width: 480px){
   .hello-gif{ width: clamp(120px, 38vw, 220px); }
 }
-
-    /* ——— Y2K rainbow Welcome with hello.gif on the right ——— */
-.welcome-wrap{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 6px 0;                 /* preserves the spacing you had under h3 */
-}
-
-.post h3.welcome90s{
-  margin: 0;
-  font-family:
-    "Arial Rounded MT Bold", "Helvetica Rounded", "VAG Rounded",
-    "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
-  font-weight: 700;
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1.05;
-  letter-spacing: 0.5px;
-
-  /* rainbow like your reference */
-  background: linear-gradient(90deg,
-    #c500b9 0%,
-    #ff0070 12%,
-    #ff4f00 24%,
-    #ffb300 36%,
-    #ffe800 46%,
-    #baff00 56%,
-    #06c07a 66%,
-    #00b5ff 76%,
-    #004dff 88%,
-    #7a00ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-
-  /* 90s bevel + long soft shadow */
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.95),
-    0 2px 0 rgba(255,255,255,.75),
-    0 12px 10px rgba(0,0,0,.35);
-}
-
-.hello-gif{
-  width: clamp(150px, 24vw, 300px);
-  height: auto;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 0 6px var(--neon-blue));
-  flex: 0 0 auto;
-  pointer-events: none;
-}
-
-@media (max-width: 560px){
-  .hello-gif{ width: clamp(120px, 36vw, 220px); }
-}
-
 
   
   </style>
@@ -902,10 +847,10 @@ body{ touch-action: manipulation; }
           <hr class="retro">
 
           <div class="post">
-<div class="welcome-wrap">
-  <h3 class="welcome90s">Welcome <span class="blink">!</span></h3>
+<h3 class="welcome-row">
+  Welcome <span class="blink">!</span>
   <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
-</div>
+</h3>
             <div class="meta">1999 ·</div>
 <p class="warnline">
   <img src="warning.gif" alt="Warning" class="warn-ico">
