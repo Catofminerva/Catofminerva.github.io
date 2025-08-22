@@ -61,20 +61,21 @@ z-index: 1;
 
 /* Title: crisp Y2K green, centered, subtle glow */
 #glitter-title{
-  font-family:"IthacaLVB","Arial Rounded MT Bold","Helvetica Rounded",
+  font-family: "Arial Rounded MT Bold","Helvetica Rounded","VAG Rounded",
                "Trebuchet MS","Verdana","Comic Sans MS",system-ui,sans-serif;
-  font-size: clamp(44px, 7vw, 86px);
-  line-height:1.05;
-  letter-spacing:.5px;
-  text-align:center;
-  color: var(--neon-green);
-  /* much lighter glow */
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.35),
-    0 0 4px rgba(57,255,20,.55);
-  margin:12px auto 0;
-  padding-inline:120px;        /* reserve room for ships */
-  position:relative;
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 8px 0 6px;
+  color: #fff; /* fallback if inline colors fail */
+  text-shadow: 0 1px 0 rgba(255,255,255,.30), 0 0 8px rgba(0,0,0,.45);
+  position: relative;            /* anchor ships */
+  padding-inline: 120px;         /* reserves space so ships stay inside */
+}
+@media (max-width: 560px){
+  #glitter-title{ padding-inline: 80px; font-size: clamp(32px, 8vw, 60px); }
 }
 
 
@@ -818,8 +819,10 @@ body{ touch-action: manipulation; }
 </div>
   
   <div class="page">
-    <h1 id="glitter-title">Ali's World</h1>
-
+<h1 id="glitter-title" class="pastel-title">
+  <span style="color:#FFA3A3">A</span><span style="color:#FFDAA3">l</span><span style="color:#EDFFA3">i</span><span style="color:#B6FFA3">'</span><span style="color:#A3FFC8">s</span>
+  <span style="color:#A3FFFF">W</span><span style="color:#A3C8FF">o</span><span style="color:#B6A3FF">r</span><span style="color:#EDA3FF">l</span><span style="color:#FFA3DA">d</span>
+</h1>
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
         ★ cool people zone ★ best viewed on desktop ★
