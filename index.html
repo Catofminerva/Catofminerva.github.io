@@ -804,76 +804,42 @@ body{ touch-action: manipulation; }
 }
 
 
-  /* === Classic light panels (paste at end of <style>) === */
-
-/* “browser white” + Win95 gray accents */
-:root{
-  --paper: #ffffff;
-  --paper-alt: #f3f3f3;
-  --rule-95: #c0c0c0;
-}
-
-/* CONTENT: white paper */
+  /* === Light look ONLY for the main content column === */
 .content{
+  /* local vars for “browser white” */
+  --paper:   #ffffff;
+  --paper-2: #f3f3f3;
+  --rule-95: #c0c0c0;
+
   background: var(--paper);
-  color: #111;                 /* readable on white */
+  color: #111;
   border-left: 1px solid var(--rule-95);
-  box-shadow: inset 0 0 0 1px #fff;
+  box-shadow: inset 0 0 0 1px #fff; /* subtle Win95 edge */
 }
 
-/* SIDEBAR: light stripes (very subtle) */
-.sidebar{
-  background:
-    repeating-linear-gradient(
-      180deg,
-      var(--paper) 0 14px,
-      var(--paper-alt) 14px 28px
-    );
-  border-right: 2px solid var(--rule-95);
-  color: #111;
-}
+/* classic link colors inside content only */
+.content a{ color:#0645ad; text-decoration: underline; }
+.content a:visited{ color:#551a8b; }
+.content a:hover{ color:#d400ff; }
 
-/* NAV buttons on light chrome */
-.nav a{
-  background: linear-gradient(#fff, #f4f8ff);
-  color: #101028;
-  text-shadow: none;
-  border-color: #5ad9ff;
-}
-.nav a:hover{
-  background: #e8f7ff;
-  color: #007a7a;
-}
-
-/* Posts become paper cards */
-.post{
-  background: #fff;
-  color: #111;
-  border: 3px groove var(--rule-95);
-  box-shadow: 0 1px 0 #fff inset;
-}
-.post h3{ color:#222; text-shadow:none; }
-.post .meta{ color:#555; }
-
-/* Light widget boxes to match */
-.sticker-wall,
-.status-say{ background:#fff; color:#111; }
-
-.status-bubble{
-  background:#fff;
+/* posts/cards on white paper */
+.content .post{
+  background: var(--paper);
   color:#111;
-  border-color: var(--rule-95);
-  box-shadow:none;
+  border: 3px groove var(--rule-95);
+  box-shadow: inset 0 1px 0 #fff;
 }
+.content .post h3{ color:#222; text-shadow:none; }
+.content .post .meta{ color:#555; }
 
-/* Chat frame on white chrome */
-.chat-frame{
-  background:#fff;
-  border-color: var(--rule-95);
-}
+/* inner marquee + chat frame (content column only) */
+.content .marquee-wrap{ background: var(--paper); border-color: var(--rule-95); }
+.content .marquee-wrap marquee{ color:#222; }
+.content .chat-frame{ background: var(--paper); border-color: var(--rule-95); }
 
-/* Keep the rainbow bars vivid on white */
-hr.retro{ filter:none; }
+/* keep rainbow bars vivid against white */
+.content > hr.retro,
+.content .post > hr.retro{ filter:none; }
 
   </style>
 </head>
