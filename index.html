@@ -1865,7 +1865,14 @@ scene.add(clouds);
 <img id="spinguy" src="spin.gif" alt="spinning guy" draggable="false">
 
 
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
 
+<!-- 2) Turn on the ghost cursor -->
+<script>
+  window.addEventListener('load', () => {
+    new cursoreffects.ghostCursor();
+  });
+</script>
 
 </body>
 </html>
