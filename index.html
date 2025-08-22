@@ -1859,39 +1859,41 @@ const meteor = makeMeteor();
     }
   }
 
-  function animate(){
-    const dt = clock.getDelta();
+ function animate(){
+  const dt = clock.getDelta();
 
-    // input smoothing
-    mx += (mxTarget - mx) * SMOOTH;
-    my += (myTarget - my) * SMOOTH;
+  // input smoothing
+  mx += (mxTarget - mx) * SMOOTH;
+  my += (myTarget - my) * SMOOTH;
 
-    // camera and world
-    camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
-    camera.lookAt(0, 1.5, -20);
-    camera.rotation.y += mx * YAW_STEER;
-    camera.rotation.x += -my * PITCH_STEER;
-    camera.rotation.z = -mx * 0.15;  
+  // camera “in world” feel
+  camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
+  camera.lookAt(0, 1.5, -20);
+  camera.rotation.y += mx * YAW_STEER;
+  camera.rotation.x += -my * PITCH_STEER;
+  camera.rotation.z = -mx * 0.15;   // banking
 
-    // constant spin plus hover turn
-    world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
+  // constant spin + extra hover turn
+  world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
 
-    // treadmill
-const dz = SPEED * dt * (1 + Math.max(0, -my) * 0.45);  // push forward a bit when hovering near top
-    landA.position.z += dz; landB.position.z += dz;
-    rivA.position.z  += dz; rivB.position.z  += dz;
-    
+  // treadmill forward; speed up when cursor near top
+  const dz = SPEED * dt * (1 + Math.max(0, -my) * 0.45);
+  landA.position.z += dz; landB.position.z += dz;
+  rivA.position.z  += dz; rivB.position.z  += dz;
 
-    recycle(landA, landB); recycle(landB, landA);
-    recycle(rivA,  rivB ); recycle(rivB,  rivA );
+  // recycle tiles
+  recycle(landA, landB); recycle(landB, landA);
+  recycle(rivA,  rivB ); recycle(rivB,  rivA );
 
-    renderer.setClearColor(SKY, 1);
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
-    updateClouds(clouds, dt, dz);
-    meteor.update(dt, performance.now()*0.001);
+  // update add-ons INSIDE the loop
+  updateClouds(clouds, dt, dz);
+  meteor.update(dt, performance.now()*0.001);
+
+  renderer.setClearColor(SKY, 1);
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
 
 })();
 </script>
