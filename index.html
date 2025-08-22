@@ -1391,9 +1391,8 @@ window.addEventListener('load', () => {
 
 
 
-
- src="https://unpkg.com/three@0.160.0/build/three.min.js">
-
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
 (() => {
   const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const motion = !prefersReduce;
@@ -1470,6 +1469,8 @@ window.addEventListener('load', () => {
     renderer.render(scene, camera);
   });
 })();
+</script>
+
 </script>
 
 
