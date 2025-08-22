@@ -1529,6 +1529,16 @@ window.addEventListener('load', () => {
       if (typeof s.motion === 'boolean') motion = s.motion;
     } catch(_){}
 
+const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let motion = !prefersReduce;
+try {
+  const s = JSON.parse(localStorage.getItem('neo_prefs_v2')||'{}');
+  if (typeof s.motion === 'boolean') motion = s.motion;
+} catch(_) {}
+
+// Always animate the valley; Chrome desktop can have stale OFF in storage
+motion = true;
+    
     const canvas = document.getElementById('threebg');
     if (!canvas) { console.error('[valley] #threebg not found'); return; }
 
