@@ -696,6 +696,39 @@ html[data-skin="neo"] #spinguy {
 /* make sure your content sits above it */
 .page { position: relative; z-index: 1; }
 
+    /* full-viewport canvas that survives iOS Chrome/Safari bars */
+#threebg{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;           /* dynamic mobile viewport height */
+  z-index: 0;
+  pointer-events: none;
+}
+@supports not (height: 100svh) {
+  #threebg{ height: 100vh; } /* fallback */
+}
+
+/* let the page scale down on phones so you still see the background */
+@media (max-width: 860px){
+  .page{
+    width: min(96vw, 760px);
+    margin: 12px auto 24px;
+  }
+  .layout{ display: block; }
+  .sidebar{
+    width: auto;
+    border-right: 0;
+    border-bottom: 6px ridge var(--neon-purple);
+  }
+}
+
+/* help browsers choose the right baseline sizes */
+html, body{ height: 100%; }
+
+/* reduce accidental zoom on taps without blocking accessibility zoom */
+body{ touch-action: manipulation; }
+
   </style>
 </head>
 <body>
@@ -1416,15 +1449,26 @@ window.addEventListener('load', () => {
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 200);
   camera.position.set(0, 2.2, 9);
 
-  function fit(){
-    const w = innerWidth, h = innerHeight;
-    renderer.setSize(Math.floor(w/1.2), Math.floor(h/1.2), false); // downscale internal res
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  fit(); addEventListener('resize', fit);
+  function vpSize(){
+  const vv = window.visualViewport;
+  const w = Math.ceil(vv ? vv.width  : window.innerWidth);
+  const h = Math.ceil(vv ? vv.height : window.innerHeight);
+  return { w, h };
+}
+function fit(){
+  const { w, h } = vpSize();
+  renderer.setSize(w, h, false);
+  canvas.style.width  = w + 'px';
+  canvas.style.height = h + 'px';
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+fit();
+addEventListener('resize', fit, { passive: true });
+if (window.visualViewport){
+  visualViewport.addEventListener('resize', fit, { passive: true });
+  visualViewport.addEventListener('scroll', fit, { passive: true });
+}
 
   // Lights: simple, old-school
   const hemi = new THREE.HemisphereLight(0xeff7ff, 0x48504a, 0.6);
