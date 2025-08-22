@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Ali's World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -749,7 +752,79 @@ body{ touch-action: manipulation; }
   .hello-gif{ width: clamp(120px, 38vw, 220px); }
 }
 
-  
+
+
+
+    /* override the default post h3 look for this row */
+.post h3.welcome-row{
+  display: grid;
+  grid-template-columns: 1fr auto; /* text left, gif right */
+  align-items: center;
+  gap: 8px;
+  color: transparent;          /* the gradient provides the color */
+  text-shadow: none;           /* reset the purple glow here */
+}
+
+/* “have you seen this person?”-style rainbow headline */
+.welcome90s{
+  font-family: "Arial Rounded MT Bold","Helvetica Rounded","Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1.05;
+
+  /* rainbow sweep across the text */
+  background: linear-gradient(90deg,
+    #d316b8 0%,
+    #ff0f6a 10%,
+    #ff3f00 20%,
+    #ffa000 30%,
+    #ffd83b 40%,
+    #cfff47 50%,
+    #4be070 60%,
+    #14a173 68%,
+    #2c86e4 78%,
+    #1129df 88%,
+    #7b05ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* shiny bevel + soft drop shadow */
+  text-shadow:
+     0 1px 0 rgba(255,255,255,.95),
+     0 2px 0 rgba(255,255,255,.75),
+     0 3px 0 rgba(255,255,255,.55),
+     0 10px 8px rgba(0,0,0,.28);
+}
+
+/* optional faint wavy highlight under the word for extra Y2K energy */
+.post h3.welcome-row::after{
+  content:"";
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -6px;
+  height: 12px;
+  background:
+    radial-gradient(100% 60% at 0 50%, rgba(255,255,255,.22), transparent 60%) 0 0 / 120px 100% repeat-x;
+  opacity: .6;
+  pointer-events: none;
+}
+
+/* keep the hello.gif big but responsive */
+.hello-gif{
+  width: clamp(140px, 22vw, 300px);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+  pointer-events: none;
+}
+
+@media (max-width: 480px){
+  .hello-gif{ width: clamp(120px, 38vw, 220px); }
+}
+
   </style>
 </head>
 <body>
@@ -847,7 +922,7 @@ body{ touch-action: manipulation; }
 
           <div class="post">
 <h3 class="welcome-row">
-  Welcome <span class="blink">!</span>
+  <span class="welcome90s">Welcome <span class="blink">!</span></span>
   <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
 </h3>
             <div class="meta">1999 ·</div>
