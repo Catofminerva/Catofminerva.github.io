@@ -739,28 +739,35 @@ body{ touch-action: manipulation; }
   margin: 0 0 6px 0;
 }
 
+/* Smaller rainbow headline */
 .y2k-welcome{
   margin: 0;
   font-weight: 700;
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(28px, 4.2vw, 48px);  /* was much larger */
+  line-height: 1;
   letter-spacing: 0.5px;
   font-family:
     "Arial Rounded MT Bold", "Helvetica Rounded", "VAG Rounded",
     "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
-  /* soft bevel + long shadow like the reference */
   text-shadow:
-    0 1px 0 rgba(255,255,255,.9),
-    0 12px 10px rgba(0,0,0,.35);
+    0 1px 0 rgba(255,255,255,.85),
+    0 8px 10px rgba(0,0,0,.28);
 }
 
+/* Keep it on one line on wider screens */
+@media (min-width: 900px){
+  .y2k-welcome{ white-space: nowrap; }
+}
+
+/* Make the hello.gif a touch smaller too */
 .hello-gif{
-  width: clamp(150px, 24vw, 300px);
+  width: clamp(110px, 18vw, 220px);
   height: auto;
   image-rendering: pixelated;
   filter: drop-shadow(0 0 6px var(--neon-blue));
   flex: 0 0 auto;
 }
+
 
 @media (max-width: 560px){
   .hello-gif{ width: clamp(120px, 36vw, 220px); }
