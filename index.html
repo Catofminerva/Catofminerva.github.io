@@ -271,22 +271,7 @@ hr.retro {
   #glitter-title::before,#glitter-title::after{ width:72px; height:46px; }
 }
 
-#glitter-title::before{
-  left:0;                                        /* edge of the title box */
-  transform: translate(-110%, -50%);             /* shove it outside */
-  background-image:url("starwar1.gif?v=1");
-}
-    
-#glitter-title::after{
-  right:0;
-  transform: translate(110%, -50%);              /* outside on the right */
-  background-image:url("ship.gif?v=1");
-}
 
-
-/* keep the hover wiggle with the new transforms */
-#glitter-title:hover::before{ transform: translate(-110%, -50%) rotate(-3deg); }
-#glitter-title:hover::after { transform: translate(110%, -50%)  rotate(3deg);  }
 
 
 
