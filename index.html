@@ -1674,7 +1674,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     return m;
   }
 
-// === Cloud layer (soft billboards)
+// === Cloud layer (soft billboards) — FIXED
 function makeCloudLayer(camera){
   const group = new THREE.Group();
   const puffGeo = new THREE.PlaneGeometry(1, 1);
@@ -1690,8 +1690,9 @@ function makeCloudLayer(camera){
         #include <fog_pars_vertex>
         void main(){
           vUv = uv;
-          vec4 mv = modelViewMatrix * vec4(position,1.0);
-          gl_Position = projectionMatrix * mv;
+          // three's fog chunk expects mvPosition to exist
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
           #include <fog_vertex>
         }`,
       fragmentShader: `
@@ -1700,14 +1701,15 @@ function makeCloudLayer(camera){
         #include <fog_pars_fragment>
         void main(){
           vec2 p = vUv - 0.5;
-          float d = length(p * vec2(1.4,1.0));
+          float d = length(p * vec2(1.4, 1.0));
           float a = smoothstep(0.52, 0.20, d);
           gl_FragColor = vec4(uColor, a * uAlpha);
           #include <fog_fragment>
         }`
     });
     const m = new THREE.Mesh(puffGeo, mat);
-    m.renderOrder = 10;             // draw after terrain
+    m.renderOrder = 10;
+    m.scale.set(w, h, 1);               // actually size the puff
     return m;
   }
 
@@ -1723,7 +1725,6 @@ function makeCloudLayer(camera){
     for (let k=0;k<puffs;k++){
       const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
       m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
-      m.scale.set(m.scale.x || 1, m.scale.y || 1, 1);
       cloud.add(m);
     }
     cloud.position.set(x, y, z);
@@ -1738,20 +1739,16 @@ function makeCloudLayer(camera){
 function updateClouds(group, dt, dz){
   const cam = group.userData.billboardTo;
   for (const c of group.children){
-    // billboard the whole cloud toward the camera
-    c.quaternion.copy(cam.quaternion);
-
-    // parallax drift and wind
+    c.quaternion.copy(cam.quaternion);      // billboard toward camera
     c.position.z += dz * 0.5 * c.userData.speed;
     c.position.x += dt * c.userData.wind;
-
-    // recycle when far behind
     if (c.position.z > TILE*1.2){
       c.position.z -= TILE*2.4;
       c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
     }
   }
 }
+
 
   
   // World
