@@ -827,6 +827,100 @@ body{ touch-action: manipulation; }
 .post .chat-frame{ background:#fff; border-color:#c0c0c0; }
 
 
+    /* === Windows 95 Sidebar Theme =================================== */
+:root{
+  --w95-bg:#c0c0c0;
+  --w95-mid:#d9d9d9;
+  --w95-hi:#ffffff;
+  --w95-shadow:#808080;
+  --w95-dark:#000000;
+  --w95-link:#0000ff;
+  --w95-vlink:#800080;
+}
+
+/* Panel */
+.sidebar{
+  background: var(--w95-bg) !important;         /* kill the neon stripes */
+  color:#000;
+  padding: 8px 6px 12px;
+  font-family: "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  text-transform: none;
+  letter-spacing: 0;
+  /* 3D recessed panel */
+  box-shadow:
+    inset -1px -1px 0 var(--w95-dark),
+    inset  1px  1px 0 var(--w95-hi),
+    inset -2px -2px 0 var(--w95-shadow),
+    inset  2px  2px 0 #dfdfdf;
+  border-right: none;
+}
+
+/* Group box label for the nav (pure CSS) */
+.sidebar .nav{
+  position: relative;
+  margin: 8px 4px 12px;
+  padding: 8px 6px 6px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+}
+.sidebar .nav::before{
+  content: "Navigation";
+  position: absolute;
+  top: -9px; left: 10px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  font-size: 12px;
+}
+
+/* Buttons look like Win95 */
+.sidebar .nav a{
+  display: flex; align-items: center; gap: 6px;
+  margin: 6px 2px;
+  padding: 5px 8px;
+  background: var(--w95-bg);
+  color:#000; text-decoration: none; text-shadow: none;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+  text-transform: none;                    /* not screaming caps */
+}
+.sidebar .nav a:hover{ background: var(--w95-mid); }
+.sidebar .nav a:active{
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  transform: translate(1px,1px);           /* pressed */
+}
+.sidebar .nav a:focus-visible{ outline: 1px dotted #000; outline-offset: -4px; }
+.sidebar .nav-icon{ width:20px; height:20px; image-rendering: pixelated; }
+
+/* Other widgets in the sidebar get sunken Win95 frames */
+.sticker-wall,
+.status-say{
+  background: var(--w95-bg) !important;
+  color:#000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow); /* sunken */
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+
+/* Tiny labels like classic group boxes (optional, looks nice) */
+.sticker-wall{ position: relative; padding-top: 14px; }
+.sticker-wall::before{
+  content: "Stickers";
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 4px; background: var(--w95-bg); font-size: 12px;
+}
+.status-say{ position: relative; padding-top: 14px; }
+.status-say::before{
+  content: "Status";
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 4px; background: var(--w95-bg); font-size: 12px;
+}
+
+/* Hyperlink colors inside the sidebar (Win95 defaults) */
+.sidebar a:not(.nav a){ color: var(--w95-link); }
+.sidebar a:not(.nav a):visited{ color: var(--w95-vlink); }
+
   </style>
 </head>
 <body>
