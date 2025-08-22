@@ -686,7 +686,7 @@ html[data-skin="neo"] #spinguy {
 
 
     /* 3D background canvas under .page, above stars.gif */
-#space3d {
+#threebg {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -749,15 +749,18 @@ html[data-space="on"] .page {
 html:not([data-space="on"]) #space3d { filter: saturate(1.2); }
 
 /* Respect reduced motion: no dimming, no fancy hint animation */
-@media (prefers-reduced-motion: reduce) {
-  html[data-space="on"] .page { filter: none; }
-}
+@media (prefers-reduc
 
   </style>
 </head>
 <body>
 
-<canvas id="space3d" aria-hidden="true"></canvas>
+  <canvas id="space3d" aria-hidden="true"></canvas>
+<button id="spaceToggle" type="button">🪐 Space Mode</button>
+<div id="spaceHint">Click the canvas to capture the mouse. WASD to move, Space/Shift = up/down. Drop an image anywhere to spawn a billboard. Press Esc to exit.</div>
+
+
+  <canvas id="threebg" aria-hidden="true"></canvas>
 
   <canvas id="neoNebula" aria-hidden="true"></canvas>
 <div id="neoBar" role="toolbar" aria-label="Neo controls">
@@ -1451,11 +1454,126 @@ window.addEventListener('load', () => {
 
 
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+(() => {
+  const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motion = !prefersReduce;
+
+  const canvas = document.getElementById('threebg');
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+  // Pixelate a bit for “retro” feel
+  renderer.setPixelRatio(1);
+  canvas.style.imageRendering = 'pixelated';
+
+  const scene = new THREE.Scene();
+  // Cool, chalky fog to unify colours
+  const FOG = 0xcad4cf;
+  scene.fog = new THREE.Fog(FOG, 6, 38);
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 200);
+  camera.position.set(0, 2.2, 9);
+
+  function fit(){
+    const w = innerWidth, h = innerHeight;
+    renderer.setSize(Math.floor(w/1.2), Math.floor(h/1.2), false); // downscale internal res
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  fit(); addEventListener('resize', fit);
+
+  // Lights: simple, old-school
+  const hemi = new THREE.HemisphereLight(0xeff7ff, 0x48504a, 0.6);
+  scene.add(hemi);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+  dir.position.set(3, 5, 2);
+  scene.add(dir);
+
+  // A shared material palette (flat shading sells the “PS1” look)
+  const mintStone = new THREE.MeshLambertMaterial({ color: 0x9fb2aa, flatShading: true, dithering: true });
+  const darkStone = new THREE.MeshLambertMaterial({ color: 0x6f7c76, flatShading: true, dithering: true });
+  const ringMetal = new THREE.MeshLambertMaterial({ color: 0x7da3a0, flatShading: true, dithering: true });
+
+  // Floor disc
+  const floor = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 0.4, 28), darkStone);
+  floor.position.y = -0.2;
+  scene.add(floor);
+
+  // Ring walkway
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(7.6, 0.22, 8, 64), ringMetal);
+  ring.rotation.x = -Math.PI/2;
+  ring.position.y = 0.05;
+  scene.add(ring);
+
+  // Columns around the ring
+  const colGeo = new THREE.CylinderGeometry(0.42, 0.48, 4.6, 8);
+  for (let i=0;i<10;i++){
+    const a = i / 10 * Math.PI*2;
+    const c = new THREE.Mesh(colGeo, mintStone.clone());
+    c.position.set(Math.cos(a)*8.6, 2.3, Math.sin(a)*8.6);
+    c.rotation.y = a*0.5;
+    scene.add(c);
+  }
+
+  // Pedestal + “friend” (low-poly little guy)
+  const pedestal = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.2), darkStone);
+  pedestal.position.set(-3.2, 0.2, -1.2);
+  scene.add(pedestal);
+
+  const friend = new THREE.Mesh(new THREE.TetrahedronGeometry(1.0, 0), mintStone.clone());
+  friend.position.set(-3.2, 1.2, -1.2);
+  scene.add(friend);
+
+  // A leaning slab on the other side
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.6, 0.2), mintStone);
+  slab.position.set(2.8, 1.0, 0.8);
+  slab.rotation.set(0.05, -0.2, -0.08);
+  scene.add(slab);
+
+  // Mouse parallax (canvas has pointer-events:none, so just read global pointer)
+  let mx = 0, my = 0;
+  addEventListener('pointermove', e => {
+    mx = (e.clientX / innerWidth  - 0.5);
+    my = (e.clientY / innerHeight - 0.5);
+  }, {passive:true});
+
+  // Slow camera orbit with subtle sway
+  let t0 = performance.now();
+  renderer.setAnimationLoop(() => {
+    const t = (performance.now() - t0) / 1000;
+
+    // Orbit around the centre
+    const orbit = 9;
+    const speed = 0.12;
+    const angle = motion ? t*speed : 0.0;
+    camera.position.x = Math.cos(angle) * orbit;
+    camera.position.z = Math.sin(angle) * orbit;
+    camera.position.y = 2.2 + (motion ? Math.sin(t*0.6)*0.1 : 0);
+
+    // Look at the centre with tiny mouse steering
+    camera.lookAt(0, 1.2, 0);
+    camera.rotation.y += mx * 0.08;
+    camera.rotation.x += -my * 0.04;
+
+    // Little bob on the “friend”
+    if (motion) friend.position.y = 1.2 + Math.sin(t*1.4)*0.08;
+
+    renderer.setClearColor(FOG, 1); // match fog as “sky”
+    renderer.render(scene, camera);
+  });
+})();
+
+</script>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.160.0/examples/js/controls/PointerLockControls.js"></script>
 <script src="https://unpkg.com/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
 
-  
-  <script>
+<script>
 (() => {
   const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let motion = !prefersReduce;
@@ -1622,26 +1740,23 @@ window.addEventListener('load', () => {
     }
   });
 
-/* ---------- always-on background; dbl-click to enter fly mode ---------- */
-function enterSpace(){
-  if (controls.isLocked) return;
-  root.dataset.space = 'on';          // bring canvas above page & accept input
-  controls.lock();                    // pointer-lock the canvas
-}
-function exitSpace(){
-  root.dataset.space = '';            // drop canvas back under the page
-  controls.unlock();
-}
-
-// double-click the canvas OR any empty background around .page to enter
-canvas.addEventListener('dblclick', enterSpace);
-document.addEventListener('dblclick', (e) => {
-  if (!e.target.closest('.page')) enterSpace();
-});
-
-// leave when pointer lock is released (Esc)
-controls.addEventListener('unlock', () => { root.dataset.space=''; });
-
+  /* ---------- button + pointer lock wiring ---------- */
+  function enterSpace(){
+    root.dataset.space = 'on';
+    hint.style.display = 'block';
+    // capture pointer only on user gesture
+    controls.lock();
+  }
+  function exitSpace(){
+    root.dataset.space = '';
+    hint.style.display = 'none';
+    controls.unlock();
+  }
+  btn.addEventListener('click', () => {
+    if (root.dataset.space === 'on') exitSpace();
+    else enterSpace();
+  });
+  controls.addEventListener('unlock', () => { root.dataset.space = ''; hint.style.display = 'none'; });
 
   /* ---------- animation loop ---------- */
   let last = performance.now();
