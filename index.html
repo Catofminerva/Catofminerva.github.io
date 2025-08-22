@@ -728,6 +728,28 @@ html, body{ height: 100%; }
 /* reduce accidental zoom on taps without blocking accessibility zoom */
 body{ touch-action: manipulation; }
 
+  /* Welcome row with Apple 'hello' on the far right */
+.post h3.welcome-row{
+  display: grid;
+  grid-template-columns: 1fr auto;   /* text grows, gif hugs the right */
+  align-items: center;
+  gap: 8px;
+}
+
+.hello-gif{
+  width: clamp(140px, 22vw, 300px);  /* “fairly large” but responsive */
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+  pointer-events: none;              /* decorative */
+}
+
+/* Slightly smaller on narrower phones so it never crowds the text */
+@media (max-width: 480px){
+  .hello-gif{ width: clamp(120px, 38vw, 220px); }
+}
+
+  
   </style>
 </head>
 <body>
@@ -824,7 +846,10 @@ body{ touch-action: manipulation; }
           <hr class="retro">
 
           <div class="post">
-            <h3>Welcome <span class="blink">!</span></h3>
+<h3 class="welcome-row">
+  Welcome <span class="blink">!</span>
+  <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
+</h3>
             <div class="meta">1999 ·</div>
 <p class="warnline">
   <img src="warning.gif" alt="Warning" class="warn-ico">
