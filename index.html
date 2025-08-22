@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Ali's World</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     :root{
@@ -696,64 +696,38 @@ html[data-skin="neo"] #spinguy {
 /* make sure your content sits above it */
 .page { position: relative; z-index: 1; }
 
-  /* the 3D canvas should always fill the visual viewport */
+    /* full-viewport canvas that survives iOS Chrome/Safari bars */
 #threebg{
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: 100svh;
+  height: 100svh;           /* dynamic mobile viewport height */
   z-index: 0;
   pointer-events: none;
 }
-@supports not (height: 100svh){ #threebg{ height: 100vh; } }
+@supports not (height: 100svh) {
+  #threebg{ height: 100vh; } /* fallback */
+}
 
-/* responsive page shell */
+/* let the page scale down on phones so you still see the background */
 @media (max-width: 860px){
   .page{
     width: min(96vw, 760px);
-    margin: 10px auto 20px;
-    left: 0;                 /* remove the tiny nudge on phones */
-    border-width: 4px;
+    margin: 12px auto 24px;
   }
-
-  /* turn the table into blocks */
-  .layout,
-  .layout tbody,
-  .layout tr,
-  .layout td{ display: block; width: 100%; }
-
+  .layout{ display: block; }
   .sidebar{
-    width: 100%;
+    width: auto;
     border-right: 0;
     border-bottom: 6px ridge var(--neon-purple);
   }
-  .content{
-    border-left: 0;
-    padding: 10px 10px 18px;
-  }
-
-  /* comfortable text and title on small screens */
-  #glitter-title{ font-size: clamp(28px, 8vw, 56px); padding-top: 14px; }
-  .nav a{ font-size: 14px !important; }
-
-  /* keep embeds inside the viewport */
-  .chat-frame{ width: 100%; height: min(70vh, 520px); }
-  .button-strip img{ height: 28px; }
-
-  /* stickers and status bubble adapt */
-  .sticker-wall{ grid-template-columns: 1fr 1fr; }
-  .sticker-wall .wide{ width: 100%; }
-  .status-say{ grid-template-columns: 56px 1fr; }
-  .status-avatar{ width: 56px; height: 56px; }
-
-  /* title side images stay out of the way */
-  #glitter-title::before, #glitter-title::after{ width: 72px; height: 46px; }
 }
+
 /* help browsers choose the right baseline sizes */
-html, body { width: 100%; height: 100%; }
+html, body{ height: 100%; }
 
 /* reduce accidental zoom on taps without blocking accessibility zoom */
-body { overflow-x: hidden; }
+body{ touch-action: manipulation; }
 
   </style>
 </head>
@@ -1481,32 +1455,20 @@ window.addEventListener('load', () => {
   const h = Math.ceil(vv ? vv.height : window.innerHeight);
   return { w, h };
 }
-function vpSize(){
-  const vv = window.visualViewport;
-  return {
-    w: Math.ceil(vv ? vv.width  : window.innerWidth),
-    h: Math.ceil(vv ? vv.height : window.innerHeight)
-  };
-}
-
 function fit(){
   const { w, h } = vpSize();
-  // render at the exact viewport size on mobile for reliability
   renderer.setSize(w, h, false);
   canvas.style.width  = w + 'px';
   canvas.style.height = h + 'px';
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
 }
-
-// init + listeners
 fit();
 addEventListener('resize', fit, { passive: true });
 if (window.visualViewport){
   visualViewport.addEventListener('resize', fit, { passive: true });
-  visualViewport.addEventListener('scroll',  fit, { passive: true });
+  visualViewport.addEventListener('scroll', fit, { passive: true });
 }
-
 
   // Lights: simple, old-school
   const hemi = new THREE.HemisphereLight(0xeff7ff, 0x48504a, 0.6);
