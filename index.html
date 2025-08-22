@@ -921,6 +921,73 @@ body{ touch-action: manipulation; }
 .sidebar a:not(.nav a){ color: var(--w95-link); }
 .sidebar a:not(.nav a):visited{ color: var(--w95-vlink); }
 
+
+
+
+
+
+    /* === Windows 95 Main Content Panel ================================= */
+:root{
+  --w95-bg:#c0c0c0;
+  --w95-mid:#d9d9d9;
+  --w95-hi:#ffffff;
+  --w95-shadow:#808080;
+  --w95-dark:#000000;
+  --w95-link:#0000ff;
+  --w95-vlink:#800080;
+}
+
+/* Make the td.content a raised Win95 panel */
+td.content{
+  background: var(--w95-bg) !important;    /* replace the translucent black */
+  color:#000;
+  font-family: "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  border-left: none !important;            /* kill the purple divider */
+  padding: 10px 12px 16px;
+  position: relative;                      /* for the seam pseudo-element */
+  /* subtle 3D bevel like Win95 shell */
+  box-shadow:
+    inset -1px -1px 0 var(--w95-dark),
+    inset  1px  1px 0 var(--w95-hi),
+    inset -2px -2px 0 var(--w95-shadow),
+    inset  2px  2px 0 #dfdfdf;
+}
+
+/* A thin Win95-style seam between sidebar and content */
+td.content::before{
+  content:"";
+  position:absolute; inset:0 auto 0 0; width:2px;
+  background: var(--w95-hi);
+  box-shadow: 1px 0 0 var(--w95-shadow);
+  pointer-events:none;
+}
+
+/* Links inside content use classic Win95 colors (doesn't touch your nav buttons) */
+td.content a{ color: var(--w95-link); }
+td.content a:visited{ color: var(--w95-vlink); }
+
+/* OPTIONAL niceties: make in-content marquee and hr feel native */
+td.content .marquee-wrap{
+  background: var(--w95-mid) !important;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+}
+td.content hr.retro{
+  border: none; height: 10px; margin: 10px 0 14px;
+  box-shadow: inset 1px 1px 0 var(--w95-hi), inset -1px -1px 0 var(--w95-shadow);
+}
+
+/* If you haven't already restyled .post, here’s a Win95 document card */
+td.content .post{
+  background:#fff !important;
+  color:#000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+td.content .post h3{ color:#000; text-shadow:none; }
+
   </style>
 </head>
 <body>
