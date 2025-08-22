@@ -1674,13 +1674,96 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     return m;
   }
 
+// === Cloud layer (soft billboards)
+function makeCloudLayer(camera){
+  const group = new THREE.Group();
+  const puffGeo = new THREE.PlaneGeometry(1, 1);
+
+  function puff(w, h){
+    const mat = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      fog: true,
+      uniforms: { uColor: { value: new THREE.Color(0xffffff) }, uAlpha: { value: 0.28 } },
+      vertexShader: `
+        varying vec2 vUv;
+        #include <fog_pars_vertex>
+        void main(){
+          vUv = uv;
+          vec4 mv = modelViewMatrix * vec4(position,1.0);
+          gl_Position = projectionMatrix * mv;
+          #include <fog_vertex>
+        }`,
+      fragmentShader: `
+        uniform vec3 uColor; uniform float uAlpha;
+        varying vec2 vUv;
+        #include <fog_pars_fragment>
+        void main(){
+          vec2 p = vUv - 0.5;
+          float d = length(p * vec2(1.4,1.0));
+          float a = smoothstep(0.52, 0.20, d);
+          gl_FragColor = vec4(uColor, a * uAlpha);
+          #include <fog_fragment>
+        }`
+    });
+    const m = new THREE.Mesh(puffGeo, mat);
+    m.renderOrder = 10;             // draw after terrain
+    return m;
+  }
+
+  for (let i=0;i<18;i++){
+    const w = 20 + Math.random()*28;
+    const h = 8  + Math.random()*14;
+    const y = 8.5 + Math.random()*2.0;
+    const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
+    const z = -TILE + Math.random()*TILE*3.0;
+
+    const cloud = new THREE.Group();
+    const puffs = 3 + Math.floor(Math.random()*3);
+    for (let k=0;k<puffs;k++){
+      const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
+      m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
+      m.scale.set(m.scale.x || 1, m.scale.y || 1, 1);
+      cloud.add(m);
+    }
+    cloud.position.set(x, y, z);
+    cloud.userData.speed = 0.2 + Math.random()*0.3;   // z drift
+    cloud.userData.wind  = -0.15 + Math.random()*0.3; // x drift
+    group.add(cloud);
+  }
+  group.userData.billboardTo = camera;
+  return group;
+}
+
+function updateClouds(group, dt, dz){
+  const cam = group.userData.billboardTo;
+  for (const c of group.children){
+    // billboard the whole cloud toward the camera
+    c.quaternion.copy(cam.quaternion);
+
+    // parallax drift and wind
+    c.position.z += dz * 0.5 * c.userData.speed;
+    c.position.x += dt * c.userData.wind;
+
+    // recycle when far behind
+    if (c.position.z > TILE*1.2){
+      c.position.z -= TILE*2.4;
+      c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
+    }
+  }
+}
+
+  
   // World
   const landA = makeLand(0), landB = makeLand(TILE);
   const rivA  = makeRiver(0), rivB  = makeRiver(TILE);
   const world = new THREE.Group();
   world.add(landA, landB, rivA, rivB);
   scene.add(world);
+const clouds = makeCloudLayer(camera);
+scene.add(clouds);
 
+  
   const clock = new THREE.Clock();
   const SPEED       = 2.1  * reduceScale;   // forward scroll
   const SPIN_RATE   = 0.06 * reduceScale;   // constant spin
@@ -1756,6 +1839,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     landA.position.z += dz; landB.position.z += dz;
     rivA.position.z  += dz; rivB.position.z  += dz;
 
+    updateClouds(clouds, dt, dz);
     recycle(landA, landB); recycle(landB, landA);
     recycle(rivA,  rivB ); recycle(rivB,  rivA );
 
