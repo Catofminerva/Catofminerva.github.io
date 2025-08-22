@@ -1720,6 +1720,10 @@ const SMOOTH = isTouch ? 0.10 : 0.28;   // desktop snaps quicker, touch stays ge
 mx += (mxTarget - mx) * SMOOTH;
 my += (myTarget - my) * SMOOTH;
 
+const DESKTOP_MULT = 2.4;           // bump for stronger mouse steering on desktop
+const YAW_STEER   = isTouch ? 0.010 : 0.010 * DESKTOP_MULT;
+const PITCH_STEER = isTouch ? 0.005 : 0.005 * DESKTOP_MULT;
+      
       // Camera
       camera.position.y = 3.0 + (motion ? Math.sin(performance.now()*0.001)*0.08 : 0);
       camera.lookAt(0, 1.5, -20);
