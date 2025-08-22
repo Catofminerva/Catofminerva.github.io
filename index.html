@@ -1649,6 +1649,17 @@ if (window.visualViewport){
     renderer.render(scene, camera);
   });
 })();
+  
+</script>
+
+  <!-- 1) Load the library -->
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
+<!-- 2) Turn on the ghost cursor -->
+<script>
+  window.addEventListener('load', () => {
+    new cursoreffects.ghostCursor();
+  });
 </script>
 
 
