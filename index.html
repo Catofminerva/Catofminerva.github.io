@@ -1020,6 +1020,81 @@ td.content .post h3{ color:#000; text-shadow:none; }
   font: 12px/1 "Tahoma","MS Sans Serif",sans-serif;
 }
 
+
+
+    /* === Win95 toolbar for the ALT / CRT / MOTION bar =================== */
+/* Uses the same --w95-* vars you already added */
+
+#neoBar{
+  position: fixed;
+  top: 10px; right: 10px;
+  z-index: 10000;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  padding: 6px 6px;
+  background: var(--w95-bg);
+  border: 2px solid; /* 3D bevel */
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+
+  font: 12px/1 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  color: #000;
+}
+
+/* tiny caption above the bar (optional) */
+#neoBar{ position: fixed; }
+#neoBar::before{
+  content: "Display Options";
+  position: absolute;
+  left: 6px; top: -11px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  border: 1px solid var(--w95-shadow);
+  border-top-color: var(--w95-hi);
+  border-left-color: var(--w95-hi);
+  font: 11px/1 "Tahoma","MS Sans Serif",sans-serif;
+}
+
+/* Win95 push buttons */
+#neoBar button{
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  min-width: 0;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow:
+    inset -1px -1px 0 var(--w95-shadow),
+    inset  1px  1px 0 var(--w95-hi);
+  cursor: pointer;
+  user-select: none;
+}
+
+#neoBar button:hover{
+  background: var(--w95-mid);
+}
+
+#neoBar button:active,
+#neoBar button[aria-pressed="true"]{
+  border-color: var(--w95-dark) var(--w95-hi) var(--w95-hi) var(--w95-dark);
+  box-shadow:
+    inset  1px  1px 0 var(--w95-shadow),
+    inset -1px -1px 0 var(--w95-hi);
+  background: var(--w95-mid);
+  transform: translate(1px,1px);
+}
+
+/* classic dotted focus */
+#neoBar button:focus-visible{
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
+
   </style>
 </head>
 <body>
@@ -1506,15 +1581,24 @@ setInterval(() => {
   window.addEventListener('pointermove', tilt, {passive:true});
 
   // Apply prefs to DOM and buttons
-  function apply(){
-    root.dataset.skin = state.skin ? 'neo' : '';
-    root.dataset.crt  = state.crt  ? 'on'  : '';
-    document.body.dataset.crt = root.dataset.crt; // for the CRT CSS
-    if (altBtn) altBtn.textContent = state.skin   ? 'ALT SKIN: ON' : 'ALT SKIN: OFF';
-    if (crtBtn) crtBtn.textContent = state.crt    ? 'CRT: ON'      : 'CRT: OFF';
-    if (motBtn) motBtn.textContent = state.motion ? 'MOTION: ON'   : 'MOTION: OFF';
-    if (!state.skin && page) page.style.transform = 'none';
+function apply(){
+  root.dataset.skin = state.skin ? 'neo' : '';
+  root.dataset.crt  = state.crt  ? 'on'  : '';
+  document.body.dataset.crt = root.dataset.crt;
+  if (altBtn) {
+    altBtn.textContent = state.skin ? 'ALT SKIN: ON' : 'ALT SKIN: OFF';
+    altBtn.setAttribute('aria-pressed', String(state.skin));     // ← add
   }
+  if (crtBtn) {
+    crtBtn.textContent = state.crt ? 'CRT: ON' : 'CRT: OFF';
+    crtBtn.setAttribute('aria-pressed', String(state.crt));       // ← add
+  }
+  if (motBtn) {
+    motBtn.textContent = state.motion ? 'MOTION: ON' : 'MOTION: OFF';
+    motBtn.setAttribute('aria-pressed', String(state.motion));    // ← add
+  }
+  if (!state.skin && page) page.style.transform = 'none';
+}
   apply();
 
   // Wire controls
