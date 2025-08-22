@@ -1527,125 +1527,292 @@ window.addEventListener('load', () => {
 
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script>
-(() => {
+() => {
+  // Respect your "motion" preference if it exists, otherwise use OS setting
   const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const motion = !prefersReduce;
+  let motion = !prefersReduce;
+  try {
+    const s = JSON.parse(localStorage.getItem('neo_prefs_v2')||'{}');
+    if (typeof s.motion === 'boolean') motion = s.motion;
+  } catch(_) {}
 
   const canvas = document.getElementById('threebg');
   if (!canvas) return;
 
+  // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-  // Pixelate a bit for “retro” feel
-  renderer.setPixelRatio(1);
+  renderer.setPixelRatio(1);                     // crunchy/retro
   canvas.style.imageRendering = 'pixelated';
 
+  // Scene + fog
   const scene = new THREE.Scene();
-  // Cool, chalky fog to unify colours
-  const FOG = 0xcad4cf;
-  scene.fog = new THREE.Fog(FOG, 6, 38);
+  const FOG = 0x8b54d6;                          // lavender haze
+  scene.fog = new THREE.Fog(FOG, 12, 90);
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 200);
-  camera.position.set(0, 2.2, 9);
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 400);
+  camera.position.set(0, 3.1, 12);
 
+  // Fit to viewport, including iOS visualViewport
   function vpSize(){
-  const vv = window.visualViewport;
-  const w = Math.ceil(vv ? vv.width  : window.innerWidth);
-  const h = Math.ceil(vv ? vv.height : window.innerHeight);
-  return { w, h };
-}
-function fit(){
-  const { w, h } = vpSize();
-  renderer.setSize(w, h, false);
-  canvas.style.width  = w + 'px';
-  canvas.style.height = h + 'px';
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-}
-fit();
-addEventListener('resize', fit, { passive: true });
-if (window.visualViewport){
-  visualViewport.addEventListener('resize', fit, { passive: true });
-  visualViewport.addEventListener('scroll', fit, { passive: true });
-}
-
-  // Lights: simple, old-school
-  const hemi = new THREE.HemisphereLight(0xeff7ff, 0x48504a, 0.6);
-  scene.add(hemi);
-  const dir = new THREE.DirectionalLight(0xffffff, 0.8);
-  dir.position.set(3, 5, 2);
-  scene.add(dir);
-
-  // A shared material palette (flat shading sells the “PS1” look)
-  const mintStone = new THREE.MeshLambertMaterial({ color: 0x9fb2aa, flatShading: true, dithering: true });
-  const darkStone = new THREE.MeshLambertMaterial({ color: 0x6f7c76, flatShading: true, dithering: true });
-  const ringMetal = new THREE.MeshLambertMaterial({ color: 0x7da3a0, flatShading: true, dithering: true });
-
-  // Floor disc
-  const floor = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 0.4, 28), darkStone);
-  floor.position.y = -0.2;
-  scene.add(floor);
-
-  // Ring walkway
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(7.6, 0.22, 8, 64), ringMetal);
-  ring.rotation.x = -Math.PI/2;
-  ring.position.y = 0.05;
-  scene.add(ring);
-
-  // Columns around the ring
-  const colGeo = new THREE.CylinderGeometry(0.42, 0.48, 4.6, 8);
-  for (let i=0;i<10;i++){
-    const a = i / 10 * Math.PI*2;
-    const c = new THREE.Mesh(colGeo, mintStone.clone());
-    c.position.set(Math.cos(a)*8.6, 2.3, Math.sin(a)*8.6);
-    c.rotation.y = a*0.5;
-    scene.add(c);
+    const vv = window.visualViewport;
+    const w = Math.ceil(vv ? vv.width  : innerWidth);
+    const h = Math.ceil(vv ? vv.height : innerHeight);
+    return { w, h };
+  }
+  function fit(){
+    const { w, h } = vpSize();
+    renderer.setSize(w, h, false);
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  addEventListener('resize', fit, { passive:true });
+  if (window.visualViewport){
+    visualViewport.addEventListener('resize', fit, { passive:true });
+    visualViewport.addEventListener('scroll',  fit, { passive:true });
   }
 
-  // Pedestal + “friend” (low-poly little guy)
-  const pedestal = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.2), darkStone);
-  pedestal.position.set(-3.2, 0.2, -1.2);
-  scene.add(pedestal);
+  // Lights
+  const hemi = new THREE.HemisphereLight(0xffe5ff, 0x332244, 0.75); // candy sky + dark ground
+  const sun  = new THREE.DirectionalLight(0xffffff, 0.9);
+  sun.position.set(-2.5, 4.5, 1.5);
+  scene.add(hemi, sun);
 
-  const friend = new THREE.Mesh(new THREE.TetrahedronGeometry(1.0, 0), mintStone.clone());
-  friend.position.set(-3.2, 1.2, -1.2);
-  scene.add(friend);
+  // Skydome with vertical color gradient (purple → pink)
+  {
+    const geo = new THREE.SphereGeometry(200, 16, 12);
+    const mat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      uniforms: {
+        top:    { value: new THREE.Color(0xff9be6) },
+        bottom: { value: new THREE.Color(0x6b2fd6) }
+      },
+      vertexShader: `
+        varying float vY;
+        void main(){
+          vY = normalize(modelMatrix * vec4(position,1.0)).y * 0.5 + 0.5;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+        }`,
+      fragmentShader: `
+        uniform vec3 top; uniform vec3 bottom;
+        varying float vY;
+        void main(){ gl_FragColor = vec4(mix(bottom, top, pow(vY, 1.4)), 1.0); }`
+    });
+    scene.add(new THREE.Mesh(geo, mat));
+  }
 
-  // A leaning slab on the other side
-  const slab = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.6, 0.2), mintStone);
-  slab.position.set(2.8, 1.0, 0.8);
-  slab.rotation.set(0.05, -0.2, -0.08);
-  scene.add(slab);
+  // === Terrain parameters ===
+  const TILE_LEN = 140;          // z-length of one tile
+  const WORLD_W  = 120;          // x-width
+  const SEG_X    = 120;          // subdivisions (keep low-ish for PS1 look)
+  const SEG_Z    = 120;
 
-  // Mouse parallax (canvas has pointer-events:none, so just read global pointer)
+  // Faux-noise that is fast and deterministic (sum of sines)
+  function fnoise(x, z){
+    return (
+      Math.sin(x*0.65 + z*0.83) +
+      Math.sin(x*1.37 - z*0.71) +
+      Math.sin(x*2.11 + z*1.97)
+    ) * (1/3);
+  }
+
+  // Height function: two mountain walls, carved center valley, plus ridges
+  function heightAt(x, zAbs){
+    // Normalize to world scale
+    const nx = x / WORLD_W;                    // roughly [-0.5, 0.5]
+    const zz = zAbs / TILE_LEN;
+
+    // Walls
+    const left  = 5.0 * Math.exp(-Math.pow((nx + 0.38)/0.22, 2));
+    const right = 5.0 * Math.exp(-Math.pow((nx - 0.38)/0.22, 2));
+
+    // Carved center valley + gentle undulation along z
+    const valleyCarve = -2.2 * Math.exp(-Math.pow(nx/0.26, 2)) - 0.45 + 0.25*Math.sin(zz*6.0);
+
+    // Stony ridges and bumps
+    const ridges = 0.9 * fnoise(x*0.25, zAbs*0.22) + 0.45 * fnoise(x*0.55, zAbs*0.47);
+
+    return left + right + valleyCarve + ridges;
+  }
+
+  // Color ramp by altitude (lush green → lime → yellow → orange → peach)
+  function colorFor(h, minH, maxH){
+    const t = Math.min(1, Math.max(0, (h - minH) / (maxH - minH + 1e-6)));
+    const stops = [
+      { t: 0.00, c: new THREE.Color(0x1fe34a) },
+      { t: 0.35, c: new THREE.Color(0x7bff57) },
+      { t: 0.55, c: new THREE.Color(0xe9ff6a) },
+      { t: 0.75, c: new THREE.Color(0xffad33) },
+      { t: 1.00, c: new THREE.Color(0xffd6a8) }
+    ];
+    let a = stops[0], b = stops[stops.length-1];
+    for (let i=1;i<stops.length;i++){ if (t <= stops[i].t){ a = stops[i-1]; b = stops[i]; break; } }
+    const u = (t - a.t) / Math.max(1e-6, b.t - a.t);
+    return a.c.clone().lerp(b.c, u);
+  }
+
+  // Build a terrain tile at a given z-offset
+  function buildTerrainTile(zOffset){
+    const geo = new THREE.PlaneGeometry(WORLD_W, TILE_LEN, SEG_X, SEG_Z);
+    geo.rotateX(-Math.PI / 2);
+
+    // Position + color attributes
+    const pos   = geo.attributes.position;
+    const count = pos.count;
+    const cols  = new Float32Array(count * 3);
+
+    // First pass: compute heights & track min/max for coloring
+    let minH =  1e9, maxH = -1e9;
+    for (let i=0;i<count;i++){
+      const x = pos.getX(i);
+      const z = pos.getZ(i) + zOffset - TILE_LEN*0.5;
+      const h = heightAt(x, z);
+      pos.setY(i, h);
+      if (h < minH) minH = h;
+      if (h > maxH) maxH = h;
+    }
+
+    // Second pass: colors
+    for (let i=0;i<count;i++){
+      const h = pos.getY(i);
+      const c = colorFor(h, minH, maxH);
+      cols[i*3+0] = c.r; cols[i*3+1] = c.g; cols[i*3+2] = c.b;
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+    geo.computeVertexNormals();
+
+    const mat = new THREE.MeshLambertMaterial({
+      vertexColors: true,
+      flatShading: true,
+      dithering: true
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.z = zOffset - TILE_LEN*0.5;
+    return mesh;
+  }
+
+  // River strip down the center
+  function buildRiverTile(zOffset){
+    const width = 16;                             // river width
+    const segX  = 80, segZ = 100;
+    const geo = new THREE.PlaneGeometry(width, TILE_LEN, segX, segZ);
+    geo.rotateX(-Math.PI / 2);
+
+    const pos   = geo.attributes.position;
+    const count = pos.count;
+
+    for (let i=0;i<count;i++){
+      const x = pos.getX(i);
+      const zAbs = (pos.getZ(i) + zOffset - TILE_LEN*0.5);
+      // Put water just above the valley floor at x
+      const base = heightAt(x, zAbs);
+      pos.setY(i, Math.min(base + 0.12, base + 0.18));
+    }
+    geo.computeVertexNormals();
+
+    const mat = new THREE.MeshPhongMaterial({
+      color: 0x1b44ff,
+      emissive: 0x0a1a66,
+      shininess: 60,
+      flatShading: true
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.z = zOffset - TILE_LEN*0.5;
+    mesh.userData.river = { t: 0, geo, pos };   // store for ripple anim
+    return mesh;
+  }
+
+  // Two tiles for an endless treadmill
+  const terrainA = buildTerrainTile(0);
+  const terrainB = buildTerrainTile(TILE_LEN);
+  const riverA   = buildRiverTile(0);
+  const riverB   = buildRiverTile(TILE_LEN);
+  scene.add(terrainA, terrainB, riverA, riverB);
+
+  // Gentle wind on the river
+  function ripple(mesh, time){
+    const { geo, pos } = mesh.userData.river;
+    const count = pos.count;
+    for (let i=0;i<count;i++){
+      const x = pos.getX(i);
+      const z = pos.getZ(i);
+      // Small phase-scrolling sine; keep it cheap
+      const dy = 0.05 * Math.sin(x*0.9 + time*1.8) + 0.025 * Math.cos(z*2.0 + time*1.2);
+      pos.setY(i, pos.getY(i) + dy*0.02);
+    }
+    pos.needsUpdate = true;
+    geo.computeVertexNormals();
+  }
+
+  // Mouse steer
   let mx = 0, my = 0;
   addEventListener('pointermove', e => {
     mx = (e.clientX / innerWidth  - 0.5);
     my = (e.clientY / innerHeight - 0.5);
-  }, {passive:true});
+  }, { passive: true });
 
-  // Slow camera orbit with subtle sway
-  let t0 = performance.now();
+  // Animate
+  const clock = new THREE.Clock();
+  const SCROLL_SPEED = 2.2;   // world units per second
+
+  function scrollTile(mesh, other){
+    mesh.position.z += (motion ? SCROLL_SPEED : 0) * clock.getDelta();
+    // When a tile goes past the camera, hop it behind the other tile and rebuild it
+    if (mesh.position.z > TILE_LEN*0.5){
+      mesh.position.z = other.position.z - TILE_LEN;
+      // Re-seed geometry for fresh scenery on wrap
+      if (mesh.geometry && mesh.geometry.attributes && mesh.geometry.attributes.position){
+        const pos = mesh.geometry.attributes.position;
+        const off = mesh.position.z + TILE_LEN*0.5;
+        for (let i=0;i<pos.count;i++){
+          const x = pos.getX(i);
+          const zAbs = pos.getZ(i) + off;
+          const h = heightAt(x, zAbs);
+          pos.setY(i, h);
+        }
+        // Recolor after rebuild
+        const pos2 = mesh.geometry.attributes.position;
+        let minH =  1e9, maxH = -1e9;
+        for (let i=0;i<pos2.count;i++){
+          const h = pos2.getY(i);
+          if (h < minH) minH = h;
+          if (h > maxH) maxH = h;
+        }
+        const cols = mesh.geometry.getAttribute('color');
+        for (let i=0;i<pos2.count;i++){
+          const c = colorFor(pos2.getY(i), minH, maxH);
+          cols.setXYZ(i, c.r, c.g, c.b);
+        }
+        pos.needsUpdate = true;
+        cols.needsUpdate = true;
+        mesh.geometry.computeVertexNormals();
+      }
+    }
+  }
+
   renderer.setAnimationLoop(() => {
-    const t = (performance.now() - t0) / 1000;
+    const t = performance.now() * 0.001;
 
-    // Orbit around the centre
-    const orbit = 9;
-    const speed = 0.12;
-    const angle = motion ? t*speed : 0.0;
-    camera.position.x = Math.cos(angle) * orbit;
-    camera.position.z = Math.sin(angle) * orbit;
-    camera.position.y = 2.2 + (motion ? Math.sin(t*0.6)*0.1 : 0);
+    // Camera: slight glide, tiny mouse steer
+    camera.position.y = 3.1 + (motion ? Math.sin(t*0.6)*0.08 : 0);
+    camera.lookAt(0, 1.5, -20);
+    camera.rotation.y += mx * 0.02;
+    camera.rotation.x += -my * 0.01;
 
-    // Look at the centre with tiny mouse steering
-    camera.lookAt(0, 1.2, 0);
-    camera.rotation.y += mx * 0.08;
-    camera.rotation.x += -my * 0.04;
+    // Treadmill scroll
+    clock.getDelta(); // consume once
+    scrollTile(terrainA, terrainB);
+    scrollTile(terrainB, terrainA);
+    scrollTile(riverA,   riverB);
+    scrollTile(riverB,   riverA);
 
-    // Little bob on the “friend”
-    if (motion) friend.position.y = 1.2 + Math.sin(t*1.4)*0.08;
+    // River ripples
+    if (motion){ ripple(riverA, t); ripple(riverB, t); }
 
-    renderer.setClearColor(FOG, 1); // match fog as “sky”
+    renderer.setClearColor(FOG, 1);
     renderer.render(scene, camera);
   });
 })();
