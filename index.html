@@ -686,7 +686,7 @@ html[data-skin="neo"] #spinguy {
 
 
     /* 3D background canvas under .page, above stars.gif */
-#threebg {
+#space3d {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -757,7 +757,9 @@ html:not([data-space="on"]) #space3d { filter: saturate(1.2); }
 </head>
 <body>
 
-  <canvas id="threebg" aria-hidden="true"></canvas>
+<canvas id="space3d" aria-hidden="true"></canvas>
+<button id="spaceToggle" type="button">🪐 Space Mode</button>
+<div id="spaceHint">Click the canvas to capture the mouse. WASD to move, Space/Shift = up/down. Drop an image anywhere to spawn a billboard. Press Esc to exit.</div>
 
   <canvas id="neoNebula" aria-hidden="true"></canvas>
 <div id="neoBar" role="toolbar" aria-label="Neo controls">
