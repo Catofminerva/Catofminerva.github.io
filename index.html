@@ -1719,7 +1719,7 @@ function makeCloudLayer(camera){
   for (let i=0;i<18;i++){
     const w = 20 + Math.random()*28;
     const h =  8 + Math.random()*14;
-    const y = 8.5 + Math.random()*2.0;
+    const y = 12 + Math.random()*2.0;
     const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
     const z = -TILE + Math.random()*TILE*3.0;
 
@@ -1743,15 +1743,19 @@ function makeCloudLayer(camera){
 function updateClouds(group, dt, dz){
   const cam = group.userData.billboardTo;
   for (const c of group.children){
-    c.quaternion.copy(cam.quaternion);            // face the camera
-    c.position.z += dz * 0.5 * c.userData.speed;  // parallax drift
-    c.position.x += dt * c.userData.wind;         // wind
+    // face the camera in yaw only: keep current height so clouds stay “up”
+    c.lookAt(cam.position.x, c.position.y, cam.position.z);
+
+    c.position.z += dz * 0.45 * c.userData.speed;  // gentle parallax
+    c.position.x += dt * c.userData.wind;
+
     if (c.position.z > TILE*1.2){
       c.position.z -= TILE*2.4;
       c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
     }
   }
 }
+
 
 
 
