@@ -740,12 +740,18 @@ body{ touch-action: manipulation; }
 }
 
 /* Smaller rainbow headline */
+/* Rainbow headline — stays inside the post */
 .y2k-welcome{
-  margin: 0;
+  margin: 6px 0 10px;
   font-weight: 700;
-  font-size: clamp(28px, 4.2vw, 48px);  /* was much larger */
-  line-height: 1;
-  letter-spacing: 0.5px;
+  font-size: clamp(26px, 3.4vw, 42px);   /* smaller cap */
+  line-height: 1.05;
+  letter-spacing: .5px;
+  max-width: 100%;
+  text-wrap: balance;                     /* nicer multi-line wrap */
+  overflow-wrap: anywhere;                /* allow breaks even with colored spans */
+  white-space: normal;                    /* IMPORTANT: let it wrap */
+  padding-right: 8px;                     /* keeps the glow off the border */
   font-family:
     "Arial Rounded MT Bold", "Helvetica Rounded", "VAG Rounded",
     "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
@@ -754,10 +760,7 @@ body{ touch-action: manipulation; }
     0 8px 10px rgba(0,0,0,.28);
 }
 
-/* Keep it on one line on wider screens */
-@media (min-width: 900px){
-  .y2k-welcome{ white-space: nowrap; }
-}
+
 
 /* Make the hello.gif a touch smaller too */
 .hello-gif{
