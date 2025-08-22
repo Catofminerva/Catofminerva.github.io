@@ -60,13 +60,19 @@ z-index: 1;
     }
 
     #glitter-title {
-  font-family: "IthacaLVB", "Arial Rounded MT Bold", "Helvetica Rounded",
-               "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
-  /* optional: tighten/scale if the new font feels big */
+  font-family: "IthacaLVB","Arial Rounded MT Bold","Helvetica Rounded",
+               "Trebuchet MS","Verdana","Comic Sans MS",system-ui,sans-serif;
   font-size: clamp(44px, 7vw, 86px);
   line-height: 1.05;
-  letter-spacing: 0.5px;
-    }
+  letter-spacing: .5px;
+
+  color: var(--neon-green);                     /* Y2K green */
+  text-shadow: 0 0 6px #fff, 0 0 14px var(--neon-green), 0 0 28px var(--neon-green);
+  text-align: center;                           /* center the text */
+  margin: 12px auto 0;
+  position: relative;                           /* anchor ships */
+}
+
 
     .marquee-wrap {
       margin: 10px 20px;
@@ -241,33 +247,35 @@ hr.retro {
 #glitter-title { position: relative; }  /* anchor for pseudo-elements */
 
 #glitter-title::before,
-#glitter-title::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 110px;             /* size of the ships */
-  height: 70px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  image-rendering: pixelated;
+#glitter-title::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:110px; height:70px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  image-rendering:pixelated;
   filter: drop-shadow(0 0 6px var(--neon-blue));
-  pointer-events: none;      /* don’t block clicks */
+  pointer-events:none;
 }
 
-#glitter-title::before {
-  left: 35px;                 /* nudge from left edge of the title area */
-  background-image: url("starwar1.gif?v=1");
+#glitter-title::before{
+  left:0;                                        /* edge of the title box */
+  transform: translate(-110%, -50%);             /* shove it outside */
+  background-image:url("starwar1.gif?v=1");
 }
-#glitter-title::after {
-  right: 30px;                /* nudge from right edge of the title area */
-  background-image: url("ship.gif?v=1");
+    
+#glitter-title::after{
+  right:0;
+  transform: translate(110%, -50%);              /* outside on the right */
+  background-image:url("ship.gif?v=1");
 }
 
-/* Optional gentle hover wiggle – remove if you want them static */
-#glitter-title:hover::before { transform: translateY(-50%) rotate(-3deg); }
-#glitter-title:hover::after  { transform: translateY(-50%) rotate(3deg); }
+
+/* keep the hover wiggle with the new transforms */
+#glitter-title:hover::before{ transform: translate(-110%, -50%) rotate(-3deg); }
+#glitter-title:hover::after { transform: translate(110%, -50%)  rotate(3deg);  }
 
 
 
