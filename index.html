@@ -1674,136 +1674,12 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     return m;
   }
 
-
-  // ===== Parallax cloud layer (soft shader billboards)
-function makeCloudLayer() {
-  const group = new THREE.Group();
-  const geo = new THREE.PlaneGeometry(1, 1, 1, 1);
-
-  function puff(w, h){
-    const mat = new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      fog: true,
-      uniforms: { uColor: { value: new THREE.Color(0xffffff) }, uAlpha: { value: 0.28 } },
-      vertexShader: `
-        varying vec2 vUv;
-        #include <fog_pars_vertex>
-        void main(){
-          vUv = uv;
-          vec4 mvPosition = modelViewMatrix * vec4(position,1.0);
-          gl_Position = projectionMatrix * mvPosition;
-          #include <fog_vertex>
-        }`,
-      fragmentShader: `
-        uniform vec3 uColor; uniform float uAlpha;
-        varying vec2 vUv;
-        #include <fog_pars_fragment>
-        void main(){
-          vec2 p = vUv - 0.5;
-          float d = length(p*vec2(1.4,1.0));
-          float a = smoothstep(0.52, 0.20, d);          // soft round puff
-          gl_FragColor = vec4(uColor, a * uAlpha);
-          #include <fog_fragment>
-        }`
-    });
-    const m = new THREE.Mesh(geo, mat);
-    m.scale.set(w, h, 1);
-    return m;
-  }
-
-  // Build a few layered clouds
-  for (let i=0;i<18;i++){
-    const w = 20 + Math.random()*28;
-    const h = 8  + Math.random()*14;
-    const y = 8.5 + Math.random()*2.0;
-    const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
-    const z = -TILE + Math.random()*TILE*3.0;
-    const c = new THREE.Group();
-    const puffs = 3 + Math.floor(Math.random()*3);
-    for (let k=0;k<puffs;k++){
-      const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
-      m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
-      c.add(m);
-    }
-    c.position.set(x, y, z);
-    c.userData.speed = 0.2 + Math.random()*0.3;      // z drift
-    c.userData.wind  = -0.15 + Math.random()*0.3;    // x drift
-    group.add(c);
-  }
-  return group;
-}
-
-function updateClouds(group, dt, dz){
-  for (const c of group.children){
-    c.position.z += dz * 0.5 * c.userData.speed;     // parallax vs ground
-    c.position.x += dt * c.userData.wind;
-    // recycle when far behind
-    if (c.position.z > TILE*1.2) {
-      c.position.z -= TILE*2.4;
-      c.position.x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
-    }
-  }
-}
-
-
-function makeMeteor(){
-  const geo = new THREE.PlaneGeometry(1.6, 0.10);
-  const mat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite:false, blending: THREE.AdditiveBlending, fog:true,
-    uniforms: { uAlpha:{ value: 0.0 } },
-    vertexShader: `
-      varying vec2 vUv; #include <fog_pars_vertex>
-      void main(){ vUv=uv; vec4 mv=modelViewMatrix*vec4(position,1.0); gl_Position=projectionMatrix*mv; #include <fog_vertex> }`,
-    fragmentShader: `
-      uniform float uAlpha; varying vec2 vUv; #include <fog_pars_fragment>
-      void main(){
-        float t = 1.0 - vUv.x;
-        float core = smoothstep(0.05, 0.0, abs(vUv.y-0.5));
-        float tail = smoothstep(0.0, 1.0, t);
-        float a = core * tail * uAlpha;
-        gl_FragColor = vec4(1.0, 0.95, 0.9, a);
-        #include <fog_fragment>
-      }`
-  });
-  const m = new THREE.Mesh(geo, mat);
-  m.visible = false;
-  m.userData.life = 0;
-  scene.add(m);
-  return {
-    mesh: m,
-    triggerAt: 0,
-    reset(now){
-      const y = 9.5 + Math.random()*2.0;
-      const startX = -WORLD_W*0.7, endX =  WORLD_W*0.7;
-      m.position.set(startX, y, -TILE*0.3);
-      m.rotation.z = -0.35;
-      m.visible = true;
-      m.userData.life = 0;
-      this.endX = endX;
-      mat.uniforms.uAlpha.value = 0.0;
-      this.triggerAt = now + 8 + Math.random()*10;   // next spawn window
-    },
-    update(dt, now){
-      if (!m.visible && now > this.triggerAt) this.reset(now);
-      if (!m.visible) return;
-      m.userData.life += dt;
-      m.position.x += dt * 24;                       // streak across
-      mat.uniforms.uAlpha.value = Math.min(1, m.userData.life*3.0) * Math.max(0, 1.0 - m.userData.life*0.8);
-      if (m.position.x > this.endX) { m.visible = false; mat.uniforms.uAlpha.value = 0.0; }
-    }
-  };
-}
-  
   // World
   const landA = makeLand(0), landB = makeLand(TILE);
   const rivA  = makeRiver(0), rivB  = makeRiver(TILE);
   const world = new THREE.Group();
   world.add(landA, landB, rivA, rivB);
   scene.add(world);
-  const clouds = makeCloudLayer();
-scene.add(clouds);
-const meteor = makeMeteor();
 
   const clock = new THREE.Clock();
   const SPEED       = 2.1  * reduceScale;   // forward scroll
@@ -1824,43 +1700,70 @@ const meteor = makeMeteor();
   }, { passive: true });
   addEventListener("pointerleave", () => { mxTarget = 0; myTarget = 0; }, { passive: true });
 
-  
- function animate(){
-  const dt = clock.getDelta();
+  function recycle(mesh, other){
+    if (mesh.position.z > TILE*0.5){
+      mesh.position.z = other.position.z - TILE;
+      if (mesh.userData.kind === "land"){
+        const pos = mesh.geometry.attributes.position;
+        let min=1e9, max=-1e9;
+        for (let i=0;i<pos.count;i++){
+          const x = pos.getX(i);
+          const zAbs = pos.getZ(i) + mesh.position.z + TILE*0.5;
+          const h = hfun(x, zAbs);
+          pos.setY(i, h);
+          if (h<min) min=h; if (h>max) max=h;
+        }
+        const cols = mesh.geometry.getAttribute("color");
+        for (let i=0;i<pos.count;i++){
+          const c = colorFor(pos.getY(i), min, max);
+          cols.setXYZ(i, c.r, c.g, c.b);
+        }
+        pos.needsUpdate = true; cols.needsUpdate = true;
+        mesh.geometry.computeVertexNormals();
+      } else {
+        const pos = mesh.userData.pos;
+        for (let i=0;i<pos.count;i++){
+          const x = pos.getX(i);
+          const zLocal = pos.getZ(i);
+          const zAbs = zLocal + mesh.position.z + TILE*0.5;
+          const base = hfun(x, zAbs);
+          pos.setY(i, base + 0.14);
+        }
+        pos.needsUpdate = true;
+        mesh.geometry.computeVertexNormals();
+      }
+    }
+  }
 
-  // input smoothing
-  mx += (mxTarget - mx) * SMOOTH;
-  my += (myTarget - my) * SMOOTH;
+  function animate(){
+    const dt = clock.getDelta();
 
-  // camera feel
-  camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
-  camera.lookAt(0, 1.5, -20);
-  camera.rotation.y += mx * YAW_STEER;
-  camera.rotation.x += -my * PITCH_STEER;
-  camera.rotation.z = -mx * 0.15;
+    // input smoothing
+    mx += (mxTarget - mx) * SMOOTH;
+    my += (myTarget - my) * SMOOTH;
 
-  // constant spin + hover turn
-  world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
+    // camera and world
+    camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
+    camera.lookAt(0, 1.5, -20);
+    camera.rotation.y += mx * YAW_STEER;
+    camera.rotation.x += -my * PITCH_STEER;
 
-  // treadmill forward (faster near top)
-  const dz = SPEED * dt * (1 + Math.max(0, -my) * 0.45);
-  landA.position.z += dz; landB.position.z += dz;
-  rivA.position.z  += dz; rivB.position.z  += dz;
+    // constant spin plus hover turn
+    world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
 
-  recycle(landA, landB); recycle(landB, landA);
-  recycle(rivA,  rivB ); recycle(rivB,  rivA );
+    // treadmill
+    const dz = SPEED * dt;
+    landA.position.z += dz; landB.position.z += dz;
+    rivA.position.z  += dz; rivB.position.z  += dz;
 
-  updateClouds(clouds, dt, dz);
-  meteor.update(dt, performance.now()*0.001);
+    recycle(landA, landB); recycle(landB, landA);
+    recycle(rivA,  rivB ); recycle(rivB,  rivA );
 
-  renderer.setClearColor(SKY, 1);
-  renderer.render(scene, camera);
-}
-
-// Use Three's own loop (don’t also call requestAnimationFrame inside animate)
-renderer.setAnimationLoop(animate);
-
-
+    renderer.setClearColor(SKY, 1);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
 })();
 </script>
 
