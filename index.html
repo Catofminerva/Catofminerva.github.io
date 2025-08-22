@@ -95,6 +95,15 @@ z-index: 1;
       border-right: 6px ridge var(--neon-purple);
       vertical-align: top;
     }
+    .sidebar{
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(13, 0, 34, 0.25) 0 12px,   /* was #0d0022 */
+    rgba(18, 0, 46, 0.25) 12px 24px /* was #12002e */
+  );
+  backdrop-filter: blur(1px);       /* keeps text readable */
+}
+    
     .content {
       padding: 10px 14px 20px;
       vertical-align: top;
