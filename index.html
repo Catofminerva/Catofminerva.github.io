@@ -59,19 +59,24 @@ html, body {
 z-index: 1;
     }
 
-    #glitter-title {
-  font-family: "IthacaLVB","Arial Rounded MT Bold","Helvetica Rounded",
+/* Title: crisp Y2K green, centered, subtle glow */
+#glitter-title{
+  font-family:"IthacaLVB","Arial Rounded MT Bold","Helvetica Rounded",
                "Trebuchet MS","Verdana","Comic Sans MS",system-ui,sans-serif;
   font-size: clamp(44px, 7vw, 86px);
-  line-height: 1.05;
-  letter-spacing: .5px;
-
-  color: var(--neon-green);                     /* Y2K green */
-  text-shadow: 0 0 6px #fff, 0 0 14px var(--neon-green), 0 0 28px var(--neon-green);
-  text-align: center;                           /* center the text */
-  margin: 12px auto 0;
-  position: relative;                           /* anchor ships */
+  line-height:1.05;
+  letter-spacing:.5px;
+  text-align:center;
+  color: var(--neon-green);
+  /* much lighter glow */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.35),
+    0 0 4px rgba(57,255,20,.55);
+  margin:12px auto 0;
+  padding-inline:120px;        /* reserve room for ships */
+  position:relative;
 }
+
 
 
     .marquee-wrap {
@@ -249,15 +254,21 @@ hr.retro {
 #glitter-title::before,
 #glitter-title::after{
   content:"";
-  position:absolute;
-  top:50%;
-  width:110px; height:70px;
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
+  position:absolute; top:50%;
+  width:100px; height:64px;               /* tweak if you want */
+  transform: translateY(-50%);            /* no horizontal push */
+  background-size:contain; background-repeat:no-repeat; background-position:center;
   image-rendering:pixelated;
-  filter: drop-shadow(0 0 6px var(--neon-blue));
+  filter: drop-shadow(0 0 4px var(--neon-blue));
   pointer-events:none;
+}
+#glitter-title::before{ left:12px;  background-image:url("starwar1.gif?v=1"); }
+#glitter-title::after { right:12px; background-image:url("ship.gif?v=1"); }
+
+/* smaller ships + padding on phones so they still fit */
+@media (max-width:560px){
+  #glitter-title{ padding-inline:80px; font-size:clamp(36px,8vw,64px); }
+  #glitter-title::before,#glitter-title::after{ width:72px; height:46px; }
 }
 
 #glitter-title::before{
