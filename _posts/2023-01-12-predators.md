@@ -22,56 +22,38 @@ Let’s begin with the foundational question: _Do animals matter morally?_
 
 Opponents of animal moral value often argue that traits like _advanced rationality_, _self-awareness_, or _moral agency_ are necessary for moral consideration. Since animals lack these, they fall outside our ethical circle.
 
-But this logic fails when applied consistently. If animals did not have moral value simply because they lack one or more of these traits, then marginal cases of humans would also be excluded. We do not want to say that they also lack moral value simply because they are missing those traits. These humans include, for example, infants, the severely cognitively disabled, or individuals with advanced dementia. They lack the same traits used to exclude animals, yet we (rightly) deem it abhorrent to deny them moral value.
+But this logic fails when applied consistently. If animals did not have moral value simply because they lack one or more of these conditions, then marginal cases of humans would also be excluded. We do not want to say that they also lack moral value simply because they are missing those conditions. These humans include, for example, infants, the severely cognitively disabled, or individuals with advanced dementia. They lack the same conditions used to exclude animals, yet we (rightly) deem it abhorrent to deny them moral value.
 
 Consider:
 
-*   **P1**: If moral value depends on trait _X_ (e.g., rationality), then any being lacking _X_ lacks moral value.
+*   **P1**: If moral value depends on condition _X_ (e.g., rationality), then any being lacking _X_ lacks moral value.
 *   **P2**: Marginal humans lack _X_.
 *   **C**: Therefore, marginal humans lack moral value.
 
-Yet almost no one accepts that conclusion. To resolve this, we have two options:
+For example, suppose you want to kill pigs and eat their flesh, and justify this by claiming “pigs lack self-awareness!” Granting that is the case, does lacking self-awareness justify slaughter? If so, then early infants and humans in persistent vegetative states (who also lack self-awareness) could presumably equally be farmed. 
+
+But almost no one accepts that conclusion. To resolve this, we have two options:
 
 1.  **Bite the bullet**: Deny moral value to marginal humans.
-2.  **Expand the moral circle**: Acknowledge that trait-based thresholds are flawed, and grant moral value to animals.
+2.  **Expand the moral circle**: Acknowledge that condition-based thresholds are flawed, and grant moral value to animals.
 
 Since the first option is morally repugnant—and likely unthinkable to most readers—the second option seems to be the one we must choose.
 
-To put the argument differently:
+Having established that condtions-based thresholds fail to exclude animals without also excluding marginal humans, critics might retreat to a simpler symmetry-breaker: _“But humans are special because they’re human.”_ In other words, the morally relevant differences between humans and nonhuman animals that would justify treating them differently in terms of mass killing for consumption are not about some vague idea of ‘intelligence’ or ‘rationality’ but about their humanity. ‘Humanity’ is the trait that breaks the symmetry. After all, the senile, infants, the mentally disabled, and other marginal cases all share the trait of being _human_.
 
-*   **P1**: If an ethical stance grants moral value to humans who lack trait _X_ (e.g., rationality), then it must grant moral value to animals who also lack _X_.
-*   **P2**: Humans such as infants or the severely disabled lack _X_ but still retain moral value.
-*   **C**: Therefore, animals lacking _X_ must also retain moral value.
-
-To reject the conclusion, one must either:
-
-1.  Deny moral value to marginal humans (a repugnant option), or
-2.  Identify a _morally relevant trait_ that marginal humans possess but animals lack.
-
-No such trait survives scrutiny. Appeals to special traits, “humanity,” or even potential fail (for instance, developmental rationality expected in infants breaks down when applied to permanently disabled humans).
-
-The default presumption is that when harm is inflicted, the burden of proof lies with the _perpetrator_, not the victim. To justify treating animals worse than humans, one must:
-
-1.  Identify a trait _T_ that distinguishes the groups, and
-2.  Show why _T_ is morally relevant to the specific harm being inflicted.
-
-Suppose you want to kill pigs for food and justify this by claiming “pigs lack self-awareness!” Does lacking self-awareness justify slaughter? If so, then humans in persistent vegetative states (who also lack self-awareness) could equally be farmed. Absent a coherent _T_, the differential treatment appears arbitrary.
-
-Having established that trait-based thresholds fail to exclude animals without also excluding marginal humans, critics might retreat to a simpler symmetry-breaker: _“But humans are special because they’re human.”_ In other words, the morally relevant differences between humans and nonhuman animals that would justify treating them differently in terms of mass killing for consumption are not about ‘intelligence’ or ‘rationality’ but about their humanity. ‘Humanity’ is the trait that breaks the symmetry. After all, the senile, infants, the mentally disabled, and other marginal cases all share the trait of being _human_.
-
-This objection typically manifests in two forms, one biological and the other tribal.
+This objection typically manifests in two forms, one biological and the other tribal. 
 
 ### 1\. Species Membership: DNA
 
 **The Claim**: “Humanity” is defined by membership in _Homo sapiens_—i.e., beings whose DNA traces back to _Homo erectus_. Thus, even marginal humans deserve moral consideration, while animals do not.
 
-**The Rebuttal**: Genealogy is morally irrelevant. Consider a thought experiment where archaeologists discover _Homo fictus_, a species identical to humans in intelligence, sentience, and social bonds, but with DNA tracing to a different hominin lineage. Under the species-membership criterion, farming, experimenting on, or slaughtering _Homo fictus_ would be morally permissible—a conclusion so repugnant it collapses the premise. If we wouldn’t exploit _Homo fictus_, we cannot justify exploiting pigs, cows, or chickens based solely on lineage. As A.W.F. Edwards noted, genetic differences among humans are non-trivial. If moral equality were based solely on biological similarity, any discovered dissimilarity (e.g., IQ variance, disease susceptibility) could justify hierarchy.
+**The Objection**: Genealogy is morally irrelevant. Consider a thought experiment where archaeologists discover _Homo fictus_, a species identical to humans in intelligence, sentience, and social bonds, but with DNA tracing to a different hominin lineage. Under the species-membership criterion, farming, experimenting on, or slaughtering _Homo fictus_ would be morally permissible—a conclusion so repugnant it collapses the premise. If we wouldn’t exploit _Homo fictus_, we cannot justify exploiting pigs, cows, or chickens based solely on lineage. As A.W.F. Edwards noted, genetic differences among humans are non-trivial. If moral equality were based solely on biological similarity, any discovered dissimilarity (e.g., IQ variance, disease susceptibility) could justify hierarchy.
 
 ### 2\. In-Group Membership: Tribal
 
 **The Claim**: “Human” signifies in-group loyalty. We prioritize humans for the same reason families prioritize kin: moral value derives from affiliation rather than solely from objective traits.
 
-**The Rebuttal**: This logic justifies _any_ arbitrary in-group preference. For example, slaveholders claimed moral superiority over enslaved people based on race, and patriarchs denied women rights based on sex. In-group bias, when universalized, licenses oppression. This argument has been, and continues to be, a playbook for justifying eugenics and caste systems.
+**The Objection**: This logic justifies _any_ arbitrary in-group preference. For example, slaveholders claimed moral superiority over enslaved people based on race, and patriarchs denied women rights based on sex. In-group bias, when universalized, licenses oppression. This argument has been, and continues to be, a playbook for justifying eugenics and caste systems.
 
 If neither traits, tribe, nor taxonomy can justify excluding animals, what remains? I argue that it is **sentience** (the capacity to have subjective experiences and feel pleasure and suffering). Every proposed “cutoff” for moral consideration—intelligence, language, moral agency—collapses under the weight of marginal human cases. Sentience is _both necessary and sufficient_ for moral relevance. To experience suffering, pleasure, or desire is to have interests that can be harmed or fulfilled.
 
