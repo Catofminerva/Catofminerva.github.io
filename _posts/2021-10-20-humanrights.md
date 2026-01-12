@@ -208,8 +208,6 @@ At any rate, I think this is the reason why we have yet to acknowledge the pligh
 *   Richard Rorty, ‘Human Rights, Rationality, and Sentimentality’, 2010 — This essays is a mere footnote to Rorty’s paper. That paper is the thread which ties in all the assumptions made herein, especially the idea of viewing morality as moral identity.
     
 
-Ali Al Maadeed is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
-
 [1](#footnote-anchor-1)
 
 In "Less Than Words Can Say," Richard Mitchell argues that language is crucial for the development of thought, and he uses a comparison between two fictional primitive tribes, the Jiukiukwe and the Manhassetites, to illustrate his point. These tribes represent two different approaches to language and its role in shaping thought and communication.
