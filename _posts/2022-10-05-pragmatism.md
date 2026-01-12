@@ -17,7 +17,6 @@ If your answer was something to the effect of “well all it means is that Bosto
 
 In other words, the words ‘knife’ and ‘table’ pick out certain objects in the world and the preposition ‘on the’ denotes a relation in space between the two objects, such that the proposition ‘the knife is on the table’ is true just in case it corresponds to that state of affairs. Merriam Webster defines ‘truth’ as much, suggesting that it is “the property (as of a statement) of being in accord with fact or reality” and The Oxford English Dictionary says of truth that it is “Conformity with fact; agreement with reality”. According to the Philsurveys, most philosophers, indeed 51.78%, agree with this notion of ‘truth’.  
 
-Ali Al Maadeed is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
 
 Pragmatism
 ----------
