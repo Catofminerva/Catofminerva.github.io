@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Is International Law ‘Really’ ‘Law’?"
+title: "Is International Law ‘really’ ‘Law’?"
 permalink: /internationallaw
 ---  
 
