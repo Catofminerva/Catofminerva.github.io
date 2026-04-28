@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ page.title }} · {{ site.title | default: "Ali's World" }}</title>
+  <title>{{ page.title }} · {{ site.title | default: "Galaxy 981" }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <style>
@@ -305,6 +305,59 @@
 .sidebar { width: 210px; }         /* fixed first column width hint */
 .content { width: auto; min-width: 0; }  /* allow wrapping inside */
 
+
+/* ---------- READING MODE OVERRIDES ---------- */
+
+/* 1. Take the global filter off the whole document; reapply only to chrome */
+html, body { filter: none; }
+.marquee-wrap, .button-strip, .sticker-wall, #glitter-title,
+.sidebar, .footer { filter: contrast(115%) saturate(125%); }
+
+/* 2. Give the post a real, opaque reading surface */
+.post {
+  background: #11071f;            /* solid deep purple-black */
+  color: #f3ecd9;                 /* warm cream, easy on the eyes */
+  font-family: Verdana, "Lucida Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 18px 20px 22px;
+}
+
+/* 3. Body copy color (overrides the cyan --ink inside posts only) */
+.post p,
+.post li,
+.post blockquote,
+.post section { color: #f3ecd9; }
+
+/* 4. Keep headings neon, but bump contrast against the new bg */
+.post h1, .post h2, .post h3 {
+  color: #ff79ff;                 /* hot pink-purple, still very 1999 */
+  text-shadow: 0 0 6px #8f00ff, 0 0 12px #4a008a;
+}
+
+/* 5. Links inside posts: visible without screaming */
+.post a          { color: #6cf3ff; text-decoration: underline; }
+.post a:visited  { color: #c79dff; }
+.post a:hover    { color: #fff48a; background: #1c0b35; }
+
+/* 6. Inline code / pre blocks with proper contrast */
+.post pre, .post code {
+  background: #050010;
+  color: #b6ffb6;
+  border: 1px solid #2a0d4a;
+  padding: 2px 6px;
+}
+
+/* 7. Meta line (date/author) — readable but secondary */
+.post .meta { color: #ffd76b; }
+
+/* 8. Blockquote */
+.post blockquote {
+  background: #1a0a30;
+  border-left: 4px solid #ff79ff;
+  color: #f3ecd9;
+}
+    
   </style>
 </head>
 <body>
@@ -327,7 +380,6 @@
             <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="Guestbook" class="nav-icon">Guestbook</a>
             <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="Kool Books" class="nav-icon">Kool Books</a>
             <a href="{{ '/Truth2.html' | relative_url }}"><img src="{{ '/math.gif' | relative_url }}" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="{{ '/oudsimulator.html' | relative_url }}">Oud Simulator</a>
             <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="Contact" class="nav-icon">Contact</a>
           </div>
 
