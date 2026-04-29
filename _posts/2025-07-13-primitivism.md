@@ -7,7 +7,7 @@ permalink: /primitivism
 
 ***Epistemic status**: I find the descriptive claims in this piece quite well-supported and the prescriptive claims considerably less so. The descriptive part of the essay is what I am most confident about; the prescriptive part is what I have spent the most time arguing with myself about, and the position I land on is the position that has survived the most rounds of self-objection rather than the one I find most emotionally appealing.*
 
-##I. The Original Affluent Society, Briefly
+## I. The Original Affluent Society, Briefly
 
 In 1968, Marshall Sahlins delivered a paper at a conference in Chicago called ‘Man the Hunter’ which became, in revised form, the most widely-cited essay in twentieth-century economic anthropology. The paper was called *The Original Affluent Society*, and its claim was that hunter-gatherer societies, judged by the standards relevant to actual human well-being, were considerably better off than agricultural and industrial societies have been since.
 
@@ -17,7 +17,7 @@ Sahlins's interpretive move was to ask why this had been so consistently misread
 
 This is, as far as I can tell, broadly correct. Not in every detail (Robert Kelly's *The Foraging Spectrum* (1995) is the standard work qualifying the Sahlins picture, and he points out that the !Kung numbers are from a relatively favourable ecological setting and that hunter-gatherers in less favourable settings worked considerably more, that hunger was not absent everywhere it was claimed to be absent, and that the cross-cultural variability among foraging peoples is much greater than the iconic Sahlins examples suggested). The strongest version of the *Original Affluent Society* thesis cannot survive Kelly's qualifications. But the *qualified* version of the thesis, i.e., that hunter-gatherers in reasonably favourable ecological conditions worked far less than agriculturalists, ate better, had more leisure, were healthier, and lived under social arrangements considerably less hierarchical than anything that came after, survives the qualifications more or less intact. This qualified version is what I take to be true, and it is enough to do the philosophical work I want it to do.
 
-##II. The Paleopathological Record
+## II. The Paleopathological Record
 
 The Sahlins case is contingent, in part, on ethnographic data from contemporary or recently-contacted foraging peoples. This is open to the objection that contemporary foragers are not representative of pre-agricultural humans, that they have been displaced into marginal lands, have had centuries of contact with state societies, and may have adapted in ways that obscure what life was actually like before agriculture. The objection has merit. It is met, however, by an entirely separate body of evidence: the bones.
 
@@ -29,7 +29,7 @@ This is, when you sit with it, a strange thing to know. The transition from fora
 
 I want to flag here that I am not making the strong primitivist claim that everything about agriculture was a mistake. I am making a narrower and better-supported claim that the transition was, on the available evidence, bad for the people who made it, and remained bad for their descendants for thousands of years. Whether the very long-term consequences of agriculture are net positive or net negative is a separate question, and one I will return to. The narrow claim is what the evidence actually supports.
 
-##III. Why Agriculture Won
+## III. Why Agriculture Won
 
 The obvious question, given the previous section, is that if agriculture was so much worse, why did it spread? There must be some sense in which it was *better* than foraging, or it would not have replaced it.
 
@@ -45,7 +45,7 @@ So the spread of agriculture is not a story of better technology beating worse t
 
 I want to draw out a structural point here. The mechanism by which agriculture won is a mechanism that does not select for *welfare* and rather selects for competitive expansion. These two things can come apart, and in this case they did. The result is a world in which the dominant mode of human life is the one that out-bred and out-coerced its alternatives, not the one that made human beings happiest or healthiest or most fulfilled. There is no reason in principle to expect such a world to be a particularly good one for the human beings living in it, and on the available evidence, it has not been.
 
-##IV. The Same Pattern Repeated
+## IV. The Same Pattern Repeated
 
 This is where the argument generalises in a way that I find more disturbing the longer I sit with it.
 
@@ -56,7 +56,7 @@ The shift from peasant agriculture to industrial wage labour, for example, was f
 The contemporary shift, in highly developed economies, from local employment to globalised supply chains shows a similar structure in which it produces more output and more aggregate wealth, but the welfare of the median worker in the affected regions has, over the past forty years, stagnated or declined. The aggregate gains are real but they are concentrated in a small fraction of the population, while the costs are distributed widely. The same mechanism is operating where a structural shift produces more total output and more competitive position for the systems that adopt it, while making most of the people involved worse off than they were before.
 I am not making the strong claim that everything is getting worse (I have a smartphone and central heating and modern medicine, which are real goods) and I am not making the strong claim that there is no progress, because some things have gotten better in ways that are unambiguously valuable. I am making the narrower claim that the *mechanism* by which large-scale human social transitions tend to happen is a mechanism that does not select for the welfare of the people involved, and that the result of running this mechanism for ten thousand years is a world in which the people living in it are, on a number of measures that matter, worse off than they would have been if the mechanism had not run.
 
-##V. The Standard Objections
+## V. The Standard Objections
 
 I want to spend a section on the standard objections because the objections are genuinely strong and the position has to earn its place against them.
 
@@ -73,7 +73,9 @@ This is also a real objection and the data Pinker draws on is partly real, but t
 This is a more complicated story than either Pinker tells or that primitivists tell. It is, I think, the actual story.
 
 *Objection 3: But culture.* The argument I have just made measures human welfare on a fairly limited set of axes (calories, height, leisure, mortality) and ignores the dimensions of human life on which civilisation has produced enormous gains, such as literature, science, philosophy, art, the cumulative cultural achievements that distinguish a literate post-Enlightenment society from a paleolithic band. A defender of civilisation might concede every empirical point I have made and respond: yes, but the achievements of human culture are worth the costs, and any accounting that does not include them is an accounting that fails to take seriously what it is to be a human being. I am the kind of person who reads books and listens to music and finds these things genuinely valuable, and any honest version of the argument has to take the objection seriously.
+
 The form of the objection, stripped to its skeleton, is thus: *but I would not want to live the way the Hadza live, because the things I value most are not available there, and therefore the civilisational arrangement that makes those things available is justified*. This is, I think, the form most contemporary defenders of civilisation actually have in mind when they push back on arguments like the one I have been making. It feels like a knockdown. I want to suggest that it is not a knockdown at all, and that the way it fails is interesting and is in fact a piece of evidence for the position it is meant to refute.
+
 The problem with the objection is that the *I* who is doing the valuing in *I would not want to live without these things* is not a stance-independent observer of the relative merits of civilisational and pre-civilisational life. It is a person whose entire apparatus of valuing (the categories under which experiences become salient, the things that count as fulfilment, the practices that constitute a life worth living, the very capacity to be the kind of person for whom *reading novels in the afternoon* is a coherent description of well-being) has been produced by the civilisation that is under examination. The desires that civilisation does not satisfy in pre-civilisational arrangements are desires that civilisation itself instilled. They are not pre-existing human needs that civilisation arose to meet; they are products of the cultural conditions civilisation produced, and they could not have been desires in any robust sense before the conditions that made them intelligible were in place. The Hadza do not lack these desires and suffer their absence in silence. They have a different set of desires, also culturally produced, which their arrangements satisfy adequately, and on the available evidence they appear to be at least as content with their lives as we are with ours, and probably considerably more so.
 
 Affluence, on the Sahlins definition, is the ratio of desires to means. There are two ways to be affluent: produce more, or want less. Industrial civilisation has bet everything on the first strategy and has produced an enormous amount, but it has also been continuously producing new wants at a rate that exceeds the rate at which the production keeps up with them, with the result that contemporary populations are, by their own self-report, no more satisfied than populations a generation or two ago and considerably less satisfied than the foraging baseline. The Hadza have bet on the second strategy and have ended up with a ratio of desires to means that comes out, on most days, in their favour. To then say *but I would not be content with the Hadza means* is to say *I have been successfully conditioned into wanting more than the Hadza want*, which is true and which is a description of the problem rather than a defence of the system that produced it.
@@ -82,7 +84,7 @@ There is a version of the objection that survives this response, which I want to
 
 So, yes, civilisation has produced things I value, and yes, my valuing of them is itself a product of the civilisation that produced them, and yes, I am stuck with both facts and have to live as the person I am rather than as some hypothetical version of myself who would have wanted different things. This is fine. It is also not a defence of civilisation in the sense the objection requires. It is a description of the inheritance one happens to have received, with no particular normative implications about whether the inheritance was, on net, worth what was paid for it. The accounting question survives the personal preferences. The Hadza could ask the same question about their inheritance and presumably answer it differently, and there is no neutral vantage from which to settle which of the two answers is correct. What we can say is that the civilisational answer to the question is a particular answer given by particular people whose capacity to give it has been shaped by the very thing the question is about, and that this fact should make us less confident in the answer than its defenders typically are.
 
-##VI. The Anti-Civ Position
+## VI. The Anti-Civ Position
 
 If you have followed me this far, you can see roughly where the argument is going. There is a position called *anti-civilisation*, or *primitivism*, which takes the descriptive claims I have just made and draws from them the conclusion that civilisation is a mistake, that we should dismantle it, and that the project of human flourishing requires a return to something closer to the foraging mode of life. The position has a small but serious literature (John Zerzan, Derrick Jensen, Kevin Tucker, the late John Moore) and it has a slightly larger fellow-traveller literature in writers like James Scott and David Graeber, who do not endorse the prescriptive part of primitivism but whose descriptive work largely supports the primitivist diagnosis.
 
@@ -99,7 +101,7 @@ The third reason is that I value some of the things civilisation has produced, i
 
 So I am not a primitivist. I find the descriptive case the primitivists make to be largely correct, and I find their prescriptive case to be largely wrong, and I think it is possible to hold both of these views consistently.
 
-##VII. What I Actually Think
+## VII. What I Actually Think
 
 Here is what I have come to think, after several years of working through this material.
 
@@ -121,7 +123,7 @@ The third piece is that contemporary industrial civilisation is the same pattern
 
 Though the strong primitivist wants us to dismantle civilisation now, accept the consequences, the consequences are coming anyway and at least this way we control them, I cannot endorse this because I do not think it is politically possible and I do not think anyone should endorse a programme of mass death even when the alternative is also a programme of mass death; the choice between two such programmes is not a choice anyone should be making. I merely think that the contemporary expressions of the civilisational dynamic are doing visible damage now, that some of them are doing more damage than others, that some of them can be resisted, modified, or scaled down before the larger system fails, and that the work of doing this is the work that the anti-civ analysis recommends as the response to a situation in which the strong prescription is unavailable. I think this is the position the evidence supports. I think it is also the position that, if more people held it, would produce slightly better outcomes than the alternatives. I do not think most people will hold it, because the ideology of progress is doing its work effectively and because the position is uncomfortable in ways that the alternatives are not.
 
-##VIII. A Note on Why This Matters
+## VIII. A Note on Why This Matters
 
 I want to end with a brief note on why I think this argument is worth making, given that the prescriptive payoff is, as I have just acknowledged, fairly modest.
 The reason is that the standard story of progress is not a neutral historical claim. It is a piece of ideological work that is, right now, doing significant damage. It is the story under which proposals to scale back, slow down, or refuse certain technological developments are dismissed as Luddite or backward-looking. It is the story under which the costs of the present arrangement are treated as either non-existent or as the unavoidable price of being a civilised people. It is the story under which the obvious fact that most people, most of the time, throughout most of recorded history, have been worse off than they would have been under the foraging mode of life, is treated as a pre-historical curiosity rather than as a load-bearing fact about what kind of civilisation we are.
