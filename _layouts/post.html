@@ -306,56 +306,58 @@
 .content { width: auto; min-width: 0; }  /* allow wrapping inside */
 
 
-/* ---------- READING MODE OVERRIDES ---------- */
+/* ---------- READING MODE OVERRIDES (light panel) ---------- */
 
-/* 1. Take the global filter off the whole document; reapply only to chrome */
+/* 1. Strip the global filter; reapply only to the loud chrome */
 html, body { filter: none; }
 .marquee-wrap, .button-strip, .sticker-wall, #glitter-title,
 .sidebar, .footer { filter: contrast(115%) saturate(125%); }
 
-/* 2. Give the post a real, opaque reading surface */
+/* 2. Light reading surface for the post */
 .post {
-  background: #11071f;            /* solid deep purple-black */
-  color: #f3ecd9;                 /* warm cream, easy on the eyes */
+  background: #fdf6e3;            /* warm parchment */
+  color: #1a1a1a;                 /* near-black, softer than pure #000 */
   font-family: Verdana, "Lucida Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.7;
   padding: 18px 20px 22px;
+  border: 4px groove #8f00ff;     /* keep the neon frame */
 }
 
 /* 3. Body copy color (overrides the cyan --ink inside posts only) */
 .post p,
 .post li,
 .post blockquote,
-.post section { color: #f3ecd9; }
+.post section { color: #1a1a1a; }
 
-/* 4. Keep headings neon, but bump contrast against the new bg */
+/* 4. Headings: dark purple pops nicely on cream, still on-theme */
 .post h1, .post h2, .post h3 {
-  color: #ff79ff;                 /* hot pink-purple, still very 1999 */
-  text-shadow: 0 0 6px #8f00ff, 0 0 12px #4a008a;
+  color: #5b008a;
+  text-shadow: none;              /* glow doesn't help on a light bg */
 }
 
-/* 5. Links inside posts: visible without screaming */
-.post a          { color: #6cf3ff; text-decoration: underline; }
-.post a:visited  { color: #c79dff; }
-.post a:hover    { color: #fff48a; background: #1c0b35; }
+/* 5. Classic 90s link colors — high contrast on cream */
+.post a          { color: #0000cc; text-decoration: underline; }
+.post a:visited  { color: #6a0dad; }
+.post a:hover    { color: #cc0066; background: #fff2b8; }
 
-/* 6. Inline code / pre blocks with proper contrast */
+/* 6. Code blocks: dark-on-light, monospace */
 .post pre, .post code {
-  background: #050010;
-  color: #b6ffb6;
-  border: 1px solid #2a0d4a;
+  background: #efe7d0;
+  color: #1a1a1a;
+  border: 1px solid #c9bfa3;
   padding: 2px 6px;
+  font-family: "Courier New", monospace;
 }
 
-/* 7. Meta line (date/author) — readable but secondary */
-.post .meta { color: #ffd76b; }
+/* 7. Meta line (date/author) — muted but legible */
+.post .meta { color: #6a0dad; }
 
 /* 8. Blockquote */
 .post blockquote {
-  background: #1a0a30;
-  border-left: 4px solid #ff79ff;
-  color: #f3ecd9;
+  background: #f5ecd0;
+  border-left: 4px solid #5b008a;
+  color: #1a1a1a;
 }
     
   </style>
