@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "We Are Worse Off Than the Hadza, And This Is a Problem"
