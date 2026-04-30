@@ -1817,24 +1817,25 @@ window.addEventListener('load', () => {
 
 
 
+<script type="module">
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
- 
+
 (() => {
   const canvas = document.getElementById("threebg");
   if (!canvas) return;
- 
+
   const prefersReduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const reduceScale   = prefersReduce ? 0.7 : 1;
- 
+
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
   renderer.setPixelRatio(1);
   canvas.style.imageRendering = "pixelated";
- 
+
   const scene = new THREE.Scene();
   const SKY = 0xb36af0;
   scene.fog = new THREE.Fog(SKY, 18, 140);
- 
-  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 600);
+
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 400);
   function fit(){
     const w = innerWidth, h = innerHeight;
     renderer.setSize(w, h, false);
@@ -1848,16 +1849,16 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     visualViewport.addEventListener("scroll",  fit, { passive: true });
   }
   camera.position.set(0, 3.0, 12);
- 
+
   // Lights
-  scene.add(new THREE.HemisphereLight(0xffe6ff, 0x221533, 0.85));
+  scene.add(new THREE.HemisphereLight(0xffe6ff, 0x221533, 0.8));
   const sun = new THREE.DirectionalLight(0xffffff, 0.9);
   sun.position.set(-2.5, 4.5, 1.5);
   scene.add(sun);
- 
-  // Skydome (bigger so stars/planet sit comfortably inside)
+
+  // Skydome gradient
   {
-    const g = new THREE.SphereGeometry(280, 16, 12);
+    const g = new THREE.SphereGeometry(220, 16, 12);
     const m = new THREE.ShaderMaterial({
       side: THREE.BackSide,
       uniforms: {
@@ -1876,94 +1877,17 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     });
     scene.add(new THREE.Mesh(g, m));
   }
- 
-  // === Twinkling stars (Galaxy 981 vibes) ==========================
-  const starsMat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, fog: false,
-    uniforms: { uTime: { value: 0 } },
-    vertexShader: `
-      uniform float uTime;
-      attribute float aPhase, aSpeed, aSize;
-      varying float vTw;
-      void main(){
-        float tw = 0.5 + 0.5*sin(uTime*aSpeed + aPhase);
-        vTw = tw;
-        gl_PointSize = aSize * (0.7 + tw*0.7);
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }`,
-    fragmentShader: `
-      varying float vTw;
-      void main(){
-        vec2 p = gl_PointCoord - 0.5;
-        float d = length(p);
-        float a = smoothstep(0.5, 0.05, d);
-        // sparkle cross
-        float cx = max(0.0, 1.0 - abs(p.x)*7.0) * max(0.0, 1.0 - abs(p.y)*0.7);
-        float cy = max(0.0, 1.0 - abs(p.y)*7.0) * max(0.0, 1.0 - abs(p.x)*0.7);
-        a = max(a, (cx + cy)*0.55);
-        gl_FragColor = vec4(vec3(1.0, 0.96, 1.0), a * (0.25 + vTw*0.75));
-      }`
-  });
-  {
-    const N = 700;
-    const pos = new Float32Array(N*3);
-    const phase = new Float32Array(N);
-    const speed = new Float32Array(N);
-    const size  = new Float32Array(N);
-    for (let i=0;i<N;i++){
-      const u = Math.random()*Math.PI*2;
-      const v = Math.acos(1 - Math.random()*0.9); // bias upward
-      const r = 240;
-      pos[i*3]   = r * Math.sin(v) * Math.cos(u);
-      pos[i*3+1] = r * Math.cos(v) * 0.5 + 28;
-      pos[i*3+2] = r * Math.sin(v) * Math.sin(u);
-      phase[i] = Math.random() * Math.PI * 2;
-      speed[i] = 0.7 + Math.random()*1.8;
-      size[i]  = 1.5 + Math.random()*3.5;
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    geo.setAttribute("aPhase",   new THREE.BufferAttribute(phase, 1));
-    geo.setAttribute("aSpeed",   new THREE.BufferAttribute(speed, 1));
-    geo.setAttribute("aSize",    new THREE.BufferAttribute(size, 1));
-    scene.add(new THREE.Points(geo, starsMat));
-  }
-  // =================================================================
- 
-  // === Ringed planet + small moon ==================================
-  const planet = new THREE.Group();
-  {
-    const ball = new THREE.Mesh(
-      new THREE.SphereGeometry(7, 18, 14),
-      new THREE.MeshLambertMaterial({ color: 0xff6ec7, emissive: 0x551133, flatShading: true })
-    );
-    const ring = new THREE.Mesh(
-      new THREE.RingGeometry(9.5, 12.5, 48),
-      new THREE.MeshBasicMaterial({
-        color: 0xffd1f4, side: THREE.DoubleSide,
-        transparent: true, opacity: 0.55, fog: false
-      })
-    );
-    ring.rotation.x = Math.PI/2 - 0.35;
-    planet.add(ball, ring);
-    planet.position.set(70, 38, -160);
-    scene.add(planet);
-  }
-  const moon = new THREE.Mesh(
-    new THREE.SphereGeometry(2.0, 12, 10),
-    new THREE.MeshLambertMaterial({ color: 0xfff2c1, emissive: 0x3b2c0f, flatShading: true })
-  );
-  moon.position.set(-58, 32, -130);
-  scene.add(moon);
-  // =================================================================
- 
+
   // ===== Terrain constants
   const WORLD_W = 120, TILE = 120, SX = 96, SZ = 96;
-  const RIVER_WIDTH     = 18;
-  const CHANNEL_MARGIN  = 4;
-  const CHANNEL_DEPTH   = 0.5;
+
+  // River + channel carve that prevents green land poking through
+  const RIVER_WIDTH     = 18;     // water strip width
+  const CHANNEL_MARGIN  = 4;      // carve a bit wider than the water
+  const CHANNEL_DEPTH   = 0.5;    // how deep to push the bed
   const riverHalf       = (RIVER_WIDTH + CHANNEL_MARGIN) * 0.5;
- 
+
+  // Faux noise
   function fnoise(x, z){
     return (
       Math.sin(x*0.25 + z*0.33) +
@@ -1971,17 +1895,18 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
       Math.sin(x*1.70 + z*1.30)
     ) / 3;
   }
- 
+
+  // Height function, plus a center channel carved by a gentle Gaussian
   function hfun(x, z){
     const nx = x / WORLD_W;
     const left  = 5.0 * Math.exp(-Math.pow(((nx + 0.38)/0.22), 2));
     const right = 5.0 * Math.exp(-Math.pow(((nx - 0.38)/0.22), 2));
     const carve = -2.1 * Math.exp(-Math.pow((nx/0.26), 2)) - 0.42 + 0.22*Math.sin(z*0.06);
     const bumps = 0.9 * fnoise(x*0.8, z*0.8) + 0.35 * fnoise(x*1.7, z*1.3);
-    const channel = -CHANNEL_DEPTH * Math.exp(-Math.pow(x / riverHalf, 2));
+    const channel = -CHANNEL_DEPTH * Math.exp(-Math.pow(x / riverHalf, 2)); // lowers land under river
     return left + right + carve + bumps + channel;
   }
- 
+
   function colorFor(h, minH, maxH){
     const t = Math.min(1, Math.max(0, (h - minH) / (maxH - minH + 1e-6)));
     const stops = [
@@ -1993,7 +1918,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     const u = (t - a.t) / Math.max(1e-6, b.t - a.t);
     return new THREE.Color(a.c).lerp(new THREE.Color(b.c), u);
   }
- 
+
   function makeLand(zoff){
     const geo = new THREE.PlaneGeometry(WORLD_W, TILE, SX, SZ);
     geo.rotateX(-Math.PI/2);
@@ -2001,7 +1926,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     let min=1e9, max=-1e9;
     for (let i=0;i<pos.count;i++){
       const x = pos.getX(i);
-      const zAbs = pos.getZ(i) + zoff - TILE*0.5;   // = world Z
+      const zAbs = pos.getZ(i) + zoff - TILE*0.5;
       const h = hfun(x, zAbs);
       pos.setY(i, h);
       if (h<min) min=h; if (h>max) max=h;
@@ -2019,254 +1944,150 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
     m.userData.kind = "land";
     return m;
   }
- 
+
   function makeRiver(zoff){
-    const sx = 48, sz = 64; // a touch coarser so wave updates stay cheap
-    const geo = new THREE.PlaneGeometry(RIVER_WIDTH, TILE, sx, sz);
+    const width = RIVER_WIDTH, sx=64, sz=80;
+    const geo = new THREE.PlaneGeometry(width, TILE, sx, sz);
     geo.rotateX(-Math.PI/2);
     const pos = geo.attributes.position;
-    const base = new Float32Array(pos.count);
     for (let i=0;i<pos.count;i++){
       const x = pos.getX(i);
       const zAbs = pos.getZ(i) + zoff - TILE*0.5;
-      const b = hfun(x, zAbs) + 0.14;
-      pos.setY(i, b);
-      base[i] = b;
+      const base = hfun(x, zAbs);
+      pos.setY(i, base + 0.14);                 // a touch higher than the bed
     }
     geo.computeVertexNormals();
     const mat = new THREE.MeshPhongMaterial({
-      color: 0x1c46ff, emissive: 0x0a155f, shininess: 90,
-      flatShading: true, polygonOffset: true,
-      polygonOffsetFactor: -2, polygonOffsetUnits: -2
+      color: 0x1c46ff,
+      emissive: 0x0a155f,
+      shininess: 70,
+      flatShading: true,
+      polygonOffset: true,                       // keep water in front of land to avoid “green residues”
+      polygonOffsetFactor: -2,
+      polygonOffsetUnits: -2
     });
     const m = new THREE.Mesh(geo, mat);
     m.position.z = zoff - TILE*0.5;
     m.userData.kind = "river";
-    m.userData.pos  = pos;
-    m.userData.base = base; // unanimated bed heights
+    m.userData.pos = pos;
     return m;
   }
- 
-  // === Trees =======================================================
-  // Shared geometries / materials so we can spawn lots cheaply.
-  const TRUNK_GEO  = new THREE.CylinderGeometry(0.10, 0.14, 0.7, 5);
-  const LEAVES_GEO = new THREE.ConeGeometry(0.7, 1.6, 6);
-  const TRUNK_MAT  = new THREE.MeshLambertMaterial({ color: 0x5a2e0d, flatShading: true });
-  const LEAF_MATS  = [
-    new THREE.MeshLambertMaterial({ color: 0x1f8a3a, flatShading: true }),
-    new THREE.MeshLambertMaterial({ color: 0x2a9c46, flatShading: true }),
-    new THREE.MeshLambertMaterial({ color: 0x158244, flatShading: true }),
-    new THREE.MeshLambertMaterial({ color: 0x3aa860, flatShading: true })
-  ];
- 
-  function makeTreesForLand(meshZ){
-    const group = new THREE.Group();
-    let placed = 0, attempts = 0;
-    while (placed < 55 && attempts < 220){
-      attempts++;
-      const side = Math.random() < 0.5 ? -1 : 1;
-      const x = side * (riverHalf + 2.5 + Math.random() * 38);
-      if (Math.abs(x) > WORLD_W*0.46) continue;
-      const localZ = (Math.random() - 0.5) * TILE;
-      const zAbs   = localZ + meshZ;            // world Z
-      const h = hfun(x, zAbs);
-      // skip water + over-tall peaks
-      if (h < 0.25 || h > 4.4) continue;
- 
-      const tree = new THREE.Group();
-      const trunk  = new THREE.Mesh(TRUNK_GEO, TRUNK_MAT);
-      const leaves = new THREE.Mesh(LEAVES_GEO, LEAF_MATS[Math.floor(Math.random()*LEAF_MATS.length)]);
-      trunk.position.y  = 0.35;
-      leaves.position.y = 1.15;
-      tree.add(trunk, leaves);
-      tree.position.set(x, h - 0.05, localZ);
-      tree.scale.setScalar(0.65 + Math.random()*0.95);
-      tree.rotation.y = Math.random() * Math.PI * 2;
-      group.add(tree);
-      placed++;
+
+// === Cloud layer (soft billboards) — no engine fog, manual depth fade
+function makeCloudLayer(camera){
+  const group = new THREE.Group();
+  const puffGeo = new THREE.PlaneGeometry(1, 1);
+
+  function puff(w, h){
+    const mat = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      // fog: false  // we do our own fade
+      uniforms: {
+        uColor: { value: new THREE.Color(0xffffff) },
+        uAlpha: { value: 0.23 }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        varying float vDepth;                 // camera-space depth
+        void main(){
+          vUv = uv;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          vDepth = -mvPosition.z;
+          gl_Position = projectionMatrix * mvPosition;
+        }`,
+      fragmentShader: `
+        uniform vec3  uColor;
+        uniform float uAlpha;
+        varying vec2  vUv;
+        varying float vDepth;
+        void main(){
+          vec2 p = vUv - 0.5;
+          float d  = length(p * vec2(1.4, 1.0));     // round puff
+          float soft = smoothstep(0.52, 0.20, d);    // feathered edge
+          float df   = smoothstep(10.0, 140.0, vDepth); // manual distance fade
+          gl_FragColor = vec4(uColor, soft * uAlpha * df);
+        }`
+    });
+    const m = new THREE.Mesh(puffGeo, mat);
+    m.renderOrder = 10;
+    m.scale.set(w, h, 1);
+    return m;
+  }
+
+  for (let i=0;i<18;i++){
+    const w = 20 + Math.random()*28;
+    const h =  8 + Math.random()*14;
+    const y = 20 + Math.random()*2.0;
+    const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
+    const z = -TILE + Math.random()*TILE*3.0;
+
+    const cloud = new THREE.Group();
+    const puffs = 3 + Math.floor(Math.random()*3);
+    for (let k=0;k<puffs;k++){
+      const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
+      m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
+      cloud.add(m);
     }
-    return group;
+    cloud.position.set(x, y, z);
+    cloud.userData.speed = 0.2 + Math.random()*0.3;      // z drift
+    cloud.userData.wind  = -0.15 + Math.random()*0.3;    // x drift
+    group.add(cloud);
   }
- 
-  function attachTrees(landMesh){
-    if (landMesh.userData.trees) landMesh.remove(landMesh.userData.trees);
-    const trees = makeTreesForLand(landMesh.position.z);
-    landMesh.add(trees);
-    landMesh.userData.trees = trees;
-  }
-  // =================================================================
- 
-  // === Floating Y2K wireframe shapes ===============================
-  function makeFloaters(){
-    const group = new THREE.Group();
-    const palette = [0x00e5ff, 0xff66cc, 0x39ff14, 0xffff33, 0x8f00ff, 0xff8a3a];
-    const shapes = [
-      new THREE.OctahedronGeometry(1.0, 0),
-      new THREE.TetrahedronGeometry(1.1, 0),
-      new THREE.IcosahedronGeometry(1.0, 0),
-      new THREE.BoxGeometry(1.4, 1.4, 1.4),
-      new THREE.TorusGeometry(0.9, 0.32, 6, 12)
-    ];
-    for (let i=0;i<14;i++){
-      const g = shapes[i % shapes.length];
-      const wire = new THREE.WireframeGeometry(g);
-      const mat = new THREE.LineBasicMaterial({
-        color: palette[i % palette.length],
-        transparent: true, opacity: 0.78
-      });
-      const m = new THREE.LineSegments(wire, mat);
-      m.position.set(
-        -WORLD_W*0.5 + Math.random()*WORLD_W,
-        7 + Math.random()*16,
-        -TILE*0.4 + Math.random()*TILE*1.4
-      );
-      m.scale.setScalar(0.7 + Math.random()*1.5);
-      m.userData = {
-        spinX: (Math.random()-0.5)*0.6,
-        spinY: (Math.random()-0.5)*0.6,
-        spinZ: (Math.random()-0.5)*0.4,
-        bobPh: Math.random()*Math.PI*2,
-        bobAmp: 0.3 + Math.random()*0.8
-      };
-      m.userData.baseY = m.position.y;
-      group.add(m);
-    }
-    return group;
-  }
- 
-  function updateFloaters(group, dt, t, dz){
-    for (const m of group.children){
-      m.rotation.x += m.userData.spinX * dt;
-      m.rotation.y += m.userData.spinY * dt;
-      m.rotation.z += m.userData.spinZ * dt;
-      m.position.y = m.userData.baseY + Math.sin(t*0.8 + m.userData.bobPh) * m.userData.bobAmp;
-      m.position.z += dz * 0.6;
-      if (m.position.z > TILE*0.6){
-        m.position.z -= TILE*2.0;
-        m.position.x = -WORLD_W*0.5 + Math.random()*WORLD_W;
-        m.userData.baseY = 7 + Math.random()*16;
-      }
+
+  group.userData.billboardTo = camera;
+  return group;
+}
+
+function updateClouds(group, dt, dz){
+  const cam = group.userData.billboardTo;
+  for (const c of group.children){
+    // face the camera in yaw only: keep current height so clouds stay “up”
+    c.lookAt(cam.position.x, c.position.y, cam.position.z);
+
+    c.position.z += dz * 0.45 * c.userData.speed;  // gentle parallax
+    c.position.x += dt * c.userData.wind;
+
+    if (c.position.z > TILE*1.2){
+      c.position.z -= TILE*2.4;
+      c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
     }
   }
-  // =================================================================
- 
-  // === Cloud layer (kept) ==========================================
-  function makeCloudLayer(camera){
-    const group = new THREE.Group();
-    const puffGeo = new THREE.PlaneGeometry(1, 1);
-    function puff(w, h){
-      const mat = new THREE.ShaderMaterial({
-        transparent: true, depthWrite: false,
-        uniforms: { uColor: { value: new THREE.Color(0xffffff) }, uAlpha: { value: 0.23 } },
-        vertexShader: `
-          varying vec2 vUv;
-          varying float vDepth;
-          void main(){
-            vUv = uv;
-            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            vDepth = -mvPosition.z;
-            gl_Position = projectionMatrix * mvPosition;
-          }`,
-        fragmentShader: `
-          uniform vec3  uColor;
-          uniform float uAlpha;
-          varying vec2  vUv;
-          varying float vDepth;
-          void main(){
-            vec2 p = vUv - 0.5;
-            float d  = length(p * vec2(1.4, 1.0));
-            float soft = smoothstep(0.52, 0.20, d);
-            float df   = smoothstep(10.0, 140.0, vDepth);
-            gl_FragColor = vec4(uColor, soft * uAlpha * df);
-          }`
-      });
-      const m = new THREE.Mesh(puffGeo, mat);
-      m.renderOrder = 10;
-      m.scale.set(w, h, 1);
-      return m;
-    }
-    for (let i=0;i<18;i++){
-      const w = 20 + Math.random()*28;
-      const h =  8 + Math.random()*14;
-      const y = 20 + Math.random()*2.0;
-      const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
-      const z = -TILE + Math.random()*TILE*3.0;
-      const cloud = new THREE.Group();
-      const puffs = 3 + Math.floor(Math.random()*3);
-      for (let k=0;k<puffs;k++){
-        const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
-        m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
-        cloud.add(m);
-      }
-      cloud.position.set(x, y, z);
-      cloud.userData.speed = 0.2 + Math.random()*0.3;
-      cloud.userData.wind  = -0.15 + Math.random()*0.3;
-      group.add(cloud);
-    }
-    group.userData.billboardTo = camera;
-    return group;
-  }
- 
-  function updateClouds(group, dt, dz){
-    const cam = group.userData.billboardTo;
-    for (const c of group.children){
-      c.lookAt(cam.position.x, c.position.y, cam.position.z);
-      c.position.z += dz * 0.45 * c.userData.speed;
-      c.position.x += dt * c.userData.wind;
-      if (c.position.z > TILE*1.2){
-        c.position.z -= TILE*2.4;
-        c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
-      }
-    }
-  }
-  // =================================================================
- 
-  // World assembly
+}
+
+
+
+
+  
+  // World
   const landA = makeLand(0), landB = makeLand(TILE);
   const rivA  = makeRiver(0), rivB  = makeRiver(TILE);
-  attachTrees(landA);
-  attachTrees(landB);
- 
   const world = new THREE.Group();
   world.add(landA, landB, rivA, rivB);
   scene.add(world);
- 
-  const clouds   = makeCloudLayer(camera); scene.add(clouds);
-  const floaters = makeFloaters();         scene.add(floaters);
- 
+const clouds = makeCloudLayer(camera);
+scene.add(clouds);
+
+  
   const clock = new THREE.Clock();
-  const SPEED        = 2.1  * reduceScale;
-  const SPIN_RATE    = 0.06 * reduceScale;
-  const POINTER_TURN = 0.90 * reduceScale;
- 
+  const SPEED       = 2.1  * reduceScale;   // forward scroll
+  const SPIN_RATE   = 0.06 * reduceScale;   // constant spin
+  const POINTER_TURN= 0.90 * reduceScale;   // extra spin from hover, rad/s at full edge
+
+  // Hover steering tuned to feel like “you’re in there”
   const isTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
   let mx=0, my=0, mxTarget=0, myTarget=0;
   const DESKTOP_MULT = 4.0;
   const YAW_STEER    = isTouch ? 0.020 : 0.020 * DESKTOP_MULT;
   const PITCH_STEER  = isTouch ? 0.010 : 0.010 * DESKTOP_MULT;
-  const SMOOTH       = isTouch ? 0.10  : 0.36;
- 
+  const SMOOTH       = isTouch ? 0.10 : 0.36;
+
   addEventListener("pointermove", e => {
     mxTarget = (e.clientX / innerWidth  - 0.5);
     myTarget = (e.clientY / innerHeight - 0.5);
   }, { passive: true });
   addEventListener("pointerleave", () => { mxTarget = 0; myTarget = 0; }, { passive: true });
- 
-  // Wave displacement on top of stored bed heights
-  function animateRiverWaves(mesh, t){
-    const pos  = mesh.userData.pos;
-    const base = mesh.userData.base;
-    for (let i=0;i<pos.count;i++){
-      const x = pos.getX(i);
-      const zLocal = pos.getZ(i);
-      const zAbs = zLocal + mesh.position.z;
-      const wave = Math.sin(zAbs*0.45 + t*1.6) * 0.05 +
-                   Math.sin(x*0.7   - t*1.1) * 0.04;
-      pos.setY(i, base[i] + wave);
-    }
-    pos.needsUpdate = true;
-  }
- 
+
   function recycle(mesh, other){
     if (mesh.position.z > TILE*0.5){
       mesh.position.z = other.position.z - TILE;
@@ -2275,7 +2096,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
         let min=1e9, max=-1e9;
         for (let i=0;i<pos.count;i++){
           const x = pos.getX(i);
-          const zAbs = pos.getZ(i) + mesh.position.z; // FIXED: was off by TILE/2
+          const zAbs = pos.getZ(i) + mesh.position.z + TILE*0.5;
           const h = hfun(x, zAbs);
           pos.setY(i, h);
           if (h<min) min=h; if (h>max) max=h;
@@ -2287,63 +2108,53 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
         }
         pos.needsUpdate = true; cols.needsUpdate = true;
         mesh.geometry.computeVertexNormals();
-        attachTrees(mesh); // regrow forest for the new section
       } else {
-        const pos  = mesh.userData.pos;
-        const base = mesh.userData.base;
+        const pos = mesh.userData.pos;
         for (let i=0;i<pos.count;i++){
           const x = pos.getX(i);
-          const zAbs = pos.getZ(i) + mesh.position.z; // FIXED: was off by TILE/2
-          base[i] = hfun(x, zAbs) + 0.14;
-          pos.setY(i, base[i]);
+          const zLocal = pos.getZ(i);
+          const zAbs = zLocal + mesh.position.z + TILE*0.5;
+          const base = hfun(x, zAbs);
+          pos.setY(i, base + 0.14);
         }
         pos.needsUpdate = true;
         mesh.geometry.computeVertexNormals();
       }
     }
   }
- 
+
   function animate(){
     const dt = clock.getDelta();
-    const t  = clock.getElapsedTime();
- 
+
     // input smoothing
     mx += (mxTarget - mx) * SMOOTH;
     my += (myTarget - my) * SMOOTH;
- 
+
+    // camera and world
     camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
     camera.lookAt(0, 1.5, -20);
-    camera.rotation.y +=  mx * YAW_STEER;
+    camera.rotation.y += mx * YAW_STEER;
     camera.rotation.x += -my * PITCH_STEER;
- 
+
+    // constant spin plus hover turn
     world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
- 
-    // celestial bodies
-    starsMat.uniforms.uTime.value = t;
-    planet.rotation.y           += dt * 0.05;
-    planet.children[0].rotation.y += dt * 0.18; // the ball spins faster than the rings
-    moon.rotation.y             += dt * 0.10;
- 
+
     // treadmill
     const dz = SPEED * dt;
     landA.position.z += dz; landB.position.z += dz;
     rivA.position.z  += dz; rivB.position.z  += dz;
- 
-    animateRiverWaves(rivA, t);
-    animateRiverWaves(rivB, t);
- 
+
     updateClouds(clouds, dt, dz);
-    updateFloaters(floaters, dt, t, dz);
- 
     recycle(landA, landB); recycle(landB, landA);
     recycle(rivA,  rivB ); recycle(rivB,  rivA );
- 
+
     renderer.setClearColor(SKY, 1);
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
   }
   animate();
 })();
+</script>
 
 
 
