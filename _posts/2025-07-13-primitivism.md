@@ -7,7 +7,7 @@ permalink: /primitivism
 
 ***Epistemic status**: I find the descriptive claims in this piece quite well-supported and the prescriptive claims considerably less so. The descriptive part of the essay is what I am most confident about; the prescriptive part is what I have spent the most time arguing with myself about, and the position I land on is the position that has survived the most rounds of self-objection rather than the one I find most emotionally appealing.*
 
-## I. The Original Affluent Society, Briefly
+## I. The Original Affluent Society
 
 In 1968, Marshall Sahlins delivered a paper at a conference in Chicago called ‘Man the Hunter’ which became, in revised form, the most widely-cited essay in twentieth-century economic anthropology. The paper was called *The Original Affluent Society*, and its claim was that hunter-gatherer societies, judged by the standards relevant to actual human well-being, were considerably better off than agricultural and industrial societies have been since.
 
