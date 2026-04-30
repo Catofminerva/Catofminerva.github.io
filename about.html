@@ -331,5 +331,486 @@
       });
     })();
   </script>
+
+<!-- =================================================================
+     BLACK MESA TUNNEL — paste this entire block right before </body>
+     Nothing else needs to change in your file.
+     ================================================================ -->
+ 
+<canvas id="threebg" aria-hidden="true"></canvas>
+ 
+<style>
+  #threebg{
+    position: fixed; inset: 0;
+    width: 100vw; height: 100svh;
+    z-index: 0; pointer-events: none;
+    image-rendering: pixelated;
+  }
+  @supports not (height: 100svh){ #threebg{ height: 100vh; } }
+ 
+  /* Make sure the page sits on top of the world */
+  .page{ position: relative; z-index: 1; filter: contrast(115%) saturate(125%); }
+ 
+  /* The body filter on this page breaks fixed positioning for the canvas.
+     Override it; we re-apply the visual pop to .page above. */
+  html, body{ filter: none !important; background: #07090c; }
+</style>
+ 
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+ 
+(() => {
+  const canvas = document.getElementById("threebg");
+  if (!canvas) return;
+ 
+  const prefersReduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceScale   = prefersReduce ? 0.5 : 1;
+ 
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+  renderer.setPixelRatio(1);
+ 
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x07090c, 0.028);
+ 
+  const camera = new THREE.PerspectiveCamera(72, 1, 0.1, 200);
+  camera.position.set(0, 2.0, 0);
+ 
+  function fit(){
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  addEventListener("resize", fit, { passive: true });
+  if (window.visualViewport){
+    visualViewport.addEventListener("resize", fit, { passive: true });
+    visualViewport.addEventListener("scroll",  fit, { passive: true });
+  }
+ 
+  renderer.setClearColor(0x07090c, 1);
+ 
+  // ---------- Lights ----------
+  scene.add(new THREE.AmbientLight(0x2a2e35, 0.55));
+  const fill = new THREE.DirectionalLight(0x9aa0a8, 0.25);
+  fill.position.set(2, 5, -1);
+  scene.add(fill);
+ 
+  // ---------- Procedural textures ----------
+  function makeHazardTex(){
+    const c = document.createElement('canvas');
+    c.width = 128; c.height = 32;
+    const x = c.getContext('2d');
+    x.fillStyle = '#1a1a1a'; x.fillRect(0,0,128,32);
+    x.fillStyle = '#ffc107';
+    for (let i=-32;i<160;i+=24){
+      x.beginPath();
+      x.moveTo(i,0); x.lineTo(i+12,0); x.lineTo(i-4,32); x.lineTo(i-16,32);
+      x.closePath(); x.fill();
+    }
+    x.fillStyle = 'rgba(0,0,0,0.25)';
+    for (let i=0;i<40;i++) x.fillRect(Math.random()*128, Math.random()*32, 2+Math.random()*4, 1);
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = THREE.RepeatWrapping; t.magFilter = THREE.NearestFilter;
+    return t;
+  }
+  function makeConcreteTex(){
+    const c = document.createElement('canvas'); c.width=c.height=128;
+    const x = c.getContext('2d');
+    x.fillStyle = '#5a5650'; x.fillRect(0,0,128,128);
+    for (let i=0;i<240;i++){
+      const v = 60+Math.floor(Math.random()*45);
+      x.fillStyle = `rgba(${v},${v-3},${v-8},${0.18+Math.random()*0.45})`;
+      x.beginPath(); x.arc(Math.random()*128, Math.random()*128, 1+Math.random()*5, 0, Math.PI*2); x.fill();
+    }
+    for (let i=0;i<10;i++){
+      x.fillStyle = `rgba(20,15,10,${0.12+Math.random()*0.22})`;
+      x.fillRect(Math.random()*128, Math.random()*128, 1, 18+Math.random()*60);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    return t;
+  }
+  function makeLambdaTex(){
+    const c = document.createElement('canvas'); c.width=c.height=128;
+    const x = c.getContext('2d');
+    x.fillStyle = '#1f1d1a'; x.fillRect(0,0,128,128);
+    x.fillStyle = '#ff8c1a';
+    x.beginPath(); x.arc(64,64,44,0,Math.PI*2); x.fill();
+    x.strokeStyle = '#1a1818'; x.lineWidth = 13; x.lineCap = 'round';
+    x.beginPath();
+    x.moveTo(40,92); x.lineTo(64,36); x.lineTo(88,92);
+    x.moveTo(56,60); x.lineTo(45,92);
+    x.stroke();
+    return new THREE.CanvasTexture(c);
+  }
+  function makeCRTTex(){
+    const c = document.createElement('canvas'); c.width=128; c.height=96;
+    const x = c.getContext('2d');
+    x.fillStyle = '#001a00'; x.fillRect(0,0,128,96);
+    x.fillStyle = '#39ff14'; x.font = '8px monospace';
+    ['> SECTOR C ONLINE','> MAT-LAB 7','> XEN PORTAL: STBY','> WARN: ANOM',
+     '> [RUN _','> CHK: 0xA941','> RES OK'].forEach((l,i)=>x.fillText(l,4,12+i*12));
+    x.fillStyle = 'rgba(0,0,0,0.3)';
+    for (let y=0;y<96;y+=2) x.fillRect(0,y,128,1);
+    return new THREE.CanvasTexture(c);
+  }
+  function makeWarningTex(){
+    const c = document.createElement('canvas'); c.width=128; c.height=96;
+    const x = c.getContext('2d');
+    x.fillStyle = '#fff8e0'; x.fillRect(0,0,128,96);
+    x.fillStyle = '#cc1010'; x.fillRect(0,0,128,18);
+    x.fillStyle = '#fff'; x.font = 'bold 11px sans-serif';
+    x.fillText('WARNING', 36, 13);
+    x.fillStyle = '#000';
+    x.font = 'bold 9px sans-serif';
+    x.fillText('AUTHORIZED', 24, 36);
+    x.fillText('PERSONNEL', 26, 50);
+    x.fillText('ONLY', 46, 64);
+    x.font = '7px sans-serif';
+    x.fillText('SECTOR C — CLEARANCE 4', 14, 82);
+    return new THREE.CanvasTexture(c);
+  }
+  function makeExitTex(){
+    const c = document.createElement('canvas'); c.width=64; c.height=24;
+    const x = c.getContext('2d');
+    x.fillStyle = '#0a4a0a'; x.fillRect(0,0,64,24);
+    x.fillStyle = '#39ff14'; x.font = 'bold 16px sans-serif';
+    x.fillText('EXIT →', 8, 18);
+    return new THREE.CanvasTexture(c);
+  }
+ 
+  const hazardTex   = makeHazardTex();
+  const concreteTex = makeConcreteTex();
+  const lambdaTex   = makeLambdaTex();
+  const crtTex      = makeCRTTex();
+  const warningTex  = makeWarningTex();
+  const exitTex     = makeExitTex();
+ 
+  // ---------- Materials ----------
+  const concreteMat = new THREE.MeshLambertMaterial({ map: concreteTex, color: 0xc8c4be });
+  const floorMat    = new THREE.MeshLambertMaterial({ map: concreteTex, color: 0x6c655c });
+  const ceilMat     = new THREE.MeshLambertMaterial({ color: 0x2c2c33, flatShading: true });
+  const metalMat    = new THREE.MeshLambertMaterial({ color: 0x55585e, flatShading: true });
+  const pipeMat     = new THREE.MeshLambertMaterial({ color: 0x8a6a44, flatShading: true });
+  const pipeBlue    = new THREE.MeshLambertMaterial({ color: 0x3a5a78, flatShading: true });
+  const woodMat     = new THREE.MeshLambertMaterial({ color: 0x8a5a2b, flatShading: true });
+  const barrelMat   = new THREE.MeshLambertMaterial({ color: 0xb33a22, emissive: 0x220a05, flatShading: true });
+  const railMat     = new THREE.MeshLambertMaterial({ color: 0x9aa0a8 });
+  const lambdaMat   = new THREE.MeshBasicMaterial({ map: lambdaTex });
+  const crtMat      = new THREE.MeshBasicMaterial({ map: crtTex });
+  const warningMat  = new THREE.MeshBasicMaterial({ map: warningTex });
+  const exitMat     = new THREE.MeshBasicMaterial({ map: exitTex });
+ 
+  // ---------- Tunnel constants ----------
+  const W = 9, H = 5, D = 12, CHUNKS = 5;
+ 
+  // ---------- Build a chunk ----------
+  function makeChunk(){
+    const g = new THREE.Group();
+ 
+    // Floor
+    const floor = new THREE.Mesh(new THREE.BoxGeometry(W, 0.3, D), floorMat);
+    floor.position.y = -0.15; g.add(floor);
+ 
+    // Tram rails + ties
+    const railGeo = new THREE.BoxGeometry(0.08, 0.06, D);
+    const railL = new THREE.Mesh(railGeo, railMat);
+    const railR = new THREE.Mesh(railGeo, railMat);
+    railL.position.set(-0.5, 0.03, 0);
+    railR.position.set( 0.5, 0.03, 0);
+    g.add(railL, railR);
+    for (let z = -D/2 + 0.5; z < D/2; z += 1.0){
+      const tie = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.05, 0.2), woodMat);
+      tie.position.set(0, 0.02, z);
+      g.add(tie);
+    }
+ 
+    // Walls
+    const wallGeo = new THREE.BoxGeometry(0.4, H, D);
+    const wallL = new THREE.Mesh(wallGeo, concreteMat);
+    const wallR = new THREE.Mesh(wallGeo, concreteMat);
+    wallL.position.set(-W/2, H/2, 0);
+    wallR.position.set( W/2, H/2, 0);
+    g.add(wallL, wallR);
+ 
+    // Hazard stripe at floor level (independent UV repeat per chunk)
+    function stripe(side){
+      const m = new THREE.MeshBasicMaterial({
+        map: hazardTex.clone(), side: THREE.DoubleSide
+      });
+      m.map.repeat.set(8, 1); m.map.needsUpdate = true;
+      const s = new THREE.Mesh(new THREE.PlaneGeometry(D, 0.5), m);
+      s.rotation.y = side > 0 ? -Math.PI/2 : Math.PI/2;
+      s.position.set(side*(W/2 - 0.21), 0.3, 0);
+      return s;
+    }
+    g.add(stripe(-1), stripe(1));
+ 
+    // Ceiling
+    const ceil = new THREE.Mesh(new THREE.BoxGeometry(W, 0.3, D), ceilMat);
+    ceil.position.y = H + 0.15; g.add(ceil);
+ 
+    // Ceiling pipes
+    const pipeGeo = new THREE.CylinderGeometry(0.16, 0.16, D, 8);
+    pipeGeo.rotateX(Math.PI/2);
+    const p1 = new THREE.Mesh(pipeGeo, pipeMat);
+    p1.position.set(-W/2 + 0.7, H - 0.5, 0);
+    const p2 = new THREE.Mesh(pipeGeo, pipeBlue);
+    p2.position.set(-W/2 + 1.1, H - 0.7, 0);
+    const p3 = new THREE.Mesh(pipeGeo, pipeMat);
+    p3.position.set( W/2 - 0.7, H - 0.5, 0);
+    g.add(p1, p2, p3);
+ 
+    // Cable bundle (small dark pipe)
+    const cableGeo = new THREE.CylinderGeometry(0.06, 0.06, D, 6);
+    cableGeo.rotateX(Math.PI/2);
+    const cable = new THREE.Mesh(cableGeo, new THREE.MeshLambertMaterial({ color: 0x101216 }));
+    cable.position.set(W/2 - 1.1, H - 0.7, 0);
+    g.add(cable);
+ 
+    // Light fixtures + point lights
+    const lights = [];
+    for (let z = -D/2 + 2; z <= D/2 - 2; z += 4){
+      const fix = new THREE.Mesh(
+        new THREE.BoxGeometry(1.2, 0.15, 0.4),
+        new THREE.MeshBasicMaterial({ color: 0xfff0c0 })
+      );
+      fix.position.set(0, H - 0.1, z);
+      g.add(fix);
+ 
+      const light = new THREE.PointLight(0xffd9a0, 1.4, 9, 1.5);
+      light.position.set(0, H - 0.4, z);
+      g.add(light);
+      light.userData = {
+        baseIntensity: 1.4,
+        flicker: Math.random() < 0.35,
+        emergency: Math.random() < 0.15,   // rare red emergency mode
+        fixture: fix,
+        phase: Math.random()*100
+      };
+      lights.push(light);
+    }
+    g.userData.lights = lights;
+ 
+    // Random props (2-4 per chunk)
+    const propCount = 2 + Math.floor(Math.random()*3);
+    for (let i = 0; i < propCount; i++){
+      const z = -D/2 + 1 + Math.random()*(D-2);
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const r = Math.random();
+ 
+      if (r < 0.30){
+        // Wooden crate (with optional stack)
+        const s = 0.7 + Math.random()*0.4;
+        const crate = new THREE.Mesh(new THREE.BoxGeometry(s,s,s), woodMat);
+        crate.position.set(side*(W/2 - 0.7 - Math.random()*0.5), s/2, z);
+        crate.rotation.y = (Math.random()-0.5)*0.3;
+        const stencil = new THREE.Mesh(
+          new THREE.PlaneGeometry(s*0.6, s*0.6),
+          new THREE.MeshBasicMaterial({ map: lambdaTex, transparent: true, opacity: 0.85 })
+        );
+        stencil.position.z = s/2 + 0.001;
+        crate.add(stencil);
+        g.add(crate);
+        if (Math.random() < 0.4){
+          const top = new THREE.Mesh(new THREE.BoxGeometry(s*0.85, s*0.85, s*0.85), woodMat);
+          top.position.set(crate.position.x + (Math.random()-0.5)*0.1, s + s*0.85/2, z + (Math.random()-0.5)*0.1);
+          top.rotation.y = (Math.random()-0.5)*0.5;
+          g.add(top);
+        }
+      } else if (r < 0.55){
+        // Red barrel + hazard ring
+        const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 1.0, 14), barrelMat);
+        barrel.position.set(side*(W/2 - 0.6), 0.5, z);
+        g.add(barrel);
+        const ringMat = new THREE.MeshBasicMaterial({
+          map: hazardTex.clone(), side: THREE.DoubleSide
+        });
+        ringMat.map.repeat.set(3, 1); ringMat.map.needsUpdate = true;
+        const ring = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.39, 0.39, 0.18, 14, 1, true),
+          ringMat
+        );
+        ring.position.copy(barrel.position);
+        g.add(ring);
+      } else if (r < 0.78){
+        // Door with lambda decal
+        const door = new THREE.Mesh(new THREE.BoxGeometry(0.15, 2.2, 1.4), metalMat);
+        door.position.set(side*(W/2 - 0.05), 1.1, z);
+        g.add(door);
+        const decal = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.7), lambdaMat);
+        decal.position.set(side*(W/2 - 0.13), 1.5, z);
+        decal.rotation.y = side > 0 ? -Math.PI/2 : Math.PI/2;
+        g.add(decal);
+      } else if (r < 0.92){
+        // CRT terminal
+        const term = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.5, 0.5), metalMat);
+        term.position.set(side*(W/2 - 0.4), 1.0, z);
+        g.add(term);
+        const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.45, 0.35), crtMat);
+        screen.position.set(side*(W/2 - 0.71), 1.05, z);
+        screen.rotation.y = side > 0 ? -Math.PI/2 : Math.PI/2;
+        g.add(screen);
+        const glow = new THREE.PointLight(0x39ff14, 0.7, 3);
+        glow.position.set(side*(W/2 - 1.0), 1.05, z);
+        g.add(glow);
+      } else {
+        // Warning poster
+        const poster = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.7), warningMat);
+        poster.position.set(side*(W/2 - 0.21), 2.0, z);
+        poster.rotation.y = side > 0 ? -Math.PI/2 : Math.PI/2;
+        g.add(poster);
+      }
+    }
+ 
+    // EXIT sign (rare per chunk)
+    if (Math.random() < 0.5){
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const sign = new THREE.Mesh(new THREE.PlaneGeometry(0.8, 0.3), exitMat);
+      sign.position.set(side*(W/2 - 0.21), H - 0.9, -D/2 + 1 + Math.random()*(D-2));
+      sign.rotation.y = side > 0 ? -Math.PI/2 : Math.PI/2;
+      g.add(sign);
+    }
+ 
+    // Vertical pipe (occasional)
+    if (Math.random() < 0.5){
+      const vp = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, H, 8), pipeBlue);
+      const side = Math.random() < 0.5 ? -1 : 1;
+      vp.position.set(side*(W/2 - 0.45), H/2, -D/2 + 1 + Math.random()*(D-2));
+      g.add(vp);
+    }
+ 
+    return g;
+  }
+ 
+  // ---------- Spawn chunks ----------
+  const chunks = [];
+  for (let i = 0; i < CHUNKS; i++){
+    const c = makeChunk();
+    c.position.z = -i * D;
+    scene.add(c);
+    chunks.push(c);
+  }
+ 
+  // Distant red beacon at end of corridor
+  const distLight = new THREE.PointLight(0xff2233, 1.5, 18);
+  distLight.position.set(0, 2.5, -CHUNKS*D + 4);
+  scene.add(distLight);
+ 
+  // ---------- Steam puffs ----------
+  const steam = [];
+  for (let i = 0; i < 6; i++){
+    const m = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1),
+      new THREE.MeshBasicMaterial({ color: 0xddddee, transparent: true, opacity: 0, depthWrite: false })
+    );
+    m.userData = {
+      life: Math.random(),
+      x0: (Math.random()<0.5?-1:1) * (W/2 - 0.5),
+      y0: 0.5 + Math.random()*1.5,
+      z0: -Math.random()*CHUNKS*D
+    };
+    scene.add(m);
+    steam.push(m);
+  }
+ 
+  // ---------- Mouse parallax look ----------
+  let mx=0, my=0, mxT=0, myT=0;
+  addEventListener("pointermove", e => {
+    mxT = (e.clientX / innerWidth  - 0.5) * 2;
+    myT = (e.clientY / innerHeight - 0.5) * 2;
+  }, { passive: true });
+  addEventListener("pointerleave", () => { mxT = 0; myT = 0; }, { passive: true });
+ 
+  // ---------- Click flash ----------
+  let flashT = 0;
+  const flashLight = new THREE.PointLight(0xffffff, 0, 15);
+  flashLight.position.set(0, 2.4, -2);
+  scene.add(flashLight);
+  addEventListener("click", () => { if (flashT <= 0) flashT = 0.4; });
+ 
+  // ---------- Animate ----------
+  const clock = new THREE.Clock();
+  const SPEED = 5.5 * reduceScale;
+ 
+  function animate(){
+    const dt = Math.min(clock.getDelta(), 0.05);
+    const t  = clock.getElapsedTime();
+ 
+    // Smooth mouse
+    mx += (mxT - mx) * 0.08;
+    my += (myT - my) * 0.08;
+ 
+    // Camera: tram POV with mouse look + tiny bob
+    camera.rotation.order = "YXZ";
+    camera.rotation.y = -mx * 0.5;
+    camera.rotation.x = -my * 0.25;
+    camera.rotation.z =  mx * 0.04;
+    camera.position.x = mx * 0.4;
+    camera.position.y = 2.0 + my * 0.2 + Math.sin(t*5)*0.025;
+ 
+    // Move + recycle chunks
+    const dz = SPEED * dt;
+    for (const c of chunks) c.position.z += dz;
+    for (const c of chunks){
+      if (c.position.z > D){
+        let minZ = Infinity;
+        for (const o of chunks) if (o.position.z < minZ) minZ = o.position.z;
+        c.position.z = minZ - D;
+      }
+    }
+ 
+    // Flicker fixtures
+    for (const c of chunks){
+      for (const L of (c.userData.lights || [])){
+        if (L.userData.flicker){
+          const n = Math.sin(t*23 + L.userData.phase) * Math.sin(t*7 + L.userData.phase*2);
+          const flick = n > 0.4 ? 0.15 : 1.0;
+          L.intensity = L.userData.baseIntensity * flick;
+          L.userData.fixture.material.color.setHSL(0.12, 0.4, 0.4 + flick*0.5);
+        } else if (L.userData.emergency){
+          // alternates yellow / red on a slow cycle
+          const swing = (Math.sin(t*1.5 + L.userData.phase) + 1) * 0.5;
+          L.color.setRGB(1, 0.4 + (1-swing)*0.4, 0.2 + (1-swing)*0.5);
+          L.intensity = 0.9 + swing*0.6;
+          L.userData.fixture.material.color.setRGB(1, 0.55 + (1-swing)*0.35, 0.35);
+        }
+      }
+    }
+ 
+    // Steam
+    for (const s of steam){
+      s.userData.life += dt * 0.55;
+      if (s.userData.life > 1){
+        s.userData.life = 0;
+        s.userData.x0 = (Math.random()<0.5?-1:1) * (W/2 - 0.5);
+        s.userData.y0 = 0.4 + Math.random()*1.6;
+        s.userData.z0 = -Math.random()*CHUNKS*D + camera.position.z;
+      }
+      const u = s.userData.life;
+      s.position.set(s.userData.x0, s.userData.y0 + u*1.2, s.userData.z0);
+      const sc = 0.3 + u*1.6;
+      s.scale.set(sc, sc, 1);
+      s.material.opacity = (1-u) * 0.32;
+      s.lookAt(camera.position);
+    }
+ 
+    // Distant beacon
+    distLight.intensity = 1.2 + Math.sin(t*1.5)*0.3 + (Math.random() < 0.02 ? 0.6 : 0);
+ 
+    // Click flash
+    if (flashT > 0){
+      flashLight.intensity = (flashT/0.4) * 7;
+      flashT -= dt;
+    } else {
+      flashLight.intensity = 0;
+    }
+ 
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
 </body>
 </html>
