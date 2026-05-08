@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Blurry Lines Between Ethnography and Espionage"
+title: "What Makes Ethnography Not Espionage"
 permalink: /ethnography
 ---  
 
@@ -31,6 +31,6 @@ I want to end with a small observation about what Verdery does not do, which is 
 Here are some of the photos Verdery discovers:
 
 
-p>![](IMG_0199.jpeg)
+![](IMG_0199.jpeg)
 
 ![](IMG_0193.jpeg)
