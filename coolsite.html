@@ -116,6 +116,12 @@
     .badge:hover{ filter: hue-rotate(25deg) saturate(120%); transform: translateY(-1px); }
     .desc{ font-size:12px; color:#eee; margin-top:6px; }
 
+    /* daily reads badge gets its own colour so it feels like a different shelf */
+    .daily .badge{
+      background: linear-gradient(180deg,#fff3b0 0%,#ffe14d 60%,#ffc400 100%);
+      box-shadow: inset 0 0 0 2px #fff, 0 0 8px rgba(255,225,77,.45);
+    }
+
     /* sticker wall in sidebar */
     .sticker-wall{
       margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
@@ -200,8 +206,75 @@
             </div>
           </div>
 
+          <div class="post daily" id="daily">
+            <h3>Intellectual Stuff to Read Everyday</h3>
+            <div class="meta">my daily rounds ★ click through, see whats new, read one or two ★</div>
+            <div class="link-grid">
+              <div class="card">
+                <a class="badge" href="https://harpers.org/" target="_blank" rel="noopener">Harper's</a>
+                <div class="desc">oldest monthly in america, still going. the readings section at the front is my fave bit, weird found documents n excerpts. also long essays on politics + culture. some free, some not</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.nplusonemag.com/" target="_blank" rel="noopener">n+1</a>
+                <div class="desc">brooklyn lit + politics mag, a bit snobby but in a way i enjoy. print comes out 3x a year but they put online-only stuff up every week so theres always smth new</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a>
+                <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a>
+                <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://blogs.lse.ac.uk/lsereviewofbooks/" target="_blank" rel="noopener">LSE Review of Books</a>
+                <div class="desc">free open access reviews of social science books, updated basically daily. great for finding academic books u had no idea existed. no paywall!!</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a>
+                <div class="desc">essays on philosophy, science, psychology, society. all free, all pretty digestible, most of them a 15 min read. their sister site Psyche does shorter psych/how-to-live stuff</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.thenation.com/" target="_blank" rel="noopener">The Nation</a>
+                <div class="desc">oldest lefty weekly in the us, running since 1865 (!!!). politics, reporting, culture crit, and they still print poetry which is kinda lovely</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.the-tls.com/" target="_blank" rel="noopener">Times Literary Supplement</a>
+                <div class="desc">the tls, british, going since 1902. reviews of basically everything, from shakespeare to political theory. went fortnightly in print but the site updates constantly. paywalled tho :(</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a>
+                <div class="desc">THE literary magazine. their Writers at Work interview archive is legendary and a lot of it is free. the daily blog is good for a quick morning read</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.theatlantic.com/" target="_blank" rel="noopener">The Atlantic</a>
+                <div class="desc">big american mag, mixed bag honestly, but when its good its really good. mostly paywalled which is annoying</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://jacobin.com/" target="_blank" rel="noopener">Jacobin</a>
+                <div class="desc">socialist mag, super readable and openly partisan about it. where i go when i want the class analysis take on whatevers happening. free!</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://nautil.us/" target="_blank" rel="noopener">Nautilus</a>
+                <div class="desc">science mag that treats science as part of culture instead of just Facts. physics, biology, consciousness, and the writing is actually beautiful</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://www.lesswrong.com/" target="_blank" rel="noopener">LessWrong</a>
+                <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a>
+                <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
+              </div>
+              <div class="card">
+                <a class="badge" href="https://margaretkilljoy.substack.com/" target="_blank" rel="noopener">Margaret Killjoy</a>
+                <div class="desc">anarchist writer + musician + scifi novelist, writes on her substack about anarchism, forgotten rebellions, and how to actually live under all this. free to read, no paywall nonsense</div>
+              </div>
+            </div>
+          </div>
+
           <div class="post" id="academic">
-            <h3>Academic</h3>
+            <h3>Other Intellectual Stuff</h3>
             <div class="meta">Blogs, mags, and philosophy rabbit holes</div>
             <div class="link-grid">
               <div class="card">
@@ -209,11 +282,7 @@
                 <div class="desc">High-imact factor leftist Pol Sci. magazine.</div>
               </div>
               <div class="card">
-                <a class="badge" href="https://www.jhiblog.org/" target="_blank" rel="noopener">Opinio Juris</a>
-                <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://opiniojuris.org/" target="_blank" rel="noopener">Journey of History of Ideas Blog</a>
+                <a class="badge" href="https://www.jhiblog.org/" target="_blank" rel="noopener">JHI Blog</a>
                 <div class="desc">i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</div>
               </div>
               <div class="card">
@@ -231,10 +300,6 @@
               <div class="card">
                 <a class="badge" href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a>
                 <div class="desc">another philosophy wiki/holybook.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://lesswrong.com/" target="_blank" rel="noopener">LessWrong</a>
-                <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
               </div>
               <div class="card">
                 <a class="badge" href="https://www.astralcodexten.com/" target="_blank" rel="noopener">Astral Codex Ten</a>
@@ -255,14 +320,6 @@
               <div class="card">
                 <a class="badge" href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a>
                 <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a>
-                <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a>
-                <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
               </div>
               <div class="card">
                 <a class="badge" href="https://philosophynow.org" target="_blank" rel="noopener">Philosophy Magazine</a>
