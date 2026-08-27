@@ -306,296 +306,178 @@
 .content { width: auto; min-width: 0; }  /* allow wrapping inside */
 
 
-/* ---------- READING MODE OVERRIDES (light panel) ---------- */
+/* ============================================================
+   READING MODE  ·  replace your old "READING MODE OVERRIDES"
+   block with everything below (keep it last in the <style> tag)
+   ============================================================ */
 
-/* 1. Strip the global filter; reapply only to the loud chrome */
-html, body { filter: none; }
-.marquee-wrap, .button-strip, .sticker-wall, #glitter-title,
-.sidebar, .footer { filter: contrast(115%) saturate(125%); }
+/* Optional web font. Delete this line if you only want locally
+   installed faces; the stack below falls back gracefully. */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
-/* 2. Light reading surface for the post */
-.post {
-  background: #fdf6e3;            /* warm parchment */
-  color: #1a1a1a;                 /* near-black, softer than pure #000 */
-  font-family: Verdana, "Lucida Sans", "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  padding: 18px 20px 22px;
-  border: 4px groove #8f00ff;     /* keep the neon frame */
+:root{
+  --read-bg:#fffdf7;          /* warm off-white, not full parchment */
+  --read-ink:#1c1b19;
+  --read-muted:#6b6560;
+  --read-rule:#e3dccd;
+  --read-link:#3a2fa8;
+  --read-link-visited:#6a0dad;
+  --read-accent:#5b008a;
+  --read-measure:680px;       /* the reading column width */
 }
 
-/* 3. Body copy color (overrides the cyan --ink inside posts only) */
+/* Keep the global neon filter off the article, but let the retro
+   chrome stay as loud as it was. */
+html, body{ filter:none; }
+.marquee-wrap, .button-strip, .sticker-wall, #glitter-title,
+.sidebar, .footer, .sound-toggle{ filter:contrast(115%) saturate(125%); }
+
+/* ---------- the article container ---------- */
+.post{
+  max-width:var(--read-measure);
+  margin:20px auto 30px;
+  padding:36px 40px 42px;
+  background:var(--read-bg);
+  color:var(--read-ink);
+  border:3px solid var(--neon-purple);
+  box-shadow:0 0 22px rgba(143,0,255,.35);
+
+  font-family:"EB Garamond", Baskerville, "Libre Baskerville",
+              Garamond, "Hoefler Text", "Palatino Linotype",
+              Palatino, Georgia, serif;
+  font-size:21px;
+  line-height:1.62;
+  letter-spacing:.005em;
+  font-kerning:normal;
+  font-variant-numeric:oldstyle-nums;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- body copy ---------- */
 .post p,
 .post li,
 .post blockquote,
-.post section { color: #1a1a1a; }
+.post section{ color:var(--read-ink); }
 
-/* 4. Headings: dark purple pops nicely on cream, still on-theme */
-.post h1, .post h2, .post h3 {
-  color: #5b008a;
-  text-shadow: none;              /* glow doesn't help on a light bg */
+.post p{ margin:0 0 1.15em; }
+.post section > p:first-child{ margin-top:0; }
+
+/* ---------- headings ---------- */
+.post h1, .post h2, .post h3, .post h4{
+  font-family:inherit;
+  color:var(--read-accent);
+  text-shadow:none;
+  font-weight:600;
+  line-height:1.18;
+  letter-spacing:-.01em;
+}
+.post h1{ font-size:2.05em; margin:0 0 .3em; }
+.post h2{ font-size:1.48em; margin:1.6em 0 .4em; }
+.post h3{ font-size:1.2em;  margin:1.4em 0 .35em; }
+.post h4{ font-size:1.02em; margin:1.3em 0 .3em; text-transform:uppercase;
+          letter-spacing:.06em; }
+
+/* ---------- byline / date ---------- */
+.post .meta{
+  font-family:Verdana, "Helvetica Neue", Arial, sans-serif;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  color:var(--read-muted);
+  padding-bottom:14px;
+  margin-bottom:24px;
+  border-bottom:1px solid var(--read-rule);
 }
 
-/* 5. Classic 90s link colors — high contrast on cream */
-.post a          { color: #0000cc; text-decoration: underline; }
-.post a:visited  { color: #6a0dad; }
-.post a:hover    { color: #cc0066; background: #fff2b8; }
+/* ---------- links ---------- */
+.post a{
+  color:var(--read-link);
+  text-decoration:underline;
+  text-underline-offset:2px;
+  text-decoration-thickness:1px;
+  word-break:normal;            /* cancels the earlier break-all rule */
+  overflow-wrap:anywhere;
+}
+.post a:visited{ color:var(--read-link-visited); }
+.post a:hover{ color:#cc0066; background:#fff2b8; }
 
-/* 6. Code blocks: dark-on-light, monospace */
-.post pre, .post code {
-  background: #efe7d0;
-  color: #1a1a1a;
-  border: 1px solid #c9bfa3;
-  padding: 2px 6px;
-  font-family: "Courier New", monospace;
+/* ---------- lists, quotes, rules ---------- */
+.post ul, .post ol{ margin:0 0 1.15em; padding-left:1.4em; }
+.post li{ margin:0 0 .45em; }
+
+.post blockquote{
+  margin:1.5em 0;
+  padding:.15em 0 .15em 1.1em;
+  border-left:3px solid var(--read-accent);
+  background:none;
+  color:var(--read-muted);
+  font-style:italic;
 }
 
-/* 7. Meta line (date/author) — muted but legible */
-.post .meta { color: #6a0dad; }
-
-/* 8. Blockquote */
-.post blockquote {
-  background: #f5ecd0;
-  border-left: 4px solid #5b008a;
-  color: #1a1a1a;
+.post hr{
+  border:0; height:1px; width:62%;
+  background:var(--read-rule);
+  margin:2.2em auto;
 }
-    
-  </style>
-</head>
-<body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">★ welcome to my webspace ★ best viewed on desktop ★</marquee>
-    </div>
+/* ---------- media ---------- */
+.post img{
+  display:block;
+  margin:1.7em auto;
+  max-width:100%;
+  height:auto;
+  border:1px solid var(--read-rule);
+  image-rendering:auto;
+}
+.post a > img{ margin:1.7em auto; }
 
-    <table class="layout" role="presentation">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="{{ '/index.html' | relative_url }}"><img src="{{ '/cutehome.gif' | relative_url }}" alt="Home" class="nav-icon">Home</a>
-            <a href="{{ '/about.html' | relative_url }}"><img src="{{ '/about.gif' | relative_url }}" alt="About" class="nav-icon">About</a>
-            <a href="{{ '/blog_posts.html' | relative_url }}"><img src="{{ '/post.gif' | relative_url }}" alt="Entries" class="nav-icon">Entries</a>
-            <a href="{{ '/chat.html' | relative_url }}"><img src="{{ '/chattt.gif' | relative_url }}" alt="Chat" class="nav-icon">Chat</a>
-            <a href="{{ '/coolsite.html' | relative_url }}"><img src="{{ '/coollinks.gif' | relative_url }}" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="{{ '/Truth2.html' | relative_url }}"><img src="{{ '/math.gif' | relative_url }}" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="Contact" class="nav-icon">Contact</a>
-          </div>
+.post figure{ margin:1.7em 0; }
+.post figcaption, .post .caption{
+  font-family:Verdana, Arial, sans-serif;
+  font-size:12px;
+  line-height:1.5;
+  color:var(--read-muted);
+  text-align:center;
+  margin-top:-1.1em;
+}
 
-          <div style="text-align:center; padding:10px">
-            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
-            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
-          </div>
+.post iframe, .post embed, .post object{ margin:1.5em 0; }
+.post blockquote.twitter-tweet{
+  border-left:0; padding:0; font-style:normal; margin:1.5em auto;
+}
 
-          <div style="padding:0 10px 12px; color:#fff; font-size:12px">
-            <div><a href="{{ '/contact.html' | relative_url }}">Email Me</a></div>
-            <div style="margin-top:6px"><a href="{{ '/guestbook.html' | relative_url }}">Sign my Guestbook</a></div>
-            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
-          </div>
+/* ---------- code ---------- */
+.post pre, .post code{
+  font-family:"Courier New", monospace;
+  font-size:.8em;
+  font-variant-numeric:normal;
+  background:#f3ece0;
+  color:#1a1a1a;
+  border:1px solid #ded4c0;
+}
+.post pre{ padding:12px 14px; line-height:1.5; overflow-x:auto;
+           white-space:pre-wrap; overflow-wrap:anywhere; }
+.post code{ padding:1px 5px; }
+.post pre code{ background:none; border:0; padding:0; }
 
-          <div class="sticker-wall">
-            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
-            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
-            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
-            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
-            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
-            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
-            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free Speech Online">
-            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-Fi" class="wide">
-            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
-          </div>
+/* ---------- optional: drop cap on the first paragraph ----------
+.post section > p:first-child::first-letter{
+  float:left; font-size:3.1em; line-height:.82;
+  margin:.06em .09em 0 0; color:var(--read-accent);
+}
+---------------------------------------------------------------- */
 
-          <div class="sticker-controls">
-            <button id="shuffleStickers">Shuffle</button>
-            <button id="resetStickers" title="Put them back how they were">Reset</button>
-          </div>
-        </td>
-
-        <td class="content">
-          <hr class="retro">
-
-          <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
-            <header>
-              <h1 itemprop="headline">{{ page.title }}</h1>
-              <div class="meta">
-                {% if page.date %}
-                  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
-                {% endif %}
-                {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
-              </div>
-            </header>
-
-            <section itemprop="articleBody">
-              {{ content }}
-            </section>
-          </article>
-
-          <div class="marquee-wrap small">
-            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
-          </div>
-
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
-
-    <div class="button-strip" aria-label="buttons">
-      <img src="{{ '/icc.gif' | relative_url }}" alt="ICC">
-      <img src="{{ '/dp.gif' | relative_url }}" alt="DP">
-      <img src="{{ '/anarchynow.jpeg' | relative_url }}" alt="Anarchy Now">
-      <img src="{{ '/freespeech.gif' | relative_url }}" alt="Free Speech">
-      <img src="{{ '/privacy.gif' | relative_url }}" alt="Privacy">
-      <img src="{{ '/piracy.png' | relative_url }}" alt="Piracy">
-    </div>
-
-    <div class="footer">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 · Part of the Galactic Webring ·
-        <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> |
-        <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
-    </div>
-
-    <audio id="blip" preload="auto"><source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg"></audio>
-    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
-  </div>
-
-<!-- Robust Twitter loader -->
-<script>
-  /* load widgets.js if missing, then render any blockquotes */
-  window.twttr = (function(d,s,id){
-    var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};
-    if (d.getElementById(id)) return t;
-    js=d.createElement(s); js.id=id; js.async=true;
-    js.src="https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js,fjs);
-    t._e=[]; t.ready=function(f){ t._e.push(f); };
-    return t;
-  }(document,"script","twitter-wjs"));
-  twttr.ready(function(t){ t.widgets.load(document.querySelector('.post')); });
-
-  /* also retry on DOM ready and bfcache restore */
-  const rehydrate = () => { try { twttr.widgets.load(document.querySelector('.post')); } catch(_){} };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rehydrate); else rehydrate();
-  window.addEventListener('pageshow', rehydrate);
-</script>
-
-<script>
-/* hit counter */
-(() => { try {
-  const key='geocities_hit_counter';
-  const n=(parseInt(localStorage.getItem(key)||'0',10)+1);
-  localStorage.setItem(key,n);
-  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
-} catch(e){} })();
-
-/* last updated label */
-document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
-
-/* tiny nav misalignment */
-(() => {
-  const links=document.querySelectorAll('.nav a');
-  links.forEach(a=>{
-    const ml=6+Math.floor(Math.random()*7);
-    const fs=12+Math.floor(Math.random()*3);
-    a.style.marginLeft=ml+'px';
-    a.style.fontSize=fs+'px';
-    if (Math.random()<0.4) a.style.letterSpacing='1px';
-  });
-})();
-
-/* Konami hyperspace */
-(() => {
-  const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let buf=[];
-  document.addEventListener('keydown',e=>{
-    buf.push(e.key.length===1?e.key.toLowerCase():e.key);
-    buf=buf.slice(-seq.length);
-    if (seq.every((k,i)=>k===buf[i])) {
-      document.documentElement.classList.add('hyperspace');
-      setTimeout(()=>document.documentElement.classList.remove('hyperspace'),650);
-    }
-  });
-})();
-
-/* VHS transition on internal links */
-(() => {
-  document.querySelectorAll('.page a[href]').forEach(a=>{
-    const url=a.getAttribute('href')||'';
-    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-    a.addEventListener('click',e=>{
-      e.preventDefault();
-      document.documentElement.classList.add('vhs');
-      setTimeout(()=>{ window.location.href=url; },200);
-    });
-  });
-})();
-
-/* periodic title flyby */
-setInterval(()=>{ document.documentElement.classList.add('flyby');
-  setTimeout(()=>document.documentElement.classList.remove('flyby'),1700);
-},14000);
-
-/* time-of-day palette */
-(() => { const h=new Date().getHours(); document.documentElement.classList.add((h>=6&&h<17)?'morning':'night'); })();
-
-/* UI sounds */
-(() => {
-  const a=document.getElementById('blip'); const btn=document.getElementById('soundToggle');
-  if(!a||!btn) return;
-  if(!a.currentSrc){ a.src="{{ '/kawaii%208bit.mp3' | relative_url }}"; a.load(); }
-  let enabled=false; a.volume=0.5;
-  btn.addEventListener('click',()=>{
-    enabled=!enabled; btn.setAttribute('aria-pressed',String(enabled));
-    btn.textContent=enabled?'🔊 sound':'🔇 sound';
-    try{ a.play().then(()=>{ a.pause(); a.currentTime=0; }).catch(()=>{}); }catch(_){}
-  });
-  const beep=()=>{ if(!enabled) return; try{ a.currentTime=0; a.play(); }catch(_){}};;
-  document.querySelectorAll('.nav a').forEach(el=>{
-    el.addEventListener('pointerdown',beep);
-    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') beep(); });
-  });
-})();
-
-  (function(){
-  // Make post images lazy and decode off the main thread
-  document.querySelectorAll('.post img').forEach(function(img){
-    if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
-    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
-
-    // Help the browser choose smaller files if you use srcset
-    if(img.hasAttribute('srcset') && !img.hasAttribute('sizes')){
-      // blog column width: adjust if yours differs
-      img.setAttribute('sizes','(max-width: 900px) 100vw, 720px');
-    }
-
-    // Reserve space to avoid jumps once we know intrinsic size
-    function setAR(){
-      var w = img.naturalWidth, h = img.naturalHeight;
-      if(w && h){ img.style.aspectRatio = w + ' / ' + h; }
-    }
-    if (img.complete) setAR(); else img.addEventListener('load', setAR, { once:true });
-  });
-})();
-</script>
-
-<!-- hyperspace + vhs visuals -->
-<style>
-  .hyperspace::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
-                repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
-    animation: warp 600ms ease-in-out;
-  }
-  @keyframes warp{ 0%{opacity:0; transform:scaleX(1)} 40%{opacity:1; transform:scaleX(1.8)} 100%{opacity:0; transform:scaleX(1)} }
-  .vhs::after{
-    content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-    background: linear-gradient(#000,transparent 12%,#0000 88%,#000),
-                repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-    animation: vhs 240ms steps(2,end);
-  }
-  @keyframes vhs{ from{opacity:0} to{opacity:1} }
+/* ---------- small screens ---------- */
+@media (max-width:900px){
+  .post{ font-size:19px; padding:24px 22px 28px; margin:12px auto 20px; }
+}
+@media (max-width:600px){
+  .post{ font-size:18px; padding:18px 16px 22px; border-width:2px;
+         line-height:1.58; }
+  .post h1{ font-size:1.68em; }
+  .post h2{ font-size:1.32em; }
+}
 </style>
 </body>
 </html>
