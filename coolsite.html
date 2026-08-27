@@ -1,3 +1,253 @@
+Pasted text(9).txt
+Document
+i gave ai to edit my html into a y2k, late 90s early 2000s blog layout, neo/geocities, etc, be creative but visibly human made, gifs everywhere, messiness a feature etc but it ended being quite ai coded feigning to be old cool blog. dont get me wrong, i want it to be extremely cool like youd see featured in neocities homepages today but still
+
+
+Yes. I see exactly what happened. The page is too conceptually complete.
+
+The underlying idea is excellent, “a video rental shop that never closed”, but the AI has turned that idea into a fully art-directed experience. Everything has been subordinated to the metaphor: the page is .shop, navigation is a “directory”, links are “tapes”, sections are “aisles”, cards sit on simulated wooden shelves, there is a membership card, a shop TV, rental stickers, a till, a “be kind · rewind” sign, an exit sign, a till receipt, VHS transitions, “random rental”, “restock shelves”. Even the CSS comments continue the fiction: /* ---------- the carpet ---------- */, /* ---------- the shop ---------- */, /* the shelf board each row stands on */.
+
+That is why it feels AI-made despite being technically quite good. It has the characteristic “what if website, but THEME?” maximal coherence.
+
+A real personal webpage, especially one in the lineage you are after, usually feels accumulated rather than conceived in one sitting.
+
+Your content already has this quality. There are typos, odd little asides, differing levels of seriousness, THE literary magazine, “a bit snobby but in a way i enjoy”, “return to monkey!”, “this one is wildddd”, warnings about obscure hyperlinks, etc. The writing sounds like somebody maintaining a personal bookmarks page.
+
+The design around it sounds like a creative director describing that person.
+
+For example, this is almost suspiciously perfect:
+
+open since 1999 · never closed · no late fees, we lost the ledger
+
+Then:
+
+★ new arrivals on the front shelf ★ please rewind before returning ★ ask at the counter for staff picks
+
+Then the membership card has “store 04 · aisle rat”, and the footer closes with “we still have your deposit from 2004”.
+
+Any one of those jokes is great. All of them together reveal the mechanism.
+
+What I would change
+
+I would keep perhaps 30–40% of the video shop conceit and wreck its internal consistency.
+
+The big header could still be GALAXY 981 VIDEO. Maybe the link categories can remain “New Releases / Documentary / Supplies / Classics / Cult & Weird”. Those are fun and immediately legible.
+
+But then allow the webpage underneath to become an actual weird personal homepage.
+
+So instead of:
+
+GALAXY 981 VIDEO
+┌───────────────┬─────────────────────────────┐
+│ directory     │ NEW RELEASES                │
+│ membership    │ [uniform tape card] [card] │
+│ television    │ [uniform tape card] [card] │
+│ flyers        │                             │
+└───────────────┴─────────────────────────────┘
+
+I'd move towards something like:
+
+               ☆ GALAXY 981 VIDEO ☆
+         kool webpages i found on the internet
+               [under construction]
+
+ [home] [about me] [diary] [links] [books] [guestbook]
+
+      /\_/\
+     ( o.o )      CURRENTLY: procrastinating
+      > ^ <       LAST UPDATED: 27.08.26
+
+  +---------------- NEW STUFF ----------------+
+  | Harper's        n+1           LRB         |
+  |                                              |
+  |  [tiny gif] London Review of Books          |
+  |  you probably know this one. lrb is one     |
+  |  of the most famous...                      |
+  |                                [NEW!!!!]     |
+  +----------------------------------------------+
+
+   ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+             SOME ACADEMIC STUFF
+
+         SEP
+             JHI blog      [spinning globe]
+    New Left Review
+
+                  RationalWiki
+       "another philosophy wiki/holybook."
+
+              <-- inexplicable gif -->
+
+   ===========================================
+
+       COOL OLD INTERNET THINGS I FOUND
+
+   [PCJS]    [old web today]
+                    [Wiby]
+
+                 IMPORTANT:
+       beware of the anarchy hyperlink!!!!
+
+ [Palestine gif] [sleeping cat] [free speech]
+                   [whatever]
+ [made on macintosh] [best viewed 800x600]
+
+      you are visitor number [000013]
+             sign my guestbook!!!!!
+
+The distinction is that the latter has rhythm problems. It has empty bits. One item is bizarrely centred. Another has a GIF for reasons known only to you. Something has a 1px purple border although nothing else does. An <hr> appears because you happened to like that <hr>. One section looks different because you built it three months after the others.
+
+That is the texture you are missing.
+
+Your present layout has this very modern grid:
+
+.link-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(224px, 1fr));
+  gap:34px 16px;
+}
+
+and every link then receives precisely the same designed cassette treatment.
+
+This is one of the biggest culprits. I would abolish the universal card component.
+
+Harper's might be a huge underlined Times New Roman link.
+
+SEP might have a book GIF beside it.
+
+LessWrong might literally have <strike>do not go here actually</strike> underneath.
+
+Robert Brown, because you have a personal story attached to it, could get its own stupid little box.
+
+One website could have:
+
+<font color="red">!!!! NEW !!!!</font>
+
+Another could be inexplicably 18px Comic Sans.
+
+A few could simply be:
+
+<a href="...">PEA Soup</a> - another philosophy blog with short accessible posts
+
+And one especially beloved link might have a giant glittering arrow pointing at it.
+
+That is much more human than assigning every item .card > .spine > .face > .badge > .desc > .sticker.
+
+Likewise, your CSS currently has an extremely controlled palette declared up front:
+
+--blue:#12237e;
+--blue-lt:#1e3bbf;
+--blue-dk:#0a1450;
+--yellow:#ffc60b;
+--red:#e8232a;
+--cream:#f7f2e3;
+...
+
+Beautiful CSS. Wrong kind of beauty.
+
+I would introduce colours that do not belong. A lime <hr>. Lavender link box. Grey Windows 98 button. An inexplicable burgundy table. One heading rendered as a GIF. A tiled stars background behind only one area. A bit of fake Windows UI beside something that otherwise looks GeoCities. Perhaps your Arabic/Qatar/Palestine/PETA/sci-fi GIF assortment remains exactly as arbitrary as it currently is, because that part is already much closer to what you want.
+
+And I would remove most of the “retro simulation” effects that announce themselves as authored nostalgia:
+
+fake VHS page transition
+shelf-restocking JavaScript
+tape checkout counter
+faux rental-duration stickers on every link
+carefully simulated wooden shelf edges
+animated neon OPEN sign
+
+The <marquee>, however? Absolutely keep the marquee. In fact I might make it slightly more embarrassing.
+
+The fake CRT can stay too, although I would make it less exquisitely styled. Currently even the CRT has inset borders, simulated knobs, phosphor glow and an explanatory “Demo tape · playing on loop” caption. It looks like somebody designing a representation of an old television. A little 150px GIF of static beside some ASCII nonsense would paradoxically feel more convincing.
+
+The target isn't really “authentic 1999”
+
+This distinction matters.
+
+You aren't building an archaeological reconstruction of a GeoCities page. If we did that faithfully, there would be lots of Times New Roman, blue hyperlinks, tables, terrible image compression and frankly much less visual sophistication.
+
+You're after something closer to the contemporary handmade-web interpretation of Web 1.0: someone in 2026 who genuinely loves the old web, knows HTML/CSS, collects GIFs, and has spent an unreasonable amount of time decorating a personal corner of the internet.
+
+That can be spectacularly cool.
+
+The crucial quality is specificity without totalisation.
+
+A little video-shop idea: excellent.
+
+A strange computer terminal: excellent.
+
+A tiled background: yes.
+
+Pixel cats, Palestinian buttons, animated e-mail icons, spinning CDs, tiny badges, a visitor counter: yes.
+
+One extremely overworked CSS component because you became obsessed with it one weekend: very believable.
+
+Every element participating elegantly in an overarching fictional retail environment: AI portfolio piece.
+
+And there is another dead giveaway: the code itself is too immaculate. The enormous section comments and perfectly systematic component architecture make the source look like a deliverable:
+
+/* ---------- membership card ---------- */
+/* ---------- store TV ---------- */
+/* ---------- window flyers ---------- */
+/* ---------- till buttons ---------- */
+/* ---------- aisle signs ---------- */
+/* ---------- the shelves ---------- */
+/* ---------- footer ---------- */
+/* ---------- VHS transition ---------- */
+
+A personal homepage's source can still be well written, but I would expect more:
+
+/* links */
+
+followed 200 lines later by:
+
+/* idk why removing this breaks the cat DO NOT TOUCH */
+
+and:
+
+.oldthing {
+   margin-left:17px; /* looked weird at 15 */
+}
+
+That sort of thing should emerge naturally from actually working on the page rather than being artificially inserted everywhere as “humanisation”. I wouldn't manufacture fifty fake quirky comments either, because then we have recreated the same problem at another level.
+
+The answer is therefore not “make it uglier.” It is: stop designing the page as one object.
+
+Make individual bits you like. Place them together. Allow historical residue. Let one idea die halfway down the page. Give disproportionately elaborate treatment to things you personally care about. Leave other things almost unstyled. Keep GIFs that clash. Make the hierarchy slightly stupid. Put an image somewhere because it made you laugh.
+
+I think your actual link descriptions provide enough personality that this could become far cooler than the current version.
+
+If I were editing this file myself, I would preserve every single URL and every word you've written, then substantially dismantle the design layer and rebuild it as a dense, messy, extremely charming personal-web links page, perhaps with the video-store identity surviving as one recurring joke rather than the organising law of the page. That would get much closer to what you're describing.
+
+Pasted text(20260827-164312).txt
+Document
+re-edit the file entirely then. this was the original btw for reference:
+
+
+Done. I rebuilt it from the original rather than modifying the video-store redesign. The original Galaxy 981 identity, navigation and sticker assets remain the basis of the page.
+
+The new version keeps all 60 original site links, URLs and descriptions unchanged, but dismantles the uniform card system. Different sections now have different structures, there is more visual imbalance, GIFs have escaped the sidebar, some links get disproportionate treatment, and the page openly says it was made in 2026 rather than pretending to be an archival 1999 site.
+
+Download the rebuilt coolsite.html
+
+I think this is substantially closer to “excellent contemporary Neocities homepage made by an actual person” than the video-rental version.
+
+coolsite.html
+HTML
+i like it - but can you remove the gifs next to the titles? this is probably the only page id like some bit of structure for clean structure for pragmatic navigation between links. i like the layout now. lets keep it title hyperlinked then text below just like that, but a bit more structure. maybe like the old forums idk.  also please remove truth table - i forgot its defunct page. 
+
+Done. I kept the layout you liked, but made the actual link directory much more orderly:
+
+removed all GIFs beside individual link titles
+removed the defunct Truth Table navigation item
+retained all 60 links and descriptions
+each category now has an old-forum-style bordered index
+alternating rows, with hyperlinked title first and your text directly below
+kept the surrounding GIFs, stickers, intermissions and general Galaxy 981 chaos
+
+Download the updated coolsite.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -457,6 +707,101 @@ h1 {
   .tool-entry { width:100%; margin-right:0; }
   .junk-drawer { columns:1; }
 }
+
+
+/* ============================================================
+   link directory: intentionally calmer than the rest of the page
+   old forum / bookmarks-index sort of thing
+   ============================================================ */
+.links {
+  padding:0;
+  margin:0 0 12px;
+  border:2px ridge #7868ae;
+  background:#070716;
+  box-shadow:2px 2px 0 #000;
+}
+
+.links::before {
+  content:"SITE / NOTES";
+  display:block;
+  padding:4px 8px;
+  border-bottom:2px ridge #7868ae;
+  background:#29265a;
+  color:#e8e5ff;
+  font:bold 10px Verdana,"MS Sans Serif",sans-serif;
+  letter-spacing:.08em;
+}
+
+.link-entry {
+  margin:0;
+  padding:7px 9px 8px;
+  border:0;
+  border-bottom:1px solid #373158;
+  background:#0c0b22;
+  box-shadow:none;
+  transform:none;
+  line-height:1.35;
+  width:auto;
+  display:block;
+  color:inherit;
+}
+
+.link-entry:nth-child(even) { background:#11102b; }
+.link-entry:last-child { border-bottom:0; }
+.link-entry:hover { background:#17143a; }
+
+.link-entry > div:first-child {
+  margin:0;
+  padding:0;
+  font:bold 13px Verdana,"MS Sans Serif",sans-serif;
+}
+
+.link-entry > div:first-child::before {
+  content:"» ";
+  color:#ffff33;
+  font-family:"Courier New",monospace;
+}
+
+.link-entry > div:first-child a,
+.link-entry > div:first-child a:visited {
+  color:#74eaff;
+  background:transparent;
+  font-size:13px;
+  font-family:Verdana,"MS Sans Serif",sans-serif;
+  text-decoration:underline;
+  text-decoration-style:solid;
+  text-underline-offset:2px;
+}
+
+.link-entry > div:first-child a:hover { color:#ffff33; }
+
+.link-entry .desc {
+  margin:3px 0 0 17px;
+  max-width:none;
+  color:#c9c8d8;
+  background:transparent;
+  font:11px/1.5 Verdana,"MS Sans Serif",sans-serif;
+}
+
+.link-entry .desc a { color:#8fefff; }
+
+/* little personal annotations are allowed, but they behave like forum labels */
+.scribble-note {
+  margin-left:6px;
+  color:#d99bd0;
+  font:10px Verdana,"MS Sans Serif",sans-serif;
+}
+
+.new-badge {
+  margin-left:7px;
+  padding:1px 4px;
+  border:1px solid #6e6531;
+  background:#fff59b;
+  color:#111;
+  font:9px "MS Sans Serif",Tahoma,sans-serif;
+  vertical-align:1px;
+}
+
 </style>
 </head>
 
@@ -488,7 +833,6 @@ h1 {
           <a href="coolsite.html"><img src="coollinks.gif" alt="">Kool Webpages</a>
           <a href="guestbook.html"><img src="book-0037.gif" alt="">Guestbook</a>
           <a href="books.html"><img src="catread.gif" alt="">Kool Books</a>
-          <a href="Truth2.html"><img src="math.gif" alt="">Truth Table</a>
           <a href="contact.html"><img src="phone.gif" alt="">Contact</a>
         </nav>
 
@@ -528,67 +872,67 @@ h1 {
           <h2 class="section-title">Intellectual Stuff to Read Everyday <span class="blink">!</span></h2>
           <div class="section-meta">my daily rounds ★ click around / see whats new / read one or two</div>
           <div class="links">
-            <div class="link-entry yellow-paper">
-  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://harpers.org/" target="_blank" rel="noopener">Harper&#x27;s</a></div>
+            <div class="link-entry">
+  <div><a href="https://harpers.org/" target="_blank" rel="noopener">Harper&#x27;s</a></div>
   <div class="desc">oldest monthly in america, still going. the readings section at the front is my fave bit, weird found documents n excerpts. also long essays on politics + culture. some free, some not</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://www.nplusonemag.com/" target="_blank" rel="noopener">n+1</a></div>
   <div class="desc">brooklyn lit + politics mag, a bit snobby but in a way i enjoy. print comes out 3x a year but they put online-only stuff up every week so theres always smth new</div>
 </div>
-<div class="link-entry big-fave">
-  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a><span class="scribble-note"> ← i read this a lot</span></div>
+<div class="link-entry">
+  <div><a href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a><span class="scribble-note"> ← i read this a lot</span></div>
   <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a></div>
   <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
 </div>
-<div class="link-entry yellow-paper">
-  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://blogs.lse.ac.uk/lsereviewofbooks/" target="_blank" rel="noopener">LSE Review of Books</a></div>
+<div class="link-entry">
+  <div><a href="https://blogs.lse.ac.uk/lsereviewofbooks/" target="_blank" rel="noopener">LSE Review of Books</a></div>
   <div class="desc">free open access reviews of social science books, updated basically daily. great for finding academic books u had no idea existed. no paywall!!</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a></div>
   <div class="desc">essays on philosophy, science, psychology, society. all free, all pretty digestible, most of them a 15 min read. their sister site Psyche does shorter psych/how-to-live stuff</div>
 </div>
-<div class="link-entry plain">
+<div class="link-entry">
   <div><a href="https://www.thenation.com/" target="_blank" rel="noopener">The Nation</a></div>
   <div class="desc">oldest lefty weekly in the us, running since 1865 (!!!). politics, reporting, culture crit, and they still print poetry which is kinda lovely</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://www.the-tls.com/" target="_blank" rel="noopener">Times Literary Supplement</a></div>
   <div class="desc">the tls, british, going since 1902. reviews of basically everything, from shakespeare to political theory. went fortnightly in print but the site updates constantly. paywalled tho :(</div>
 </div>
-<div class="link-entry yellow-paper">
-  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a></div>
+<div class="link-entry">
+  <div><a href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a></div>
   <div class="desc">THE literary magazine. their Writers at Work interview archive is legendary and a lot of it is free. the daily blog is good for a quick morning read</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://www.theatlantic.com/" target="_blank" rel="noopener">The Atlantic</a></div>
   <div class="desc">big american mag, mixed bag honestly, but when its good its really good. mostly paywalled which is annoying</div>
 </div>
-<div class="link-entry plain">
+<div class="link-entry">
   <div><a href="https://jacobin.com/" target="_blank" rel="noopener">Jacobin</a></div>
   <div class="desc">socialist mag, super readable and openly partisan about it. where i go when i want the class analysis take on whatevers happening. free!</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://nautil.us/" target="_blank" rel="noopener">Nautilus</a></div>
   <div class="desc">science mag that treats science as part of culture instead of just Facts. physics, biology, consciousness, and the writing is actually beautiful</div>
 </div>
-<div class="link-entry warningish">
-  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://www.lesswrong.com/" target="_blank" rel="noopener">LessWrong</a></div>
+<div class="link-entry">
+  <div><a href="https://www.lesswrong.com/" target="_blank" rel="noopener">LessWrong</a></div>
   <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
 </div>
-<div class="link-entry law-note">
-  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a><span class="new-badge">LAW NERD CORNER</span></div>
+<div class="link-entry">
+  <div><a href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a><span class="new-badge">LAW NERD CORNER</span></div>
   <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
 </div>
-<div class="link-entry plain">
+<div class="link-entry">
   <div><a href="https://margaretkilljoy.substack.com/" target="_blank" rel="noopener">Margaret Killjoy</a></div>
   <div class="desc">anarchist writer + musician + scifi novelist, writes on her substack about anarchism, forgotten rebellions, and how to actually live under all this. free to read, no paywall nonsense</div>
 </div>
-<div class="link-entry ">
+<div class="link-entry">
   <div><a href="https://www.wired.com" target="_blank" rel="noopener">Wired Magazine</a></div>
   <div class="desc">mostly about how tech reshapes our everyday lives, politics, culture, with a lot of investigative stories on this, some very pessimisitc on the future others not so much</div>
 </div>
@@ -605,59 +949,59 @@ h1 {
           <h2 class="section-title">Other Intellectual Stuff</h2>
           <div class="section-meta">blogs, mags, philosophy rabbit holes, things i swear i will return to</div>
           <div class="links">
-            <div class="link-entry plain-row">
-  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a></div>
+            <div class="link-entry">
+  <div><a href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a></div>
   <div class="desc">High-imact factor leftist Pol Sci. magazine.</div>
 </div>
-<div class="link-entry boxy-row">
+<div class="link-entry">
   <div><a href="https://www.jhiblog.org/" target="_blank" rel="noopener">JHI Blog</a></div>
   <div class="desc">i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</div>
 </div>
-<div class="link-entry under-row">
-  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://thefunambulist.net/" target="_blank" rel="noopener">The Funambulist Magazine</a></div>
+<div class="link-entry">
+  <div><a href="https://thefunambulist.net/" target="_blank" rel="noopener">The Funambulist Magazine</a></div>
   <div class="desc">"Our hope is to provide a useful platform where activist/academic/practitioner voices can meet and build solidarities across geographical scales. . . anticolonial, antiracist, queer, and feminist" topics.</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://www.e-ir.info" target="_blank" rel="noopener">E-International Relations</a></div>
   <div class="desc">sum short articles on IR, many written by undergrad-grad students</div>
 </div>
-<div class="link-entry green-row">
-  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a></div>
+<div class="link-entry">
+  <div><a href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a></div>
   <div class="desc">this is the Philosophy holy book that every student reads before bed</div>
 </div>
-<div class="link-entry plain-row">
-  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a></div>
+<div class="link-entry">
+  <div><a href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a></div>
   <div class="desc">another philosophy wiki/holybook.</div>
 </div>
-<div class="link-entry boxy-row">
+<div class="link-entry">
   <div><a href="https://www.astralcodexten.com/" target="_blank" rel="noopener">Astral Codex Ten</a></div>
   <div class="desc">a guy who is basically 'the father' of the above website who talks about psychology and philosophy (i no longer read it because his politics are extra horribe!)</div>
 </div>
-<div class="link-entry under-row">
-  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://rationalwiki.org/wiki/Main_Page" target="_blank" rel="noopener">RationalWiki</a></div>
+<div class="link-entry">
+  <div><a href="https://rationalwiki.org/wiki/Main_Page" target="_blank" rel="noopener">RationalWiki</a></div>
   <div class="desc">a wiki for 'sceptics', i think it was build during the early era of new atheism but its still updated and has some cool entries, for e.g <a href="https://rationalwiki.org/wiki/Just_asking_questions" rel="noopener" target="_blank">Just asking questions</a>.</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://www.lanceindependent.com/" target="_blank" rel="noopener">Lance Independent</a></div>
   <div class="desc">lance is a philosophy phd that writes in a super accessible way, he has a cool youtube channel too. he debates metaethics</div>
 </div>
-<div class="link-entry green-row">
-  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://peasoupblog.com/" target="_blank" rel="noopener">PEA Soup</a></div>
+<div class="link-entry">
+  <div><a href="https://peasoupblog.com/" target="_blank" rel="noopener">PEA Soup</a></div>
   <div class="desc">another philosophy blog with short accessible posts</div>
 </div>
-<div class="link-entry memory-box">
-  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a><span class="scribble-note"> ← this one is here for sentimental reasons</span></div>
+<div class="link-entry">
+  <div><a href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a><span class="scribble-note"> ← this one is here for sentimental reasons</span></div>
   <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
 </div>
-<div class="link-entry boxy-row">
+<div class="link-entry">
   <div><a href="https://philosophynow.org" target="_blank" rel="noopener">Philosophy Magazine</a></div>
   <div class="desc">yet another accessible philosophy website</div>
 </div>
-<div class="link-entry under-row">
-  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://social-epistemology.com/" target="_blank" rel="noopener">Social Epistemology Review</a></div>
+<div class="link-entry">
+  <div><a href="https://social-epistemology.com/" target="_blank" rel="noopener">Social Epistemology Review</a></div>
   <div class="desc">a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a></div>
   <div class="desc">a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</div>
 </div>
@@ -669,37 +1013,37 @@ h1 {
         <section class="section" id="retro">
           <h2 class="section-title">Retro Webmaster Tools</h2>
           <div class="section-meta">textures, pets, cursors, pixel mischief etc etc</div>
-          <div class="tool-wall">
-            <div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="coollinks.gif" alt=""><a href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a></div>
+          <div class="links">
+            <div class="link-entry">
+  <div><a href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a></div>
   <div class="desc">the motherload of classic gifs.</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a></div>
+<div class="link-entry">
+  <div><a href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a></div>
   <div class="desc">lots of classic cute gifs, textures, pets and other tools for webmasters</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="chattt.gif" alt=""><a href="https://tholman.com/cursor-effects/" target="_blank" rel="noopener">Cursor effects</a></div>
+<div class="link-entry">
+  <div><a href="https://tholman.com/cursor-effects/" target="_blank" rel="noopener">Cursor effects</a></div>
   <div class="desc">adds cool 90s cursor effects to your cursor</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="cutehome.gif" alt=""><a href="https://geocities/?q=cat" target="_blank" rel="noopener">Geocities</a></div>
+<div class="link-entry">
+  <div><a href="https://geocities/?q=cat" target="_blank" rel="noopener">Geocities</a></div>
   <div class="desc">perfect if youre looking for ideas for your webpage</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://nineties.website" target="_blank" rel="noopener">Nineties</a></div>
+<div class="link-entry">
+  <div><a href="https://nineties.website" target="_blank" rel="noopener">Nineties</a></div>
   <div class="desc">90s aesthetic html ideas. if link broken just go to nineties dot website</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833" target="_blank" rel="noopener">Git &amp; GitHub Guide</a></div>
+<div class="link-entry">
+  <div><a href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833" target="_blank" rel="noopener">Git &amp; GitHub Guide</a></div>
   <div class="desc">if youre new to git and github, this is a good guide.</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="http://mikesdigitalpogpage.com/" target="_blank" rel="noopener">POGS</a></div>
+<div class="link-entry">
+  <div><a href="http://mikesdigitalpogpage.com/" target="_blank" rel="noopener">POGS</a></div>
   <div class="desc">digital POGS are back baby</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="book-0037.gif" alt=""><a href="https://lookscanned.io/en/scan" target="_blank" rel="noopener">LOOKS SCANNED</a></div>
+<div class="link-entry">
+  <div><a href="https://lookscanned.io/en/scan" target="_blank" rel="noopener">LOOKS SCANNED</a></div>
   <div class="desc">gives you a PDF of any screenshot to make it look like it was scanned on a scanner!!!</div>
 </div>
           </div>
@@ -711,60 +1055,60 @@ h1 {
           <h2 class="section-title">Nostalgia Trips</h2>
           <div class="section-meta">old computers / time capsules / websites about websites / things preserved by weird people online</div>
           <div class="links">
-            <div class="link-entry oldbox">
+            <div class="link-entry">
   <div><a href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a></div>
   <div class="desc">uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</div>
 </div>
-<div class="link-entry plain-row">
-  <div><img class="tiny-gif" src="cutehome.gif" alt=""><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a></div>
+<div class="link-entry">
+  <div><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a></div>
   <div class="desc">now you can relive the old internet days with these classic browsers :D</div>
 </div>
-<div class="link-entry blue-note">
-  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://theoldnet.com/" target="_blank" rel="noopener">The Old Net</a></div>
+<div class="link-entry">
+  <div><a href="https://theoldnet.com/" target="_blank" rel="noopener">The Old Net</a></div>
   <div class="desc">basically a search engine that only indexes old websites, how cool is that???</div>
 </div>
-<div class="link-entry warningish">
-  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a></div>
+<div class="link-entry">
+  <div><a href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a></div>
   <div class="desc">this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://www.wiby.org/" target="_blank" rel="noopener">Wiby</a></div>
   <div class="desc">another search engine that only indexes Web.10 websites ooo la la</div>
 </div>
-<div class="link-entry oldbox">
-  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://oldcomputers.net/" target="_blank" rel="noopener">Old Computers</a></div>
+<div class="link-entry">
+  <div><a href="https://oldcomputers.net/" target="_blank" rel="noopener">Old Computers</a></div>
   <div class="desc">a musuem of classic computers and internet</div>
 </div>
-<div class="link-entry memory-box">
-  <div><img class="tiny-gif" src="sleepycat.gif" alt=""><a href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a></div>
+<div class="link-entry">
+  <div><a href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a></div>
   <div class="desc">i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://my90stv.com/#zbi7oQITpDo" target="_blank" rel="noopener">My90sTV</a></div>
   <div class="desc">90s TV simulator, what else can i say</div>
 </div>
-<div class="link-entry under-row">
-  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://www.my80stv.com/" target="_blank" rel="noopener">My80sTV</a></div>
+<div class="link-entry">
+  <div><a href="https://www.my80stv.com/" target="_blank" rel="noopener">My80sTV</a></div>
   <div class="desc">90s? pff here's am 80s TV simulator</div>
 </div>
-<div class="link-entry yellow-paper">
-  <div><img class="tiny-gif" src="coollinks.gif" alt=""><a href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a></div>
+<div class="link-entry">
+  <div><a href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a></div>
   <div class="desc">paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</div>
 </div>
-<div class="link-entry oldbox">
+<div class="link-entry">
   <div><a href="https://flashmuseum.org/" target="_blank" rel="noopener">Flash Musuem</a></div>
   <div class="desc">archive of thousands of old flash games find your fave miniclip game here</div>
 </div>
-<div class="link-entry big-fave">
-  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://www.makewordart.com/" target="_blank" rel="noopener">WORD ART IS BACK</a></div>
+<div class="link-entry">
+  <div><a href="https://www.makewordart.com/" target="_blank" rel="noopener">WORD ART IS BACK</a></div>
   <div class="desc">return to monkey! (website where you can make wordart again!)</div>
 </div>
-<div class="link-entry blue-note">
-  <div><img class="tiny-gif" src="book-0037.gif" alt=""><a href="https://walzr.com/IMG_0001" target="_blank" rel="noopener">IMG_0001</a></div>
+<div class="link-entry">
+  <div><a href="https://walzr.com/IMG_0001" target="_blank" rel="noopener">IMG_0001</a></div>
   <div class="desc">ill just let them explain this one: "Between 2009 and 2012, iPhones had a built-in "Send to YouTube" button in the Photos app. Many of these uploads kept their default IMG_XXXX filenames, creating a time capsule of raw, unedited moments from random lives."</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="starwar1.gif" alt=""><a href="https://geocities.live/" target="_blank" rel="noopener">90&#x27;S WEBSITE MAKER</a></div>
+<div class="link-entry">
+  <div><a href="https://geocities.live/" target="_blank" rel="noopener">90&#x27;S WEBSITE MAKER</a></div>
   <div class="desc">another return to monkey! put in any website and it turns it into its 90's versionn</div>
 </div>
           </div>
@@ -777,37 +1121,37 @@ h1 {
         <section class="section" id="misc">
           <h2 class="section-title">Miscellaneous</h2>
           <div class="section-meta">junk drawer. categorisation has failed here</div>
-          <div class="junk-drawer">
-            <div class="link-entry yellow-paper">
-  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a></div>
+          <div class="links">
+            <div class="link-entry">
+  <div><a href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a></div>
   <div class="desc">guess the date of random photos, fun lil game</div>
 </div>
-<div class="link-entry plain-row">
+<div class="link-entry">
   <div><a href="https://cloudhiker.net/explore" target="_blank" rel="noopener">Cloud Hiker</a></div>
   <div class="desc">surf the most intersting hyperlinks on the web</div>
 </div>
-<div class="link-entry oldbox">
-  <div><img class="tiny-gif" src="chattt.gif" alt=""><a href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a></div>
+<div class="link-entry">
+  <div><a href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a></div>
   <div class="desc">collection of super fun interactive projects</div>
 </div>
-<div class="link-entry blue-note">
-  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://www.codingame.com/ide/puzzle/onboarding" target="_blank" rel="noopener">CodinGame Onboarding</a></div>
+<div class="link-entry">
+  <div><a href="https://www.codingame.com/ide/puzzle/onboarding" target="_blank" rel="noopener">CodinGame Onboarding</a></div>
   <div class="desc">learn to code via playing a game</div>
 </div>
-<div class="link-entry under-row">
-  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a></div>
+<div class="link-entry">
+  <div><a href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a></div>
   <div class="desc">an interactive site that finds a photo pointing to your cursor no matter where it is</div>
 </div>
-<div class="link-entry tool-entry">
-  <div><img class="tiny-gif" src="phone.gif" alt=""><a href="https://busysimulator.com/" target="_blank" rel="noopener">Busy Simulator</a></div>
+<div class="link-entry">
+  <div><a href="https://busysimulator.com/" target="_blank" rel="noopener">Busy Simulator</a></div>
   <div class="desc">play notifications to make you look busy at work hehehehe</div>
 </div>
-<div class="link-entry plain-row">
-  <div><img class="tiny-gif" src="starwar2.jpg" alt=""><a href="https://www.geo-fs.com/" target="_blank" rel="noopener">Flight Simulator</a></div>
+<div class="link-entry">
+  <div><a href="https://www.geo-fs.com/" target="_blank" rel="noopener">Flight Simulator</a></div>
   <div class="desc">the clue is in the name genius!</div>
 </div>
-<div class="link-entry warningish">
-  <div><img class="tiny-gif" src="sleepycat.gif" alt=""><a href="https://www.youhaventlived.com/" target="_blank" rel="noopener">Boomer blog</a></div>
+<div class="link-entry">
+  <div><a href="https://www.youhaventlived.com/" target="_blank" rel="noopener">Boomer blog</a></div>
   <div class="desc">a super old blog that somehow (!!!) is updated daily???? give this man an award</div>
 </div>
           </div>
@@ -845,3 +1189,5 @@ document.getElementById('randomBtn')?.addEventListener('click', () => {
 </script>
 </body>
 </html>
+coolsite.html
+HTML
