@@ -352,7 +352,7 @@ html, body{ filter:none; }
 /* ---------- headings ---------- */
 .post h1, .post h2, .post h3, .post h4{
   font-family:inherit;
-  color:var(--read-accent);
+  #111:var(--read-accent);
   text-shadow:none;
   font-weight:600;
   line-height:1.18;
@@ -464,6 +464,96 @@ html, body{ filter:none; }
   .post h1{ font-size:1.68em; }
   .post h2{ font-size:1.32em; }
 }
+
+
+    /* ---- black headings ---- */
+.post h1, .post h2, .post h3, .post h4{ color:#111; }
+ 
+/* ---- sensible cursors inside the article (the site-wide
+        crosshair makes body text feel unselectable) ---- */
+.post{ cursor:auto; }
+.post p, .post li, .post blockquote,
+.post h1, .post h2, .post h3, .post h4{ cursor:text; }
+.post a{ cursor:pointer; }
+ 
+/* ---- highlighter-green text selection ---- */
+.post ::selection{ background:#39ff14; color:#000; }
+ 
+/* ---- horizontal rules become a star ornament ---- */
+.post hr{
+  border:0; background:none; height:auto; width:100%;
+  margin:2.4em 0; overflow:visible; text-align:center;
+}
+.post hr::after{
+  content:"★   ·   ★   ·   ★";
+  display:block;
+  font-size:.62em; letter-spacing:.5em;
+  color:var(--read-accent);
+}
+ 
+/* ---- the terminal-style stats panel under the byline ---- */
+.entry-stats{
+  font-family:"Courier New", monospace;
+  font-size:12px; line-height:1.7;
+  color:#2b2820; background:#ece4d0;
+  border:2px inset #bcb094;
+  padding:9px 12px; margin:0 0 26px;
+}
+.entry-stats b{ color:#5b008a; }
+.entry-stats .hits{
+  background:#000; color:#00ff00; padding:1px 5px;
+  border:2px inset #0aa; letter-spacing:2px;
+}
+ 
+/* ---- blinking NEW! next to fresh entries ---- */
+.new-badge{
+  font-family:Verdana, Arial, sans-serif;
+  font-size:11px; font-weight:bold; letter-spacing:.12em;
+  color:#c00000; vertical-align:super;
+  animation:blink .9s steps(1,end) infinite;
+}
+ 
+/* ---- tag chips ---- */
+.entry-tags{
+  margin:26px 0 0; font-family:Verdana, Arial, sans-serif;
+  font-size:12px; color:var(--read-muted);
+}
+.entry-tags span{
+  display:inline-block; margin:0 5px 5px 0; padding:2px 8px;
+  background:#f4ecd8; border:1px solid var(--read-rule); color:#3b3730;
+}
+ 
+/* ---- footer link row ---- */
+.entry-foot{
+  margin-top:28px; padding-top:14px;
+  border-top:1px solid var(--read-rule);
+  font-family:Verdana, Arial, sans-serif; font-size:12px;
+  display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:center;
+}
+.entry-foot a{ color:var(--read-link); text-decoration:underline; }
+.entry-foot a:hover{ color:#cc0066; background:#fff2b8; }
+ 
+/* ---- blinking end-of-entry cursor ---- */
+.entry-end{
+  display:block; margin-top:22px; text-align:center;
+  font-family:"Courier New", monospace; font-size:14px; color:#5b008a;
+}
+.entry-end::after{
+  content:"_"; animation:blink .9s steps(1,end) infinite;
+}
+ 
+/* ---- printing: drop all the chrome ---- */
+@media print{
+  .sidebar, .marquee-wrap, .button-strip, .footer,
+  hr.retro, .sound-toggle, .entry-foot{ display:none !important; }
+  .page{ border:0; box-shadow:none; background:#fff; width:auto !important; }
+  .post{ border:0; box-shadow:none; max-width:none; font-size:12pt; }
+  .content{ background:#fff; }
+}
+ 
+@media (max-width:600px){
+  .entry-stats{ font-size:11px; }
+}
   </style>
 </head>
 <body>
@@ -521,21 +611,54 @@ html, body{ filter:none; }
         <td class="content">
           <hr class="retro">
 
-          <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
-            <header>
-              <h1 itemprop="headline">{{ page.title }}</h1>
-              <div class="meta">
-                {% if page.date %}
-                  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
-                {% endif %}
-                {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
-              </div>
-            </header>
-
-            <section itemprop="articleBody">
-              {{ content }}
-            </section>
-          </article>
+          
+{% assign now_s  = site.time | date: '%s' | plus: 0 %}
+{% assign pub_s  = page.date | date: '%s' | plus: 0 %}
+{% assign age    = now_s | minus: pub_s %}
+{% assign words  = content | number_of_words %}
+{% assign mins   = words | divided_by: 220 | plus: 1 %}
+{% assign kb     = content | size | divided_by: 1024 | plus: 1 %}
+{% assign secs   = kb | divided_by: 5 | plus: 1 %}
+ 
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header>
+    <h1 itemprop="headline">{{ page.title }}{% if age < 1209600 %} <span class="new-badge">NEW!</span>{% endif %}</h1>
+    <div class="meta">
+      {% if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% endif %}
+      {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
+    </div>
+  </header>
+ 
+  <div class="entry-stats">
+    &gt; <b>{{ words }}</b> words &nbsp;·&nbsp; about <b>{{ mins }} min</b> to read<br>
+    &gt; <b>{{ kb }} KB</b> &nbsp;·&nbsp; roughly <b>{{ secs }} sec</b> over a 56k modem<br>
+    &gt; you are reader <span class="hits" id="entryHits">000000</span> of this entry<br>
+    &gt; best viewed in Netscape Navigator 4.0 at 800×600
+  </div>
+ 
+  <section itemprop="articleBody">
+    {{ content }}
+  </section>
+ 
+  <span class="entry-end">[ end of transmission ]</span>
+ 
+  {% if page.tags and page.tags.size > 0 %}
+  <div class="entry-tags">
+    filed under:
+    {% for tag in page.tags %}<span>{{ tag }}</span>{% endfor %}
+  </div>
+  {% endif %}
+ 
+  <div class="entry-foot">
+    <a href="#glitter-title">▲ back to top</a>
+    <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
+    <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
+    <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
+    <a href="#" onclick="window.print();return false;">🖨 print this page</a>
+  </div>
+</article>
 
           <div class="marquee-wrap small">
             <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
@@ -609,6 +732,17 @@ document.getElementById('lastUpdated').textContent = document.lastModified || '1
   });
 })();
 
+
+/* per-entry reader counter, stored per URL */
+(() => { try {
+  const el = document.getElementById('entryHits');
+  if(!el) return;
+  const key = 'g981_hits:' + location.pathname;
+  const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
+  localStorage.setItem(key, n);
+  el.textContent = String(n).padStart(6, '0');
+} catch(e){} })();
+  
 /* Konami hyperspace */
 (() => {
   const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
