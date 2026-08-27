@@ -1,218 +1,864 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Galaxy 981 Guestbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galaxy 981 // Guestbook</title>
 
   <style>
-    /* === borrow the index.html look === */
     :root{
-      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
-      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
+      --cyan:#6ff7ff;
+      --blue:#00b7ff;
+      --acid:#b8ff32;
+      --yellow:#fff36b;
+      --violet:#9f5cff;
+      --hotpink:#ff5ad9;
+      --ink:#dffeff;
+      --deep:#050015;
     }
-    html, body {
-      margin:0; padding:0;
-      background-image:url('stars.gif'); background-repeat:repeat;
-      color:var(--ink);
-      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
-    }
-    .page {
-      width:760px; margin:18px auto 32px; position:relative; left:7px;
-      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
-      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
-    #glitter-title{
-      font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
-    }
-    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
-    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
-    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
 
-    .layout{ width:100%; border-collapse:collapse; }
-    .sidebar{
-      width:210px;
-      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple); vertical-align:top;
+    *{ box-sizing:border-box; }
+
+    html{
+      min-height:100%;
+      background:#020008;
     }
-    .content{
-      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
+
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      font-family:"Courier New", Courier, monospace;
+      cursor:crosshair;
+      overflow-x:auto;
+      image-rendering:pixelated;
+      background:
+        linear-gradient(rgba(0,0,15,.24),rgba(0,0,15,.24)),
+        url("stars.gif") repeat,
+        #020008;
+    }
+
+    /* cheap screen dust. i like it better when you can barely see it */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:9998;
+      opacity:.13;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 2px, rgba(160,240,255,.17) 3px, transparent 4px),
+        repeating-linear-gradient(90deg, transparent 0 41px, rgba(255,0,210,.09) 42px, transparent 43px);
+      mix-blend-mode:screen;
+    }
+
+    a{ color:#74ffff; }
+    a:visited{ color:#d58cff; }
+    a:hover{ color:#fff36b; background:#321056; text-decoration:none; }
+
+    .site{
+      width:980px;
+      margin:17px auto 45px;
+      position:relative;
+    }
+
+    /* header is deliberately its own object, not part of one big card */
+    .masthead{
+      position:relative;
+      min-height:143px;
+      margin-left:54px;
+      margin-right:21px;
+      border-top:5px ridge #52eaff;
+      border-left:5px ridge #52eaff;
+      border-right:8px outset #6b20a7;
+      border-bottom:3px solid #19064b;
+      background:
+        linear-gradient(90deg, rgba(0,9,40,.93), rgba(46,0,67,.78)),
+        repeating-linear-gradient(135deg, transparent 0 9px, rgba(99,255,244,.07) 10px 11px);
+      box-shadow:12px 10px 0 #07000f, 0 0 22px rgba(0,229,255,.45);
+      transform:rotate(-.16deg);
+    }
+
+    .masthead h1{
+      margin:0;
+      padding:8px 16px 0 25px;
+      font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size:72px;
+      line-height:.98;
+      font-weight:400;
+      letter-spacing:1px;
+      color:#85f9ff;
+      text-shadow:
+        2px 2px 0 #4f00bb,
+        -2px -1px 0 #fff,
+        5px 5px 0 #001a67,
+        0 0 12px #00d9ff;
+      transform:skewX(-4deg);
+    }
+
+    .masthead .nine{
+      color:#d9ff45;
+      font-family:"Arial Black", Impact, sans-serif;
+      font-size:64px;
+      vertical-align:7px;
+      letter-spacing:-5px;
+      text-shadow:2px 2px 0 #68007d, 0 0 9px #c8ff00;
+    }
+
+    .masthead .sub{
+      position:absolute;
+      left:31px;
+      bottom:7px;
+      font-family:"Comic Sans MS", cursive;
+      font-size:15px;
+      color:#fff58c;
+      transform:rotate(-1.5deg);
+    }
+
+    .masthead .ship-left,
+    .masthead .ship-right{
+      position:absolute;
+      width:118px;
+      max-height:80px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 6px #79ffff);
+      z-index:2;
+    }
+    .masthead .ship-left{ left:-77px; top:18px; transform:rotate(-9deg); }
+    .masthead .ship-right{ right:-55px; top:36px; transform:rotate(7deg); }
+
+    .microtag{
+      position:absolute;
+      right:17px;
+      top:-12px;
+      padding:3px 7px;
+      border:2px outset #d4d4d4;
+      background:#c0c0c0;
+      color:#001a55;
+      font:11px "MS Sans Serif", Tahoma, sans-serif;
+      box-shadow:3px 3px 0 #000;
+      transform:rotate(1.5deg);
+    }
+
+    .crawl{
+      width:875px;
+      margin:14px 0 0 87px;
+      border:3px inset #b6b6b6;
+      background:#080029;
+      box-shadow:4px 5px 0 #000;
+      font-family:"MS Sans Serif", Tahoma, sans-serif;
+      font-size:13px;
+      color:#ffff58;
+      transform:rotate(.14deg);
+    }
+
+    .crawl marquee{ padding:4px 0 3px; }
+
+    .tiny-corner-note{
+      position:absolute;
+      top:118px;
+      left:0;
+      width:92px;
+      padding:5px 6px;
+      color:#1a0027;
+      background:#d9ff66;
+      border:1px solid #849c21;
+      box-shadow:3px 4px 0 #000;
+      font:10px/1.1 Arial, sans-serif;
+      transform:rotate(-5deg);
+      z-index:4;
+    }
+
+    .workbench{
+      display:grid;
+      grid-template-columns:202px 1fr 132px;
+      gap:12px;
+      align-items:start;
+      margin-top:16px;
+    }
+
+    /* LEFT PILE ------------------------------------------------ */
+    .left-rail{
+      position:relative;
+      top:7px;
+    }
+
+    .navbox{
+      padding:7px 7px 9px;
+      border:4px ridge #5920a9;
+      background:
+        repeating-linear-gradient(0deg, rgba(31,0,70,.97) 0 18px, rgba(8,4,42,.97) 18px 36px);
+      box-shadow:6px 7px 0 #000;
+    }
+
+    .navbox .label{
+      display:inline-block;
+      margin:-18px 0 7px 8px;
+      padding:2px 9px;
+      background:#fbff61;
+      color:#28003c;
+      border:2px solid #b28300;
+      font:bold 11px Arial, sans-serif;
+      transform:rotate(-2deg);
+      box-shadow:2px 2px #000;
     }
 
     .nav a{
-      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
-    }
-    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
-    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
-
-    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
-    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
-    .post .meta{ font-size:12px; color:var(--neon-yellow); }
-    hr.retro{
-      height:12px; border:0; margin:10px 0 14px;
-      background-image:repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
-      );
+      display:block;
+      position:relative;
+      min-height:34px;
+      margin:6px 2px;
+      padding:4px 5px 4px 36px;
+      text-decoration:none;
+      font:bold 12px/24px "MS Sans Serif", Tahoma, sans-serif;
+      text-transform:uppercase;
+      color:#d9ffff;
+      border:2px outset #a9e6ff;
+      background:#11134d;
+      box-shadow:2px 2px 0 #000;
     }
 
-    /* tiny sparkle ships like index (optional images present there) */
-    #glitter-title::before,#glitter-title::after{
-      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
-      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
-      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+    /* every old site had one button that clearly came from another layout */
+    .nav a:nth-child(3n+2){
+      background:#30093f;
+      border-color:#ff86e4;
+      color:#ffd0f3;
+      transform:translateX(3px);
     }
-    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
-    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
+    .nav a:nth-child(4){
+      font-family:"Comic Sans MS", cursive;
+      text-transform:none;
+      color:#181800;
+      background:#cfff3b;
+      border-color:#faffc2;
+      transform:rotate(-1deg) translateX(-2px);
+    }
+    .nav a:nth-child(7){
+      background:#003765;
+      border-style:ridge;
+      letter-spacing:-.4px;
+    }
 
-    /* guestbook form styling to match */
-    .gb-form label{ display:block; font-size:12px; color:var(--neon-yellow); margin:6px 0 2px; }
-    .gb-input, .gb-textarea{
-      width:100%; box-sizing:border-box; background:#0e0e33; color:#a7ffff; border:3px inset #6af7ff;
-      padding:6px 8px; font-family:inherit; font-size:14px; box-shadow:2px 2px 0 #000;
+    .nav a:hover{
+      border-style:inset;
+      transform:translate(1px,1px);
+      filter:brightness(1.35);
     }
-    .gb-textarea{ min-height:110px; resize:vertical; }
+    .nav a:nth-child(3n+2):hover{ transform:translate(4px,1px); }
+
+    .nav-icon{
+      position:absolute;
+      left:5px;
+      top:3px;
+      width:27px;
+      height:27px;
+      object-fit:contain;
+      image-rendering:pixelated;
+    }
+
+    .minipanel{
+      margin:17px 8px 0 -4px;
+      padding:7px;
+      border:2px solid #45e4ff;
+      background:#020c22;
+      color:#b9f8ff;
+      font:11px/1.35 "Courier New", monospace;
+      box-shadow:5px 5px 0 #17002e;
+    }
+
+    .minipanel h4{
+      margin:-16px 0 5px 7px;
+      width:max-content;
+      padding:1px 5px;
+      background:#071b48;
+      border:1px solid #76ecff;
+      color:#fff78a;
+      font-size:11px;
+    }
+
+    .minipanel .blink{
+      animation:blink 1.05s steps(2,end) infinite;
+      color:#9dff35;
+      font-weight:bold;
+    }
+
+    .postit{
+      width:164px;
+      margin:22px 0 0 23px;
+      padding:14px 9px 10px;
+      color:#322100;
+      background:#fff08b;
+      border:1px solid #a68d35;
+      font:12px/1.28 "Comic Sans MS", cursive;
+      box-shadow:5px 5px 0 rgba(0,0,0,.72);
+      transform:rotate(2.2deg);
+    }
+    .postit::before{
+      content:"";
+      position:absolute;
+      width:65px;
+      height:14px;
+      margin-top:-22px;
+      margin-left:38px;
+      background:rgba(195,235,255,.55);
+      border:1px solid rgba(110,150,170,.3);
+      transform:rotate(-5deg);
+    }
+
+    /* MIDDLE PILE ---------------------------------------------- */
+    .main{
+      min-width:0;
+      padding-top:2px;
+    }
+
+    .bead-divider{
+      height:13px;
+      margin:0 4px 13px 12px;
+      border-top:2px dotted #fff;
+      border-bottom:2px dotted #ff50d5;
+      background:
+        repeating-linear-gradient(90deg,
+          #ff384f 0 13px,
+          #ffb928 13px 26px,
+          #e9ff35 26px 39px,
+          #46e87b 39px 52px,
+          #36c8ff 52px 65px,
+          #6e52ff 65px 78px,
+          #e853ff 78px 91px);
+      box-shadow:2px 3px #000;
+      transform:rotate(.25deg);
+    }
+
+    .guest-window{
+      position:relative;
+      margin:0 7px 27px 1px;
+      border:3px outset #d0d0d0;
+      background:#c0c0c0;
+      color:#000;
+      box-shadow:9px 9px 0 rgba(0,0,0,.75);
+      transform:rotate(-.08deg);
+    }
+
+    .windowbar{
+      min-height:26px;
+      padding:4px 84px 4px 7px;
+      color:#fff;
+      background:linear-gradient(90deg,#00007f,#1084d0 72%,#00007f);
+      font:bold 12px "MS Sans Serif", Tahoma, sans-serif;
+      letter-spacing:.2px;
+    }
+
+    .window-controls{
+      position:absolute;
+      top:4px;
+      right:4px;
+      display:flex;
+      gap:2px;
+    }
+    .window-controls span{
+      width:18px;
+      height:18px;
+      display:grid;
+      place-items:center;
+      border:2px outset #efefef;
+      background:#c0c0c0;
+      color:#000;
+      font:bold 11px/1 Arial, sans-serif;
+    }
+
+    .guest-inner{
+      padding:10px 12px 13px;
+      background:
+        repeating-linear-gradient(0deg,#bfbfbf 0 22px,#c6c6c6 22px 44px);
+      font:12px "MS Sans Serif", Tahoma, sans-serif;
+    }
+
+    .guest-title-row{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      margin-bottom:6px;
+    }
+    .guest-title-row h2{
+      margin:0;
+      color:#3b0062;
+      font:bold 22px "Arial Black", Arial, sans-serif;
+      text-shadow:1px 1px #fff;
+    }
+    .guest-title-row img{
+      width:74px;
+      height:auto;
+      filter:drop-shadow(2px 2px 0 #666);
+    }
+
+    .microcopy{
+      margin:1px 0 9px;
+      padding:3px 5px;
+      display:inline-block;
+      color:#102000;
+      background:#cfff70;
+      border:1px dotted #335d00;
+      font:11px "Comic Sans MS", cursive;
+      transform:rotate(-.6deg);
+    }
+
+    .gb-form label{
+      display:block;
+      margin:7px 0 2px;
+      color:#000063;
+      font-weight:bold;
+    }
+
+    .gb-input,
+    .gb-textarea{
+      width:100%;
+      padding:6px 7px;
+      color:#001232;
+      background:#fffef0;
+      border:2px inset #efefef;
+      font:13px "Courier New", monospace;
+      outline:none;
+      box-shadow:none;
+    }
+    .gb-input:focus,
+    .gb-textarea:focus{
+      background:#fff;
+      outline:1px dotted #000080;
+    }
+    .gb-textarea{
+      min-height:126px;
+      resize:vertical;
+      background:
+        linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)),
+        repeating-linear-gradient(0deg,transparent 0 18px,#c8d9ff 19px 20px);
+    }
+
+    .ubb{
+      display:flex;
+      flex-wrap:wrap;
+      gap:3px;
+      margin:4px 0;
+      align-items:center;
+    }
+    .ubb::before{
+      content:"mini bbcode thing:";
+      margin-right:3px;
+      color:#555;
+      font-size:10px;
+    }
+    .ubb button,
     .gb-btn{
-      margin-top:8px; padding:6px 10px; border:3px outset #6af7ff; background:#140043; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
+      cursor:pointer;
+      border:2px outset #eee;
+      background:#c0c0c0;
+      color:#000;
+      font:12px "MS Sans Serif", Tahoma, sans-serif;
+      box-shadow:none;
     }
-    .gb-btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+    .ubb button{ min-width:27px; padding:2px 5px; }
+    .ubb button:active,
+    .gb-btn:active{ border-style:inset; }
 
-    .gb-list .entry{ padding:8px; border:3px ridge #6af7ff; background:rgba(0,0,0,0.35); margin:10px 0; }
-    .gb-list .who{ color:var(--neon-yellow); font-size:12px; }
-    .gb-list .when{ color:#c9f; font-size:11px; margin-left:6px; }
-  
-  /* guestbook title row with gif */
-.title-row{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 6px 0;   /* keeps the spacing your posts use */
-}
-.title-row h3{ margin: 0; }
-.gb-gif{
-  width: 80px;          /* tweak size */
-  height: auto;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 0 6px var(--neon-blue));
-}
-@media (max-width: 480px){
-  .gb-gif{ width: 60px; }
-}
+    #smiley-panel{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+      width:max-content;
+      max-width:100%;
+      padding:5px;
+      margin:4px 0 6px;
+      border:2px inset #eee;
+      background:#ddd;
+    }
+    #smiley-panel[hidden]{ display:none; }
+    #smiley-panel [data-smiley]{
+      cursor:pointer;
+      padding:1px 3px;
+      border:1px outset #fff;
+      background:#c0c0c0;
+      font-size:18px;
+    }
 
-    /* === BBCode toolbar + smileys === */
-.ubb{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; align-items:center; }
-.ubb button{
-  cursor:pointer; padding:3px 6px; border:3px outset #6af7ff;
-  background:#0e0e33; color:#a7ffff; box-shadow:2px 2px 0 #000;
-  font-family:inherit; font-size:14px;
-}
-.ubb button:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+    .button-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:7px;
+    }
+    .gb-btn{
+      padding:5px 13px;
+      font-weight:bold;
+    }
+    .form-whisper{
+      color:#6a0066;
+      font:10px "Comic Sans MS", cursive;
+      transform:rotate(1deg);
+    }
 
-#smiley-panel{
-  display:flex; flex-wrap:wrap; gap:4px; padding:6px; margin-top:6px;
-  border:3px inset #6af7ff; background:#0b0b2a;
-}
-#smiley-panel[hidden]{ display:none; }
-#smiley-panel [data-smiley]{
-  cursor:pointer; font-size:20px; line-height:1; padding:2px 4px;
-  border:2px outset #6af7ff; background:#140043;
-}
-#smiley-panel [data-smiley]:active{ border-style:inset; transform:translate(1px,1px); }
+    /* message board looks like a different page got embedded here later */
+    .messages-board{
+      position:relative;
+      margin:0 0 20px 18px;
+      padding:11px 12px 15px;
+      border:4px double #80ff67;
+      background:
+        linear-gradient(rgba(1,12,18,.93),rgba(1,12,18,.93)),
+        repeating-linear-gradient(45deg,#10250f 0 6px,#061622 6px 12px);
+      box-shadow:-7px 6px 0 #260033, 0 0 14px rgba(57,255,20,.25);
+      transform:rotate(.12deg);
+    }
 
-/* make links inside messages readable */
-.gb-list .entry .msg a{ color:#7ff; text-decoration:underline; }
+    .messages-board::before{
+      content:"ARCHIVE / PUBLIC";
+      position:absolute;
+      right:-18px;
+      top:-14px;
+      padding:3px 6px;
+      border:2px solid #ff6bd9;
+      background:#1c0022;
+      color:#ffb8ed;
+      font:bold 10px Arial, sans-serif;
+      transform:rotate(4deg);
+    }
 
-  
+    .messages-board h2{
+      margin:0;
+      color:#8dff5c;
+      font:26px "Comic Sans MS", cursive;
+      text-shadow:2px 2px 0 #173500;
+    }
+    .messages-board .meta{
+      color:#ffef75;
+      font-size:10px;
+      margin-bottom:9px;
+    }
+
+    .gb-list .entry{
+      position:relative;
+      margin:9px 2px 13px;
+      padding:8px 9px 9px;
+      color:#dbffff;
+      background:#060c2c;
+      border:2px ridge #5cecff;
+      box-shadow:3px 3px 0 #000;
+      font-size:12px;
+      overflow-wrap:anywhere;
+    }
+    .gb-list .entry:nth-child(4n+2){
+      margin-left:13px;
+      margin-right:-3px;
+      border-color:#ff65df;
+      background:#27082a;
+      transform:rotate(-.18deg);
+    }
+    .gb-list .entry:nth-child(4n+3){
+      margin-left:-5px;
+      border-style:dashed;
+      border-color:#d7ff51;
+      background:#112510;
+      color:#f5ffe5;
+    }
+    .gb-list .entry:nth-child(4n){
+      margin-left:6px;
+      border:3px double #9874ff;
+      background:#120c32;
+      transform:rotate(.12deg);
+    }
+    .gb-list .entry::after{
+      content:"✦";
+      position:absolute;
+      right:5px;
+      top:2px;
+      color:#ffec67;
+      font-size:12px;
+    }
+
+    .gb-list .who{
+      color:#fff369;
+      font:11px "MS Sans Serif", Tahoma, sans-serif;
+    }
+    .gb-list .when{
+      color:#d197ff;
+      font:9px "Courier New", monospace;
+      margin-left:5px;
+    }
+    .gb-list .msg{
+      margin-top:4px;
+      line-height:1.42;
+    }
+    .gb-list .msg a{ color:#80ffff; text-decoration:underline; }
+
+    .empty-note{
+      padding:9px;
+      color:#a8eaff;
+      border:1px dotted #6eefff;
+      font-size:11px;
+    }
+
+    /* RIGHT PILE ------------------------------------------------ */
+    .right-rail{
+      position:relative;
+      padding-top:33px;
+    }
+
+    .sticker{
+      position:relative;
+      margin-bottom:18px;
+      padding:7px 6px;
+      background:#ff62d7;
+      color:#270026;
+      border:3px double #fff;
+      box-shadow:4px 4px 0 #000;
+      font:bold 11px/1.2 Arial, sans-serif;
+      text-align:center;
+      transform:rotate(3deg);
+    }
+
+    .sticker.alt{
+      background:#74f7ff;
+      color:#00202a;
+      transform:rotate(-2deg);
+    }
+
+    .counterbox{
+      margin:2px 0 19px 9px;
+      padding:7px 5px;
+      border:3px ridge #8b70ff;
+      background:#0a0226;
+      color:#fff;
+      font:10px/1.35 "Courier New", monospace;
+      text-align:center;
+      box-shadow:4px 5px 0 #000;
+    }
+    .counterdigits{
+      display:block;
+      margin:5px auto;
+      padding:2px 4px;
+      width:max-content;
+      letter-spacing:2px;
+      color:#39ff14;
+      background:#000;
+      border:2px inset #777;
+      font:bold 14px "Courier New", monospace;
+      text-shadow:0 0 4px #39ff14;
+    }
+
+    .mini-gif{
+      display:block;
+      width:92px;
+      max-height:90px;
+      object-fit:contain;
+      margin:4px auto 17px;
+      filter:drop-shadow(0 0 5px #67f6ff);
+      transform:rotate(2deg);
+    }
+
+    .underconstruction{
+      margin:0 -4px 18px 4px;
+      padding:5px;
+      border:2px dashed #111;
+      background:repeating-linear-gradient(135deg,#ffdc23 0 8px,#ffdc23 8px 16px,#151515 16px 24px,#151515 24px 32px);
+      color:#000;
+      text-align:center;
+      font:bold 10px Arial, sans-serif;
+      box-shadow:3px 3px 0 #000;
+      transform:rotate(-1.4deg);
+    }
+    .underconstruction span{
+      display:inline-block;
+      padding:3px 4px;
+      background:#ffe86d;
+      border:1px solid #000;
+    }
+
+    .side-links{
+      padding:5px;
+      border-left:3px solid #ff64dc;
+      border-bottom:3px solid #ff64dc;
+      color:#cceeff;
+      background:rgba(17,0,38,.84);
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    .footer-scrap{
+      width:625px;
+      margin:25px 0 0 231px;
+      padding:5px 8px;
+      border:1px dotted #8ce8ff;
+      color:#a8d5e8;
+      background:rgba(0,0,0,.52);
+      font:10px "Courier New", monospace;
+      text-align:center;
+      transform:rotate(-.3deg);
+    }
+
+    @keyframes blink{ 50%{ visibility:hidden; } }
+
+    /* vhs-ish page change */
+    .vhs::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      pointer-events:none;
+      background:
+        linear-gradient(#000,transparent 12%,#0000 88%,#000),
+        repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 2px,transparent 2px 4px);
+      animation:vhs 240ms steps(2,end);
+    }
+    @keyframes vhs{ from{ opacity:0 } to{ opacity:1 } }
+
+    @media (max-width: 820px){
+      /* keep the desktop-site feeling, but don't make phones completely miserable */
+      .site{ width:760px; margin-left:10px; margin-right:10px; }
+      .masthead{ margin-left:39px; }
+      .masthead h1{ font-size:60px; }
+      .masthead .nine{ font-size:53px; }
+      .crawl{ width:690px; margin-left:65px; }
+      .workbench{ grid-template-columns:185px 1fr; }
+      .right-rail{ display:none; }
+      .footer-scrap{ width:520px; margin-left:208px; }
+    }
   </style>
 </head>
-<body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">★ sign my guestbook ★ leave a trace in cyberspace ★</marquee>
+<body>
+  <div class="site">
+    <div class="tiny-corner-note">guestbook<br>dept.<br><b>OPEN</b> 24/7</div>
+
+    <header class="masthead">
+      <img class="ship-left" src="starwar1.gif?v=1" alt="">
+      <h1>GALAXY <span class="nine">981</span></h1>
+      <div class="sub">the guestbook annex / please leave fingerprints on the glass</div>
+      <img class="ship-right" src="starwar2.jpg?v=1" alt="">
+      <div class="microtag">guestbook.html&nbsp;&nbsp;[local]</div>
+    </header>
+
+    <div class="crawl">
+      <marquee behavior="scroll" direction="left" scrollamount="4">★ sign my guestbook ★ say something weird ★ links are okay ★ this page is permanently under renovation ★ refresh if the stars look wrong ★</marquee>
     </div>
 
-    <table class="layout">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
-          </div>
+    <div class="workbench">
+      <aside class="left-rail">
+        <div class="navbox">
+          <div class="label">DIRECTORY</div>
+          <nav class="nav" aria-label="Site navigation">
+            <a href="index.html"><img src="cutehome.gif" alt="" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="" class="nav-icon">Entries</a>
+            <a href="index.html#chat-room"><img src="chattt.gif" alt="" class="nav-icon">chat room</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="" class="nav-icon">Kool Books</a>
+            <a href="Truth2.html"><img src="math.gif" alt="" class="nav-icon">Truth Table</a>
+            <a href="contact.html"><img src="phone.gif" alt="" class="nav-icon">Contact</a>
+          </nav>
+        </div>
 
-          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
-            <div><a href="https://catofminerva.com/contact.html">Email Me</a></div>
-            <div style="margin-top:6px"><a href="#sign">Sign my Guestbook</a></div>
-          </div>
-        </td>
+        <div class="minipanel">
+          <h4>GALAXY STATUS</h4>
+          signal: <span class="blink">● ONLINE</span><br>
+          protocol: html + hope<br>
+          browser: yours probably<br>
+          mood: guestbook-shaped
+        </div>
 
-        <td class="content">
-          <hr class="retro">
+        <div class="postit">
+          <b>webmaster note:</b><br>
+          sign this even if you have nothing profound to say. “hello” is historically important internet evidence.
+        </div>
+      </aside>
 
-          <div class="post" id="sign">
-<div class="title-row">
-  <h3>Sign the Guestbook</h3>
-  <img src="guestbookcute.gif" alt="Guestbook badge" class="gb-gif">
-</div>
-<div class="meta">say hello friend</div>
-<br>
+      <main class="main">
+        <div class="bead-divider" aria-hidden="true"></div>
+
+        <section class="guest-window" id="sign">
+          <div class="windowbar">Galaxy 981 Guestbook Writer v1.3</div>
+          <div class="window-controls" aria-hidden="true"><span>_</span><span>□</span><span>×</span></div>
+
+          <div class="guest-inner">
+            <div class="guest-title-row">
+              <h2>Sign the Guestbook</h2>
+              <img src="guestbookcute.gif" alt="Guestbook badge">
+            </div>
+
+            <div class="microcopy">say hello friend. leave a little fossil in cyberspace.</div>
 
             <form id="guestbookForm" class="gb-form" autocomplete="off">
-              <label for="username">Name</label>
-              <input class="gb-input" type="text" id="username" placeholder="Your name" maxlength="60" />
+              <label for="username">Your name / alias</label>
+              <input class="gb-input" type="text" id="username" placeholder="Anonymous internet person" maxlength="60">
 
               <label for="message">Message</label>
 
-<div class="ubb" aria-label="Formatting toolbar">
-  <button type="button" data-tag="b" title="Bold"><strong>B</strong></button>
-  <button type="button" data-tag="i" title="Italic"><em>I</em></button>
-  <button type="button" data-tag="u" title="Underline"><span style="text-decoration:underline">U</span></button>
-  <button type="button" id="btn-link" title="Link">Link</button>
-  <button type="button" id="btn-smileys" title="Smileys">🙂</button>
-</div>
+              <div class="ubb" aria-label="Formatting toolbar">
+                <button type="button" data-tag="b" title="Bold"><strong>B</strong></button>
+                <button type="button" data-tag="i" title="Italic"><em>I</em></button>
+                <button type="button" data-tag="u" title="Underline"><span style="text-decoration:underline">U</span></button>
+                <button type="button" id="btn-link" title="Link">URL</button>
+                <button type="button" id="btn-smileys" title="Smileys">:)</button>
+              </div>
 
-<div id="smiley-panel" hidden>
-  <span data-smiley=":)">🙂</span>
-  <span data-smiley=":D">😄</span>
-  <span data-smiley=";)">😉</span>
-  <span data-smiley=":(">🙁</span>
-  <span data-smiley=":P">😛</span>
-  <span data-smiley="&lt;3">❤️</span>
-</div>
+              <div id="smiley-panel" hidden>
+                <span data-smiley=":)">🙂</span>
+                <span data-smiley=":D">😄</span>
+                <span data-smiley=";)">😉</span>
+                <span data-smiley=":(">🙁</span>
+                <span data-smiley=":P">😛</span>
+                <span data-smiley="&lt;3">❤️</span>
+              </div>
 
-<textarea class="gb-textarea" id="message" placeholder="Write your message here"></textarea>
+              <textarea class="gb-textarea" id="message" placeholder="Write something. BBCode: [b] [i] [u] [url=https://...]"></textarea>
 
-              <button class="gb-btn" type="submit">Submit</button>
+              <div class="button-row">
+                <button class="gb-btn" type="submit">OK, PUT IT ON THE INTERNET</button>
+                <span class="form-whisper">please do not summon anything expensive</span>
+              </div>
             </form>
           </div>
+        </section>
 
-          <div class="post">
-            <h3>Messages</h3>
-            <div class="meta">Newest first</div>
-            <div id="messages" class="gb-list"></div>
+        <section class="messages-board">
+          <h2>Messages</h2>
+          <div class="meta">newest first // whatever survives the database appears below</div>
+          <div id="messages" class="gb-list">
+            <div class="empty-note">contacting the guestbook mothership...</div>
           </div>
+        </section>
 
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
+        <div class="bead-divider" aria-hidden="true"></div>
+      </main>
+
+      <aside class="right-rail" aria-label="Assorted site scraps">
+        <div class="sticker">BEST VIEWED<br>WITH TOO MANY<br>TABS OPEN</div>
+
+        <div class="counterbox">
+          visitors-ish
+          <span class="counterdigits">00981</span>
+          counter may be spiritually accurate
+        </div>
+
+        <img src="guestbookcute.gif" alt="" class="mini-gif">
+
+        <div class="underconstruction"><span>UNDER<br>CONSTRUCTION<br>FOREVER</span></div>
+
+        <div class="sticker alt">★ YOU ARE HERE ★<br><small>somewhere in the web</small></div>
+
+        <div class="side-links">
+          <b>loose ends:</b><br>
+          <a href="https://catofminerva.com/contact.html">e-mail me</a><br>
+          <a href="#sign">sign again?</a><br>
+          <span style="color:#fff36b">* more junk later</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer-scrap">GALAXY 981 // assembled from tables, gifs, bad ideas, and later additions // if something is 3px off, it lives there now</div>
   </div>
 
-  <!-- VHS-style internal nav like index: only intercepts relative links -->
   <script>
-    document.querySelectorAll('.page a[href]').forEach(a => {
+    document.querySelectorAll('.site a[href]').forEach(a => {
       const url = a.getAttribute('href') || '';
       if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
       a.addEventListener('click', e => {
@@ -223,7 +869,6 @@
     });
   </script>
 
-  <!-- Firebase guestbook (kept simple, ordered by ISO timestamp) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
@@ -239,7 +884,7 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
+    const db = getFirestore(app);
 
     const form = document.getElementById('guestbookForm');
     const messagesDiv = document.getElementById('messages');
@@ -250,130 +895,129 @@
       const messageText = document.getElementById('message').value.trim();
       if (!messageText) return;
 
-      const timestamp = new Date().toISOString(); // ISO sorts correctly as a string
+      const timestamp = new Date().toISOString();
+
       try {
         await addDoc(collection(db, 'guestbook'), { username, message: messageText, timestamp });
         form.reset();
-        await loadMessages(); // refresh after submit
+        smileBox.hidden = true;
+        await loadMessages();
       } catch (err) {
-        alert('Failed to save message.');
+        alert('Failed to save message. The guestbook gremlins won.');
       }
     });
 
     async function loadMessages(){
-      const q = query(collection(db, 'guestbook'), orderBy('timestamp','desc'));
-      const snap = await getDocs(q);
-      messagesDiv.innerHTML = '';
-      snap.forEach(doc => {
-        const d = doc.data();
-        const when = new Date(d.timestamp).toLocaleString();
-        const el = document.createElement('div');
-        el.className = 'entry';
-        el.innerHTML = `
-          <div class="who"><strong>${escapeHtml(d.username || 'Anonymous')}</strong>
-            <span class="when">(${when})</span>
-          </div>
-          <div class="msg">${escapeHtml(d.message || '')}</div>`;
-        messagesDiv.appendChild(el);
-      });
+      const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
+
+      try {
+        const snap = await getDocs(q);
+        messagesDiv.innerHTML = '';
+
+        if (snap.empty) {
+          messagesDiv.innerHTML = '<div class="empty-note">Nobody has written here yet. This is your chance to become archaeological evidence.</div>';
+          return;
+        }
+
+        snap.forEach(doc => {
+          const d = doc.data();
+          const when = d.timestamp ? new Date(d.timestamp).toLocaleString() : 'time unknown';
+          const el = document.createElement('div');
+          el.className = 'entry';
+          el.innerHTML = `
+            <div class="who"><strong>${escapeHtml(d.username || 'Anonymous')}</strong>
+              <span class="when">(${escapeHtml(when)})</span>
+            </div>
+            <div class="msg">${renderMessage(d.message || '')}</div>`;
+          messagesDiv.appendChild(el);
+        });
+      } catch (err) {
+        messagesDiv.innerHTML = '<div class="empty-note">The messages would not load. Refresh once; if that fails, blame outer space.</div>';
+      }
     }
 
     function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[c]));
     }
 
+    function insertAround(tag){
+      const ta = document.getElementById('message');
+      const [start, end] = [ta.selectionStart, ta.selectionEnd];
+      const before = ta.value.slice(0, start);
+      const sel = ta.value.slice(start, end) || 'text';
+      const after = ta.value.slice(end);
+      const open = `[${tag}]`;
+      const close = `[/${tag}]`;
 
-/* === insert BBCode tags around selection === */
-function insertAround(tag){
-  const ta = document.getElementById('message');
-  const [start, end] = [ta.selectionStart, ta.selectionEnd];
-  const before = ta.value.slice(0, start);
-  const sel    = ta.value.slice(start, end) || 'text';
-  const after  = ta.value.slice(end);
-  const open = `[${tag}]`, close = `[/${tag}]`;
-  ta.value = before + open + sel + close + after;
-  ta.focus();
-  const pos = before.length + open.length + sel.length;
-  ta.selectionStart = ta.selectionEnd = pos;
-}
+      ta.value = before + open + sel + close + after;
+      ta.focus();
+      const pos = before.length + open.length + sel.length;
+      ta.selectionStart = ta.selectionEnd = pos;
+    }
 
-/* toolbar buttons */
-document.querySelector('.ubb').addEventListener('click', e=>{
-  const btn = e.target.closest('button');
-  if(!btn) return;
-  const tag = btn.dataset.tag;
-  if(tag) insertAround(tag);
-});
+    document.querySelector('.ubb').addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const tag = btn.dataset.tag;
+      if (tag) insertAround(tag);
+    });
 
-document.getElementById('btn-link').addEventListener('click', ()=>{
-  const url = prompt('Enter URL (include http/https):','https://');
-  if(!url) return;
-  const ta = document.getElementById('message');
-  const [s,e] = [ta.selectionStart, ta.selectionEnd];
-  const txt = ta.value.slice(s,e) || 'link';
-  const bb  = `[url=${url}]${txt}[/url]`;
-  ta.setRangeText(bb, s, e, 'end');
-  ta.focus();
-});
+    document.getElementById('btn-link').addEventListener('click', () => {
+      const url = prompt('Enter URL (include http/https):', 'https://');
+      if (!url || !/^https?:\/\//i.test(url)) return;
 
-/* smiley picker */
-const smileBtn = document.getElementById('btn-smileys');
-const smileBox = document.getElementById('smiley-panel');
-smileBtn.addEventListener('click', ()=> { smileBox.hidden = !smileBox.hidden; });
-smileBox.addEventListener('click', e=>{
-  const s = e.target.getAttribute('data-smiley');
-  if(!s) return;
-  const ta = document.getElementById('message');
-  const pos = ta.selectionEnd;
-  ta.setRangeText(` ${s} `, pos, pos, 'end');
-  ta.focus();
-});
+      const ta = document.getElementById('message');
+      const [s,e] = [ta.selectionStart, ta.selectionEnd];
+      const txt = ta.value.slice(s,e) || 'link';
+      const bb = `[url=${url}]${txt}[/url]`;
+      ta.setRangeText(bb, s, e, 'end');
+      ta.focus();
+    });
 
-/* === safe BBCode → HTML for display ===
-   We escape first, then replace a small whitelist of tags. */
-function renderMessage(raw){
-  let s = String(raw || '');
-  s = escapeHtml(s);
+    const smileBtn = document.getElementById('btn-smileys');
+    const smileBox = document.getElementById('smiley-panel');
 
-  // line breaks
-  s = s.replace(/\r?\n/g, '<br>');
+    smileBtn.addEventListener('click', () => {
+      smileBox.hidden = !smileBox.hidden;
+    });
 
-  // BBCode
-  s = s.replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>');
-  s = s.replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>');
-  s = s.replace(/\[u\](.*?)\[\/u\]/gis, '<span style="text-decoration:underline">$1</span>');
-  s = s.replace(/\[url=(https?:\/\/[^\s\]]+)\](.*?)\[\/url\]/gis,
-                '<a href="$1" target="_blank" rel="nofollow noopener">$2</a>');
+    smileBox.addEventListener('click', e => {
+      const s = e.target.getAttribute('data-smiley');
+      if (!s) return;
+      const ta = document.getElementById('message');
+      const pos = ta.selectionEnd;
+      ta.setRangeText(` ${s} `, pos, pos, 'end');
+      ta.focus();
+    });
 
-  // emoticons → emoji (keeps it asset-free)
-  const emotes = [
-    {re:/(^|[\s])\:\)(?=$|[\s])/g, rep:'$1🙂'},
-    {re:/(^|[\s])\:D(?=$|[\s])/g, rep:'$1😄'},
-    {re:/(^|[\s])\;\)(?=$|[\s])/g, rep:'$1😉'},
-    {re:/(^|[\s])\:\((?=$|[\s])/g, rep:'$1🙁'},
-    {re:/(^|[\s])\:P(?=$|[\s])/g, rep:'$1😛'},
-    {re:/&lt;3/g, rep:'❤️'},
-  ];
-  emotes.forEach(({re,rep})=> s = s.replace(re, rep));
+    function renderMessage(raw){
+      let s = escapeHtml(String(raw || ''));
 
-  return s;
-}
+      s = s.replace(/\r?\n/g, '<br>');
+      s = s.replace(/\[b\](.*?)\[\/b\]/gis, '<strong>$1</strong>');
+      s = s.replace(/\[i\](.*?)\[\/i\]/gis, '<em>$1</em>');
+      s = s.replace(/\[u\](.*?)\[\/u\]/gis, '<span style="text-decoration:underline">$1</span>');
+      s = s.replace(
+        /\[url=(https?:\/\/[^\s\]]+)\](.*?)\[\/url\]/gis,
+        '<a href="$1" target="_blank" rel="nofollow noopener noreferrer">$2</a>'
+      );
 
+      const emotes = [
+        {re:/(^|[\s])\:\)(?=$|[\s])/g, rep:'$1🙂'},
+        {re:/(^|[\s])\:D(?=$|[\s])/g, rep:'$1😄'},
+        {re:/(^|[\s])\;\)(?=$|[\s])/g, rep:'$1😉'},
+        {re:/(^|[\s])\:\((?=$|[\s])/g, rep:'$1🙁'},
+        {re:/(^|[\s])\:P(?=$|[\s])/g, rep:'$1😛'},
+        {re:/&lt;3/g, rep:'❤️'}
+      ];
 
-    
+      emotes.forEach(({re, rep}) => s = s.replace(re, rep));
+      return s;
+    }
+
     loadMessages();
   </script>
-
-  <!-- minimal VHS effect class -->
-  <style>
-    .vhs::after{
-      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-      background:
-        linear-gradient(#000,transparent 12%,#0000 88%,#000),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-      animation:vhs 240ms steps(2,end);
-    }
-    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
-  </style>
 </body>
 </html>
