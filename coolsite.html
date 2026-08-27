@@ -552,6 +552,176 @@ h1 {
   vertical-align:1px;
 }
 
+
+
+/* ============================================================
+   2026-08-27: light GeoCities-ish interior
+   keep stars OUTSIDE the page, keep the inside bright + readable
+   ============================================================ */
+body {
+  background:#000 url("stars.gif") repeat;
+  color:#111;
+}
+
+.page {
+  background:#fff;
+  border-color:#00bdf2;
+  box-shadow:0 0 22px #004d80;
+}
+
+.mast {
+  background:#fff;
+  border-bottom:3px double #8f00ff;
+}
+
+.best-viewed { color:#555; }
+
+h1 {
+  color:#00bff3;
+  background:linear-gradient(90deg,#ff5c8a,#ffb52e,#fff23b,#55e85a,#36e8e8,#4d8dff,#c85cff,#ff5cbe);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(0,0,0,.08);
+  text-shadow:none;
+}
+
+.subtitle { color:#d800a6; }
+
+.marquee-box {
+  background:#fff;
+  border-color:#00bdf2;
+  color:#111;
+}
+.marquee-box marquee {
+  color:#111;
+  background:linear-gradient(90deg,#fff7b2,#ffd9f3,#d9fbff,#e6ffd7,#fff7b2);
+}
+
+.sidebar {
+  background:#ececec;
+  border-right:5px ridge #00bdf2;
+  color:#111;
+}
+
+.main {
+  background:#fff;
+  color:#111;
+}
+
+.nav-title { color:#4c00a8; }
+
+.nav a,
+.nav a:nth-child(3n),
+.nav a:nth-child(4n) {
+  background:#d8d8d8;
+  color:#111;
+  border-color:#fff #777 #777 #fff;
+  margin-left:2px;
+  margin-right:2px;
+}
+.nav a:hover {
+  background:#fff;
+  color:#0000cc;
+}
+
+.status {
+  background:#fff;
+  color:#222;
+  border-color:#00a84f;
+}
+
+.stickers { border-top-color:#aaa; }
+.little-note { color:#666; }
+
+.welcome {
+  background:#fff;
+  color:#111;
+  border-color:#ff45bf;
+}
+
+.section-title {
+  color:#006cff;
+  text-shadow:1px 1px #ff5fc7;
+}
+.section-meta { color:#8b008b; }
+.section-cut {
+  border-top-color:#ff66cc;
+  border-bottom-color:#41cfff;
+}
+
+/* clean old-forum directory on white */
+.links {
+  background:#fff;
+  border-color:#9b9b9b;
+  box-shadow:2px 2px 0 #d2d2d2;
+}
+
+.links::before {
+  background:#d7d7d7;
+  color:#111;
+  border-bottom-color:#999;
+}
+
+.link-entry,
+.link-entry:nth-child(even) {
+  background:#fff;
+  color:#111;
+  border-bottom-color:#c9c9c9;
+}
+.link-entry:nth-child(even) { background:#f3f3f3; }
+.link-entry:hover { background:#fffbd7; }
+
+.link-entry > div:first-child::before { color:#ff0099; }
+
+.link-entry > div:first-child a,
+.link-entry > div:first-child a:visited {
+  color:#0000cc;
+  background:transparent;
+}
+.link-entry > div:first-child a:visited { color:#800080; }
+.link-entry > div:first-child a:hover {
+  color:#ff008c;
+  background:#ffff99;
+}
+
+.link-entry .desc { color:#222; }
+.link-entry .desc a { color:#0000cc; }
+.scribble-note { color:#a00079; }
+
+/* any older special boxes that still appear should also live comfortably on white */
+.boxy-row,
+.big-fave,
+.warningish,
+.law-note,
+.oldbox,
+.blue-note,
+.memory-box,
+.tool-wall,
+.tool-entry {
+  color:#111;
+}
+.boxy-row { background:#f3fbff; }
+.big-fave { background:#fff; border-color:#00bdf2; }
+.big-fave > div:first-child a { color:#0000cc; }
+.warningish { background:#fff0f6; }
+.law-note { background:#fff; }
+.oldbox { background:#eee; }
+.blue-note { background:#eef5ff; }
+.memory-box { background:#fff1fb; }
+.tool-wall { background:#fafafa; }
+.tool-entry { background:#eee; }
+.tool-entry > div:first-child a { color:#0000cc; }
+
+.breaker { color:#008f3a; }
+
+.footer {
+  background:#efefef;
+  color:#444;
+  border-top-color:#00bdf2;
+}
+.footer a { color:#0000cc; }
+
 </style>
 </head>
 
