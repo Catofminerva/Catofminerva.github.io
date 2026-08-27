@@ -1,675 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }} · {{ site.title | default: "Galaxy 981" }}</title>
+<meta charset="UTF-8">
+<title>{{ page.title }} · {{ site.title | default: "Galaxy 981" }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <style>
-    /* @import must be the FIRST thing in the stylesheet or browsers ignore it.
-       Delete this line if you only want locally installed serif faces. */
-    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
-    :root{
-      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
-      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
-    }
-    html, body{
-      margin:0; padding:0;
-      background-image:url({{ '/stars.gif' | relative_url }}); background-repeat:repeat;
-      color:var(--ink); font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
-    }
-
-    /* wider than index */
-    .page{
-      width:min(1120px, calc(100vw - 24px)) !important;
-      margin:18px auto 32px; position:relative; left:7px;
-      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
-      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
-
-    #glitter-title{
-      font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
-    }
-    #glitter-title::before,#glitter-title::after{
-      content:""; position:absolute; top:50%; transform:translateY(-50%);
-      width:110px; height:70px; background-repeat:no-repeat; background-position:center; background-size:contain;
-      image-rendering:pixelated; filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
-    }
-    #glitter-title::before{ left:35px;  background-image:url({{ '/starwar1.gif?v=1' | relative_url }}); }
-    #glitter-title::after { right:30px; background-image:url({{ '/starwar2.jpg?v=1' | relative_url }}); }
-    #glitter-title:hover::before{ transform:translateY(-50%) rotate(-3deg); }
-    #glitter-title:hover::after { transform:translateY(-50%) rotate(3deg); }
-
-    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
-    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
-    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
-
-    .layout{ width:100%; border-collapse:collapse; }
-    .sidebar{
-      width:210px;
-      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple); vertical-align:top;
-    }
-    .content{ padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a; }
-
-    .nav a{
-      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
-    }
-    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
-    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
-
-    .post{
-      margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62);
-      line-height:1.85;
-    }
-    .post h1,.post h2,.post h3{ color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); margin-top:0; }
-    .post .meta{ font-size:12px; color:var(--neon-yellow); margin-bottom:10px; }
-
-    /* embeds & media */
-    .post img{ max-width:100%; height:auto; }
-    .post a > img{ display:block; margin:12px auto; }   /* makes linked images visible and centered */
-    .post pre,.post code{ background:#0e0e33; color:#a7ffff; padding:2px 4px; }
-    .post iframe,.post embed,.post object{ width:100%; max-width:100%; border:0; }
-    .post iframe[src*="substack.com"]{ min-height:420px; }
-    .post blockquote.twitter-tweet{ margin:1em auto; display:block !important; visibility:visible !important; }
-
-    hr.retro{
-      height:12px; border:0; margin:10px 0 14px;
-      background-image:repeating-linear-gradient(90deg,#ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px);
-      position:relative; overflow:visible;
-    }
-    .content > hr.retro:first-of-type{ position:relative; overflow:visible; }
-    .content > hr.retro:first-of-type::after{
-      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
-      background:url({{ '/kitty.gif?v=10' | relative_url }}) center/contain no-repeat;
-      image-rendering:pixelated; animation:kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
-    }
-    @keyframes kitty-rail{ from{left:-64px} to{left:100%} }
-
-    .blink{ animation:blink .9s steps(1,end) infinite; } @keyframes blink{ 50%{ opacity:0 } }
-
-    .button-strip{ margin:8px 20px 12px; padding:10px; border:4px groove var(--neon-blue);
-      background:rgba(10,0,25,0.6); display:flex; flex-wrap:wrap; gap:10px 12px; justify-content:center; align-items:center; }
-    .button-strip img{ height:31px; image-rendering:pixelated; display:block; }
-
-    .sticker-wall{ margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
-      display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center; position:relative; }
-    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; transition:transform 120ms ease; }
-    .sticker-wall img:hover{ transform:translateY(-1px); filter:drop-shadow(0 0 6px var(--neon-green)); }
-    .sticker-wall .wide{ grid-column:span 2; width:188px; }
-
-    .sticker-controls{ display:flex; gap:8px; justify-content:center; margin:6px 0 10px; }
-    .sticker-controls button{ padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
-    .sticker-controls button:active{ border-style:inset; color:var(--neon-green); }
-    .sticker-wall.shuffled img{ animation:pop 180ms; } @keyframes pop{ 50%{ transform:scale(1.08) } }
-
-    .footer{ padding:8px; text-align:center; color:#fff; }
-
-    .sound-toggle{ margin:6px auto 12px; display:block; background:#0e0e33; color:#a7ffff;
-      border:2px outset #6af7ff; padding:6px 10px; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
-    .sound-toggle[aria-pressed="true"]{ border-style:inset; color:var(--neon-green); }
-
-    @keyframes flybyL{ 0%{transform:translate(-120%, -10px) rotate(8deg)} 70%{transform:translate(10%, 4px) rotate(-6deg)} 100%{transform:none} }
-    @keyframes flybyR{ 0%{transform:translate(120%, 10px) rotate(-8deg)} 70%{transform:translate(-10%, -6px) rotate(6deg)} 100%{transform:none} }
-    .flyby #glitter-title::before{ animation:flybyL 1.6s ease-out; } .flyby #glitter-title::after{ animation:flybyR 1.6s ease-out; }
-
-    :root.morning{ --neon-blue:#00e5ff; --neon-purple:#00b2ff; } :root.night{ --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
-
-    .post p{ margin:0 0 14px; } .post ul,.post ol{ padding-left:20px; }
-    .post blockquote{ margin:10px 0; padding:8px 12px; border-left:4px solid var(--neon-blue); background:rgba(0,0,0,0.35); }
-
-  /* === RESPONSIVE + ACCESSIBILITY TWEAKS === */
-
-/* fluid title size */
-#glitter-title{
-  font-size: clamp(28px, 7vw, 60px);
-  padding: clamp(12px, 3vw, 18px) 10px 0;
-}
-
-/* keep code and long lines from overflowing */
-.post pre,
-.post code{
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
-}
-
-/* phone and small tablets */
-@media (max-width: 900px){
-  /* container */
-  .page{
-    width: min(960px, 100% - 12px) !important;
-    margin: 10px auto 20px;
-    left: 0;
-  }
-
-  /* stack the table layout */
-  .layout,
-  .layout tr,
-  .layout td{
-    display: block;
-    width: 100%;
-  }
-
-  /* sidebar becomes a top band */
-  .sidebar{
-    width: 100%;
-    border-right: 0;
-    border-bottom: 6px ridge var(--neon-purple);
-  }
-  .content{ border-left: 0; }
-
-  /* nav becomes a grid of big tap targets */
-  .nav{
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 8px;
-  }
-  .nav a{
-    margin: 0;
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1.2;
-    touch-action: manipulation;
-  }
-  .nav-icon{ width: 22px; height: 22px; }
-
-  /* headline decorations shrink */
-  #glitter-title::before,
-  #glitter-title::after{
-    width: 76px; height: 48px;
-    filter: drop-shadow(0 0 4px var(--neon-blue));
-    left: 16px; right: 16px;
-  }
-
-  /* tighten chrome */
-  .marquee-wrap{ margin: 8px 10px; border-width: 4px; }
-  .marquee-wrap.small{ margin: 6px 10px 10px; border-width: 3px; }
-
-  /* posts and embeds */
-  .post iframe,
-  .post embed,
-  .post object{ height: auto; }
-  .post iframe[src*="substack.com"]{ min-height: 340px; }
-
-  /* sticker grid and buttons */
-  .sticker-wall{ grid-template-columns: repeat(3, 1fr); }
-  .sticker-wall img{ width: 72px; }
-  .sticker-wall .wide{ grid-column: span 3; width: 160px; }
-
-  .button-strip{
-    padding: 8px;
-    gap: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .button-strip img{ height: 28px; flex: 0 0 auto; }
-
-  /* the rail cat can sit out on small screens */
-  .content > hr.retro:first-of-type::after{ display: none; }
-}
-
-/* very small phones */
-@media (max-width: 600px){
-  .nav{ grid-template-columns: 1fr; }
-  #glitter-title{ font-size: clamp(24px, 9vw, 40px); }
-  #glitter-title::before,
-  #glitter-title::after{ display: none; }
-  marquee{ font-size: 16px; }
-
-  .sticker-wall{ grid-template-columns: repeat(2, 1fr); }
-  .sticker-wall img{ width: 64px; }
-  .sticker-wall .wide{ grid-column: span 2; width: 140px; }
-}
-
-/* tiniest screens */
-@media (max-width: 380px){
-  .button-strip img{ height: 24px; }
-  marquee{ font-size: 14px; }
-}
-
-/* reduce motion for folks who prefer it */
-@media (prefers-reduced-motion: reduce){
-  *{ animation: none !important; transition: none !important; }
-}
-
-/* 1) Put stars on their own layer on mobile, remove root filter */
-@media (max-width: 900px){
-  html, body{
-    background: none;
-    filter: none;
-  }
-  body::before{
-    content:"";
-    position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: url({{ '/stars.gif' | relative_url }}) repeat;
-    image-rendering: pixelated;
-    transform: translateZ(0); /* own composited layer */
-    will-change: transform;
-  }
-  /* keep the neon pop ONLY on content */
-  .page{ filter: contrast(115%) saturate(125%); }
-}
-
-/* Mobile-only extra guards for big images */
-@media (max-width: 900px){
-  .post img{
-    content-visibility: auto;
-    contain-intrinsic-size: 800px auto;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-}
-
-/* Motion preference: swap animated bg for a still frame if available */
-@media (prefers-reduced-motion: reduce){
-  body::before{ background-image: url({{ '/stars-still.png' | relative_url }}); }
-}
-
-/* Never let long links/words force a mega-wide layout */
-.post p,
-.post li,
-.post blockquote {
-  overflow-wrap: anywhere;
-  hyphens: auto;
-}
-.post code,
-.post pre {
-  word-break: break-all;
-  overflow-wrap: anywhere;
-}
-
-/* Treat touch devices as "mobile" regardless of zoom level */
-@media (max-width: 900px), (hover: none) and (pointer: coarse){
-  .layout,
-  .layout tr,
-  .layout td { display: block; width: 100%; }
-}
-
-/* Make the table layout more resilient to wide content */
-.layout { table-layout: fixed; width: 100%; }
-.sidebar { width: 210px; }
-.content { width: auto; min-width: 0; }
-
+<style>
+/* @import has to be the first rule or browsers drop it */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 /* ============================================================
-   READING MODE  ·  keep this block last inside <style>
+   GALAXY 981 · SINGLE ENTRY
+   Same furniture as the Entry Log: starfield desk, fanfold
+   sheet, penguin hero, purple rail. The middle column is the
+   quiet reading measure.
    ============================================================ */
 
 :root{
-  --read-bg:#fffdf7;          /* warm off-white */
-  --read-ink:#1c1b19;
-  --read-muted:#6b6560;
-  --read-rule:#e3dccd;
-  --read-link:#3a2fa8;
-  --read-link-visited:#6a0dad;
-  --read-accent:#5b008a;
-  --read-measure:680px;       /* the reading column width */
+  --paper:#f6f4e6;
+  --band:#e6ecd6;
+  --edge:#d9dcc7;
+  --rule:#bcc3ad;
+  --ink:#111111;
+  --ink-soft:#57604f;
+
+  --pink:#ff2fa0;
+  --cyan:#00d8e8;
+  --lemon:#ffe94a;
+  --stamp:#d02c1f;
+  --link:#0000cc;
+  --visited:#0000cc;
+  --grape:#4b0f6b;
+
+  --void-a:#0d0026;
+  --void-b:#160038;
+  --chrome:#c0c0c0;
+
+  --f-display:Impact, Haettenschweiler, "Arial Narrow Bold", "Franklin Gothic Heavy", sans-serif;
+  --f-read:"EB Garamond", Baskerville, Garamond, "Hoefler Text", "Palatino Linotype", Palatino, Georgia, serif;
+  --f-data:"Courier New", Courier, monospace;
+  --f-ui:Verdana, Geneva, "MS Sans Serif", sans-serif;
 }
 
-/* Keep the global neon filter off the article, but let the retro
-   chrome stay as loud as it was. */
-html, body{ filter:none; }
-.marquee-wrap, .button-strip, .sticker-wall, #glitter-title,
-.sidebar, .footer, .sound-toggle{ filter:contrast(115%) saturate(125%); }
+*{ box-sizing:border-box; }
 
-/* ---------- the article container ---------- */
+html, body{
+  margin:0; padding:0; color:var(--ink);
+  font-family:var(--f-read); font-size:17px; line-height:1.55;
+  background:#05000f url({{ '/stars.gif' | relative_url }}) repeat;
+  image-rendering:pixelated;
+}
+
+/* ---------- sheet ---------- */
+.form{
+  position:relative; width:min(1000px, 100% - 18px);
+  margin:20px auto 34px; padding:0 40px;
+  background:var(--paper);
+  background-image:radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+  background-size:3px 3px;
+  border:5px ridge var(--pink);
+  box-shadow:0 0 34px rgba(255,47,160,.35), 0 14px 34px rgba(0,0,0,.55);
+  image-rendering:auto;
+}
+.form::before, .form::after{
+  content:""; position:absolute; top:0; bottom:0; width:40px; z-index:2;
+  background-color:var(--edge);
+  background-image:radial-gradient(circle at 20px 13px, #a9b096 0 5px, var(--paper) 5.5px 6.5px, transparent 7px);
+  background-size:40px 26px; pointer-events:none;
+}
+.form::before{ left:0;  border-right:1px dashed var(--rule); }
+.form::after { right:0; border-left:1px dashed var(--rule); }
+
+hr.retro{
+  height:12px; border:0; margin:0;
+  background-image:repeating-linear-gradient(90deg,
+    #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,
+    #00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px);
+}
+
+/* ---------- nav ---------- */
+.crumb{
+  margin:0 -40px; padding:7px 44px;
+  background:var(--chrome); border-bottom:3px ridge #fff;
+  font-family:var(--f-ui); font-size:11px;
+  display:flex; flex-wrap:wrap; gap:5px 6px; align-items:center;
+}
+.crumb a{
+  display:inline-flex; align-items:center; gap:4px; padding:3px 7px;
+  color:#000; text-decoration:none; background:#e8e8e8; border:2px outset #fff;
+}
+.crumb a:hover{ border-style:inset; background:var(--lemon); }
+.crumb a[aria-current="page"]{ border-style:inset; background:var(--cyan); font-weight:bold; }
+.crumb img{ width:16px; height:16px; image-rendering:pixelated; }
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -40px; padding:18px 44px 16px;
+  background:var(--void-a) url({{ '/stars.gif' | relative_url }}) repeat;
+  border-bottom:5px ridge var(--cyan);
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+}
+.penguin{
+  width:clamp(112px, 17vw, 200px); height:auto; flex:0 0 auto;
+  image-rendering:pixelated; filter:drop-shadow(0 0 14px var(--cyan));
+  animation:bob 2.6s ease-in-out infinite;
+}
+@keyframes bob{ 50%{ transform:translateY(-6px) } }
+
+.hero-text{ flex:1 1 260px; min-width:0; }
+.eyebrow{
+  margin:0 0 5px; font-family:var(--f-ui); font-size:11px; font-weight:bold;
+  letter-spacing:.12em; color:var(--lemon); text-transform:uppercase;
+}
+.blink{ animation:blink .9s steps(1,end) infinite; }
+@keyframes blink{ 50%{ opacity:0 } }
+
+.entry-no{
+  margin:0; font-family:var(--f-display); text-transform:uppercase;
+  font-size:clamp(38px, 7.5vw, 82px); line-height:.88; letter-spacing:-.02em;
+  color:#fff;
+  text-shadow:3px 0 0 var(--pink), -3px 0 0 var(--cyan),
+              0 0 22px rgba(0,216,232,.5), 6px 6px 0 rgba(0,0,0,.7);
+}
+.hero-meta{
+  margin:10px 0 0; font-family:var(--f-data); font-size:12.5px;
+  color:#b9f6ff; line-height:1.8;
+}
+.hero-meta b{ color:#000; background:var(--lemon); padding:0 4px; font-weight:normal; }
+.hero-meta a{ color:var(--cyan); }
+
+.ticker{
+  margin:0 -40px; padding:5px 0; background:#001a4d;
+  border-bottom:3px groove var(--cyan);
+  font-family:var(--f-data); font-size:13px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--lemon); overflow:hidden;
+}
+
+/* ---------- columns ---------- */
+.cols{ display:flex; gap:20px; align-items:flex-start; padding:18px 0 0; }
+.main{ flex:1 1 auto; min-width:0; }
+.rail{ flex:0 0 194px; }
+
+/* ---------- the reading column ---------- */
 .post{
-  max-width:var(--read-measure);
-  margin:20px auto 30px;
-  padding:36px 40px 42px;
-  background:var(--read-bg);
-  color:var(--read-ink);
-  border:3px solid var(--neon-purple);
-  box-shadow:0 0 22px rgba(143,0,255,.35);
-
-  font-family:"EB Garamond", Baskerville, "Libre Baskerville",
-              Garamond, "Hoefler Text", "Palatino Linotype",
-              Palatino, Georgia, serif;
-  font-size:21px;
-  line-height:1.62;
-  letter-spacing:.005em;
-  font-kerning:normal;
-  font-variant-numeric:oldstyle-nums;
-  text-rendering:optimizeLegibility;
-  -webkit-font-smoothing:antialiased;
+  max-width:64ch; margin:0;
+  font-family:var(--f-read); font-size:21px; line-height:1.62;
+  color:var(--ink); letter-spacing:.005em;
+  font-kerning:normal; font-variant-numeric:oldstyle-nums;
+  text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+  cursor:auto;
+}
+.post > header h1{
+  margin:0 0 4px; font-size:clamp(30px,4.6vw,44px); line-height:1.14;
+  font-weight:600; letter-spacing:-.012em; color:#000;
+}
+.post .byline{
+  font-family:var(--f-ui); font-size:11px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-soft);
+  padding-bottom:12px; border-bottom:1px solid var(--rule); margin-bottom:20px;
 }
 
-/* ---------- body copy ---------- */
-.post p,
-.post li,
-.post blockquote,
-.post section{ color:var(--read-ink); }
+.stats{
+  font-family:var(--f-data); font-size:12px; line-height:1.75;
+  color:#2b2820; background:var(--band); border:2px inset #a8ae99;
+  padding:9px 12px; margin:0 0 26px;
+}
+.stats b{ color:var(--stamp); font-weight:normal; }
+.stats .led-sm{
+  background:#000; color:#00ff5a; padding:1px 5px;
+  border:2px inset #0aa; letter-spacing:2px;
+}
+
+.post h2, .post h3, .post h4{ color:#000; font-weight:600; line-height:1.2; }
+.post h2{ font-size:1.46em; margin:1.6em 0 .38em; }
+.post h3{ font-size:1.2em;  margin:1.4em 0 .34em; }
+.post h4{ font-size:1.02em; margin:1.3em 0 .3em; text-transform:uppercase; letter-spacing:.06em; }
 
 .post p{ margin:0 0 1.15em; }
-.post section > p:first-child{ margin-top:0; }
-
-/* ---------- headings ---------- */
-.post h1, .post h2, .post h3, .post h4{
-  font-family:inherit;
-  #111:var(--read-accent);
-  text-shadow:none;
-  font-weight:600;
-  line-height:1.18;
-  letter-spacing:-.01em;
-}
-.post h1{ font-size:2.05em; margin:0 0 .3em; }
-.post h2{ font-size:1.48em; margin:1.6em 0 .4em; }
-.post h3{ font-size:1.2em;  margin:1.4em 0 .35em; }
-.post h4{ font-size:1.02em; margin:1.3em 0 .3em; text-transform:uppercase;
-          letter-spacing:.06em; }
-
-/* ---------- byline / date ---------- */
-.post .meta{
-  font-family:Verdana, "Helvetica Neue", Arial, sans-serif;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.09em;
-  color:var(--read-muted);
-  padding-bottom:14px;
-  margin-bottom:24px;
-  border-bottom:1px solid var(--read-rule);
-}
-
-/* ---------- links ---------- */
-.post a{
-  color:var(--read-link);
-  text-decoration:underline;
-  text-underline-offset:2px;
-  text-decoration-thickness:1px;
-  word-break:normal;
-  overflow-wrap:anywhere;
-}
-.post a:visited{ color:var(--read-link-visited); }
-.post a:hover{ color:#cc0066; background:#fff2b8; }
-
-/* ---------- lists, quotes, rules ---------- */
+.post p, .post li, .post blockquote{ overflow-wrap:anywhere; hyphens:auto; cursor:text; }
 .post ul, .post ol{ margin:0 0 1.15em; padding-left:1.4em; }
 .post li{ margin:0 0 .45em; }
 
+.post a{
+  color:var(--link); text-decoration:underline;
+  text-underline-offset:2px; text-decoration-thickness:1px;
+}
+.post a:visited{ color:var(--visited); }
+.post a:hover{ color:#cc0066; background:var(--lemon); }
+
 .post blockquote{
-  margin:1.5em 0;
-  padding:.15em 0 .15em 1.1em;
-  border-left:3px solid var(--read-accent);
-  background:none;
-  color:var(--read-muted);
-  font-style:italic;
+  margin:1.5em 0; padding:.15em 0 .15em 1.1em;
+  border-left:3px solid var(--pink); color:#3a4034; font-style:italic;
 }
-
 .post hr{
-  border:0; height:1px; width:62%;
-  background:var(--read-rule);
-  margin:2.2em auto;
-}
-
-/* ---------- media ---------- */
-.post img{
-  display:block;
-  margin:1.7em auto;
-  max-width:100%;
-  height:auto;
-  border:1px solid var(--read-rule);
-  image-rendering:auto;
-}
-.post a > img{ margin:1.7em auto; }
-
-.post figure{ margin:1.7em 0; }
-.post figcaption, .post .caption{
-  font-family:Verdana, Arial, sans-serif;
-  font-size:12px;
-  line-height:1.5;
-  color:var(--read-muted);
-  text-align:center;
-  margin-top:-1.1em;
-}
-
-.post iframe, .post embed, .post object{ margin:1.5em 0; }
-.post blockquote.twitter-tweet{
-  border-left:0; padding:0; font-style:normal; margin:1.5em auto;
-}
-
-/* ---------- code ---------- */
-.post pre, .post code{
-  font-family:"Courier New", monospace;
-  font-size:.8em;
-  font-variant-numeric:normal;
-  background:#f3ece0;
-  color:#1a1a1a;
-  border:1px solid #ded4c0;
-}
-.post pre{ padding:12px 14px; line-height:1.5; overflow-x:auto;
-           white-space:pre-wrap; overflow-wrap:anywhere; }
-.post code{ padding:1px 5px; }
-.post pre code{ background:none; border:0; padding:0; }
-
-/* ---------- optional: drop cap on the first paragraph ----------
-.post section > p:first-child::first-letter{
-  float:left; font-size:3.1em; line-height:.82;
-  margin:.06em .09em 0 0; color:var(--read-accent);
-}
----------------------------------------------------------------- */
-
-/* ---------- small screens ---------- */
-@media (max-width:900px){
-  .post{ font-size:19px; padding:24px 22px 28px; margin:12px auto 20px; }
-}
-@media (max-width:600px){
-  .post{ font-size:18px; padding:18px 16px 22px; border-width:2px;
-         line-height:1.58; }
-  .post h1{ font-size:1.68em; }
-  .post h2{ font-size:1.32em; }
-}
-
-
-    /* ---- black headings ---- */
-.post h1, .post h2, .post h3, .post h4{ color:#111; }
- 
-/* ---- sensible cursors inside the article (the site-wide
-        crosshair makes body text feel unselectable) ---- */
-.post{ cursor:auto; }
-.post p, .post li, .post blockquote,
-.post h1, .post h2, .post h3, .post h4{ cursor:text; }
-.post a{ cursor:pointer; }
- 
-/* ---- highlighter-green text selection ---- */
-.post ::selection{ background:#39ff14; color:#000; }
- 
-/* ---- horizontal rules become a star ornament ---- */
-.post hr{
-  border:0; background:none; height:auto; width:100%;
-  margin:2.4em 0; overflow:visible; text-align:center;
+  border:0; height:auto; margin:2.2em 0; text-align:center; overflow:visible;
 }
 .post hr::after{
-  content:"★   ·   ★   ·   ★";
-  display:block;
-  font-size:.62em; letter-spacing:.5em;
-  color:var(--read-accent);
+  content:"★   ·   ★   ·   ★"; display:block;
+  font-size:.62em; letter-spacing:.5em; color:var(--stamp);
 }
- 
-/* ---- the terminal-style stats panel under the byline ---- */
-.entry-stats{
-  font-family:"Courier New", monospace;
-  font-size:12px; line-height:1.7;
-  color:#2b2820; background:#ece4d0;
-  border:2px inset #bcb094;
-  padding:9px 12px; margin:0 0 26px;
+.post img{
+  display:block; margin:1.7em auto; max-width:100%; height:auto;
+  border:1px solid var(--rule); image-rendering:auto;
 }
-.entry-stats b{ color:#5b008a; }
-.entry-stats .hits{
-  background:#000; color:#00ff00; padding:1px 5px;
-  border:2px inset #0aa; letter-spacing:2px;
+.post figure{ margin:1.7em 0; }
+.post figcaption{
+  font-family:var(--f-ui); font-size:12px; color:var(--ink-soft);
+  text-align:center; margin-top:-1.1em; line-height:1.5;
 }
- 
-/* ---- blinking NEW! next to fresh entries ---- */
-.new-badge{
-  font-family:Verdana, Arial, sans-serif;
-  font-size:11px; font-weight:bold; letter-spacing:.12em;
-  color:#c00000; vertical-align:super;
-  animation:blink .9s steps(1,end) infinite;
+.post iframe, .post embed, .post object{ width:100%; max-width:100%; border:0; margin:1.5em 0; }
+.post iframe[src*="substack.com"]{ min-height:420px; }
+.post blockquote.twitter-tweet{
+  border-left:0; padding:0; font-style:normal; margin:1.5em auto;
+  display:block !important; visibility:visible !important;
 }
- 
-/* ---- tag chips ---- */
-.entry-tags{
-  margin:26px 0 0; font-family:Verdana, Arial, sans-serif;
-  font-size:12px; color:var(--read-muted);
+.post pre, .post code{
+  font-family:var(--f-data); font-size:.8em; font-variant-numeric:normal;
+  background:#eee7d2; color:#111; border:1px solid #d5cbb4;
 }
-.entry-tags span{
-  display:inline-block; margin:0 5px 5px 0; padding:2px 8px;
-  background:#f4ecd8; border:1px solid var(--read-rule); color:#3b3730;
-}
- 
-/* ---- footer link row ---- */
-.entry-foot{
-  margin-top:28px; padding-top:14px;
-  border-top:1px solid var(--read-rule);
-  font-family:Verdana, Arial, sans-serif; font-size:12px;
-  display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:center;
-}
-.entry-foot a{ color:var(--read-link); text-decoration:underline; }
-.entry-foot a:hover{ color:#cc0066; background:#fff2b8; }
- 
-/* ---- blinking end-of-entry cursor ---- */
-.entry-end{
+.post pre{ padding:12px 14px; line-height:1.5; white-space:pre-wrap; overflow-wrap:anywhere; }
+.post code{ padding:1px 5px; word-break:break-all; }
+.post pre code{ background:none; border:0; padding:0; }
+.post ::selection{ background:var(--lemon); color:#000; }
+
+.end{
   display:block; margin-top:22px; text-align:center;
-  font-family:"Courier New", monospace; font-size:14px; color:#5b008a;
+  font-family:var(--f-data); font-size:13px; color:var(--stamp);
 }
-.entry-end::after{
-  content:"_"; animation:blink .9s steps(1,end) infinite;
+.end::after{ content:"_"; animation:blink .9s steps(1,end) infinite; }
+
+/* tags + footer strip inside the column */
+.tags{ margin:24px 0 0; display:flex; flex-wrap:wrap; gap:5px; align-items:center;
+  font-family:var(--f-ui); font-size:11px; color:var(--ink-soft); }
+.tags a{
+  font-size:10px; text-transform:uppercase; text-decoration:none; color:#000;
+  background:#fff; border:1px solid #000; padding:1px 6px; box-shadow:2px 2px 0 rgba(0,0,0,.25);
 }
- 
-/* ---- printing: drop all the chrome ---- */
+.tags a:hover{ background:var(--pink); color:#fff; }
+
+.entry-foot{
+  margin-top:22px; padding-top:13px; border-top:1px solid var(--rule);
+  display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:center;
+  font-family:var(--f-ui); font-size:11px;
+}
+.entry-foot a{ color:var(--link); }
+.entry-foot a:hover{ background:var(--lemon); }
+
+/* prev / next */
+.updown{
+  display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0;
+  font-family:var(--f-ui); font-size:11px;
+}
+.updown a{
+  flex:1 1 200px; padding:9px 11px; text-decoration:none; color:#000;
+  background:#e8e8e8; border:3px outset #fff;
+}
+.updown a:hover{ border-style:inset; background:var(--lemon); }
+.updown span{ display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+.updown b{ font-family:var(--f-read); font-size:16px; font-weight:600; }
+.updown .next{ text-align:right; }
+
+/* ---------- rail ---------- */
+.panel{
+  margin:0 0 14px; border:4px ridge var(--grape);
+  background:repeating-linear-gradient(135deg, var(--void-a) 0 12px, var(--void-b) 12px 24px);
+  color:#dcd3ff; font-family:var(--f-ui); font-size:11px;
+}
+.panel h3{
+  margin:0; padding:5px 8px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--grape); color:var(--lemon); border-bottom:2px groove #b98cff;
+}
+.panel .in{ padding:9px 9px 11px; line-height:1.7; }
+.panel a{ color:var(--cyan); }
+.panel dl{ margin:0; }
+.panel dt{ color:#ffa9dd; float:left; clear:left; width:62px; }
+.panel dd{ margin:0 0 3px 66px; }
+
+.led{
+  display:inline-block; padding:3px 7px; background:#000; color:#00ff5a;
+  font-family:var(--f-data); letter-spacing:3px; border:3px inset #0aa;
+}
+
+.stickers{ display:grid; grid-template-columns:repeat(2,1fr); gap:7px; padding:9px; }
+.stickers img{ width:100%; max-width:84px; height:auto; image-rendering:pixelated; justify-self:center; }
+.stickers .wide{ grid-column:span 2; max-width:170px; }
+.stickers img:hover{ filter:drop-shadow(0 0 6px var(--cyan)); transform:translateY(-1px); }
+
+.construction{
+  padding:6px 8px; font-family:var(--f-ui); font-size:10px; font-weight:bold;
+  color:#000; text-align:center; text-transform:uppercase; letter-spacing:.06em;
+  background:repeating-linear-gradient(45deg,#ffcc00 0 10px,#000 10px 20px);
+  border:3px outset #ffcc00;
+}
+.construction span{ background:#ffcc00; padding:2px 5px; display:inline-block; }
+
+/* ---------- kitty + footer ---------- */
+.kitty-rail{ position:relative; height:56px; margin:8px 0 0; overflow:hidden; }
+.kitty-rail::after{
+  content:""; position:absolute; top:-4px; left:-90px; width:90px; height:90px;
+  background:url({{ '/kitty.gif?v=10' | relative_url }}) center/contain no-repeat;
+  image-rendering:pixelated; animation:kitty 13s linear infinite;
+}
+@keyframes kitty{ to{ left:100% } }
+
+.perf{ margin:10px 0 0; border:0; border-top:2px dashed var(--rule); position:relative; height:0; }
+.perf::after{ content:"✁"; position:absolute; left:0; top:-11px; background:var(--paper); padding-right:8px; color:var(--ink-soft); }
+
+.foot{ padding:16px 0 26px; }
+.buttons{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:0 0 14px; }
+.buttons img{ height:31px; image-rendering:pixelated; }
+.buttons img:hover{ transform:translateY(-2px); filter:drop-shadow(0 0 5px var(--pink)); }
+
+.badges{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 14px; font-family:var(--f-ui); font-size:10px; }
+.badge{ padding:4px 8px; border:3px ridge var(--cyan); background:#000; color:var(--cyan); }
+.badge.b2{ border-color:var(--pink); color:var(--pink); }
+.badge.b3{ border-color:var(--lemon); color:var(--lemon); }
+
+.webring{
+  margin:0 0 12px; padding:7px; text-align:center;
+  border:3px groove var(--grape); background:#150033; color:#e6dcff;
+  font-family:var(--f-ui); font-size:11px;
+}
+.webring a{ color:var(--cyan); }
+
+.colophon{ font-family:var(--f-data); font-size:11px; color:var(--ink-soft); text-align:center; line-height:2.1; }
+.colophon a{ color:var(--link); }
+
+.sound-toggle{
+  display:block; margin:10px auto 0; padding:5px 11px; cursor:pointer;
+  font-family:var(--f-ui); font-size:11px; color:#000;
+  background:#e8e8e8; border:2px outset #fff;
+}
+.sound-toggle[aria-pressed="true"]{ border-style:inset; background:var(--cyan); }
+
+/* ---------- print ---------- */
 @media print{
-  .sidebar, .marquee-wrap, .button-strip, .footer,
-  hr.retro, .sound-toggle, .entry-foot{ display:none !important; }
-  .page{ border:0; box-shadow:none; background:#fff; width:auto !important; }
-  .post{ border:0; box-shadow:none; max-width:none; font-size:12pt; }
-  .content{ background:#fff; }
+  html, body{ background:#fff; }
+  .form{ box-shadow:none; border:0; width:auto; padding:0; }
+  .form::before, .form::after, .crumb, .hero, .ticker, .rail,
+  .buttons, .badges, .webring, .kitty-rail, .sound-toggle,
+  .updown, .entry-foot{ display:none !important; }
+  .post{ max-width:none; font-size:12pt; }
 }
- 
+
+/* ---------- small screens ---------- */
+@media (max-width:820px){
+  .form{ padding:0 22px; border-width:4px; }
+  .crumb, .hero, .ticker{ margin:0 -22px; padding-left:24px; padding-right:24px; }
+  .form::before, .form::after{ width:22px; background-size:22px 20px;
+    background-image:radial-gradient(circle at 11px 10px, #a9b096 0 3px, var(--paper) 3.5px 4.5px, transparent 5px); }
+  .cols{ flex-direction:column; }
+  .rail{ flex:1 1 auto; width:100%; }
+  .stickers{ grid-template-columns:repeat(4,1fr); }
+  .stickers .wide{ grid-column:span 2; }
+  .post{ font-size:19px; max-width:none; }
+  .post img{ content-visibility:auto; contain-intrinsic-size:800px auto; }
+}
 @media (max-width:600px){
-  .entry-stats{ font-size:11px; }
+  .post{ font-size:18px; line-height:1.58; }
 }
-  </style>
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
+<div class="form">
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">★ welcome to my webspace ★ best viewed on desktop ★</marquee>
-    </div>
+  <nav class="crumb" aria-label="Site">
+    <a href="{{ '/index.html' | relative_url }}"><img src="{{ '/cutehome.gif' | relative_url }}" alt="">Home</a>
+    <a href="{{ '/about.html' | relative_url }}"><img src="{{ '/about.gif' | relative_url }}" alt="">About</a>
+    <a href="{{ '/blog_posts.html' | relative_url }}" aria-current="page"><img src="{{ '/post.gif' | relative_url }}" alt="">Entries</a>
+    <a href="{{ '/chat.html' | relative_url }}"><img src="{{ '/chattt.gif' | relative_url }}" alt="">Chat</a>
+    <a href="{{ '/coolsite.html' | relative_url }}"><img src="{{ '/coollinks.gif' | relative_url }}" alt="">Kool Webpages</a>
+    <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="">Guestbook</a>
+    <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="">Kool Books</a>
+    <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="">Contact</a>
+  </nav>
 
-    <table class="layout" role="presentation">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="{{ '/index.html' | relative_url }}"><img src="{{ '/cutehome.gif' | relative_url }}" alt="Home" class="nav-icon">Home</a>
-            <a href="{{ '/about.html' | relative_url }}"><img src="{{ '/about.gif' | relative_url }}" alt="About" class="nav-icon">About</a>
-            <a href="{{ '/blog_posts.html' | relative_url }}"><img src="{{ '/post.gif' | relative_url }}" alt="Entries" class="nav-icon">Entries</a>
-            <a href="{{ '/chat.html' | relative_url }}"><img src="{{ '/chattt.gif' | relative_url }}" alt="Chat" class="nav-icon">Chat</a>
-            <a href="{{ '/coolsite.html' | relative_url }}"><img src="{{ '/coollinks.gif' | relative_url }}" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="{{ '/Truth2.html' | relative_url }}"><img src="{{ '/math.gif' | relative_url }}" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="Contact" class="nav-icon">Contact</a>
-          </div>
+  {%- assign total = site.posts.size -%}
+  {%- assign idx = 0 -%}
+  {%- for p in site.posts -%}{%- if p.url == page.url -%}{%- assign idx = forloop.index -%}{%- endif -%}{%- endfor -%}
+  {%- assign catno = total | minus: idx | plus: 1 -%}
+  {%- assign now_s = site.time | date: '%s' | plus: 0 -%}
+  {%- assign pub_s = page.date | date: '%s' | plus: 0 -%}
+  {%- assign age = now_s | minus: pub_s -%}
+  {%- assign words = content | number_of_words -%}
+  {%- assign mins = words | divided_by: 220 | plus: 1 -%}
+  {%- assign kb = content | size | divided_by: 1024 | plus: 1 -%}
 
-          <div style="text-align:center; padding:10px">
-            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
-            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
-          </div>
-
-          <div style="padding:0 10px 12px; color:#fff; font-size:12px">
-            <div><a href="{{ '/contact.html' | relative_url }}">Email Me</a></div>
-            <div style="margin-top:6px"><a href="{{ '/guestbook.html' | relative_url }}">Sign my Guestbook</a></div>
-            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
-          </div>
-
-          <div class="sticker-wall">
-            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
-            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
-            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
-            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
-            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
-            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
-            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free Speech Online">
-            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-Fi" class="wide">
-            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
-          </div>
-
-          <div class="sticker-controls">
-            <button id="shuffleStickers">Shuffle</button>
-            <button id="resetStickers" title="Put them back how they were">Reset</button>
-          </div>
-        </td>
-
-        <td class="content">
-          <hr class="retro">
-
-          
-{% assign now_s  = site.time | date: '%s' | plus: 0 %}
-{% assign pub_s  = page.date | date: '%s' | plus: 0 %}
-{% assign age    = now_s | minus: pub_s %}
-{% assign words  = content | number_of_words %}
-{% assign mins   = words | divided_by: 220 | plus: 1 %}
-{% assign kb     = content | size | divided_by: 1024 | plus: 1 %}
-{% assign secs   = kb | divided_by: 5 | plus: 1 %}
- 
-<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
-  <header>
-    <h1 itemprop="headline">{{ page.title }}{% if age < 1209600 %} <span class="new-badge">NEW!</span>{% endif %}</h1>
-    <div class="meta">
-      {% if page.date %}
-        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
-      {% endif %}
-      {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
+  <header class="hero">
+    <img class="penguin" src="{{ '/penguin.gif' | relative_url }}" alt="Penguin furiously typing">
+    <div class="hero-text">
+      <p class="eyebrow{% if age < 1209600 %} blink{% endif %}">
+        ★ Galaxy 981 · entry log{% if age < 1209600 %} · new transmission{% endif %} ★
+      </p>
+      <h1 class="entry-no">№ {{ catno | prepend: '00000' | slice: -3, 3 }}</h1>
+      <p class="hero-meta">
+        filed <b>{{ page.date | date: "%d %b %Y" }}</b>{% if page.author %} by {{ page.author }}{% endif %}
+        &nbsp;//&nbsp; <a href="{{ '/blog_posts.html' | relative_url }}">◄ back to the whole roll</a>
+      </p>
     </div>
   </header>
- 
-  <div class="entry-stats">
-    &gt; <b>{{ words }}</b> words &nbsp;·&nbsp; about <b>{{ mins }} min</b> to read<br>
-    &gt; <b>{{ kb }} KB</b> &nbsp;·&nbsp; roughly <b>{{ secs }} sec</b> over a 56k modem<br>
-    &gt; you are reader <span class="hits" id="entryHits">000000</span> of this entry<br>
-    &gt; best viewed in Netscape Navigator 4.0 at 800×600
-  </div>
- 
-  <section itemprop="articleBody">
-    {{ content }}
-  </section>
- 
-  <span class="entry-end">[ end of transmission ]</span>
- 
-  {% if page.tags and page.tags.size > 0 %}
-  <div class="entry-tags">
-    filed under:
-    {% for tag in page.tags %}<span>{{ tag }}</span>{% endfor %}
-  </div>
-  {% endif %}
- 
-  <div class="entry-foot">
-    <a href="#glitter-title">▲ back to top</a>
-    <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
-    <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
-    <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
-    <a href="#" onclick="window.print();return false;">🖨 print this page</a>
-  </div>
-</article>
 
-          <div class="marquee-wrap small">
-            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
+  <div class="ticker">
+    <marquee scrollamount="4">
+      ✦ now printing entry {{ catno }} of {{ total }} ✦ do not tear paper while the platen is moving ✦ mind the wet toner ✦ sign the guestbook on your way out ✦
+    </marquee>
+  </div>
+  <hr class="retro">
+
+  <div class="cols">
+
+    <!-- =============== READING COLUMN =============== -->
+    <div class="main">
+      <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+        <header>
+          <h1 itemprop="headline">{{ page.title }}</h1>
+          <div class="byline">
+            {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%d %B %Y" }}</time>{% endif %}
+            {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
           </div>
+        </header>
 
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
+        <div class="stats">
+          &gt; <b>{{ words }}</b> words · about <b>{{ mins }} min</b> to read<br>
+          &gt; <b>{{ kb }} KB</b> · roughly <b>{{ kb | divided_by: 5 | plus: 1 }} sec</b> over a 56k modem<br>
+          &gt; you are reader <span class="led-sm" id="entryHits">000000</span> of this entry
+        </div>
 
-    <div class="button-strip" aria-label="buttons">
+        <section itemprop="articleBody">
+          {{ content }}
+        </section>
+
+        <span class="end">[ end of transmission ]</span>
+
+        {% if page.tags.size > 0 %}
+          <p class="tags">filed under: {% for t in page.tags %}<a href="{{ '/blog_posts.html' | relative_url }}">{{ t }}</a>{% endfor %}</p>
+        {% endif %}
+
+        <div class="entry-foot">
+          <a href="#top">▲ back to top</a>
+          <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
+          <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
+          <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
+          <a href="#" onclick="window.print();return false;">🖨 print this page</a>
+        </div>
+
+        <nav class="updown" aria-label="Nearby entries">
+          {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}"><span>◄ older entry</span><b>{{ page.previous.title }}</b></a>
+          {% endif %}
+          {% if page.next %}
+            <a class="next" href="{{ page.next.url | relative_url }}"><span>newer entry ►</span><b>{{ page.next.title }}</b></a>
+          {% endif %}
+        </nav>
+      </article>
+
+      <div class="kitty-rail" aria-hidden="true"></div>
+    </div>
+
+    <!-- =============== RAIL =============== -->
+    <aside class="rail">
+      <div class="panel">
+        <h3>Station log</h3>
+        <div class="in">
+          <dl>
+            <dt>Mood</dt><dd>caffeinated</dd>
+            <dt>Playing</dt><dd>oud, badly</dd>
+            <dt>Reading</dt><dd><a href="{{ '/books.html' | relative_url }}">see the shelf</a></dd>
+            <dt>Weather</dt><dd>drizzle, obviously</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Recent entries</h3>
+        <div class="in">
+          {% for p in site.posts limit: 5 %}
+            <div style="margin:0 0 6px">
+              <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
+              <span style="color:#b3a6e6; font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Visitors</h3>
+        <div class="in" style="text-align:center">
+          <span class="led" id="hitCount">000000</span><br>
+          <span style="font-size:10px; color:#b3a6e6">since 1999</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Stickers</h3>
+        <div class="stickers">
+          <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
+          <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
+          <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
+          <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
+          <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
+          <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
+          <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
+          <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
+          <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
+        </div>
+      </div>
+
+      <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
+    </aside>
+  </div>
+
+  <hr class="perf">
+
+  <footer class="foot">
+    <div class="buttons">
       <img src="{{ '/icc.gif' | relative_url }}" alt="ICC">
       <img src="{{ '/dp.gif' | relative_url }}" alt="DP">
       <img src="{{ '/anarchynow.jpeg' | relative_url }}" alt="Anarchy Now">
@@ -678,19 +526,89 @@ html, body{ filter:none; }
       <img src="{{ '/piracy.png' | relative_url }}" alt="Piracy">
     </div>
 
-    <div class="footer">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 · Part of the Galactic Webring ·
-        <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> |
-        <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+    <div class="badges">
+      <span class="badge">Best viewed in Netscape Navigator 4.0 @ 800×600</span>
+      <span class="badge b2">Hand-coded, no tables were harmed</span>
+      <span class="badge b3">Y2K compliant (probably)</span>
+    </div>
+
+    <div class="webring">
+      ✦ Part of the Galactic Webring ✦
+      <a href="#" onclick="alert('Prev page broken');return false;">◄ Prev</a> ·
+      <a href="#" onclick="alert('Spinning the dial…');return false;">Random</a> ·
+      <a href="#" onclick="alert('Next page loading…');return false;">Next ►</a>
+    </div>
+
+    <div class="colophon">
+      © 1999–{{ site.time | date: "%Y" }} Galaxy 981 ·
+      <a href="{{ '/guestbook.html' | relative_url }}">sign the guestbook</a> ·
+      <a href="{{ '/contact.html' | relative_url }}">email me</a><br>
+      sheet printed <span id="printed"></span>
     </div>
 
     <audio id="blip" preload="auto"><source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg"></audio>
-    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
-  </div>
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false">🔇 sound</button>
+  </footer>
+</div>
 
-<!-- Robust Twitter loader -->
 <script>
-  /* load widgets.js if missing, then render any blockquotes */
+/* site-wide visitor counter */
+(() => { try{
+  const k='geocities_hit_counter';
+  const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
+  localStorage.setItem(k,n);
+  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
+}catch(e){} })();
+
+/* per-entry reader counter */
+(() => { try{
+  const el=document.getElementById('entryHits'); if(!el) return;
+  const k='g981_hits:'+location.pathname;
+  const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
+  localStorage.setItem(k,n);
+  el.textContent=String(n).padStart(6,'0');
+}catch(e){} })();
+
+document.getElementById('printed').textContent =
+  new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+/* 8-bit blips, off by default */
+(() => {
+  const a=document.getElementById('blip'), btn=document.getElementById('soundToggle');
+  if(!a||!btn) return;
+  let on=false; a.volume=.45;
+  btn.addEventListener('click',()=>{
+    on=!on; btn.setAttribute('aria-pressed',String(on));
+    btn.textContent = on ? '🔊 sound' : '🔇 sound';
+    try{ a.play().then(()=>{a.pause();a.currentTime=0;}).catch(()=>{}); }catch(_){}
+  });
+  const beep=()=>{ if(!on) return; try{ a.currentTime=0; a.play(); }catch(_){} };
+  document.querySelectorAll('.crumb a, .updown a').forEach(el=>el.addEventListener('pointerdown',beep));
+})();
+
+/* post images: lazy, async decode, no layout jumps */
+(() => {
+  document.querySelectorAll('.post img').forEach(img=>{
+    if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
+    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+    if(img.hasAttribute('srcset') && !img.hasAttribute('sizes'))
+      img.setAttribute('sizes','(max-width: 820px) 100vw, 640px');
+    const setAR=()=>{ const w=img.naturalWidth,h=img.naturalHeight; if(w&&h) img.style.aspectRatio=w+' / '+h; };
+    if(img.complete) setAR(); else img.addEventListener('load',setAR,{once:true});
+  });
+})();
+
+/* calmer marquee on phones */
+(() => {
+  if (matchMedia('(max-width:820px)').matches ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('marquee').forEach(m=>m.setAttribute('scrollamount','1'));
+  }
+})();
+</script>
+
+<!-- Twitter embeds -->
+<script>
   window.twttr = (function(d,s,id){
     var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};
     if (d.getElementById(id)) return t;
@@ -701,136 +619,9 @@ html, body{ filter:none; }
     return t;
   }(document,"script","twitter-wjs"));
   twttr.ready(function(t){ t.widgets.load(document.querySelector('.post')); });
-
-  /* also retry on DOM ready and bfcache restore */
   const rehydrate = () => { try { twttr.widgets.load(document.querySelector('.post')); } catch(_){} };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rehydrate); else rehydrate();
   window.addEventListener('pageshow', rehydrate);
 </script>
-
-<script>
-/* hit counter */
-(() => { try {
-  const key='geocities_hit_counter';
-  const n=(parseInt(localStorage.getItem(key)||'0',10)+1);
-  localStorage.setItem(key,n);
-  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
-} catch(e){} })();
-
-/* last updated label */
-document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
-
-/* tiny nav misalignment */
-(() => {
-  const links=document.querySelectorAll('.nav a');
-  links.forEach(a=>{
-    const ml=6+Math.floor(Math.random()*7);
-    const fs=12+Math.floor(Math.random()*3);
-    a.style.marginLeft=ml+'px';
-    a.style.fontSize=fs+'px';
-    if (Math.random()<0.4) a.style.letterSpacing='1px';
-  });
-})();
-
-
-/* per-entry reader counter, stored per URL */
-(() => { try {
-  const el = document.getElementById('entryHits');
-  if(!el) return;
-  const key = 'g981_hits:' + location.pathname;
-  const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
-  localStorage.setItem(key, n);
-  el.textContent = String(n).padStart(6, '0');
-} catch(e){} })();
-  
-/* Konami hyperspace */
-(() => {
-  const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let buf=[];
-  document.addEventListener('keydown',e=>{
-    buf.push(e.key.length===1?e.key.toLowerCase():e.key);
-    buf=buf.slice(-seq.length);
-    if (seq.every((k,i)=>k===buf[i])) {
-      document.documentElement.classList.add('hyperspace');
-      setTimeout(()=>document.documentElement.classList.remove('hyperspace'),650);
-    }
-  });
-})();
-
-/* VHS transition on internal links */
-(() => {
-  document.querySelectorAll('.page a[href]').forEach(a=>{
-    const url=a.getAttribute('href')||'';
-    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-    a.addEventListener('click',e=>{
-      e.preventDefault();
-      document.documentElement.classList.add('vhs');
-      setTimeout(()=>{ window.location.href=url; },200);
-    });
-  });
-})();
-
-/* periodic title flyby */
-setInterval(()=>{ document.documentElement.classList.add('flyby');
-  setTimeout(()=>document.documentElement.classList.remove('flyby'),1700);
-},14000);
-
-/* time-of-day palette */
-(() => { const h=new Date().getHours(); document.documentElement.classList.add((h>=6&&h<17)?'morning':'night'); })();
-
-/* UI sounds */
-(() => {
-  const a=document.getElementById('blip'); const btn=document.getElementById('soundToggle');
-  if(!a||!btn) return;
-  if(!a.currentSrc){ a.src="{{ '/kawaii%208bit.mp3' | relative_url }}"; a.load(); }
-  let enabled=false; a.volume=0.5;
-  btn.addEventListener('click',()=>{
-    enabled=!enabled; btn.setAttribute('aria-pressed',String(enabled));
-    btn.textContent=enabled?'🔊 sound':'🔇 sound';
-    try{ a.play().then(()=>{ a.pause(); a.currentTime=0; }).catch(()=>{}); }catch(_){}
-  });
-  const beep=()=>{ if(!enabled) return; try{ a.currentTime=0; a.play(); }catch(_){}};
-  document.querySelectorAll('.nav a').forEach(el=>{
-    el.addEventListener('pointerdown',beep);
-    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') beep(); });
-  });
-})();
-
-/* post images: lazy load, async decode, reserve space */
-(function(){
-  document.querySelectorAll('.post img').forEach(function(img){
-    if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
-    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
-
-    if(img.hasAttribute('srcset') && !img.hasAttribute('sizes')){
-      img.setAttribute('sizes','(max-width: 900px) 100vw, 680px');
-    }
-
-    function setAR(){
-      var w = img.naturalWidth, h = img.naturalHeight;
-      if(w && h){ img.style.aspectRatio = w + ' / ' + h; }
-    }
-    if (img.complete) setAR(); else img.addEventListener('load', setAR, { once:true });
-  });
-})();
-</script>
-
-<!-- hyperspace + vhs visuals -->
-<style>
-  .hyperspace::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
-                repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
-    animation: warp 600ms ease-in-out;
-  }
-  @keyframes warp{ 0%{opacity:0; transform:scaleX(1)} 40%{opacity:1; transform:scaleX(1.8)} 100%{opacity:0; transform:scaleX(1)} }
-  .vhs::after{
-    content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-    background: linear-gradient(#000,transparent 12%,#0000 88%,#000),
-                repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-    animation: vhs 240ms steps(2,end);
-  }
-  @keyframes vhs{ from{opacity:0} to{opacity:1} }
-</style>
 </body>
 </html>
