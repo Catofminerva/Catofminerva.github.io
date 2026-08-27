@@ -1,537 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Galaxy 981 Kool Webpages</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>Galaxy 981 · Kool Webpages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style> 
-    /* === borrow the index.html look === */
-    :root{
-      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
-      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
-    }
-    html, body {
-      margin:0; padding:0;
-      background-image:url('stars.gif'); background-repeat:repeat;
-      color:var(--ink);
-      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
-    }
-    .page {
-      width:760px; margin:18px auto 32px; position:relative; left:7px;
-      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
-      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
+<style>
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
 
-    #glitter-title{
-      font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
-    }
+body {
+  background:#000 url("stars.gif") repeat;
+  color:#d9ffff;
+  font-family:"Trebuchet MS",Verdana,Arial,sans-serif;
+  font-size:14px;
+  cursor:crosshair;
+}
 
-    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
-    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
-    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
+a { color:#4dffff; }
+a:visited { color:#d486ff; }
+a:hover { color:#ffff33; background:#35105c; }
 
-    .layout{ width:100%; border-collapse:collapse; }
-    .sidebar{
-      width:210px;
-      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple); vertical-align:top;
-    }
-    .content{
-      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
-    }
+.page {
+  width:830px;
+  max-width:calc(100% - 18px);
+  margin:14px auto 36px;
+  background:rgba(0,0,22,.92);
+  border:5px ridge #00d9ff;
+  box-shadow:0 0 22px #004d80;
+}
 
-    .nav a{
-      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
-    }
-    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
-    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
+.mast {
+  text-align:center;
+  padding:9px 10px 3px;
+  background:#05001b;
+  border-bottom:3px double #8f00ff;
+}
 
-    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
-    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
-    .post .meta{ font-size:12px; color:var(--neon-yellow); }
+.best-viewed {
+  font:11px "Courier New",monospace;
+  color:#9da7ff;
+  text-align:left;
+  padding-left:4px;
+}
 
-    hr.retro{
-      height:12px; border:0; margin:10px 0 14px;
-      background-image:repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
-      );
-      position:relative; overflow:visible;
-    }
+.title-line {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:1px 0 0;
+}
 
-    /* starships like index */
-    #glitter-title::before,#glitter-title::after{
-      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
-      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
-      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
-    }
-    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
-    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
+.title-line img {
+  width:88px;
+  max-height:62px;
+  object-fit:contain;
+  image-rendering:pixelated;
+}
 
-    /* Let the rainbow bar host the cat (like index) */
-    .content > hr.retro:first-of-type::after{
-      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
-      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
-      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
-    }
-    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
+h1 {
+  margin:0;
+  font:700 54px/1 "Comic Sans MS","Trebuchet MS",sans-serif;
+  letter-spacing:-3px;
+  color:#00f0ff;
+  text-shadow:2px 2px #7f00ff, 0 0 9px #00d9ff;
+}
 
-    /* ASCII panel */
-    .ascii{
-      background:#000; color:#0f0; border:3px inset #6af7ff; padding:8px; overflow:auto; max-height:280px;
-      font-family:"Courier New",monospace; font-size:12px; white-space:pre; box-shadow:2px 2px 0 #000;
-    }
+.subtitle {
+  margin:2px 0 7px;
+  color:#ff73d1;
+  font:16px "Comic Sans MS",cursive;
+  transform:rotate(-.4deg);
+}
 
-    /* Toolbar for surfing */
-    .toolbar{
-      display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:8px 0 2px;
-    }
-    .tool-btn{
-      padding:6px 10px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
-    }
-    .tool-btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
-    .note{ font-size:12px; color:var(--neon-yellow); }
+.marquee-box {
+  margin:5px 11px 9px;
+  background:#001a4d;
+  border:3px groove #37efff;
+  color:#ffff33;
+  font:bold 15px "Courier New",monospace;
+}
 
-    /* Link grid with “blinkie badge” headers */
-    .link-grid{
-      display:grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap:12px;
-    }
-    .card{
-      background:rgba(0,0,0,0.35); border:3px ridge #6af7ff; padding:8px; box-shadow: inset 0 0 6px #000;
-    }
-    .badge{
-      display:inline-block;
-      min-width: 138px; height:34px; line-height:32px; padding:0 8px;
-      border:2px solid #222; box-shadow: inset 0 0 0 2px #fff, 0 0 8px rgba(0,255,255,.35);
-      background:
-        linear-gradient(180deg,#c0faff 0%,#6aefff 60%,#00e5ff 100%);
-      color:#000; text-shadow:0 0 0 transparent; font-weight:bold; font-size:14px; text-decoration:none;
-      image-rendering:pixelated;
-    }
-    .badge:hover{ filter: hue-rotate(25deg) saturate(120%); transform: translateY(-1px); }
-    .desc{ font-size:12px; color:#eee; margin-top:6px; }
+.layout {
+  width:100%;
+  border-collapse:collapse;
+}
 
-    /* daily reads badge gets its own colour so it feels like a different shelf */
-    .daily .badge{
-      background: linear-gradient(180deg,#fff3b0 0%,#ffe14d 60%,#ffc400 100%);
-      box-shadow: inset 0 0 0 2px #fff, 0 0 8px rgba(255,225,77,.45);
-    }
+.sidebar {
+  width:202px;
+  vertical-align:top;
+  background:#12002e url("stars.gif") repeat;
+  border-right:5px ridge #8f00ff;
+  padding:9px 7px 16px;
+}
 
-    /* sticker wall in sidebar */
-    .sticker-wall{
-      margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
-      display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; justify-items:center; align-items:center;
-    }
-    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; }
-    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
-    .sticker-wall .wide{ grid-column: span 2; width:188px; }
+.main {
+  vertical-align:top;
+  padding:11px 14px 24px;
+  background:rgba(5,0,28,.72);
+}
 
-    /* minimal VHS overlay for internal hops */
-    .vhs::after{
-      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-      background:
-        linear-gradient(#000,transparent 12%,#0000 88%,#000),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-      animation:vhs 240ms steps(2,end);
-    }
-    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
-  </style>
+.nav-title {
+  color:#ffff33;
+  font:bold 13px "Courier New",monospace;
+  margin:1px 4px 7px;
+}
+
+.nav a {
+  display:block;
+  margin:0 2px 7px;
+  padding:4px 6px;
+  border:2px outset #87f8ff;
+  background:#11113d;
+  color:#c9ffff;
+  text-decoration:none;
+  font:bold 12px Verdana,sans-serif;
+}
+
+.nav a:nth-child(3n) { margin-left:8px; background:#1a0038; }
+.nav a:nth-child(4n) { margin-right:10px; border-color:#ff6ed3; }
+.nav a:hover { border-style:inset; color:#39ff14; }
+
+.nav img {
+  width:23px;
+  height:23px;
+  object-fit:contain;
+  vertical-align:middle;
+  margin-right:6px;
+  image-rendering:pixelated;
+}
+
+.status {
+  margin:14px 3px 11px;
+  padding:7px;
+  border:1px dashed #39ff14;
+  background:#000;
+  color:#b5ff9c;
+  font:11px/1.55 "Courier New",monospace;
+  transform:rotate(-.7deg);
+}
+
+.stickers {
+  position:relative;
+  min-height:365px;
+  margin:8px 0 4px;
+  border-top:1px dotted #714aa0;
+  padding-top:8px;
+}
+
+.stickers img {
+  position:absolute;
+  max-width:88px;
+  height:auto;
+  image-rendering:pixelated;
+  filter:drop-shadow(2px 2px 1px #000);
+}
+.stickers img:nth-child(1) { left:2px; top:16px; transform:rotate(-4deg); }
+.stickers img:nth-child(2) { right:1px; top:7px; transform:rotate(3deg); }
+.stickers img:nth-child(3) { left:28px; top:91px; transform:rotate(1deg); }
+.stickers img:nth-child(4) { right:3px; top:132px; transform:rotate(-7deg); }
+.stickers img:nth-child(5) { left:0; top:174px; transform:rotate(6deg); }
+.stickers img:nth-child(6) { right:10px; top:224px; transform:rotate(-2deg); }
+.stickers img:nth-child(7) { left:8px; top:273px; transform:rotate(-3deg); }
+.stickers img:nth-child(8) { right:0; top:306px; width:132px; max-width:132px; }
+
+.little-note {
+  font:10px "Courier New",monospace;
+  color:#a5a5c9;
+  text-align:center;
+  margin-top:5px;
+}
+
+.rainbow {
+  height:8px;
+  border:0;
+  margin:4px -2px 13px;
+  background:linear-gradient(90deg,
+    #f00 0 14%,#ff8c00 14% 28%,#ffff00 28% 42%,
+    #00d000 42% 56%,#00bfff 56% 70%,#334cff 70% 84%,#a000ff 84%);
+}
+
+.welcome {
+  width:92%;
+  margin:3px auto 18px 2px;
+  padding:8px 10px;
+  border:2px dashed #ff5fcc;
+  background:#18002a;
+  font:12px/1.55 "Courier New",monospace;
+  color:#ffd6f4;
+}
+
+.welcome img {
+  width:42px;
+  vertical-align:middle;
+  margin-right:7px;
+  image-rendering:pixelated;
+}
+
+.surf-tools {
+  text-align:right;
+  margin:-7px 0 16px;
+}
+
+.surf-tools button {
+  font:bold 12px "MS Sans Serif",Tahoma,sans-serif;
+  color:#000;
+  background:#c0c0c0;
+  border:2px outset #fff;
+  padding:3px 8px;
+  cursor:pointer;
+}
+.surf-tools button:active { border-style:inset; }
+
+.section {
+  margin:0 0 27px;
+}
+
+.section-title {
+  margin:0 0 3px;
+  color:#ffff33;
+  font:bold 22px "Comic Sans MS","Trebuchet MS",sans-serif;
+  text-shadow:2px 2px #59008c;
+}
+
+.section-meta {
+  margin:0 0 10px;
+  color:#ff85d8;
+  font:11px "Courier New",monospace;
+}
+
+.section-cut {
+  border:0;
+  border-top:1px dashed #7050a0;
+  border-bottom:1px dashed #171738;
+  height:4px;
+  margin:19px 0 22px;
+}
+
+.links {
+  padding-left:7px;
+}
+
+.link-entry {
+  margin:0 0 9px;
+  line-height:1.38;
+}
+
+.link-entry > div:first-child {
+  font:bold 15px "Trebuchet MS",Verdana,sans-serif;
+}
+
+.link-entry .desc {
+  color:#d7d7e7;
+  font-size:12px;
+  margin:2px 0 0 19px;
+  max-width:95%;
+}
+
+.link-entry .desc a { font-size:inherit; }
+
+.tiny-gif {
+  width:20px;
+  height:20px;
+  object-fit:contain;
+  vertical-align:middle;
+  margin:0 5px 1px 0;
+  image-rendering:pixelated;
+}
+
+.plain {
+  margin-left:18px;
+}
+
+.plain-row {
+  border-bottom:1px dotted #4c3b73;
+  padding-bottom:6px;
+}
+
+.boxy-row {
+  border-left:4px solid #4dffff;
+  padding:5px 8px;
+  background:#06162b;
+}
+
+.under-row > div:first-child a {
+  text-decoration:underline wavy #ff65cf;
+  text-underline-offset:3px;
+}
+
+.green-row {
+  margin-left:9px;
+  color:#b5ff9c;
+}
+.green-row > div:first-child a { color:#39ff14; }
+
+.yellow-paper {
+  width:94%;
+  padding:6px 8px 7px;
+  background:#fff6a6;
+  border:1px solid #6b5d16;
+  color:#111;
+  box-shadow:3px 3px 0 #482d6a;
+  transform:rotate(-.35deg);
+}
+.yellow-paper a { color:#0000bb; }
+.yellow-paper a:visited { color:#630063; }
+.yellow-paper .desc { color:#28230c; }
+
+.big-fave {
+  width:97%;
+  padding:8px 10px;
+  border:3px double #00ffea;
+  background:#001d29;
+}
+.big-fave > div:first-child a {
+  color:#ffff33;
+  font-size:19px;
+}
+.big-fave .desc { font-size:13px; }
+
+.warningish {
+  padding:7px 8px;
+  background:#2c0015;
+  border:1px dashed #ff3b72;
+}
+.warningish > div:first-child a { color:#ff7198; }
+
+.law-note {
+  margin-left:21px;
+  padding:7px 9px;
+  border:2px dotted #9effff;
+  background:#000;
+}
+.new-badge {
+  display:inline-block;
+  margin-left:8px;
+  padding:1px 4px;
+  background:#ffff33;
+  color:#000;
+  font:9px "Courier New",monospace;
+  vertical-align:middle;
+}
+
+.oldbox {
+  padding:6px 8px;
+  border:3px ridge #c0c0c0;
+  background:#080830;
+  box-shadow:2px 2px 0 #000;
+}
+
+.blue-note {
+  margin-left:12px;
+  padding:4px 7px;
+  border-left:7px solid #006cff;
+  background:#00143f;
+}
+
+.memory-box {
+  width:96%;
+  padding:8px 9px;
+  background:#1d092f;
+  border:1px solid #ff73d1;
+  transform:rotate(.25deg);
+}
+
+.scribble-note {
+  color:#ff9fe0;
+  font:12px "Comic Sans MS",cursive;
+  font-weight:normal;
+}
+
+.tool-wall {
+  border:2px dotted #5d4a89;
+  padding:8px 8px 1px;
+  background:rgba(0,0,0,.28);
+}
+
+.tool-entry {
+  display:inline-block;
+  vertical-align:top;
+  width:47%;
+  margin:0 2% 11px 0;
+  padding:5px 6px;
+  border:2px outset #9befff;
+  background:#15154c;
+}
+.tool-entry > div:first-child a {
+  color:#9ff;
+  font-family:"MS Sans Serif",Tahoma,sans-serif;
+}
+.tool-entry .desc {
+  margin-left:2px;
+  font-size:11px;
+}
+
+.junk-drawer {
+  columns:2 240px;
+  column-gap:16px;
+}
+.junk-drawer .link-entry {
+  break-inside:avoid;
+  display:inline-block;
+  width:100%;
+}
+
+.breaker {
+  text-align:center;
+  margin:14px 0 20px;
+  color:#39ff14;
+  font:12px "Courier New",monospace;
+}
+
+.breaker img {
+  max-width:80px;
+  max-height:50px;
+  vertical-align:middle;
+  margin:0 5px;
+  image-rendering:pixelated;
+}
+
+.footer {
+  border-top:4px groove #8f00ff;
+  background:#060013;
+  text-align:center;
+  padding:10px 8px 14px;
+  font:11px/1.8 "Courier New",monospace;
+  color:#aeb1d2;
+}
+
+.footer img {
+  max-height:28px;
+  max-width:88px;
+  vertical-align:middle;
+  margin:2px 4px;
+  image-rendering:pixelated;
+}
+
+.footer a { color:#ffff33; }
+
+.blink {
+  animation:blink 1s steps(1,end) infinite;
+}
+@keyframes blink { 50% { visibility:hidden; } }
+
+@media (max-width:720px) {
+  .page { max-width:calc(100% - 8px); margin-top:5px; }
+  h1 { font-size:39px; }
+  .title-line img { width:55px; }
+  .layout, .layout tbody, .layout tr, .sidebar, .main { display:block; width:100%; }
+  .sidebar { border-right:0; border-bottom:5px ridge #8f00ff; }
+  .nav { columns:2; column-gap:7px; }
+  .nav a { break-inside:avoid; }
+  .stickers { min-height:190px; }
+  .stickers img { position:static; width:70px; margin:3px; transform:none !important; }
+  .tool-entry { width:100%; margin-right:0; }
+  .junk-drawer { columns:1; }
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
+<div class="page">
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">★ portal to kool webpages ★ under construction forever ★ powered by stardust and iframes ★</marquee>
+  <header class="mast">
+    <div class="best-viewed">GALAXY 981 / kool webpages / page last messed with: aug 2026</div>
+    <div class="title-line">
+      <img src="starwar1.gif?v=1" alt="">
+      <h1>Galaxy 981</h1>
+      <img src="starwar2.jpg?v=1" alt="">
     </div>
+    <div class="subtitle">kool webpages i keep around because bookmarks folders are boring</div>
+    <div class="marquee-box">
+      <marquee scrollamount="5">★ welcome 2 my links page ★ some of these are useful ★ some are here for extremely specific reasons ★ links open in a new tab ★ this page is permanently under construction ★</marquee>
+    </div>
+  </header>
 
-    <table class="layout">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+  <table class="layout" role="presentation">
+    <tr>
+      <td class="sidebar">
+        <div class="nav-title">&gt;&gt; GO SOMEWHERE</div>
+        <nav class="nav" aria-label="Site">
+          <a href="index.html"><img src="cutehome.gif" alt="">Home</a>
+          <a href="about.html"><img src="about.gif" alt="">About</a>
+          <a href="blog_posts.html"><img src="post.gif" alt="">Entries</a>
+          <a href="index.html#chat-room"><img src="chattt.gif" alt="">Chat</a>
+          <a href="coolsite.html"><img src="coollinks.gif" alt="">Kool Webpages</a>
+          <a href="guestbook.html"><img src="book-0037.gif" alt="">Guestbook</a>
+          <a href="books.html"><img src="catread.gif" alt="">Kool Books</a>
+          <a href="Truth2.html"><img src="math.gif" alt="">Truth Table</a>
+          <a href="contact.html"><img src="phone.gif" alt="">Contact</a>
+        </nav>
+
+        <div class="status">
+          <b>STATUS.TXT</b><br>
+          current task: avoiding current task<br>
+          browser tabs: too many<br>
+          this page: unfinished on purpose
+        </div>
+
+        <div class="stickers" aria-label="sticker pile">
+          <img src="arabic.gif" alt="Arabic">
+          <img src="qatar.gif" alt="Qatar">
+          <img src="pali.gif" alt="Palestine">
+          <img src="sleepycat.gif" alt="Sleepy cat">
+          <img src="peta.gif" alt="PETA">
+          <img src="fist.gif" alt="Fist">
+          <img src="freespeechonline.gif" alt="Free Speech Online">
+          <img src="scifi.gif" alt="Sci-Fi">
+        </div>
+        <div class="little-note">yes the stickers are supposed to overlap</div>
+      </td>
+
+      <td class="main">
+        <hr class="rainbow">
+
+        <div class="welcome">
+          <img src="kitty.gif" alt="">
+          hi. this is basically the drawer where i throw websites i want to find again. there is no ranking system and some categories make more sense than others.
+        </div>
+
+        <div class="surf-tools">
+          <button id="randomBtn" type="button">random site</button>
+        </div>
+
+        <section class="section" id="daily">
+          <h2 class="section-title">Intellectual Stuff to Read Everyday <span class="blink">!</span></h2>
+          <div class="section-meta">my daily rounds ★ click around / see whats new / read one or two</div>
+          <div class="links">
+            <div class="link-entry yellow-paper">
+  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://harpers.org/" target="_blank" rel="noopener">Harper&#x27;s</a></div>
+  <div class="desc">oldest monthly in america, still going. the readings section at the front is my fave bit, weird found documents n excerpts. also long essays on politics + culture. some free, some not</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://www.nplusonemag.com/" target="_blank" rel="noopener">n+1</a></div>
+  <div class="desc">brooklyn lit + politics mag, a bit snobby but in a way i enjoy. print comes out 3x a year but they put online-only stuff up every week so theres always smth new</div>
+</div>
+<div class="link-entry big-fave">
+  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a><span class="scribble-note"> ← i read this a lot</span></div>
+  <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a></div>
+  <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
+</div>
+<div class="link-entry yellow-paper">
+  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://blogs.lse.ac.uk/lsereviewofbooks/" target="_blank" rel="noopener">LSE Review of Books</a></div>
+  <div class="desc">free open access reviews of social science books, updated basically daily. great for finding academic books u had no idea existed. no paywall!!</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a></div>
+  <div class="desc">essays on philosophy, science, psychology, society. all free, all pretty digestible, most of them a 15 min read. their sister site Psyche does shorter psych/how-to-live stuff</div>
+</div>
+<div class="link-entry plain">
+  <div><a href="https://www.thenation.com/" target="_blank" rel="noopener">The Nation</a></div>
+  <div class="desc">oldest lefty weekly in the us, running since 1865 (!!!). politics, reporting, culture crit, and they still print poetry which is kinda lovely</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://www.the-tls.com/" target="_blank" rel="noopener">Times Literary Supplement</a></div>
+  <div class="desc">the tls, british, going since 1902. reviews of basically everything, from shakespeare to political theory. went fortnightly in print but the site updates constantly. paywalled tho :(</div>
+</div>
+<div class="link-entry yellow-paper">
+  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a></div>
+  <div class="desc">THE literary magazine. their Writers at Work interview archive is legendary and a lot of it is free. the daily blog is good for a quick morning read</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://www.theatlantic.com/" target="_blank" rel="noopener">The Atlantic</a></div>
+  <div class="desc">big american mag, mixed bag honestly, but when its good its really good. mostly paywalled which is annoying</div>
+</div>
+<div class="link-entry plain">
+  <div><a href="https://jacobin.com/" target="_blank" rel="noopener">Jacobin</a></div>
+  <div class="desc">socialist mag, super readable and openly partisan about it. where i go when i want the class analysis take on whatevers happening. free!</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://nautil.us/" target="_blank" rel="noopener">Nautilus</a></div>
+  <div class="desc">science mag that treats science as part of culture instead of just Facts. physics, biology, consciousness, and the writing is actually beautiful</div>
+</div>
+<div class="link-entry warningish">
+  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://www.lesswrong.com/" target="_blank" rel="noopener">LessWrong</a></div>
+  <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
+</div>
+<div class="link-entry law-note">
+  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a><span class="new-badge">LAW NERD CORNER</span></div>
+  <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
+</div>
+<div class="link-entry plain">
+  <div><a href="https://margaretkilljoy.substack.com/" target="_blank" rel="noopener">Margaret Killjoy</a></div>
+  <div class="desc">anarchist writer + musician + scifi novelist, writes on her substack about anarchism, forgotten rebellions, and how to actually live under all this. free to read, no paywall nonsense</div>
+</div>
+<div class="link-entry ">
+  <div><a href="https://www.wired.com" target="_blank" rel="noopener">Wired Magazine</a></div>
+  <div class="desc">mostly about how tech reshapes our everyday lives, politics, culture, with a lot of investigative stories on this, some very pessimisitc on the future others not so much</div>
+</div>
           </div>
+        </section>
 
-          <div class="sticker-wall">
-            <img src="arabic.gif" alt="Arabic">
-            <img src="qatar.gif" alt="Qatar">
-            <img src="pali.gif" alt="Palestine">
-            <img src="sleepycat.gif" alt="Sleepy cat">
-            <img src="peta.gif" alt="PETA">
-            <img src="fist.gif" alt="Fist">
-            <img src="freespeechonline.gif" alt="Free Speech Online">
-            <img src="scifi.gif" alt="Sci-Fi" class="wide">
+        <div class="breaker">
+          ~*~*~ <img src="sleepycat.gif" alt=""> internet intermission <img src="scifi.gif" alt=""> ~*~*~
+        </div>
+
+        <hr class="section-cut">
+
+        <section class="section" id="academic">
+          <h2 class="section-title">Other Intellectual Stuff</h2>
+          <div class="section-meta">blogs, mags, philosophy rabbit holes, things i swear i will return to</div>
+          <div class="links">
+            <div class="link-entry plain-row">
+  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a></div>
+  <div class="desc">High-imact factor leftist Pol Sci. magazine.</div>
+</div>
+<div class="link-entry boxy-row">
+  <div><a href="https://www.jhiblog.org/" target="_blank" rel="noopener">JHI Blog</a></div>
+  <div class="desc">i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</div>
+</div>
+<div class="link-entry under-row">
+  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://thefunambulist.net/" target="_blank" rel="noopener">The Funambulist Magazine</a></div>
+  <div class="desc">"Our hope is to provide a useful platform where activist/academic/practitioner voices can meet and build solidarities across geographical scales. . . anticolonial, antiracist, queer, and feminist" topics.</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://www.e-ir.info" target="_blank" rel="noopener">E-International Relations</a></div>
+  <div class="desc">sum short articles on IR, many written by undergrad-grad students</div>
+</div>
+<div class="link-entry green-row">
+  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a></div>
+  <div class="desc">this is the Philosophy holy book that every student reads before bed</div>
+</div>
+<div class="link-entry plain-row">
+  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a></div>
+  <div class="desc">another philosophy wiki/holybook.</div>
+</div>
+<div class="link-entry boxy-row">
+  <div><a href="https://www.astralcodexten.com/" target="_blank" rel="noopener">Astral Codex Ten</a></div>
+  <div class="desc">a guy who is basically 'the father' of the above website who talks about psychology and philosophy (i no longer read it because his politics are extra horribe!)</div>
+</div>
+<div class="link-entry under-row">
+  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://rationalwiki.org/wiki/Main_Page" target="_blank" rel="noopener">RationalWiki</a></div>
+  <div class="desc">a wiki for 'sceptics', i think it was build during the early era of new atheism but its still updated and has some cool entries, for e.g <a href="https://rationalwiki.org/wiki/Just_asking_questions" rel="noopener" target="_blank">Just asking questions</a>.</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://www.lanceindependent.com/" target="_blank" rel="noopener">Lance Independent</a></div>
+  <div class="desc">lance is a philosophy phd that writes in a super accessible way, he has a cool youtube channel too. he debates metaethics</div>
+</div>
+<div class="link-entry green-row">
+  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://peasoupblog.com/" target="_blank" rel="noopener">PEA Soup</a></div>
+  <div class="desc">another philosophy blog with short accessible posts</div>
+</div>
+<div class="link-entry memory-box">
+  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a><span class="scribble-note"> ← this one is here for sentimental reasons</span></div>
+  <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
+</div>
+<div class="link-entry boxy-row">
+  <div><a href="https://philosophynow.org" target="_blank" rel="noopener">Philosophy Magazine</a></div>
+  <div class="desc">yet another accessible philosophy website</div>
+</div>
+<div class="link-entry under-row">
+  <div><img class="tiny-gif" src="catread.gif" alt=""><a href="https://social-epistemology.com/" target="_blank" rel="noopener">Social Epistemology Review</a></div>
+  <div class="desc">a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a></div>
+  <div class="desc">a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</div>
+</div>
           </div>
-        </td>
+        </section>
 
-        <td class="content">
-          <hr class="retro">
+        <hr class="rainbow">
 
-          <div class="post">
-            <h3>surf the web</h3>
-
-            <div class="toolbar">
-              <button id="randomBtn" class="tool-btn">🎲 Random Site</button>
-              <button id="shuffleBtn" class="tool-btn">🔀 Shuffle Lists</button>
-             <span class="note">(links open in a new tab!)</span>
-
-            </div>
-
-            <div class="ascii">
-   _______________                        |*\_/*|________
-  |  ___________  |     .-.     .-.      ||_/-\_|______  |
-  | |           | |    .****. .****.     | |           | |
-  | |   0   0   | |    .*****.*****.     | |   0   0   | |
-  | |     -     | |     .*********.      | |     -     | |
-  | |   \___/   | |      .*******.       | |   \___/   | |
-  | |___     ___| |       .*****.        | |___________| |
-  |_____|\_/|_____|        .***.         |_______________|
-    _|__|/ \|_|_.............*.............._|________|_
-   / ********** \                          / ********** \
- /  ************  \                      /  ************  \
---------------------                    --------------------
-            </div>
+        <section class="section" id="retro">
+          <h2 class="section-title">Retro Webmaster Tools</h2>
+          <div class="section-meta">textures, pets, cursors, pixel mischief etc etc</div>
+          <div class="tool-wall">
+            <div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="coollinks.gif" alt=""><a href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a></div>
+  <div class="desc">the motherload of classic gifs.</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a></div>
+  <div class="desc">lots of classic cute gifs, textures, pets and other tools for webmasters</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="chattt.gif" alt=""><a href="https://tholman.com/cursor-effects/" target="_blank" rel="noopener">Cursor effects</a></div>
+  <div class="desc">adds cool 90s cursor effects to your cursor</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="cutehome.gif" alt=""><a href="https://geocities/?q=cat" target="_blank" rel="noopener">Geocities</a></div>
+  <div class="desc">perfect if youre looking for ideas for your webpage</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://nineties.website" target="_blank" rel="noopener">Nineties</a></div>
+  <div class="desc">90s aesthetic html ideas. if link broken just go to nineties dot website</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833" target="_blank" rel="noopener">Git &amp; GitHub Guide</a></div>
+  <div class="desc">if youre new to git and github, this is a good guide.</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="http://mikesdigitalpogpage.com/" target="_blank" rel="noopener">POGS</a></div>
+  <div class="desc">digital POGS are back baby</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="book-0037.gif" alt=""><a href="https://lookscanned.io/en/scan" target="_blank" rel="noopener">LOOKS SCANNED</a></div>
+  <div class="desc">gives you a PDF of any screenshot to make it look like it was scanned on a scanner!!!</div>
+</div>
           </div>
+        </section>
 
-          <div class="post daily" id="daily">
-            <h3>Intellectual Stuff to Read Everyday</h3>
-            <div class="meta">my daily rounds ★ click through, see whats new, read one or two ★</div>
-            <div class="link-grid">
-              <div class="card">
-                <a class="badge" href="https://harpers.org/" target="_blank" rel="noopener">Harper's</a>
-                <div class="desc">oldest monthly in america, still going. the readings section at the front is my fave bit, weird found documents n excerpts. also long essays on politics + culture. some free, some not</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.nplusonemag.com/" target="_blank" rel="noopener">n+1</a>
-                <div class="desc">brooklyn lit + politics mag, a bit snobby but in a way i enjoy. print comes out 3x a year but they put online-only stuff up every week so theres always smth new</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a>
-                <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.nybooks.com/" target="_blank" rel="noopener">The New York Review of Books</a>
-                <div class="desc">another notable literary magazine, the american competitor to the above (lrb wins...)</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://blogs.lse.ac.uk/lsereviewofbooks/" target="_blank" rel="noopener">LSE Review of Books</a>
-                <div class="desc">free open access reviews of social science books, updated basically daily. great for finding academic books u had no idea existed. no paywall!!</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a>
-                <div class="desc">essays on philosophy, science, psychology, society. all free, all pretty digestible, most of them a 15 min read. their sister site Psyche does shorter psych/how-to-live stuff</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.thenation.com/" target="_blank" rel="noopener">The Nation</a>
-                <div class="desc">oldest lefty weekly in the us, running since 1865 (!!!). politics, reporting, culture crit, and they still print poetry which is kinda lovely</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.the-tls.com/" target="_blank" rel="noopener">Times Literary Supplement</a>
-                <div class="desc">the tls, british, going since 1902. reviews of basically everything, from shakespeare to political theory. went fortnightly in print but the site updates constantly. paywalled tho :(</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a>
-                <div class="desc">THE literary magazine. their Writers at Work interview archive is legendary and a lot of it is free. the daily blog is good for a quick morning read</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.theatlantic.com/" target="_blank" rel="noopener">The Atlantic</a>
-                <div class="desc">big american mag, mixed bag honestly, but when its good its really good. mostly paywalled which is annoying</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://jacobin.com/" target="_blank" rel="noopener">Jacobin</a>
-                <div class="desc">socialist mag, super readable and openly partisan about it. where i go when i want the class analysis take on whatevers happening. free!</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://nautil.us/" target="_blank" rel="noopener">Nautilus</a>
-                <div class="desc">science mag that treats science as part of culture instead of just Facts. physics, biology, consciousness, and the writing is actually beautiful</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.lesswrong.com/" target="_blank" rel="noopener">LessWrong</a>
-                <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a>
-                <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://margaretkilljoy.substack.com/" target="_blank" rel="noopener">Margaret Killjoy</a>
-                <div class="desc">anarchist writer + musician + scifi novelist, writes on her substack about anarchism, forgotten rebellions, and how to actually live under all this. free to read, no paywall nonsense</div>
-              </div>
-               <div class="card">
-                <a class="badge" href="https://www.wired.com" target="_blank" rel="noopener">Wired Magazine</a>
-                <div class="desc">mostly about how tech reshapes our everyday lives, politics, culture, with a lot of investigative stories on this, some very pessimisitc on the future others not so much</div>
-              </div>
-            </div>
+        <hr class="section-cut">
+
+        <section class="section" id="nostalgia">
+          <h2 class="section-title">Nostalgia Trips</h2>
+          <div class="section-meta">old computers / time capsules / websites about websites / things preserved by weird people online</div>
+          <div class="links">
+            <div class="link-entry oldbox">
+  <div><a href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a></div>
+  <div class="desc">uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</div>
+</div>
+<div class="link-entry plain-row">
+  <div><img class="tiny-gif" src="cutehome.gif" alt=""><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a></div>
+  <div class="desc">now you can relive the old internet days with these classic browsers :D</div>
+</div>
+<div class="link-entry blue-note">
+  <div><img class="tiny-gif" src="scifi.gif" alt=""><a href="https://theoldnet.com/" target="_blank" rel="noopener">The Old Net</a></div>
+  <div class="desc">basically a search engine that only indexes old websites, how cool is that???</div>
+</div>
+<div class="link-entry warningish">
+  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a></div>
+  <div class="desc">this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://www.wiby.org/" target="_blank" rel="noopener">Wiby</a></div>
+  <div class="desc">another search engine that only indexes Web.10 websites ooo la la</div>
+</div>
+<div class="link-entry oldbox">
+  <div><img class="tiny-gif" src="about.gif" alt=""><a href="https://oldcomputers.net/" target="_blank" rel="noopener">Old Computers</a></div>
+  <div class="desc">a musuem of classic computers and internet</div>
+</div>
+<div class="link-entry memory-box">
+  <div><img class="tiny-gif" src="sleepycat.gif" alt=""><a href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a></div>
+  <div class="desc">i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://my90stv.com/#zbi7oQITpDo" target="_blank" rel="noopener">My90sTV</a></div>
+  <div class="desc">90s TV simulator, what else can i say</div>
+</div>
+<div class="link-entry under-row">
+  <div><img class="tiny-gif" src="post.gif" alt=""><a href="https://www.my80stv.com/" target="_blank" rel="noopener">My80sTV</a></div>
+  <div class="desc">90s? pff here's am 80s TV simulator</div>
+</div>
+<div class="link-entry yellow-paper">
+  <div><img class="tiny-gif" src="coollinks.gif" alt=""><a href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a></div>
+  <div class="desc">paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</div>
+</div>
+<div class="link-entry oldbox">
+  <div><a href="https://flashmuseum.org/" target="_blank" rel="noopener">Flash Musuem</a></div>
+  <div class="desc">archive of thousands of old flash games find your fave miniclip game here</div>
+</div>
+<div class="link-entry big-fave">
+  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://www.makewordart.com/" target="_blank" rel="noopener">WORD ART IS BACK</a></div>
+  <div class="desc">return to monkey! (website where you can make wordart again!)</div>
+</div>
+<div class="link-entry blue-note">
+  <div><img class="tiny-gif" src="book-0037.gif" alt=""><a href="https://walzr.com/IMG_0001" target="_blank" rel="noopener">IMG_0001</a></div>
+  <div class="desc">ill just let them explain this one: "Between 2009 and 2012, iPhones had a built-in "Send to YouTube" button in the Photos app. Many of these uploads kept their default IMG_XXXX filenames, creating a time capsule of raw, unedited moments from random lives."</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="starwar1.gif" alt=""><a href="https://geocities.live/" target="_blank" rel="noopener">90&#x27;S WEBSITE MAKER</a></div>
+  <div class="desc">another return to monkey! put in any website and it turns it into its 90's versionn</div>
+</div>
           </div>
+        </section>
 
-          <div class="post" id="academic">
-            <h3>Other Intellectual Stuff</h3>
-            <div class="meta">Blogs, mags, and philosophy rabbit holes</div>
-            <div class="link-grid">
-              <div class="card">
-                <a class="badge" href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a>
-                <div class="desc">High-imact factor leftist Pol Sci. magazine.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.jhiblog.org/" target="_blank" rel="noopener">JHI Blog</a>
-                <div class="desc">i found pretty cool and interesting blog posts here (!) Again, I love academic blogs because they usally skip the throat clearing and academese lingua franca.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://thefunambulist.net/" target="_blank" rel="noopener">The Funambulist Magazine</a>
-                <div class="desc">"Our hope is to provide a useful platform where activist/academic/practitioner voices can meet and build solidarities across geographical scales. . . anticolonial, antiracist, queer, and feminist" topics.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.e-ir.info" target="_blank" rel="noopener">E-International Relations</a>
-                <div class="desc">sum short articles on IR, many written by undergrad-grad students</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a>
-                <div class="desc">this is the Philosophy holy book that every student reads before bed</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://iep.utm.edu/" target="_blank" rel="noopener">Internet Encyclopedia of Philosophy</a>
-                <div class="desc">another philosophy wiki/holybook.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.astralcodexten.com/" target="_blank" rel="noopener">Astral Codex Ten</a>
-                <div class="desc">a guy who is basically 'the father' of the above website who talks about psychology and philosophy (i no longer read it because his politics are extra horribe!)</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://rationalwiki.org/wiki/Main_Page" target="_blank" rel="noopener">RationalWiki</a>
-                <div class="desc">a wiki for 'sceptics', i think it was build during the early era of new atheism but its still updated and has some cool entries, for e.g <a href="https://rationalwiki.org/wiki/Just_asking_questions" target="_blank" rel="noopener">Just asking questions</a>.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.lanceindependent.com/" target="_blank" rel="noopener">Lance Independent</a>
-                <div class="desc">lance is a philosophy phd that writes in a super accessible way, he has a cool youtube channel too. he debates metaethics</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://peasoupblog.com/" target="_blank" rel="noopener">PEA Soup</a>
-                <div class="desc">another philosophy blog with short accessible posts</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a>
-                <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://philosophynow.org" target="_blank" rel="noopener">Philosophy Magazine</a>
-                <div class="desc">yet another accessible philosophy website</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://social-epistemology.com/" target="_blank" rel="noopener">Social Epistemology Review</a>
-                <div class="desc">a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a>
-                <div class="desc">a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</div>
-              </div>
-            </div>
+        <div class="breaker">
+          <img src="fist.gif" alt=""> &nbsp; YOU HAVE REACHED THE MESSY PART &nbsp; <img src="kitty.gif" alt="">
+        </div>
+
+        <section class="section" id="misc">
+          <h2 class="section-title">Miscellaneous</h2>
+          <div class="section-meta">junk drawer. categorisation has failed here</div>
+          <div class="junk-drawer">
+            <div class="link-entry yellow-paper">
+  <div><img class="tiny-gif" src="kitty.gif" alt=""><a href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a></div>
+  <div class="desc">guess the date of random photos, fun lil game</div>
+</div>
+<div class="link-entry plain-row">
+  <div><a href="https://cloudhiker.net/explore" target="_blank" rel="noopener">Cloud Hiker</a></div>
+  <div class="desc">surf the most intersting hyperlinks on the web</div>
+</div>
+<div class="link-entry oldbox">
+  <div><img class="tiny-gif" src="chattt.gif" alt=""><a href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a></div>
+  <div class="desc">collection of super fun interactive projects</div>
+</div>
+<div class="link-entry blue-note">
+  <div><img class="tiny-gif" src="math.gif" alt=""><a href="https://www.codingame.com/ide/puzzle/onboarding" target="_blank" rel="noopener">CodinGame Onboarding</a></div>
+  <div class="desc">learn to code via playing a game</div>
+</div>
+<div class="link-entry under-row">
+  <div><img class="tiny-gif" src="fist.gif" alt=""><a href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a></div>
+  <div class="desc">an interactive site that finds a photo pointing to your cursor no matter where it is</div>
+</div>
+<div class="link-entry tool-entry">
+  <div><img class="tiny-gif" src="phone.gif" alt=""><a href="https://busysimulator.com/" target="_blank" rel="noopener">Busy Simulator</a></div>
+  <div class="desc">play notifications to make you look busy at work hehehehe</div>
+</div>
+<div class="link-entry plain-row">
+  <div><img class="tiny-gif" src="starwar2.jpg" alt=""><a href="https://www.geo-fs.com/" target="_blank" rel="noopener">Flight Simulator</a></div>
+  <div class="desc">the clue is in the name genius!</div>
+</div>
+<div class="link-entry warningish">
+  <div><img class="tiny-gif" src="sleepycat.gif" alt=""><a href="https://www.youhaventlived.com/" target="_blank" rel="noopener">Boomer blog</a></div>
+  <div class="desc">a super old blog that somehow (!!!) is updated daily???? give this man an award</div>
+</div>
           </div>
+        </section>
 
-          <div class="post" id="retro">
-            <h3>Retro Webmaster Tools</h3>
-            <div class="meta">Textures, pets, cursors, and pixel mischief</div>
-            <div class="link-grid">
-              <div class="card">
-                <a class="badge" href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a>
-                <div class="desc">the motherload of classic gifs.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a>
-                <div class="desc">lots of classic cute gifs, textures, pets and other tools for webmasters</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://tholman.com/cursor-effects/" target="_blank" rel="noopener">Cursor effects</a>
-                <div class="desc">adds cool 90s cursor effects to your cursor</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://geocities/?q=cat" target="_blank" rel="noopener">Geocities</a>
-                <div class="desc">perfect if youre looking for ideas for your webpage</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://nineties.website" target="_blank" rel="noopener">Nineties</a>
-                <div class="desc">90s aesthetic html ideas. if link broken just go to nineties dot website</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://fateen45.notion.site/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833" target="_blank" rel="noopener">Git & GitHub Guide</a>
-                <div class="desc">if youre new to git and github, this is a good guide.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="http://mikesdigitalpogpage.com/" target="_blank" rel="noopener">POGS</a>
-                <div class="desc">digital POGS are back baby</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://lookscanned.io/en/scan" target="_blank" rel="noopener">LOOKS SCANNED</a>
-                <div class="desc">gives you a PDF of any screenshot to make it look like it was scanned on a scanner!!!</div>
-              </div>
-            </div>
-          </div>
+        <hr class="rainbow">
+      </td>
+    </tr>
+  </table>
 
-          <div class="post" id="nostalgia">
-            <h3>Nostalgia Trips</h3>
-            <div class="meta">Emulators, time capsules, and long-lost links</div>
-            <div class="link-grid">
-              <div class="card">
-                <a class="badge" href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a>
-                <div class="desc">uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a>
-                <div class="desc">now you can relive the old internet days with these classic browsers :D </div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://theoldnet.com/" target="_blank" rel="noopener">The Old Net</a>
-                <div class="desc">basically a search engine that only indexes old websites, how cool is that???</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a>
-                <div class="desc">this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.wiby.org/" target="_blank" rel="noopener">Wiby</a>
-                <div class="desc">another search engine that only indexes Web.10 websites ooo la la</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://oldcomputers.net/" target="_blank" rel="noopener">Old Computers</a>
-                <div class="desc">a musuem of classic computers and internet</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a>
-                <div class="desc">i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://my90stv.com/#zbi7oQITpDo" target="_blank" rel="noopener">My90sTV</a>
-                <div class="desc">90s TV simulator, what else can i say</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.my80stv.com/" target="_blank" rel="noopener">My80sTV</a>
-                <div class="desc">90s? pff here's am 80s TV simulator</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a>
-                <div class="desc">paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://flashmuseum.org/" target="_blank" rel="noopener">Flash Musuem</a>
-                <div class="desc">archive of thousands of old flash games find your fave miniclip game here</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.makewordart.com/" target="_blank" rel="noopener">WORD ART IS BACK</a>
-                <div class="desc">return to monkey! (website where you can make wordart again!)</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://walzr.com/IMG_0001" target="_blank" rel="noopener">IMG_0001</a>
-                <div class="desc">ill just let them explain this one: "Between 2009 and 2012, iPhones had a built-in "Send to YouTube" button in the Photos app. Many of these uploads kept their default IMG_XXXX filenames, creating a time capsule of raw, unedited moments from random lives."</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://geocities.live/" target="_blank" rel="noopener">90'S WEBSITE MAKER</a>
-                <div class="desc">another return to monkey! put in any website and it turns it into its 90's versionn</div>
-              </div>
-            </div>
-          </div>
+  <footer class="footer">
+    <div>
+      <img src="freespeechonline.gif" alt="">
+      <img src="pali.gif" alt="">
+      <img src="sleepycat.gif" alt="">
+      <img src="scifi.gif" alt="">
+    </div>
+    <div>
+      <a href="guestbook.html">sign the guestbook</a> ·
+      <a href="index.html">home</a> ·
+      <a href="contact.html">contact</a>
+    </div>
+    <div>made in 2026 with html, bad judgement, and too many gifs</div>
+  </footer>
+</div>
 
-          <div class="post" id="misc">
-            <h3>Miscellaneous</h3>
-            <div class="meta">Playful, weird, and wonderful</div>
-            <div class="link-grid">
-              <div class="card">
-                <a class="badge" href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a>
-                <div class="desc">guess the date of random photos, fun lil game</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://cloudhiker.net/explore" target="_blank" rel="noopener">Cloud Hiker</a>
-                <div class="desc">surf the most intersting hyperlinks on the web</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a>
-                <div class="desc">collection of super fun interactive projects</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.codingame.com/ide/puzzle/onboarding" target="_blank" rel="noopener">CodinGame Onboarding</a>
-                <div class="desc">learn to code via playing a game</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a>
-                <div class="desc">an interactive site that finds a photo pointing to your cursor no matter where it is</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://busysimulator.com/" target="_blank" rel="noopener">Busy Simulator</a>
-                <div class="desc">play notifications to make you look busy at work hehehehe</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.geo-fs.com/" target="_blank" rel="noopener">Flight Simulator</a>
-                <div class="desc">the clue is in the name genius!</div>
-              </div>
-              <div class="card">
-                <a class="badge" href="https://www.youhaventlived.com/" target="_blank" rel="noopener">Boomer blog</a>
-                <div class="desc">a super old blog that somehow (!!!) is updated daily???? give this man an award</div>
-              </div>
-            </div>
-          </div>
+<script>
+const externalLinks = Array.from(document.querySelectorAll('.main a[href^="http"]'));
 
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Internal VHS transition for relative links -->
-  <script>
-    document.querySelectorAll('.page a[href]').forEach(a => {
-      const url = a.getAttribute('href') || '';
-      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.documentElement.classList.add('vhs');
-        setTimeout(() => { window.location.href = url; }, 200);
-      });
-    });
-
-    // Random Site + Shuffle
-    const pickRandom = () => {
-      const links = Array.from(document.querySelectorAll('.link-grid .card .badge'));
-      if (!links.length) return;
-      const pick = links[Math.floor(Math.random() * links.length)];
-      window.open(pick.href, '_blank', 'noopener');
-    };
-
-    const shuffleAll = () => {
-      document.querySelectorAll('.link-grid').forEach(grid => {
-        const cards = Array.from(grid.children);
-        for (let i = cards.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          grid.appendChild(cards[j]);
-          cards.splice(j,1);
-        }
-      });
-    };
-
-    document.getElementById('randomBtn')?.addEventListener('click', pickRandom);
-    document.getElementById('shuffleBtn')?.addEventListener('click', shuffleAll);
-  </script>
-
-  <!-- minimal VHS effect class -->
-  <style>
-    .vhs::after{
-      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-      background:
-        linear-gradient(#000,transparent 12%,#0000 88%,#000),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-      animation:vhs 240ms steps(2,end);
-    }
-    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
-  </style>
+document.getElementById('randomBtn')?.addEventListener('click', () => {
+  if (!externalLinks.length) return;
+  const pick = externalLinks[Math.floor(Math.random() * externalLinks.length)];
+  window.open(pick.href, '_blank', 'noopener');
+});
+</script>
 </body>
 </html>
