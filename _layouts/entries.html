@@ -1,317 +1,534 @@
+---
+title: The Entry Log
+permalink: /blog_posts.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>{{ page.title }} · {{ site.title | default: "Galaxy 981" }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <style>
-    :root{
-      --neon-blue:   #00e5ff;
-      --neon-green:  #39ff14;
-      --neon-yellow: #ffff33;
-      --neon-purple: #8f00ff;
+<style>
+/* ============================================================
+   GALAXY 981 · ENTRY LOG
+   Concept: the archive as a continuous-form dot-matrix printout.
+   Tractor-feed holes down both margins, alternating greenbar
+   rows, rubber-stamped dates, a tear-off perforation at the end.
+   No neon anywhere: this page is ink on paper.
+   ============================================================ */
 
-      --ink:         #00ffea;
-      --panel-bg:    rgba(0,0,0,0.78);
-      --sidebar-a:   #0d0022;
-      --sidebar-b:   #12002e;
-      --marquee-bg:  #001a4d;
-    }
+:root{
+  --paper:    #f4f5ec;   /* greenbar white */
+  --band:     #e3ead8;   /* the pale green stripe */
+  --edge:     #d8dccb;   /* tractor-feed margin */
+  --ink:      #1c2331;   /* dot-matrix near-black, blue cast */
+  --ink-soft: #5d6675;
+  --rule:     #bfc6b2;
+  --stamp:    #b8332a;   /* rubber stamp red */
+  --link:     #1a1ac0;   /* period-correct hyperlink blue */
+  --visited:  #5b2a86;
+  --hi:       #fff59a;   /* highlighter */
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-image: url('/stars.gif');
-      background-repeat: repeat;
-      color: var(--ink);
-      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
-      image-rendering: pixelated;
-      cursor: crosshair;
-      filter: contrast(115%) saturate(125%);
-    }
+  --font-display: Impact, Haettenschweiler, "Arial Narrow Bold", "Franklin Gothic Heavy", sans-serif;
+  --font-body:    "Times New Roman", Times, Georgia, serif;
+  --font-data:    "Courier New", Courier, monospace;
+}
 
-    .page {
-      width: 760px;
-      margin: 18px auto 32px;
-      position: relative;
-      left: 7px; /* tiny off-center nudge */
-      border: 6px ridge var(--neon-blue);
-      outline: 4px solid #00131a;
-      background: var(--panel-bg);
-      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
+*{ box-sizing:border-box; }
 
-    #glitter-title {
-      font-size: 60px;
-      text-align: center;
-      color: var(--neon-blue);
-      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
-      margin: 0;
-      padding: 18px 10px 0;
-      letter-spacing: 0.5px;
-    }
+html{ background:#6f7364; }        /* desk surface under the paper */
+body{
+  margin:0; padding:0;
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.55;
+  background:#6f7364;
+  background-image:
+    linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px);
+  background-size:22px 22px;
+}
 
-    .marquee-wrap {
-      margin: 10px 20px;
-      border: 6px groove var(--neon-blue);
-      background: var(--marquee-bg);
-    }
-    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
+/* ---------- the sheet ---------- */
+.form{
+  position:relative;
+  width:min(940px, 100% - 20px);
+  margin:26px auto 40px;
+  padding:0 40px;
+  background:var(--paper);
+  /* toner speckle */
+  background-image:radial-gradient(rgba(0,0,0,.045) 1px, transparent 1px);
+  background-size:3px 3px;
+  box-shadow:0 2px 0 rgba(0,0,0,.18), 0 14px 34px rgba(0,0,0,.32);
+}
 
-    .layout { width: 100%; border-collapse: collapse; }
-    .sidebar {
-      width: 210px;
-      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right: 6px ridge var(--neon-purple);
-      vertical-align: top;
-    }
-    .content {
-      padding: 10px 14px 20px;
-      vertical-align: top;
-      background: rgba(15,0,20,0.45);
-      border-left: 4px solid #21003a;
-    }
+/* tractor-feed margins */
+.form::before, .form::after{
+  content:""; position:absolute; top:0; bottom:0; width:40px;
+  background-color:var(--edge);
+  background-image:radial-gradient(circle at 20px 13px, #b6bca8 0 5px, var(--paper) 5.5px 6.5px, transparent 7px);
+  background-size:40px 26px;
+  pointer-events:none;
+}
+.form::before{ left:0;  border-right:1px dashed var(--rule); }
+.form::after { right:0; border-left:1px dashed var(--rule); }
 
-    .nav a {
-      display: block;
-      margin: 10px 6px;
-      padding: 6px 8px;
-      border: 3px outset #6af7ff;
-      background: #0e0e33;
-      color: #a7ffff;
-      text-decoration: none;
-      text-align: left;
-      text-transform: uppercase;
-      text-shadow: 0 0 4px var(--neon-blue);
-      box-shadow: 2px 2px 0 #000;
-    }
-    .nav a:hover {
-      border-style: inset;
-      color: var(--neon-green);
-      background: #140043;
-      transform: translate(1px,1px);
-    }
-    .nav-icon {
-      vertical-align: middle;
-      width: 26px;
-      height: 26px;
-      margin-right: 6px;
-      image-rendering: pixelated;
-    }
+/* ---------- masthead ---------- */
+.head{ padding:26px 0 0; }
 
-    .post {
-      margin: 14px 0 28px;
-      padding: 10px 10px 14px;
-      border: 4px groove var(--neon-purple);
-      background: rgba(20,0,30,0.62);
-    }
-    .post h3 {
-      margin: 0 0 6px 0;
-      color: var(--neon-purple);
-      text-shadow: 0 0 6px var(--neon-purple);
-    }
-    .post .meta { font-size: 12px; color: var(--neon-yellow); }
+.crumb{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-soft);
+  display:flex; flex-wrap:wrap; gap:4px 12px; align-items:center;
+}
+.crumb a{ color:var(--ink-soft); text-decoration:none; border-bottom:1px dotted var(--ink-soft); }
+.crumb a:hover{ color:var(--stamp); border-bottom-style:solid; }
+.crumb img{
+  width:16px; height:16px; vertical-align:-3px; margin-right:4px;
+  image-rendering:pixelated;
+  filter:grayscale(1) contrast(135%) brightness(.85);   /* photocopied */
+}
+.crumb a:hover img{ filter:none; }
 
-    hr.retro {
-      height: 12px; border: 0; margin: 10px 0 14px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,
-        #ffa500 14px 28px,
-        #ffff00 28px 42px,
-        #00cc00 42px 56px,
-        #00aaff 56px 70px,
-        #0000ff 70px 84px,
-        #8000ff 84px 98px
-      );
-    }
-
-    .blink { animation: blink 0.9s steps(1,end) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* entries list styling */
-    .entries { list-style: none; padding-left: 0; }
-    .entries li { margin: 10px 0; font-size: 1rem; }
-    .entries li a { text-decoration: none; color: #a7ffff; }
-    .entries li a:hover { color: var(--neon-green); }
-      .badge { font-size: 10px; padding: 1px 4px; border: 1px solid var(--neon-green); color: var(--neon-green); }
-
-  /* date chip for entries */
-  .date-badge{
-    margin-left:8px;
-    font-size:12px;
-    color: var(--neon-yellow);
-    white-space: nowrap;
-    vertical-align: baseline;
-    opacity: 0.9;
-  }
-    .footer { padding: 8px; text-align: center; color: #fff; }
-  
-  
-  /* --- MOBILE JITTER FIX: isolate animated background + drop root filter --- */
-@media (max-width: 900px){
-  /* Remove animated bg from the root paint layer */
-  html, body{
-    background: none;
-    filter: none;               /* stop filtering the entire page each GIF frame */
-  }
-
-  /* Put the stars on their own composited layer */
-  body::before{
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: url('/stars.gif') repeat;
-    image-rendering: pixelated;
-    will-change: transform;
-    transform: translateZ(0);
-  }
-
-  /* Keep the neon punch on your content only */
-  .page{
-    filter: contrast(115%) saturate(125%);
+.masthead{
+  margin:18px 0 0;
+  font-family:var(--font-display);
+  font-size:clamp(52px, 12vw, 128px);
+  line-height:.84;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+/* dot-matrix texture inside the letterforms */
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  .masthead, .year-num{
+    background-image:radial-gradient(var(--ink) 42%, transparent 44%);
+    background-size:4px 4px;
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
   }
 }
 
-/* Respect motion preferences or fall back if the device is struggling */
-@media (prefers-reduced-motion: reduce){
-  body::before{ background-image: url('/stars-still.png'); } /* first frame as PNG works great */
+.deck{
+  margin:14px 0 0; font-family:var(--font-data); font-size:12.5px;
+  color:var(--ink-soft); line-height:1.8;
+}
+.deck b{ color:var(--ink); font-weight:normal; background:var(--hi); padding:0 3px; }
+
+.ticker{
+  margin:18px 0 0; padding:5px 0;
+  border-top:2px solid var(--ink); border-bottom:1px solid var(--ink);
+  font-family:var(--font-data); font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink);
+  overflow:hidden;
 }
 
+/* ---------- control strip ---------- */
+.controls{
+  display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center;
+  margin:16px 0 4px; padding:11px 12px;
+  background:var(--band); border:1px solid var(--rule);
+}
+.grep{ display:flex; align-items:center; gap:7px; flex:1 1 240px; }
+.grep label{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-soft);
+}
+.grep input{
+  flex:1; min-width:0;
+  font-family:var(--font-data); font-size:13px; color:var(--ink);
+  padding:5px 8px; background:var(--paper);
+  border:2px inset #a8ae99;
+}
+.grep input:focus{ outline:2px solid var(--stamp); outline-offset:1px; }
 
+.chips{ display:flex; flex-wrap:wrap; gap:6px; }
+.chip{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.06em;
+  text-transform:uppercase; cursor:pointer;
+  padding:3px 9px; color:var(--ink);
+  background:var(--paper); border:1px solid var(--ink);
+  box-shadow:2px 2px 0 rgba(28,35,49,.28);
+}
+.chip:hover{ background:var(--hi); }
+.chip[aria-pressed="true"]{
+  background:var(--ink); color:var(--paper); box-shadow:none;
+  transform:translate(2px,2px);
+}
+.chip:focus-visible{ outline:2px solid var(--stamp); outline-offset:2px; }
 
-/* title + penguin layout */
-.title-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 14px;
-  padding-top: 6px;
+.count{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-soft); margin-left:auto;
 }
 
-/* big, crisp penguin; scales down on small screens */
-.title-penguin{
-  width: clamp(140px, 22vw, 320px);
-  height: auto;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 0 12px var(--neon-blue));
+/* ---------- year headers ---------- */
+.year{
+  display:flex; align-items:flex-end; gap:12px;
+  margin:34px 0 0; padding-bottom:4px;
+  border-bottom:3px double var(--ink);
+}
+.year-num{
+  font-family:var(--font-display); font-size:clamp(38px,8vw,62px);
+  line-height:.9; letter-spacing:-.01em; color:var(--ink);
+}
+.year-note{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-soft); padding-bottom:7px;
 }
 
-/* stack on phones so it never cramps the heading */
-@media (max-width: 700px){
-  .title-row{ flex-direction: column; gap: 8px; }
+/* ---------- entry rows ---------- */
+.log{ margin:0; padding:0; list-style:none; }
+
+.row{
+  display:grid;
+  grid-template-columns:74px 1fr auto;
+  gap:0 16px;
+  padding:14px 12px 15px;
+  border-bottom:1px solid var(--rule);
+  position:relative;
+}
+.row:nth-child(even){ background:var(--band); }
+.row:hover{ background:var(--hi); }
+.row:focus-within{ background:var(--hi); }
+
+.cat{
+  font-family:var(--font-data); font-size:12px; line-height:1.35;
+  color:var(--ink-soft); padding-top:5px;
+}
+.cat .no{
+  display:block; font-size:18px; color:var(--stamp);
+  letter-spacing:.06em;
 }
 
-    
-  </style>
+.body h2{
+  margin:0; font-family:var(--font-body); font-weight:normal;
+  font-size:clamp(21px,2.6vw,27px); line-height:1.2;
+}
+.body h2 a{
+  color:var(--ink); text-decoration:none;
+  border-bottom:1px solid rgba(28,35,49,.35);
+}
+.body h2 a:hover{ color:var(--link); border-bottom-color:var(--link); }
+.body h2 a:visited{ color:var(--visited); }
+.body h2 a:focus-visible{ outline:2px solid var(--stamp); outline-offset:3px; }
+
+.teaser{
+  margin:6px 0 0; font-style:italic; color:#3c4350;
+  font-size:15.5px; line-height:1.5;
+  max-width:62ch;
+}
+
+.tags{ margin:9px 0 0; display:flex; flex-wrap:wrap; gap:5px; }
+.tags a{
+  font-family:var(--font-data); font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; text-decoration:none;
+  color:var(--ink-soft); border:1px dotted var(--ink-soft);
+  padding:1px 6px;
+}
+.tags a:hover{ color:var(--stamp); border-color:var(--stamp); border-style:solid; }
+
+.stat{
+  font-family:var(--font-data); font-size:11px; line-height:1.7;
+  color:var(--ink-soft); text-align:right; padding-top:5px;
+  white-space:nowrap;
+}
+
+/* rubber stamp for recent entries */
+.stamp{
+  position:absolute; right:14px; bottom:10px;
+  font-family:var(--font-display); font-size:15px; letter-spacing:.16em;
+  color:var(--stamp); border:2px solid var(--stamp);
+  padding:2px 8px; transform:rotate(-7deg); opacity:.82;
+  text-transform:uppercase; pointer-events:none;
+}
+
+/* ---------- empty state ---------- */
+.nothing{
+  display:none; margin:26px 0; padding:22px;
+  border:2px dashed var(--rule); text-align:center;
+  font-family:var(--font-data); font-size:13px; color:var(--ink-soft);
+}
+.nothing.on{ display:block; }
+
+/* ---------- tear-off footer ---------- */
+.perf{
+  margin:38px 0 0; border:0; border-top:2px dashed var(--rule);
+  position:relative; height:0;
+}
+.perf::after{
+  content:"✁"; position:absolute; left:0; top:-11px;
+  background:var(--paper); padding-right:8px;
+  font-size:16px; color:var(--ink-soft);
+}
+
+.foot{ padding:20px 0 30px; }
+.buttons{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:0 0 16px; }
+.buttons img{
+  height:31px; image-rendering:pixelated;
+  filter:grayscale(1) contrast(140%) brightness(.9);
+  transition:filter 120ms ease;
+}
+.buttons img:hover{ filter:none; }
+
+.colophon{
+  font-family:var(--font-data); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink-soft); text-align:center;
+  line-height:2;
+}
+.colophon a{ color:var(--ink-soft); }
+.led{
+  display:inline-block; padding:2px 6px; margin-left:4px;
+  background:var(--ink); color:#8de88a; letter-spacing:3px;
+  font-family:var(--font-data);
+}
+
+/* ---------- print: it is already a printout ---------- */
+@media print{
+  html, body{ background:#fff; }
+  .form{ box-shadow:none; width:auto; padding:0; }
+  .form::before, .form::after,
+  .controls, .buttons, .ticker{ display:none !important; }
+  .row{ break-inside:avoid; }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:760px){
+  .form{ padding:0 22px; width:calc(100% - 12px); margin:12px auto 26px; }
+  .form::before, .form::after{ width:22px; background-size:22px 20px;
+    background-image:radial-gradient(circle at 11px 10px, #b6bca8 0 3px, var(--paper) 3.5px 4.5px, transparent 5px); }
+  .row{ grid-template-columns:56px 1fr; padding:12px 4px 14px; }
+  .stat{ grid-column:2; text-align:left; padding-top:8px; white-space:normal; }
+  .stamp{ position:static; display:inline-block; margin-top:10px; }
+  .count{ margin-left:0; }
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .row{ animation:feed 260ms ease-out both; }
+  @keyframes feed{ from{ opacity:0; transform:translateY(-7px); } }
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-<div class="title-row">
-  <h1 id="glitter-title">{{ page.title }}</h1>
-  <img src="/penguin.gif"
-       alt="Penguin furiously typing"
-       class="title-penguin">
-</div>
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">
-        ★ browse the archive ★ newest up top ★ blink if you remember icq ★
+<div class="form">
+
+  <header class="head">
+    <nav class="crumb" aria-label="Site">
+      <a href="{{ '/index.html' | relative_url }}"><img src="{{ '/cutehome.gif' | relative_url }}" alt="">Home</a>
+      <a href="{{ '/about.html' | relative_url }}"><img src="{{ '/about.gif' | relative_url }}" alt="">About</a>
+      <a href="{{ '/chat.html' | relative_url }}"><img src="{{ '/chattt.gif' | relative_url }}" alt="">Chat</a>
+      <a href="{{ '/coolsite.html' | relative_url }}"><img src="{{ '/coollinks.gif' | relative_url }}" alt="">Kool Webpages</a>
+      <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="">Guestbook</a>
+      <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="">Kool Books</a>
+      <a href="{{ '/Truth2.html' | relative_url }}"><img src="{{ '/math.gif' | relative_url }}" alt="">Truth Table</a>
+      <a href="{{ '/oudsimulator.html' | relative_url }}">Oud Simulator</a>
+      <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="">Contact</a>
+    </nav>
+
+    <h1 class="masthead">The Entry<br>Log</h1>
+
+    {% assign total = site.posts.size %}
+    {% assign newest = site.posts.first.date | date: "%d %b %Y" %}
+    <p class="deck">
+      Galaxy 981 · continuous-form archive · every entry filed in order of transmission<br>
+      <b>{{ total }}</b> documents on file &nbsp;//&nbsp; most recent impression <b>{{ newest }}</b>
+      &nbsp;//&nbsp; feed paper gently
+    </p>
+
+    <div class="ticker">
+      <marquee scrollamount="3">
+        now printing · {{ total }} entries · do not tear paper while the platen is moving · form feed = ctrl+L · thank you for reading ·
       </marquee>
     </div>
+  </header>
 
-    <table class="layout">
-      <tr>
-        <!-- Sidebar -->
-        <td class="sidebar">
-          <div class="nav">
-            <a href="/index.html"><img src="/cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="/about.html"><img src="/about.gif" alt="About" class="nav-icon">About</a>
-            <a href="/blog_posts.html"><img src="/post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="/chat.html"><img src="/chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="/coolsite.html"><img src="/coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="/guestbook.html"><img src="/book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="/books.html"><img src="/catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="/Truth2.html"><img src="/math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="/oudsimulator.html">Oud Simulator</a>
-            <a href="/contact.html"><img src="/phone.gif" alt="Contact" class="nav-icon">Contact</a>
-          </div>
-
-          <div style="text-align:center; padding:10px">
-            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
-            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
-          </div>
-
-          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
-            <div><a href="#" onclick="alert('Email me!'); return false;">Email Me</a></div>
-            <div style="margin-top:6px"><a href="#" onclick="alert('Guestbook coming soon!'); return false;">Sign my Guestbook</a></div>
-            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
-          </div>
-        </td>
-
-        <!-- Content -->
-        <td class="content">
-          <hr class="retro">
-
-          <!-- Anything you put in the page itself appears here -->
-          <div class="post">
-            {{ content }}
-          </div>
-
-         
-
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
-
-    <div class="footer">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Ali's Blog — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+  <div class="controls">
+    <div class="grep">
+      <label for="grep">Find</label>
+      <input id="grep" type="search" placeholder="title, word, tag…" autocomplete="off">
     </div>
+
+    <div class="chips" id="chips">
+      <button class="chip" type="button" data-tag="*" aria-pressed="true">All</button>
+      {% for tag in site.tags %}
+        <button class="chip" type="button" data-tag="{{ tag[0] | downcase }}" aria-pressed="false">{{ tag[0] }}</button>
+      {% endfor %}
+      <button class="chip" type="button" id="flip" data-tag="" aria-pressed="false" title="Reverse the order">↕ Oldest first</button>
+    </div>
+
+    <span class="count" id="count"></span>
   </div>
 
-  <script>
-    (function() {
-      try {
-        var key = 'geocities_hit_counter';
-        var n = parseInt(localStorage.getItem(key) || '0', 10) + 1;
-        localStorage.setItem(key, n);
-        var s = String(n).padStart(6, '0');
-        document.getElementById('hitCount').textContent = s;
-      } catch (e) {}
-    })();
+  {% assign seen = 0 %}
+  {% assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+  <div id="stack">
+  {% for year in years %}
+    <section class="year-group" data-year="{{ year.name }}">
+      <div class="year">
+        <span class="year-num">{{ year.name }}</span>
+        <span class="year-note">{{ year.items.size }} entr{% if year.items.size == 1 %}y{% else %}ies{% endif %} filed</span>
+      </div>
 
-    document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+      <ul class="log">
+        {% for post in year.items %}
+          {% assign seen = seen | plus: 1 %}
+          {% assign catno = total | minus: seen | plus: 1 %}
+          {% assign now_s = site.time | date: '%s' | plus: 0 %}
+          {% assign pub_s = post.date | date: '%s' | plus: 0 %}
+          {% assign age   = now_s | minus: pub_s %}
+          {% assign words = post.content | number_of_words %}
+          {% assign kb    = post.content | size | divided_by: 1024 | plus: 1 %}
 
-    /* tiny nav misalignment so it doesn't feel grid-perfect */
-    (function () {
-      var links = document.querySelectorAll('.nav a');
-      links.forEach(function(a){
-        var ml = 6 + Math.floor(Math.random()*7); // 6–12px
-        var fs = 12 + Math.floor(Math.random()*3); // 12–14px
-        a.style.marginLeft = ml + 'px';
-        a.style.fontSize   = fs + 'px';
-        if (Math.random() < 0.4) a.style.letterSpacing = '1px';
-      });
-    })();
-  
-  
- 
-(function(){
-  if (matchMedia('(max-width:900px)').matches){
-    document.querySelectorAll('marquee').forEach(function(m){
-      var n = parseInt(m.getAttribute('scrollamount')||'6',10);
-      m.setAttribute('scrollamount', String(Math.max(1, Math.floor(n/2))));
+          <li class="row"
+              data-title="{{ post.title | downcase | escape }}"
+              data-tags="{% for t in post.tags %}{{ t | downcase }} {% endfor %}"
+              data-text="{{ post.excerpt | strip_html | downcase | truncate: 220 | escape }}"
+              style="animation-delay:{{ forloop.index0 | times: 28 }}ms">
+
+            <div class="cat">
+              <span class="no">{{ catno | prepend: '00000' | slice: -3, 3 }}</span>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%y" }}</time>
+            </div>
+
+            <div class="body">
+              <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+              {% if post.excerpt %}
+                <p class="teaser">{{ post.excerpt | strip_html | truncate: 165 }}</p>
+              {% endif %}
+              {% if post.tags.size > 0 %}
+                <p class="tags">{% for t in post.tags %}<a href="#" data-jump="{{ t | downcase }}">{{ t }}</a>{% endfor %}</p>
+              {% endif %}
+            </div>
+
+            <div class="stat">
+              {{ words }} words<br>
+              {{ kb }} KB<br>
+              {{ kb | divided_by: 5 | plus: 1 }}s @ 56k
+            </div>
+
+            {% if age < 1209600 %}<span class="stamp">New</span>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+  </div>
+
+  <p class="nothing" id="nothing">
+    No entries match that. The drawer is empty, the platen is still.<br>
+    Clear the search to feed the whole roll again.
+  </p>
+
+  <hr class="perf">
+
+  <footer class="foot">
+    <div class="buttons">
+      <img src="{{ '/icc.gif' | relative_url }}" alt="ICC">
+      <img src="{{ '/dp.gif' | relative_url }}" alt="DP">
+      <img src="{{ '/anarchynow.jpeg' | relative_url }}" alt="Anarchy Now">
+      <img src="{{ '/freespeech.gif' | relative_url }}" alt="Free Speech">
+      <img src="{{ '/privacy.gif' | relative_url }}" alt="Privacy">
+      <img src="{{ '/piracy.png' | relative_url }}" alt="Piracy">
+    </div>
+
+    <div class="colophon">
+      © 1999–{{ site.time | date: "%Y" }} Galaxy 981 · part of the Galactic Webring ·
+      <a href="{{ '/guestbook.html' | relative_url }}">sign the guestbook</a><br>
+      sheet printed <span id="printed"></span> · visitor <span class="led" id="hitCount">000000</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ---- visitor counter, kept from the old sidebar ---- */
+(() => { try{
+  const k='geocities_hit_counter';
+  const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
+  localStorage.setItem(k,n);
+  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
+}catch(e){} })();
+
+document.getElementById('printed').textContent =
+  new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+/* ---- filtering, tag chips, order flip ---- */
+(() => {
+  const rows    = [...document.querySelectorAll('.row')];
+  const groups  = [...document.querySelectorAll('.year-group')];
+  const grep    = document.getElementById('grep');
+  const chips   = [...document.querySelectorAll('.chip[data-tag]')].filter(c => c.id !== 'flip');
+  const flip    = document.getElementById('flip');
+  const count   = document.getElementById('count');
+  const nothing = document.getElementById('nothing');
+  const stack   = document.getElementById('stack');
+  let tag = '*';
+
+  function apply(){
+    const q = grep.value.trim().toLowerCase();
+    let shown = 0;
+
+    rows.forEach(r => {
+      const hay = r.dataset.title + ' ' + r.dataset.tags + ' ' + r.dataset.text;
+      const okQ = !q || hay.includes(q);
+      const okT = tag === '*' || r.dataset.tags.split(' ').includes(tag);
+      const on  = okQ && okT;
+      r.hidden = !on;
+      if (on) shown++;
     });
+
+    groups.forEach(g => {
+      g.hidden = ![...g.querySelectorAll('.row')].some(r => !r.hidden);
+    });
+
+    count.textContent = shown + ' of ' + rows.length + ' shown';
+    nothing.classList.toggle('on', shown === 0);
   }
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
-    document.querySelectorAll('marquee').forEach(function(m){ m.setAttribute('scrollamount','1'); });
-  }
+
+  grep.addEventListener('input', apply);
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    tag = c.dataset.tag;
+    chips.forEach(o => o.setAttribute('aria-pressed', String(o === c)));
+    apply();
+  }));
+
+  /* clicking a tag under an entry selects that chip */
+  document.querySelectorAll('[data-jump]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const want = a.dataset.jump;
+      const chip = chips.find(c => c.dataset.tag === want);
+      if (chip) chip.click();
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+
+  let reversed = false;
+  flip.addEventListener('click', () => {
+    reversed = !reversed;
+    flip.setAttribute('aria-pressed', String(reversed));
+    flip.textContent = reversed ? '↕ Newest first' : '↕ Oldest first';
+    [...stack.children].reverse().forEach(g => {
+      [...g.querySelectorAll('.log')].forEach(list => {
+        [...list.children].reverse().forEach(li => list.appendChild(li));
+      });
+      stack.appendChild(g);
+    });
+  });
+
+  apply();
 })();
 
-
-  </script>
+/* ---- gentler marquee on phones and for reduced motion ---- */
+(() => {
+  const slow = matchMedia('(max-width:760px)').matches ||
+               matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (slow) document.querySelectorAll('marquee').forEach(m => m.setAttribute('scrollamount','1'));
+})();
+</script>
 </body>
 </html>
