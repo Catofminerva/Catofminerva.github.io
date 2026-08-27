@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <style>
+    /* @import must be the FIRST thing in the stylesheet or browsers ignore it.
+       Delete this line if you only want locally installed serif faces. */
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
     :root{
       --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
       --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
@@ -118,7 +122,7 @@
 
     .post p{ margin:0 0 14px; } .post ul,.post ol{ padding-left:20px; }
     .post blockquote{ margin:10px 0; padding:8px 12px; border-left:4px solid var(--neon-blue); background:rgba(0,0,0,0.35); }
-  
+
   /* === RESPONSIVE + ACCESSIBILITY TWEAKS === */
 
 /* fluid title size */
@@ -188,7 +192,6 @@
   .marquee-wrap.small{ margin: 6px 10px 10px; border-width: 3px; }
 
   /* posts and embeds */
-  .post{ margin: 10px 0 20px; padding: 8px 8px 12px; }
   .post iframe,
   .post embed,
   .post object{ height: auto; }
@@ -235,8 +238,6 @@
   *{ animation: none !important; transition: none !important; }
 }
 
-
-
 /* 1) Put stars on their own layer on mobile, remove root filter */
 @media (max-width: 900px){
   html, body{
@@ -255,20 +256,12 @@
   .page{ filter: contrast(115%) saturate(125%); }
 }
 
-/* 2) Make big images cheap to paint and prevent layout jumps */
-.post img{
-  display:block;
-  max-width:100%;
-  height:auto;
-  image-rendering:auto;           /* override any pixelation on images */
-}
-
-/* Mobile-only extra guards */
+/* Mobile-only extra guards for big images */
 @media (max-width: 900px){
   .post img{
-    content-visibility: auto;     /* skip offscreen work */
-    contain-intrinsic-size: 800px auto; /* placeholder to avoid reflow while decoding */
-    transform: translateZ(0);     /* isolate while scrolling */
+    content-visibility: auto;
+    contain-intrinsic-size: 800px auto;
+    transform: translateZ(0);
     backface-visibility: hidden;
   }
 }
@@ -278,45 +271,38 @@
   body::before{ background-image: url({{ '/stars-still.png' | relative_url }}); }
 }
 
-    /* 1) Never let long links/words force a mega-wide layout */
+/* Never let long links/words force a mega-wide layout */
 .post p,
 .post li,
 .post blockquote {
   overflow-wrap: anywhere;
-  word-break: break-word;
   hyphens: auto;
 }
-.post a,
 .post code,
 .post pre {
-  word-break: break-all;     /* URLs and long tokens */
+  word-break: break-all;
   overflow-wrap: anywhere;
 }
 
-/* 2) Treat touch devices as “mobile” regardless of zoom level */
+/* Treat touch devices as "mobile" regardless of zoom level */
 @media (max-width: 900px), (hover: none) and (pointer: coarse){
   .layout,
   .layout tr,
-  .layout td { display: block; width: 100%; }  /* always stacked on phones */
+  .layout td { display: block; width: 100%; }
 }
 
-/* 3) Make the table layout more resilient to wide content */
+/* Make the table layout more resilient to wide content */
 .layout { table-layout: fixed; width: 100%; }
-.sidebar { width: 210px; }         /* fixed first column width hint */
-.content { width: auto; min-width: 0; }  /* allow wrapping inside */
+.sidebar { width: 210px; }
+.content { width: auto; min-width: 0; }
 
 
 /* ============================================================
-   READING MODE  ·  replace your old "READING MODE OVERRIDES"
-   block with everything below (keep it last in the <style> tag)
+   READING MODE  ·  keep this block last inside <style>
    ============================================================ */
 
-/* Optional web font. Delete this line if you only want locally
-   installed faces; the stack below falls back gracefully. */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 :root{
-  --read-bg:#fffdf7;          /* warm off-white, not full parchment */
+  --read-bg:#fffdf7;          /* warm off-white */
   --read-ink:#1c1b19;
   --read-muted:#6b6560;
   --read-rule:#e3dccd;
@@ -396,7 +382,7 @@ html, body{ filter:none; }
   text-decoration:underline;
   text-underline-offset:2px;
   text-decoration-thickness:1px;
-  word-break:normal;            /* cancels the earlier break-all rule */
+  word-break:normal;
   overflow-wrap:anywhere;
 }
 .post a:visited{ color:var(--read-link-visited); }
@@ -478,6 +464,239 @@ html, body{ filter:none; }
   .post h1{ font-size:1.68em; }
   .post h2{ font-size:1.32em; }
 }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 id="glitter-title">Galaxy 981</h1>
+
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">★ welcome to my webspace ★ best viewed on desktop ★</marquee>
+    </div>
+
+    <table class="layout" role="presentation">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="{{ '/index.html' | relative_url }}"><img src="{{ '/cutehome.gif' | relative_url }}" alt="Home" class="nav-icon">Home</a>
+            <a href="{{ '/about.html' | relative_url }}"><img src="{{ '/about.gif' | relative_url }}" alt="About" class="nav-icon">About</a>
+            <a href="{{ '/blog_posts.html' | relative_url }}"><img src="{{ '/post.gif' | relative_url }}" alt="Entries" class="nav-icon">Entries</a>
+            <a href="{{ '/chat.html' | relative_url }}"><img src="{{ '/chattt.gif' | relative_url }}" alt="Chat" class="nav-icon">Chat</a>
+            <a href="{{ '/coolsite.html' | relative_url }}"><img src="{{ '/coollinks.gif' | relative_url }}" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="{{ '/guestbook.html' | relative_url }}"><img src="{{ '/book-0037.gif' | relative_url }}" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="{{ '/books.html' | relative_url }}"><img src="{{ '/catread.gif' | relative_url }}" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="{{ '/Truth2.html' | relative_url }}"><img src="{{ '/math.gif' | relative_url }}" alt="Truth Table" class="nav-icon">Truth Table</a>
+            <a href="{{ '/contact.html' | relative_url }}"><img src="{{ '/phone.gif' | relative_url }}" alt="Contact" class="nav-icon">Contact</a>
+          </div>
+
+          <div style="text-align:center; padding:10px">
+            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
+            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
+          </div>
+
+          <div style="padding:0 10px 12px; color:#fff; font-size:12px">
+            <div><a href="{{ '/contact.html' | relative_url }}">Email Me</a></div>
+            <div style="margin-top:6px"><a href="{{ '/guestbook.html' | relative_url }}">Sign my Guestbook</a></div>
+            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
+          </div>
+
+          <div class="sticker-wall">
+            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
+            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
+            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
+            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
+            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
+            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
+            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free Speech Online">
+            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-Fi" class="wide">
+            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
+          </div>
+
+          <div class="sticker-controls">
+            <button id="shuffleStickers">Shuffle</button>
+            <button id="resetStickers" title="Put them back how they were">Reset</button>
+          </div>
+        </td>
+
+        <td class="content">
+          <hr class="retro">
+
+          <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+            <header>
+              <h1 itemprop="headline">{{ page.title }}</h1>
+              <div class="meta">
+                {% if page.date %}
+                  <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
+                {% endif %}
+                {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
+              </div>
+            </header>
+
+            <section itemprop="articleBody">
+              {{ content }}
+            </section>
+          </article>
+
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
+          </div>
+
+          <hr class="retro">
+        </td>
+      </tr>
+    </table>
+
+    <div class="button-strip" aria-label="buttons">
+      <img src="{{ '/icc.gif' | relative_url }}" alt="ICC">
+      <img src="{{ '/dp.gif' | relative_url }}" alt="DP">
+      <img src="{{ '/anarchynow.jpeg' | relative_url }}" alt="Anarchy Now">
+      <img src="{{ '/freespeech.gif' | relative_url }}" alt="Free Speech">
+      <img src="{{ '/privacy.gif' | relative_url }}" alt="Privacy">
+      <img src="{{ '/piracy.png' | relative_url }}" alt="Piracy">
+    </div>
+
+    <div class="footer">
+      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 · Part of the Galactic Webring ·
+        <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> |
+        <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+    </div>
+
+    <audio id="blip" preload="auto"><source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg"></audio>
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
+  </div>
+
+<!-- Robust Twitter loader -->
+<script>
+  /* load widgets.js if missing, then render any blockquotes */
+  window.twttr = (function(d,s,id){
+    var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};
+    if (d.getElementById(id)) return t;
+    js=d.createElement(s); js.id=id; js.async=true;
+    js.src="https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js,fjs);
+    t._e=[]; t.ready=function(f){ t._e.push(f); };
+    return t;
+  }(document,"script","twitter-wjs"));
+  twttr.ready(function(t){ t.widgets.load(document.querySelector('.post')); });
+
+  /* also retry on DOM ready and bfcache restore */
+  const rehydrate = () => { try { twttr.widgets.load(document.querySelector('.post')); } catch(_){} };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rehydrate); else rehydrate();
+  window.addEventListener('pageshow', rehydrate);
+</script>
+
+<script>
+/* hit counter */
+(() => { try {
+  const key='geocities_hit_counter';
+  const n=(parseInt(localStorage.getItem(key)||'0',10)+1);
+  localStorage.setItem(key,n);
+  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
+} catch(e){} })();
+
+/* last updated label */
+document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+
+/* tiny nav misalignment */
+(() => {
+  const links=document.querySelectorAll('.nav a');
+  links.forEach(a=>{
+    const ml=6+Math.floor(Math.random()*7);
+    const fs=12+Math.floor(Math.random()*3);
+    a.style.marginLeft=ml+'px';
+    a.style.fontSize=fs+'px';
+    if (Math.random()<0.4) a.style.letterSpacing='1px';
+  });
+})();
+
+/* Konami hyperspace */
+(() => {
+  const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let buf=[];
+  document.addEventListener('keydown',e=>{
+    buf.push(e.key.length===1?e.key.toLowerCase():e.key);
+    buf=buf.slice(-seq.length);
+    if (seq.every((k,i)=>k===buf[i])) {
+      document.documentElement.classList.add('hyperspace');
+      setTimeout(()=>document.documentElement.classList.remove('hyperspace'),650);
+    }
+  });
+})();
+
+/* VHS transition on internal links */
+(() => {
+  document.querySelectorAll('.page a[href]').forEach(a=>{
+    const url=a.getAttribute('href')||'';
+    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(()=>{ window.location.href=url; },200);
+    });
+  });
+})();
+
+/* periodic title flyby */
+setInterval(()=>{ document.documentElement.classList.add('flyby');
+  setTimeout(()=>document.documentElement.classList.remove('flyby'),1700);
+},14000);
+
+/* time-of-day palette */
+(() => { const h=new Date().getHours(); document.documentElement.classList.add((h>=6&&h<17)?'morning':'night'); })();
+
+/* UI sounds */
+(() => {
+  const a=document.getElementById('blip'); const btn=document.getElementById('soundToggle');
+  if(!a||!btn) return;
+  if(!a.currentSrc){ a.src="{{ '/kawaii%208bit.mp3' | relative_url }}"; a.load(); }
+  let enabled=false; a.volume=0.5;
+  btn.addEventListener('click',()=>{
+    enabled=!enabled; btn.setAttribute('aria-pressed',String(enabled));
+    btn.textContent=enabled?'🔊 sound':'🔇 sound';
+    try{ a.play().then(()=>{ a.pause(); a.currentTime=0; }).catch(()=>{}); }catch(_){}
+  });
+  const beep=()=>{ if(!enabled) return; try{ a.currentTime=0; a.play(); }catch(_){}};
+  document.querySelectorAll('.nav a').forEach(el=>{
+    el.addEventListener('pointerdown',beep);
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') beep(); });
+  });
+})();
+
+/* post images: lazy load, async decode, reserve space */
+(function(){
+  document.querySelectorAll('.post img').forEach(function(img){
+    if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
+    if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+
+    if(img.hasAttribute('srcset') && !img.hasAttribute('sizes')){
+      img.setAttribute('sizes','(max-width: 900px) 100vw, 680px');
+    }
+
+    function setAR(){
+      var w = img.naturalWidth, h = img.naturalHeight;
+      if(w && h){ img.style.aspectRatio = w + ' / ' + h; }
+    }
+    if (img.complete) setAR(); else img.addEventListener('load', setAR, { once:true });
+  });
+})();
+</script>
+
+<!-- hyperspace + vhs visuals -->
+<style>
+  .hyperspace::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
+                repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
+    animation: warp 600ms ease-in-out;
+  }
+  @keyframes warp{ 0%{opacity:0; transform:scaleX(1)} 40%{opacity:1; transform:scaleX(1.8)} 100%{opacity:0; transform:scaleX(1)} }
+  .vhs::after{
+    content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+    background: linear-gradient(#000,transparent 12%,#0000 88%,#000),
+                repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+    animation: vhs 240ms steps(2,end);
+  }
+  @keyframes vhs{ from{opacity:0} to{opacity:1} }
 </style>
 </body>
 </html>
