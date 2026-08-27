@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Galaxy 981</title>
 
   <style>
@@ -1095,6 +1096,315 @@ td.content .post h3{ color:#000; text-shadow:none; }
   outline-offset: -4px;
 }
 
+
+
+/* ============================================================
+   MOBILE PASS — keep the desktop homepage intact, but make the
+   old 760px layout genuinely usable on phones.
+   ============================================================ */
+@media (max-width: 700px){
+  *, *::before, *::after{ box-sizing:border-box; }
+
+  html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    overflow-x:hidden;
+    min-width:0;
+  }
+
+  /* display-options toolbar becomes part of the normal document flow */
+  #neoBar{
+    position:relative !important;
+    top:auto !important;
+    right:auto !important;
+    width:calc(100% - 18px);
+    max-width:560px;
+    margin:18px auto 9px;
+    padding:8px 6px 6px;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+  #neoBar button{
+    min-height:38px;
+    padding:5px 8px;
+    font-size:12px;
+  }
+
+  .page{
+    width:calc(100% - 12px) !important;
+    max-width:760px;
+    left:0 !important;
+    margin:8px auto 22px !important;
+    border-width:4px;
+    outline-width:2px;
+    box-shadow:0 0 18px var(--neon-blue), inset 0 0 4px #000;
+  }
+
+  /* title still has the Kirbys, but they no longer force horizontal overflow */
+  #glitter-title{
+    width:100%;
+    min-width:0;
+    padding:8px 52px 2px !important;
+    margin:7px 0 3px !important;
+    font-size:clamp(30px, 10.5vw, 46px) !important;
+    line-height:1;
+    letter-spacing:0;
+    white-space:nowrap;
+  }
+  #glitter-title::before,
+  #glitter-title::after{
+    width:48px !important;
+    height:42px !important;
+    filter:drop-shadow(0 0 3px var(--neon-blue));
+  }
+  #glitter-title::before{ left:3px !important; }
+  #glitter-title::after{ right:3px !important; }
+
+  .page > .marquee-wrap{
+    margin:8px 8px 10px;
+  }
+  .page > .marquee-wrap marquee{
+    font-size:12px;
+  }
+
+  /* completely dismantle the desktop table geometry */
+  table.layout,
+  .layout tbody,
+  .layout tr,
+  .layout td{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .sidebar{
+    width:100% !important;
+    padding:9px 7px 10px !important;
+    border:0 !important;
+    border-bottom:4px ridge var(--neon-purple) !important;
+    box-shadow:
+      inset -1px -1px 0 var(--w95-dark),
+      inset  1px  1px 0 var(--w95-hi),
+      inset -2px -2px 0 var(--w95-shadow),
+      inset  2px  2px 0 #dfdfdf !important;
+  }
+
+  /* two-column launch-menu feel, then one column on very small phones */
+  .sidebar .nav{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:6px;
+    margin:10px 3px 12px;
+    padding:10px 6px 7px;
+  }
+  .sidebar .nav a{
+    min-width:0;
+    min-height:44px;
+    margin:0 !important;
+    padding:7px 7px !important;
+    font-size:14px !important;
+    letter-spacing:0 !important;
+    line-height:1.15;
+    overflow-wrap:anywhere;
+  }
+  .sidebar .nav-icon{
+    width:22px;
+    height:22px;
+    flex:0 0 22px;
+  }
+
+  /* the little info block had inline white text intended for the old dark sidebar */
+  .sidebar > div[style*="color:#fff"]{
+    color:#000 !important;
+    font-size:13px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+  .sticker-wall{
+    display:flex !important;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:7px;
+    padding:14px 7px 8px;
+  }
+  .sticker-wall img,
+  .sticker-wall .wide{
+    width:auto !important;
+    max-width:min(43%, 150px) !important;
+    max-height:72px;
+    object-fit:contain;
+  }
+  .sticker-controls{
+    flex-wrap:wrap;
+  }
+  .sticker-controls button,
+  .sound-toggle{
+    min-height:42px;
+    font-size:14px;
+  }
+
+  .status-say{
+    grid-template-columns:58px minmax(0,1fr);
+    gap:8px;
+    margin:12px 5px 8px;
+  }
+  .status-avatar{
+    width:58px;
+    height:58px;
+  }
+  #statuscafe-content{
+    overflow-wrap:anywhere;
+  }
+
+  td.content{
+    width:100% !important;
+    min-width:0 !important;
+    padding:10px 8px 14px !important;
+    border:0 !important;
+  }
+  td.content::before{ display:none; }
+
+  td.content .post{
+    width:100%;
+    min-width:0;
+    margin:11px 0 18px;
+    padding:10px 10px 12px;
+    overflow-wrap:anywhere;
+  }
+  td.content .post p{
+    max-width:100%;
+  }
+
+  .welcome-flex{
+    display:block;
+    width:100%;
+  }
+  .y2k-welcome{
+    width:100%;
+    margin:2px 0 10px;
+    padding:0;
+    font-size:clamp(31px, 11vw, 44px);
+    line-height:1.04;
+    text-align:left;
+  }
+  .hello-gif{
+    display:block;
+    width:min(78%, 235px) !important;
+    max-width:100%;
+    margin:4px auto 8px;
+  }
+
+  .warnline{
+    display:grid;
+    grid-template-columns:24px minmax(0,1fr) 24px;
+    gap:6px;
+    width:100%;
+    font-size:13px;
+    line-height:1.25;
+    text-align:center;
+  }
+  .warn-ico{
+    width:24px;
+    height:24px;
+  }
+
+  /* old embedded widgets may retain fixed intrinsic widths */
+  td.content iframe{
+    max-width:100% !important;
+  }
+  td.content .post iframe:not(.chat-frame){
+    display:block;
+    width:min(100%, 314px) !important;
+    margin:0 auto;
+  }
+  .chat-frame{
+    width:100% !important;
+    height:72svh !important;
+    min-height:440px;
+  }
+
+  .marquee-wrap.small{
+    margin:6px 2px 12px;
+  }
+  .marquee-wrap.small marquee{
+    font-size:12px;
+  }
+
+  .button-strip{
+    margin:8px 7px 10px;
+    padding:8px 6px;
+    gap:7px;
+  }
+  .button-strip img{
+    max-width:46%;
+    height:auto;
+    max-height:31px;
+  }
+
+  .footer{
+    padding:7px 5px 9px;
+    font-size:12px;
+    overflow:hidden;
+  }
+
+  /* keep the mascots, but stop them covering half the viewport */
+  #dancecat,
+  #spinguy{
+    width:min(20vw, 72px) !important;
+    max-width:72px !important;
+    bottom:6px !important;
+    filter:drop-shadow(0 0 5px rgba(0,0,0,.55));
+  }
+  #dancecat{ right:5px !important; }
+  #spinguy{ left:5px !important; }
+
+  /* hover-only cursor decorations are irrelevant on touchscreens */
+  .neo-sparkle{ display:none !important; }
+}
+
+@media (max-width: 390px){
+  #glitter-title{
+    padding-inline:43px !important;
+    font-size:clamp(27px, 10vw, 37px) !important;
+  }
+  #glitter-title::before,
+  #glitter-title::after{
+    width:40px !important;
+    height:36px !important;
+  }
+
+  .sidebar .nav{
+    grid-template-columns:1fr;
+  }
+
+  .status-say{
+    display:block;
+  }
+  .status-avatar{
+    display:block;
+    margin:0 auto 9px;
+  }
+  .status-bubble::after{ display:none; }
+
+  .button-strip img{
+    max-width:90%;
+  }
+}
+
+@media (hover:none) and (pointer:coarse){
+  html, body{ cursor:auto; }
+  .nav a:hover,
+  .sticker-wall img:hover{
+    transform:none;
+    filter:none;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1207,7 +1517,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
             <div class="meta">1999 ·</div>
 <p class="warnline">
   <img src="warning.gif" alt="Warning" class="warn-ico">
-  <span>WARNING: THIS SITE IS NOT OPTIMISED FOR MOBILE VIEW!!</span>
+  <span>MOBILE MODE NOW KINDA WORKS!!</span>
   <img src="warning.gif" alt="" class="warn-ico" aria-hidden="true">
 </p>
             <p>hi...still figuring this out lol</p>
