@@ -1115,24 +1115,8 @@ td.content .post h3{ color:#000; text-shadow:none; }
     min-width:0;
   }
 
-  /* display-options toolbar becomes part of the normal document flow */
-  #neoBar{
-    position:relative !important;
-    top:auto !important;
-    right:auto !important;
-    width:calc(100% - 18px);
-    max-width:560px;
-    margin:18px auto 9px;
-    padding:8px 6px 6px;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:5px;
-  }
-  #neoBar button{
-    min-height:38px;
-    padding:5px 8px;
-    font-size:12px;
-  }
+  /* desktop-only display toys are hidden on phones */
+  #neoBar{ display:none !important; }
 
   .page{
     width:calc(100% - 12px) !important;
@@ -1171,7 +1155,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
     font-size:12px;
   }
 
-  /* completely dismantle the desktop table geometry */
+  /* Stack the desktop table. JS moves the non-nav sidebar bits below it. */
   table.layout,
   .layout tbody,
   .layout tr,
@@ -1193,13 +1177,27 @@ td.content .post h3{ color:#000; text-shadow:none; }
       inset  2px  2px 0 #dfdfdf !important;
   }
 
+  .sidebar-extras{
+    width:calc(100% - 14px);
+    margin:10px auto 12px;
+    padding:12px 7px 10px;
+    background:var(--w95-bg);
+    color:#000;
+    border:3px groove #c0c0c0;
+    box-shadow:
+      inset -1px -1px 0 var(--w95-dark),
+      inset  1px  1px 0 var(--w95-hi);
+  }
+
   /* two-column launch-menu feel, then one column on very small phones */
   .sidebar .nav{
     display:grid;
     grid-template-columns:repeat(2, minmax(0,1fr));
     gap:6px;
-    margin:10px 3px 12px;
+    width:calc(100% - 14px);
+    margin:10px 7px 12px;
     padding:10px 6px 7px;
+    background:var(--w95-bg);
   }
   .sidebar .nav a{
     min-width:0;
@@ -1218,7 +1216,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
   }
 
   /* the little info block had inline white text intended for the old dark sidebar */
-  .sidebar > div[style*="color:#fff"]{
+  .sidebar-extras > div[style*="color:#fff"]{
     color:#000 !important;
     font-size:13px !important;
     padding-left:10px !important;
@@ -1443,6 +1441,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
             <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
           </div>
 
+          <div class="sidebar-extras">
           <div style="text-align:center; padding:10px">
             <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
             <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
@@ -1494,6 +1493,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
 </div>
 
 <script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
+          </div><!-- /.sidebar-extras -->
 
           
         </td>
@@ -2671,6 +2671,34 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
   window.addEventListener('load', () => {
     new cursoreffects.ghostCursor();
   });
+</script>
+
+
+<script>
+/* Mobile housekeeping: keep navigation near the top, move the busy
+   sidebar extras below the actual homepage content. */
+(() => {
+  const mq = matchMedia('(max-width:700px)');
+  const extras = document.querySelector('.sidebar-extras');
+  const sidebar = document.querySelector('.sidebar');
+  const table = document.querySelector('table.layout');
+  if (!extras || !sidebar || !table) return;
+
+  const home = document.createComment('sidebar-extras-home');
+  sidebar.insertBefore(home, extras);
+
+  const placeExtras = () => {
+    if (mq.matches) {
+      table.insertAdjacentElement('afterend', extras);
+    } else if (home.parentNode) {
+      home.parentNode.insertBefore(extras, home.nextSibling);
+    }
+  };
+
+  placeExtras();
+  if (mq.addEventListener) mq.addEventListener('change', placeExtras);
+  else mq.addListener(placeExtras);
+})();
 </script>
 
 </body>
