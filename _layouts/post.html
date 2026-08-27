@@ -345,8 +345,9 @@ hr.retro{
 
 /* ---------- small screens ---------- */
 @media (max-width:820px){
-  .form{ padding:0 40px; border-width:4px; }
-  .crumb, .hero, .ticker{ margin:0 -40px; padding-left:24px; padding-right:24px; }
+  .form{ padding:0 12px; border-width:4px; }
+  .form::before, .form::after{ display:none; }
+  .crumb, .hero, .ticker{ margin:0 -12px; padding-left:14px; padding-right:14px; }
   .form::before, .form::after{ width:22px; background-size:22px 20px;
     background-image:radial-gradient(circle at 11px 10px, #a9b096 0 3px, var(--paper) 3.5px 4.5px, transparent 5px); }
   .cols{ flex-direction:column; }
