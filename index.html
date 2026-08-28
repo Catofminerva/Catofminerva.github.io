@@ -1403,6 +1403,213 @@ td.content .post h3{ color:#000; text-shadow:none; }
   }
 }
 
+
+/* ============================================================
+   2026-08-28: GIF DEPOSIT. found a folder of them, put them in.
+   everything below here is new. nothing above was touched.
+   ============================================================ */
+
+/* --- reusable Win95 group box (matches the sidebar theme) --- */
+.w95-box{
+  position: relative;
+  margin: 16px 5px 12px;
+  padding: 14px 8px 9px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+  text-align: center;
+}
+.w95-box::before{
+  content: attr(data-label);
+  position: absolute;
+  top: -9px; left: 10px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  font: 12px/1 "Tahoma","MS Sans Serif",sans-serif;
+  color: #000;
+}
+.w95-box .cap{
+  margin: 6px 2px 0;
+  font: 11px/1.45 "Tahoma","MS Sans Serif",sans-serif;
+  color: #333;
+}
+
+/* --- the server, allegedly --- */
+.server-shot img{
+  display: block;
+  width: 100%;
+  max-width: 168px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  background: #000;
+}
+
+/* --- archive curio banner in the sidebar --- */
+.archive-shot img{
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+
+/* --- the award. no caption. it speaks for itself. --- */
+.award-solo{
+  margin: 18px 0 20px;
+  text-align: center;
+}
+.award-solo img{
+  max-width: min(340px, 92%);
+  height: auto;
+  image-rendering: pixelated;
+  transform: rotate(-1deg);
+}
+
+/* --- 3D GALLERY window --- */
+.win95-window{
+  margin: 16px 0 22px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: inset -1px -1px 0 var(--w95-shadow), inset 1px 1px 0 #dfdfdf;
+}
+.win95-window .titlebar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 2px;
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font: bold 12px/1.3 "Tahoma","MS Sans Serif",sans-serif;
+}
+.win95-window .titlebar .tb-buttons{
+  display: flex;
+  gap: 2px;
+}
+.win95-window .titlebar .tb-buttons span{
+  width: 16px; height: 14px;
+  display: grid; place-items: center;
+  background: var(--w95-bg);
+  color: #000;
+  border: 1px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  font: 10px/1 "Tahoma",sans-serif;
+}
+.win95-window .win-body{
+  margin: 2px;
+  padding: 12px 10px 10px;
+  background: #008080;              /* the teal desktop, obviously */
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.win95-window .win-status{
+  margin: 2px;
+  padding: 3px 6px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  font: 11px/1.4 "Tahoma","MS Sans Serif",sans-serif;
+  color: #222;
+}
+
+.plinth-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.plinth{
+  width: 168px;
+  padding: 9px 8px 7px;
+  background: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  text-align: center;
+}
+.plinth img{
+  display: block;
+  width: 100%;
+  max-width: 132px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.plinth .lab{
+  margin-top: 7px;
+  color: var(--neon-green);
+  font: 10px/1.4 "Courier New",monospace;
+  letter-spacing: .4px;
+}
+
+/* --- the power plant --- */
+.hamster-plant{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 16px;
+  margin: 10px 20px 4px;
+  padding: 8px 12px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+}
+.hamster-plant figure{
+  margin: 0;
+  text-align: center;
+}
+.hamster-plant img{
+  display: block;
+  height: 58px;
+  width: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.hamster-plant figcaption{
+  margin-top: 3px;
+  font: 9px/1.3 "Courier New",monospace;
+  color: #444;
+}
+.hamster-plant .hp-title{
+  font: bold 13px/1.35 "Tahoma","MS Sans Serif",sans-serif;
+  letter-spacing: .4px;
+  text-align: center;
+}
+.hamster-plant .hp-sub{
+  display: block;
+  margin-top: 3px;
+  font: 10px/1.4 "Courier New",monospace;
+  font-weight: normal;
+  color: #444;
+}
+
+@media (max-width: 700px){
+  .w95-box{ margin: 16px 2px 12px; }
+  .award-solo img{ max-width: 92%; }
+  .win95-window{ margin: 12px 0 18px; }
+  .win95-window .win-body{ padding: 10px 6px 8px; }
+  .plinth{ width: calc(50% - 8px); min-width: 128px; padding: 7px 5px 6px; }
+  .plinth img{ max-width: 104px; }
+  .hamster-plant{
+    margin: 8px 7px 4px;
+    padding: 8px 8px;
+    gap: 8px 12px;
+  }
+  .hamster-plant img{ height: 46px; }
+  .hamster-plant .hp-title{ font-size: 12px; }
+}
+
   </style>
 </head>
 <body>
@@ -1459,6 +1666,12 @@ td.content .post h3{ color:#000; text-shadow:none; }
   </div>
 </div>
 
+          <!-- where this website actually lives -->
+          <div class="w95-box server-shot" data-label="Server">
+            <img src="computerinspace.gif" alt="a desktop computer floating in space">
+            <p class="cap">THE SERVER (artist&rsquo;s impression). it is out there. it is cold. it is serving you this page anyway.</p>
+          </div>
+
           <div class="sticker-wall">
   <img src="arabic.gif" alt="Arabic">
   <img src="qatar.gif" alt="Qatar">
@@ -1490,6 +1703,12 @@ td.content .post h3{ color:#000; text-shadow:none; }
       <div id="statuscafe-content">loading…</div>
     </div>
   </div>
+</div>
+
+<!-- salvaged banner, kept purely because it exists -->
+<div class="w95-box archive-shot" data-label="Archive">
+  <img src="saddamscyberpalace.gif" alt="Saddam's Cyber Palace banner">
+  <p class="cap">rescued from a dead geocities ring. i have no further information.</p>
 </div>
 
 <script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
@@ -1529,10 +1748,34 @@ td.content .post h3{ color:#000; text-shadow:none; }
             <p>i’m gonna add more posts when i finish typing them out from my notebook (yeah i still write stuff on paper in big 2021 :')).</p>
           </div>
 
+          <div class="award-solo">
+            <img src="excellentwebsiteaward.gif" alt="excellent website award">
+          </div>
+
           <div class="post">
             <h3>Pet and feed Zaki</h3>
             <div class="meta">Virtual pet</div>
             <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
+          </div>
+
+          <div class="win95-window" id="threedee">
+            <div class="titlebar">
+              <span>3D_GALLERY.EXE</span>
+              <span class="tb-buttons"><span>_</span><span>□</span><span>×</span></span>
+            </div>
+            <div class="win-body">
+              <div class="plinth-row">
+                <div class="plinth">
+                  <img src="3dskullspin.gif" alt="spinning 3D skull">
+                  <div class="lab">SKULL.3DS &#9679; 24 fps &#9679; still cool</div>
+                </div>
+                <div class="plinth">
+                  <img src="3dpinkpantherhead.gif" alt="rotating 3D Pink Panther head">
+                  <div class="lab">PANTHER.3DS &#9679; renders in 1998 &#9679; unlicensed probably</div>
+                </div>
+              </div>
+            </div>
+            <div class="win-status">2 object(s) &#9679; rendering at maximum quality</div>
           </div>
 
           <div class="marquee-wrap small">
@@ -1556,6 +1799,21 @@ td.content .post h3{ color:#000; text-shadow:none; }
         </td>
       </tr>
     </table>
+
+    <div class="hamster-plant">
+      <figure>
+        <img src="hamsterwheel.gif" alt="hamster running in a wheel">
+        <figcaption>generator no.1</figcaption>
+      </figure>
+      <div class="hp-title">
+        THIS SITE IS POWERED BY HAMSTERS
+        <span class="hp-sub">uptime depends entirely on their mood. no refunds.</span>
+      </div>
+      <figure>
+        <img src="adancinghamster.gif" alt="dancing hamster">
+        <figcaption>off shift</figcaption>
+      </figure>
+    </div>
 
     <div class="button-strip" aria-label="buttons">
   <img src="icc.gif" alt="ICC">
