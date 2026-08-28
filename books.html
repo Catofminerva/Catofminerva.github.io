@@ -46,15 +46,7 @@ html, body{
 }
    
 /* if stars.gif ever 404s the page should still look like something */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
-  background:
-    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
-    radial-gradient(1px 1px at 70% 60%, #9df, transparent),
-    radial-gradient(1px 1px at 40% 80%, #fff, transparent),
-    radial-gradient(circle at 50% 0%, #1b0040, #05000e 70%);
-  opacity:.85;
-}
+
 
 a{ color:var(--neon-yellow); }
 a:visited{ color:#c9a0ff; }
