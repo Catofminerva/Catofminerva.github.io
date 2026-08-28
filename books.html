@@ -32,33 +32,6 @@
   --cover-ratio: 2 / 3;
 }
 
-/* alternate skins. i change these when the seasons change. */
-html.skin-bubblegum{
-  --neon-blue:#ff8ae2; --neon-green:#7cf9ff; --neon-yellow:#fff06a; --neon-purple:#ff2bd1;
-  --ink:#ffe3fb; --panel-bg:rgba(48,0,40,0.80);
-  --sidebar-a:#2a0030; --sidebar-b:#3d0040; --marquee-bg:#4d0033;
-}
-html.skin-terminal{
-  --neon-blue:#33ff66; --neon-green:#aaffaa; --neon-yellow:#ccffcc; --neon-purple:#00cc44;
-  --ink:#33ff66; --panel-bg:rgba(0,10,0,0.92);
-  --sidebar-a:#001100; --sidebar-b:#002200; --marquee-bg:#001a00;
-}
-html.skin-terminal body{ font-family:"Courier New",monospace; }
-html.skin-terminal .book h4,
-html.skin-terminal .zone h2{ font-family:"Courier New",monospace; }
-
-html, body{
-  margin:0; padding:0;
-      background:
-        linear-gradient(rgba(0,0,15,.24),rgba(0,0,15,.24)),
-        url("background3.gif") repeat,
-        #020008;
-  color:var(--ink);
-  font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-  image-rendering:pixelated;
-  cursor:crosshair;
-  filter:contrast(112%) saturate(122%);
-}
 
 /* if stars.gif ever 404s the page should still look like something */
 body::before{
