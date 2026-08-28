@@ -836,6 +836,183 @@ h1 {
   h1 { font-size:34px; letter-spacing:-2px; }
 }
 
+
+/* ============================================================
+   2026-08-28: found a folder of gifs on an old drive.
+   could not just leave them sitting there.
+   NOTE TO SELF: the "wanna know where the cool links are?" gif
+   has a QUESTION MARK in its filename, so it must be written as
+   %3F in the src or the browser reads it as a query string and
+   404s. do not "fix" this back. it took me twenty minutes.
+   ============================================================ */
+
+/* --- the pointing banner, sits above the first directory --- */
+.point-banner {
+  margin:2px 0 14px;
+  text-align:center;
+}
+
+.point-banner img {
+  display:inline-block;
+  max-width:min(340px, 92%);
+  height:auto;
+  image-rendering:pixelated;
+  transform:rotate(-1.1deg);
+  filter:drop-shadow(2px 2px 0 rgba(0,0,0,.25));
+}
+
+.point-banner .answer {
+  display:block;
+  margin:4px auto 0;
+  color:#ff0099;
+  font:bold 14px "Comic Sans MS",cursive;
+  letter-spacing:.2px;
+}
+
+.point-banner .arrows {
+  display:block;
+  color:#00a2e8;
+  font:bold 15px "Courier New",monospace;
+  letter-spacing:5px;
+  line-height:1.1;
+}
+
+/* --- folder tab that sits on top of each directory box --- */
+.dir-tab {
+  display:inline-block;
+  margin:0 0 -2px 12px;
+  padding:3px 9px 1px;
+  border:1px solid #9b9b9b;
+  border-bottom:0;
+  background:#d7d7d7;
+  position:relative;
+  z-index:2;
+  line-height:0;
+}
+
+.dir-tab img {
+  height:24px;
+  width:auto;
+  image-rendering:pixelated;
+  vertical-align:bottom;
+}
+
+.dir-tab .tab-count {
+  display:inline-block;
+  margin-left:6px;
+  color:#333;
+  font:9px "MS Sans Serif",Tahoma,sans-serif;
+  line-height:24px;
+  vertical-align:bottom;
+}
+
+/* --- the COOL star, hand-awarded, no criteria --- */
+.cool-star {
+  width:24px;
+  height:auto;
+  margin-left:5px;
+  vertical-align:-6px;
+  image-rendering:pixelated;
+}
+
+.cool-key {
+  margin:0 0 13px;
+  padding:5px 8px 5px 6px;
+  border:1px dotted #b0b0b0;
+  background:#fffdf0;
+  color:#333;
+  font:11px Verdana,"MS Sans Serif",sans-serif;
+}
+
+.cool-key img {
+  width:24px;
+  vertical-align:-6px;
+  margin:0 3px;
+  image-rendering:pixelated;
+}
+
+/* the surf button and the key share a line on wide screens */
+.surf-row {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin:-4px 0 16px;
+}
+.surf-row .cool-key { flex:1 1 320px; margin:0; }
+.surf-row .surf-tools { flex:0 0 auto; margin:0; }
+
+/* --- the server, allegedly --- */
+.server-room {
+  order:4;
+  margin:12px 3px 11px;
+  padding:6px 6px 7px;
+  border:2px ridge #9b9b9b;
+  background:#0b0b1c;
+  text-align:center;
+}
+
+.server-room .sr-title {
+  color:#7cf3ff;
+  font:bold 9px "Courier New",monospace;
+  letter-spacing:.06em;
+  margin-bottom:4px;
+}
+
+.server-room img {
+  display:block;
+  width:100%;
+  max-width:158px;
+  height:auto;
+  margin:0 auto;
+  image-rendering:pixelated;
+}
+
+.server-room .sr-note {
+  margin-top:5px;
+  color:#b9b6d8;
+  font:10px/1.45 "Courier New",monospace;
+}
+
+/* --- hamster power plant, footer --- */
+.hamster-power {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin:4px auto 8px;
+  padding:5px 11px 5px 7px;
+  border:2px ridge #c0c0c0;
+  background:#fff;
+  box-shadow:2px 2px 0 #cfcfcf;
+  text-align:left;
+}
+
+.hamster-power img {
+  max-height:52px;
+  max-width:60px;
+  margin:0;
+  image-rendering:pixelated;
+}
+
+.hamster-power .hp-text {
+  color:#222;
+  font:bold 11px/1.35 "Comic Sans MS","Trebuchet MS",cursive;
+}
+
+.hamster-power .hp-sub {
+  display:block;
+  color:#777;
+  font:9px/1.4 "Courier New",monospace;
+  font-weight:normal;
+}
+
+@media (max-width:720px) {
+  .surf-row { flex-direction:column; align-items:stretch; }
+  .surf-row .surf-tools { text-align:right; }
+  .point-banner img { max-width:96%; }
+  .server-room { margin:12px 10px 0; }
+  .dir-tab { margin-left:6px; }
+}
 </style>
 </head>
 
@@ -877,6 +1054,14 @@ h1 {
           this page: unfinished on purpose
         </div>
 
+        <div class="server-room">
+          <div class="sr-title">THE SERVER (artist's impression)</div>
+          <img src="computerinspace.gif" alt="a desktop computer floating in space">
+          <div class="sr-note">
+            it is out there. it is cold. it is serving you this page anyway.
+          </div>
+        </div>
+
         <div class="stickers" aria-label="sticker pile">
           <img src="arabic.gif" alt="Arabic">
           <img src="qatar.gif" alt="Qatar">
@@ -898,13 +1083,27 @@ h1 {
           hi. this is basically the drawer where i throw websites i want to find again. there is no ranking system and some categories make more sense than others.
         </div>
 
-        <div class="surf-tools">
-          <button id="randomBtn" type="button">random site</button>
+        <!-- the gif asks. the page answers. -->
+        <div class="point-banner">
+          <img src="wannaknowwherethecoollinksare%3F.gif" alt="wanna know where the cool links are?">
+          <span class="answer">yes u do. they are directly beneath this gif.</span>
+          <span class="arrows">▼ ▼ ▼ ▼ ▼</span>
+        </div>
+
+        <div class="surf-row">
+          <div class="cool-key">
+            key: a link with a <img src="coolflashingstar.gif" alt="cool"> next to it is one i actually go back to.
+            there is no methodology. i just award them. some sections have loads, one has none, that is also information.
+          </div>
+          <div class="surf-tools">
+            <button id="randomBtn" type="button">random site</button>
+          </div>
         </div>
 
         <section class="section" id="daily">
           <h2 class="section-title">Intellectual Stuff to Read Everyday <span class="blink">!</span></h2>
           <div class="section-meta">my daily rounds ★ click around / see whats new / read one or two</div>
+          <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">16 in here</span></div>
           <div class="links">
             <div class="link-entry">
   <div><a href="https://harpers.org/" target="_blank" rel="noopener">Harper&#x27;s</a></div>
@@ -915,7 +1114,7 @@ h1 {
   <div class="desc">brooklyn lit + politics mag, a bit snobby but in a way i enjoy. print comes out 3x a year but they put online-only stuff up every week so theres always smth new</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a><span class="scribble-note"> ← i read this a lot</span></div>
+  <div><a href="https://www.lrb.co.uk/" target="_blank" rel="noopener">London Review of Books</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"><span class="scribble-note"> ← i read this a lot</span></div>
   <div class="desc">you probably know this one, lrb is one of the most famous literary magazines for book reviews and essays and i just love to read it so why the heck not include it</div>
 </div>
 <div class="link-entry">
@@ -927,7 +1126,7 @@ h1 {
   <div class="desc">free open access reviews of social science books, updated basically daily. great for finding academic books u had no idea existed. no paywall!!</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a></div>
+  <div><a href="https://aeon.co/" target="_blank" rel="noopener">Aeon</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">essays on philosophy, science, psychology, society. all free, all pretty digestible, most of them a 15 min read. their sister site Psyche does shorter psych/how-to-live stuff</div>
 </div>
 <div class="link-entry">
@@ -939,7 +1138,7 @@ h1 {
   <div class="desc">the tls, british, going since 1902. reviews of basically everything, from shakespeare to political theory. went fortnightly in print but the site updates constantly. paywalled tho :(</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a></div>
+  <div><a href="https://www.theparisreview.org/" target="_blank" rel="noopener">The Paris Review</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">THE literary magazine. their Writers at Work interview archive is legendary and a lot of it is free. the daily blog is good for a quick morning read</div>
 </div>
 <div class="link-entry">
@@ -959,7 +1158,7 @@ h1 {
   <div class="desc">basically a forum for a bunch of contrarian nerds freaking out about AI ... BUT (!!) you often find some awesome user submitted articles on philosophy, tech, psychology, econ. etc that kinda think outside the box.</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a><span class="new-badge">LAW NERD CORNER</span></div>
+  <div><a href="https://opiniojuris.org/" target="_blank" rel="noopener">Opinio Juris</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"><span class="new-badge">LAW NERD CORNER</span></div>
   <div class="desc">*The* blog on international law. I'm a law grad and specialised in intl. law in grad school - this is where i go when i need to brush up on stuff / look at latest updates in the field etc.</div>
 </div>
 <div class="link-entry">
@@ -982,6 +1181,7 @@ h1 {
         <section class="section" id="academic">
           <h2 class="section-title">Other Intellectual Stuff</h2>
           <div class="section-meta">blogs, mags, philosophy rabbit holes, things i swear i will return to</div>
+          <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">14 in here</span></div>
           <div class="links">
             <div class="link-entry">
   <div><a href="https://www.newleftreview.org" target="_blank" rel="noopener">New Left Review</a></div>
@@ -1000,7 +1200,7 @@ h1 {
   <div class="desc">sum short articles on IR, many written by undergrad-grad students</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a></div>
+  <div><a href="https://plato.stanford.edu/index.html" target="_blank" rel="noopener">Stanford Encyclopedia of Philosophy</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">this is the Philosophy holy book that every student reads before bed</div>
 </div>
 <div class="link-entry">
@@ -1024,7 +1224,7 @@ h1 {
   <div class="desc">another philosophy blog with short accessible posts</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a><span class="scribble-note"> ← this one is here for sentimental reasons</span></div>
+  <div><a href="https://webhome.phy.duke.edu/~rgb/index.php" target="_blank" rel="noopener">Robert Brown</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"><span class="scribble-note"> ← this one is here for sentimental reasons</span></div>
   <div class="desc">i only include it here because i happened to run across this page by accident when i was little and was my first intro into academic thought, basically a physics phd gives his takes on philosophy. also the website is super old so it has that aesthetic i like :D</div>
 </div>
 <div class="link-entry">
@@ -1036,7 +1236,7 @@ h1 {
   <div class="desc">a more academic-y blog on social epistemology for general readership, tbh i read it like twice but i keep it here just in case i wanna return to it</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a></div>
+  <div><a href="https://allthingslinguistic.com" target="_blank" rel="noopener">Linguistic Blog</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">a blog about linguistics with a focus on internet linguistics like trends in internet language use and communication. so if u love the internet and its culture like me, this is for u!</div>
 </div>
           </div>
@@ -1047,13 +1247,14 @@ h1 {
         <section class="section" id="retro">
           <h2 class="section-title">Retro Webmaster Tools</h2>
           <div class="section-meta">textures, pets, cursors, pixel mischief etc etc</div>
+          <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">where the gifs came from</span></div>
           <div class="links">
             <div class="link-entry">
-  <div><a href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a></div>
+  <div><a href="https://gifcities.org/?q=cat" target="_blank" rel="noopener">GIF cities</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"><span class="scribble-note"> ← the hamster + the flashing star came from here</span></div>
   <div class="desc">the motherload of classic gifs.</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a></div>
+  <div><a href="https://melonland.net//" target="_blank" rel="noopener">Melon Land</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">lots of classic cute gifs, textures, pets and other tools for webmasters</div>
 </div>
 <div class="link-entry">
@@ -1088,13 +1289,14 @@ h1 {
         <section class="section" id="nostalgia">
           <h2 class="section-title">Nostalgia Trips</h2>
           <div class="section-meta">old computers / time capsules / websites about websites / things preserved by weird people online</div>
+          <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">danger: time sink</span></div>
           <div class="links">
             <div class="link-entry">
-  <div><a href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a></div>
+  <div><a href="https://www.pcjs.org/" target="_blank" rel="noopener">PCJS</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">uses javascript to simulate classic computer hardware from web 1.0. What a time to be alive!!!</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a></div>
+  <div><a href="https://oldweb.today/?browser=nm2-mac#19960101/http://geocities.com/" target="_blank" rel="noopener">Old Web Today</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">now you can relive the old internet days with these classic browsers :D</div>
 </div>
 <div class="link-entry">
@@ -1102,7 +1304,7 @@ h1 {
   <div class="desc">basically a search engine that only indexes old websites, how cool is that???</div>
 </div>
 <div class="link-entry">
-  <div><a href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a></div>
+  <div><a href="http://www.textfiles.com/directory.html" target="_blank" rel="noopener">Text Files Directory</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">this one is wildddd (BEWARE OF THE ANARCHY HYPERLINK!!). from Wikipedia: "...website dedicated to preserving the digital documents that contain the history of the bulletin board system (BBS) world and various subcultures...'a glimpse into the history of writers and artists bound by the 128 characters that the American Standard Code for Information Interchange (ASCII) allowed them'...thousands of text files, primarily from the 1980s, but also contains some older files and some that were created well into the 1990s.</div>
 </div>
 <div class="link-entry">
@@ -1114,7 +1316,7 @@ h1 {
   <div class="desc">a musuem of classic computers and internet</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a></div>
+  <div><a href="https://geocities.restorativland.org/" target="_blank" rel="noopener">Geocities Restorative</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">i just love to spend hourse here, looking into the lives of those that were here when the internet first began. this site has blogs that were last updated in the 90s and 2000s</div>
 </div>
 <div class="link-entry">
@@ -1126,7 +1328,7 @@ h1 {
   <div class="desc">90s? pff here's am 80s TV simulator</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a></div>
+  <div><a href="https://wiby.me/surprise/" target="_blank" rel="noopener">Wiby Surprise</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">paste this into your web address and it will send you to a random old webpage...each click is a surprise, dont say i didnt warn ya</div>
 </div>
 <div class="link-entry">
@@ -1155,6 +1357,7 @@ h1 {
         <section class="section" id="misc">
           <h2 class="section-title">Miscellaneous</h2>
           <div class="section-meta">junk drawer. categorisation has failed here</div>
+          <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">no system whatsoever</span></div>
           <div class="links">
             <div class="link-entry">
   <div><a href="https://www.chronophoto.app/game.html" target="_blank" rel="noopener">Chronophoto</a></div>
@@ -1165,7 +1368,7 @@ h1 {
   <div class="desc">surf the most intersting hyperlinks on the web</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a></div>
+  <div><a href="https://neal.fun/" target="_blank" rel="noopener">Neal Fun</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">collection of super fun interactive projects</div>
 </div>
 <div class="link-entry">
@@ -1173,7 +1376,7 @@ h1 {
   <div class="desc">learn to code via playing a game</div>
 </div>
 <div class="link-entry">
-  <div><a href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a></div>
+  <div><a href="https://pointerpointer.com/" target="_blank" rel="noopener">Pointer Pointer</a><img class="cool-star" src="coolflashingstar.gif" alt="cool"></div>
   <div class="desc">an interactive site that finds a photo pointing to your cursor no matter where it is</div>
 </div>
 <div class="link-entry">
@@ -1197,6 +1400,13 @@ h1 {
   </table>
 
   <footer class="footer">
+    <div class="hamster-power">
+      <img src="hamsterwheel.gif" alt="a hamster running in a wheel">
+      <span class="hp-text">
+        THIS SITE IS POWERED BY HAMSTERS
+        <span class="hp-sub">uptime depends entirely on their mood. no refunds.</span>
+      </span>
+    </div>
     <div>
       <img src="freespeechonline.gif" alt="">
       <img src="pali.gif" alt="">
