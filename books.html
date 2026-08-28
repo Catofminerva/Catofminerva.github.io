@@ -1,624 +1,1324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Galaxy 981’s Bookshelf</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>Galaxy 981 :: KOOL BOOKS :: the shelf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Books I have read and would not shut up about. Est. whenever." />
 
-  <style>
-    /* ==== borrow the index.html look ==== */
-    :root{
-      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
-      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
-    }
-    html, body {
-      margin:0; padding:0;
-      background-image:url('stars.gif'); background-repeat:repeat;
-      color:var(--ink);
-      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
-    }
-    .page {
-      width:760px; margin:18px auto 32px; position:relative; left:7px;
-      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
-      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
-    #glitter-title{
-      font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
-    }
-    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
-    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
-    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
+<style>
+/* =========================================================
+   GALAXY 981 // BOOKS
+   this stylesheet is not organised. it grew. sorry.
+   sections are dated by when i made them, not by when
+   i read the books. the colours do not agree with each
+   other and that is correct.
+   ========================================================= */
 
-    .layout{ width:100%; border-collapse:collapse; }
-    .sidebar{
-      width:210px;
-      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple); vertical-align:top;
-    }
-    .content{
-      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
-    }
-
-    .nav a{
-      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
-    }
-    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
-    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
-
-    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
-    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
-    .post .meta{ font-size:12px; color:var(--neon-yellow); }
-
-    hr.retro{
-      height:12px; border:0; margin:10px 0 14px;
-      background-image:repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
-      );
-      position:relative; overflow:visible;
-    }
-    /* kitty on the first rainbow bar */
-    .content > hr.retro:first-of-type::after{
-      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
-      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
-      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
-    }
-    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
-
-    /* title ships like index */
-    #glitter-title::before,#glitter-title::after{
-      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
-      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
-      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
-    }
-    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
-    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
-
-    /* sticker wall */
-    .sticker-wall{
-      margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
-      display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; justify-items:center; align-items:center;
-    }
-    .sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; }
-    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
-    .sticker-wall .wide{ grid-column: span 2; width:188px; }
-
-    /* ==== bookshelf UI ==== */
-    .shelf-toolbar{
-      display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; margin:8px 0 2px;
-    }
-    .btn{
-      padding:6px 10px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff; cursor:pointer; box-shadow:2px 2px 0 #000;
-    }
-    .btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
-    .seg{
-      display:inline-flex; border:3px outset #6af7ff; background:#0e0e33; box-shadow:2px 2px 0 #000; overflow:hidden;
-    }
-    .seg button{
-      border:0; padding:6px 10px; background:transparent; color:#a7ffff; cursor:pointer;
-    }
-    .seg button.active{ color:var(--neon-green); background:#140043; }
-    .search{
-      flex:1 1 180px; min-width:180px;
-      padding:6px 8px; border:3px inset #6af7ff; background:#000820; color:#a7ffff; box-shadow:2px 2px 0 #000;
-      font-family:inherit;
-    }
-    .tiny{ font-size:12px; color:var(--neon-yellow); }
-
-    .book-grid{
-      display:grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap:12px;
-    }
-    .book{
-      border:3px ridge #6af7ff; background:rgba(0,0,0,0.35); padding:8px; box-shadow: inset 0 0 6px #000;
-      display:flex; flex-direction:column; gap:6px;
-    }
-/* Taller book covers, no cropping */
+/* ---------- global tokens (the 2001 layer) ---------- */
 :root{
-  /* tweak if you want a bit shorter: 3 / 4 also looks good */
+  --neon-blue:#00e5ff;
+  --neon-green:#39ff14;
+  --neon-yellow:#ffff33;
+  --neon-purple:#8f00ff;
+  --hot-pink:#ff2bd1;
+  --ink:#00ffea;
+  --panel-bg:rgba(0,0,0,0.78);
+  --sidebar-a:#0d0022;
+  --sidebar-b:#12002e;
+  --marquee-bg:#001a4d;
+  --page-w:940px;
+  --cover-w:104px;
   --cover-ratio: 2 / 3;
 }
 
-.cover{
-  aspect-ratio: var(--cover-ratio);
-  width: 100%;
-  /* remove the old height:0 + padding-top trick */
-  border: 3px inset #6af7ff;
+/* alternate skins. i change these when the seasons change. */
+html.skin-bubblegum{
+  --neon-blue:#ff8ae2; --neon-green:#7cf9ff; --neon-yellow:#fff06a; --neon-purple:#ff2bd1;
+  --ink:#ffe3fb; --panel-bg:rgba(48,0,40,0.80);
+  --sidebar-a:#2a0030; --sidebar-b:#3d0040; --marquee-bg:#4d0033;
+}
+html.skin-terminal{
+  --neon-blue:#33ff66; --neon-green:#aaffaa; --neon-yellow:#ccffcc; --neon-purple:#00cc44;
+  --ink:#33ff66; --panel-bg:rgba(0,10,0,0.92);
+  --sidebar-a:#001100; --sidebar-b:#002200; --marquee-bg:#001a00;
+}
+html.skin-terminal body{ font-family:"Courier New",monospace; }
+html.skin-terminal .book h4,
+html.skin-terminal .zone h2{ font-family:"Courier New",monospace; }
+
+html, body{
+  margin:0; padding:0;
+  background-color:#05000e;
+  background-image:url('stars.gif');
+  background-repeat:repeat;
+  color:var(--ink);
+  font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+  image-rendering:pixelated;
+  cursor:crosshair;
+  filter:contrast(112%) saturate(122%);
+}
+
+/* if stars.gif ever 404s the page should still look like something */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
   background:
-    radial-gradient(60% 60% at 50% 35%, rgba(255,255,255,0.06), transparent 60%),
-    #000;
-  box-shadow: 2px 2px 0 #000;
-  display: grid;                 /* center the image without absolute positioning */
-  place-items: center;
-  padding: 6px;                  /* little inner frame so black covers don’t stick to the edge */
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 60%, #9df, transparent),
+    radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+    radial-gradient(circle at 50% 0%, #1b0040, #05000e 70%);
+  opacity:.85;
 }
 
-.cover img{
-  max-width: 100%;
-  max-height: 100%;
-  height: auto;
-  width: auto;
-  object-fit: contain;           /* show entire cover */
-  object-position: center top;   /* prioritize the top (titles often sit there) */
-  image-rendering: auto;
-  background: #000;              /* if an image has transparency */
+a{ color:var(--neon-yellow); }
+a:visited{ color:#c9a0ff; }
+
+.page{
+  width:var(--page-w); max-width:96vw;
+  margin:18px auto 40px;
+  position:relative;
+  border:6px ridge var(--neon-blue);
+  outline:4px solid #00131a;
+  background:var(--panel-bg);
+  box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
 }
 
-    .book h4{ margin:0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); font-size:16px; }
-    .book .desc{ font-size:12px; color:#eee; }
-    .book .more{
-      align-self:flex-start; text-decoration:none; display:inline-block; margin-top:2px;
-      border:3px outset #6af7ff; background:#140043; color:#a7ffff; padding:4px 8px; box-shadow:2px 2px 0 #000;
-    }
-    .book .more:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+/* ---------- header ---------- */
+#glitter-title{
+  font-size:58px; text-align:center; color:var(--neon-blue);
+  text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
+  margin:0; padding:20px 10px 0; letter-spacing:.5px; position:relative;
+}
+#glitter-title::before,#glitter-title::after{
+  content:""; position:absolute; top:50%; transform:translateY(-50%);
+  width:110px; height:70px; background-repeat:no-repeat; background-position:center;
+  background-size:contain; image-rendering:pixelated;
+  filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
+}
+#glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
+#glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
 
-    /* collapse long text with details for tidy cards */
-    details{ background:rgba(0,0,0,0.25); padding:6px; border:2px solid #21003a; }
-    details>summary{ cursor:pointer; color:var(--neon-yellow); }
-    details[open]{ border-color:#6af7ff; }
+.subtitle{
+  text-align:center; margin:2px 0 0; color:var(--neon-green);
+  font-size:15px; letter-spacing:1px;
+}
+.subtitle small{ color:#b39dff; }
 
-    /* VHS overlay for internal hops */
-    .vhs::after{
-      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-      background:
-        linear-gradient(#000,transparent 12%,#0000 88%,#000),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-      animation:vhs 240ms steps(2,end);
-    }
-    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+.headbar{
+  display:flex; flex-wrap:wrap; gap:8px 14px; justify-content:center; align-items:center;
+  margin:10px 20px 0; padding:6px 8px;
+  border:3px double var(--neon-purple); background:rgba(0,0,0,.45);
+  font-size:11px; font-family:"MS Sans Serif",Verdana,sans-serif; color:#9df;
+}
+.counter{ display:inline-flex; gap:2px; vertical-align:middle; }
+.counter b{
+  background:#000; color:#0f0; border:1px solid #0a0; padding:1px 3px;
+  font-family:"Courier New",monospace; font-size:13px; font-weight:normal;
+}
+.blink{ animation:blink 1.05s steps(2,start) infinite; }
+@keyframes blink{ to{ visibility:hidden } }
 
-    /* Compact vertical covers that sit neatly beside the text */
-:root{
-  --cover-w: 110px;   /* tweak 90–130 for smaller/larger */
-  --cover-ratio: 2 / 3;
+.marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
+.marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
+marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
+.marquee-wrap.small marquee{ font-size:13px; color:var(--neon-green); font-weight:normal; }
+
+/* ---------- layout ---------- */
+.layout{ width:100%; border-collapse:collapse; }
+.sidebar{
+  width:216px; padding:0 0 14px;
+  background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+  border-right:6px ridge var(--neon-purple); vertical-align:top;
+}
+.content{
+  padding:10px 16px 22px; vertical-align:top;
+  background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
 }
 
+/* ---------- nav ---------- */
+.nav a{
+  display:block; margin:10px 6px; padding:6px 8px;
+  border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+  text-decoration:none; text-align:left; text-transform:uppercase;
+  text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
+}
+.nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
+.nav a.here{ color:var(--neon-yellow); border-style:inset; background:#1d0055; }
+.nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
+
+/* ---------- sidebar widgets ---------- */
+.widget{ margin:12px 6px; border:3px inset #6af7ff; background:rgba(0,0,0,.42); padding:8px; }
+.widget h5{
+  margin:0 0 6px; font-size:13px; color:var(--neon-yellow);
+  text-transform:uppercase; letter-spacing:.5px; border-bottom:1px dashed #6af7ff; padding-bottom:3px;
+}
+.widget p{ margin:4px 0; font-size:12px; color:#dff; }
+.widget .lo{ font-size:11px; color:#9ab; }
+
+.nowreading{ display:flex; gap:8px; align-items:flex-start; }
+.nowreading img{ width:52px; border:2px solid #000; box-shadow:2px 2px 0 var(--neon-purple); }
+.progress{
+  margin-top:6px; height:14px; border:2px inset #6af7ff; background:#000; padding:1px;
+  display:flex; gap:1px;
+}
+.progress i{ flex:0 0 6px; background:#111; }
+.progress i.on{ background:var(--neon-green); box-shadow:0 0 4px var(--neon-green); }
+
+.poll label{ display:block; font-size:12px; margin:3px 0; cursor:pointer; color:#dff; }
+.poll .bar{ height:9px; background:#111; border:1px solid #445; margin-top:2px; }
+.poll .bar span{ display:block; height:100%; background:var(--hot-pink); }
+.poll-results{ display:none; }
+.poll.voted .poll-form{ display:none; }
+.poll.voted .poll-results{ display:block; }
+
+.sticker-wall{
+  margin:12px 6px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,0.35);
+  display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center;
+}
+.sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; }
+.sticker-wall img:hover{ transform:translateY(-1px); filter:drop-shadow(0 0 6px var(--neon-green)); }
+.sticker-wall .wide{ grid-column:span 2; width:188px; }
+
+/* 88x31 buttons, hand-built, no image files */
+.buttons88{ display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin:10px 6px; }
+.btn88{
+  width:88px; height:31px; display:grid; place-items:center; text-align:center;
+  font-family:"MS Sans Serif",Verdana,Geneva,sans-serif; font-size:9px; line-height:1.05;
+  text-transform:uppercase; letter-spacing:.2px; text-decoration:none;
+  border:1px solid #000; box-shadow:inset 0 0 0 1px #fff; color:#fff; cursor:pointer;
+}
+.btn88:hover{ filter:brightness(1.25); }
+.b1{ background:linear-gradient(180deg,#000 0 50%,#111 50% 100%); color:#0f0; }
+.b2{ background:repeating-linear-gradient(90deg,#ff0080 0 4px,#000 4px 8px); }
+.b3{ background:linear-gradient(90deg,#00c2ff,#7a00ff); }
+.b4{ background:#ffe600; color:#000; box-shadow:inset 0 0 0 1px #000; }
+.b5{ background:#000; color:#ff2bd1; }
+.b6{ background:repeating-linear-gradient(45deg,#0a0 0 3px,#050 3px 6px); }
+
+/* ---------- generic content bits ---------- */
+hr.retro{
+  height:12px; border:0; margin:14px 0 16px; position:relative; overflow:visible;
+  background-image:repeating-linear-gradient(90deg,
+    #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,
+    #00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px);
+}
+.content > hr.retro:first-of-type::after{
+  content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
+  background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
+  animation:kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
+}
+@keyframes kitty-rail{ from{ left:-64px } to{ left:100% } }
+
+pre.ascii{
+  margin:14px 0; text-align:center; color:var(--neon-purple);
+  font-family:"Courier New",monospace; font-size:12px; line-height:1.1;
+  text-shadow:0 0 5px var(--neon-purple); overflow-x:auto;
+}
+
+.postit{
+  display:inline-block; max-width:330px; background:#fff9a8; color:#222;
+  font-family:"Comic Sans MS",cursive; font-size:13px; padding:12px 12px 14px;
+  box-shadow:3px 4px 0 rgba(0,0,0,.55); transform:rotate(-2.2deg); position:relative;
+  border-bottom:1px solid #d9cf6a;
+}
+.postit::before{
+  content:""; position:absolute; top:-9px; left:50%; transform:translateX(-50%) rotate(3deg);
+  width:74px; height:20px; background:rgba(255,255,255,.45); border:1px solid rgba(0,0,0,.12);
+}
+.postit.b{ background:#bff7ff; transform:rotate(1.6deg); border-bottom-color:#7fd0da; }
+.postit.c{ background:#ffd0ec; transform:rotate(-1deg); border-bottom-color:#e0a6c6; }
+
+.construction{
+  margin:16px 0; padding:8px 10px; color:#000; font-weight:bold; font-size:13px;
+  font-family:"MS Sans Serif",Verdana,sans-serif; text-align:center;
+  background:repeating-linear-gradient(45deg,#ffcc00 0 12px,#111 12px 24px);
+  border:3px solid #000;
+}
+.construction span{ background:#ffcc00; padding:3px 8px; display:inline-block; border:2px solid #000; }
+
+/* ---------- toolbar ---------- */
+.deck{ margin:14px 0 22px; padding:10px 12px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
+.deck h3{ margin:0 0 4px; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
+.deck .meta{ font-size:12px; color:var(--neon-yellow); margin-bottom:8px; }
+
+.shelf-toolbar{ display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; }
+.btn{
+  padding:6px 10px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+  cursor:pointer; box-shadow:2px 2px 0 #000; font-family:inherit; font-size:13px;
+}
+.btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+.seg{ display:inline-flex; border:3px outset #6af7ff; background:#0e0e33; box-shadow:2px 2px 0 #000; overflow:hidden; }
+.seg button{ border:0; padding:6px 10px; background:transparent; color:#a7ffff; cursor:pointer; font-family:inherit; font-size:13px; }
+.seg button.active{ color:var(--neon-green); background:#140043; }
+.search{
+  flex:1 1 190px; min-width:170px; padding:6px 8px; border:3px inset #6af7ff;
+  background:#000820; color:#a7ffff; box-shadow:2px 2px 0 #000; font-family:inherit;
+}
+.tiny{ font-size:11px; color:var(--neon-yellow); }
+.tagbar{ margin-top:9px; display:flex; flex-wrap:wrap; gap:5px; align-items:center; }
+.tag{
+  font-size:11px; padding:2px 7px; border:2px outset #6af7ff; background:#100034;
+  color:#9df; cursor:pointer; font-family:inherit;
+}
+.tag:hover{ color:var(--neon-green); }
+.tag.on{ border-style:inset; background:var(--neon-purple); color:#fff; }
+.count-line{ margin-top:8px; font-size:12px; color:#9df; }
+
+/* ---------- zones: each shelf has its own weather ---------- */
+.zone{ margin:26px 0 30px; padding:12px 14px 18px; position:relative; }
+.zone h2{ margin:0 0 2px; font-size:26px; }
+.zone .stamp{
+  font-size:11px; font-family:"Courier New",monospace; color:#9ab; margin:0 0 10px;
+  letter-spacing:.4px;
+}
+.book-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+
+/* -- zone A: the card catalogue (made 2009, ported 2021) -- */
+.zone-catalogue{
+  background:#f3ecd8; color:#231a10; border:5px double #6b5636;
+  box-shadow:6px 6px 0 rgba(0,0,0,.5);
+  font-family:"Courier New",Courier,monospace;
+}
+.zone-catalogue h2{ font-family:"Courier New",monospace; color:#6b1b1b; letter-spacing:2px; text-transform:uppercase; }
+.zone-catalogue .stamp{ color:#6b5636; }
+.zone-catalogue .book{
+  background:#fffdf4; border:1px solid #b9a884; box-shadow:2px 2px 0 rgba(0,0,0,.25);
+  background-image:repeating-linear-gradient(#fffdf4 0 22px, #ece2c8 22px 23px);
+}
+.zone-catalogue .book h4{ color:#6b1b1b; text-shadow:none; font-family:"Courier New",monospace; font-size:15px; }
+.zone-catalogue .desc, .zone-catalogue .byline{ color:#3b2f20; }
+.zone-catalogue summary{ color:#8a2b2b; }
+.zone-catalogue .cover{ border:1px solid #8b7550; background:#e8dcc0; }
+.zone-catalogue .more{ background:#e8dcc0; color:#3b2f20; border:2px outset #b9a884; }
+.zone-catalogue .rating{ color:#8a2b2b; }
+.zone-catalogue .tag{ background:#e8dcc0; color:#4a3a22; border-color:#b9a884; }
+.duestamp{
+  position:absolute; right:16px; top:12px; transform:rotate(-9deg);
+  border:3px solid #8a2b2b; color:#8a2b2b; padding:4px 8px; font-size:11px;
+  font-family:"Courier New",monospace; letter-spacing:1px; opacity:.75;
+}
+
+/* -- zone B: memoirs, the parchment phase -- */
+.zone-parchment{
+  background:linear-gradient(180deg,#2a1b0f,#150c06);
+  border:4px ridge #b98a3a; color:#f0e2c8;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.zone-parchment h2{ font-family:Georgia,"Times New Roman",serif; color:#f3d38a; font-style:italic; }
+.zone-parchment .stamp{ color:#b98a3a; }
+.zone-parchment .book{ background:rgba(255,240,210,.05); border:1px solid #6d5330; }
+.zone-parchment .book h4{ color:#f3d38a; text-shadow:none; font-family:Georgia,serif; }
+.zone-parchment .desc{ color:#e6d7bb; font-size:14px; line-height:1.55; }
+.zone-parchment summary{ color:#d8a94e; }
+.zone-parchment .cover{ border:2px solid #6d5330; background:#0d0805; }
+.zone-parchment .more{ background:#3a2a14; color:#f3d38a; border:2px outset #8a6a2f; }
+.zone-parchment .rating{ color:#d8a94e; }
+.zone-parchment .tag{ background:#2a1b0f; color:#e2c68d; border-color:#6d5330; }
+
+/* -- zone C: the weird wing. still my favourite. do not touch. -- */
+.zone-weird{
+  background:#02060a; border:3px solid #14ff9e; color:#bfffe6;
+  box-shadow:0 0 24px rgba(20,255,158,.25), inset 0 0 60px #000;
+  font-family:"Courier New",monospace; overflow:hidden;
+}
+.zone-weird::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.16;
+  background:repeating-linear-gradient(0deg, rgba(255,255,255,.5) 0 1px, transparent 1px 3px);
+  animation:scan 6s linear infinite;
+}
+@keyframes scan{ from{ background-position:0 0 } to{ background-position:0 120px } }
+.zone-weird h2{
+  color:#14ff9e; font-family:"Courier New",monospace; letter-spacing:3px;
+  text-shadow:2px 0 #ff00a0, -2px 0 #00b4ff;
+}
+.zone-weird .stamp{ color:#4a7d68; }
+.zone-weird .book{ background:rgba(20,255,158,.04); border:1px solid #14ff9e; }
+.zone-weird .book:hover{ box-shadow:0 0 14px rgba(20,255,158,.45); }
+.zone-weird .book h4{ color:#eaffcd; text-shadow:1px 0 #ff00a0; font-family:"Courier New",monospace; }
+.zone-weird .desc{ color:#a9e7cd; }
+.zone-weird summary{ color:#14ff9e; }
+.zone-weird .cover{ border:1px solid #14ff9e; background:#000; }
+.zone-weird .more{ background:#001a10; color:#14ff9e; border:2px outset #0b8f5c; }
+.zone-weird .rating{ color:#ff00a0; }
+.zone-weird .tag{ background:#001a10; color:#7fe9c2; border-color:#0b8f5c; }
+
+/* -- zone D: photocopied flyer, taped to a pole -- */
+.zone-xerox{
+  background:#e9e9e6; color:#111; border:2px solid #111;
+  font-family:"Arial Narrow",Arial,Helvetica,sans-serif;
+  box-shadow:5px 5px 0 #000; filter:contrast(118%) grayscale(18%);
+}
+.zone-xerox h2{
+  font-family:Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;
+  color:#111; letter-spacing:1px; text-transform:uppercase; font-size:32px;
+  transform:skewX(-4deg);
+}
+.zone-xerox .stamp{ color:#444; }
+.zone-xerox .book{ background:#fff; border:2px solid #111; box-shadow:3px 3px 0 #111; }
+.zone-xerox .book h4{ color:#111; text-shadow:none; font-family:Impact,sans-serif; letter-spacing:.5px; font-size:17px; }
+.zone-xerox .desc{ color:#222; }
+.zone-xerox summary{ color:#000; background:#ffe600; display:inline-block; padding:0 4px; }
+.zone-xerox .cover{ border:2px solid #111; background:#ddd; }
+.zone-xerox .more{ background:#111; color:#fff; border:2px solid #111; }
+.zone-xerox .rating{ color:#111; background:#ffe600; padding:0 4px; display:inline-block; }
+.zone-xerox .tag{ background:#fff; color:#111; border:1px dashed #111; }
+.zone-xerox .book:nth-child(odd){ transform:rotate(-.5deg); }
+.zone-xerox .book:nth-child(even){ transform:rotate(.6deg); }
+
+/* -- zone E: the drawer where things go when i can't classify them -- */
+.zone-drawer{
+  background:
+    linear-gradient(180deg, rgba(255,43,209,.12), rgba(0,0,0,.6)),
+    repeating-linear-gradient(45deg,#12002e 0 18px,#1a0040 18px 36px);
+  border:6px ridge var(--hot-pink); color:#ffd9f4;
+}
+.zone-drawer h2{
+  color:#fff; font-size:30px;
+  text-shadow:0 0 6px var(--hot-pink),0 0 16px var(--hot-pink),2px 2px 0 #000;
+  font-family:"Comic Sans MS",cursive;
+}
+.zone-drawer .stamp{ color:#ffb0e8; }
+.zone-drawer .book{ background:rgba(0,0,0,.45); border:3px ridge var(--hot-pink); }
+.zone-drawer .book h4{ color:#fff; text-shadow:0 0 8px var(--hot-pink); }
+.zone-drawer .desc{ color:#ffe6f8; }
+.zone-drawer summary{ color:#ffe600; }
+.zone-drawer .cover{ border:3px inset var(--hot-pink); background:#000; }
+.zone-drawer .more{ background:#3a0030; color:#ffd9f4; border:3px outset var(--hot-pink); }
+.zone-drawer .rating{ color:#ffe600; }
+.zone-drawer .tag{ background:#3a0030; color:#ffd9f4; border-color:var(--hot-pink); }
+.zone-drawer .book:nth-child(3n){ transform:rotate(-1.1deg); }
+.zone-drawer .book:nth-child(3n+2){ transform:rotate(.9deg); }
+
+/* ---------- book card (shared skeleton, dressed by the zone) ---------- */
 .book{
-  display: grid;
-  grid-template-columns: var(--cover-w) 1fr;  /* cover | text */
-  grid-template-rows: auto 1fr auto;
-  gap: 10px 12px;
-  align-items: start;
-  border: 3px ridge #6af7ff;
-  background: rgba(0,0,0,0.35);
-  padding: 8px;
-  box-shadow: inset 0 0 6px #000;
+  display:grid;
+  grid-template-columns:var(--cover-w) 1fr;
+  gap:8px 12px; align-items:start; padding:9px;
 }
-
-/* Cover column stays small and vertical */
 .cover{
-  grid-row: 1 / span 3;   /* spans title, details, button */
-  grid-column: 1;
-  width: var(--cover-w);
-  aspect-ratio: var(--cover-ratio);
-  border: 3px inset #6af7ff;
-  background: #000;
-  display: grid;
-  place-items: center;
-  padding: 4px;           /* thin inner frame */
+  grid-row:1 / span 6; grid-column:1;
+  width:var(--cover-w); aspect-ratio:var(--cover-ratio);
+  display:grid; place-items:center; padding:4px;
+  border:3px inset #6af7ff; background:#000;
 }
-
-.cover img{
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;     /* full image visible */
-  object-position: center top;
-  background: #000;
-}
-
-/* Text lives in the flexible column */
-.book h4,
-.book details,
+.cover img{ max-width:100%; max-height:100%; object-fit:contain; object-position:center top; background:#000; }
+.book h4, .book .byline, .book .rating, .book details, .book .tags, .book .more{ grid-column:2; }
+.book h4{ margin:0; font-size:16px; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); line-height:1.25; }
+.book .byline{ margin:0; font-size:12px; opacity:.85; }
+.book .rating{ margin:0; font-size:13px; letter-spacing:1px; }
+.book details{ margin:0; background:rgba(0,0,0,.14); padding:5px 7px; border:1px dotted currentColor; }
+.book details[open]{ background:rgba(0,0,0,.22); }
+.book summary{ cursor:pointer; font-size:12px; }
+.book .desc p{ margin:6px 0; font-size:12.5px; line-height:1.5; }
+.book .tags{ margin:0; display:flex; flex-wrap:wrap; gap:4px; }
 .book .more{
-  grid-column: 2;
+  align-self:start; justify-self:start; text-decoration:none; display:inline-block;
+  padding:3px 8px; font-size:12px; box-shadow:2px 2px 0 rgba(0,0,0,.6);
+}
+.book .more:active{ transform:translate(1px,1px); }
+.book.hit{ outline:3px dashed var(--neon-yellow); outline-offset:3px; }
+
+.pull{
+  margin:10px 0 0; padding:8px 10px; font-style:italic; font-size:13px;
+  border-left:4px solid currentColor; opacity:.92;
 }
 
-.book h4{
-  margin: 0;
-  color: var(--neon-purple);
-  text-shadow: 0 0 6px var(--neon-purple);
-  font-size: 16px;
+/* ---------- shrine (the one thing on this site i actually designed) ---------- */
+.shrine{
+  margin:26px 0; padding:18px 16px; text-align:center; position:relative;
+  border:8px ridge #ffcf3f; background:radial-gradient(circle at 50% 20%, #2a0d4d, #08000f 75%);
+  box-shadow:0 0 30px rgba(255,207,63,.35), inset 0 0 40px #000;
 }
-.book details{ margin: 0; }
-.book .more{ align-self: start; }
+.shrine h3{
+  margin:0 0 4px; font-family:Georgia,serif; font-size:22px; color:#ffcf3f;
+  text-shadow:0 0 10px #ffcf3f; letter-spacing:1px;
+}
+.shrine .who{ font-size:12px; color:#c9a0ff; margin:0 0 12px; }
+.shrine blockquote{
+  margin:0 auto; max-width:640px; text-align:left; font-family:Georgia,serif;
+  font-size:14px; line-height:1.7; color:#f6ecd2;
+  border-top:1px solid rgba(255,207,63,.4); border-bottom:1px solid rgba(255,207,63,.4);
+  padding:12px 6px;
+}
+.shrine .lamps{ font-size:20px; letter-spacing:10px; color:#ffcf3f; margin-top:10px; animation:flicker 3.4s infinite; }
+@keyframes flicker{ 0%,100%{opacity:1} 47%{opacity:.55} 52%{opacity:1} 78%{opacity:.7} }
 
-/* Stack on small screens */
-@media (max-width: 520px){
-  .book{
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .cover{
-    grid-row: auto; grid-column: auto;
-    width: 100%;
-    aspect-ratio: var(--cover-ratio);
-  }
-  .book h4, .book details, .book .more{ grid-column: auto; }
+/* ---------- to-read pile ---------- */
+.tbr{ margin:24px 0; padding:12px 14px; border:4px dashed var(--neon-green); background:rgba(0,20,10,.4); }
+.tbr h3{ margin:0 0 8px; color:var(--neon-green); }
+.tbr ol{ margin:0; padding-left:22px; font-size:13px; line-height:1.9; }
+.tbr li.dead{ text-decoration:line-through; opacity:.55; }
+.tbr .note{ font-size:11px; color:var(--neon-yellow); }
+
+/* ---------- shoutbox ---------- */
+.shoutbox{ margin:24px 0; border:3px inset #6af7ff; background:#000816; padding:10px 12px; }
+.shoutbox h3{ margin:0 0 8px; color:var(--neon-blue); font-size:17px; }
+.shout{ font-size:12.5px; margin:0 0 7px; padding-bottom:6px; border-bottom:1px dotted #234; }
+.shout b{ color:var(--hot-pink); }
+.shout .t{ color:#567; font-size:11px; }
+.shoutbox .closed{ font-size:11px; color:var(--neon-yellow); margin-top:8px; }
+
+/* ---------- footer ---------- */
+.footer{
+  margin-top:22px; padding:14px 10px 18px; text-align:center; font-size:12px;
+  border-top:6px ridge var(--neon-purple); background:rgba(0,0,0,.5); color:#9df;
+}
+.webring{
+  display:inline-block; margin:8px auto; padding:6px 12px;
+  border:3px double var(--neon-green); background:#000; color:var(--neon-green);
+  font-family:"Courier New",monospace; font-size:12px;
+}
+.webring a{ color:var(--neon-green); }
+
+/* ---------- VHS page transition ---------- */
+.vhs::after{
+  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background:
+    linear-gradient(#000,transparent 12%,#0000 88%,#000),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+  animation:vhs 240ms steps(2,end);
+}
+@keyframes vhs{ from{ opacity:0 } to{ opacity:1 } }
+
+/* sparkles */
+.spark{ position:fixed; width:8px; height:8px; pointer-events:none; z-index:9998; font-size:11px; }
+
+/* back to top rocket */
+#totop{
+  position:fixed; right:14px; bottom:14px; z-index:50; padding:8px 10px;
+  border:3px outset #6af7ff; background:#0e0e33; color:var(--neon-yellow);
+  cursor:pointer; box-shadow:2px 2px 0 #000; font-family:inherit; font-size:12px;
 }
 
-  </style>
+/* ---------- small screens: it still works, it just gets taller ---------- */
+@media (max-width:820px){
+  .layout, .layout tbody, .layout tr, .layout td{ display:block; width:auto; }
+  .sidebar{ width:auto; border-right:0; border-bottom:6px ridge var(--neon-purple); }
+  .content{ border-left:0; }
+  #glitter-title{ font-size:34px; padding-top:64px; }
+  #glitter-title::before{ left:50%; transform:translate(-115%,-10%); top:26px; }
+  #glitter-title::after{ right:50%; transform:translate(115%,-10%); top:26px; }
+}
+@media (max-width:560px){
+  .book{ grid-template-columns:1fr; }
+  .cover{ grid-row:auto; grid-column:auto; width:120px; }
+  .book h4,.book .byline,.book .rating,.book details,.book .tags,.book .more{ grid-column:auto; }
+  .zone-xerox .book, .zone-drawer .book{ transform:none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; }
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
+<div class="page">
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">★ library cart squeaking by ★ pixels smell like old paperbacks ★</marquee>
-    </div>
+  <h1 id="glitter-title">Galaxy 981</h1>
+  <p class="subtitle">KOOL BOOKS <small>&#9679; a shelf, kept badly, since forever</small></p>
 
-    <table class="layout">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="index.html#chat-room"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
-          </div>
-
-          <div class="sticker-wall">
-            <img src="arabic.gif" alt="Arabic">
-            <img src="qatar.gif" alt="Qatar">
-            <img src="pali.gif" alt="Palestine">
-            <img src="sleepycat.gif" alt="Sleepy cat">
-            <img src="peta.gif" alt="PETA">
-            <img src="fist.gif" alt="Fist">
-            <img src="freespeechonline.gif" alt="Free Speech Online">
-            <img src="scifi.gif" alt="Sci-Fi" class="wide">
-          </div>
-        </td>
-
-        <td class="content">
-          <hr class="retro">
-
-          <div class="post">
-            <h3>Browse Books</h3>
-            <div class="meta">Filter by genre, search titles or shuffle</div>
-
-            <div class="shelf-toolbar">
-              <div class="seg" role="tablist" aria-label="Genre">
-                <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
-                <button data-filter="nonfiction" role="tab" aria-selected="false">Non-Fiction</button>
-                <button data-filter="fiction" role="tab" aria-selected="false">Fiction</button>
-              </div>
-              <input id="search" class="search" type="search" placeholder="Search title or text">
-              <button id="shuffle" class="btn">🔀 Shuffle</button>
-              <button id="random" class="btn">🎲 Random Book</button>
-              <span class="tiny">Tip: “Enter” focuses search, “Esc” clears it.</span>
-            </div>
-          </div>
-
-          <!-- Non-Fiction -->
-          <div class="post" id="non-fiction">
-            <h3>Non-Fiction Books</h3>
-            <div class="book-grid" id="grid-nf">
-              <!-- My Past and Thoughts -->
-              <article class="book" data-genre="nonfiction" data-title="My Past and Thoughts">
-                <div class="cover"><img src="herzen.jpeg" alt="My Past and Thoughts cover"></div>
-                <h4>My Past and Thoughts</h4>
-                <details open>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>800-page memoirs of the 19th century Russian intellectual and revolutionary, Alexander Herzen. It is deeply personable, vibrant with life and history. I have read dozens of memoirs and autobiographies, this one is a literary masterpiece.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/70069.My_Past_and_Thoughts?ref=nav_sb_ss_1_16">More Info</a>
-              </article>
-
-              <!-- Defying Hitler -->
-              <article class="book" data-genre="nonfiction" data-title="Defying Hitler">
-                <div class="cover"><img src="hitler.jpg" alt="Defying Hitler cover"></div>
-                <h4>Defying Hitler</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Diary written by Sebastian Haffner, a young German Jew, as he watches his country descend into Nazism. The litereary style and writing is particularly brilliant.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/65458.Defying_Hitler?ref=nav_sb_ss_1_14">More Info</a>
-              </article>
-
-              <!-- Available Light -->
-              <article class="book" data-genre="nonfiction" data-title="Available Light">
-                <div class="cover"><img src="geertz.jpg" alt="Available Light cover"></div>
-                <h4>Available Light: Anthropological Reflections on Philosophical Topics.</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Clifford Geertz doing philosophy, what's not to like? Philosophy of anthropology, anthropology of philosophy? Being a work of *reflection*, Clifford isn’t afraid of going on tangents. Im hesitant to recommend this because a lot of background knolwedge is needed to appreaciate some of the essays. But the literary style makes it accessible to most people.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/330007.Available_Light">More Info</a>
-              </article>
-
-              <!-- Russian Thinkers -->
-              <article class="book" data-genre="nonfiction" data-title="Russian Thinkers">
-                <div class="cover"><img src="russian.jpg" alt="Russian Thinkers cover"></div>
-                <h4>Russian Thinkers</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Fascinating inights into 19th century Russian Intelligentsia. Was particularly amused on how many of them used literature as a tool for liberation, seeing that it was the only medium available to them for social criticism. Isaiah Berlin, the writer, does a profoundly good job at making such a dense subject extremely entertaining.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/84707.Russian_Thinkers">More Info</a>
-              </article>
-
-              <!-- Achieving Our Country -->
-              <article class="book" data-genre="nonfiction" data-title="Achieving Our Country">
-                <div class="cover"><img src="left.jpg" alt="Achieving Our Country cover"></div>
-                <h4>Achieving Our Country: Leftist Thought in Twentieth-Century America</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Philosopher Richard Rorty critiques the American Left for straying from its pragmatic roots of hope and inclusive, class-centered  patriotism, towards abstract critique and passive cynicism. He reminisces about an earlier Left, aligned with figures like Dewey and Whitman, which championed solidarity and progress. Rorty acknowledges America's dual history of progress and atrocity but sees these as failures of imagination rather than inherent sin, arguing for continued constructive engagement over condemnation. He sees America as an evolving project that should learn from past injustices without being paralyzed by them, urging a move away from theoretical detachment towards active policy-making and reform.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86103.Achieving_Our_Country">More Info</a>
-              </article>
-
-              <!-- Philosophy and Social Hope -->
-              <article class="book" data-genre="nonfiction" data-title="Philosophy and Social Hope">
-                <div class="cover"><img src="hope.jpeg" alt="Philosophy and Social Hope cover"></div>
-                <h4>Philosophy and Social Hope</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Initially drawn to uncovering a universal law to explain historical and political phenomena, I was once captivated by theories suggesting that humans operated under fixed principles. Over time, and influenced by Rorty, my perspective shifted. I came to reject essentialism and foundationalism and embraced a more pluralistic, dynamic understanding of human behaviour. I cam to also recognise language and discourse as central to our interaction with the world.</p>
-                    <p>This book is the best possible introduction to Rorty, clear and digestible philosophy that is relevant to people’s everyday thinking. Rorty's relativistic view, which might unsettle some, resonates deeply with me, as it reveals a world where fixed truths give way to discourse and practical utility. He argues that our beliefs do not mirror reality but are responses to cope with it. This framework dismisses the need for a unified appearance-reality distinction, given that we assess our beliefs based on their usefulness in achieving our goals. In this light, the sciences and religion serve different purposes and need not be reconciled.</p>
-                    <p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. Consider this quote:</p>
-                    <p>”We pragmatists cannot make sense of the idea that we should pursue truth for its own sake. We cannot regard truth as a goal of inquiry. The purpose of inquiry is to achieve agreement among human beings about what to do, to bring about consensus on the ends to be achieved and the means to be used to achieve those ends. Inquiry that does not achieve coordination of behaviour is not inquiry but simply wordplay. To argue for a certain theory about the microstructure of material bodies, or about the proper balance of powers between branches of government, is to argue about what we should do: how we should use the tools at our disposal in order to make technological, or political, progress. So, for pragmatists there is no sharp break between natural science and social science, nor between social science and politics, nor between politics, philosophy and literature. All areas of culture are parts of the same endeavour to make life better.”</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86099.Philosophy_and_Social_Hope">More Info</a>
-              </article>
-
-              <!-- The Utopia of Rules -->
-              <article class="book" data-genre="nonfiction" data-title="The Utopia of Rules">
-                <div class="cover"><img src="Bureaucracy.jpeg" alt="The Utopia of Rules cover"></div>
-                <h4>The Utopia of Rules: On Technology, Stupidity, and the Secret Joys of Bureaucracy</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Premise: Paperwork sucks and bureaucracy stifles all creativity, imagination, and innovation. Oh and also there has barely been any technological progressive in the past century. Also capitalism sucks. Also the assumption that capitalism = free market = deregulation = anti-bureaucracy = libertarianism or right wing, is not sound.</p>
-                    <p>Of course the book is much more nuanced and interesting than this straw man version and definitely worth reading.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/22245334-the-utopia-of-rules">More Info</a>
-              </article>
-
-              <!-- The Social Construction of What? -->
-              <article class="book" data-genre="nonfiction" data-title="The Social Construction of What?">
-                <div class="cover"><img src="socialconstruction.jpg" alt="The Social Construction of What? cover"></div>
-                <h4>The Social Construction of What?</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>So, you know how there's always been this big ol' debate between scientists and philosophers about what's real and what's just a social construct? Well, Hacking jumps right into the middle of that mess and starts poking around for some answers. He's got a great way of breaking things down, using anecdotes and analysis to make some pretty complex ideas feel a lot more accessible.</p>
-                    <p>One thing that caught my attention was how he compares this Science Wars business to the old nominalist vs. structuralist debate. Now, I don't want to get too bogged down in the details here, but basically, nominalists think that reality is whatever we say it is, while structuralists believe that there's some deeper truth beneath the surface. Hacking's take is that, yeah, there might be some objectivity to science, but the way we go about figuring out what's true is definitely influenced by society.</p>
-                    <p>What Hacking's trying to do here is get us to think more critically about how we categorize things. He wants us to look beyond the obvious and consider all the social forces that shape our understanding of reality.</p>
-                    <p>Now, I know some people might be thinking, "But wait, isn't this social construction stuff just a bunch of postmodern mumbo-jumbo?" And, honestly, I can see why you might think that. But Hacking's approach is different. He's not trying to tear down the whole system or anything - he just wants us to be more aware of how our beliefs and values influence the way we see the world. The book is a referee's whistle in the culture wars.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/841374.The_Social_Construction_of_What_">More Info</a>
-              </article>
-
-              <!-- Why We Love Dogs -->
-              <article class="book" data-genre="nonfiction" data-title="Why We Love Dogs, Eat Pigs, and Wear Cows">
-                <div class="cover"><img src="dogs.jpeg" alt="Why We Love Dogs cover"></div>
-                <h4>Why We Love Dogs, Eat Pigs, and Wear Cows</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Melanie Joy delves into the psychological and societal mechanisms that lead to selective compassion when it comes to animals. A provocative and enlightening read that questions the ethics and traditions of our food choices.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/6532109-why-we-love-dogs-eat-pigs-and-wear-cows">More Info</a>
-              </article>
-
-              <!-- Animal Liberation -->
-              <article class="book" data-genre="nonfiction" data-title="Animal Liberation">
-                <div class="cover"><img src="animal.jpeg" alt="Animal Liberation cover"></div>
-                <h4>Animal Liberation</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Peter Singer's groundbreaking work, 'Animal Liberation', has been a vital force in the animal rights movement. Challenging the ethical foundation of our treatment of animals, it remains a thought-provoking resource on the subject of animal ethics.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/29380.Animal_Liberation">More Info</a>
-              </article>
-            </div>
-          </div>
-
-          <!-- Fiction -->
-          <div class="post" id="fiction">
-            <h3>Fiction Books</h3>
-            <div class="book-grid" id="grid-fic">
-              <!-- Songs of a Dead Dreamer and Grimscribe -->
-              <article class="book" data-genre="fiction" data-title="Songs of a Dead Dreamer and Grimscribe">
-                <div class="cover"><img src="ligotti1.jpeg" alt="Songs of a Dead Dreamer and Grimscribe cover"></div>
-                <h4>Songs of a Dead Dreamer and Grimscribe</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Thomas Ligotti is now mentioned in the same breath among the greats like Poe, Lovecraft, and Kafka. But he's got a pretty unique style that sets him apart, too. In this anthology of 33 stories, is a window into his eerie genius.</p>
-                    <p>Now, I know some people might call his stuff "cosmic horror," but honestly, it's so much more than that. Sure, there's some sci-fi elements and ancient mythology thrown in, but ultimately, Ligotti's work is all about exploring the human condition. And its not always pretty.  You need to check this out. Trust me, the writing itself is worth it, even if you're not a fan of the 'weird fiction' genre.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/24611567-songs-of-a-dead-dreamer-and-grimscribe">More Info</a>
-              </article>
-
-              <!-- Teatro Grottesco -->
-              <article class="book" data-genre="fiction" data-title="Teatro Grottesco">
-                <div class="cover"><img src="ligotti2.jpeg" alt="Teatro Grottesco cover"></div>
-                <h4>Teatro Grottesco</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Kafka meets Poe, but without the sappy romance. Ligotti's stories are laced with black humour but don't expect to be scared in a traditional way. These tales are quite cerebral, they really dig deep into that grey matter between your ears, and not meant to merely entertain you.
-                    His prose, at times wry, pessimistic, or bitingly sarcastic, is nonetheless beautiful. Chef's kiss. More than perfect.</p>
-                    <p>You'll encounter stories that are both metaphorical and allegorical, set in strange towns, surreal scenarios, and the monotonous cruelty of daily life. You will read this :)</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/2452401.Teatro_Grottesco">More Info</a>
-              </article>
-
-              <!-- Dark Entries -->
-              <article class="book" data-genre="fiction" data-title="Dark Entries">
-                <div class="cover"><img src="dark.jpeg" alt="Dark Entries cover"></div>
-                <h4>Dark Entries</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Aickman's stories are super immersive, with a richness that'll suck you right in. But, they're also kinda... weird. Like, you'll be reading along, and suddenly, things get a little (okay, a lot) inexplicable. You'll be left wondering, "Wait, what just happened? Did I miss something?". These aren't your usual bump-in-the-night kind of stories. They're not Steven King type horrors. There's no gore, no cheap scares, and no obvious villains. They're a bit more refined, yet no less chilling for their subtlety. Aickman builds worlds that you feel you know... only to slip through the cracks of reality when you least expect it. So, if you're lookin' for somethin' a little different, a little odd, a little WTF, then this collection is for you.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/10552013-dark-entries">More Info</a>
-              </article>
-
-              <!-- Song for the Unraveling of the World -->
-              <article class="book" data-genre="fiction" data-title="Song for the Unraveling of the World">
-                <div class="cover"><img src="song.jpeg" alt="Song for the Unraveling of the World cover"></div>
-                <h4>Song for the Unraveling of the World</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Brian Evenson's collection is totally impossible to pin down. Again this book is like, horror, but not the usual jump-scare stuff. Some of them have aliens and weird shenanigans that feel more at home in sci-fi, but they're not really that either. And the atmosphere is quite uncanny. It's got this timeless, eerie feeling like it's going down in some parallel universe. You're never sure if you're in the past, the future, or some other creepy dimension that's just a stone's throw away from our own. And the details. Evenson doesn't give you everything at once; he drops little breadcrumbs that make your skin crawl and leaves the rest for your brain to trip over later. There's this one story about a girl with no face, or a dude who's convinced he's being watched all the time - it's freaky because you start seeing those things out of the corner of your eye even after you finish the book.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/41888678-song-for-the-unraveling-of-the-world">More Info</a>
-              </article>
-
-              <!-- Fevre Dream -->
-              <article class="book" data-genre="fiction" data-title="Fevre Dream">
-                <div class="cover"><img src="Fevre_dream.jpeg" alt="Fevre Dream cover"></div>
-                <h4>Fevre Dream</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>A vampire novel by George RR Martin, and not the cheesy 500 year old vampire falling for a highschool girl type (ahem, Twighlight).</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/382450.Fevre_Dream?ref=nav_sb_ss_1_10">More Info</a>
-              </article>
-
-              <!-- Disgrace -->
-              <article class="book" data-genre="fiction" data-title="Disgrace">
-                <div class="cover"><img src="disgrace.jpeg" alt="Disgrace cover"></div>
-                <h4>Disgrace</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>In post-apartheid South Africa, Lurie, a university lecturer, is disgraced for hooking up with his student. He retreats to the country to live with his daughter. There, they experience her gruelling rape. He turns to working in an "Animal Welfare" clinic whose main role is to kill dogs and cats. He takes it upon himself to incinerate the animals himself, to save them from posthumous humiliation. The book is full of allegories, human emotions and insights on the post-apartheid transitory period and shifting racial power dynamics between whites and blacks who both undergo instances of disgrace.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/en/book/show/6192">More Info</a>
-              </article>
-
-              <!-- They Shoot Horses, Don't They? -->
-              <article class="book" data-genre="fiction" data-title="They Shoot Horses, Don't They?">
-                <div class="cover"><img src="25B9F568-3DE5-4A72-B256-094897C3DC63_1_201_a.jpeg" alt="They Shoot Horses, Don't They? cover"></div>
-                <h4>They Shoot Horses, Don't They?</h4>
-                <details>
-                  <summary>Description</summary>
-                  <div class="desc">
-                    <p>Written in 1935, this is an existential novel set during the Great Depression. Gloria Beatty and her boyfriend particpate in a gruelling and long dance marathon contest that drags for weeks, all to win the $1000 prize money or be noticed by studio producers and movie stars. At one point, Gloria asks ”Why are these high-powered scientists always screwing around trying to prolong life instead of finding pleasant ways to end it?”. The novel ends with one of the most bleak questions in all of literature, which is the title of the book. It is meant to depict the helplessness people felt during the Depression, who worked really hard in a rat-race marathon to the top but ended up nowhere.</p>
-                  </div>
-                </details>
-                <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/152052.They_Shoot_Horses_Don_t_They_?ref=nav_sb_ss_1_17">More Info</a>
-              </article>
-            </div>
-          </div>
-
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
+  <div class="headbar">
+    <span>you are visitor <span class="counter"><b>0</b><b>0</b><b>1</b><b>4</b><b>8</b><b>2</b></span></span>
+    <span>&#9679;</span>
+    <span>last updated: <b id="lastup">recently, i think</b></span>
+    <span>&#9679;</span>
+    <span class="blink">NEW BOOKS ADDED</span>
+    <span>&#9679;</span>
+    <span>best viewed with your eyes</span>
   </div>
 
-  <!-- Internal VHS transition for relative links -->
-  <script>
-    document.querySelectorAll('.page a[href]').forEach(a => {
-      const url = a.getAttribute('href') || '';
-      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.documentElement.classList.add('vhs');
-        setTimeout(() => { window.location.href = url; }, 200);
-      });
+  <div class="marquee-wrap">
+    <marquee behavior="alternate" scrollamount="6">&#9733; library cart squeaking by &#9733; pixels smell like old paperbacks &#9733; i will lend you any of these &#9733; i will not get them back &#9733;</marquee>
+  </div>
+
+  <table class="layout">
+    <tr>
+      <td class="sidebar">
+
+        <div class="nav">
+          <a href="index.html"><img src="cutehome.gif" alt="" class="nav-icon">Home</a>
+          <a href="about.html"><img src="about.gif" alt="" class="nav-icon">About</a>
+          <a href="blog_posts.html"><img src="post.gif" alt="" class="nav-icon">Entries</a>
+          <a href="index.html#chat-room"><img src="chattt.gif" alt="" class="nav-icon">Chat</a>
+          <a href="coolsite.html"><img src="coollinks.gif" alt="" class="nav-icon">Kool Webpages</a>
+          <a href="guestbook.html"><img src="book-0037.gif" alt="" class="nav-icon">Guestbook</a>
+          <a href="books.html" class="here"><img src="catread.gif" alt="" class="nav-icon">Kool Books</a>
+          <a href="Truth2.html"><img src="math.gif" alt="" class="nav-icon">Truth Table</a>
+          <a href="contact.html"><img src="phone.gif" alt="" class="nav-icon">Contact</a>
+        </div>
+
+        <div class="widget">
+          <h5>Now reading</h5>
+          <div class="nowreading">
+            <img src="herzen.jpeg" alt="">
+            <div>
+              <p><b>My Past and Thoughts</b></p>
+              <p class="lo">Herzen &#9679; vol. 2 &#9679; started in March</p>
+            </div>
+          </div>
+          <div class="progress" aria-hidden="true">
+            <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+            <i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="lo">roughly 58%. the bookmark is a receipt.</p>
+        </div>
+
+        <div class="widget">
+          <h5>Change the vibe</h5>
+          <p class="lo">the site has moods. so do i.</p>
+          <button class="btn" data-skin="" style="width:100%;margin-bottom:5px">&#127769; Midnight</button>
+          <button class="btn" data-skin="skin-bubblegum" style="width:100%;margin-bottom:5px">&#127849; Bubblegum</button>
+          <button class="btn" data-skin="skin-terminal" style="width:100%">&#128421; Terminal</button>
+        </div>
+
+        <div class="widget poll" id="poll">
+          <h5>Poll #7</h5>
+          <p>Dog-earing pages is:</p>
+          <div class="poll-form">
+            <label><input type="radio" name="p7" value="0"> fine, it's my book</label>
+            <label><input type="radio" name="p7" value="1"> a small crime</label>
+            <label><input type="radio" name="p7" value="2"> unforgivable</label>
+            <label><input type="radio" name="p7" value="3"> i eat the pages</label>
+            <button class="btn" id="vote" style="margin-top:6px">Vote</button>
+          </div>
+          <div class="poll-results">
+            <p>fine, it's my book <span class="lo">61%</span><span class="bar"><span style="width:61%"></span></span></p>
+            <p>a small crime <span class="lo">22%</span><span class="bar"><span style="width:22%"></span></span></p>
+            <p>unforgivable <span class="lo">14%</span><span class="bar"><span style="width:14%"></span></span></p>
+            <p>i eat the pages <span class="lo">3%</span><span class="bar"><span style="width:3%"></span></span></p>
+            <p class="lo">37 votes. thank you for participating.</p>
+          </div>
+        </div>
+
+        <div class="widget">
+          <h5>Shelf stats</h5>
+          <p class="lo">books listed: <b id="stat-total">0</b></p>
+          <p class="lo">re-read at least twice: <b>4</b></p>
+          <p class="lo">bought twice by accident: <b>2</b></p>
+          <p class="lo">still lent out: <b>1</b> (you know who you are)</p>
+        </div>
+
+        <div class="sticker-wall">
+          <img src="arabic.gif" alt="Arabic">
+          <img src="qatar.gif" alt="Qatar">
+          <img src="pali.gif" alt="Palestine">
+          <img src="sleepycat.gif" alt="Sleepy cat">
+          <img src="peta.gif" alt="PETA">
+          <img src="fist.gif" alt="Fist">
+          <img src="freespeechonline.gif" alt="Free Speech Online">
+          <img src="scifi.gif" alt="Sci-Fi" class="wide">
+        </div>
+
+        <div class="buttons88">
+          <a class="btn88 b1" href="#weird">weird fiction<br>enjoyer</a>
+          <a class="btn88 b2" href="#catalogue">anti-<br>foundationalist</a>
+          <a class="btn88 b3" href="#drawer">no genre<br>discipline</a>
+          <a class="btn88 b4" href="#xerox">read the<br>Singer</a>
+          <a class="btn88 b5" href="guestbook.html">sign my<br>guestbook!!</a>
+          <a class="btn88 b6" href="coolsite.html">surf the<br>web</a>
+        </div>
+
+        <p class="tiny" style="text-align:center;margin:8px 6px">
+          this page was hand-typed.<br>the CSS is a compost heap.
+        </p>
+
+      </td>
+
+      <td class="content">
+
+        <hr class="retro">
+
+        <div class="deck">
+          <h3>Browse the shelf</h3>
+          <div class="meta">Filter, search, shuffle, or let the dice pick. Sections are sorted by the era of me that made them.</div>
+
+          <div class="shelf-toolbar">
+            <div class="seg" role="tablist" aria-label="Genre">
+              <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
+              <button data-filter="nonfiction" role="tab" aria-selected="false">Non-Fiction</button>
+              <button data-filter="fiction" role="tab" aria-selected="false">Fiction</button>
+            </div>
+            <input id="search" class="search" type="search" placeholder="Search titles, authors, ramblings&hellip;" aria-label="Search books">
+            <button id="shuffle" class="btn">&#128256; Shuffle</button>
+            <button id="random" class="btn">&#127922; Random book</button>
+            <button id="expand" class="btn">&#128220; Open all</button>
+            <button id="sparkle" class="btn">&#10024; Sparkles: off</button>
+          </div>
+
+          <div class="tagbar">
+            <span class="tiny">tags:</span>
+            <button class="tag" data-tag="reread">#reread</button>
+            <button class="tag" data-tag="changed-my-mind">#changed-my-mind</button>
+            <button class="tag" data-tag="russians">#russians</button>
+            <button class="tag" data-tag="weird">#weird</button>
+            <button class="tag" data-tag="animals">#animals</button>
+            <button class="tag" data-tag="pragmatism">#pragmatism</button>
+            <button class="tag" data-tag="bleak">#bleak</button>
+            <button class="tag" data-tag="lent-out">#lent-out</button>
+            <button class="tag" data-tag="funny">#funny</button>
+          </div>
+
+          <div class="count-line"><span id="count">0</span> books showing. <span class="tiny">Enter jumps to search, Esc clears everything.</span></div>
+        </div>
+
+        <div style="text-align:center;margin:16px 0">
+          <div class="postit">rating systems are inconsistent across this page because i changed my mind about rating systems roughly four times. the stars, the paw prints and the percentages do not convert.</div>
+        </div>
+
+        <!-- ============ ZONE A : CATALOGUE ============ -->
+        <section class="zone zone-catalogue" id="catalogue">
+          <div class="duestamp">DUE BACK<br>NEVER</div>
+          <h2>Shelf 01 &mdash; The ones that rearranged my head</h2>
+          <p class="stamp">est. 2009 &#9679; philosophy, mostly &#9679; card-catalogue styling because i went through a phase &#9679; ratings out of five stars</p>
+
+          <div class="book-grid">
+
+            <article class="book" data-genre="nonfiction" data-tags="pragmatism changed-my-mind reread" data-title="Philosophy and Social Hope">
+              <div class="cover"><img src="hope.jpeg" alt="Philosophy and Social Hope cover"></div>
+              <h4>Philosophy and Social Hope</h4>
+              <p class="byline">Richard Rorty &#9679; 1999 &#9679; read three times, argued about twice that</p>
+              <p class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <details open>
+                <summary>the long version</summary>
+                <div class="desc">
+                  <p>Initially drawn to uncovering a universal law to explain historical and political phenomena, I was once captivated by theories suggesting that humans operated under fixed principles. Over time, and influenced by Rorty, my perspective shifted. I came to reject essentialism and foundationalism and embraced a more pluralistic, dynamic understanding of human behaviour. I came to also recognise language and discourse as central to our interaction with the world.</p>
+                  <p>This book is the best possible introduction to Rorty, clear and digestible philosophy that is relevant to people's everyday thinking. Rorty's relativistic view, which might unsettle some, resonates deeply with me, as it reveals a world where fixed truths give way to discourse and practical utility. He argues that our beliefs do not mirror reality but are responses to cope with it. This framework dismisses the need for a unified appearance-reality distinction, given that we assess our beliefs based on their usefulness in achieving our goals. In this light, the sciences and religion serve different purposes and need not be reconciled.</p>
+                  <p>What I've learned from Rorty, beyond any previous academic lesson, is the value of reinterpreting our worldviews. He masterfully anticipates and integrates criticism into his philosophy by suggesting that, when foundational truths are contested, what remains is a choice between what serves our ends best. The quote I keep coming back to is downstairs, in the shrine. Yes, there is a shrine.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="pragmatism">#pragmatism</button><button class="tag" data-tag="changed-my-mind">#changed-my-mind</button><button class="tag" data-tag="reread">#reread</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86099.Philosophy_and_Social_Hope">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="pragmatism changed-my-mind" data-title="Achieving Our Country">
+              <div class="cover"><img src="left.jpg" alt="Achieving Our Country cover"></div>
+              <h4>Achieving Our Country: Leftist Thought in Twentieth-Century America</h4>
+              <p class="byline">Richard Rorty &#9679; 1998 &#9679; the angrier, more useful sibling of the one above</p>
+              <p class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+              <details>
+                <summary>the long version</summary>
+                <div class="desc">
+                  <p>Rorty critiques the American Left for straying from its pragmatic roots of hope and inclusive, class-centered patriotism, towards abstract critique and passive cynicism. He reminisces about an earlier Left, aligned with figures like Dewey and Whitman, which championed solidarity and progress.</p>
+                  <p>Rorty acknowledges America's dual history of progress and atrocity but sees these as failures of imagination rather than inherent sin, arguing for continued constructive engagement over condemnation. He sees America as an evolving project that should learn from past injustices without being paralysed by them, urging a move away from theoretical detachment towards active policy-making and reform.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="pragmatism">#pragmatism</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/86103.Achieving_Our_Country">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="changed-my-mind funny" data-title="The Social Construction of What?">
+              <div class="cover"><img src="socialconstruction.jpg" alt="The Social Construction of What? cover"></div>
+              <h4>The Social Construction of What?</h4>
+              <p class="byline">Ian Hacking &#9679; 1999 &#9679; a referee's whistle in the culture wars</p>
+              <p class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+              <details>
+                <summary>the long version</summary>
+                <div class="desc">
+                  <p>So, you know how there's always been this big ol' debate between scientists and philosophers about what's real and what's just a social construct? Hacking jumps right into the middle of that mess and starts poking around for some answers. He's got a great way of breaking things down, using anecdotes and analysis to make some pretty complex ideas feel a lot more accessible.</p>
+                  <p>One thing that caught my attention was how he compares this Science Wars business to the old nominalist versus structuralist debate. I don't want to get too bogged down in the details, but basically, nominalists think that reality is whatever we say it is, while structuralists believe that there's some deeper truth beneath the surface. Hacking's take is that, yeah, there might be some objectivity to science, although the way we go about figuring out what's true is definitely influenced by society.</p>
+                  <p>What Hacking's trying to do here is get us to think more critically about how we categorise things. He wants us to look beyond the obvious and consider all the social forces that shape our understanding of reality.</p>
+                  <p>Now, I know some people might be thinking, "isn't this social construction stuff just a bunch of postmodern mumbo-jumbo?" Honestly, I can see why you'd think that. Hacking's approach is different though. He isn't trying to tear down the whole system, he just wants us to be more aware of how our beliefs and values influence the way we see the world.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="changed-my-mind">#changed-my-mind</button><button class="tag" data-tag="funny">#funny</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/841374.The_Social_Construction_of_What_">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="reread" data-title="Available Light">
+              <div class="cover"><img src="geertz.jpg" alt="Available Light cover"></div>
+              <h4>Available Light: Anthropological Reflections on Philosophical Topics</h4>
+              <p class="byline">Clifford Geertz &#9679; 2000 &#9679; the tangents are the point</p>
+              <p class="rating">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+              <details>
+                <summary>the long version</summary>
+                <div class="desc">
+                  <p>Clifford Geertz doing philosophy, what's not to like? Philosophy of anthropology, anthropology of philosophy? Being a work of <i>reflection</i>, Geertz isn't afraid of going on tangents.</p>
+                  <p>I'm hesitant to recommend this because a lot of background knowledge is needed to appreciate some of the essays. The literary style makes it accessible to most people anyway.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="reread">#reread</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/330007.Available_Light">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="russians reread" data-title="Russian Thinkers">
+              <div class="cover"><img src="russian.jpg" alt="Russian Thinkers cover"></div>
+              <h4>Russian Thinkers</h4>
+              <p class="byline">Isaiah Berlin &#9679; 1978 &#9679; gateway drug to the whole 19th century</p>
+              <p class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <details>
+                <summary>the long version</summary>
+                <div class="desc">
+                  <p>Fascinating insights into the 19th century Russian intelligentsia. I was particularly amused by how many of them used literature as a tool for liberation, seeing that it was the only medium available to them for social criticism.</p>
+                  <p>Berlin does a profoundly good job at making such a dense subject extremely entertaining.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="russians">#russians</button><button class="tag" data-tag="reread">#reread</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/84707.Russian_Thinkers">More info &raquo;</a>
+            </article>
+
+          </div>
+        </section>
+
+        <pre class="ascii">
+   .    *  .      .        *     .      *   .        .    *
+ *   .-----------------------------------------------------.   .
+   . |  scroll down, the styling gets worse and then better |  *
+ .    '-----------------------------------------------------'    .
+        </pre>
+
+        <!-- ============ ZONE B : PARCHMENT ============ -->
+        <section class="zone zone-parchment" id="lives">
+          <h2>Shelf 02 &mdash; People who were there</h2>
+          <p class="stamp">memoirs &#9679; made this section on a train &#9679; serif fonts because it felt respectful &#9679; rating: out of ten, don't ask why</p>
+
+          <div class="book-grid">
+
+            <article class="book" data-genre="nonfiction" data-tags="russians reread lent-out" data-title="My Past and Thoughts">
+              <div class="cover"><img src="herzen.jpeg" alt="My Past and Thoughts cover"></div>
+              <h4>My Past and Thoughts</h4>
+              <p class="byline">Alexander Herzen &#9679; 800-odd pages &#9679; currently lent out, currently regretted</p>
+              <p class="rating">10 / 10</p>
+              <details>
+                <summary>why this one</summary>
+                <div class="desc">
+                  <p>Memoirs of the 19th century Russian intellectual and revolutionary. Deeply personable, vibrant with life and history. I have read dozens of memoirs and autobiographies. This one is a literary masterpiece.</p>
+                  <p class="pull">If you only take one book off this page, take this one. Then give it back.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="russians">#russians</button><button class="tag" data-tag="lent-out">#lent-out</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/70069.My_Past_and_Thoughts">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="bleak" data-title="Defying Hitler">
+              <div class="cover"><img src="hitler.jpg" alt="Defying Hitler cover"></div>
+              <h4>Defying Hitler</h4>
+              <p class="byline">Sebastian Haffner &#9679; written 1939, published 2000</p>
+              <p class="rating">9 / 10</p>
+              <details>
+                <summary>why this one</summary>
+                <div class="desc">
+                  <p>A memoir written by a young German watching his country descend into Nazism, month by month, from inside an ordinary life. The literary style and the writing are particularly brilliant.</p>
+                  <p>What stays with me is the granularity. It is not about the machinery of the state, it is about what happens to a tennis match, a law exam, a friendship.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="bleak">#bleak</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/65458.Defying_Hitler">More info &raquo;</a>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ============ SHRINE ============ -->
+        <section class="shrine">
+          <h3>&#10038; The Rorty Paragraph &#10038;</h3>
+          <p class="who">I have typed this out for people so many times that it now lives here permanently.</p>
+          <blockquote>
+            We pragmatists cannot make sense of the idea that we should pursue truth for its own sake. We cannot regard truth as a goal of inquiry. The purpose of inquiry is to achieve agreement among human beings about what to do, to bring about consensus on the ends to be achieved and the means to be used to achieve those ends. Inquiry that does not achieve coordination of behaviour is not inquiry but simply wordplay. To argue for a certain theory about the microstructure of material bodies, or about the proper balance of powers between branches of government, is to argue about what we should do: how we should use the tools at our disposal in order to make technological, or political, progress. So, for pragmatists there is no sharp break between natural science and social science, nor between social science and politics, nor between politics, philosophy and literature. All areas of culture are parts of the same endeavour to make life better.
+          </blockquote>
+          <p class="who" style="margin-top:10px">Richard Rorty, <i>Philosophy and Social Hope</i></p>
+          <div class="lamps">&#10038; &#10038; &#10038;</div>
+        </section>
+
+        <!-- ============ ZONE C : THE WEIRD WING ============ -->
+        <section class="zone zone-weird" id="weird">
+          <h2>&gt;&gt; THE WEIRD WING</h2>
+          <p class="stamp">built 2016 &#9679; horror that refuses to behave &#9679; i have not changed a single pixel of this section since and i won't &#9679; rated in dread, out of five</p>
+
+          <div class="book-grid">
+
+            <article class="book" data-genre="fiction" data-tags="weird reread bleak" data-title="Songs of a Dead Dreamer and Grimscribe">
+              <div class="cover"><img src="ligotti1.jpeg" alt="Songs of a Dead Dreamer and Grimscribe cover"></div>
+              <h4>Songs of a Dead Dreamer and Grimscribe</h4>
+              <p class="byline">Thomas Ligotti &#9679; 33 stories &#9679; the entry point</p>
+              <p class="rating">&#9760;&#9760;&#9760;&#9760;&#9760;</p>
+              <details>
+                <summary>[ open transmission ]</summary>
+                <div class="desc">
+                  <p>Ligotti is now mentioned in the same breath as Poe, Lovecraft and Kafka. He has a pretty unique style that sets him apart, though. This anthology is a window into his eerie genius.</p>
+                  <p>Some people call his stuff "cosmic horror", however it's so much more than that. Sure, there are sci-fi elements and ancient mythology thrown in, but ultimately Ligotti's work is about the human condition, and it isn't always pretty. Check this out. The writing alone is worth it even if weird fiction isn't your genre.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="weird">#weird</button><button class="tag" data-tag="reread">#reread</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/24611567-songs-of-a-dead-dreamer-and-grimscribe">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="fiction" data-tags="weird bleak funny" data-title="Teatro Grottesco">
+              <div class="cover"><img src="ligotti2.jpeg" alt="Teatro Grottesco cover"></div>
+              <h4>Teatro Grottesco</h4>
+              <p class="byline">Thomas Ligotti &#9679; the one I press on people</p>
+              <p class="rating">&#9760;&#9760;&#9760;&#9760;&#9760;</p>
+              <details>
+                <summary>[ open transmission ]</summary>
+                <div class="desc">
+                  <p>Kafka meets Poe, without the sappy romance. Ligotti's stories are laced with black humour, although you shouldn't expect to be scared in a traditional way. These tales are cerebral. They dig into the grey matter between your ears rather than merely entertaining you.</p>
+                  <p>His prose, by turns wry, pessimistic and bitingly sarcastic, is nonetheless beautiful. Chef's kiss. More than perfect. You'll encounter stories that are metaphorical and allegorical, set in strange towns, surreal scenarios, and the monotonous cruelty of daily life. You will read this :)</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="weird">#weird</button><button class="tag" data-tag="funny">#funny</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/2452401.Teatro_Grottesco">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="fiction" data-tags="weird" data-title="Dark Entries">
+              <div class="cover"><img src="dark.jpeg" alt="Dark Entries cover"></div>
+              <h4>Dark Entries</h4>
+              <p class="byline">Robert Aickman &#9679; "strange stories", his own label</p>
+              <p class="rating">&#9760;&#9760;&#9760;&#9760;&#9761;</p>
+              <details>
+                <summary>[ open transmission ]</summary>
+                <div class="desc">
+                  <p>Aickman's stories are super immersive, with a richness that'll suck you right in. They're also kinda... weird. You'll be reading along, and suddenly things get a lot inexplicable. You'll be left wondering whether you missed something.</p>
+                  <p>These aren't your usual bump-in-the-night stories, and they're not Stephen King horrors either. There's no gore and no cheap scares, and the villains never announce themselves. They're more refined, yet no less chilling for the subtlety. Aickman builds worlds you feel you know, then lets you slip through the cracks of reality when you least expect it. If you're looking for something a little different, a little odd, a little WTF, this collection is for you.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="weird">#weird</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/10552013-dark-entries">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="fiction" data-tags="weird bleak" data-title="Song for the Unraveling of the World">
+              <div class="cover"><img src="song.jpeg" alt="Song for the Unraveling of the World cover"></div>
+              <h4>Song for the Unraveling of the World</h4>
+              <p class="byline">Brian Evenson &#9679; 2019 &#9679; unclassifiable, deliberately</p>
+              <p class="rating">&#9760;&#9760;&#9760;&#9760;&#9761;</p>
+              <details>
+                <summary>[ open transmission ]</summary>
+                <div class="desc">
+                  <p>Evenson's collection is impossible to pin down. Horror, but not the jump-scare kind. Some stories have aliens and shenanigans that feel more at home in sci-fi, although they aren't really that either.</p>
+                  <p>The atmosphere is uncanny in a timeless way, like it's all going down in a parallel universe. You're never sure whether you're in the past, the future, or some other creepy dimension a stone's throw from our own. Evenson doesn't give you everything at once, he drops little breadcrumbs that make your skin crawl and leaves the rest for your brain to trip over later. There's one story about a girl with no face, another about a man convinced he's being watched constantly. You start seeing those things out of the corner of your eye even after you finish the book.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="weird">#weird</button><button class="tag" data-tag="bleak">#bleak</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/41888678-song-for-the-unraveling-of-the-world">More info &raquo;</a>
+            </article>
+
+          </div>
+        </section>
+
+        <div class="marquee-wrap small">
+          <marquee scrollamount="4" direction="right">&#9788; do not read the weird wing before bed &#9788; i mean it &#9788; you won't listen &#9788;</marquee>
+        </div>
+
+        <!-- ============ ZONE D : XEROX ============ -->
+        <section class="zone zone-xerox" id="xerox">
+          <h2>Shelf 03 // Animals &amp; the systems around them</h2>
+          <p class="stamp">photocopied flyer aesthetic &#9679; made this while volunteering in 2013 &#9679; the highlighter is load-bearing &#9679; no ratings here, that felt wrong</p>
+
+          <div class="book-grid">
+
+            <article class="book" data-genre="nonfiction" data-tags="animals changed-my-mind" data-title="Why We Love Dogs, Eat Pigs, and Wear Cows">
+              <div class="cover"><img src="dogs.jpeg" alt="Why We Love Dogs cover"></div>
+              <h4>Why We Love Dogs, Eat Pigs, and Wear Cows</h4>
+              <p class="byline">Melanie Joy &#9679; the book that named the thing</p>
+              <p class="rating">READ IT</p>
+              <details>
+                <summary>what's inside</summary>
+                <div class="desc">
+                  <p>Joy delves into the psychological and societal mechanisms that lead to selective compassion when it comes to animals. A provocative and enlightening read that questions the ethics and traditions of our food choices.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="animals">#animals</button><button class="tag" data-tag="changed-my-mind">#changed-my-mind</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/6532109-why-we-love-dogs-eat-pigs-and-wear-cows">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="animals changed-my-mind" data-title="Animal Liberation">
+              <div class="cover"><img src="animal.jpeg" alt="Animal Liberation cover"></div>
+              <h4>Animal Liberation</h4>
+              <p class="byline">Peter Singer &#9679; 1975 &#9679; the foundational one</p>
+              <p class="rating">READ IT</p>
+              <details>
+                <summary>what's inside</summary>
+                <div class="desc">
+                  <p>Singer's groundbreaking work has been a vital force in the animal rights movement. It challenges the ethical foundation of our treatment of animals and remains a thought-provoking resource on animal ethics decades later.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="animals">#animals</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/29380.Animal_Liberation">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="nonfiction" data-tags="funny" data-title="The Utopia of Rules">
+              <div class="cover"><img src="Bureaucracy.jpeg" alt="The Utopia of Rules cover"></div>
+              <h4>The Utopia of Rules</h4>
+              <p class="byline">David Graeber &#9679; on technology, stupidity and the secret joys of bureaucracy</p>
+              <p class="rating">READ IT</p>
+              <details>
+                <summary>what's inside</summary>
+                <div class="desc">
+                  <p>Premise: paperwork sucks and bureaucracy stifles all creativity, imagination and innovation. Oh, and there has barely been any technological progress in the past century. Also capitalism sucks. Also the assumption that capitalism equals free market equals deregulation equals anti-bureaucracy equals libertarianism or right wing, is not sound.</p>
+                  <p>Of course the book is much more nuanced and interesting than this straw man version, and definitely worth reading.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="funny">#funny</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/22245334-the-utopia-of-rules">More info &raquo;</a>
+            </article>
+
+          </div>
+        </section>
+
+        <div style="text-align:center;margin:18px 0">
+          <div class="postit b">i keep meaning to split the animal ethics shelf into "arguments" and "reporting" but every time i open the HTML i get distracted and change a font instead.</div>
+        </div>
+
+        <!-- ============ ZONE E : THE DRAWER ============ -->
+        <section class="zone zone-drawer" id="drawer">
+          <h2>&#9829; the drawer of things that fit nowhere &#9829;</h2>
+          <p class="stamp">newest section &#9679; no organising principle &#9679; the cards are crooked on purpose &#9679; ratings in paw prints out of five, i don't want to talk about it</p>
+
+          <div class="book-grid">
+
+            <article class="book" data-genre="fiction" data-tags="funny" data-title="Fevre Dream">
+              <div class="cover"><img src="Fevre_dream.jpeg" alt="Fevre Dream cover"></div>
+              <h4>Fevre Dream</h4>
+              <p class="byline">George R. R. Martin &#9679; vampires on a Mississippi steamboat</p>
+              <p class="rating">&#128062;&#128062;&#128062;&#128062;</p>
+              <details>
+                <summary>pitch</summary>
+                <div class="desc">
+                  <p>A vampire novel by GRRM, and not the cheesy 500-year-old-vampire-falls-for-a-highschool-girl type (ahem, Twilight).</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="funny">#funny</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/382450.Fevre_Dream">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="fiction" data-tags="animals bleak changed-my-mind" data-title="Disgrace">
+              <div class="cover"><img src="disgrace.jpeg" alt="Disgrace cover"></div>
+              <h4>Disgrace</h4>
+              <p class="byline">J. M. Coetzee &#9679; 1999 &#9679; the dogs. the dogs.</p>
+              <p class="rating">&#128062;&#128062;&#128062;&#128062;&#128062;</p>
+              <details>
+                <summary>pitch</summary>
+                <div class="desc">
+                  <p>In post-apartheid South Africa, Lurie, a university lecturer, is disgraced for hooking up with his student. He retreats to the country to live with his daughter. There, they experience her gruelling rape. He turns to working in an animal welfare clinic whose main role is to kill dogs and cats, and he takes it upon himself to incinerate the animals so they are spared posthumous humiliation.</p>
+                  <p>The book is full of allegories, human emotions and insights on the post-apartheid transitory period and the shifting racial power dynamics between whites and blacks, both of whom undergo instances of disgrace.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="animals">#animals</button><button class="tag" data-tag="bleak">#bleak</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/en/book/show/6192">More info &raquo;</a>
+            </article>
+
+            <article class="book" data-genre="fiction" data-tags="bleak" data-title="They Shoot Horses, Don't They?">
+              <div class="cover"><img src="25B9F568-3DE5-4A72-B256-094897C3DC63_1_201_a.jpeg" alt="They Shoot Horses, Don't They? cover"></div>
+              <h4>They Shoot Horses, Don't They?</h4>
+              <p class="byline">Horace McCoy &#9679; 1935 &#9679; the bleakest title in literature, and it's a question</p>
+              <p class="rating">&#128062;&#128062;&#128062;&#128062;&#128062;</p>
+              <details>
+                <summary>pitch</summary>
+                <div class="desc">
+                  <p>An existential novel set during the Great Depression. Gloria Beatty and her boyfriend participate in a gruelling dance marathon contest that drags on for weeks, all to win the $1000 prize money or be noticed by studio producers and movie stars.</p>
+                  <p>At one point Gloria asks why all these high-powered scientists spend their time trying to prolong life instead of finding pleasant ways to end it. The novel closes on the question in the title. It is meant to depict the helplessness people felt during the Depression, working incredibly hard in a rat race to the top and ending up nowhere.</p>
+                </div>
+              </details>
+              <p class="tags"><button class="tag" data-tag="bleak">#bleak</button></p>
+              <a class="more" target="_blank" rel="noopener" href="https://www.goodreads.com/book/show/152052.They_Shoot_Horses_Don_t_They_">More info &raquo;</a>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ============ TBR ============ -->
+        <section class="tbr">
+          <h3>&#128218; The pile beside the bed (unstyled, sorry)</h3>
+          <ol>
+            <li>Herzen vol. 3 <span class="note">(technically already started)</span></li>
+            <li class="dead">The Man Without Qualities <span class="note">(abandoned p.240, twice, will try again in a different decade)</span></li>
+            <li>anything else by Aickman I can find secondhand</li>
+            <li>the Dewey I keep pretending I've read</li>
+            <li class="dead">a 900-page history of concrete <span class="note">(i was in a mood)</span></li>
+            <li>whatever the guestbook keeps telling me to read</li>
+          </ol>
+        </section>
+
+        <div class="construction">
+          <span>&#9888; SECTION UNDER CONSTRUCTION SINCE 2019 &#9888;</span>
+          <p style="margin:8px 0 0;background:#ffcc00;display:inline-block;padding:4px 8px;border:2px solid #000">
+            poetry shelf coming soon. it has been coming soon for a long time.
+          </p>
+        </div>
+
+        <!-- ============ SHOUTBOX ============ -->
+        <section class="shoutbox">
+          <h3>&#128172; What people have said about this shelf</h3>
+          <p class="shout"><b>mothcollector</b> <span class="t">(2 weeks ago)</span><br>came here for the ligotti recs, stayed for the fact that every section looks like a different website</p>
+          <p class="shout"><b>anon</b> <span class="t">(a while ago)</span><br>the card catalogue bit is the best thing on neocities, do not modernise it</p>
+          <p class="shout"><b>d.</b> <span class="t">(months ago)</span><br>i still have your Herzen. i will bring it. probably.</p>
+          <p class="shout"><b>webmaster</b> <span class="t">(just now)</span><br>d. it has been three years</p>
+          <p class="closed">Shoutbox is closed because the script broke and I never fixed it. Use the <a href="guestbook.html">guestbook</a> instead.</p>
+        </section>
+
+        <hr class="retro">
+
+        <div class="footer">
+          <div class="webring">
+            &laquo; prev &#9679; <a href="coolsite.html">THE READING RING</a> &#9679; next &raquo;<br>
+            <span class="tiny">a ring of 14 sites. four of them still load.</span>
+          </div>
+          <p style="margin:10px 0 4px">
+            hand-typed in a text editor &#9679; no framework &#9679; no cookies except the one that remembers your search
+          </p>
+          <p class="tiny">Galaxy 981 &#9679; the shelf is never finished &#9679; <a href="contact.html">say hello</a></p>
+        </div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<button id="totop" title="back to the top">&#128640; top</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- VHS transition on internal links ---------- */
+  document.querySelectorAll('.page a[href]').forEach(function(a){
+    var url = a.getAttribute('href') || '';
+    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(function(){ window.location.href = url; }, 200);
+    });
+  });
+
+  /* ---------- filtering ---------- */
+  var seg       = document.querySelector('.seg');
+  var segBtns   = seg ? seg.querySelectorAll('button') : [];
+  var search    = document.getElementById('search');
+  var allBooks  = Array.prototype.slice.call(document.querySelectorAll('.book'));
+  var grids     = Array.prototype.slice.call(document.querySelectorAll('.book-grid'));
+  var zones     = Array.prototype.slice.call(document.querySelectorAll('.zone'));
+  var tagBtns   = Array.prototype.slice.call(document.querySelectorAll('.tagbar .tag'));
+  var countEl   = document.getElementById('count');
+  var totalEl   = document.getElementById('stat-total');
+
+  var activeTags = [];
+
+  if (totalEl) totalEl.textContent = allBooks.length;
+
+  function currentGenre(){
+    var on = seg && seg.querySelector('button.active');
+    return on ? on.dataset.filter : 'all';
+  }
+
+  function applyFilter(){
+    var genre = currentGenre();
+    var q = (search && search.value || '').toLowerCase().trim();
+    var shown = 0;
+
+    allBooks.forEach(function(b){
+      var text = ((b.dataset.title || '') + ' ' + (b.dataset.tags || '') + ' ' + b.textContent).toLowerCase();
+      var bookTags = (b.dataset.tags || '').split(/\s+/);
+      var okGenre = genre === 'all' || b.dataset.genre === genre;
+      var okText  = !q || text.indexOf(q) !== -1;
+      var okTags  = activeTags.every(function(t){ return bookTags.indexOf(t) !== -1; });
+      var visible = okGenre && okText && okTags;
+      b.style.display = visible ? '' : 'none';
+      if (visible) shown++;
     });
 
-    // Genre filter, search, shuffle, random
-    const seg = document.querySelector('.seg');
-    const buttons = seg.querySelectorAll('button');
-    const search = document.getElementById('search');
-    const allBooks = Array.from(document.querySelectorAll('.book'));
-    const shuffleBtn = document.getElementById('shuffle');
-    const randomBtn  = document.getElementById('random');
+    /* hide a whole shelf when nothing in it survives */
+    zones.forEach(function(z){
+      var books = z.querySelectorAll('.book');
+      var any = Array.prototype.some.call(books, function(b){ return b.style.display !== 'none'; });
+      z.style.display = any ? '' : 'none';
+    });
 
-    function applyFilter(){
-      const genre = seg.querySelector('button.active')?.dataset.filter || 'all';
-      const q = (search.value || '').toLowerCase();
-      allBooks.forEach(b => {
-        const g = b.dataset.genre;
-        const text = (b.dataset.title + ' ' + b.textContent).toLowerCase();
-        const matchGenre = genre === 'all' || g === genre;
-        const matchText  = !q || text.includes(q);
-        b.style.display = (matchGenre && matchText) ? '' : 'none';
-      });
+    if (countEl) countEl.textContent = shown;
+  }
+
+  segBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      segBtns.forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      try { localStorage.setItem('books_filter', btn.dataset.filter); } catch(e){}
+      applyFilter();
+    });
+  });
+
+  function syncTagButtons(){
+    document.querySelectorAll('.tag').forEach(function(t){
+      t.classList.toggle('on', activeTags.indexOf(t.dataset.tag) !== -1);
+    });
+  }
+
+  /* every tag on the page is clickable, including the ones on the cards */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('.tag') : null;
+    if (!t || !t.dataset.tag) return;
+    var tag = t.dataset.tag;
+    var i = activeTags.indexOf(tag);
+    if (i === -1) activeTags.push(tag); else activeTags.splice(i,1);
+    syncTagButtons();
+    applyFilter();
+    try { localStorage.setItem('books_tags', activeTags.join(' ')); } catch(e2){}
+  });
+
+  if (search){
+    search.addEventListener('input', function(){
+      applyFilter();
+      try { localStorage.setItem('books_search', search.value); } catch(e){}
+    });
+  }
+
+  document.addEventListener('keydown', function(e){
+    var ae = document.activeElement;
+    if (e.key === 'Enter' && ae !== search &&
+        !/^(INPUT|TEXTAREA|BUTTON|A|SUMMARY)$/.test(ae ? ae.tagName : '')){
+      e.preventDefault();
+      if (search){ search.focus(); search.select(); }
     }
+    if (e.key === 'Escape'){
+      if (search) search.value = '';
+      activeTags = [];
+      syncTagButtons();
+      applyFilter();
+      try { localStorage.removeItem('books_search'); localStorage.removeItem('books_tags'); } catch(e3){}
+    }
+  });
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        applyFilter();
-      });
-    });
-
-    search.addEventListener('input', applyFilter);
-    search.addEventListener('keydown', e => {
-      if (e.key === 'Escape'){ search.value=''; applyFilter(); }
-    });
-
-    function shuffleGrid(gridEl){
-      const cards = Array.from(gridEl.children);
-      for (let i = cards.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        gridEl.appendChild(cards[j]);
+  /* ---------- shuffle / random / expand ---------- */
+  var shuffleBtn = document.getElementById('shuffle');
+  if (shuffleBtn) shuffleBtn.addEventListener('click', function(){
+    grids.forEach(function(grid){
+      var cards = Array.prototype.slice.call(grid.children);
+      for (var i = cards.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        grid.appendChild(cards[j]);
         cards.splice(j,1);
       }
+    });
+  });
+
+  var randomBtn = document.getElementById('random');
+  if (randomBtn) randomBtn.addEventListener('click', function(){
+    var visible = allBooks.filter(function(b){ return b.style.display !== 'none'; });
+    if (!visible.length) return;
+    var pick = visible[Math.floor(Math.random()*visible.length)];
+    allBooks.forEach(function(b){ b.classList.remove('hit'); });
+    pick.classList.add('hit');
+    var d = pick.querySelector('details'); if (d) d.open = true;
+    pick.scrollIntoView({behavior:'smooth', block:'center'});
+    if (pick.animate) pick.animate(
+      [{transform:'scale(1)'},{transform:'scale(1.035)'},{transform:'scale(1)'}],
+      {duration:520}
+    );
+  });
+
+  var expandBtn = document.getElementById('expand');
+  if (expandBtn) expandBtn.addEventListener('click', function(){
+    var anyClosed = allBooks.some(function(b){
+      var d = b.querySelector('details'); return d && !d.open && b.style.display !== 'none';
+    });
+    allBooks.forEach(function(b){
+      var d = b.querySelector('details');
+      if (d && b.style.display !== 'none') d.open = anyClosed;
+    });
+    expandBtn.innerHTML = anyClosed ? '&#128220; Close all' : '&#128220; Open all';
+  });
+
+  /* ---------- skins ---------- */
+  document.querySelectorAll('[data-skin]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var skin = btn.dataset.skin;
+      document.documentElement.className =
+        document.documentElement.className.replace(/\bskin-\S+/g,'').trim();
+      if (skin) document.documentElement.classList.add(skin);
+      try { localStorage.setItem('books_skin', skin); } catch(e){}
+    });
+  });
+
+  /* ---------- poll ---------- */
+  var voteBtn = document.getElementById('vote');
+  var poll = document.getElementById('poll');
+  if (voteBtn && poll) voteBtn.addEventListener('click', function(){
+    poll.classList.add('voted');
+    try { localStorage.setItem('books_voted','1'); } catch(e){}
+  });
+
+  /* ---------- sparkle cursor, off by default, because i am considerate now ---------- */
+  var sparkleOn = false;
+  var sparkleBtn = document.getElementById('sparkle');
+  var chars = ['\u2726','\u2727','\u2739','\u2734','\u00b7'];
+  var lastSpark = 0;
+
+  function setSparkle(on){
+    sparkleOn = on;
+    if (sparkleBtn) sparkleBtn.innerHTML = '&#10024; Sparkles: ' + (on ? 'ON' : 'off');
+    try { localStorage.setItem('books_sparkle', on ? '1' : '0'); } catch(e){}
+  }
+  if (sparkleBtn) sparkleBtn.addEventListener('click', function(){ setSparkle(!sparkleOn); });
+
+  document.addEventListener('mousemove', function(e){
+    if (!sparkleOn) return;
+    var now = Date.now();
+    if (now - lastSpark < 45) return;
+    lastSpark = now;
+    var s = document.createElement('span');
+    s.className = 'spark';
+    s.textContent = chars[Math.floor(Math.random()*chars.length)];
+    s.style.left = e.clientX + 'px';
+    s.style.top  = e.clientY + 'px';
+    s.style.color = ['#00e5ff','#ff2bd1','#ffff33','#39ff14'][Math.floor(Math.random()*4)];
+    document.body.appendChild(s);
+    if (s.animate){
+      s.animate([{opacity:1,transform:'translate(0,0) scale(1)'},
+                 {opacity:0,transform:'translate(0,14px) scale(.4)'}],
+                {duration:650, easing:'ease-out'});
     }
-    shuffleBtn.addEventListener('click', () => {
-      shuffleGrid(document.getElementById('grid-nf'));
-      shuffleGrid(document.getElementById('grid-fic'));
+    setTimeout(function(){ s.remove(); }, 640);
+  });
+
+  /* ---------- back to top ---------- */
+  var top = document.getElementById('totop');
+  if (top) top.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ---------- last updated, honestly ---------- */
+  var lastup = document.getElementById('lastup');
+  if (lastup && document.lastModified){
+    lastup.textContent = document.lastModified.split(' ')[0];
+  }
+
+  /* ---------- restore state ---------- */
+  try {
+    var savedSkin = localStorage.getItem('books_skin');
+    if (savedSkin) document.documentElement.classList.add(savedSkin);
+
+    var savedF = localStorage.getItem('books_filter');
+    if (savedF) segBtns.forEach(function(b){
+      var on = b.dataset.filter === savedF;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
 
-    randomBtn.addEventListener('click', () => {
-      const visible = allBooks.filter(b => b.style.display !== 'none');
-      if (!visible.length) return;
-      const pick = visible[Math.floor(Math.random()*visible.length)];
-      pick.scrollIntoView({behavior:'smooth', block:'center'});
-      pick.animate([{transform:'scale(1.0)'},{transform:'scale(1.03)'},{transform:'scale(1.0)'}], {duration:500});
-    });
+    var savedQ = localStorage.getItem('books_search');
+    if (savedQ && search) search.value = savedQ;
 
-    // Remember last filter
-    const FILT_KEY='books_filter'; const SEARCH_KEY='books_search';
-    const savedF = localStorage.getItem(FILT_KEY); const savedQ = localStorage.getItem(SEARCH_KEY);
-    if (savedF) { buttons.forEach(b => b.classList.toggle('active', b.dataset.filter===savedF)); }
-    if (savedQ) { search.value = savedQ; }
-    applyFilter();
-    buttons.forEach(b => b.addEventListener('click', () => localStorage.setItem(FILT_KEY, b.dataset.filter)));
-    search.addEventListener('input', () => localStorage.setItem(SEARCH_KEY, search.value));
-  </script>
+    var savedT = localStorage.getItem('books_tags');
+    if (savedT) activeTags = savedT.split(' ').filter(Boolean);
+
+    if (localStorage.getItem('books_voted') === '1' && poll) poll.classList.add('voted');
+    setSparkle(localStorage.getItem('books_sparkle') === '1');
+  } catch(e){}
+
+  syncTagButtons();
+  applyFilter();
+
+  /* ---------- easter egg: type "dust" anywhere ---------- */
+  var buf = '';
+  document.addEventListener('keypress', function(e){
+    if (document.activeElement === search) return;
+    buf = (buf + e.key).slice(-4).toLowerCase();
+    if (buf === 'dust'){
+      document.querySelectorAll('.book').forEach(function(b,i){
+        if (!b.animate) return;
+        setTimeout(function(){
+          b.animate([{filter:'brightness(1)'},{filter:'brightness(2.2)'},{filter:'brightness(1)'}],{duration:420});
+        }, i*55);
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>
