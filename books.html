@@ -33,6 +33,18 @@
 }
 
 
+html, body{
+  margin:0; padding:0;
+  background-image:url('background2.gif');
+  background-repeat:repeat;
+  background-color:#05000e;
+  color:var(--ink);
+  font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
+  image-rendering:pixelated;
+  cursor:crosshair;
+  filter:contrast(112%) saturate(122%);
+}
+   
 /* if stars.gif ever 404s the page should still look like something */
 body::before{
   content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
@@ -537,13 +549,7 @@ pre.ascii{
           <p class="lo">roughly 58%. the bookmark is a receipt.</p>
         </div>
 
-        <div class="widget">
-          <h5>Change the vibe</h5>
-          <p class="lo">the site has moods. so do i.</p>
-          <button class="btn" data-skin="" style="width:100%;margin-bottom:5px">&#127769; Midnight</button>
-          <button class="btn" data-skin="skin-bubblegum" style="width:100%;margin-bottom:5px">&#127849; Bubblegum</button>
-          <button class="btn" data-skin="skin-terminal" style="width:100%">&#128421; Terminal</button>
-        </div>
+
 
         <div class="widget poll" id="poll">
           <h5>Poll #7</h5>
@@ -1189,16 +1195,7 @@ pre.ascii{
     expandBtn.innerHTML = anyClosed ? '&#128220; Close all' : '&#128220; Open all';
   });
 
-  /* ---------- skins ---------- */
-  document.querySelectorAll('[data-skin]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var skin = btn.dataset.skin;
-      document.documentElement.className =
-        document.documentElement.className.replace(/\bskin-\S+/g,'').trim();
-      if (skin) document.documentElement.classList.add(skin);
-      try { localStorage.setItem('books_skin', skin); } catch(e){}
-    });
-  });
+
 
   /* ---------- poll ---------- */
   var voteBtn = document.getElementById('vote');
@@ -1253,8 +1250,6 @@ pre.ascii{
 
   /* ---------- restore state ---------- */
   try {
-    var savedSkin = localStorage.getItem('books_skin');
-    if (savedSkin) document.documentElement.classList.add(savedSkin);
 
     var savedF = localStorage.getItem('books_filter');
     if (savedF) segBtns.forEach(function(b){
