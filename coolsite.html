@@ -722,6 +722,120 @@ h1 {
 }
 .footer a { color:#0000cc; }
 
+
+
+/* ============================================================
+   Mobile hierarchy: navigation first, directory second,
+   sidebar extras last. Desktop stays unchanged.
+   ============================================================ */
+@media (max-width:720px) {
+  /* unwrap the desktop sidebar so its children can be reordered */
+  .layout, .layout tbody { display:block; width:100%; }
+  .layout tr {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+  }
+
+  .sidebar {
+    display:contents;
+  }
+
+  .nav-title {
+    order:1;
+    margin:0;
+    padding:9px 10px 4px;
+    background:#ececec;
+  }
+
+  .nav {
+    order:2;
+    columns:2;
+    column-gap:7px;
+    padding:4px 8px 10px;
+    background:#ececec;
+    border-bottom:4px ridge #00bdf2;
+  }
+
+  .nav a {
+    break-inside:avoid;
+    min-height:42px;
+  }
+
+  .main {
+    order:3;
+    display:block;
+    width:100%;
+    padding:11px 9px 20px;
+  }
+
+  /* secondary/personal sidebar material belongs after the directory */
+  .status {
+    order:4;
+    margin:14px 10px 10px;
+    transform:none;
+  }
+
+  .stickers {
+    order:5;
+    min-height:0;
+    margin:4px 8px 0;
+    padding:12px 6px 8px;
+    text-align:center;
+    background:#ececec;
+    border-top:4px ridge #00bdf2;
+  }
+
+  .stickers img {
+    position:static;
+    width:auto;
+    max-width:88px;
+    max-height:65px;
+    margin:5px 3px;
+    transform:none !important;
+    vertical-align:middle;
+  }
+
+  .little-note {
+    order:6;
+    margin:0;
+    padding:2px 8px 13px;
+    background:#ececec;
+    color:#555;
+    border-bottom:4px ridge #00bdf2;
+  }
+
+  .welcome {
+    width:100%;
+    margin:3px 0 16px;
+  }
+
+  .surf-tools {
+    margin:-5px 0 14px;
+  }
+
+  .link-entry {
+    padding:8px 8px 9px;
+  }
+
+  .link-entry .desc {
+    margin-left:12px;
+    overflow-wrap:anywhere;
+  }
+
+  .section-title {
+    font-size:20px;
+    line-height:1.15;
+  }
+}
+
+@media (max-width:430px) {
+  .nav { columns:1; }
+  .title-line { gap:3px; }
+  .title-line img { width:42px; max-height:44px; }
+  h1 { font-size:34px; letter-spacing:-2px; }
+}
+
 </style>
 </head>
 
