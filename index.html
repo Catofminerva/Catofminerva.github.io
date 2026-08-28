@@ -571,6 +571,28 @@ html[data-skin="neo"] .nav a:hover {
 }
 
 
+    /* blinkies are 150x20, not 88x31, so don't stretch them */
+.button-strip img.blinky{ height: 20px; }
+    
+
+/* rainbow swirl divider, drop anywhere */
+.swirl{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 14px 0;
+  image-rendering: pixelated;
+}
+/* if the gif is a narrow tile rather than one wide image, use this instead:
+.swirl-tile{
+  height: 22px;
+  background: url("rainbowswirldivider.gif") repeat-x center / auto 100%;
+  margin: 14px 0;
+}
+*/
+
+    
+    
 /* === Status Cafe: speaker + speech bubble === */
 .status-say {
   display: grid;
@@ -1552,6 +1574,9 @@ td.content .post h3{ color:#000; text-shadow:none; }
 
 /* --- the power plant --- */
 .hamster-plant{
+      <img src="rainbowswirldivider.gif" alt="" class="swirl" aria-hidden="true">
+
+    <div class="button-strip" aria-label="buttons">
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1829,7 +1854,14 @@ td.content .post h3{ color:#000; text-shadow:none; }
             <img src="crypto.png" alt="Piracy">
       <img src="bestviewed.gif" alt="Piracy">
   <img src="pirates.gif" alt="Piracy">
-
+  <!-- 2026-08-28: gif deposit, part two -->
+  <img src="clubpenguin.gif" alt="Club Penguin">
+  <img src="googlethebrain.gif" alt="Google is the brain">
+  <img src="nyan.gif" alt="Nyan">
+  <img src="y2kcompliant.png" alt="Y2K compliant">
+  <img src="hatesquarespace.png" alt="I hate Squarespace">
+  <img src="dragons.gif" alt="Dragons">
+  <img src="piratemovies.gif" alt="Pirate movies">
 
   
 </div>
