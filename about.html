@@ -461,6 +461,84 @@ a:hover { color: #ff1493; background: #ffff66; }
   max-width: 160px;
   transform: rotate(-2deg);
 }
+
+/* mobile: navigation first, actual page second, sidebar extras last */
+@media (max-width: 690px) {
+  body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .site-shell {
+    width: calc(100% - 8px);
+    max-width: none;
+    margin: 4px auto 18px;
+    border-width: 4px;
+    box-shadow: 2px 2px 0 #003b75;
+  }
+
+  .system-message {
+    width: calc(100% - 14px);
+    margin-bottom: 8px;
+  }
+
+  .sidebar {
+    padding: 8px;
+  }
+
+  .navbox {
+    margin-bottom: 4px;
+  }
+
+  .navbox a {
+    min-height: 44px;
+    vertical-align: top;
+  }
+
+  .content {
+    padding: 10px 10px 18px;
+  }
+
+  .about-gif,
+  .gif-break img,
+  .gif-three {
+    max-width: min(180px, 70vw);
+  }
+
+  .meme-row img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .gif-shelf img {
+    max-width: min(88px, 28vw);
+    height: auto;
+  }
+
+  .sidebar-extras.mobile-bottom {
+    margin: 14px 8px 2px;
+    padding: 12px 10px 10px;
+    border: 2px groove #fff;
+    background: #d4d0c8;
+    text-align: center;
+  }
+
+  .sidebar-extras.mobile-bottom .side-counter {
+    margin: 2px 0 12px;
+    color: #7a00b8;
+  }
+
+  .sidebar-extras.mobile-bottom .side-links {
+    margin-top: 8px;
+    line-height: 2.2;
+  }
+
+  .sidebar-extras.mobile-bottom .side-gifs {
+    margin-top: 12px;
+  }
+}
+
 </style>
 </head>
 
@@ -494,21 +572,23 @@ a:hover { color: #ff1493; background: #ffff66; }
           <a href="contact.html"><img src="phone.gif" alt="">Contact</a>
         </fieldset>
 
-        <div class="side-counter">
-          You are visitor #<br>
-          <span class="counter" id="hitCount">000000</span>
-        </div>
+        <div class="sidebar-extras" id="sidebarExtras">
+          <div class="side-counter">
+            You are visitor #<br>
+            <span class="counter" id="hitCount">000000</span>
+          </div>
 
-        <div class="side-links">
-          <a href="contact.html">Email Me</a><br>
-          <a href="guestbook.html">Sign my Guestbook</a><br>
-          <a href="coolsite.html">Cool Links</a>
-        </div>
+          <div class="side-links">
+            <a href="contact.html">Email Me</a><br>
+            <a href="guestbook.html">Sign my Guestbook</a><br>
+            <a href="coolsite.html">Cool Links</a>
+          </div>
 
-        <div class="side-gifs">
-          <img src="qatar.gif" alt="Qatar">
-          <img src="pali.gif" alt="Palestine">
-          <img src="freespeechonline.gif" alt="Free speech online">
+          <div class="side-gifs">
+            <img src="qatar.gif" alt="Qatar">
+            <img src="pali.gif" alt="Palestine">
+            <img src="freespeechonline.gif" alt="Free speech online">
+          </div>
         </div>
       </td>
 
@@ -645,6 +725,34 @@ a:hover { color: #ff1493; background: #ffff66; }
 
 document.getElementById('lastUpdated').textContent =
   document.lastModified ? document.lastModified : 'unknown';
+</script>
+
+<script>
+/* On phones, keep nav near the top but put sidebar extras after the About content. */
+(() => {
+  const mq = window.matchMedia('(max-width: 690px)');
+  const extras = document.getElementById('sidebarExtras');
+  const sidebar = document.querySelector('.sidebar');
+  const table = document.querySelector('.layout');
+  if (!extras || !sidebar || !table) return;
+
+  const marker = document.createComment('sidebar extras home');
+  extras.parentNode.insertBefore(marker, extras);
+
+  const place = () => {
+    if (mq.matches) {
+      extras.classList.add('mobile-bottom');
+      table.insertAdjacentElement('afterend', extras);
+    } else {
+      extras.classList.remove('mobile-bottom');
+      marker.parentNode.insertBefore(extras, marker.nextSibling);
+    }
+  };
+
+  place();
+  if (mq.addEventListener) mq.addEventListener('change', place);
+  else mq.addListener(place);
+})();
 </script>
 
 </body>
