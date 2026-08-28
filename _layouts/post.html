@@ -137,9 +137,10 @@ hr.retro{
 }
 
 /* ---------- columns ---------- */
-.cols{ display:flex; gap:20px; align-items:flex-start; padding:18px 0 0; }
-.main{ flex:1 1 auto; min-width:0; }
-.rail{ flex:0 0 194px; }
+.cols{ padding:18px 0 0; }
+.cols::after{ content:""; display:block; clear:both; }
+.rail{ float:right; width:194px; margin:0 0 18px 20px; }
+.main{ min-width:0; }
 
 /* ---------- the reading column ---------- */
 .post{
@@ -350,8 +351,9 @@ hr.retro{
   .crumb, .hero, .ticker{ margin:0 -12px; padding-left:14px; padding-right:14px; }
   .form::before, .form::after{ width:22px; background-size:22px 20px;
     background-image:radial-gradient(circle at 11px 10px, #a9b096 0 3px, var(--paper) 3.5px 4.5px, transparent 5px); }
-  .cols{ flex-direction:column; }
-  .rail{ flex:1 1 auto; width:100%; }
+  .cols{ display:flex; flex-direction:column; }
+.main{ order:1; }
+.rail{ order:2; float:none; width:auto; margin:16px 0 0; }
   .stickers{ grid-template-columns:repeat(4,1fr); }
   .stickers .wide{ grid-column:span 2; }
   .post{ font-size:19px; max-width:none; }
@@ -414,6 +416,60 @@ hr.retro{
 
   <div class="cols">
 
+
+
+         <!-- =============== RAIL =============== -->
+    <aside class="rail">
+      <div class="panel">
+        <h3>Station log</h3>
+        <div class="in">
+          <dl>
+            <dt>Mood</dt><dd>caffeinated</dd>
+            <dt>Playing</dt><dd>oud, badly</dd>
+            <dt>Reading</dt><dd><a href="{{ '/books.html' | relative_url }}">see the shelf</a></dd>
+            <dt>Weather</dt><dd>drizzle, obviously</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Recent entries</h3>
+        <div class="in">
+          {% for p in site.posts limit: 5 %}
+            <div style="margin:0 0 6px">
+              <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
+              <span style="color:#b3a6e6; font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Visitors</h3>
+        <div class="in" style="text-align:center">
+          <span class="led" id="hitCount">000000</span><br>
+          <span style="font-size:10px; color:#b3a6e6">since 1999</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Stickers</h3>
+        <div class="stickers">
+          <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
+          <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
+          <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
+          <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
+          <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
+          <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
+          <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
+          <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
+          <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
+        </div>
+      </div>
+
+      <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
+    </aside>
+  </div>
     <!-- =============== READING COLUMN =============== -->
     <div class="main">
       <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
