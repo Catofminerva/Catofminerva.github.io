@@ -12,8 +12,8 @@
 /* ============================================================
    GALAXY 981 · SINGLE ENTRY
    Starfield desk, fanfold sheet, penguin hero, purple rail.
-   The rail is FLOATED, so once the article runs past the
-   bottom of it the text reflows across the full sheet.
+   Header and stats span the full sheet; the rail floats beside
+   the article body only, so long titles get the whole width.
    ============================================================ */
 
 :root{
@@ -89,7 +89,10 @@ hr.retro{
   display:inline-flex; align-items:center; gap:4px; padding:3px 7px;
   color:#000; text-decoration:none; background:#e8e8e8; border:2px outset #fff;
 }
-.crumb a:hover{ border-style:inset; background:var(--lemon); }
+@media (hover:hover){
+  .crumb a:hover{ border-style:inset; background:var(--lemon); }
+}
+.crumb a:active{ border-style:inset; background:var(--lemon); }
 .crumb a[aria-current="page"]{ border-style:inset; background:var(--cyan); font-weight:bold; }
 .crumb img{ width:16px; height:16px; image-rendering:pixelated; }
 
@@ -156,6 +159,7 @@ hr.retro{
 .post > header h1{
   margin:0 0 4px; font-size:clamp(30px,4.6vw,44px); line-height:1.14;
   font-weight:600; letter-spacing:-.012em; color:#000;
+  overflow-wrap:break-word; word-break:break-word; hyphens:auto;
 }
 .post .byline{
   font-family:var(--f-ui); font-size:11px; letter-spacing:.09em;
@@ -164,7 +168,7 @@ hr.retro{
 }
 
 .stats{
-  display:flow-root;                 /* sits beside the float, never under it */
+  display:flow-root;
   font-family:var(--f-data); font-size:12px; line-height:1.75;
   color:#2b2820; background:var(--band); border:2px inset #a8ae99;
   padding:9px 12px; margin:0 0 26px;
@@ -188,9 +192,12 @@ hr.retro{
 .post a{
   color:var(--link); text-decoration:underline;
   text-underline-offset:2px; text-decoration-thickness:1px;
+  overflow-wrap:break-word;
 }
 .post a:visited{ color:var(--visited); }
-.post a:hover{ color:#cc0066; background:var(--lemon); }
+@media (hover:hover){
+  .post a:hover{ color:#cc0066; background:var(--lemon); }
+}
 
 .post blockquote{
   display:flow-root;
@@ -235,7 +242,7 @@ hr.retro{
 .post ::selection{ background:var(--lemon); color:#000; }
 
 .end{
-  display:block; margin-top:22px; text-align:center;
+  display:block; clear:right; margin-top:22px; text-align:center;
   font-family:var(--f-data); font-size:13px; color:var(--stamp);
 }
 .end::after{ content:"_"; animation:blink .9s steps(1,end) infinite; }
@@ -246,16 +253,21 @@ hr.retro{
 .tags a{
   font-size:10px; text-transform:uppercase; text-decoration:none; color:#000;
   background:#fff; border:1px solid #000; padding:1px 6px; box-shadow:2px 2px 0 rgba(0,0,0,.25);
+  min-width:0; overflow-wrap:break-word; word-break:break-word;
 }
-.tags a:hover{ background:var(--pink); color:#fff; }
+@media (hover:hover){
+  .tags a:hover{ background:var(--pink); color:#fff; }
+}
 
 .entry-foot{
   margin-top:22px; padding-top:13px; border-top:1px solid var(--rule);
   display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:center;
-  font-family:var(--f-ui); font-size:11px;
+  font-family:var(--f-ui); font-size:11px; min-width:0;
 }
-.entry-foot a{ color:var(--link); }
-.entry-foot a:hover{ background:var(--lemon); }
+.entry-foot a{ color:var(--link); min-width:0; overflow-wrap:break-word; word-break:break-word; }
+@media (hover:hover){
+  .entry-foot a:hover{ background:var(--lemon); }
+}
 
 /* prev / next */
 .updown{
@@ -272,24 +284,36 @@ hr.retro{
 .updown a:active{ border-style:inset; background:var(--lemon); }
 .updown span{ display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
 .updown b{
-  font-family:var(--f-read); font-size:16px; font-weight:600;
-  display:block; overflow-wrap:break-word; word-break:break-word; hyphens:auto;
+  display:block; font-family:var(--f-read); font-size:16px; font-weight:600;
+  overflow-wrap:break-word; word-break:break-word; hyphens:auto;
 }
 .updown .next{ text-align:right; }
 .updown .next b{ text-align:left; }
 
-/* ---------- rail ---------- */
+/* ---------- rail (lives inside .post, so it overrides article type) ---------- */
+.rail{
+  font-variant-numeric:normal; letter-spacing:normal;
+  font-family:var(--f-ui); font-size:11px; line-height:1.55;
+}
 .panel{
   margin:0 0 14px; border:4px ridge var(--grape);
   background:repeating-linear-gradient(135deg, var(--void-a) 0 12px, var(--void-b) 12px 24px);
   color:#dcd3ff; font-family:var(--f-ui); font-size:11px;
+  min-width:0; overflow:hidden;
 }
 .panel h3{
   margin:0; padding:5px 8px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   background:var(--grape); color:var(--lemon); border-bottom:2px groove #b98cff;
+  line-height:1.4;
 }
-.panel .in{ padding:9px 9px 11px; line-height:1.7; }
-.panel a{ color:var(--cyan); }
+.panel .in{ padding:9px 9px 11px; line-height:1.7; min-width:0; }
+.panel a{
+  color:var(--cyan); text-decoration:none;
+  overflow-wrap:anywhere; word-break:break-word; hyphens:auto;
+}
+@media (hover:hover){
+  .panel a:hover{ text-decoration:underline; color:#fff; }
+}
 .panel dl{ margin:0; }
 .panel dt{ color:#ffa9dd; float:left; clear:left; width:62px; }
 .panel dd{ margin:0 0 3px 66px; }
@@ -300,9 +324,14 @@ hr.retro{
 }
 
 .stickers{ display:grid; grid-template-columns:repeat(2,1fr); gap:7px; padding:9px; }
-.stickers img{ width:100%; max-width:84px; height:auto; image-rendering:pixelated; justify-self:center; }
+.stickers img{
+  width:100%; max-width:84px; height:auto; image-rendering:pixelated;
+  justify-self:center; display:block; margin:0 auto; border:0; clear:none;
+}
 .stickers .wide{ grid-column:span 2; max-width:170px; }
-.stickers img:hover{ filter:drop-shadow(0 0 6px var(--cyan)); transform:translateY(-1px); }
+@media (hover:hover){
+  .stickers img:hover{ filter:drop-shadow(0 0 6px var(--cyan)); transform:translateY(-1px); }
+}
 
 .construction{
   padding:6px 8px; font-family:var(--f-ui); font-size:10px; font-weight:bold;
@@ -327,7 +356,9 @@ hr.retro{
 .foot{ padding:16px 0 26px; }
 .buttons{ display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin:0 0 14px; }
 .buttons img{ height:31px; image-rendering:pixelated; }
-.buttons img:hover{ transform:translateY(-2px); filter:drop-shadow(0 0 5px var(--pink)); }
+@media (hover:hover){
+  .buttons img:hover{ transform:translateY(-2px); filter:drop-shadow(0 0 5px var(--pink)); }
+}
 
 .badges{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 14px; font-family:var(--f-ui); font-size:10px; }
 .badge{ padding:4px 8px; border:3px ridge var(--cyan); background:#000; color:var(--cyan); }
@@ -384,30 +415,6 @@ hr.retro{
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; }
 }
-
-
-
-/* ---------- post-refactor patches ---------- */
-
-/* title owns the full sheet now; break long words rather than overflow */
-.post > header h1{ overflow-wrap:break-word; hyphens:auto; }
-
-/* the rail lives inside .post now, so cancel the article typography on it */
-.post .rail{ font-variant-numeric:normal; letter-spacing:normal; }
-.post .rail img{ display:block; margin:0 auto; border:0; clear:none; }
-.post .rail a{ text-decoration:none; }
-.post .rail a:hover{ background:var(--grape); color:#fff; }
-
-/* short entries: keep the closing furniture off the float */
-.post .end{ clear:right; }
-
-
-   .post > header h1,
-.tags a,
-.entry-foot a{
-  overflow-wrap:break-word; word-break:break-word; hyphens:auto;
-}
-.entry-foot{ min-width:0; }
 </style>
 </head>
 
@@ -457,7 +464,7 @@ hr.retro{
   </div>
   <hr class="retro">
 
-   <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
 
     <header>
       <h1 itemprop="headline">{{ page.title }}</h1>
@@ -561,93 +568,6 @@ hr.retro{
     <div class="kitty-rail" aria-hidden="true"></div>
   </article>
 
-      <div class="panel">
-        <h3>Recent entries</h3>
-        <div class="in">
-          {% for p in site.posts limit: 5 %}
-            <div style="margin:0 0 6px">
-              <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
-              <span style="color:#b3a6e6; font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Visitors</h3>
-        <div class="in" style="text-align:center">
-          <span class="led" id="hitCount">000000</span><br>
-          <span style="font-size:10px; color:#b3a6e6">since 1999</span>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Stickers</h3>
-        <div class="stickers">
-          <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
-          <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
-          <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
-          <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
-          <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
-          <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
-          <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
-          <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
-          <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
-        </div>
-      </div>
-
-      <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
-    </aside>
-
-    <!-- =============== READING COLUMN =============== -->
-    <div class="main">
-      <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
-        <header>
-          <h1 itemprop="headline">{{ page.title }}</h1>
-          <div class="byline">
-            {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%d %B %Y" }}</time>{% endif %}
-            {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
-          </div>
-        </header>
-
-        <div class="stats">
-          &gt; <b>{{ words }}</b> words · about <b>{{ mins }} min</b> to read<br>
-          &gt; <b>{{ kb }} KB</b> · roughly <b>{{ kb | divided_by: 5 | plus: 1 }} sec</b> over a 56k modem<br>
-          &gt; you are reader <span class="led-sm" id="entryHits">000000</span> of this entry
-        </div>
-
-        <section itemprop="articleBody">
-          {{ content }}
-        </section>
-
-        <span class="end">[ end of transmission ]</span>
-
-        {% if page.tags.size > 0 %}
-          <p class="tags">filed under: {% for t in page.tags %}<a href="{{ '/blog_posts.html' | relative_url }}">{{ t }}</a>{% endfor %}</p>
-        {% endif %}
-
-        <div class="entry-foot">
-          <a href="#top">▲ back to top</a>
-          <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
-          <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
-          <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
-          <a href="#" onclick="window.print();return false;">🖨 print this page</a>
-        </div>
-
-        <nav class="updown" aria-label="Nearby entries">
-          {% if page.previous %}
-            <a href="{{ page.previous.url | relative_url }}"><span>◄ older entry</span><b>{{ page.previous.title }}</b></a>
-          {% endif %}
-          {% if page.next %}
-            <a class="next" href="{{ page.next.url | relative_url }}"><span>newer entry ►</span><b>{{ page.next.title }}</b></a>
-          {% endif %}
-        </nav>
-      </article>
-
-      <div class="kitty-rail" aria-hidden="true"></div>
-    </div>
-  </div>
-
   <hr class="perf">
 
   <footer class="foot">
@@ -688,10 +608,11 @@ hr.retro{
 <script>
 /* site-wide visitor counter */
 (() => { try{
+  const el=document.getElementById('hitCount'); if(!el) return;
   const k='geocities_hit_counter';
   const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
   localStorage.setItem(k,n);
-  document.getElementById('hitCount').textContent=String(n).padStart(6,'0');
+  el.textContent=String(n).padStart(6,'0');
 }catch(e){} })();
 
 /* per-entry reader counter */
@@ -703,8 +624,11 @@ hr.retro{
   el.textContent=String(n).padStart(6,'0');
 }catch(e){} })();
 
-document.getElementById('printed').textContent =
-  new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+(() => {
+  const el=document.getElementById('printed'); if(!el) return;
+  el.textContent = new Date().toLocaleString('en-GB',
+    {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+})();
 
 /* 8-bit blips, off by default */
 (() => {
@@ -722,7 +646,7 @@ document.getElementById('printed').textContent =
 
 /* post images: lazy, async decode, no layout jumps */
 (() => {
-  document.querySelectorAll('.post img').forEach(img=>{
+  document.querySelectorAll('.post section[itemprop="articleBody"] img').forEach(img=>{
     if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
     if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
     if(img.hasAttribute('srcset') && !img.hasAttribute('sizes'))
