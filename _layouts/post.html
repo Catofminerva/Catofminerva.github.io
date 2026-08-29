@@ -377,6 +377,22 @@ hr.retro{
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; }
 }
+
+
+
+/* ---------- post-refactor patches ---------- */
+
+/* title owns the full sheet now; break long words rather than overflow */
+.post > header h1{ overflow-wrap:break-word; hyphens:auto; }
+
+/* the rail lives inside .post now, so cancel the article typography on it */
+.post .rail{ font-variant-numeric:normal; letter-spacing:normal; }
+.post .rail img{ display:block; margin:0 auto; border:0; clear:none; }
+.post .rail a{ text-decoration:none; }
+.post .rail a:hover{ background:var(--grape); color:#fff; }
+
+/* short entries: keep the closing furniture off the float */
+.post .end{ clear:right; }
 </style>
 </head>
 
@@ -426,21 +442,109 @@ hr.retro{
   </div>
   <hr class="retro">
 
-  <div class="cols">
+   <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
 
-    <!-- =============== RAIL (floats right; source order matters) =============== -->
-    <aside class="rail">
-      <div class="panel">
-        <h3>Station log</h3>
-        <div class="in">
-          <dl>
-            <dt>Mood</dt><dd>caffeinated</dd>
-            <dt>Playing</dt><dd>oud, badly</dd>
-            <dt>Reading</dt><dd><a href="{{ '/books.html' | relative_url }}">see the shelf</a></dd>
-            <dt>Weather</dt><dd>drizzle, obviously</dd>
-          </dl>
-        </div>
+    <header>
+      <h1 itemprop="headline">{{ page.title }}</h1>
+      <div class="byline">
+        {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%d %B %Y" }}</time>{% endif %}
+        {% if page.author %} · <span itemprop="author">{{ page.author }}</span>{% endif %}
       </div>
+    </header>
+
+    <div class="stats">
+      &gt; <b>{{ words }}</b> words · about <b>{{ mins }} min</b> to read<br>
+      &gt; <b>{{ kb }} KB</b> · roughly <b>{{ kb | divided_by: 5 | plus: 1 }} sec</b> over a 56k modem<br>
+      &gt; you are reader <span class="led-sm" id="entryHits">000000</span> of this entry
+    </div>
+
+    <div class="cols">
+
+      <!-- =============== RAIL (floats right; source order matters) =============== -->
+      <aside class="rail">
+        <div class="panel">
+          <h3>Station log</h3>
+          <div class="in">
+            <dl>
+              <dt>Mood</dt><dd>caffeinated</dd>
+              <dt>Playing</dt><dd>oud, badly</dd>
+              <dt>Reading</dt><dd><a href="{{ '/books.html' | relative_url }}">see the shelf</a></dd>
+              <dt>Weather</dt><dd>drizzle, obviously</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Recent entries</h3>
+          <div class="in">
+            {% for p in site.posts limit: 5 %}
+              <div style="margin:0 0 6px">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
+                <span style="color:#b3a6e6; font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Visitors</h3>
+          <div class="in" style="text-align:center">
+            <span class="led" id="hitCount">000000</span><br>
+            <span style="font-size:10px; color:#b3a6e6">since 1999</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Stickers</h3>
+          <div class="stickers">
+            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
+            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
+            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
+            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
+            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
+            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
+            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
+            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
+            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
+          </div>
+        </div>
+
+        <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
+      </aside>
+
+      <!-- =============== READING COLUMN =============== -->
+      <div class="main">
+        <section itemprop="articleBody">
+          {{ content }}
+        </section>
+
+        <span class="end">[ end of transmission ]</span>
+
+        {% if page.tags.size > 0 %}
+          <p class="tags">filed under: {% for t in page.tags %}<a href="{{ '/blog_posts.html' | relative_url }}">{{ t }}</a>{% endfor %}</p>
+        {% endif %}
+
+        <div class="entry-foot">
+          <a href="#top">▲ back to top</a>
+          <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
+          <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
+          <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
+          <a href="#" onclick="window.print();return false;">🖨 print this page</a>
+        </div>
+
+        <nav class="updown" aria-label="Nearby entries">
+          {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}"><span>◄ older entry</span><b>{{ page.previous.title }}</b></a>
+          {% endif %}
+          {% if page.next %}
+            <a class="next" href="{{ page.next.url | relative_url }}"><span>newer entry ►</span><b>{{ page.next.title }}</b></a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+
+    <div class="kitty-rail" aria-hidden="true"></div>
+  </article>
 
       <div class="panel">
         <h3>Recent entries</h3>
