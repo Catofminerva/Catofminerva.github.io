@@ -96,7 +96,7 @@ body{
    ================================================================ */
 .sky{
   position:fixed; inset:-10% -10% -10% -10%; z-index:-3; pointer-events:none;
-  background-color:var(--void);
+  background-color:transparent;          /* was var(--void), which hid the tile */
   background-image:
     radial-gradient(1.6px 1.6px at 40px 60px,   #fffbe6 50%, transparent 51%),
     radial-gradient(1.4px 1.4px at 150px 200px, #b9f6ff 50%, transparent 51%),
