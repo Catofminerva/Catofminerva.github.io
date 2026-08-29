@@ -263,13 +263,20 @@ hr.retro{
   font-family:var(--f-ui); font-size:11px;
 }
 .updown a{
-  flex:1 1 200px; padding:9px 11px; text-decoration:none; color:#000;
+  flex:1 1 200px; min-width:0; padding:9px 11px; text-decoration:none; color:#000;
   background:#e8e8e8; border:3px outset #fff;
 }
-.updown a:hover{ border-style:inset; background:var(--lemon); }
+@media (hover:hover){
+  .updown a:hover{ border-style:inset; background:var(--lemon); }
+}
+.updown a:active{ border-style:inset; background:var(--lemon); }
 .updown span{ display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
-.updown b{ font-family:var(--f-read); font-size:16px; font-weight:600; }
+.updown b{
+  font-family:var(--f-read); font-size:16px; font-weight:600;
+  display:block; overflow-wrap:break-word; word-break:break-word; hyphens:auto;
+}
 .updown .next{ text-align:right; }
+.updown .next b{ text-align:left; }
 
 /* ---------- rail ---------- */
 .panel{
@@ -393,6 +400,14 @@ hr.retro{
 
 /* short entries: keep the closing furniture off the float */
 .post .end{ clear:right; }
+
+
+   .post > header h1,
+.tags a,
+.entry-foot a{
+  overflow-wrap:break-word; word-break:break-word; hyphens:auto;
+}
+.entry-foot{ min-width:0; }
 </style>
 </head>
 
