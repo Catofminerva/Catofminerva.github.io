@@ -207,6 +207,20 @@ hr.retro{
 .cat{ font-family:var(--f-data); font-size:12px; line-height:1.35; color:var(--ink-soft); padding-top:5px; }
 .cat .no{ display:block; font-size:19px; color:var(--stamp); letter-spacing:.05em; }
 
+.body{ min-width:0; }
+.body h2,
+.body h2 a,
+.teaser{
+  overflow-wrap:break-word;
+  word-break:break-word;
+  hyphens:auto;
+}
+
+.body h2 a{ word-spacing:normal; }
+.body h2{ text-wrap:pretty; }
+
+   
+   
 .body h2{
   margin:0; font-family:var(--f-body); font-weight:bold;
   font-size:clamp(21px,2.6vw,27px); line-height:1.2;
@@ -335,7 +349,8 @@ hr.retro{
   .rail{ flex:1 1 auto; width:100%; }
   .stickers{ grid-template-columns:repeat(4,1fr); }
   .stickers .wide{ grid-column:span 2; }
-  .row{ grid-template-columns:54px 1fr; padding:12px 4px 14px; }
+  .row{ grid-template-columns:54px minmax(0,1fr); padding:12px 4px 14px; }
+  .teaser{ max-width:none; }
   .stat{ grid-column:2; text-align:left; padding-top:8px; white-space:normal; }
   .stamp{ position:static; display:inline-block; margin-top:9px; }
   .count{ margin-left:0; }
