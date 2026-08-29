@@ -1,831 +1,1938 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Galaxy 981 Web Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Galaxy 981 :: the chat room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A live chat room on Galaxy 981. Bring a nickname.">
+<meta name="color-scheme" content="dark">
 
-  <!-- Early embed switch so CSS applies before paint -->
-  <script>
-    (function(){
-      try{
-        var p = new URL(location.href).searchParams;
-        var embed = p.get('embed') === '1' || (window.top !== window.self);
-        if (embed) document.documentElement.classList.add('embed');
-      }catch(_){}
-    })();
-  </script>
+<!-- ============================================================
+     GALAXY 981 / chat.html
+     redesign #7. i keep saying this is the last one.
 
-  <style>
-    /* ========== THEME FROM index.html ========== */
-    :root{
-      --neon-blue:   #00e5ff;
-      --neon-green:  #39ff14;
-      --neon-yellow: #ffff33;
-      --neon-purple: #8f00ff;
+     things you can swap without breaking anything:
+       * the LINKS array in the nav (bottom of file)
+       * the BADGES array  (my 88x31 collection, drawn in svg)
+       * the ORACLE array  (the owl's answers)
+       * .sticker-wall     (points at your real gifs; a missing
+                            file turns into a drawn placeholder
+                            instead of a broken-image icon)
+       * WORKER_HOST       (the websocket, unchanged from before)
+     ============================================================ -->
 
-      --ink:         #00ffea;
-      --panel-bg:    rgba(0,0,0,0.78);
-      --sidebar-a:   #0d0022;
-      --sidebar-b:   #12002e;
-      --marquee-bg:  #001a4d;
-    }
+<script>
+  /* embed switch runs before paint so ?embed=1 never flashes the chrome */
+  (function () {
+    try {
+      var p = new URL(location.href).searchParams;
+      if (p.get('embed') === '1' || window.top !== window.self) {
+        document.documentElement.classList.add('embed');
+      }
+    } catch (_) {}
+  })();
+  /* saved prefs, also before paint, so the page doesn't blink into the right theme */
+  (function () {
+    try {
+      var d = document.documentElement;
+      var pal = localStorage.getItem('g981_palette');
+      if (pal) d.setAttribute('data-palette', pal);
+      if (localStorage.getItem('g981_crt') === '0') d.classList.add('no-crt');
+      if (localStorage.getItem('g981_motion') === '0') d.classList.add('no-motion');
+    } catch (_) {}
+  })();
+</script>
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-image: url('stars.gif');
-      background-repeat: repeat;
-      color: var(--ink);
-      font-family: "Comic Sans MS", "Courier New", "MS Sans Serif", monospace;
-      image-rendering: pixelated;
-      cursor: crosshair;
-      filter: contrast(115%) saturate(125%);
-    }
+<style>
+/* ================================================================
+   0. TOKENS
+   the page has three palettes. they are hue shifts of one another
+   because i redid the header in march and never redid anything else.
+   ================================================================ */
+:root{
+  --void:#06030e;
+  --void-2:#0d0620;
+  --cyan:#00e5ff;
+  --lime:#39ff14;
+  --sun:#ffd23f;
+  --grape:#a855ff;
+  --hot:#ff3ba7;
+  --ink:#bdf7ff;
+  --ink-dim:#7fb9c9;
+  --rule:#2a1650;
 
-    .page {
-      width: 760px;
-      margin: 18px auto 32px;
-      position: relative;
-      left: 7px;
-      border: 6px ridge var(--neon-blue);
-      outline: 4px solid #00131a;
-      background: var(--panel-bg);
-      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
+  /* the chat program has its own world and does not share these */
+  --sys-face:#cfc9c0;
+  --sys-lit:#f4f1ea;
+  --sys-dim:#6d675e;
+  --sys-dark:#3d3830;
+  --sys-title-a:#1b2f8f;
+  --sys-title-b:#5f8ede;
+  --paper:#fdfaf1;
+  --paper-alt:#f3eddd;
+  --paper-ink:#181613;
+}
+:root[data-palette="dusk"]{ --cyan:#ff9e4f; --grape:#c0407a; --hot:#ffd23f; --ink:#ffe6c9; --ink-dim:#d3a179; --void:#170a12; --void-2:#2a0f1c; --rule:#5c1f36; }
+:root[data-palette="lagoon"]{ --cyan:#7cf9c8; --grape:#3aa0ff; --hot:#b8ff5c; --ink:#dcfff2; --ink-dim:#84c5b2; --void:#02100e; --void-2:#04241f; --rule:#0d4b3d; }
 
-    #glitter-title {
-      font-size: 60px;
-      text-align: center;
-      color: var(--neon-blue);
-      text-shadow: 0 0 6px #fff, 0 0 10px var(--neon-blue), 0 0 14px var(--neon-green);
-      margin: 0;
-      padding: 18px 10px 0;
-      letter-spacing: 0.5px;
-      position: relative;
-    }
+*,*::before,*::after{ box-sizing:border-box; }
 
-    .marquee-wrap { margin: 10px 20px; border: 6px groove var(--neon-blue); background: var(--marquee-bg); }
-    .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
-    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root.no-motion html{ scroll-behavior:auto; }
 
-    /* Sidebar + content table layout (as in index.html) */
-    .layout { width: 100%; border-collapse: collapse; }
-    .sidebar {
-      width: 210px;
-      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right: 6px ridge var(--neon-purple);
-      vertical-align: top;
-    }
-    .content {
-      padding: 10px 14px 20px;
-      vertical-align: top;
-      background: rgba(15,0,20,0.45);
-      border-left: 4px solid #21003a;
-    }
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--ink);
+  font:15px/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;
+  overflow-x:hidden;
+}
 
-    .nav a {
-      display: block;
-      margin: 10px 6px;
-      padding: 6px 8px;
-      border: 3px outset #6af7ff;
-      background: #0e0e33;
-      color: #a7ffff;
-      text-decoration: none;
-      text-align: left;
-      text-transform: uppercase;
-      text-shadow: 0 0 4px var(--neon-blue);
-      box-shadow: 2px 2px 0 #000;
-    }
-    .nav a:hover { border-style: inset; color: var(--neon-green); background: #140043; transform: translate(1px,1px); }
-    .nav-icon { vertical-align: middle; width: 26px; height: 26px; margin-right: 6px; image-rendering: pixelated; }
+/* ================================================================
+   1. ATMOSPHERE — sky, drift, scanlines
+   ================================================================ */
+.sky{
+  position:fixed; inset:-10% -10% -10% -10%; z-index:-3; pointer-events:none;
+  background-color:var(--void);
+  background-image:
+    radial-gradient(1.6px 1.6px at 40px 60px,   #fffbe6 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 150px 200px, #b9f6ff 50%, transparent 51%),
+    radial-gradient(1px 1px   at 260px 90px,    #ffffff 50%, transparent 51%),
+    radial-gradient(1px 1px   at 320px 300px,   #ffd6ff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 90px 340px,  #d8fff0 50%, transparent 51%);
+  background-size:400px 400px;
+  animation:drift 200s linear infinite;
+  opacity:.85;
+}
+.sky--near{
+  z-index:-2; opacity:.5;
+  background-image:
+    radial-gradient(2.4px 2.4px at 120px 80px,  #ffffff 50%, transparent 51%),
+    radial-gradient(2px 2px at 500px 420px,     #9de9ff 50%, transparent 51%),
+    radial-gradient(2.2px 2.2px at 300px 560px, #ffc2f0 50%, transparent 51%);
+  background-size:640px 640px;
+  animation-duration:90s;
+}
+.sky--glow{
+  z-index:-3; opacity:1; animation:none; background-size:auto;
+  background-image:
+    radial-gradient(60vw 40vh at 12% 8%, rgba(168,85,255,.34), transparent 70%),
+    radial-gradient(50vw 38vh at 88% 22%, rgba(0,229,255,.22), transparent 70%),
+    radial-gradient(70vw 50vh at 50% 110%, rgba(255,59,167,.18), transparent 70%);
+  background-image:
+    radial-gradient(60vw 40vh at 12% 8%,  color-mix(in srgb, var(--grape) 34%, transparent), transparent 70%),
+    radial-gradient(50vw 38vh at 88% 22%, color-mix(in srgb, var(--cyan) 22%, transparent), transparent 70%),
+    radial-gradient(70vw 50vh at 50% 110%, color-mix(in srgb, var(--hot) 18%, transparent), transparent 70%);
+}
+@keyframes drift{ to{ background-position:400px 800px; } }
 
-    .post { margin: 14px 0 28px; padding: 10px 10px 14px; border: 4px groove var(--neon-purple); background: rgba(20,0,30,0.62); }
-    .post h3 { margin: 0 0 6px 0; color: var(--neon-purple); text-shadow: 0 0 6px var(--neon-purple); }
-    .post .meta { font-size: 12px; color: var(--neon-yellow); }
+.crt{
+  position:fixed; inset:0; z-index:60; pointer-events:none; mix-blend-mode:overlay; opacity:.5;
+  background:repeating-linear-gradient(180deg, rgba(255,255,255,.10) 0 1px, transparent 1px 3px);
+}
+:root.no-crt .crt{ display:none; }
 
-    hr.retro {
-      height: 12px; border: 0; margin: 10px 0 14px;
-      background-image: repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,
-        #ffa500 14px 28px,
-        #ffff00 28px 42px,
-        #00cc00 42px 56px,
-        #00aaff 56px 70px,
-        #0000ff 70px 84px,
-        #8000ff 84px 98px
-      );
-      position: relative;
-      overflow: visible;
-    }
+/* sparkle cursor lives here */
+.spark{
+  position:fixed; z-index:70; pointer-events:none; width:8px; height:8px; margin:-4px 0 0 -4px;
+  border-radius:50%; background:var(--sun);
+  box-shadow:0 0 8px var(--sun);
+  animation:sparkfade .7s linear forwards;
+}
+@keyframes sparkfade{ from{ transform:scale(1); opacity:.95 } to{ transform:scale(.1) translateY(14px); opacity:0 } }
 
-    /* Running kitty across first rainbow bar in content */
-    .content > hr.retro:first-of-type::after {
-      content: "";
-      position: absolute;
-      left: -64px;
-      top: -60px;
-      width: 160px; height: 160px;
-      background: url("kitty.gif?v=10") center / contain no-repeat;
-      image-rendering: pixelated;
-      animation: kitty-rail 12s linear infinite;
-      pointer-events: none;
-      z-index: 9;
-    }
-    @keyframes kitty-rail { from { left: -64px; } to { left: 100%; } }
+/* ================================================================
+   2. SHELL
+   ================================================================ */
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--sun); color:#111; padding:10px 16px; font-weight:bold;
+}
+.skip:focus{ left:8px; top:8px; }
 
-    /* Sidebar sticker wall (from index) */
-    .sticker-wall{ margin: 10px 8px 14px; padding: 8px; border: 3px inset #6af7ff; background: rgba(0,0,0,0.35); display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; justify-items: center; align-items: center; position: relative; }
-    .sticker-wall img{ width: 88px; height: auto; image-rendering: pixelated; display: block; transition: transform 120ms ease; }
-    .sticker-wall img:hover{ transform: translateY(-1px); filter: drop-shadow(0 0 6px var(--neon-green)); }
-    .sticker-wall .wide{ grid-column: span 2; width: 188px; }
-    .sticker-controls{ display:flex; gap:8px; justify-content:center; margin:6px 0 10px; }
-    .sticker-controls button{ padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff; font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000; }
-    .sticker-controls button:active{ border-style: inset; color:var(--neon-green); }
-    .sticker-wall.shuffled img{ animation: pop 180ms; }
-    @keyframes pop { 50% { transform: scale(1.08) } }
+.shell{
+  width:min(1140px, 95vw);
+  margin:20px auto 70px;
+  position:relative;
+  border:6px ridge var(--cyan);
+  outline:4px solid #04010c;
+  background:
+    linear-gradient(180deg, rgba(12,4,28,.90), rgba(6,3,14,.94));
+  box-shadow:0 0 0 1px #000, 0 0 70px rgba(0,229,255,.28), inset 0 0 40px #000;
+  box-shadow:0 0 0 1px #000, 0 0 70px color-mix(in srgb, var(--cyan) 28%, transparent), inset 0 0 40px #000;
+}
 
-    /* Title ships (from index) */
-    #glitter-title::before, #glitter-title::after {
-      content: ""; position: absolute; top: 50%; transform: translateY(-50%);
-      width: 110px; height: 70px; background-repeat: no-repeat; background-position: center; background-size: contain; image-rendering: pixelated; filter: drop-shadow(0 0 6px var(--neon-blue)); pointer-events: none;
-    }
-    #glitter-title::before { left: 35px;  background-image: url("starwar1.gif?v=1"); }
-    #glitter-title::after  { right: 30px; background-image: url("starwar2.jpg?v=1"); }
-    @keyframes flybyL { 0%{ transform:translate(-120%, -10px) rotate(8deg) } 70%{ transform:translate(10%, 4px) rotate(-6deg) } 100%{ transform:none } }
-    @keyframes flybyR { 0%{ transform:translate(120%, 10px) rotate(-8deg) } 70%{ transform:translate(-10%, -6px) rotate(6deg) } 100%{ transform:none } }
-    .flyby #glitter-title::before { animation: flybyL 1.6s ease-out; }
-    .flyby #glitter-title::after  { animation: flybyR 1.6s ease-out; }
+/* ================================================================
+   3. HEADER — the polished stratum. everything below it is older.
+   ================================================================ */
+.banner{ position:relative; padding:26px 18px 10px; text-align:center; overflow:hidden; }
+.banner::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    conic-gradient(from 0deg at 50% 120%,
+      transparent 0deg, color-mix(in srgb, var(--grape) 30%, transparent) 25deg, transparent 50deg,
+      transparent 130deg, color-mix(in srgb, var(--cyan) 26%, transparent) 155deg, transparent 180deg);
+  animation:sweep 26s linear infinite; opacity:.7;
+}
+@keyframes sweep{ to{ transform:rotate(360deg) } }
 
-    :root.morning { --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
-    :root.night   { --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
+.wordmark{
+  position:relative; margin:0; line-height:.86;
+  font-family:Impact, Haettenschweiler, "Arial Narrow Bold", "Trebuchet MS", sans-serif;
+  font-size:clamp(46px, 11vw, 108px);
+  letter-spacing:.01em; text-transform:uppercase;
+  transform:skewX(-4deg);
+  color:#d6fbff;
+}
+/* chrome letters. the gradient lives on the word, not the whole heading,
+   so the numerals can be hollow without arguing about background-clip. */
+.wordmark .word{
+  background:linear-gradient(180deg,
+    #ffffff 0 30%, #d6fbff 30% 46%, #24b9ff 46% 58%, #0b3f9c 58% 78%, #7fe9ff 78% 100%);
+  -webkit-background-clip:text; background-clip:text;
+  filter:drop-shadow(0 3px 0 #050018) drop-shadow(0 0 22px rgba(0,229,255,.7));
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .wordmark .word{ color:transparent; }
+}
+.wordmark .num{ color:var(--hot); filter:drop-shadow(0 0 12px var(--hot)); }
+@supports (-webkit-text-stroke: 2px red){
+  .wordmark .num{ -webkit-text-stroke:2px var(--hot); -webkit-text-fill-color:transparent; color:transparent; }
+}
+.wordmark__sub{
+  margin:10px 0 0; font:italic 15px/1.4 Georgia, "Times New Roman", serif; color:var(--ink-dim);
+  position:relative;
+}
+.wordmark__sub b{ color:var(--sun); font-weight:normal; font-style:normal; }
+.ar{ font-family:"Traditional Arabic","Noto Naskh Arabic",serif; font-size:1.25em; }
 
-    .footer { padding: 8px; text-align: center; color: #fff; }
+.versionflag{
+  position:relative; display:inline-block; margin-top:10px; padding:2px 10px;
+  font:bold 10px/1.6 Verdana, sans-serif; letter-spacing:.16em; text-transform:uppercase;
+  color:#08131a; background:var(--lime); transform:rotate(-1.4deg);
+  box-shadow:2px 2px 0 #000;
+}
 
-    /* ========== CHAT UI — namespaced to avoid conflicts ========== */
-    .chat-window{ border: 4px groove var(--neon-blue); background: rgba(0,0,0,0.6); box-shadow: inset 0 0 8px #000; }
-    .chat-menubar{ position: relative; background:#0e0e33; border-bottom:1px solid #6af7ff; padding:4px 6px; color:#a7ffff; }
-    .chat-menubar .menu-btn{ border:1px solid #6af7ff; background:#140043; color:#a7ffff; padding:2px 8px; font-size:12px; margin-right:6px; cursor:pointer; box-shadow: 1px 1px 0 #000; }
-    .chat-menubar .menu-btn:active{ background:#0e0e33; }
-    .chat-dropdown{ position:absolute; top:26px; left:0; display:none; background:#000; border:1px solid #6af7ff; min-width:210px; z-index:10; box-shadow: 0 0 10px rgba(0,229,255,0.25); }
-    .chat-dropdown a{ display:block; padding:6px 10px; font-size:12px; color:#a7ffff; cursor:pointer; text-decoration:none; }
-    .chat-dropdown a:hover{ background:#140043; }
+/* ticker: css instead of <marquee>, same energy, stops for reduced motion */
+.ticker{
+  position:relative; margin:14px 16px 0; overflow:hidden;
+  border:4px groove var(--cyan); background:#00113a;
+  font:bold 15px/2.1 Verdana, sans-serif; color:var(--sun);
+}
+.ticker__track{ display:inline-flex; white-space:nowrap; will-change:transform; animation:slide 34s linear infinite; }
+.ticker__track span{ padding:0 2.2rem; }
+.ticker__track b{ color:var(--lime); }
+@keyframes slide{ to{ transform:translateX(-50%) } }
+.ticker:hover .ticker__track{ animation-play-state:paused; }
 
-    .topicbar{ background:#0e0e33; border-bottom:1px solid #6af7ff; padding:4px 8px; font-size:12px; color:#a7ffff; }
+/* ================================================================
+   4. LAYOUT
+   ================================================================ */
+.grid{
+  display:grid; grid-template-columns:216px minmax(0,1fr);
+  align-items:start;
+}
+.rail{
+  background:
+    repeating-linear-gradient(135deg, #12042c 0 12px, #190740 12px 24px);
+  border-right:6px ridge var(--grape);
+  padding-bottom:18px;
+  position:relative;
+}
+.main{ padding:12px 18px 26px; min-width:0; background:rgba(10,2,20,.42); }
 
-    .chat-layout{ display:grid; grid-template-columns: 1fr 220px; gap:0; }
-    .chat-left{ border-right:1px solid #6af7ff; background:rgba(0,0,0,0.35); }
-    .chat-right{ background:rgba(0,0,0,0.25); }
+/* ================================================================
+   5. RAIL WIDGETS
+   ================================================================ */
+.nav{ padding:12px 8px 6px; }
+.nav a{
+  display:flex; align-items:center; gap:8px;
+  margin:7px 4px; padding:6px 8px;
+  border:3px outset #6af7ff;
+  border:3px outset color-mix(in srgb, var(--cyan) 60%, #fff 10%);
+  background:#100f3d; color:#a9f6ff; text-decoration:none;
+  font:12px/1.2 Verdana, sans-serif; text-transform:uppercase; letter-spacing:.04em;
+  text-shadow:0 0 5px color-mix(in srgb, var(--cyan) 70%, transparent);
+  box-shadow:2px 2px 0 #000;
+}
+.nav a:hover,.nav a:focus-visible{ border-style:inset; color:var(--lime); background:#180a4a; transform:translate(1px,1px); }
+.nav a[aria-current="page"]{ background:#2a0a52; color:var(--sun); border-color:var(--sun); }
+.nav .ico{ width:20px; height:20px; flex:0 0 20px; }
 
-    #log{ height:420px; overflow-y:auto; padding:8px; font:13px "Courier New", Courier, monospace; white-space:pre-wrap; word-break:break-word; color:#a7ffff; }
-    #log .sys{ color:#ffff99; }
-    #log.hide-ts .ts{ display:none; }
-    #log .hilite{ background:#003344; }
+.box{
+  margin:12px 8px; padding:8px 9px 10px;
+  border:3px inset #6af7ff;
+  border:3px inset color-mix(in srgb, var(--cyan) 55%, #fff);
+  background:rgba(0,0,0,.42);
+  font:12px/1.5 Verdana, sans-serif; color:#d9f6ff;
+}
+.box > h4{
+  margin:-8px -9px 8px; padding:4px 8px;
+  font:bold 11px/1.5 Verdana, sans-serif; letter-spacing:.12em; text-transform:uppercase;
+  color:#0a0018; background:var(--cyan);
+}
+.box p{ margin:6px 0; }
+.box a{ color:var(--sun); }
 
-    .inputbar{ padding:6px; background:#0b0b2a; border-top:1px solid #6af7ff; }
-    .row{ display:flex; gap:6px; margin-bottom:6px; align-items:center; }
-    input[type="text"]{ flex:1; padding:6px; border:1px solid #6af7ff; background:#000; color:#a7ffff; font:13px Arial, Helvetica, sans-serif; }
-    input[name="nick"]{ flex:0 0 180px; }
-    button{ padding:5px 10px; border:1px solid #6af7ff; background:#140043; color:#a7ffff; cursor:pointer; box-shadow: 1px 1px 0 #000; }
-    button:active{ background:#0e0e33; }
-    .toolbar{ display:flex; gap:6px; align-items:center; font-size:12px; }
-    select{ border:1px solid #6af7ff; background:#000; color:#a7ffff; padding:2px 4px; font-size:12px; }
+.counter{ text-align:center; padding:10px 6px 4px; font:11px/1.5 Verdana,sans-serif; color:var(--sun); }
+.counter .odometer{
+  display:inline-block; margin-top:4px; padding:4px 8px;
+  border:3px inset #0aa; background:#000; color:#00ff5a;
+  font:16px/1 "Courier New", monospace; letter-spacing:3px;
+}
+.counter small{ display:block; margin-top:5px; color:var(--ink-dim); font-size:10px; font-style:italic; }
 
-    #roster{ height:420px; overflow-y:auto; padding:8px; font:12px Arial, Helvetica, sans-serif; color:#fff; }
-    #roster .user{ padding:2px 0; border-bottom:1px dotted #335; }
+/* the little media player */
+.player{ margin:12px 8px; border:3px outset #7cf; background:linear-gradient(180deg,#1a1150,#0a0530); padding:8px; }
+.player__screen{ background:#02160f; border:2px inset #0a8; padding:5px 6px; overflow:hidden; }
+.player__title{ display:inline-block; white-space:nowrap; color:var(--lime); font:11px/1.4 "Courier New",monospace; animation:slide2 12s linear infinite; }
+@keyframes slide2{ from{ transform:translateX(100%) } to{ transform:translateX(-100%) } }
+.eq{ display:flex; align-items:flex-end; gap:2px; height:20px; margin-top:6px; }
+.eq i{ width:5px; height:9px; background:var(--hot); animation:bounce .9s ease-in-out infinite alternate; }
+.eq i:nth-child(2){ animation-delay:.12s; background:var(--sun) }
+.eq i:nth-child(3){ animation-delay:.24s; background:var(--lime) }
+.eq i:nth-child(4){ animation-delay:.36s; background:var(--cyan) }
+.eq i:nth-child(5){ animation-delay:.48s; background:var(--grape) }
+.eq i:nth-child(6){ animation-delay:.60s; background:var(--hot) }
+.eq i:nth-child(7){ animation-delay:.72s; background:var(--sun) }
+@keyframes bounce{ from{ height:3px } to{ height:20px } }
+.player__meta{ margin-top:6px; font:10px/1.4 Verdana,sans-serif; color:var(--ink-dim); }
 
-    .tips{ font-size:11px; color:#cfe; margin:6px; line-height:1.35; }
-    .tips a{ color:#a7ffff; text-decoration:underline; cursor:pointer; }
-    .tips code{ background:#000; border:1px solid #335; padding:0 2px; }
+/* the oracle */
+.oracle{ margin:12px 8px; padding:10px 9px; border:3px double var(--sun); background:rgba(30,10,0,.5); text-align:center; }
+.oracle__owl{ width:56px; height:56px; }
+.oracle__out{ min-height:44px; margin:6px 0 8px; font:italic 12px/1.45 Georgia,serif; color:#ffeec9; }
+.btn{
+  font:bold 11px/1.4 Verdana, sans-serif; padding:5px 10px; cursor:pointer;
+  border:2px outset #8de9ff; background:#160a44; color:#bdf7ff; box-shadow:2px 2px 0 #000;
+}
+.btn:hover{ color:var(--lime); }
+.btn:active{ border-style:inset; transform:translate(1px,1px); box-shadow:1px 1px 0 #000; }
 
-    .statusbar{ background:#0e0e33; border-top:1px solid #6af7ff; padding:4px 8px; font-size:12px; color:#a7ffff; display:flex; justify-content:space-between; }
-    #typing{ color:#9fe; }
+/* sticker wall: real gifs from the folder */
+.sticker-wall{
+  margin:12px 8px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,.4);
+  display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center;
+}
+.sticker-wall img{ width:86px; height:auto; image-rendering:pixelated; display:block; transition:transform 120ms ease; }
+.sticker-wall img:hover{ transform:translateY(-2px) rotate(-1deg); filter:drop-shadow(0 0 7px var(--lime)); }
+.sticker-wall .wide{ grid-column:span 2; width:184px; }
+.sticker-wall .ghost{
+  width:86px; height:31px; display:grid; place-items:center;
+  border:1px dashed #4a7; color:#4a7; background:#03150f;
+  font:9px/1.2 "Courier New",monospace; text-align:center;
+}
+.sticker-wall .ghost.wide{ width:184px; }
+.sticker-wall.shuffled img,.sticker-wall.shuffled .ghost{ animation:pop 200ms; }
+@keyframes pop{ 50%{ transform:scale(1.1) } }
+.sticker-controls{ display:flex; gap:6px; justify-content:center; margin:0 8px 10px; }
 
-    /* Context menu */
-    #ctx{ position:absolute; display:none; background:#000; border:1px solid #6af7ff; z-index:20; min-width:160px; }
-    #ctx a{ display:block; padding:6px 10px; color:#a7ffff; text-decoration:none; }
-    #ctx a:hover{ background:#140043; }
+/* badges i collected, drawn not downloaded */
+.badges{ margin:12px 8px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.badges svg{ display:block; image-rendering:pixelated; }
+.badges a{ line-height:0; filter:saturate(1); }
+.badges a:hover{ filter:brightness(1.25) saturate(1.4); }
 
-    /* Message editor + placeholder */
-    .edit{
-      flex: 1;
-      min-height: 42px;
-      max-height: 140px;
-      overflow-y: auto;
-      border: 1px solid #6af7ff;
-      background: #000;
-      color: #a7ffff;
-      padding: 6px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      outline: none;
-      box-sizing: border-box;
-    }
-    .edit.is-empty::before{
-      content: attr(data-ph);
-      color:#6af7ff;
-      opacity:0.6;
-      pointer-events:none;
-    }
-  
-    /* ===== EMBED MODE (for iframe) ===== */
-    html.embed, html.embed body { background: transparent; filter: none; }
-    .embed .page { border: 0; outline: 0; background: transparent; box-shadow: none; width: auto; margin: 0; left: 0; }
-    .embed #glitter-title,
-    .embed .marquee-wrap,
-    .embed .sidebar,
-    .embed .footer,
-    .embed .sticker-controls,
-    .embed .sticker-wall,
-    .embed .content > hr.retro,
-    .embed .content > .marquee-wrap,
-    .embed .content > .post:not(#chat-room) { display: none !important; }
-    .embed .layout { width: auto; }
-    .embed .content { padding: 0; border: 0; background: transparent; }
-    .embed #chat-room { margin: 0; padding: 0; border: 0; background: transparent; }
-    /* hide the post header + meta inside the embed */
-    .embed #chat-room > h3,
-    .embed #chat-room > .meta { display:none !important; }
-    .embed .chat-window { border: 0; background: transparent; box-shadow: none; }
-  </style>
+/* control panel */
+.panel label{ display:flex; align-items:center; gap:7px; margin:6px 0; cursor:pointer; }
+.panel input[type=checkbox]{ accent-color:var(--hot); width:14px; height:14px; }
+.panel select{ width:100%; margin-top:4px; background:#000; color:var(--ink); border:2px inset #6af7ff; font:12px Verdana,sans-serif; padding:3px; }
+</style>
+
+<style>
+/* ================================================================
+   6. THE CHAT PROGRAM
+   this is the one thing on the page that is not decorated. it looks
+   like software because it is software: a light system window sitting
+   on the starfield like an application left open over a wallpaper.
+   the log is cream on purpose. the colour picker offers navy, maroon
+   and black, which were invisible against the old black log.
+   ================================================================ */
+.win{
+  margin:16px 0 22px;
+  background:var(--sys-face);
+  border:2px solid var(--sys-lit);
+  border-right-color:var(--sys-dark); border-bottom-color:var(--sys-dark);
+  box-shadow:7px 7px 0 rgba(0,0,0,.6), 0 0 40px rgba(0,229,255,.2);
+  box-shadow:7px 7px 0 rgba(0,0,0,.6), 0 0 40px color-mix(in srgb, var(--cyan) 20%, transparent);
+  color:var(--paper-ink);
+  font-family:Verdana, Geneva, sans-serif;
+}
+.win__bar{
+  display:flex; align-items:center; gap:8px; padding:5px 6px;
+  background:linear-gradient(90deg,var(--sys-title-a) 0%, var(--sys-title-b) 72%, #cddffb 100%);
+  color:#fff; font:bold 12px/1.4 Verdana, sans-serif;
+  text-shadow:1px 1px 0 rgba(0,0,0,.45);
+}
+.win__bar .dot{ width:12px; height:12px; flex:0 0 12px; background:var(--sun); border:1px solid #000; }
+.win__bar .grow{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.win__ctl{ display:flex; gap:3px; }
+.win .win__ctl button{
+  width:19px; height:17px; padding:0; line-height:1;
+  font:bold 11px/1 "Courier New",monospace; color:#111;
+  border:2px outset var(--sys-lit); background:var(--sys-face); cursor:pointer;
+}
+.win .win__ctl button:active{ border-style:inset; }
+
+.chat-menubar{ position:relative; background:var(--sys-face); border-bottom:1px solid var(--sys-dim); padding:3px 4px; }
+.chat-menubar .menu-btn{
+  border:1px solid transparent; background:transparent; color:#161310;
+  font:12px/1.4 Verdana,sans-serif; padding:2px 8px; margin-right:2px; cursor:pointer;
+}
+.chat-menubar .menu-btn:hover{ background:var(--sys-title-a); color:#fff; }
+.chat-menubar .menu-btn[aria-expanded="true"]{ border:1px inset var(--sys-dim); background:#bcb6ad; color:#000; }
+.chat-dropdown{
+  position:absolute; top:24px; left:0; display:none; z-index:14; min-width:216px;
+  background:var(--sys-face); border:2px outset var(--sys-lit);
+  box-shadow:4px 4px 0 rgba(0,0,0,.45);
+}
+.chat-dropdown a{
+  display:block; padding:5px 12px; font:12px/1.5 Verdana,sans-serif; color:#161310;
+  text-decoration:none; cursor:pointer;
+}
+.chat-dropdown a:hover{ background:var(--sys-title-a); color:#fff; }
+.chat-dropdown hr{ border:0; border-top:1px solid var(--sys-dim); border-bottom:1px solid var(--sys-lit); margin:3px 6px; }
+
+.topicbar{
+  display:flex; gap:8px; align-items:baseline;
+  padding:4px 8px; background:#e5e0d7; border-bottom:1px solid var(--sys-dim);
+  font:12px/1.5 Verdana,sans-serif; color:#3a352d;
+}
+.topicbar strong{ color:#161310; }
+#topicText{ cursor:text; }
+#topicText:hover{ text-decoration:underline dotted; }
+
+.chat-layout{ display:grid; grid-template-columns:minmax(0,1fr) 208px; }
+.chat-left{ min-width:0; border-right:1px solid var(--sys-dim); }
+.chat-right{ background:#e5e0d7; display:flex; flex-direction:column; }
+.chat-right.hidden{ display:none; }
+.chat-layout:has(.chat-right.hidden){ grid-template-columns:minmax(0,1fr); }
+
+#log{
+  height:clamp(300px, 44vh, 470px); overflow-y:auto; padding:8px 10px;
+  background:var(--paper); color:var(--paper-ink);
+  font:13px/1.6 "Courier New", Courier, monospace;
+  white-space:pre-wrap; word-break:break-word;
+  border-top:1px solid var(--sys-dim);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.12);
+}
+#log > div{ padding:1px 2px; }
+#log > div:nth-child(even){ background:var(--paper-alt); }
+#log .ts{ color:#8d8574; }
+#log.hide-ts .ts{ display:none; }
+#log .nickname{ font-weight:bold; }
+#log .sys{ color:#6f6142; font-style:italic; background:#fbf4de !important; }
+#log .whisper{ background:#fdeaf4 !important; box-shadow:inset 3px 0 0 #c2359b; }
+#log .emote{ color:#4a3d86; font-style:italic; }
+#log .mine{ box-shadow:inset 3px 0 0 #12855c; }
+#log .hilite{ background:#fff59a !important; outline:1px solid #d9b800; }
+#log .joinpart{ color:#7a7263; font-size:12px; font-style:italic; }
+
+.inputbar{ padding:7px; background:var(--sys-face); border-top:1px solid var(--sys-lit); }
+.row{ display:flex; gap:6px; align-items:center; margin-bottom:6px; }
+.row:last-child{ margin-bottom:0; }
+.row label{ font:12px/1.4 Verdana,sans-serif; color:#2d2820; }
+input[type=text]{
+  flex:1; min-width:0; padding:5px 6px;
+  border:2px inset var(--sys-lit); background:#fff; color:#111;
+  font:13px/1.4 Verdana, sans-serif;
+}
+input#nick{ flex:0 1 168px; }
+.win button{
+  font:12px/1.4 Verdana,sans-serif; padding:4px 11px; cursor:pointer;
+  border:2px outset var(--sys-lit); background:var(--sys-face); color:#161310;
+}
+.win button:hover{ background:#ddd8cf; }
+.win button:active{ border-style:inset; transform:translate(1px,1px); }
+#send{ font-weight:bold; padding:4px 18px; }
+
+.toolbar{ flex-wrap:wrap; font-size:12px; padding:4px 5px; background:#e5e0d7; border:1px solid var(--sys-dim); }
+.toolbar .sep{ width:1px; align-self:stretch; background:var(--sys-dim); box-shadow:1px 0 0 var(--sys-lit); }
+.toolbar label{ display:flex; gap:4px; align-items:center; }
+.win select{
+  border:2px inset var(--sys-lit); background:#fff; color:#111;
+  font:12px/1.4 Verdana,sans-serif; padding:2px 3px;
+}
+#fmtB{ font-family:Georgia,serif; font-weight:bold; }
+#fmtI{ font-family:Georgia,serif; font-style:italic; }
+#fmtU{ font-family:Georgia,serif; text-decoration:underline; }
+
+.edit{
+  flex:1; min-width:0; min-height:44px; max-height:150px; overflow-y:auto;
+  border:2px inset var(--sys-lit); background:#fff; color:#111;
+  padding:6px 7px; font:13px/1.5 Verdana,sans-serif;
+  white-space:pre-wrap; word-break:break-word; outline:none;
+}
+.edit:focus{ box-shadow:0 0 0 2px color-mix(in srgb, var(--sys-title-b) 70%, transparent); }
+.edit.is-empty::before{ content:attr(data-ph); color:#9a948a; pointer-events:none; }
+
+.chat-right h5{
+  margin:0; padding:5px 8px; background:#d2ccc2; border-bottom:1px solid var(--sys-dim);
+  font:bold 11px/1.5 Verdana,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:#2d2820;
+  display:flex; justify-content:space-between;
+}
+#roster{ flex:1; min-height:0; overflow-y:auto; padding:6px; font:12px/1.5 Verdana,sans-serif; color:#221e18; }
+#roster .user{
+  display:flex; align-items:center; gap:6px; padding:3px 4px; cursor:context-menu;
+  border-bottom:1px dotted #c3bcae;
+}
+#roster .user:hover{ background:#fff7d9; }
+#roster .user::before{ content:""; width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#25a55f; box-shadow:0 0 0 1px #0006; }
+#roster .user.self{ font-weight:bold; }
+#roster .user.self::after{ content:"you"; margin-left:auto; font:9px/1 Verdana,sans-serif; color:#7a7263; text-transform:uppercase; letter-spacing:.08em; }
+#roster .user.muted{ opacity:.45; text-decoration:line-through; }
+#roster .empty{ padding:10px 4px; color:#7a7263; font-style:italic; }
+
+.tips{
+  padding:8px 10px; background:#efe9dd; border-top:1px solid var(--sys-dim);
+  font:11px/1.5 Verdana,sans-serif; color:#3a352d;
+}
+.tips code{ background:#fff; border:1px solid #c3bcae; padding:0 3px; font-family:"Courier New",monospace; }
+.tips a{ color:#12457f; }
+.tips ul{ margin:5px 0 5px 18px; padding:0; }
+.tips li{ margin:2px 0; }
+
+.statusbar{
+  display:flex; gap:10px; align-items:center; justify-content:space-between;
+  padding:4px 8px; background:var(--sys-face); border-top:2px groove var(--sys-lit);
+  font:11px/1.6 Verdana,sans-serif; color:#2d2820;
+}
+.statusbar > div{ border:1px inset #bbb4aa; padding:1px 7px; background:#e8e3da; }
+.statusbar .grow{ flex:1; }
+#status::before{
+  content:""; display:inline-block; width:8px; height:8px; margin-right:6px; border-radius:50%;
+  background:#c9a227; box-shadow:0 0 5px #c9a227; vertical-align:middle;
+}
+#status[data-state=on]::before{ background:#25a55f; box-shadow:0 0 5px #25a55f; }
+#status[data-state=off]::before{ background:#c1362f; box-shadow:0 0 5px #c1362f; }
+#typing{ color:#5a5245; font-style:italic; min-height:1em; }
+
+#ctx{
+  position:absolute; display:none; z-index:80; min-width:172px;
+  background:var(--sys-face); border:2px outset var(--sys-lit); box-shadow:4px 4px 0 rgba(0,0,0,.45);
+}
+#ctx a{ display:block; padding:5px 12px; font:12px/1.5 Verdana,sans-serif; color:#161310; text-decoration:none; }
+#ctx a:hover{ background:var(--sys-title-a); color:#fff; }
+#ctx .ctx-head{ padding:4px 12px; background:#d2ccc2; font:bold 11px/1.5 Verdana,sans-serif; border-bottom:1px solid var(--sys-dim); }
+</style>
+
+<style>
+/* ================================================================
+   7. THE REST OF THE HOUSE
+   different rooms, different decades, no attempt at agreement.
+   ================================================================ */
+
+/* rainbow rule with a cat walking it */
+.rail-strip{ position:relative; height:14px; margin:14px 0 18px; overflow:visible; }
+.rail-strip .bar{
+  position:absolute; inset:0; height:14px;
+  background-image:repeating-linear-gradient(90deg,
+    #ff0033 0 16px, #ff8a00 16px 32px, #ffe400 32px 48px,
+    #33d017 48px 64px, #00b3ff 64px 80px, #2b34ff 80px 96px, #a12bff 96px 112px);
+  box-shadow:0 0 14px rgba(255,255,255,.28);
+}
+.walker{
+  position:absolute; bottom:8px; left:0; width:62px; height:44px;
+  animation:walk 19s linear infinite;
+}
+@keyframes walk{
+  from{ transform:translateX(-70px) }
+  to{ transform:translateX(calc(100% + 100vw)) }
+}
+.walker .body{ animation:bob .5s ease-in-out infinite alternate; transform-origin:center bottom; }
+@keyframes bob{ from{ transform:translateY(0) } to{ transform:translateY(-2.5px) } }
+
+/* the taped notice */
+.notice{
+  position:relative; margin:6px 0 20px; padding:14px 18px;
+  background:#fff8c8; color:#2b2410; border:1px solid #d9c46a;
+  font:13px/1.6 "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;
+  transform:rotate(-.5deg);
+  box-shadow:4px 6px 0 rgba(0,0,0,.5);
+}
+.notice::before,.notice::after{
+  content:""; position:absolute; top:-11px; width:74px; height:22px;
+  background:rgba(255,255,255,.42); border-left:1px dashed rgba(0,0,0,.16); border-right:1px dashed rgba(0,0,0,.16);
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+.notice::before{ left:22px; transform:rotate(-4deg); }
+.notice::after{ right:26px; transform:rotate(3deg); }
+.notice b{ color:#a3320f; }
+.notice .strike{ text-decoration:line-through; color:#8a7f5e; }
+
+/* section headers, hand-cut */
+.head{
+  display:flex; align-items:center; gap:12px; margin:30px 0 12px;
+}
+.head h2{
+  margin:0; font:bold 22px/1.2 "Trebuchet MS", Verdana, sans-serif;
+  color:var(--sun); text-shadow:2px 2px 0 #2a0a52, 0 0 16px color-mix(in srgb, var(--sun) 55%, transparent);
+  letter-spacing:.02em;
+}
+.head .line{ flex:1; height:6px; background:repeating-linear-gradient(90deg, var(--grape) 0 6px, transparent 6px 12px); }
+.head .eyebrow{
+  font:9px/1.6 Verdana,sans-serif; letter-spacing:.2em; text-transform:uppercase;
+  color:#08131a; background:var(--cyan); padding:1px 7px;
+}
+
+/* entries, on paper, because writing deserves a different substrate */
+.entries{ display:grid; gap:18px; }
+.paper{
+  position:relative; padding:24px 28px 22px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.03), transparent 60px),
+    #fbf3e0;
+  color:#2a2118; border:1px solid #cdb98c;
+  font:16px/1.7 Georgia, "Times New Roman", serif;
+  box-shadow:0 16px 0 -10px rgba(0,0,0,.55), 0 0 34px rgba(255,214,140,.10);
+}
+.paper h3{ margin:0 0 4px; font:bold 22px/1.25 Georgia, serif; color:#1d1710; }
+.paper h3 a{ color:inherit; text-decoration:none; border-bottom:2px solid #d8b23f; }
+.paper h3 a:hover{ background:#fbe9a8; }
+.paper .stamp{
+  font:10px/1.6 Verdana,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:#8a6b28;
+  border-bottom:1px dotted #cdb98c; padding-bottom:8px; margin-bottom:12px; display:block;
+}
+.paper p{ margin:0 0 12px; }
+.paper p:last-child{ margin-bottom:0; }
+.paper .lede::first-letter{
+  float:left; font-size:52px; line-height:.82; padding:4px 8px 0 0; color:#a3320f; font-weight:bold;
+}
+.paper .pen{
+  display:block; margin-top:14px; padding-top:10px; border-top:1px dotted #cdb98c;
+  font:14px/1.5 "Comic Sans MS","Chalkboard SE",cursive; color:#b0421c; transform:rotate(-.3deg);
+}
+.paper--short{ font-size:15px; }
+
+.postit{
+  position:relative; padding:16px 16px 18px; color:#221d10;
+  font:13px/1.55 "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;
+  box-shadow:3px 5px 0 rgba(0,0,0,.45);
+}
+.postit--yellow{ background:#fff173; transform:rotate(1.4deg); }
+.postit--pink{ background:#ffb4dd; transform:rotate(-1.8deg); }
+.postit--blue{ background:#a9e7ff; transform:rotate(.8deg); }
+.postit h4{ margin:0 0 6px; font-size:14px; text-transform:uppercase; letter-spacing:.05em; }
+.postit ul{ margin:6px 0 0 16px; padding:0; }
+.postit s{ color:#6f6a55; }
+
+.pair{ display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:16px; align-items:start; }
+.stack{ display:grid; gap:14px; }
+
+/* ---- the 2003 stratum. left exactly as found. ---- */
+.stratum{
+  margin:26px 0 6px; padding:0;
+  background:#000080; color:#00ff00;
+  border:5px double #ffff00;
+  font-family:"Times New Roman", Times, serif; font-size:16px; line-height:1.5;
+}
+.stratum .inner{ padding:14px 18px 18px; }
+.stratum h3{
+  margin:0 0 4px; text-align:center; font-size:30px; color:#ffff00;
+  text-shadow:2px 2px 0 #ff00ff;
+}
+.stratum .subtitle{ text-align:center; color:#00ffff; font-style:italic; margin:0 0 12px; }
+.stratum table{ width:100%; border-collapse:collapse; margin:10px 0; background:#000040; }
+.stratum th,.stratum td{ border:1px solid #c0c0c0; padding:5px 8px; font-size:15px; }
+.stratum th{ background:#0000b0; color:#ffff00; text-align:left; width:34%; }
+.stratum a{ color:#ffff00; }
+.stratum .hr{ height:6px; background:repeating-linear-gradient(90deg,#ff00ff 0 10px,#00ffff 10px 20px); margin:12px 0; }
+.blink{ animation:blink 1.15s steps(1,end) infinite; }
+@keyframes blink{ 50%{ opacity:0 } }
+.construction{
+  display:flex; align-items:center; gap:10px; margin-top:12px; padding:6px 10px;
+  background:repeating-linear-gradient(45deg,#ffcc00 0 12px,#111 12px 24px);
+  border:2px solid #000;
+}
+.construction span{
+  background:#111; color:#ffcc00; padding:3px 8px;
+  font:bold 12px/1.5 Verdana,sans-serif; letter-spacing:.08em;
+}
+.tape-note{
+  position:relative; margin:-10px 0 22px 24px; width:max-content; max-width:88%;
+  padding:9px 14px; background:#fff173; color:#221d10; transform:rotate(-1.6deg);
+  font:13px/1.45 "Comic Sans MS","Chalkboard SE",cursive; box-shadow:3px 4px 0 rgba(0,0,0,.5);
+}
+
+/* ---- the shrine ---- */
+.shrine{
+  display:grid; grid-template-columns:170px minmax(0,1fr); gap:18px; align-items:center;
+  margin:24px 0 8px; padding:18px 20px;
+  border:4px ridge var(--grape);
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(168,85,255,.24), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 8px, transparent 8px 16px),
+    #11052a;
+}
+.shrine h3{ margin:0 0 6px; font:bold 19px/1.3 "Trebuchet MS",sans-serif; color:var(--cyan); }
+.shrine p{ margin:0 0 10px; font-size:13.5px; color:#e2d6ff; }
+.shrine .oud{ width:100%; height:auto; filter:drop-shadow(0 6px 16px rgba(0,0,0,.7)); }
+.shrine .quote{
+  font:italic 14px/1.6 Georgia,serif; color:var(--sun);
+  border-left:3px solid var(--hot); padding-left:12px; margin:0 0 12px;
+}
+
+/* ---- footer ---- */
+.foot{
+  border-top:6px ridge var(--grape); padding:14px 18px 20px; text-align:center;
+  background:linear-gradient(180deg, rgba(20,4,44,.7), rgba(4,1,10,.9));
+  font:12px/1.7 Verdana,sans-serif; color:var(--ink-dim);
+}
+.webring{
+  display:inline-flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;
+  padding:8px 14px; margin-bottom:10px; border:3px outset var(--cyan); background:#0a0430;
+}
+.webring a{ color:var(--sun); text-decoration:none; border-bottom:1px dotted currentColor; }
+.webring a:hover{ color:var(--lime); }
+.webring .name{ color:var(--cyan); font-weight:bold; letter-spacing:.06em; }
+.foot .fineprint{ font-size:11px; color:#6a5f88; }
+.foot .fineprint em{ color:#8b7fb0; }
+
+a{ color:var(--cyan); }
+a:hover{ color:var(--lime); }
+:focus-visible{ outline:3px solid var(--sun); outline-offset:2px; }
+
+/* ================================================================
+   8. QUALITY FLOOR
+   the excess is opt-out. that is the only modern thing here.
+   ================================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  .sky,.walker,.ticker__track,.player__title{ animation:none !important; }
+  .ticker__track{ transform:none; }
+}
+:root.no-motion .sky,
+:root.no-motion .walker,
+:root.no-motion .ticker__track,
+:root.no-motion .player__title,
+:root.no-motion .eq i,
+:root.no-motion .banner::before,
+:root.no-motion .blink{ animation:none !important; }
+:root.no-motion .blink{ opacity:1 !important; }
+
+@media (max-width: 920px){
+  .grid{ grid-template-columns:1fr; }
+  .rail{ border-right:0; border-bottom:6px ridge var(--grape); display:grid; grid-template-columns:repeat(auto-fit,minmax(232px,1fr)); align-items:start; }
+  .nav{ grid-column:1/-1; }
+  .nav a{ display:inline-flex; margin:5px 3px; }
+  .pair{ grid-template-columns:1fr; }
+  .shrine{ grid-template-columns:1fr; text-align:center; }
+  .shrine .oud{ max-width:180px; margin:0 auto; }
+}
+@media (max-width: 700px){
+  .chat-layout{ grid-template-columns:1fr; }
+  .chat-left{ border-right:0; }
+  .chat-right{ border-top:1px solid var(--sys-dim); max-height:190px; }
+  #roster{ max-height:150px; }
+  .row{ flex-wrap:wrap; }
+  input#nick{ flex:1 1 140px; }
+  .shell{ width:100%; margin:0 0 30px; border-width:4px; }
+  .wordmark{ transform:none; }
+}
+
+@media print{
+  .sky,.crt,.rail,.ticker,.banner::before,.walker,.inputbar,.tips,.chat-menubar,.win__ctl{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .shell{ border:0; box-shadow:none; }
+  #log{ height:auto; overflow:visible; }
+}
+
+/* ================================================================
+   9. EMBED MODE — chat.html?embed=1 inside an iframe, chrome removed
+   ================================================================ */
+html.embed, html.embed body{ background:transparent; }
+.embed .sky,.embed .crt,.embed .banner,.embed .ticker,.embed .rail,
+.embed .foot,.embed .rail-strip,.embed .notice,.embed .head,
+.embed .entries,.embed .stratum,.embed .tape-note,.embed .shrine,.embed .pair{ display:none !important; }
+.embed .shell{ width:auto; margin:0; border:0; outline:0; background:transparent; box-shadow:none; }
+.embed .grid{ grid-template-columns:1fr; }
+.embed .main{ padding:0; background:transparent; }
+.embed .win{ margin:0; box-shadow:none; }
+</style>
 </head>
 <body>
-  <script>
-    // Switch to embedded mode if ?embed=1 or iframes are detected
-    (function(){
-      try{
-        const p = new URL(location.href).searchParams;
-        const embed = p.get('embed') === '1' || (window.top !== window.self);
-        if (embed) {
-          // after DOM is ready, prune header/meta inside the chat post
-          document.addEventListener('DOMContentLoaded', function(){
-            const host = document.getElementById('chat-room');
-            host?.querySelector('h3')?.remove();
-            host?.querySelector('.meta')?.remove();
-          });
-        }
-      }catch(_){ /* best-effort */ }
-    })();
-  </script>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">
-        ★ welcome to Galaxy 981 cosmic webspace ★ chat client with geocities drip ★
-      </marquee>
-    </div>
+<div class="sky sky--glow"></div>
+<div class="sky"></div>
+<div class="sky sky--near"></div>
+<div class="crt" aria-hidden="true"></div>
 
-    <table class="layout">
-      <tr>
-        <!-- SIDEBAR (copied from index.html) -->
-        <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="chat.html?room=lobby"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="Truth2.html"><img src="math.gif" alt="Truth Table" class="nav-icon">Truth Table</a>
-            <a href="oudsimulator.html">Oud Simulator</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
-          </div>
+<a class="skip" href="#chat">Skip to the chat</a>
 
-          <div style="text-align:center; padding:10px">
-            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
-            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
-          </div>
+<!-- icon sprite. drawn here so the page survives being copied to a folder
+     with no images in it. put your gifs back by swapping <svg><use> for <img>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-home"><path d="M12 3 2 12h3v9h6v-6h2v6h6v-9h3z"/></g>
+    <g id="i-about"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></g>
+    <g id="i-post"><path d="M5 2h10l4 4v16H5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="2" fill="none"/></g>
+    <g id="i-chat"><path d="M3 4h18v12H8l-5 5z"/></g>
+    <g id="i-globe"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3C7 8 7 16 12 21" fill="none" stroke="currentColor" stroke-width="2"/></g>
+    <g id="i-book"><path d="M4 3h7v18H4zM13 3h7v18h-7z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 7h3M15 7h3" stroke="currentColor" stroke-width="2"/></g>
+    <g id="i-cat"><path d="M5 20V9l3-4 2 3h4l2-3 3 4v11z"/><circle cx="10" cy="13" r="1.2" fill="#0b0b2a"/><circle cx="14" cy="13" r="1.2" fill="#0b0b2a"/></g>
+    <g id="i-grid"><path d="M3 3h18v18H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="currentColor" stroke-width="2"/></g>
+    <g id="i-oud"><ellipse cx="10" cy="15" rx="7" ry="7.5"/><circle cx="10" cy="14" r="2.4" fill="#0b0b2a"/><path d="M15 10 21 4l1 2-6 6z"/></g>
+    <g id="i-phone"><path d="M5 3h4l2 5-2.5 2a12 12 0 0 0 5.5 5.5L16 13l5 2v4a2 2 0 0 1-2 2C10.7 21 3 13.3 3 5a2 2 0 0 1 2-2z"/></g>
+    <g id="i-owl">
+      <ellipse cx="12" cy="14" rx="7.5" ry="8"/>
+      <circle cx="8.8" cy="11" r="3.1" fill="#fff8dc"/><circle cx="15.2" cy="11" r="3.1" fill="#fff8dc"/>
+      <circle cx="8.8" cy="11" r="1.3" fill="#101"/><circle cx="15.2" cy="11" r="1.3" fill="#101"/>
+      <path d="M12 12.6 10.4 15h3.2z" fill="#e8a33d"/>
+      <path d="M5.4 7.2 7.6 4.8 9 8zM18.6 7.2 16.4 4.8 15 8z"/>
+    </g>
+  </defs>
+</svg>
 
-          <div style="padding: 0 10px 12px; color:#fff; font-size:12px">
-            <div><a href="https://catofminerva.com/contact.html">Email Me</a></div>
-            <div style="margin-top:6px"><a href="https://catofminerva.com/guestbook.html">Sign my Guestbook</a></div>
-            <div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div>
-          </div>
+<div class="shell">
 
-          <div class="sticker-wall">
-            <img src="arabic.gif" alt="Arabic">
-            <img src="qatar.gif" alt="Qatar">
-            <img src="pali.gif" alt="Palestine">
-            <img src="sleepycat.gif" alt="Sleepy cat">
-            <img src="peta.gif" alt="PETA">
-            <img src="fist.gif" alt="Fist">
-            <img src="freespeechonline.gif" alt="Free Speech Online">
-            <img src="scifi.gif" alt="Sci-Fi" class="wide">
-            <img src="pals.png" alt="Sci-Fi" class="wide">
-          </div>
+  <!-- ============ HEADER: redesigned in march, still my favourite ============ -->
+  <header class="banner">
+    <h1 class="wordmark"><span class="word">Galaxy</span> <span class="num">981</span></h1>
+    <p class="wordmark__sub">
+      <span class="ar" lang="ar" dir="rtl">أهلاً وسهلاً</span> &nbsp;·&nbsp;
+      a personal website that refuses to be a profile &nbsp;·&nbsp;
+      <b>the owl of Minerva flies at dusk</b>
+    </p>
+    <div class="versionflag">layout v7.2 &nbsp;·&nbsp; built by hand, badly, on purpose</div>
+  </header>
 
-          <div class="sticker-controls">
-            <button id="shuffleStickers">Shuffle</button>
-            <button id="resetStickers" title="Put them back how they were">Reset</button>
-          </div>
-        </td>
-
-        <!-- CONTENT -->
-        <td class="content">
-          <hr class="retro">
-
-          <div class="post" id="chat-room">
-            <h3>Live Chat</h3>
-            <div class="meta">web chat · room=<span id="roomLabel"></span></div>
-
-            <div class="chat-window">
-              <!-- Menubar -->
-              <div class="chat-menubar" id="menubar">
-                <button class="menu-btn" data-menu="file">File ▾</button>
-                <button class="menu-btn" data-menu="edit">Edit ▾</button>
-                <button class="menu-btn" data-menu="view">View ▾</button>
-                <button class="menu-btn" data-menu="im">IM ▾</button>
-                <button class="menu-btn" data-menu="help">Help ▾</button>
-
-                <div class="chat-dropdown" id="menu-file">
-                  <a data-action="save-log">Save Log…</a>
-                  <a data-action="print">Print…</a>
-                  <a data-action="clear-log">Clear Log</a>
-                  <a data-action="join-room">Join Room…</a>
-                </div>
-                <div class="chat-dropdown" id="menu-edit">
-                  <a data-action="copy-log">Copy Log to Clipboard</a>
-                  <a data-action="find">Find…</a>
-                  <a data-action="select-all">Select All</a>
-                </div>
-                <div class="chat-dropdown" id="menu-view">
-                  <a data-action="zoom-in">Zoom In</a>
-                  <a data-action="zoom-out">Zoom Out</a>
-                  <a data-action="toggle-timestamps">Show/Hide Timestamps</a>
-                  <a data-action="toggle-roster">Show/Hide Roster</a>
-                  <a data-action="toggle-tips">Show/Hide Tips</a>
-                </div>
-                <div class="chat-dropdown" id="menu-im">
-                  <a data-action="toggle-beep">Beep on New Message</a>
-                  <a data-action="set-topic">Set Topic…</a>
-                </div>
-                <div class="chat-dropdown" id="menu-help">
-                  <a data-action="help">Formatting Help…</a>
-                  <a data-action="about">About…</a>
-                </div>
-              </div>
-
-              <div class="topicbar">Topic: <span id="topicText">(none)</span></div>
-
-              <div class="chat-layout">
-                <div class="chat-left">
-                  <div id="log" aria-live="polite"></div>
-
-                  <div class="inputbar">
-                    <div class="row">
-                      <label for="nick" style="align-self:center;">Nick:</label>
-                      <input type="text" id="nick" name="nick" maxlength="24" placeholder="Your name">
-                      <button id="setNick">Set</button>
-                    </div>
-
-                    <div class="row toolbar">
-                      <button id="bBtn"><b>B</b></button>
-                      <button id="iBtn"><i>I</i></button>
-                      <button id="uBtn"><u>U</u></button>
-                      <label>Color:
-                        <select id="colorSel">
-                          <option value="">—</option>
-                          <option>black</option><option>red</option><option>blue</option>
-                          <option>green</option><option>maroon</option><option>purple</option>
-                          <option>teal</option><option>navy</option>
-                        </select>
-                      </label>
-                      <label>Font:
-                        <select id="fontSel">
-                          <option value="">—</option>
-                          <option>Arial</option><option>Times New Roman</option>
-                          <option>Courier New</option><option>Verdana</option>
-                        </select>
-                      </label>
-                      <label>Size:
-                        <select id="sizeSel">
-                          <option value="">—</option>
-                          <option>10</option><option>12</option><option>14</option>
-                          <option>16</option><option>18</option>
-                        </select>
-                      </label>
-                    </div>
-
-                    <div class="row">
-                      <div id="msgEdit" class="edit" contenteditable="true" data-ph="Type message"></div>
-                      <button id="send">Send</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="chat-right">
-                  <div class="chat-menubar">People in Room</div>
-                  <div id="roster"></div>
-                </div>
-              </div>
-
-              <div class="tips" id="tips">
-                <strong>Tips:</strong>
-                Enter sends, Shift+Enter = newline.
-                <span>Emotes:</span>
-                <div id="emoteList"></div>
-                Right-click a name to whisper/ignore. Double-click the topic to edit, or use IM → Set Topic….
-                Pick Color/Font with no selection to set your default style. View → Show/Hide Timestamps, File → Join Room.
-                <a href="#" id="hideTips">Hide</a> · <a href="#" id="moreHelp">More</a>
-              </div>
-
-              <div class="statusbar">
-                <div id="status">Connecting…</div>
-                <div id="typing"></div>
-                <div id="roomLabelTail"></div>
-              </div>
-            </div> <!-- /.chat-window -->
-          </div>
-
-          <div class="marquee-wrap small">
-            <marquee scrollamount="4" direction="right">under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678</marquee>
-          </div>
-
-          <hr class="retro">
-        </td>
-      </tr>
-    </table>
-
-    <div class="footer">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>★ the chat room is open ★ bring a <b>nickname</b> ★ be nice to the newcomers ★ the roster lies sometimes ★ right-click a name to whisper ★</span>
+      <span>★ the chat room is open ★ bring a <b>nickname</b> ★ be nice to the newcomers ★ the roster lies sometimes ★ right-click a name to whisper ★</span>
     </div>
   </div>
 
-  <!-- Context menu for roster -->
-  <div id="ctx">
-    <a href="#" id="ctx-whisper">Whisper…</a>
-    <a href="#" id="ctx-ignore">Ignore/Unignore</a>
+  <div class="grid">
+
+    <!-- ============ RAIL: accumulated. oldest thing on the page. ============ -->
+    <aside class="rail">
+      <nav class="nav" aria-label="Site">
+        <a href="index.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-home"/></svg>Home</a>
+        <a href="about.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-about"/></svg>About</a>
+        <a href="blog_posts.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-post"/></svg>Entries</a>
+        <a href="chat.html?room=lobby" aria-current="page"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-chat"/></svg>Chat</a>
+        <a href="coolsite.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-globe"/></svg>Kool Webpages</a>
+        <a href="guestbook.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-book"/></svg>Guestbook</a>
+        <a href="books.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-cat"/></svg>Kool Books</a>
+        <a href="Truth2.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-grid"/></svg>Truth Table</a>
+        <a href="oudsimulator.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-oud"/></svg>Oud Simulator</a>
+        <a href="contact.html"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><use href="#i-phone"/></svg>Contact</a>
+      </nav>
+
+      <div class="counter">
+        You are visitor number
+        <span id="hitCount" class="odometer">000001</span>
+        <small>counts you, not anyone else. it never did.</small>
+      </div>
+
+      <div class="player" title="not actually playing anything. i just like the bars.">
+        <div class="player__screen"><span class="player__title" id="npTitle">nothing loaded · press a string on the oud simulator →</span></div>
+        <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="player__meta">◄◄ &nbsp; ► &nbsp; ►► &nbsp;&nbsp; <a href="oudsimulator.html">open the oud</a></div>
+      </div>
+
+      <div class="oracle">
+        <svg class="oracle__owl" viewBox="0 0 24 24" fill="#c8a24a" aria-hidden="true"><use href="#i-owl"/></svg>
+        <div class="oracle__out" id="oracleOut" role="status">ask, and receive something unhelpful.</div>
+        <button class="btn" id="oracleBtn" type="button">Consult the owl</button>
+      </div>
+
+      <div class="box panel">
+        <h4>Site controls</h4>
+        <label><input type="checkbox" id="prefSpark"> sparkle cursor</label>
+        <label><input type="checkbox" id="prefCrt"> scanlines</label>
+        <label><input type="checkbox" id="prefMotion"> movement</label>
+        <label><input type="checkbox" id="prefBeep"> chat beep</label>
+        <label style="display:block">palette
+          <select id="prefPalette">
+            <option value="neon">neon (default)</option>
+            <option value="dusk">dusk</option>
+            <option value="lagoon">lagoon</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="box">
+        <h4>Stickers</h4>
+        <p style="margin:0 0 6px;color:#9fb8d8;font-size:11px">from my gif folder. some are missing and I have not looked for them.</p>
+      </div>
+      <div class="sticker-wall">
+        <img src="arabic.gif" alt="Arabic spoken here">
+        <img src="qatar.gif" alt="Qatar">
+        <img src="pali.gif" alt="Palestine">
+        <img src="sleepycat.gif" alt="A sleeping cat">
+        <img src="peta.gif" alt="PETA">
+        <img src="fist.gif" alt="Raised fist">
+        <img src="freespeechonline.gif" alt="Free speech online">
+        <img src="scifi.gif" alt="Science fiction" class="wide">
+        <img src="pals.png" alt="Palestine" class="wide">
+      </div>
+      <div class="sticker-controls">
+        <button class="btn" id="shuffleStickers" type="button">Shuffle</button>
+        <button class="btn" id="resetStickers" type="button" title="Put them back how they were">Reset</button>
+      </div>
+
+      <div class="box">
+        <h4>Buttons</h4>
+        <p style="margin:0;color:#9fb8d8;font-size:11px">88&times;31, drawn not downloaded. take any of them.</p>
+      </div>
+      <div class="badges" id="badgeWall"></div>
+
+      <div class="box">
+        <h4>Housekeeping</h4>
+        <p><a href="contact.html">Email me</a></p>
+        <p><a href="guestbook.html">Sign the guestbook</a></p>
+        <p>Last touched: <span id="lastUpdated">sometime in 1999</span></p>
+        <p style="color:var(--ink-dim);font-size:11px">Best viewed at 1024&times;768 or whatever you have.</p>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+      <div class="rail-strip" aria-hidden="true">
+        <div class="bar"></div>
+        <svg class="walker" viewBox="0 0 62 44" fill="none">
+          <g class="body">
+            <path d="M56 12c2-4 5-5 5-5s-1 5-2 7l-1 10" stroke="#f4a259" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="30" cy="24" rx="19" ry="10" fill="#f4a259"/>
+            <path d="M16 20h3v8h-3zM26 19h3v9h-3zM36 20h3v8h-3z" fill="#c9752c"/>
+            <circle cx="13" cy="18" r="9" fill="#f7b876"/>
+            <path d="M6 12 4 3l8 5zM20 12l2-9-8 5z" fill="#f7b876"/>
+            <path d="M7 11 6 6l4 3zM19 11l1-5-4 3z" fill="#ff9db1"/>
+            <circle cx="9.5" cy="17" r="1.6" fill="#123"/><circle cx="16.5" cy="17" r="1.6" fill="#123"/>
+            <path d="M12.2 20.5h1.6l-.8 1.4z" fill="#ff7fa3"/>
+            <path d="M2 18h5M2 21h5M21 18h5M21 21h5" stroke="#fff" stroke-width=".8" opacity=".85"/>
+            <path d="M20 33v-2M27 34v-3M37 33v-2M44 34v-3" stroke="#e08b3c" stroke-width="4" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="notice">
+        <b>Reading this in 2026:</b> the chat is a real websocket, not a decoration. If nobody is here,
+        the room is still yours, and messages stay in the log until you close the tab.
+        <span class="strike">Java applet version retired.</span>
+        Nickname is remembered on this device only.
+      </div>
+
+      <!-- ============ THE PROGRAM ============ -->
+      <section class="win" id="chat" aria-label="Chat room">
+        <div class="win__bar">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="grow">Galaxy981 Chat &nbsp;—&nbsp; /<span id="roomLabel">lobby</span></span>
+          <span class="win__ctl">
+            <button type="button" id="winMin" title="Minimise" aria-label="Minimise the chat log">_</button>
+            <button type="button" id="winMax" title="Wider" aria-label="Toggle wider log">□</button>
+            <button type="button" id="winClose" title="Close" aria-label="Close">✕</button>
+          </span>
+        </div>
+
+        <div class="chat-menubar" id="menubar">
+          <button class="menu-btn" data-menu="file" aria-expanded="false" type="button">File</button>
+          <button class="menu-btn" data-menu="edit" aria-expanded="false" type="button">Edit</button>
+          <button class="menu-btn" data-menu="view" aria-expanded="false" type="button">View</button>
+          <button class="menu-btn" data-menu="im"   aria-expanded="false" type="button">Room</button>
+          <button class="menu-btn" data-menu="help" aria-expanded="false" type="button">Help</button>
+
+          <div class="chat-dropdown" id="menu-file">
+            <a data-action="save-log" tabindex="0">Save log as text…</a>
+            <a data-action="print" tabindex="0">Print…</a>
+            <hr>
+            <a data-action="clear-log" tabindex="0">Clear the log</a>
+            <a data-action="join-room" tabindex="0">Join another room…</a>
+          </div>
+          <div class="chat-dropdown" id="menu-edit">
+            <a data-action="copy-log" tabindex="0">Copy log to clipboard</a>
+            <a data-action="find" tabindex="0">Find in log…</a>
+            <a data-action="select-all" tabindex="0">Select all</a>
+          </div>
+          <div class="chat-dropdown" id="menu-view">
+            <a data-action="zoom-in" tabindex="0">Bigger text</a>
+            <a data-action="zoom-out" tabindex="0">Smaller text</a>
+            <hr>
+            <a data-action="toggle-timestamps" tabindex="0">Timestamps on / off</a>
+            <a data-action="toggle-roster" tabindex="0">People list on / off</a>
+            <a data-action="toggle-tips" tabindex="0">Tips on / off</a>
+          </div>
+          <div class="chat-dropdown" id="menu-im">
+            <a data-action="set-topic" tabindex="0">Set the topic…</a>
+            <a data-action="toggle-beep" tabindex="0">Beep on new message</a>
+            <hr>
+            <a data-action="clear-ignores" tabindex="0">Unmute everyone</a>
+          </div>
+          <div class="chat-dropdown" id="menu-help">
+            <a data-action="help" tabindex="0">Formatting and commands…</a>
+            <a data-action="about" tabindex="0">About this client…</a>
+          </div>
+        </div>
+
+        <div class="topicbar">
+          <strong>Topic:</strong>
+          <span id="topicText">(none yet — double-click to set one)</span>
+        </div>
+
+        <div class="chat-layout">
+          <div class="chat-left">
+            <div id="log" aria-live="polite" aria-label="Chat log" tabindex="0"></div>
+
+            <div class="inputbar">
+              <div class="row">
+                <label for="nick">Nickname</label>
+                <input type="text" id="nick" name="nick" maxlength="24" placeholder="Anything but Anon" autocomplete="nickname">
+                <button id="setNick" type="button">Set</button>
+              </div>
+
+              <div class="row toolbar">
+                <button id="fmtB" type="button" title="Bold">B</button>
+                <button id="fmtI" type="button" title="Italic">I</button>
+                <button id="fmtU" type="button" title="Underline">U</button>
+                <span class="sep" aria-hidden="true"></span>
+                <label>Colour
+                  <select id="colorSel" aria-label="Text colour">
+                    <option value="">default</option>
+                    <option>black</option><option>maroon</option><option>red</option>
+                    <option>navy</option><option>blue</option><option>teal</option>
+                    <option>green</option><option>purple</option>
+                  </select>
+                </label>
+                <label>Font
+                  <select id="fontSel" aria-label="Font">
+                    <option value="">default</option>
+                    <option>Arial</option><option>Times New Roman</option>
+                    <option>Courier New</option><option>Verdana</option>
+                  </select>
+                </label>
+                <label>Size
+                  <select id="sizeSel" aria-label="Text size">
+                    <option value="">default</option>
+                    <option>10</option><option>12</option><option>14</option>
+                    <option>16</option><option>18</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="row">
+                <div id="msgEdit" class="edit" contenteditable="true" role="textbox" aria-multiline="true"
+                     aria-label="Message" data-ph="Say something. Enter sends."></div>
+                <button id="send" type="button">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-right">
+            <h5>People here <span id="rosterCount">0</span></h5>
+            <div id="roster"></div>
+          </div>
+        </div>
+
+        <div class="tips" id="tips">
+          <strong>How this works.</strong>
+          Enter sends, Shift+Enter starts a new line. Right-click somebody in the list to whisper or mute them.
+          Double-click the topic to change it. Pick a colour with nothing selected and it becomes your default.
+          <ul>
+            <li><code>/me waves</code> and friends: <span id="emoteList"></span></li>
+            <li><code>/nick name</code> · <code>/w name message</code> · <code>/topic text</code> · <code>/clear</code> · <code>/help</code></li>
+          </ul>
+          <a href="#" id="hideTips">Hide this</a> · <a href="#" id="moreHelp">Everything else</a>
+        </div>
+
+        <div class="statusbar">
+          <div id="status" data-state="wait">Connecting…</div>
+          <div id="typing" class="grow"></div>
+          <div id="roomLabelTail">Room: lobby</div>
+        </div>
+      </section>
+
+      <!-- ============ WRITING ============ -->
+      <div class="head">
+        <span class="eyebrow">Entries</span>
+        <h2>Things I wrote near this room</h2>
+        <span class="line" aria-hidden="true"></span>
+      </div>
+
+      <div class="pair">
+        <div class="entries">
+          <article class="paper">
+            <h3><a href="blog_posts.html">The room was better when it was worse</a></h3>
+            <span class="stamp">14 August 2026 · filed under: the net, complaining</span>
+            <p class="lede">There were four of us in here on a Tuesday and the server dropped every
+            eleven minutes, which meant every conversation had a rhythm to it: say the thing now,
+            because in a moment you will be typing to nobody. I have since fixed the reconnect. I am
+            not sure the room improved.</p>
+            <p>The version of this page that existed in 2019 had a black log with a colour picker
+            offering navy, maroon and black. For three years everyone's carefully chosen text was
+            invisible and nobody mentioned it, which is either politeness or evidence that nobody
+            used the colour picker. I have made the log cream. Choose maroon. It works now.</p>
+            <p class="pen">note: keep the beep. the beep is the whole thing.</p>
+          </article>
+
+          <article class="paper paper--short">
+            <h3><a href="Truth2.html">A truth table is a small honest machine</a></h3>
+            <span class="stamp">2 July 2026 · filed under: logic, procrastination</span>
+            <p>I built the truth table page during a week when I could not finish anything longer
+            than sixteen rows. You put propositions in, you turn the handle, and it tells you what
+            follows whether or not you wanted it to. There is no version of that page where I get to
+            argue with the output, which is restful.</p>
+          </article>
+        </div>
+
+        <div class="stack">
+          <div class="postit postit--yellow">
+            <h4>To do, eventually</h4>
+            <ul>
+              <li><s>fix reconnect loop</s></li>
+              <li><s>make the log readable</s></li>
+              <li>find kitty.gif (2004, lost)</li>
+              <li>guestbook is broken and I have decided this is fine</li>
+              <li>stop redesigning the header</li>
+            </ul>
+          </div>
+
+          <div class="postit postit--pink">
+            <h4>Saved from the log</h4>
+            <p>&ldquo;does anyone else's cat sit on the F5 key&rdquo;<br>
+            &mdash; <em>bint_alqamar</em>, 3am, room /lobby</p>
+            <p style="margin-bottom:0">I have kept this in a text file for two years.</p>
+          </div>
+
+          <div class="postit postit--blue">
+            <h4>Now</h4>
+            <p style="margin:0">Reading: <em>The Left Hand of Darkness</em>, again.<br>
+            Playing: maqām Bayātī, badly.<br>
+            Owed: three emails.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ THE 2003 STRATUM ============ -->
+      <div class="head">
+        <span class="eyebrow">Do not touch</span>
+        <h2>The old about-me box</h2>
+        <span class="line" aria-hidden="true"></span>
+      </div>
+
+      <section class="stratum">
+        <div class="inner">
+          <h3>~*~ AbOuT tHe WeBmAsTeR ~*~</h3>
+          <p class="subtitle">this page looks best in Netscape 4 and I stand by it</p>
+          <div class="hr" aria-hidden="true"></div>
+          <table>
+            <tbody>
+              <tr><th>Name</th><td>you can call me whatever you called me in the chat</td></tr>
+              <tr><th>Located</th><td>Doha, mostly</td></tr>
+              <tr><th>Age</th><td>none of your business <span class="blink">!!!</span></td></tr>
+              <tr><th>Fave music</th><td>oud, anything with a qanun in it, one embarrassing europop album</td></tr>
+              <tr><th>Fave book</th><td>changes weekly, currently Le Guin</td></tr>
+              <tr><th>ICQ</th><td>12345678 (I will not be checking this)</td></tr>
+              <tr><th>Best browser</th><td>whichever one is not currently updating</td></tr>
+            </tbody>
+          </table>
+          <div class="hr" aria-hidden="true"></div>
+          <p style="text-align:center;margin:0"><a href="guestbook.html">SiGn My GuEsTbOoK</a> or don't, I'm not your dad</p>
+          <div class="construction"><span>UNDER CONSTRUCTION SINCE 2003</span></div>
+        </div>
+      </section>
+      <p class="tape-note">left exactly as I found it. the html is wrong in four places and I have chosen to love it.</p>
+
+      <!-- ============ SHRINE ============ -->
+      <section class="shrine">
+        <svg class="oud" viewBox="0 0 150 212" fill="none" role="img" aria-label="A drawing of an oud">
+          <path d="M75 96c31 0 48 26 48 54s-22 49-48 49-48-21-48-49 17-54 48-54z" fill="#7a3d18" stroke="#2f1607" stroke-width="2"/>
+          <ellipse cx="75" cy="150" rx="43" ry="46" fill="#d09a58"/>
+          <path d="M40 118c10 40 60 40 70 0" stroke="#b57e42" stroke-width="1.4" fill="none" opacity=".7"/>
+          <path d="M36 168c14 26 64 26 78 0" stroke="#b57e42" stroke-width="1.4" fill="none" opacity=".7"/>
+          <circle cx="75" cy="133" r="15" fill="#5a2f11"/>
+          <circle cx="75" cy="133" r="10.5" fill="none" stroke="#e7c48b" stroke-width="1.2"/>
+          <path d="M75 118v30M60 133h30M64.4 122.4l21.2 21.2M85.6 122.4 64.4 143.6" stroke="#e7c48b" stroke-width="1"/>
+          <circle cx="48" cy="166" r="6" fill="#5a2f11"/><circle cx="102" cy="166" r="6" fill="#5a2f11"/>
+          <path d="M56 178h38l-4 7H60z" fill="#2f1607"/>
+          <rect x="66" y="42" width="18" height="56" fill="#4a2510"/>
+          <g transform="rotate(-40 75 44)">
+            <rect x="61" y="2" width="28" height="44" rx="4" fill="#33190a"/>
+            <g fill="#e7c48b"><rect x="56" y="10" width="10" height="3.4" rx="1.6"/><rect x="56" y="20" width="10" height="3.4" rx="1.6"/><rect x="56" y="30" width="10" height="3.4" rx="1.6"/><rect x="84" y="10" width="10" height="3.4" rx="1.6"/><rect x="84" y="20" width="10" height="3.4" rx="1.6"/><rect x="84" y="30" width="10" height="3.4" rx="1.6"/></g>
+          </g>
+          <g stroke="#f4ead0" stroke-width=".9" opacity=".9">
+            <path d="M68 46v134M70.6 46v134M73.2 46v134M75.8 46v134M78.4 46v134M81 46v134"/>
+          </g>
+        </svg>
+        <div>
+          <h3>The oud corner</h3>
+          <p class="quote">The owl of Minerva spreads its wings only with the falling of the dusk.</p>
+          <p>Which is a long way of saying I only understand the evening after it is over, and also
+          that I practise at night when nobody can hear the wrong notes. The simulator on this site
+          is tuned to a low F. It is not accurate. It is close enough to argue with.</p>
+          <p style="margin:0"><a href="oudsimulator.html">Open the oud simulator →</a></p>
+        </div>
+      </section>
+
+      <div class="rail-strip" aria-hidden="true"><div class="bar"></div></div>
+    </main>
   </div>
 
-  <!-- Page SFX audio (same id as index for re-use of UI code, optional) -->
-  <audio id="blip" preload="auto">
-    <source src="kawaii%208bit.mp3" type="audio/mpeg">
-  </audio>
+  <footer class="foot">
+    <div class="webring">
+      <a href="#" data-ring="prev">◄ Previous</a>
+      <span class="name">The Galactic Webring</span>
+      <a href="#" data-ring="next">Next ►</a>
+      <a href="#" data-ring="random">Random</a>
+    </div>
+    <div>© 1999–2026 Galaxy 981 · made in a text editor · no trackers, no analytics, no idea who visits</div>
+    <div class="fineprint">
+      This page uses one websocket and a quantity of CSS I am not going to defend.
+      <em>Sound only plays after you click something, browser rules.</em>
+    </div>
+  </footer>
+</div>
 
-  <script>
-    /* ===== index.html niceties (trimmed to single, non-duplicated versions) ===== */
-    /* hit counter */
-    (() => {
-      try {
-        const key = 'geocities_hit_counter';
-        const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
-        localStorage.setItem(key, n);
-        document.getElementById('hitCount').textContent = String(n).padStart(6,'0');
-      } catch(e){}
-    })();
+<!-- roster right-click menu -->
+<div id="ctx" role="menu">
+  <div class="ctx-head" id="ctx-name">nobody</div>
+  <a href="#" id="ctx-whisper" role="menuitem">Whisper to them…</a>
+  <a href="#" id="ctx-ignore" role="menuitem">Mute / unmute</a>
+</div>
 
-    /* last updated label */
-    document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+<script>
+/* ================================================================
+   A. HOUSEKEEPING
+   storage that does not throw. some places sandbox localStorage and
+   the whole page used to die on line one when they did.
+   ================================================================ */
+const store = (() => {
+  let ok = true, mem = Object.create(null);
+  try { localStorage.setItem('__g981', '1'); localStorage.removeItem('__g981'); }
+  catch (_) { ok = false; }
+  return {
+    get(k){ try { return ok ? localStorage.getItem(k) : (k in mem ? mem[k] : null); } catch(_){ return mem[k] ?? null; } },
+    set(k,v){ try { ok ? localStorage.setItem(k, String(v)) : (mem[k] = String(v)); } catch(_){ mem[k] = String(v); } },
+    del(k){ try { ok ? localStorage.removeItem(k) : delete mem[k]; } catch(_){ delete mem[k]; } }
+  };
+})();
 
-    /* tiny nav misalignment */
-    (() => {
-      const links = document.querySelectorAll('.nav a');
-      links.forEach(a => {
-        const ml = 6 + Math.floor(Math.random()*7);
-        const fs = 12 + Math.floor(Math.random()*3);
-        a.style.marginLeft = ml + 'px';
-        a.style.fontSize   = fs + 'px';
-        if (Math.random() < 0.4) a.style.letterSpacing = '1px';
-      });
-    })();
+const $  = (id) => document.getElementById(id);
+const html = document.documentElement;
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-    /* VHS page transition on internal links */
-    (() => {
-      document.querySelectorAll('.page a[href]').forEach(a => {
-        const url = a.getAttribute('href') || '';
-        if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          document.documentElement.classList.add('vhs');
-          setTimeout(() => { window.location.href = url; }, 200);
-        });
-      });
-    })();
+/* ================================================================
+   B. SITE CONTROLS
+   ================================================================ */
+const prefersStill = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarse = window.matchMedia('(pointer: coarse)').matches;
 
-    /* periodic title flyby */
-    setInterval(() => {
-      document.documentElement.classList.add('flyby');
-      setTimeout(() => document.documentElement.classList.remove('flyby'), 1700);
-    }, 14000);
+const prefs = {
+  spark:  store.get('g981_spark')  !== '0' && !prefersStill && !coarse,
+  crt:    store.get('g981_crt')    !== '0',
+  motion: store.get('g981_motion') !== '0' && !prefersStill,
+  beep:   store.get('g981_beep')   !== '0',
+  palette: store.get('g981_palette') || 'neon'
+};
 
-    /* time-of-day palette */
-    (() => {
-      const h = new Date().getHours();
-      document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
-    })();
+function applyPrefs(){
+  html.classList.toggle('no-crt', !prefs.crt);
+  html.classList.toggle('no-motion', !prefs.motion);
+  html.setAttribute('data-palette', prefs.palette);
+  $('prefSpark').checked  = prefs.spark;
+  $('prefCrt').checked    = prefs.crt;
+  $('prefMotion').checked = prefs.motion;
+  $('prefBeep').checked   = prefs.beep;
+  $('prefPalette').value  = prefs.palette;
+}
+function bindPref(id, key, after){
+  $(id).addEventListener('change', e => {
+    prefs[key] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    store.set('g981_' + key, e.target.type === 'checkbox' ? (prefs[key] ? '1' : '0') : prefs[key]);
+    applyPrefs();
+    if (after) after();
+  });
+}
+bindPref('prefSpark','spark');
+bindPref('prefCrt','crt');
+bindPref('prefMotion','motion');
+bindPref('prefBeep','beep');
+bindPref('prefPalette','palette');
+applyPrefs();
 
-    /* Sticker shuffle with visible buttons; remembers order */
-    (() => {
-      const wall = document.querySelector('.sticker-wall');
-      if (!wall) return;
-      const key = 'sticker_order_v1';
-      const imgs = Array.from(wall.querySelectorAll('img'));
-      const idOf = img => img.getAttribute('src') || img.alt;
-      const original = imgs.map(idOf);
-      function apply(order){ const map = new Map(imgs.map(img => [idOf(img), img])); order.forEach(id => { const img = map.get(id); if (img) wall.appendChild(img); }); }
-      try { const saved = JSON.parse(localStorage.getItem(key) || 'null'); if (Array.isArray(saved) && saved.length) apply(saved); } catch(_) {}
-      function shuffle(){ const order = Array.from(wall.querySelectorAll('img')).map(idOf); for (let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]];} apply(order); localStorage.setItem(key, JSON.stringify(order)); wall.classList.add('shuffled'); setTimeout(()=>wall.classList.remove('shuffled'), 220); }
-      function reset(){ apply(original); localStorage.setItem(key, JSON.stringify(original)); }
-      document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
-      document.getElementById('resetStickers')?.addEventListener('click', reset);
-    })();
-  </script>
+/* sparkle cursor. off over the chat window, because typing beats confetti. */
+(() => {
+  let last = 0;
+  const hues = ['var(--sun)','var(--hot)','var(--cyan)','var(--lime)'];
+  addEventListener('pointermove', (e) => {
+    if (!prefs.spark || !prefs.motion) return;
+    if (e.target.closest && e.target.closest('.win')) return;
+    const now = performance.now();
+    if (now - last < 42) return;
+    last = now;
+    const s = document.createElement('div');
+    s.className = 'spark';
+    s.style.left = e.clientX + 'px';
+    s.style.top  = e.clientY + 'px';
+    const c = hues[(Math.random() * hues.length) | 0];
+    s.style.background = c; s.style.boxShadow = '0 0 8px ' + c;
+    s.style.width = s.style.height = (4 + Math.random() * 6).toFixed(1) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 720);
+  }, { passive: true });
+})();
 
-  <script>
-    /* ===== CHAT APP (your original logic, adapted to namespaced layout) ===== */
-    const WORKER_HOST = "chat.asalmaadeed.workers.dev"; // change if your worker hostname differs
-    const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
-    document.getElementById("roomLabel").textContent = ROOM;
-    document.getElementById("roomLabelTail").textContent = "Room: " + ROOM;
+/* ================================================================
+   C. DECORATION WITH A JOB
+   ================================================================ */
 
-    // ===== State =====
-    const NICK_KEY = "aolchat_nick";
-    let nick = localStorage.getItem(NICK_KEY) || ("User" + Math.floor(Math.random()*1000));
-    const $ = id => document.getElementById(id);
-    $("nick").value = nick;
+/* the counter, honest about itself */
+(() => {
+  const n = (parseInt(store.get('g981_hits') || '0', 10) || 0) + 1;
+  store.set('g981_hits', n);
+  $('hitCount').textContent = String(n).padStart(6, '0');
+})();
 
-    // Kaomoji for /me actions
-    const EMOTE_MAP = { waves:'(^.^)/', wave:'(^.^)/', yay:'\\o/', shrug:'¯\\_(ツ)_/¯', flip:'(╯°□°）╯︵ ┻━┻', lenny:'( ͡° ͜ʖ ͡°)', happy:'(^‿^)', heart:'<3' };
+$('lastUpdated').textContent = (document.lastModified || '').split(' ')[0] || '1999-08-01';
 
-    function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
-    function renderEmoteTips(){
-      const host = document.getElementById("emoteList"); if (!host) return;
-      const byFace = new Map();
-      for (const [name, face] of Object.entries(EMOTE_MAP)) { if (!byFace.has(face)) byFace.set(face, []); byFace.get(face).push(name); }
-      const items = [];
-      for (const [face, names] of byFace.entries()) { const namesHtml = names.map(n => `<code>/me ${escapeHTML(n)}</code>`).join(" or "); items.push(`<li>${namesHtml} → <code>${escapeHTML(face)}</code></li>`); }
-      host.innerHTML = `<ul style="margin:4px 0 0 16px; padding:0">${items.join("")}</ul>`;
+/* nav links sit slightly wrong. they always have. */
+document.querySelectorAll('.nav a').forEach(a => {
+  a.style.marginLeft = (4 + Math.floor(Math.random() * 8)) + 'px';
+  a.style.fontSize   = (11.5 + Math.random() * 1.6).toFixed(1) + 'px';
+  if (Math.random() < .35) a.style.letterSpacing = '1px';
+});
+
+/* stickers: real gifs, with a drawn placeholder when one is missing */
+(() => {
+  const wall = document.querySelector('.sticker-wall');
+  if (!wall) return;
+  const ghostFor = (img) => {
+    const g = document.createElement('div');
+    g.className = 'ghost' + (img.classList.contains('wide') ? ' wide' : '');
+    g.textContent = (img.alt || 'gif') + '\n[ missing ]';
+    g.dataset.sid = img.getAttribute('src');
+    g.title = img.getAttribute('src') + ' is not in the folder';
+    img.replaceWith(g);
+  };
+  wall.querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalWidth === 0) return ghostFor(img);   /* already failed before we got here */
+    img.addEventListener('error', () => ghostFor(img), { once: true });
+  });
+
+  const KEY = 'g981_stickers';
+  const idOf = el => el.getAttribute('src') || el.dataset.sid || el.textContent;
+  const original = Array.from(wall.children).map(idOf);
+  const apply = (order) => {
+    const map = new Map(Array.from(wall.children).map(el => [idOf(el), el]));
+    order.forEach(id => { const el = map.get(id); if (el) wall.appendChild(el); });
+  };
+  try { const saved = JSON.parse(store.get(KEY) || 'null'); if (Array.isArray(saved) && saved.length) apply(saved); } catch(_){}
+  $('shuffleStickers').onclick = () => {
+    const order = Array.from(wall.children).map(idOf);
+    for (let i = order.length - 1; i > 0; i--){ const j = (Math.random() * (i + 1)) | 0; [order[i], order[j]] = [order[j], order[i]]; }
+    apply(order); store.set(KEY, JSON.stringify(order));
+    wall.classList.add('shuffled'); setTimeout(() => wall.classList.remove('shuffled'), 240);
+  };
+  $('resetStickers').onclick = () => { apply(original); store.set(KEY, JSON.stringify(original)); };
+})();
+
+/* 88x31 buttons, drawn. edit this array, the wall rebuilds itself. */
+const BADGES = [
+  { bg:'#12043a', fg:'#7df9ff', c:'#ff3ba7', g:'★', t:'GALAXY 981', s:'made by hand', k:'split' },
+  { bg:'#000000', fg:'#39ff14',                t:'BEST VIEWED',  s:'WITH YOUR EYES' },
+  { bg:'#2a0a52', fg:'#ffd23f', c:'#ffd23f', g:'✎', t:'NO AI ART', s:'drawn by a person', k:'split' },
+  { bg:'#b0003a', fg:'#ffe9f2',                t:'THIS SITE IS',  s:'A HOBBY' },
+  { bg:'#003b46', fg:'#7cf9c8', c:'#7cf9c8', g:'☾', t:'THE OWL', s:'FLIES AT DUSK', k:'split' },
+  { bg:'#402000', fg:'#f7c37a', c:'#f7c37a', g:'♪', t:'OUD', s:'ENJOYER', k:'split' },
+  { bg:'#0b1e5c', fg:'#a9e7ff',                t:'POWERED BY',   s:'ONE WEBSOCKET' },
+  { bg:'#1b1b1b', fg:'#c0c0c0',                t:'TEXT EDITOR',  s:'ONLY' },
+  { bg:'#4b0082', fg:'#ffb4dd',                t:'800×600',      s:'OPTIMISED' },
+  { bg:'#005f2f', fg:'#d9ffe6', c:'#ffd23f', g:'✉', t:'GUESTBOOK', s:'SIGN IT', k:'split' },
+  { bg:'#111133', fg:'#ffff66',                t:'NO TRACKERS',  s:'NO IDEA WHO YOU ARE' },
+  { bg:'#7a1f00', fg:'#ffd9b0',                t:'STILL',        s:'UNDER CONSTRUCTION' }
+];
+(() => {
+  const wall = $('badgeWall');
+  wall.innerHTML = BADGES.map(d => {
+    const split = d.k === 'split';
+    const tx = split ? 30 : 44;
+    const anchor = split ? 'start' : 'middle';
+    const label = (d.t + ' ' + d.s).toLowerCase();
+    return '<a href="#" title="' + esc(label) + '">' +
+      '<svg width="88" height="31" viewBox="0 0 88 31" role="img" aria-label="' + esc(label) + '">' +
+        '<rect width="88" height="31" fill="' + d.bg + '"/>' +
+        (split ? '<rect width="26" height="31" fill="' + d.c + '"/>' +
+                 '<text x="13" y="21" text-anchor="middle" font-family="Verdana,sans-serif" font-size="14" fill="' + d.bg + '">' + esc(d.g) + '</text>' : '') +
+        '<path d="M0 .5H88M.5 0V31" stroke="#ffffff" stroke-opacity=".5"/>' +
+        '<path d="M0 30.5H88M87.5 0V31" stroke="#000000" stroke-opacity=".55"/>' +
+        '<text x="' + tx + '" y="14" text-anchor="' + anchor + '" font-family="Verdana,sans-serif" font-size="8" font-weight="bold" fill="' + d.fg + '">' + esc(d.t) + '</text>' +
+        '<text x="' + tx + '" y="24" text-anchor="' + anchor + '" font-family="Verdana,sans-serif" font-size="7" fill="' + d.fg + '" opacity=".85">' + esc(d.s) + '</text>' +
+      '</svg></a>';
+  }).join('');
+  wall.addEventListener('click', e => { const a = e.target.closest('a'); if (a) e.preventDefault(); });
+})();
+
+/* the owl says something. it is never useful. */
+const ORACLE = [
+  'Send the message. It has been in the box for four minutes.',
+  'The person you are thinking about also does not know how to start.',
+  'Two of your open tabs can be closed without consequence.',
+  'Yes, but not this week.',
+  'The bug is in the file you have not opened.',
+  'Go and drink some water, the room will hold.',
+  'You are allowed to write something short.',
+  'It was never that serious. It was a little serious.',
+  'Reply tomorrow. Tomorrow you will be kinder.',
+  'The correct number of gifs is one more than you have.',
+  'Ask again after dusk. That is when I work.',
+  'No. Try the other one.'
+];
+$('oracleBtn').addEventListener('click', () => {
+  const out = $('oracleOut');
+  out.textContent = ORACLE[(Math.random() * ORACLE.length) | 0];
+  out.animate([{opacity:0, transform:'translateY(4px)'},{opacity:1, transform:'none'}], {duration: prefs.motion ? 260 : 0});
+});
+
+/* webring buttons that admit there is no ring */
+document.querySelectorAll('.webring a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const which = a.dataset.ring;
+    alert(which === 'random'
+      ? 'The ring has one site in it. You are already here.'
+      : 'The ' + which + ' site went offline in 2011. I keep the button for the shape of it.');
+  });
+});
+
+/* now-playing line changes if you visit the oud page. purely for atmosphere. */
+(() => {
+  const lines = ['nothing loaded · press a string on the oud simulator →',
+                 'silence.wav · 00:00 / ∞',
+                 'maqām Bayātī, take 41 · unreleased, deservedly'];
+  $('npTitle').textContent = lines[(Math.random() * lines.length) | 0];
+})();
+</script>
+
+<script>
+/* ================================================================
+   D. THE CHAT
+   the wire protocol is unchanged: hello, nick, chat, emote, typing,
+   whisper, settopic. your worker does not need to know any of this
+   happened.
+   ================================================================ */
+const WORKER_HOST = "chat.asalmaadeed.workers.dev";
+const ROOM = new URL(location.href).searchParams.get("room") || "lobby";
+$("roomLabel").textContent = ROOM;
+$("roomLabelTail").textContent = "Room: " + ROOM;
+document.title = "Galaxy 981 :: /" + ROOM;
+
+const NICK_KEY = "aolchat_nick";
+let nick = store.get(NICK_KEY) || ("guest" + Math.floor(Math.random() * 900 + 100));
+$("nick").value = nick;
+
+let ws = null, retry = 0, typingTimer = null, currentZoom = 13;
+let ignored = new Set((() => { try { return JSON.parse(store.get("ignored") || "[]"); } catch(_){ return []; } })());
+const saveIgnored = () => store.set("ignored", JSON.stringify([...ignored]));
+
+const logEl    = $("log");
+const rosterEl = $("roster");
+const editor   = $("msgEdit");
+const rightPane = document.querySelector(".chat-right");
+
+/* ---------- emotes ---------- */
+const EMOTE_MAP = {
+  waves:'(^.^)/', wave:'(^.^)/', yay:'\\o/', shrug:'¯\\_(ツ)_/¯',
+  flip:'(╯°□°）╯︵ ┻━┻', unflip:'┬─┬ ノ( ゜-゜ノ)', lenny:'( ͡° ͜ʖ ͡°)',
+  happy:'(^‿^)', heart:'<3', sleep:'(－_－) zzZ', cat:'=^.^='
+};
+(() => {
+  const byFace = new Map();
+  for (const [name, face] of Object.entries(EMOTE_MAP)) {
+    if (!byFace.has(face)) byFace.set(face, []);
+    byFace.get(face).push(name);
+  }
+  $("emoteList").innerHTML = [...byFace].map(([face, names]) =>
+    "<code>" + esc(names[0]) + "</code> " + esc(face)).join(" · ");
+})();
+
+/* ---------- connection ---------- */
+function setStatus(text, state){ const s = $("status"); s.textContent = text; s.setAttribute("data-state", state); }
+
+function connect(){
+  setStatus("Connecting…", "wait");
+  try { ws = new WebSocket("wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM)); }
+  catch (_) { scheduleRetry(); return; }
+
+  ws.onopen = () => { retry = 0; setStatus("Connected", "on"); send({ type:"hello", username:nick }); };
+  ws.onmessage = onMessage;
+  ws.onerror = () => { try { ws.close(); } catch(_){} };
+  ws.onclose = () => { setStatus("Disconnected", "off"); scheduleRetry(); };
+}
+function scheduleRetry(){
+  const wait = Math.min(15000, 1000 * Math.pow(1.7, retry++));
+  setStatus("Reconnecting in " + Math.round(wait / 1000) + "s", "off");
+  setTimeout(connect, wait);
+}
+function send(obj){ try { if (ws && ws.readyState === 1) ws.send(JSON.stringify(obj)); } catch(_){} }
+const online = () => ws && ws.readyState === 1;
+
+/* ---------- rendering ---------- */
+const NICK_COLOURS = ['#1c5fa8','#a4331f','#1d7a4c','#7a2f8f','#8a5a00','#0f6e78','#a02060','#3c4a7a'];
+function nickColour(name){
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+  return NICK_COLOURS[h % NICK_COLOURS.length];
+}
+
+function bbcodeToHtml(src){
+  let s = esc(src);
+  s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1</strong>");
+  s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1</em>");
+  s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1</u>");
+  s = s.replace(/\[color=(#[0-9a-fA-F]{3,6}|[a-zA-Z]{1,15})\]([\s\S]*?)\[\/color\]/gi,
+    (m, c, inner) => '<span style="color:' + c + '">' + inner + '</span>');
+  s = s.replace(/\[size=(\d{1,2})\]([\s\S]*?)\[\/size\]/gi,
+    (m, n, inner) => '<span style="font-size:' + Math.max(9, Math.min(24, parseInt(n, 10))) + 'px">' + inner + '</span>');
+  s = s.replace(/\[font=([A-Za-z0-9 ,'\-]{1,30})\]([\s\S]*?)\[\/font\]/gi, (m, name, inner) => {
+    const allowed = ["Arial","Times New Roman","Courier New","Verdana"];
+    const pick = allowed.find(f => f.toLowerCase() === name.trim().toLowerCase());
+    return pick ? '<span style="font-family:\'' + pick + '\'">' + inner + '</span>' : inner;
+  });
+  s = s.replace(/\b(https?:\/\/[^\s<]{4,120})/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+  return s;
+}
+
+function atBottom(){ return logEl.scrollHeight - logEl.scrollTop - logEl.clientHeight < 60; }
+function autoScroll(was){ if (was) logEl.scrollTop = logEl.scrollHeight; }
+
+function sysLine(text){
+  const was = atBottom();
+  const d = document.createElement("div");
+  d.className = "sys";
+  d.textContent = "— " + text;
+  logEl.appendChild(d);
+  autoScroll(was);
+}
+
+function renderMessage(m){
+  const was = atBottom();
+  const div = document.createElement("div");
+  const who = m.username || m.from || "Anon";
+  if (m._class) div.className = m._class;
+  if (who === nick && m._class !== "whisper") div.classList.add("mine");
+
+  const ts = document.createElement("span");
+  ts.className = "ts";
+  ts.textContent = "[" + (m.time ? new Date(m.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : "--:--") + "] ";
+  div.appendChild(ts);
+
+  if (m._class === "emote"){
+    const body = document.createElement("span");
+    if (m.kaomoji) body.textContent = "<" + who + "> " + (m.text || "");
+    else body.innerHTML = "* " + esc(who) + " " + bbcodeToHtml(m.text || "");
+    div.appendChild(body);
+  } else {
+    const tag = document.createElement("span");
+    tag.className = "nickname";
+    tag.style.color = nickColour(who);
+    tag.textContent = (m._class === "whisper" ? "[whisper] <" : "<") + who + "> ";
+    const body = document.createElement("span");
+    body.innerHTML = bbcodeToHtml(m.text || "");
+    div.appendChild(tag); div.appendChild(body);
+  }
+  logEl.appendChild(div);
+  autoScroll(was);
+}
+
+let roster = [];
+function renderRoster(list){
+  roster = list.slice();
+  $("rosterCount").textContent = list.length;
+  rosterEl.innerHTML = "";
+  if (!list.length){ rosterEl.innerHTML = '<div class="empty">Nobody yet. Say something anyway, the log keeps it.</div>'; return; }
+  for (const u of list){
+    const d = document.createElement("div");
+    d.className = "user" + (u === nick ? " self" : "") + (ignored.has(u) ? " muted" : "");
+    d.textContent = u;
+    rosterEl.appendChild(d);
+  }
+}
+
+function onMessage(e){
+  let p; try { p = JSON.parse(e.data); } catch(_){ return; }
+
+  if (p.type === "history" && Array.isArray(p.data)){
+    for (const raw of p.data){
+      if (!raw || ignored.has(raw.username)) continue;
+      renderMessage(raw.type === "emote" ? { ...raw, _class:"emote" } : raw);
     }
-    renderEmoteTips();
+    sysLine("you joined /" + ROOM + " as " + nick);
+    return;
+  }
+  if (p.type === "roster" && Array.isArray(p.users)) return renderRoster(p.users);
+  if (p.type === "topic") return setTopicUI(p.topic);
+  if (p.type === "typing"){
+    if (p.username === nick || ignored.has(p.username)) return;
+    $("typing").textContent = p.username + " is typing…";
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => $("typing").textContent = "", 2200);
+    return;
+  }
+  if (p.type === "whisper"){ if (!ignored.has(p.from)) { renderMessage({ ...p, _class:"whisper" }); ding(); } return; }
+  if (p.type === "emote"){ if (!ignored.has(p.username)) renderMessage({ ...p, _class:"emote" }); return; }
+  if (p.type === "chat"){
+    if (ignored.has(p.username)) return;
+    renderMessage(p);
+    if (p.username !== nick) ding();
+    return;
+  }
+  if (p.username && p.text && !ignored.has(p.username)) renderMessage(p);
+}
 
-    let ws;
-    let beepOn = true;
-    let typingTimer = null;
-    let ignored = new Set(JSON.parse(localStorage.getItem("ignored") || "[]"));
-    const saveIgnored = () => localStorage.setItem("ignored", JSON.stringify([...ignored]));
+/* ---------- composing ---------- */
+let defaultColor = "", defaultFont = "", defaultSize = "";
+const updatePlaceholder = () => editor.classList.toggle("is-empty", editor.textContent.trim().length === 0);
+updatePlaceholder();
+["input","blur","focus"].forEach(ev => editor.addEventListener(ev, updatePlaceholder));
 
-    function wsUrl(){ return "wss://" + WORKER_HOST + "/room/" + encodeURIComponent(ROOM); }
-    function setStatus(s){ $("status").textContent = s; }
-    function connect(){
-      ws = new WebSocket(wsUrl());
-      setStatus("Connecting");
-      ws.onopen = () => { setStatus("Online"); send({ type:"hello", username:nick }); };
-      ws.onclose = () => { setStatus("Disconnected"); setTimeout(connect, 1200); };
-      ws.onerror = () => { setStatus("Error"); try { ws.close(); } catch {} };
-      ws.onmessage = onMessage;
+$("fmtB").onclick = () => { editor.focus(); document.execCommand("bold"); };
+$("fmtI").onclick = () => { editor.focus(); document.execCommand("italic"); };
+$("fmtU").onclick = () => { editor.focus(); document.execCommand("underline"); };
+
+const hasSelection = () => { const s = document.getSelection(); return s && !s.isCollapsed && editor.contains(s.anchorNode); };
+const sizeToLegacy = n => (n <= 10 ? 2 : n <= 12 ? 3 : n <= 14 ? 4 : n <= 16 ? 5 : n <= 18 ? 6 : 7);
+
+$("colorSel").onchange = e => {
+  const v = e.target.value;
+  if (hasSelection()){ if (v) document.execCommand("foreColor", false, v); }
+  else { defaultColor = v; editor.style.color = v || ""; sysLine(v ? "your text is " + v + " from now on" : "text colour reset"); }
+};
+$("fontSel").onchange = e => {
+  const v = e.target.value;
+  if (hasSelection()){ if (v) document.execCommand("fontName", false, v); }
+  else { defaultFont = v; editor.style.fontFamily = v || ""; }
+};
+$("sizeSel").onchange = e => {
+  const v = e.target.value;
+  if (hasSelection()){ if (v) document.execCommand("fontSize", false, sizeToLegacy(parseInt(v, 10))); }
+  else { defaultSize = v; editor.style.fontSize = v ? parseInt(v, 10) + "px" : ""; }
+};
+
+editor.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendChat(); } });
+editor.addEventListener("paste", e => {
+  e.preventDefault();
+  const t = (e.clipboardData || window.clipboardData).getData("text/plain");
+  document.execCommand("insertText", false, t);
+});
+let typingThrottle = false;
+editor.addEventListener("input", () => {
+  if (typingThrottle || !online()) return;
+  typingThrottle = true;
+  send({ type:"typing", username:nick });
+  setTimeout(() => typingThrottle = false, 1500);
+});
+
+function htmlToBB(source){
+  const box = document.createElement("div");
+  box.innerHTML = source;
+  const px = {1:10,2:10,3:12,4:14,5:16,6:18,7:20};
+  const walk = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
+    if (node.nodeType !== Node.ELEMENT_NODE) return "";
+    const tag = node.tagName.toLowerCase();
+    let open = "", close = "";
+    if (tag === "b" || tag === "strong"){ open = "[b]"; close = "[/b]"; }
+    else if (tag === "i" || tag === "em"){ open = "[i]"; close = "[/i]"; }
+    else if (tag === "u"){ open = "[u]"; close = "[/u]"; }
+    else if (tag === "br"){ return "\n"; }
+    else if (tag === "div" || tag === "p"){ return Array.from(node.childNodes).map(walk).join("") + "\n"; }
+    else if (tag === "font"){
+      const c = node.getAttribute("color"), f = node.getAttribute("face"), s = node.getAttribute("size");
+      if (c){ open += "[color=" + c + "]"; close = "[/color]" + close; }
+      if (f){ open += "[font=" + f + "]";  close = "[/font]"  + close; }
+      if (s){ open += "[size=" + (px[s] || 12) + "]"; close = "[/size]" + close; }
     }
-
-    $("setNick").onclick = () => {
-      const v = $("nick").value.trim();
-      if (!v) return;
-      nick = v.slice(0, 24);
-      localStorage.setItem(NICK_KEY, nick);
-      send({ type:"nick", username:nick });
-      sysLine("* nick set to " + nick);
-    };
-    $("send").onclick = sendChat;
-
-    // Editor setup
-    const editor = document.getElementById("msgEdit");
-    function updatePlaceholder(){ editor.classList.toggle('is-empty', editor.textContent.trim().length === 0); }
-    updatePlaceholder();
-    editor.addEventListener('input', updatePlaceholder);
-    editor.addEventListener('blur', updatePlaceholder);
-    editor.addEventListener('focus', updatePlaceholder);
-    let defaultColor = ""; let defaultFont = ""; let defaultSize = "";
-    document.getElementById("bBtn").onclick = () => document.execCommand("bold");
-    document.getElementById("iBtn").onclick = () => document.execCommand("italic");
-    document.getElementById("uBtn").onclick = () => document.execCommand("underline");
-
-    function hasEditorSelection(){ const sel = document.getSelection(); return sel && !sel.isCollapsed && editor.contains(sel.anchorNode); }
-    document.getElementById("colorSel").onchange = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("foreColor", false, v);} else { defaultColor=v||""; editor.style.color = defaultColor || ""; } };
-    document.getElementById("fontSel").onchange  = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("fontName", false, v);} else { defaultFont=v||""; editor.style.fontFamily = defaultFont || ""; } };
-    document.getElementById("sizeSel").onchange  = (e) => { const v=e.target.value; if (hasEditorSelection()){ if(v) document.execCommand("fontSize", false, sizeToLegacy(parseInt(v,10))); } else { defaultSize=v||""; editor.style.fontSize = defaultSize ? `${parseInt(defaultSize,10)}px` : ""; } };
-
-    editor.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); } });
-    editor.addEventListener("paste", (e) => { e.preventDefault(); const t=(e.clipboardData||window.clipboardData).getData("text/plain"); document.execCommand("insertText", false, t); });
-    function sizeToLegacy(n){ return (n<=10?2:n<=12?3:n<=14?4:n<=16?5:n<=18?6:7); }
-
-    function sendTyping(){ try { ws && ws.readyState === 1 && ws.send(JSON.stringify({ type:"typing", username:nick })); } catch {} }
-    let typingThrottle=false;
-    editor.addEventListener("input", () => { if (!typingThrottle){ typingThrottle=true; sendTyping(); setTimeout(()=>typingThrottle=false, 1500); } });
-
-    function sendChat(){
-      const html = editor.innerHTML.trim();
-      const base = htmlToBB(html).trim();
-      if (!base || !ws || ws.readyState !== 1) return;
-      if (base.startsWith("/me ")){
-        const action = base.slice(4).trim();
-        const key = action.toLowerCase();
-        const kaomoji = EMOTE_MAP[key];
-        send({ type:"emote", username:nick, text: kaomoji || action, kaomoji: !!kaomoji });
-        editor.innerHTML = ""; updatePlaceholder();
-        if (defaultColor) editor.style.color = defaultColor;
-        if (defaultFont)  editor.style.fontFamily = defaultFont;
-        if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
-        return;
-      }
-      let bb = base;
-      if (defaultFont)  bb = `[font=${defaultFont}]${bb}[/font]`;
-      if (defaultSize)  bb = `[size=${parseInt(defaultSize,10)}]${bb}[/size]`;
-      if (defaultColor) bb = `[color=${defaultColor}]${bb}[/color]`;
-      send({ type:"chat", username:nick, text: bb });
-      editor.innerHTML = ""; updatePlaceholder();
-      if (defaultColor) editor.style.color = defaultColor;
-      if (defaultFont)  editor.style.fontFamily = defaultFont;
-      if (defaultSize)  editor.style.fontSize = `${parseInt(defaultSize,10)}px`;
+    else if (tag === "span"){
+      const st = node.getAttribute("style") || "";
+      const c = st.match(/color\s*:\s*([^;]+)/i), f = st.match(/font-family\s*:\s*([^;]+)/i), s = st.match(/font-size\s*:\s*(\d+)/i);
+      if (c){ open += "[color=" + c[1].trim() + "]"; close = "[/color]" + close; }
+      if (f){ open += "[font=" + f[1].replace(/["']/g,"").trim() + "]"; close = "[/font]" + close; }
+      if (s){ open += "[size=" + parseInt(s[1], 10) + "]"; close = "[/size]" + close; }
     }
+    return open + Array.from(node.childNodes).map(walk).join("") + close;
+  };
+  return Array.from(box.childNodes).map(walk).join("").replace(/\n+$/, "");
+}
 
-    function htmlToBB(html){
-      const container = document.createElement("div"); container.innerHTML = html;
-      const pxFromLegacy = {1:10,2:10,3:12,4:14,5:16,6:18,7:20};
-      const walk = (node) => {
-        if (node.nodeType === Node.TEXT_NODE) return node.nodeValue;
-        if (node.nodeType !== Node.ELEMENT_NODE) return "";
-        const tag = node.tagName.toLowerCase();
-        let open = "", close = "";
-        if (tag === "b" || tag === "strong") { open="[b]"; close="[/b]"; }
-        else if (tag === "i" || tag === "em") { open="[i]"; close="[/i]"; }
-        else if (tag === "u") { open="[u]"; close="[/u]"; }
-        else if (tag === "br") { return "\n"; }
-        else if (tag === "div" || tag === "p") { const inner = Array.from(node.childNodes).map(walk).join(""); return inner + "\n"; }
-        else if (tag === "font") {
-          const color = node.getAttribute("color");
-          const face  = node.getAttribute("face");
-          const size  = node.getAttribute("size");
-          if (color) { open += `[color=${color}]`; close = `[/color]` + close; }
-          if (face)  { open += `[font=${face}]`;   close = `[/font]` + close; }
-          if (size)  { const px = pxFromLegacy[size] || 12; open += `[size=${px}]`; close = `[/size]` + close; }
-        }
-        else if (tag === "span") {
-          const style = node.getAttribute("style") || "";
-          const mColor = style.match(/color\s*:\s*([^;]+)/i);
-          const mFace  = style.match(/font-family\s*:\s*([^;]+)/i);
-          const mSize  = style.match(/font-size\s*:\s*(\d+)/i);
-          if (mColor) { open += `[color=${mColor[1]}]`; close = `[/color]` + close; }
-          if (mFace)  { open += `[font=${mFace[1]}]`;  close = `[/font]` + close; }
-          if (mSize)  { open += `[size=${parseInt(mSize[1],10)}]`; close = `[/size]` + close; }
-        }
-        const inner = Array.from(node.childNodes).map(walk).join("");
-        return open + inner + close;
-      };
-      return Array.from(container.childNodes).map(walk).join("").replace(/\n+$/,"");
+function resetEditor(){
+  editor.innerHTML = "";
+  updatePlaceholder();
+  if (defaultColor) editor.style.color = defaultColor;
+  if (defaultFont)  editor.style.fontFamily = defaultFont;
+  if (defaultSize)  editor.style.fontSize = parseInt(defaultSize, 10) + "px";
+}
+
+function setNick(v){
+  const clean = String(v || "").trim().slice(0, 24);
+  if (!clean) return;
+  nick = clean;
+  $("nick").value = nick;
+  store.set(NICK_KEY, nick);
+  send({ type:"nick", username:nick });
+  sysLine("you are " + nick + " now");
+  renderRoster(roster);
+}
+$("setNick").onclick = () => setNick($("nick").value);
+$("nick").addEventListener("keydown", e => { if (e.key === "Enter") setNick($("nick").value); });
+$("send").onclick = sendChat;
+
+function sendChat(){
+  const text = htmlToBB(editor.innerHTML.trim()).trim();
+  if (!text) return;
+
+  if (text[0] === "/"){
+    const sp = text.indexOf(" ");
+    const cmd = (sp === -1 ? text.slice(1) : text.slice(1, sp)).toLowerCase();
+    const rest = sp === -1 ? "" : text.slice(sp + 1).trim();
+
+    if (cmd === "me"){
+      if (!online()) return sysLine("not connected, message not sent");
+      const face = EMOTE_MAP[rest.toLowerCase()];
+      send({ type:"emote", username:nick, text: face || rest, kaomoji: !!face });
+      return resetEditor();
     }
-
-    function send(obj){ try { ws.send(JSON.stringify(obj)); } catch {} }
-
-    function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
-    function bbcodeToHtml(src){
-      let s = escapeHtml(src);
-      s = s.replace(/\[b\]([\s\S]*?)\[\/b\]/gi, "<strong>$1<\/strong>");
-      s = s.replace(/\[i\]([\s\S]*?)\[\/i\]/gi, "<em>$1<\/em>");
-      s = s.replace(/\[u\]([\s\S]*?)\[\/u\]/gi, "<u>$1<\/u>");
-      s = s.replace(/\[color=(#[0-9a-fA-F]{3,6}|[a-zA-Z]{1,15})\]([\s\S]*?)\[\/color\]/gi,
-        (m, color, inner) => `<span style="color:${color}">${inner}<\/span>`);
-      s = s.replace(/\[size=(\d{1,2})\]([\s\S]*?)\[\/size\]/gi,
-        (m, n, inner) => `<span style="font-size:${Math.max(8, Math.min(24, parseInt(n,10)))}px">${inner}<\/span>`);
-      s = s.replace(/\[font=([A-Za-z0-9 ,'\-]{1,30})\]([\s\S]*?)\[\/font\]/gi,
-        (m, name, inner) => {
-          const allowed = ["Arial","Times New Roman","Courier New","Verdana"];
-          const pick = allowed.find(f => f.toLowerCase() === name.toLowerCase());
-          return pick ? `<span style="font-family:'${pick}'">${inner}<\/span>` : inner;
-        });
-      return s;
+    if (cmd === "nick"){ setNick(rest); return resetEditor(); }
+    if (cmd === "topic"){ send({ type:"settopic", topic: rest.slice(0,140), username:nick }); return resetEditor(); }
+    if (cmd === "clear"){ logEl.innerHTML = ""; sysLine("log cleared on your screen only"); return resetEditor(); }
+    if (cmd === "help"){ showHelp(); return resetEditor(); }
+    if (cmd === "w" || cmd === "whisper" || cmd === "msg"){
+      const gap = rest.indexOf(" ");
+      if (gap === -1) { sysLine("whisper needs a name and a message: /w name hello"); return resetEditor(); }
+      send({ type:"whisper", username:nick, to: rest.slice(0, gap), text: rest.slice(gap + 1) });
+      renderMessage({ _class:"whisper", from:"you → " + rest.slice(0, gap), text: rest.slice(gap + 1), time: Date.now() });
+      return resetEditor();
     }
+    sysLine("no command called /" + cmd + ". try /help");
+    return resetEditor();
+  }
 
-    function sysLine(t){ const div=document.createElement("div"); div.className="sys"; div.textContent=t; const log=$("log"); log.appendChild(div); log.scrollTop = log.scrollHeight; }
+  if (!online()) return sysLine("not connected, message not sent. it is still in the box.");
 
-    function renderMessage(m){
-      const time = m.time ? new Date(m.time).toLocaleTimeString() : "";
-      const log  = document.getElementById("log");
-      const div  = document.createElement("div");
-      if (m._class) div.className = m._class;
-      const ts = document.createElement("span"); ts.className = "ts"; ts.textContent = "[" + time + "] ";
-      if (m._class === "emote"){
-        const msg = document.createElement("span");
-        if (m.kaomoji){ msg.textContent = "<" + (m.username || "Anon") + "> " + (m.text || ""); }
-        else { msg.innerHTML = "* " + (m.username || "Anon") + " " + bbcodeToHtml(m.text || ""); }
-        div.appendChild(ts); div.appendChild(msg);
-      } else if (m._class === "whisper"){
-        const who = document.createElement("span"); who.textContent = "[whisper] <" + (m.from || "Anon") + "> ";
-        const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
-        div.appendChild(ts); div.appendChild(who); div.appendChild(msg);
-      } else {
-        const nick = document.createElement("span"); nick.textContent = "<" + (m.username || "Anon") + "> ";
-        const msg = document.createElement("span"); msg.innerHTML = bbcodeToHtml(m.text || "");
-        div.appendChild(ts); div.appendChild(nick); div.appendChild(msg);
-      }
-      log.appendChild(div); log.scrollTop = log.scrollHeight;
+  let bb = text;
+  if (defaultFont)  bb = "[font=" + defaultFont + "]" + bb + "[/font]";
+  if (defaultSize)  bb = "[size=" + parseInt(defaultSize, 10) + "]" + bb + "[/size]";
+  if (defaultColor) bb = "[color=" + defaultColor + "]" + bb + "[/color]";
+  send({ type:"chat", username:nick, text: bb });
+  resetEditor();
+}
+
+/* ---------- menus ---------- */
+const menubarEl = $("menubar");
+let openMenu = null;
+function closeMenus(){
+  document.querySelectorAll(".chat-dropdown").forEach(d => d.style.display = "none");
+  document.querySelectorAll(".menu-btn").forEach(b => b.setAttribute("aria-expanded", "false"));
+  openMenu = null;
+}
+menubarEl.addEventListener("click", e => {
+  const btn = e.target.closest(".menu-btn");
+  const item = e.target.closest(".chat-dropdown a");
+  if (btn){
+    const menu = $("menu-" + btn.dataset.menu);
+    const show = menu.style.display !== "block";
+    closeMenus();
+    if (show){
+      const r = btn.getBoundingClientRect(), host = menubarEl.getBoundingClientRect();
+      menu.style.left = Math.max(0, r.left - host.left) + "px";
+      menu.style.display = "block";
+      btn.setAttribute("aria-expanded", "true");
+      openMenu = menu;
     }
+  } else if (item){
+    handleAction(item.dataset.action);
+    closeMenus();
+  }
+});
+menubarEl.addEventListener("keydown", e => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const item = e.target.closest(".chat-dropdown a");
+  if (!item) return;
+  e.preventDefault();
+  handleAction(item.dataset.action);
+  closeMenus();
+});
+document.addEventListener("click", e => { if (!menubarEl.contains(e.target)) closeMenus(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ closeMenus(); $("ctx").style.display = "none"; } });
 
-    function renderRoster(list){ const box = $("roster"); box.innerHTML = ""; for (const u of list){ const d=document.createElement("div"); d.className="user"; d.textContent=u; box.appendChild(d); } }
-
-    function onMessage(e){
-      let payload; try { payload = JSON.parse(e.data); } catch { return; }
-      if (payload.type === "history" && Array.isArray(payload.data)) { for (let m of payload.data){ if (m && m.type === "emote") m = { ...m, _class: "emote" }; if (!m || ignored.has(m.username)) continue; renderMessage(m);} return; }
-      if (payload.type === "roster" && Array.isArray(payload.users)) { renderRoster(payload.users); return; }
-      if (payload.type === "topic") { setTopicUI(payload.topic); return; }
-      if (payload.type === "typing") { const t=$("typing"); t.textContent = `${payload.username} is typing…`; clearTimeout(typingTimer); typingTimer = setTimeout(() => t.textContent = "", 2000); return; }
-      if (payload.type === "whisper") { if (!ignored.has(payload.from)) { renderMessage({ ...payload, _class: "whisper" }); if (beepOn) ding(); } return; }
-      if (payload.type === "emote") { if (!ignored.has(payload.username)) renderMessage({ ...payload, _class: "emote" }); return; }
-      if (payload.type === "chat") { if (!ignored.has(payload.username)) { renderMessage(payload); if (payload.username !== nick && beepOn) ding(); } return; }
-      if (payload.username && payload.text) { if (!ignored.has(payload.username)) renderMessage(payload); }
+function handleAction(a){
+  switch (a){
+    case "save-log": return saveLog();
+    case "print": return window.print();
+    case "clear-log": logEl.innerHTML = ""; return sysLine("log cleared on your screen only");
+    case "join-room": return joinRoom();
+    case "copy-log": return copyLog();
+    case "find": return findInLog();
+    case "select-all": return selectAllLog();
+    case "zoom-in": return zoom(1);
+    case "zoom-out": return zoom(-1);
+    case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
+    case "toggle-roster": return rightPane.classList.toggle("hidden");
+    case "toggle-tips": return toggleTips();
+    case "toggle-beep":
+      prefs.beep = !prefs.beep; store.set("g981_beep", prefs.beep ? "1" : "0"); applyPrefs();
+      return sysLine("beep is " + (prefs.beep ? "on" : "off"));
+    case "clear-ignores":
+      ignored.clear(); saveIgnored(); renderRoster(roster);
+      return sysLine("everyone is audible again");
+    case "help": return showHelp();
+    case "about": return alert(
+      "Galaxy981 Chat\n\nOne HTML file, one websocket, no framework.\n" +
+      "Formatting: [b] [i] [u] [color=maroon] [size=14] [font=Courier New]\n" +
+      "The nickname and the mute list live on this device only.");
+    case "set-topic": {
+      const t = prompt("Topic for /" + ROOM + " (140 characters):", $("topicText").textContent);
+      if (t !== null) send({ type:"settopic", topic: t.slice(0, 140), username:nick });
+      return;
     }
+  }
+}
 
-    connect();
+const logText = () => Array.from(logEl.children).map(d => d.textContent).join("\n");
+function saveLog(){
+  const blob = new Blob([logText()], { type:"text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "chat-" + ROOM + "-" + new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-") + ".txt";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+function joinRoom(){
+  const room = prompt("Which room?", ROOM);
+  if (room && room.trim() && room !== ROOM){
+    const url = new URL(location.href);
+    url.searchParams.set("room", room.trim());
+    location.href = url.toString();
+  }
+}
+async function copyLog(){
+  try { await navigator.clipboard.writeText(logText()); sysLine("log copied to the clipboard"); }
+  catch(_) { sysLine("the browser refused to copy. Edit → Select all, then Ctrl+C."); }
+}
+function selectAllLog(){
+  const r = document.createRange(); r.selectNodeContents(logEl);
+  const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+}
+function findInLog(){
+  const term = prompt("Find what?");
+  if (!term) return;
+  const needle = term.toLowerCase();
+  logEl.querySelectorAll(".hilite").forEach(x => x.classList.remove("hilite"));
+  let hits = 0, first = null;
+  for (const div of logEl.children){
+    if (div.textContent.toLowerCase().includes(needle)){ div.classList.add("hilite"); hits++; if (!first) first = div; }
+  }
+  if (first) first.scrollIntoView({ block:"center" });
+  sysLine(hits ? hits + " line" + (hits === 1 ? "" : "s") + " matched “" + term + "”" : "nothing matched “" + term + "”");
+}
+function zoom(d){
+  currentZoom = Math.max(10, Math.min(22, currentZoom + d));
+  logEl.style.fontSize = currentZoom + "px";
+}
+function showHelp(){
+  alert(
+    "FORMATTING\n" +
+    "  [b]bold[/b]  [i]italic[/i]  [u]underline[/u]\n" +
+    "  [color=maroon]…[/color]  [size=14]…[/size]  [font=Courier New]…[/font]\n" +
+    "  The B / I / U buttons write these for you.\n\n" +
+    "COMMANDS\n" +
+    "  /me waves        an action, some words become faces\n" +
+    "  /nick name       change your nickname\n" +
+    "  /w name text     whisper to one person\n" +
+    "  /topic text      set the room topic\n" +
+    "  /clear           clear your own view\n\n" +
+    "Enter sends. Shift+Enter starts a new line.\n" +
+    "Right-click a name in the list to whisper or mute."
+  );
+}
+function toggleTips(){
+  const tips = $("tips");
+  const hidden = tips.style.display === "none";
+  tips.style.display = hidden ? "" : "none";
+  hidden ? store.del("g981_tips_hidden") : store.set("g981_tips_hidden", "1");
+}
+if (store.get("g981_tips_hidden") === "1") $("tips").style.display = "none";
+$("hideTips").onclick = e => { e.preventDefault(); toggleTips(); };
+$("moreHelp").onclick = e => { e.preventDefault(); showHelp(); };
 
-    // ===== Menus =====
-    const menubarEl = document.getElementById("menubar");
-    const logEl = document.getElementById("log");
-    const rightPane = document.querySelector(".chat-right");
-    let openMenu = null;
-    let currentZoom = 13;
+/* ---------- topic ---------- */
+function setTopicUI(t){ $("topicText").textContent = t || "(none yet — double-click to set one)"; }
+$("topicText").addEventListener("dblclick", () => handleAction("set-topic"));
 
-    menubarEl.addEventListener("click", (e) => {
-      const btn = e.target.closest(".menu-btn");
-      const item = e.target.closest(".chat-dropdown a");
-      if (btn) {
-        const id = "menu-" + btn.dataset.menu;
-        const menu = document.getElementById(id);
-        const rect = btn.getBoundingClientRect();
-        const host = menubarEl.getBoundingClientRect();
-        menu.style.left = (rect.left - host.left) + "px";
-        menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        if (openMenu && openMenu !== menu) openMenu.style.display = "none";
-        openMenu = menu.style.display === "block" ? menu : null;
-      } else if (item) {
-        handleAction(item.dataset.action);
-        closeMenus();
-      }
+/* ---------- roster right-click ---------- */
+const ctx = $("ctx");
+let ctxUser = null;
+rosterEl.addEventListener("contextmenu", e => {
+  const item = e.target.closest(".user");
+  if (!item) return;
+  e.preventDefault();
+  ctxUser = item.textContent;
+  $("ctx-name").textContent = ctxUser;
+  ctx.style.left = Math.min(e.pageX, innerWidth - 190) + "px";
+  ctx.style.top = e.pageY + "px";
+  ctx.style.display = "block";
+});
+document.addEventListener("click", () => ctx.style.display = "none");
+$("ctx-whisper").onclick = e => {
+  e.preventDefault();
+  if (!ctxUser) return;
+  const text = prompt("Whisper to " + ctxUser + ":");
+  if (!text) return;
+  send({ type:"whisper", username:nick, to: ctxUser, text });
+  renderMessage({ _class:"whisper", from:"you → " + ctxUser, text, time: Date.now() });
+};
+$("ctx-ignore").onclick = e => {
+  e.preventDefault();
+  if (!ctxUser) return;
+  ignored.has(ctxUser) ? ignored.delete(ctxUser) : ignored.add(ctxUser);
+  saveIgnored();
+  renderRoster(roster);
+  sysLine(ignored.has(ctxUser) ? ctxUser + " is muted for you" : ctxUser + " is audible again");
+};
+
+/* ---------- window buttons, which are mostly a joke ---------- */
+$("winMin").onclick = () => {
+  const on = document.querySelector(".chat-layout").style.display !== "none";
+  document.querySelector(".chat-layout").style.display = on ? "none" : "";
+  $("tips").style.display = on ? "none" : "";
+};
+$("winMax").onclick = () => {
+  logEl.style.height = logEl.style.height === "70vh" ? "" : "70vh";
+};
+$("winClose").onclick = () => {
+  sysLine("you cannot close a room you built. minimise it like an adult.");
+  const w = document.querySelector(".win");
+  if (prefs.motion) w.animate(
+    [{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],
+    {duration:220});
+};
+
+/* ---------- beep ---------- */
+let audio = null;
+function ding(){
+  if (!prefs.beep) return;
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    if (audio.state === "suspended") audio.resume();
+    const t = audio.currentTime;
+    [880, 1320].forEach((freq, i) => {
+      const o = audio.createOscillator(), g = audio.createGain();
+      o.type = "square"; o.frequency.value = freq;
+      g.gain.setValueAtTime(0.0001, t + i * 0.07);
+      g.gain.exponentialRampToValueAtTime(0.13, t + i * 0.07 + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.07 + 0.13);
+      o.connect(g); g.connect(audio.destination);
+      o.start(t + i * 0.07); o.stop(t + i * 0.07 + 0.14);
     });
-    document.addEventListener("click", (e) => { if (!menubarEl.contains(e.target)) closeMenus(); });
-    function closeMenus(){ document.querySelectorAll(".chat-dropdown").forEach(d=>d.style.display="none"); openMenu=null; }
+  } catch(_){}
+}
 
-    function handleAction(a){
-      switch(a){
-        case "save-log": return saveLog();
-        case "print": return window.print();
-        case "clear-log": return (logEl.innerHTML = "");
-        case "join-room": return joinRoom();
-        case "copy-log": return copyLog();
-        case "find": return findInLog();
-        case "select-all": return selectAllLog();
-        case "zoom-in": return zoom(1);
-        case "zoom-out": return zoom(-1);
-        case "toggle-tips": return toggleTips();
-        case "toggle-timestamps": return logEl.classList.toggle("hide-ts");
-        case "toggle-roster": return rightPane.classList.toggle("hidden");
-        case "toggle-beep": beepOn = !beepOn; alert("Beep is " + (beepOn ? "ON" : "OFF")); return;
-        case "help": return showHelp();
-        case "about": return alert("Web Chat • AOL-era look\nFormatting: [b] [i] [u] [color=red] [size=14] [font=Courier New]");
-        case "set-topic": {
-          const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || "");
-          if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick });
-          return;
-        }
-      }
-    }
-
-    // Tips bar controls
-    (() => {
-      const TIPS_KEY = "aolchat_tips_hidden";
-      const tipsEl = document.getElementById("tips");
-      const hideTipsBtn = document.getElementById("hideTips");
-      const moreHelpBtn = document.getElementById("moreHelp");
-      if (!tipsEl) return;
-      if (localStorage.getItem(TIPS_KEY) === "1") tipsEl.style.display = "none";
-      hideTipsBtn?.addEventListener("click", (e) => { e.preventDefault(); const hidden = tipsEl.style.display !== "none"; tipsEl.style.display = hidden ? "none" : ""; if (hidden) localStorage.setItem(TIPS_KEY, "1"); else localStorage.removeItem(TIPS_KEY); });
-      moreHelpBtn?.addEventListener("click", (e) => { e.preventDefault(); showHelp(); });
-    })();
-
-    // Actions
-    function saveLog(){ const text = Array.from(logEl.children).map(d=>d.textContent).join("\n"); const blob = new Blob([text], { type:"text/plain" }); const a = document.createElement("a"); const stamp = new Date().toISOString().replace(/[:.]/g,"-"); a.href = URL.createObjectURL(blob); a.download = `chat-${ROOM}-${stamp}.txt`; document.body.appendChild(a); a.click(); a.remove(); }
-    function joinRoom(){ const room = prompt("Join room:", ROOM); if (room && room !== ROOM) { const url = new URL(location.href); url.searchParams.set("room", room); location.href = url.toString(); } }
-    async function copyLog(){ const text = Array.from(logEl.children).map(d=>d.textContent).join("\n"); try { await navigator.clipboard.writeText(text); alert("Copied."); } catch { alert("Copy failed."); } }
-    function selectAllLog(){ const r = document.createRange(); r.selectNodeContents(logEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-    function findInLog(){ const term = prompt("Find:"); if (!term) return; const lower = term.toLowerCase(); logEl.querySelectorAll(".hilite").forEach(x=>x.classList.remove("hilite")); for (const div of logEl.children) { if (div.textContent.toLowerCase().includes(lower)) { div.classList.add("hilite"); div.scrollIntoView({block:"nearest"}); break; } } }
-    function zoom(delta){ currentZoom = Math.max(10, Math.min(22, currentZoom + delta)); logEl.style.fontSize = currentZoom + "px"; }
-    function showHelp(){ alert(`Formatting:\n  [b]bold[/b]  [i]italic[/i]  [u]underline[/u]\n  [color=red]red text[/color]\n  [size=14]14px text[/size]\n  [font=Courier New]Courier text[/font]\n\nToolbar inserts these tags for you.`); }
-
-    // Beep
-    function ding(){ try { const ac = new (window.AudioContext||window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type="square"; o.frequency.value=880; g.gain.setValueAtTime(0.0001, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime+0.01); g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+0.15); o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.16); } catch {} }
-
-    function setTopicUI(t){ document.getElementById("topicText").textContent = t || "(none)"; }
-    document.getElementById("topicText").addEventListener("dblclick", () => { const t = prompt("Set room topic (140 chars max):", document.getElementById("topicText").textContent || ""); if (t != null) send({ type:"settopic", topic: t.slice(0,140), username:nick }); });
-
-    // Roster context menu
-    const rosterEl = document.getElementById("roster");
-    const ctx = document.getElementById("ctx");
-    let ctxUser = null;
-    rosterEl.addEventListener("contextmenu", (e) => { const item = e.target.closest(".user"); if (!item) return; e.preventDefault(); ctxUser = item.textContent; ctx.style.left = e.pageX + "px"; ctx.style.top  = e.pageY + "px"; ctx.style.display = "block"; });
-    document.addEventListener("click", () => ctx.style.display = "none");
-    document.getElementById("ctx-whisper").onclick = (e) => { e.preventDefault(); if (!ctxUser) return; const txt = prompt("Whisper to " + ctxUser + ":"); if (txt) send({ type:"whisper", username:nick, to: ctxUser, text: txt }); };
-    document.getElementById("ctx-ignore").onclick  = (e) => { e.preventDefault(); if (!ctxUser) return; if (ignored.has(ctxUser)) ignored.delete(ctxUser); else ignored.add(ctxUser); saveIgnored(); alert((ignored.has(ctxUser) ? "Ignoring " : "Unignored ") + ctxUser); };
-
-    function toggleTips() { const tips = document.getElementById("tips"); if (!tips) return; const TIPS_KEY = "aolchat_tips_hidden"; const isHidden = tips.style.display === "none"; tips.style.display = isHidden ? "" : "none"; if (isHidden) localStorage.removeItem(TIPS_KEY); else localStorage.setItem(TIPS_KEY, "1"); }
-  </script>
+/* ---------- go ---------- */
+renderRoster([]);
+sysLine("connecting to /" + ROOM + "…");
+connect();
+addEventListener("beforeunload", () => { try { ws && ws.close(); } catch(_){} });
+</script>
 </body>
 </html>
