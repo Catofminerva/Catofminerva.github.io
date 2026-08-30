@@ -1015,6 +1015,30 @@ h1 {
   .server-room { margin:12px 10px 0; }
   .dir-tab { margin-left:6px; }
 }
+
+/* --- protip: paywalls are a suggestion --- */
+.protip-box {
+  margin:0 0 12px;
+  padding:7px 10px;
+  border:3px dashed #ffff33;
+  background:#12002e;
+  color:#39ff14;
+  font:bold 12px "Courier New",monospace;
+  text-align:center;
+  letter-spacing:.02em;
+  animation:protip-glow 1.3s ease-in-out infinite;
+}
+.protip-box b.blink { color:#ffff33; }
+.protip-box a {
+  color:#ff33cc;
+  text-decoration:underline wavy;
+  text-underline-offset:2px;
+}
+.protip-box a:hover { color:#fff; background:#ff00ff; }
+@keyframes protip-glow {
+  0%,100% { box-shadow:0 0 4px #ffff33 inset, 0 0 4px #ffff33; }
+  50% { box-shadow:0 0 14px #00ffff inset, 0 0 16px #ff00ff; }
+}
 </style>
 </head>
 
@@ -1106,6 +1130,11 @@ h1 {
           <h2 class="section-title">Intellectual Stuff to Read Everyday <span class="blink">!</span></h2>
           <div class="section-meta">my daily rounds ★ click around / see whats new / read one or two</div>
           <div class="dir-tab"><img src="coollinks.gif" alt="cool links"><span class="tab-count">16 in here</span></div>
+          <div class="protip-box">
+            <b class="blink">☆ PROTIP ☆</b> hit a paywall on one of these? paste the link into
+            <a href="https://archive.ph/" target="_blank" rel="noopener">archive.ph</a>
+            and read it anyway <b class="blink">☆ ☆ ☆</b>
+          </div>
           <div class="links">
             <div class="link-entry">
   <div><a href="https://harpers.org/" target="_blank" rel="noopener">Harper&#x27;s</a></div>
