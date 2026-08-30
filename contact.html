@@ -21,13 +21,15 @@ html, body { margin:0; padding:0; }
 
 /* ============================================================
    THE BACKGROUND
-   Plaza.png tiles on top. stars.gif sits underneath it as a
+   PLAZA.png tiles on top. stars.gif sits underneath it as a
    fallback so the page never lands on bare colour if the plaza
    is missing. do not collapse these into one line.
+   the filename really is shouting. leave the capitals alone,
+   the server cares even if i do not.
    ============================================================ */
 body {
   background:
-    url("Plaza.png") repeat,
+    url("PLAZA.png") repeat,
     url("stars.gif") repeat,
     #0a0620;
   color:#111;
@@ -208,36 +210,39 @@ a:hover { color:#ff1493; background:#ffff66; }
 @keyframes blink-hard { 50% { opacity:0; } }
 
 /* --- alice. she has been on this page longer than most of my
-       friendships. gold frame because she deserves it. --- */
+       friendships. spent twenty-odd years crammed into the
+       sidebar at thumbnail size. this is the revision where she
+       finally gets the wall space. gold frame, obviously. --- */
 .shrine {
-  margin:0 0 15px;
-  padding:9px 9px 7px;
+  margin:0 0 6px;
+  padding:11px 11px 9px;
   text-align:center;
-  border:5px ridge #d4a017;
+  border:6px ridge #d4a017;
   background:
     radial-gradient(circle at 50% 34%, #2a1a4d 0%, #140a2c 68%, #0b0518 100%);
-  box-shadow:inset 0 0 14px rgba(255,214,110,.28), 2px 2px 0 #6b4d06;
+  box-shadow:inset 0 0 18px rgba(255,214,110,.30), 3px 3px 0 #6b4d06;
 }
 .shrine .shrine-label {
-  margin-bottom:6px;
+  margin-bottom:8px;
   color:#ffd66e;
-  font:bold 9px "Courier New",monospace;
-  letter-spacing:.14em;
+  font:bold 10px "Courier New",monospace;
+  letter-spacing:.18em;
 }
 .shrine img {
   display:block;
   width:100%;
-  max-width:158px;
+  max-width:470px;
   height:auto;
   margin:0 auto;
-  border:1px solid #6b4d06;
+  border:2px solid #6b4d06;
   background:#0b0518;
   image-rendering:pixelated;
 }
 .shrine .shrine-cap {
-  margin-top:7px;
+  max-width:470px;
+  margin:9px auto 0;
   color:#e7d3a8;
-  font:10px/1.5 "Comic Sans MS","Trebuchet MS",cursive;
+  font:11px/1.6 "Comic Sans MS","Trebuchet MS",cursive;
 }
 /* if a gif has not made it onto the server yet, say so plainly
    instead of showing the browser's broken-picture icon */
@@ -793,12 +798,15 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
   .content { order:2; display:block; width:100%; padding:10px 9px 18px; }
 
   .mailstatus { order:3; margin:10px 8px; }
-  .shrine     { order:4; margin:0 8px 10px; }
-  .side-badges{ order:5; margin:0 8px; }
-  .webring    { order:6; margin:10px 8px 0; }
-  .attached   { order:7; margin:10px 8px 0; }
-  .award      { order:8; margin:10px 8px 0; }
-  .side-counter { order:9; margin:10px 8px 14px; }
+  .side-badges{ order:4; margin:0 8px; }
+  .webring    { order:5; margin:10px 8px 0; }
+  .attached   { order:6; margin:10px 8px 0; }
+  .award      { order:7; margin:10px 8px 0; }
+  .side-counter { order:8; margin:10px 8px 14px; }
+
+  /* alice keeps her frame but stops being 470px wide */
+  .shrine { padding:8px 8px 7px; border-width:4px; }
+  .shrine .shrine-cap { font-size:10px; }
 
   .fields { grid-template-columns:1fr; }
   .notepad { padding:12px 13px 14px 40px; transform:none; }
@@ -891,17 +899,6 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
             <dt>&gt; mood:</dt>
             <dd>receptive</dd>
           </dl>
-        </div>
-
-        <!-- alice has been in this corner since the second version of
-             this page. i have redesigned around her four times. -->
-        <div class="shrine">
-          <div class="shrine-label">★ ALICE ★</div>
-          <img src="alice.gif" alt="Alice" data-fallback="alice.gif">
-          <div class="shrine-cap">
-            she has been in this corner since the second draft of this page.
-            i have redesigned around her four times rather than move her.
-          </div>
         </div>
 
         <div class="side-badges">
@@ -1130,6 +1127,22 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
             <li>please do not send me a crypto newsletter. i do not know how you found me.</li>
             <li>found a broken link? you are owed one (1) favour, redeemable never, but sincerely offered.</li>
           </ol>
+        </section>
+
+        <!-- she lived in the sidebar at thumbnail size for twenty years
+             because that is where i first pasted her and moving things
+             felt like vandalism. finally gave her the wall. -->
+        <section class="shrine">
+          <div class="shrine-label">★ ALICE ★</div>
+          <img src="ALICE.gif" alt="Alice standing in a tiled hall of coloured columns" data-fallback="ALICE.gif">
+          <div class="shrine-cap">
+            she has been somewhere on this page since the second draft of it,
+            stuck in the sidebar at the size of a postage stamp because that is
+            where i first pasted her and moving things felt like vandalism.
+            this is the revision where she gets the wall. i do not know who made
+            this picture. i have never found out. she is just where i end up when
+            i am putting off replying to someone.
+          </div>
         </section>
 
         <div class="divider"><img src="dividerblackwhite.gif" alt=""></div>
