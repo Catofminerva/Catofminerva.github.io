@@ -774,10 +774,11 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 @media (max-width:700px) {
   body { overflow-x:hidden; -webkit-text-size-adjust:100%; }
 
+  /* gutter so the plaza shows around the page instead of a 4px sliver */
   .site-shell {
-    width:calc(100% - 8px);
+    width:calc(100% - 36px);
     max-width:none;
-    margin:4px auto 18px;
+    margin:14px auto 26px;
     border-width:4px;
     box-shadow:3px 3px 0 #002b57;
   }

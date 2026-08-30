@@ -536,7 +536,10 @@ pre.ascii{
   font-size:11px; font-family:"Courier New",monospace; color:#9ab; margin:0 0 10px;
   letter-spacing:.4px;
 }
-.book-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+/* min() so the 300px track can collapse on a narrow phone. plain
+   minmax(300px,1fr) refuses to go under 300 and pushes the page wider
+   than the screen. */
+.book-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr)); gap:14px; }
 
 /* an opened card takes the whole width of its shelf. some of these
    write-ups are essays and they were being read down a 200px gutter.
@@ -819,6 +822,10 @@ pre.ascii{
    a wall of buttons to reach the books.
    ---------------------------------------------------------- */
 @media (max-width:820px){
+  /* 96vw leaves an 8px sliver on a phone. widen the gutter so the
+     win95 desktop actually shows around the Paint window. */
+  .page{ width:calc(100% - 36px); max-width:none; margin:14px auto 26px; }
+
   .layout, .layout tbody{ display:block; width:auto; }
   .layout tr{ display:flex; flex-direction:column; width:100%; }
 

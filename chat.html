@@ -83,8 +83,19 @@ body{
 /* ================================================================
    1. ATMOSPHERE — sky, drift, scanlines
    ================================================================ */
+/* the starfield drifts on a transform, not on background-position.
+   background-position is a paint property: animating it on a layer this
+   size forces the whole viewport to be re-rastered every single frame,
+   forever, and on a machine that cannot keep up that reads as the page
+   strobing. a transform is handed to the compositor and never repaints.
+   each layer has to travel a whole number of tiles or it jumps when the
+   animation loops, hence the odd sizes below. */
 .sky{
-  position:fixed; inset:-10% -10% -10% -10%; z-index:-3; pointer-events:none;
+  position:fixed; z-index:-3; pointer-events:none;
+  left:-400px; top:-800px;
+  width:calc(100vw + 800px);
+  height:calc(100vh + 1600px);
+  will-change:transform;
   background-color:transparent;          /* was var(--void), which hid the tile */
   background-image:
     radial-gradient(1.6px 1.6px at 40px 60px,   #fffbe6 50%, transparent 51%),
@@ -98,15 +109,19 @@ body{
 }
 .sky--near{
   z-index:-2; opacity:.5;
+  left:-640px; top:-640px;
+  width:calc(100vw + 1280px);
+  height:calc(100vh + 1280px);
   background-image:
     radial-gradient(2.4px 2.4px at 120px 80px,  #ffffff 50%, transparent 51%),
     radial-gradient(2px 2px at 500px 420px,     #9de9ff 50%, transparent 51%),
     radial-gradient(2.2px 2.2px at 300px 560px, #ffc2f0 50%, transparent 51%);
   background-size:640px 640px;
-  animation-duration:90s;
+  animation:drift-near 90s linear infinite;
 }
 .sky--glow{
   z-index:-3; opacity:1; animation:none; background-size:auto;
+  left:0; top:0; width:100vw; height:100vh;
   background-image:
     radial-gradient(60vw 40vh at 12% 8%, rgba(168,85,255,.34), transparent 70%),
     radial-gradient(50vw 38vh at 88% 22%, rgba(0,229,255,.22), transparent 70%),
@@ -116,7 +131,8 @@ body{
     radial-gradient(50vw 38vh at 88% 22%, color-mix(in srgb, var(--cyan) 22%, transparent), transparent 70%),
     radial-gradient(70vw 50vh at 50% 110%, color-mix(in srgb, var(--hot) 18%, transparent), transparent 70%);
 }
-@keyframes drift{ to{ background-position:400px 800px; } }
+@keyframes drift{      to{ transform:translate3d(-400px,-800px,0); } }   /* 1 tile across, 2 down */
+@keyframes drift-near{ to{ transform:translate3d(-640px,-640px,0); } }   /* 1 tile each way */
 
 /* ================================================================
    2. SHELL
@@ -457,11 +473,12 @@ input#nick{ flex:0 1 168px; }
   border-top:2px dotted #4a3d7a; border-bottom:2px dotted #4a3d7a;
 }
 .rail-strip img{
-  position:absolute; top:2px; left:-70px; height:28px; width:auto;
+  position:absolute; top:2px; left:0; height:28px; width:auto;
   image-rendering:pixelated;
   animation:walk 19s linear infinite;
 }
-@keyframes walk{ from{ left:-70px } to{ left:100% } }
+/* transform, not left, so the cat does not relayout the strip 60 times a second */
+@keyframes walk{ from{ transform:translateX(-100%) } to{ transform:translateX(calc(100vw + 100%)) } }
 
 /* the taped notice */
 .notice{

@@ -445,7 +445,9 @@ h1 {
 @keyframes blink { 50% { visibility:hidden; } }
 
 @media (max-width:720px) {
-  .page { max-width:calc(100% - 8px); margin-top:5px; }
+  /* leave a real gutter so back6.gif frames the page. a 4px sliver
+     reads as a border; the wallpaper is half the point of the site. */
+  .page { width:calc(100% - 36px); max-width:none; margin:14px auto 26px; }
   h1 { font-size:39px; }
   .title-line img { width:55px; }
   .layout, .layout tbody, .layout tr, .sidebar, .main { display:block; width:100%; }
