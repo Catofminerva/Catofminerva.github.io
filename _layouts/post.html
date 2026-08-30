@@ -150,8 +150,8 @@ hr.retro{
 /* ---------- the reading column ---------- */
 .post{
   margin:0;
-  font-family:var(--f-read); font-size:21px; line-height:1.62;
-  color:var(--ink); letter-spacing:.005em;
+  font-family:var(--f-read); font-size:18px; line-height:1.5;
+  color:#15202b; letter-spacing:.005em;
   font-kerning:normal; font-variant-numeric:oldstyle-nums;
   text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
   cursor:auto;
@@ -406,11 +406,10 @@ hr.retro{
 
   .stickers{ grid-template-columns:repeat(4,1fr); }
   .stickers .wide{ grid-column:span 2; }
-  .post{ font-size:19px; }
   .post img{ content-visibility:auto; contain-intrinsic-size:800px auto; }
 }
 @media (max-width:600px){
-  .post{ font-size:18px; line-height:1.58; }
+  .post{ font-size:17px; line-height:1.5; }
 }
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; }
