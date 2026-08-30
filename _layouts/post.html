@@ -415,6 +415,96 @@ hr.retro{
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; }
 }
+
+
+/* ---------- footnote list at the end of the entry ---------- */
+.post .footnotes{
+  clear:right; display:flow-root;
+  margin:2.4em 0 0; padding:11px 14px 4px;
+  background:var(--band); border:2px inset #a8ae99;
+  font-size:.8em; line-height:1.6; font-variant-numeric:normal;
+}
+.post .footnotes::before{
+  content:"▼ notes from the margin";
+  display:block; margin-bottom:9px;
+  font-family:var(--f-ui); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-soft);
+}
+.post .footnotes hr{ display:none; }
+.post .footnotes ol{ margin:0; padding-left:1.6em; }
+.post .footnotes li{ margin:0 0 .55em; scroll-margin-top:24px; }
+.post .footnotes li:target{
+  background:var(--lemon); outline:2px dotted var(--stamp); outline-offset:4px;
+}
+.post a.reversefootnote, .post a[role="doc-backlink"]{
+  margin-left:.4em; text-decoration:none; color:var(--stamp);
+}
+ 
+/* ---------- the little numbered marker in the text ---------- */
+.post a.footnote, .post sup[id^="fnref"] a, .post a[role="doc-noteref"]{
+  font-family:var(--f-data); font-size:.92em; font-variant-numeric:normal;
+  letter-spacing:.04em; text-decoration:none;
+  color:#fff; background:var(--grape);
+  padding:1px 5px; border:1px solid #2b0742;
+  box-shadow:1px 1px 0 rgba(0,0,0,.35);
+}
+@media (hover:hover){
+  .post a.footnote:hover, .post sup[id^="fnref"] a:hover, .post a[role="doc-noteref"]:hover{
+    background:var(--pink); color:#fff;
+  }
+}
+.post a.footnote:focus-visible, .post sup[id^="fnref"] a:focus-visible{
+  outline:2px solid var(--cyan); outline-offset:2px;
+}
+ 
+/* ---------- the preview slip ---------- */
+.fn-pop{
+  position:fixed; top:0; left:0; z-index:9999;
+  width:max-content; max-width:min(370px, calc(100vw - 20px));
+  max-height:min(46vh, 340px); overflow:auto; overscroll-behavior:contain;
+  background:var(--paper);
+  background-image:radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+  background-size:3px 3px;
+  color:var(--ink); font-family:var(--f-read); font-size:16px; line-height:1.5;
+  font-variant-numeric:normal; letter-spacing:normal; text-align:left;
+  border:4px ridge var(--grape);
+  box-shadow:5px 5px 0 rgba(0,0,0,.45), 0 0 20px rgba(255,47,160,.35);
+  opacity:0; visibility:hidden; transform:translateY(5px);
+  transition:opacity .12s ease, transform .12s ease;
+  -webkit-overflow-scrolling:touch;
+}
+.fn-pop.on{ opacity:1; visibility:visible; transform:none; }
+ 
+.fn-pop .fn-head{
+  position:sticky; top:0;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:4px 5px 4px 9px;
+  background:var(--grape); color:var(--lemon);
+  border-bottom:2px groove #b98cff;
+  font-family:var(--f-ui); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+}
+.fn-pop .fn-jump{ color:var(--cyan); text-decoration:none; white-space:nowrap; }
+.fn-pop .fn-jump:hover{ text-decoration:underline; color:#fff; }
+.fn-pop .fn-close{
+  flex:0 0 auto; padding:2px 7px; cursor:pointer;
+  font-family:var(--f-ui); font-size:10px; color:#000;
+  background:#e8e8e8; border:2px outset #fff;
+}
+.fn-pop .fn-close:active{ border-style:inset; background:var(--lemon); }
+.fn-pop .fn-close[hidden]{ display:none; }
+ 
+.fn-pop .fn-body{ padding:10px 12px; }
+.fn-pop .fn-body > :first-child{ margin-top:0; }
+.fn-pop .fn-body > :last-child{ margin-bottom:0; }
+.fn-pop .fn-body p{ margin:0 0 .6em; }
+.fn-pop .fn-body a{ color:var(--link); text-decoration:underline; overflow-wrap:break-word; }
+.fn-pop .fn-body img{ max-width:100%; height:auto; margin:.6em 0; border:1px solid var(--rule); }
+.fn-pop .fn-body code{ font-family:var(--f-data); font-size:.82em; background:#eee7d2; border:1px solid #d5cbb4; padding:1px 4px; }
+ 
+@media (max-width:600px){
+  .fn-pop{ font-size:15px; max-height:min(50vh, 300px); }
+}
+@media print{ .fn-pop{ display:none !important; } }
 </style>
 </head>
 
@@ -662,6 +752,185 @@ hr.retro{
       matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('marquee').forEach(m=>m.setAttribute('scrollamount','1'));
   }
+})();
+
+
+
+   /* footnote previews: hover on a mouse, tap once on a touchscreen */
+(() => {
+  const scope = document.querySelector('.post');
+  if (!scope) return;
+ 
+  const markers = [];
+  scope.querySelectorAll(
+    'a.footnote, a[role="doc-noteref"], sup[id^="fnref"] a, a[href^="#fn:"]'
+  ).forEach(a => {
+    if (a.classList.contains('reversefootnote')) return;
+    if (a.getAttribute('role') === 'doc-backlink') return;
+    const href = a.getAttribute('href') || '';
+    if (href.charAt(0) !== '#' || href.length < 2) return;
+    if (markers.indexOf(a) === -1) markers.push(a);
+  });
+  if (!markers.length) return;
+ 
+  const canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+ 
+  const pop = document.createElement('div');
+  pop.className = 'fn-pop';
+  pop.setAttribute('role', 'dialog');
+  pop.setAttribute('aria-label', 'Footnote preview');
+  pop.setAttribute('aria-hidden', 'true');
+  pop.innerHTML =
+    '<div class="fn-head">' +
+      '<a class="fn-jump" href="#">full note ▼</a>' +
+      '<button type="button" class="fn-close" aria-label="Close note">✕ close</button>' +
+    '</div>' +
+    '<div class="fn-body"></div>';
+  document.body.appendChild(pop);
+ 
+  const jump = pop.querySelector('.fn-jump');
+  const closeBtn = pop.querySelector('.fn-close');
+  const body = pop.querySelector('.fn-body');
+ 
+  let current = null, pinned = false, showT = 0, hideT = 0, frame = 0;
+ 
+  const stopTimers = () => { clearTimeout(showT); clearTimeout(hideT); };
+ 
+  function noteFor(a) {
+    const raw = (a.getAttribute('href') || '').slice(1);
+    if (!raw) return null;
+    let id = raw;
+    try { id = decodeURIComponent(raw); } catch (e) {}
+    return document.getElementById(id) || document.getElementById(raw);
+  }
+ 
+  function fill(a) {
+    const note = noteFor(a);
+    if (!note) return false;
+    const clone = note.cloneNode(true);
+    clone.querySelectorAll('a.reversefootnote, a[role="doc-backlink"]').forEach(n => n.remove());
+    body.innerHTML = clone.innerHTML;
+    body.querySelectorAll('img').forEach(img => {
+      img.setAttribute('loading', 'lazy');
+      img.setAttribute('decoding', 'async');
+    });
+    jump.setAttribute('href', a.getAttribute('href'));
+    return true;
+  }
+ 
+  function place(a) {
+    const gap = 10;
+    pop.style.maxHeight = '';
+    const r = a.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth;
+    const vh = window.innerHeight;
+    const roomAbove = r.top - gap * 2;
+    const roomBelow = vh - r.bottom - gap * 2;
+ 
+    let h = pop.offsetHeight, top;
+    if (h <= roomAbove) {
+      top = r.top - gap - h;
+    } else if (h <= roomBelow) {
+      top = r.bottom + gap;
+    } else if (roomBelow >= roomAbove) {
+      pop.style.maxHeight = Math.max(90, roomBelow) + 'px';
+      top = r.bottom + gap;
+    } else {
+      pop.style.maxHeight = Math.max(90, roomAbove) + 'px';
+      top = Math.max(gap, r.top - gap - pop.offsetHeight);
+    }
+ 
+    let left = r.left + r.width / 2 - pop.offsetWidth / 2;
+    left = Math.min(Math.max(gap, left), vw - pop.offsetWidth - gap);
+    pop.style.left = Math.round(left) + 'px';
+    pop.style.top = Math.round(Math.max(gap, top)) + 'px';
+  }
+ 
+  function open(a, pin) {
+    if (!fill(a)) return false;
+    if (current && current !== a) current.removeAttribute('aria-expanded');
+    current = a;
+    pinned = !!pin;
+    closeBtn.hidden = !pinned;
+    a.setAttribute('aria-expanded', 'true');
+    pop.setAttribute('aria-hidden', 'false');
+    pop.classList.add('on');
+    place(a);
+    return true;
+  }
+ 
+  function close() {
+    if (!current) return;
+    current.removeAttribute('aria-expanded');
+    current = null;
+    pinned = false;
+    pop.classList.remove('on');
+    pop.setAttribute('aria-hidden', 'true');
+  }
+ 
+  markers.forEach(a => {
+    a.setAttribute('aria-haspopup', 'dialog');
+ 
+    if (canHover) {
+      a.addEventListener('mouseenter', () => {
+        stopTimers();
+        showT = setTimeout(() => open(a, false), 110);
+      });
+      a.addEventListener('mouseleave', () => {
+        stopTimers();
+        if (!pinned) hideT = setTimeout(close, 240);
+      });
+      a.addEventListener('focus', () => { stopTimers(); open(a, false); });
+      a.addEventListener('blur', () => { if (!pinned) close(); });
+    }
+ 
+    a.addEventListener('click', e => {
+      if (canHover) { close(); return; }      /* mouse: follow the link down to the note */
+      if (current === a) { close(); return; } /* second tap on the same marker closes it */
+      e.preventDefault();
+      open(a, true);
+    });
+  });
+ 
+  if (canHover) {
+    pop.addEventListener('mouseenter', stopTimers);
+    pop.addEventListener('mouseleave', () => { if (!pinned) hideT = setTimeout(close, 200); });
+  }
+ 
+  closeBtn.addEventListener('click', () => {
+    const back = current;
+    close();
+    if (back && canHover) back.focus();
+  });
+ 
+  jump.addEventListener('click', () => { setTimeout(close, 0); });
+ 
+  document.addEventListener('click', e => {
+    if (!current) return;
+    if (pop.contains(e.target) || e.target === current || current.contains(e.target)) return;
+    close();
+  }, true);
+ 
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape' || !current) return;
+    const back = current;
+    close();
+    if (back) back.focus();
+  });
+ 
+  const reflow = () => {
+    if (!current) return;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      if (!current) return;
+      const r = current.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) { close(); return; }
+      place(current);
+    });
+  };
+  window.addEventListener('scroll', reflow, { passive: true });
+  window.addEventListener('resize', reflow);
+  window.addEventListener('beforeprint', close);
 })();
 </script>
 
