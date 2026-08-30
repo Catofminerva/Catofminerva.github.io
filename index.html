@@ -1634,6 +1634,295 @@ td.content .post h3{ color:#000; text-shadow:none; }
   .hamster-plant .hp-title{ font-size: 12px; }
 }
 
+
+/* ============================================================
+   2026-08-30: GIF DEPOSIT III. the folder was deeper than i thought.
+   additive only. nothing above this line was touched.
+   ============================================================ */
+
+/* --- a planet, orbiting the system message --- */
+.marquee-planet{
+  height: 26px;
+  width: auto;
+  vertical-align: middle;
+  margin: 0 8px;
+  image-rendering: pixelated;
+}
+
+/* --- animated checkerboard rule --- */
+.div-checker{
+  height: 20px;
+  margin: 14px 0;
+  border: 0;
+  background: url("dividerblackwhite.gif") repeat-x center / auto 100%;
+  image-rendering: pixelated;
+}
+.sidebar .div-checker{ margin: 12px 4px; }
+
+/* --- window chrome, demoted to a divider --- */
+.div-win{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 16px 0 10px;
+  image-rendering: pixelated;
+}
+
+/* --- the roadworks banner --- */
+.construction-bar{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 14px 0 4px;
+  image-rendering: pixelated;
+}
+
+/* --- sidebar webcam, permanently recording nothing --- */
+.cam-screen{
+  padding: 5px;
+  background: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.cam-screen img{
+  display: block;
+  width: 100%;
+  max-width: 152px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.cam-osd{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 0 1px;
+  font: 9px/1.4 "Courier New", monospace;
+  color: var(--neon-green);
+}
+.cam-osd .rec{ color: #ff2b2b; }
+
+/* --- the lamp --- */
+.wish-lamp{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 16px 0 20px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #111;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+.wish-lamp img{
+  flex: 0 0 auto;
+  height: 104px;
+  width: auto;
+  image-rendering: pixelated;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.wish-lamp img:active{ transform: scale(.96) rotate(-2deg); }
+.wish-lamp .wish-copy{
+  flex: 1 1 210px;
+  min-width: 0;
+  font: 12px/1.55 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+}
+.wish-lamp .wish-out{
+  display: block;
+  margin-top: 5px;
+  padding: 5px 7px;
+  background: #000;
+  color: var(--neon-green);
+  font: 11px/1.5 "Courier New", monospace;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  overflow-wrap: anywhere;
+}
+.wish-lamp .wish-count{
+  display: block;
+  margin-top: 4px;
+  font: 10px/1.4 "Courier New", monospace;
+  color: #555;
+}
+
+/* --- pikachu, loitering in the pet enclosure --- */
+.pet-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 14px;
+}
+.pet-sidekick{
+  flex: 0 0 auto;
+  width: 150px;
+  max-width: 46%;
+  height: auto;
+  image-rendering: pixelated;
+  align-self: center;
+}
+.pet-sidekick-cap{
+  width: 100%;
+  margin: 6px 0 0;
+  font: 10px/1.45 "Courier New", monospace;
+  color: #555;
+}
+
+/* --- DANCEFLOOR.EXE --- */
+.win95-window .titlebar .tb-ico{
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: -3px;
+  image-rendering: pixelated;
+}
+.win95-window.dancefloor .win-body{
+  background: url("dividerblackwhite.gif") repeat;
+  image-rendering: pixelated;
+  padding: 14px 10px 12px;
+}
+.floor-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.dancer{
+  width: 124px;
+  margin: 0;
+  padding: 8px 6px 6px;
+  background: #fff;              /* these gifs ship on white, so give them white */
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.55);
+  text-align: center;
+}
+.dancer img{
+  display: block;
+  height: 104px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.dancer .lab{
+  margin-top: 7px;
+  font: 10px/1.4 "Courier New", monospace;
+  color: #333;
+  letter-spacing: .3px;
+}
+
+/* --- taskbar --- */
+.taskbar{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 3px 4px;
+  background: var(--w95-bg);
+  color: #000;
+  border-top: 2px solid var(--w95-hi);
+  box-shadow: inset 0 1px 0 #dfdfdf;
+  font: 12px/1 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+}
+.taskbar button{
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: inset -1px -1px 0 var(--w95-shadow), inset 1px 1px 0 var(--w95-hi);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.taskbar button:hover{ background: var(--w95-mid); }
+.taskbar button:active,
+.taskbar button[aria-expanded="true"]{
+  border-color: var(--w95-dark) var(--w95-hi) var(--w95-hi) var(--w95-dark);
+  box-shadow: inset 1px 1px 0 var(--w95-shadow), inset -1px -1px 0 var(--w95-hi);
+  background: var(--w95-mid);
+}
+.taskbar button:focus-visible{ outline: 1px dotted #000; outline-offset: -4px; }
+.taskbar .start{ font-weight: bold; }
+.taskbar .start img{ width: 19px; height: 19px; image-rendering: pixelated; }
+.taskbar .tray{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 7px;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.taskbar .tray img{
+  height: 19px;
+  width: auto;
+  image-rendering: pixelated;
+  cursor: help;
+}
+.taskbar .clock{ font: 11px/1 "Tahoma","MS Sans Serif",sans-serif; }
+
+.start-menu{
+  position: absolute;
+  left: 2px;
+  bottom: calc(100% + 2px);
+  z-index: 500;
+  min-width: 188px;
+  padding: 3px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.5);
+}
+.start-menu[hidden]{ display: none; }
+.start-menu a,
+.start-menu button.sm-item{
+  display: block;
+  width: auto;
+  padding: 5px 10px;
+  color: #000;
+  font: 12px/1.25 "Tahoma","MS Sans Serif",sans-serif;
+  text-decoration: none;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+}
+.start-menu a:hover,
+.start-menu button.sm-item:hover{ background: #000080; color: #fff; }
+.start-menu hr{
+  height: 2px;
+  margin: 3px 2px;
+  border: 0;
+  border-top: 1px solid var(--w95-shadow);
+  border-bottom: 1px solid var(--w95-hi);
+}
+
+@media (max-width: 700px){
+  .marquee-planet{ height: 20px; margin: 0 4px; }
+  .wish-lamp{ justify-content: center; text-align: center; }
+  .wish-lamp img{ height: 88px; }
+  .pet-sidekick{ width: 128px; max-width: 44%; }
+  .dancer{ width: calc(50% - 8px); min-width: 116px; padding: 6px 4px 5px; }
+  .dancer img{ height: 84px; }
+  .cam-screen img{ max-width: 130px; }
+  .taskbar{ flex-wrap: wrap; gap: 4px; padding: 4px; }
+  .taskbar .tray{ margin-left: auto; }
+  .taskbar button{ padding: 5px 6px; font-size: 11px; }
+  .taskbar .task-label{ font-size: 11px; }
+}
+
   </style>
 </head>
 <body>
@@ -1654,7 +1943,9 @@ td.content .post h3{ color:#000; text-shadow:none; }
 </h1>
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
-        ★ cool people zone ★ best viewed on desktop ★
+        <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true">
+        &#9733; cool people zone &#9733; best viewed on desktop &#9733;
+        <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true">
       </marquee>
     </div>
 
@@ -1724,10 +2015,24 @@ td.content .post h3{ color:#000; text-shadow:none; }
     <!-- official embed, unchanged -->
     <div id="statuscafe">
       <div id="statuscafe-username"></div>
-      <div id="statuscafe-content">loading…</div>
+      <div id="statuscafe-content">loading&#8230;</div>
     </div>
   </div>
 </div>
+
+<!-- 2026-08-30: CAM 01 -->
+<div class="w95-box" data-label="Webcam">
+  <div class="cam-screen">
+    <img src="manpeakingintoscreen.gif" alt="a man leaning in towards the camera">
+    <div class="cam-osd">
+      <span class="rec">&#9679; REC</span>
+      <span>CAM 01 &#183; LOBBY</span>
+    </div>
+  </div>
+  <p class="cap">he has been checking on the site since 2003. he does not know the tab is still open.</p>
+</div>
+
+<div class="div-checker" aria-hidden="true"></div>
 
 <!-- salvaged banner, kept purely because it exists -->
 <div class="w95-box archive-shot" data-label="Archive">
@@ -1757,7 +2062,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
   <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
 </div>
 
-            <div class="meta">1999 ·</div>
+            <div class="meta">1999 &#183;</div>
 <p class="warnline">
   <img src="warning.gif" alt="Warning" class="warn-ico">
   <span>BEST VIEWED ON DESKTOP!!</span>
@@ -1765,11 +2070,24 @@ td.content .post h3{ color:#000; text-shadow:none; }
 </p>
             <p>hi...still figuring this out lol</p>
             <p>&nbsp;</p>
-            <p>i’ve been messing with the html and it kinda works?? don’t click around too much yet coz half the links are broken ;-)</p>
+            <p>i&rsquo;ve been messing with the html and it kinda works?? don&rsquo;t click around too much yet coz half the links are broken ;-)</p>
             <br>
-            <p>chat room is up now (!!!) but if it crashes it’s probly just my server being moody again haha.</p>
+            <p>chat room is up now (!!!) but if it crashes it&rsquo;s probly just my server being moody again haha.</p>
             <p>&nbsp;</p>
-            <p>i’m gonna add more posts when i finish typing them out from my notebook (yeah i still write stuff on paper in big 2021 :')).</p>
+            <p>i&rsquo;m gonna add more posts when i finish typing them out from my notebook (yeah i still write stuff on paper in big 2021 :')).</p>
+          </div>
+
+          <div class="div-checker" aria-hidden="true"></div>
+
+          <!-- 2026-08-30: the lamp -->
+          <div class="wish-lamp">
+            <img src="genie.gif" alt="genie" id="wishGenie" title="rub the lamp">
+            <div class="wish-copy">
+              <strong>THE LAMP</strong> &#183; found it in the same folder as everything else.
+              click him and he grants one, terms unfavourable.
+              <span class="wish-out" id="wishOut">he is asleep. click to wake him.</span>
+              <span class="wish-count" id="wishCount">wishes granted: 0</span>
+            </div>
           </div>
 
           <div class="award-solo">
@@ -1778,14 +2096,21 @@ td.content .post h3{ color:#000; text-shadow:none; }
 
           <div class="post">
             <h3>Pet and feed Zaki</h3>
-            <div class="meta">Virtual pet</div>
-            <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
+            <div class="meta">Virtual pet &#183; 2 occupants</div>
+            <div class="pet-row">
+              <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
+              <img src="pikadiglettQ.gif" alt="pikachu with a poke ball" class="pet-sidekick" loading="lazy">
+              <p class="pet-sidekick-cap">
+                unregistered second pet. wandered in, would not leave, keeps opening the ball
+                at Zaki. feeding is not required, it eats the electricity.
+              </p>
+            </div>
           </div>
 
           <div class="win95-window" id="threedee">
             <div class="titlebar">
               <span>3D_GALLERY.EXE</span>
-              <span class="tb-buttons"><span>_</span><span>□</span><span>×</span></span>
+              <span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span>
             </div>
             <div class="win-body">
               <div class="plinth-row">
@@ -1802,19 +2127,46 @@ td.content .post h3{ color:#000; text-shadow:none; }
             <div class="win-status">2 object(s) &#9679; rendering at maximum quality</div>
           </div>
 
+          <!-- 2026-08-30: DANCEFLOOR.EXE -->
+          <div class="win95-window dancefloor" id="danceflooor">
+            <div class="titlebar">
+              <span><img src="windowsflag.gif" alt="" class="tb-ico" aria-hidden="true">DANCEFLOOR.EXE</span>
+              <span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span>
+            </div>
+            <div class="win-body">
+              <div class="floor-row">
+                <figure class="dancer">
+                  <img src="dancingfigure.gif" alt="a man dancing">
+                  <figcaption class="lab">GUEST_01 &#9679; unnamed &#9679; will not stop</figcaption>
+                </figure>
+                <figure class="dancer">
+                  <img src="dancingsoldier.gif" alt="a soldier dancing">
+                  <figcaption class="lab">GUEST_02 &#9679; off duty &#9679; 500 frames</figcaption>
+                </figure>
+                <figure class="dancer">
+                  <img src="robot.gif" alt="a robot walking">
+                  <figcaption class="lab">STAFF &#9679; runs the lights &#9679; 9 frames only</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="win-status">3 object(s) on the floor &#9679; music not included &#9679; tiles are load-bearing</div>
+          </div>
+
+          <img src="underconstruct.gif" alt="under construction" class="construction-bar">
+
           <div class="marquee-wrap small">
             <marquee scrollamount="4" direction="right">
-              under construction ★ if the page looks weird blame netscape ★ ring me on icq 12345678
+              under construction &#9733; if the page looks weird blame netscape &#9733; ring me on icq 12345678
             </marquee>
           </div>
 
           <hr class="retro">
           <div class="post" id="chat-room">
   <h3>Live Chat</h3>
-  <div class="meta">web chat · room=lobby</div>
+  <div class="meta">web chat &#183; room=lobby</div>
 <iframe class="chat-frame"
         src="chat.html?room=lobby&embed=1&v=2"
-        title="Galaxy 981’s Web Chat"
+        title="Galaxy 981&rsquo;s Web Chat"
         loading="lazy"
         referrerpolicy="no-referrer"></iframe>
 
@@ -1841,6 +2193,8 @@ td.content .post h3{ color:#000; text-shadow:none; }
 
     <img src="rainbowswirldivider.gif" alt="" class="swirl" aria-hidden="true">
 
+    <img src="dividerwindows.gif" alt="" class="div-win" aria-hidden="true">
+
     <div class="button-strip" aria-label="buttons">
   <img src="icc.gif" alt="ICC">
   <img src="dp.gif" alt="DP">
@@ -1863,17 +2217,53 @@ td.content .post h3{ color:#000; text-shadow:none; }
   <img src="hatesquarespace.png" alt="I hate Squarespace">
   <img src="dragons.gif" alt="Dragons">
   <img src="piratemovies.gif" alt="Pirate movies">
+  <!-- 2026-08-30: gif deposit, part three -->
+  <img src="survivedy2k.gif" alt="I survived Y2K">
+  <img src="thisuserisradioactive.jpg" alt="This user is radioactive">
+  <img src="eattherichbutton.jpg" alt="Eat the rich">
 
   
 </div>
 
     <div class="footer">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 — Part of the Galactic Webring · <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+      <marquee scrollamount="3" direction="right">&copy; 1999&ndash;2000 Galaxy 981 &mdash; Part of the Galactic Webring &#183; <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
     </div>
+
+    <!-- 2026-08-30: taskbar -->
+    <div class="taskbar" id="taskbar">
+      <button class="start" id="startBtn" type="button" aria-expanded="false" aria-controls="startMenu">
+        <img src="windowsflag.gif" alt="">Start
+      </button>
+
+      <div class="start-menu" id="startMenu" hidden>
+        <a href="about.html">About this site</a>
+        <a href="blog_posts.html">Entries</a>
+        <a href="guestbook.html">Sign the guestbook</a>
+        <a href="coolsite.html">Kool Webpages</a>
+        <hr>
+        <button class="sm-item" type="button" data-jump="#danceflooor">Go to the dancefloor</button>
+        <button class="sm-item" type="button" data-jump="#threedee">Go to 3D_GALLERY</button>
+        <hr>
+        <button class="sm-item" type="button" id="shutDownBtn">Shut Down&#8230;</button>
+      </div>
+
+      <button class="task" type="button" data-jump="#threedee">
+        <span class="task-label">3D_GALLERY.EXE</span>
+      </button>
+      <button class="task" type="button" data-jump="#danceflooor">
+        <span class="task-label">DANCEFLOOR.EXE</span>
+      </button>
+
+      <div class="tray">
+        <img src="mewtwo.gif" alt="mewtwo" title="MEWTWO.EXE - background process, cannot be ended">
+        <span class="clock" id="taskClock">--:--</span>
+      </div>
+    </div>
+
   <audio id="blip" preload="auto">
   <source src="kawaii%208bit.mp3" type="audio/mpeg">
 </audio>
-    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">🔇 sound</button>
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">&#128263; sound</button>
   </div>
 
 
@@ -2412,6 +2802,98 @@ window.addEventListener('load', () => {
 
   wireMascot('dancecat', 'bottom-right');
   wireMascot('spinguy',  'bottom-left');
+})();
+
+
+/* === 2026-08-30: lamp + taskbar ============================== */
+
+/* the genie. one wish per click, none of them useful. */
+(() => {
+  const genie = document.getElementById('wishGenie');
+  const out   = document.getElementById('wishOut');
+  const count = document.getElementById('wishCount');
+  if (!genie || !out) return;
+
+  const KEY = 'wishes_granted_v1';
+  const WISHES = [
+    'granted: your page now loads. it always did.',
+    'granted: one (1) working hyperlink. i will not say which.',
+    'granted: the hamsters get a lunch break. uptime unaffected.',
+    'granted: netscape renders it correctly on a machine you do not own.',
+    'granted: infinite wishes. void where prohibited, prohibited here.',
+    'granted: the guestbook is spam-free for eleven minutes.',
+    'granted: someone in 2004 bookmarked this. they never came back.',
+    'granted: your visitor counter is honest now. sorry.',
+    'granted: the server in space gets a blanket.',
+    'denied: that one was too big even for me. pick a smaller one.',
+    'granted: squarespace hears about it.',
+    'granted: the pet has been fed. by pikachu. incorrectly.'
+  ];
+
+  let n = 0;
+  try { n = parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch(_) {}
+  const render = () => { if (count) count.textContent = 'wishes granted: ' + n; };
+  render();
+
+  let last = -1;
+  genie.addEventListener('click', () => {
+    let i = Math.floor(Math.random() * WISHES.length);
+    if (i === last) i = (i + 1) % WISHES.length;
+    last = i;
+    out.textContent = WISHES[i];
+    n++;
+    render();
+    try { localStorage.setItem(KEY, String(n)); } catch(_) {}
+  });
+})();
+
+/* taskbar: clock, start menu, jump buttons */
+(() => {
+  const bar = document.getElementById('taskbar');
+  if (!bar) return;
+
+  const clock = document.getElementById('taskClock');
+  if (clock) {
+    const tick = () => {
+      clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    };
+    tick();
+    setInterval(tick, 15000);
+  }
+
+  const startBtn = document.getElementById('startBtn');
+  const menu     = document.getElementById('startMenu');
+  const setMenu = (open) => {
+    if (!menu || !startBtn) return;
+    menu.hidden = !open;
+    startBtn.setAttribute('aria-expanded', String(open));
+  };
+  startBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenu(menu.hidden);
+  });
+  document.addEventListener('click', (e) => {
+    if (menu && !menu.hidden && !menu.contains(e.target)) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  bar.querySelectorAll('[data-jump]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.querySelector(btn.getAttribute('data-jump'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setMenu(false);
+    });
+  });
+
+  /* Shut Down borrows the VHS transition already written above. */
+  document.getElementById('shutDownBtn')?.addEventListener('click', () => {
+    setMenu(false);
+    document.documentElement.classList.add('vhs');
+    setTimeout(() => {
+      document.documentElement.classList.remove('vhs');
+      alert('It is now safe to turn off your computer.');
+    }, 260);
+  });
 })();
 </script>
 
