@@ -1,318 +1,1298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Contact Galaxy 981</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>Contact · Galaxy 981</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    /* === borrow the index.html look === */
-    :root{
-      --neon-blue:#00e5ff; --neon-green:#39ff14; --neon-yellow:#ffff33; --neon-purple:#8f00ff;
-      --ink:#00ffea; --panel-bg:rgba(0,0,0,0.78); --sidebar-a:#0d0022; --sidebar-b:#12002e; --marquee-bg:#001a4d;
-    }
-    html, body {
-      margin:0; padding:0;
-      background-image:url('stars.gif'); background-repeat:repeat;
-      color:var(--ink);
-      font-family:"Comic Sans MS","Courier New","MS Sans Serif",monospace;
-      image-rendering:pixelated; cursor:crosshair; filter:contrast(115%) saturate(125%);
-    }
-    .page {
-      width:760px; margin:18px auto 32px; position:relative; left:7px;
-      border:6px ridge var(--neon-blue); outline:4px solid #00131a; background:var(--panel-bg);
-      box-shadow:0 0 40px var(--neon-blue), inset 0 0 6px #000;
-    }
+<!--
+  ============================================================
+  contact.html
+  started 1999. amended repeatedly. never once redesigned all
+  at the same time, which is why it looks like this.
+  if a bit of this page clashes with the bit under it, that is
+  not a bug, that is just two different years touching.
+  ============================================================
+-->
 
-    #glitter-title{
-      font-size:60px; text-align:center; color:var(--neon-blue);
-      text-shadow:0 0 6px #fff,0 0 10px var(--neon-blue),0 0 14px var(--neon-green);
-      margin:0; padding:18px 10px 0; letter-spacing:.5px; position:relative;
-    }
+<style>
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; }
 
-    .marquee-wrap{ margin:10px 20px; border:6px groove var(--neon-blue); background:var(--marquee-bg); }
-    .marquee-wrap.small{ margin:6px 20px 14px; border-width:4px; }
-    marquee{ color:var(--neon-yellow); font-weight:bold; font-size:18px; }
+/* ============================================================
+   THE BACKGROUND
+   Plaza.png tiles on top. stars.gif sits underneath it as a
+   fallback so the page never lands on bare colour if the plaza
+   is missing. do not collapse these into one line.
+   ============================================================ */
+body {
+  background:
+    url("Plaza.png") repeat,
+    url("stars.gif") repeat,
+    #0a0620;
+  color:#111;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  cursor:crosshair;
+}
 
-    .layout{ width:100%; border-collapse:collapse; }
-    .sidebar{
-      width:210px;
-      background:repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-      border-right:6px ridge var(--neon-purple); vertical-align:top;
-    }
-    .content{
-      padding:10px 14px 20px; vertical-align:top; background:rgba(15,0,20,0.45); border-left:4px solid #21003a;
-    }
+a { color:#0000ee; }
+a:visited { color:#800080; }
+a:hover { color:#ff1493; background:#ffff66; }
 
-    .nav a{
-      display:block; margin:10px 6px; padding:6px 8px; border:3px outset #6af7ff; background:#0e0e33; color:#a7ffff;
-      text-decoration:none; text-align:left; text-transform:uppercase; text-shadow:0 0 4px var(--neon-blue); box-shadow:2px 2px 0 #000;
-    }
-    .nav a:hover{ border-style:inset; color:var(--neon-green); background:#140043; transform:translate(1px,1px); }
-    .nav-icon{ vertical-align:middle; width:26px; height:26px; margin-right:6px; image-rendering:pixelated; }
+.site-shell {
+  width:840px;
+  max-width:calc(100% - 18px);
+  margin:12px auto 34px;
+  border:6px ridge #00aaff;
+  background:#d4d0c8;
+  box-shadow:6px 6px 0 #002b57;
+}
 
-    .post{ margin:14px 0 28px; padding:10px 10px 14px; border:4px groove var(--neon-purple); background:rgba(20,0,30,0.62); }
-    .post h3{ margin:0 0 6px 0; color:var(--neon-purple); text-shadow:0 0 6px var(--neon-purple); }
-    .post .meta{ font-size:12px; color:var(--neon-yellow); }
+/* ============================================================
+   1999 — the masthead. rainbow letters, same trick as about.html,
+   because i only ever learned the one trick.
+   ============================================================ */
+.banner {
+  position:relative;
+  padding:14px 74px 12px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.10)),
+    linear-gradient(180deg, #3a1670 0%, #7b3bb8 44%, #1f8fb0 45%, #0d5f86 100%);
+  border-bottom:4px solid #0088cc;
+  overflow:hidden;
+}
 
-    hr.retro{
-      height:12px; border:0; margin:10px 0 14px;
-      background-image:repeating-linear-gradient(
-        90deg,
-        #ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px
-      );
-      position:relative; overflow:visible;
-    }
-    /* kitty runs across the first rainbow bar */
-    .content > hr.retro:first-of-type::after{
-      content:""; position:absolute; left:-64px; top:-60px; width:160px; height:160px;
-      background:url("kitty.gif") center / contain no-repeat; image-rendering:pixelated;
-      animation: kitty-rail 12s linear infinite; pointer-events:none; z-index:9;
-    }
-    @keyframes kitty-rail { from{ left:-64px } to{ left:100% } }
+.banner h1 {
+  margin:2px 0 6px;
+  font-family:"Comic Sans MS","Trebuchet MS",Arial,sans-serif;
+  font-size:50px;
+  line-height:1.05;
+  letter-spacing:1px;
+  text-shadow:2px 2px 0 rgba(0,0,0,.35);
+}
 
-    /* title ships like home */
-    #glitter-title::before,#glitter-title::after{
-      content:""; position:absolute; top:50%; transform:translateY(-50%); width:110px; height:70px;
-      background-repeat:no-repeat; background-position:center; background-size:contain; image-rendering:pixelated;
-      filter:drop-shadow(0 0 6px var(--neon-blue)); pointer-events:none;
-    }
-    #glitter-title::before{ left:35px; background-image:url("starwar1.gif?v=1"); }
-    #glitter-title::after{ right:30px; background-image:url("starwar2.jpg?v=1"); }
+/* the same eight rainbow classes as every other page here */
+.r1 { color:#ff4b4b; }
+.r2 { color:#ff9a32; }
+.r3 { color:#ffe34a; }
+.r4 { color:#69ef4a; }
+.r5 { color:#38e0e8; }
+.r6 { color:#52a5ff; }
+.r7 { color:#b07cff; }
+.r8 { color:#ff79d8; }
 
-    /* === postcard contact form === */
-    .mail-panel{
-      display:grid; grid-template-columns: 1fr 210px; gap:12px;
-    }
-    @media (max-width:620px){ .mail-panel{ grid-template-columns: 1fr; } }
+.banner .tiny {
+  display:inline-block;
+  padding:2px 9px;
+  color:#111;
+  background:#fff;
+  border:2px outset #eee;
+  font:11px "MS Sans Serif",Tahoma,sans-serif;
+}
 
-    .postcard{
-      border:4px double #6af7ff;
-      background:
-        repeating-linear-gradient(135deg, rgba(0,229,255,0.08) 0 8px, transparent 8px 16px),
-        rgba(0,0,0,0.35);
-      padding:10px;
-      box-shadow: inset 0 0 8px #000, 0 0 10px rgba(0,229,255,.25);
-    }
-    .fields{
-      display:grid; grid-template-columns: 1fr 1fr; gap:10px;
-    }
-    .fields .full{ grid-column: 1 / -1; }
-    @media (max-width:520px){ .fields{ grid-template-columns: 1fr; } }
+.banner .corner-gif {
+  position:absolute;
+  top:26px;
+  width:92px;
+  max-height:60px;
+  object-fit:contain;
+  image-rendering:pixelated;
+}
+.banner .corner-gif.left  { left:12px; }
+.banner .corner-gif.right { right:12px; transform:scaleX(-1); }
 
-    label{ font-size:12px; color:var(--neon-yellow); display:block; margin-bottom:2px; }
-    input[type="text"], input[type="email"], textarea{
-      width:100%; padding:8px;
-      border:3px inset #6af7ff; background:#000820; color:#a7ffff;
-      box-shadow:2px 2px 0 #000; font-family:inherit; font-size:14px;
-    }
-    textarea{ min-height:140px; resize:vertical; }
+.system-message {
+  width:calc(100% - 28px);
+  margin:-2px auto 10px;
+  border:2px groove #fff;
+  background:#eee;
+  padding:7px 12px;
+  text-align:center;
+  font:13px Arial, sans-serif;
+  position:relative;
+}
+.system-message::before {
+  content:"System Message";
+  position:absolute;
+  top:-15px; left:10px;
+  padding:0 3px;
+  background:#eee;
+  font-size:11px;
+}
 
-    .send-bar{
-      display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:6px;
-    }
-    .btn{
-      padding:8px 14px; border:3px outset #6af7ff; background:#140043; color:#a7ffff;
-      box-shadow:2px 2px 0 #000; cursor:pointer; text-transform:uppercase; letter-spacing:1px;
-    }
-    .btn:active{ border-style:inset; color:var(--neon-green); transform:translate(1px,1px); }
+.marquee-wrap {
+  margin:0 14px 12px;
+  border:4px groove #00aaff;
+  background:#001a4d;
+}
+.marquee-wrap marquee {
+  color:#ffff33;
+  font:bold 15px "Courier New",monospace;
+  padding:3px 0;
+}
 
-    .tiny{ font-size:12px; color:var(--neon-yellow); }
-    .count{ font-variant-numeric: tabular-nums; }
+/* ============================================================
+   layout — table, like the rest of the site. sorry, not sorry.
+   ============================================================ */
+.layout { width:100%; border-collapse:collapse; }
 
-    /* right column: stickered mail stack */
-    .mail-wall{
-      border:3px inset #6af7ff; background:rgba(0,0,0,0.35); padding:8px;
-      display:grid; gap:8px; justify-items:center;
-    }
-    .mail-wall .stamp{
-      width:160px; height:auto; image-rendering:pixelated; display:block;
-      transform: rotate(-2deg);
-      filter: drop-shadow(0 0 6px rgba(0,229,255,.35));
-    }
-    .mail-wall .stamp:nth-child(2){ transform: rotate(3deg); }
-    .mail-wall .stamp:nth-child(3){ transform: rotate(-1deg); }
+.sidebar {
+  width:216px;
+  vertical-align:top;
+  background:#cfcfcf;
+  border-right:3px ridge #fff;
+  padding:10px;
+}
 
-    .ok{
-      padding:10px; background:rgba(0,40,20,0.6); border:3px ridge #27ff9f; color:#baffdb; margin-top:8px;
-    }
-    .err{
-      padding:10px; background:rgba(40,0,0,0.6); border:3px ridge #ff5c5c; color:#ffd0d0; margin-top:8px;
-    }
+.content {
+  vertical-align:top;
+  background:#fff;
+  padding:12px 15px 22px;
+}
 
-    /* minimal VHS transition for internal links */
-    .vhs::after{
-      content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
-      background:
-        linear-gradient(#000,transparent 12%,#0000 88%,#000),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
-      animation:vhs 240ms steps(2,end);
-    }
-    @keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
-  </style>
+.navbox { margin:0 0 15px; padding:8px; border:2px groove #fff; }
+.navbox legend { padding:0 4px; font-size:12px; }
+
+.navbox a {
+  display:block;
+  margin:5px 0;
+  padding:6px 7px;
+  min-height:38px;
+  border:3px outset #eee;
+  background:#d4d0c8;
+  color:#111;
+  text-decoration:none;
+  font:14px Arial, sans-serif;
+}
+.navbox a:hover { border-style:inset; background:#fff; color:#0000aa; }
+.navbox a[aria-current="page"] { background:#fff; border-style:inset; font-weight:bold; }
+
+.navbox img {
+  width:24px; height:24px;
+  vertical-align:middle;
+  margin-right:9px;
+  object-fit:contain;
+  image-rendering:pixelated;
+}
+
+/* --- the mail status readout. green screen, always on. --- */
+.mailstatus {
+  margin:0 0 15px;
+  border:3px inset #888;
+  background:#000;
+  padding:7px 8px 8px;
+  font:11px/1.55 "Courier New",monospace;
+  color:#00ff42;
+}
+.mailstatus .head {
+  margin:0 0 5px;
+  padding-bottom:4px;
+  border-bottom:1px dashed #0a6;
+  color:#7cff9f;
+  letter-spacing:.08em;
+}
+.mailstatus dl { margin:0; }
+.mailstatus dt { color:#4de08a; }
+.mailstatus dd { margin:0 0 6px; color:#c9ffd9; }
+.mailstatus dd:last-of-type { margin-bottom:0; }
+.mailstatus .cursor {
+  display:inline-block;
+  width:7px; height:12px;
+  background:#00ff42;
+  vertical-align:-2px;
+  animation:blink-hard 1.05s steps(1,end) infinite;
+}
+@keyframes blink-hard { 50% { opacity:0; } }
+
+/* --- alice. she has been on this page longer than most of my
+       friendships. gold frame because she deserves it. --- */
+.shrine {
+  margin:0 0 15px;
+  padding:9px 9px 7px;
+  text-align:center;
+  border:5px ridge #d4a017;
+  background:
+    radial-gradient(circle at 50% 34%, #2a1a4d 0%, #140a2c 68%, #0b0518 100%);
+  box-shadow:inset 0 0 14px rgba(255,214,110,.28), 2px 2px 0 #6b4d06;
+}
+.shrine .shrine-label {
+  margin-bottom:6px;
+  color:#ffd66e;
+  font:bold 9px "Courier New",monospace;
+  letter-spacing:.14em;
+}
+.shrine img {
+  display:block;
+  width:100%;
+  max-width:158px;
+  height:auto;
+  margin:0 auto;
+  border:1px solid #6b4d06;
+  background:#0b0518;
+  image-rendering:pixelated;
+}
+.shrine .shrine-cap {
+  margin-top:7px;
+  color:#e7d3a8;
+  font:10px/1.5 "Comic Sans MS","Trebuchet MS",cursive;
+}
+/* if a gif has not made it onto the server yet, say so plainly
+   instead of showing the browser's broken-picture icon */
+.gif-missing {
+  padding:16px 6px;
+  border:1px dashed #8a6d1f;
+  color:#c7ab72;
+  font:10px/1.5 "Courier New",monospace;
+}
+
+.side-badges { text-align:center; }
+.side-badges img {
+  display:inline-block;
+  width:88px; height:31px;
+  margin:3px 2px;
+  image-rendering:pixelated;
+  border:1px solid #9a9a9a;
+}
+
+/* --- the webring. two of the five member sites are gone. --- */
+.webring {
+  margin:15px 0 0;
+  padding:8px 7px 9px;
+  text-align:center;
+  border:3px double #6a4fa8;
+  background:#e9e4f5;
+  font:10px/1.5 "Courier New",monospace;
+  color:#3a2a5e;
+}
+.webring img {
+  width:56px; height:auto;
+  margin-bottom:4px;
+  image-rendering:pixelated;
+}
+.webring .ring-name {
+  display:block;
+  margin-bottom:5px;
+  color:#4c00a8;
+  font-weight:bold;
+  letter-spacing:.04em;
+}
+.webring .ring-nav { font-size:11px; }
+.webring .ring-nav a { text-decoration:none; }
+.webring .ring-foot {
+  margin-top:5px;
+  color:#6d6188;
+  font-size:9px;
+}
+
+/* --- gifs i am currently attached to. rotates rarely. --- */
+.attached {
+  margin:15px 0 0;
+  padding:7px 6px 8px;
+  border:2px groove #fff;
+  background:#c9c9c9;
+  text-align:center;
+}
+.attached .lbl {
+  margin-bottom:6px;
+  color:#3c3c3c;
+  font:bold 9px "Courier New",monospace;
+  letter-spacing:.06em;
+}
+.attached img {
+  max-width:60px;
+  max-height:56px;
+  margin:3px;
+  vertical-align:middle;
+  image-rendering:pixelated;
+}
+.attached img:nth-child(3n) { transform:rotate(2deg); }
+
+/* --- an award. i gave it to myself. --- */
+.award {
+  margin:15px 0 0;
+  padding:7px;
+  text-align:center;
+  border:2px ridge #b9a642;
+  background:#fffdf0;
+}
+.award img {
+  width:100%;
+  max-width:132px;
+  height:auto;
+  image-rendering:pixelated;
+}
+.award .cap {
+  margin-top:5px;
+  color:#6b5d16;
+  font:9px/1.45 "Courier New",monospace;
+}
+
+.side-counter {
+  margin:15px 0 4px;
+  text-align:center;
+  color:#4a4a4a;
+  font-size:11px;
+}
+.counter {
+  display:inline-block;
+  margin-top:5px;
+  padding:3px 7px;
+  color:#00ff42;
+  background:#000;
+  border:3px inset #777;
+  font:15px "Courier New",monospace;
+  letter-spacing:3px;
+}
+
+/* ============================================================
+   dividers. i own three. i use all three.
+   ============================================================ */
+.divider { margin:20px 0 18px; text-align:center; line-height:0; }
+.divider img { max-width:100%; height:auto; image-rendering:pixelated; }
+
+.rainbow-bar {
+  height:12px;
+  margin:2px 0 14px;
+  border:1px solid #888;
+  background:repeating-linear-gradient(90deg,
+    #ff1818 0 20px,#ff9b00 20px 40px,#fff100 40px 60px,#14d72b 60px 80px,
+    #00cddf 80px 100px,#1857ff 100px 120px,#7a22df 120px 140px,#ff27bc 140px 160px);
+}
+
+/* the neko runs the length of the page. he does not arrive anywhere. */
+.neko-rail {
+  position:relative;
+  height:34px;
+  margin:16px 0 14px;
+  border-top:2px dotted #b9b9b9;
+  border-bottom:2px dotted #b9b9b9;
+  overflow:hidden;
+}
+.neko-rail img {
+  position:absolute;
+  top:1px; left:-70px;
+  height:30px; width:auto;
+  image-rendering:pixelated;
+  animation:neko-run 19s linear infinite;
+}
+@keyframes neko-run { from { left:-70px; } to { left:100%; } }
+
+/* ============================================================
+   1999 — THE FORM.
+   this is the only part of the page that has a job, so it is
+   the only part i did not allow myself to decorate.
+   ============================================================ */
+.dialog {
+  margin:0 0 6px;
+  border:3px outset #fff;
+  background:#d4d0c8;
+  box-shadow:3px 3px 0 rgba(0,0,0,.35);
+  font-family:"MS Sans Serif",Tahoma,Verdana,sans-serif;
+  color:#111;
+}
+.dialog .title-bar {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:3px 4px 3px 6px;
+  background:linear-gradient(90deg,#000080,#1084d0);
+  color:#fff;
+  font:bold 12px "MS Sans Serif",Tahoma,sans-serif;
+}
+.dialog .title-bar .grow { flex:1; }
+.dialog .title-bar .boxes { letter-spacing:2px; }
+.dialog .title-bar .boxes span {
+  display:inline-block;
+  width:16px; height:14px;
+  margin-left:2px;
+  border:2px outset #eee;
+  background:#d4d0c8;
+  color:#111;
+  font:9px/10px "MS Sans Serif",Tahoma,sans-serif;
+  text-align:center;
+  letter-spacing:0;
+}
+.dialog .dialog-body { padding:11px 12px 13px; }
+
+.dialog-hint {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:0 0 11px;
+  padding:7px 9px;
+  border:2px groove #fff;
+  background:#ececec;
+  font-size:12px;
+}
+.dialog-hint img { image-rendering:pixelated; flex:0 0 auto; }
+
+.fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.fields .full { grid-column:1 / -1; }
+
+label {
+  display:block;
+  margin-bottom:3px;
+  font:12px "MS Sans Serif",Tahoma,sans-serif;
+  color:#111;
+}
+
+input[type="text"], input[type="email"], textarea {
+  width:100%;
+  padding:6px 7px;
+  border:2px inset #d4d0c8;
+  background:#fff;
+  color:#111;
+  font:14px Verdana, Tahoma, sans-serif;
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  outline:2px solid #1084d0;
+  outline-offset:1px;
+}
+textarea { min-height:150px; resize:vertical; line-height:1.5; }
+
+.send-bar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+  margin-top:12px;
+  padding-top:11px;
+  border-top:2px groove #fff;
+}
+.btn {
+  min-width:104px;
+  padding:6px 15px;
+  border:3px outset #eee;
+  background:#d4d0c8;
+  color:#111;
+  font:bold 13px "MS Sans Serif",Tahoma,sans-serif;
+  cursor:pointer;
+}
+.btn:hover { background:#e6e2da; }
+.btn:active { border-style:inset; transform:translate(1px,1px); }
+
+.tiny { font-size:11px; color:#444; }
+.count { font-variant-numeric:tabular-nums; }
+
+.ok, .err {
+  margin-top:11px;
+  padding:9px 11px;
+  font-size:13px;
+}
+.ok  { border:3px ridge #2fae5f; background:#e8fff0; color:#0a4a24; }
+.err { border:3px ridge #c94a4a; background:#fff0f0; color:#6b1414; }
+
+.sidecar {
+  margin:14px 0 0;
+  padding:9px 11px;
+  border:2px groove #fff;
+  background:#ececec;
+  font-size:12px;
+}
+.sidecar ul { margin:6px 0 0 18px; padding:0; }
+.sidecar li { margin-bottom:4px; }
+
+/* ============================================================
+   2001 — i discovered black backgrounds and never fully
+   recovered. this is the dead-contacts table. every row here
+   used to be a real way to find me.
+   ============================================================ */
+.stratum-neon {
+  margin:0 0 6px;
+  padding:12px 12px 14px;
+  border:4px ridge #8f00ff;
+  background:#05010f;
+  color:#c9ffff;
+}
+.stratum-neon h2 {
+  margin:0 0 3px;
+  color:#39ff14;
+  font:bold 21px "Courier New",monospace;
+  text-shadow:0 0 7px rgba(57,255,20,.55);
+  letter-spacing:.02em;
+}
+.stratum-neon .sub {
+  margin:0 0 12px;
+  color:#ff73d1;
+  font:11px "Courier New",monospace;
+}
+
+.deadtable { width:100%; border-collapse:collapse; font:12px "Courier New",monospace; }
+.deadtable caption {
+  caption-side:bottom;
+  padding-top:9px;
+  color:#8f8fb8;
+  font-size:11px;
+  text-align:left;
+}
+.deadtable th {
+  padding:5px 7px;
+  border-bottom:2px solid #8f00ff;
+  color:#ffff33;
+  text-align:left;
+  font-weight:bold;
+  letter-spacing:.05em;
+}
+.deadtable td {
+  padding:5px 7px;
+  border-bottom:1px dotted #33265c;
+  vertical-align:top;
+}
+.deadtable tr:hover td { background:#160a2e; }
+.deadtable .handle { color:#8fe9ff; }
+
+.led {
+  display:inline-block;
+  width:9px; height:9px;
+  margin-right:6px;
+  border-radius:50%;
+  vertical-align:0;
+}
+.led.dead { background:#5a1c1c; box-shadow:inset 0 0 3px #000; }
+.led.live {
+  background:#39ff14;
+  box-shadow:0 0 6px #39ff14;
+  animation:blink-soft 1.4s ease-in-out infinite;
+}
+@keyframes blink-soft { 50% { opacity:.28; } }
+.st-dead { color:#a97b7b; }
+.st-live { color:#39ff14; font-weight:bold; }
+
+/* ============================================================
+   2004 — graph paper phase. the reply-time chart is honest,
+   which is the worst thing about it.
+   ============================================================ */
+.stratum-paper {
+  margin:0 0 6px;
+  padding:13px 14px 15px;
+  border:1px solid #b7b7a9;
+  background:
+    repeating-linear-gradient(0deg,  rgba(120,160,190,.20) 0 1px, transparent 1px 19px),
+    repeating-linear-gradient(90deg, rgba(120,160,190,.20) 0 1px, transparent 1px 19px),
+    #fffdf2;
+  box-shadow:2px 2px 0 #cfcfc2;
+  color:#25252b;
+}
+.stratum-paper h2 {
+  margin:0 0 2px;
+  font:bold 19px "Courier New",monospace;
+  color:#123b6b;
+}
+.stratum-paper .sub { margin:0 0 13px; font:11px "Courier New",monospace; color:#6a6a55; }
+
+.chart { font:12px "Courier New",monospace; }
+.chart-row { margin-bottom:9px; }
+.chart-row .lbl { display:block; margin-bottom:3px; color:#25252b; }
+.chart-track {
+  position:relative;
+  height:17px;
+  background:rgba(255,255,255,.6);
+  border:1px solid #a9a99a;
+}
+.chart-fill {
+  height:100%;
+  background-image:repeating-linear-gradient(45deg,
+    rgba(255,255,255,.28) 0 4px, transparent 4px 8px);
+}
+.chart-fill.c1 { background-color:#2fae5f; }
+.chart-fill.c2 { background-color:#4d8dff; }
+.chart-fill.c3 { background-color:#e8a020; }
+.chart-fill.c4 { background-color:#c94a4a; }
+.chart-row .pct {
+  margin-left:7px;
+  color:#555;
+  font-size:11px;
+}
+.chart-note {
+  margin:12px 0 0;
+  padding-top:9px;
+  border-top:1px dashed #b7b7a9;
+  font:11px/1.6 "Courier New",monospace;
+  color:#4a4a3f;
+}
+
+/* ============================================================
+   the notebook. this is the bit i actually wrote by hand, in the
+   sense that i wrote it in one go and did not edit it.
+   ============================================================ */
+.notepad {
+  margin:0 0 6px;
+  padding:14px 18px 16px 52px;
+  background:
+    linear-gradient(90deg, transparent 34px, rgba(216,74,138,.55) 34px 36px, transparent 36px),
+    repeating-linear-gradient(0deg, transparent 0 25px, rgba(90,120,160,.32) 25px 26px),
+    #fff9b8;
+  border:1px solid #ccc08a;
+  border-left:3px solid #d8b24a;
+  box-shadow:3px 4px 0 rgba(0,0,0,.16);
+  transform:rotate(-.55deg);
+  color:#1e2350;
+  font-family:"Comic Sans MS","Trebuchet MS",cursive;
+}
+.notepad h2 {
+  margin:0 0 10px;
+  font-size:21px;
+  color:#c02a6a;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.notepad ol { margin:0; padding-left:20px; }
+.notepad li { margin-bottom:9px; line-height:1.55; }
+.notepad li:last-child { margin-bottom:0; }
+.notepad .aside { color:#5c5f8a; font-size:12px; }
+.notepad .crossed { text-decoration:line-through; color:#8a8db0; }
+
+/* a bit of tape, because it is stuck on top of the page */
+.taped { position:relative; }
+.taped::before, .taped::after {
+  content:"";
+  position:absolute;
+  top:-9px;
+  width:64px; height:19px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 1px 2px rgba(0,0,0,.16);
+}
+.taped::before { left:16px;  transform:rotate(-5deg); }
+.taped::after  { right:16px; transform:rotate(4deg); }
+
+/* ============================================================
+   the message-board box. copied wholesale off about.html so the
+   two pages agree about at least one thing.
+   ============================================================ */
+.update-box { margin:0 0 6px; border:2px solid #999; background:#f7f7f7; }
+.update-head {
+  padding:4px 8px;
+  background:linear-gradient(90deg,#0000a8,#00a5d6);
+  color:#fff;
+  font:bold 12px "MS Sans Serif",Tahoma,sans-serif;
+}
+.update-meta {
+  padding:4px 9px;
+  background:#e4e4e4;
+  border-bottom:1px solid #aaa;
+  color:#555;
+  font:10px Verdana, sans-serif;
+}
+.update-body { padding:11px 12px; background:#fff; }
+.update-body p { margin:0 0 9px; }
+.update-body p:last-child { margin-bottom:0; }
+
+/* ============================================================
+   the guestbook plug. i am aware. i am leaving it.
+   ============================================================ */
+.plug {
+  margin:0 0 6px;
+  padding:13px 12px 14px;
+  text-align:center;
+  border:5px double #ff00a0;
+  background:
+    linear-gradient(135deg,#fff3fb 0%,#e4fbff 34%,#fffbe0 67%,#ffeaf7 100%);
+  box-shadow:0 0 0 3px #00d9ff inset;
+}
+.plug .plug-top {
+  color:#c8008a;
+  font:bold 13px "Courier New",monospace;
+  letter-spacing:.1em;
+}
+.plug img.bears {
+  display:block;
+  margin:8px auto 6px;
+  max-width:210px;
+  width:80%;
+  height:auto;
+  image-rendering:pixelated;
+}
+.plug .plug-line {
+  margin:2px 0 9px;
+  color:#3a2a5e;
+  font:14px/1.5 "Comic Sans MS","Trebuchet MS",cursive;
+}
+.plug a.plug-btn {
+  display:inline-block;
+  padding:8px 20px;
+  border:4px outset #ffdc3c;
+  background:#ffec6b;
+  color:#7a0050;
+  font:bold 15px "Comic Sans MS","Trebuchet MS",cursive;
+  text-decoration:none;
+}
+.plug a.plug-btn:hover { border-style:inset; background:#fff7b8; color:#c8008a; }
+.plug .stars { margin-top:9px; letter-spacing:3px; font-size:15px; }
+
+.blink { animation:blink-hard 1.05s steps(1,end) infinite; }
+
+/* ============================================================
+   footer + the button wall. every one of these was earned by
+   nobody.
+   ============================================================ */
+.footer {
+  padding:12px 12px 14px;
+  border-top:3px ridge #fff;
+  background:#d4d0c8;
+  text-align:center;
+  color:#4a4a4a;
+  font:10px/1.75 Verdana, sans-serif;
+}
+.button-wall {
+  margin:0 auto 10px;
+  padding:9px 6px 6px;
+  max-width:640px;
+  border:2px groove #fff;
+  background:#c6c2ba;
+}
+.button-wall .wall-label {
+  margin-bottom:7px;
+  color:#3c3c3c;
+  font:bold 10px "Courier New",monospace;
+  letter-spacing:.1em;
+}
+.button-wall img {
+  width:88px; height:31px;
+  margin:3px 2px;
+  vertical-align:middle;
+  image-rendering:pixelated;
+  border:1px solid #8f8f8f;
+}
+.footer .ring { margin:6px 0 4px; font:11px "Courier New",monospace; }
+.footer .ring a { margin:0 5px; }
+.footer .starrow { letter-spacing:2px; }
+
+/* ============================================================
+   2026 — mobile. added grudgingly, after a friend opened the
+   site on a phone in front of me and i had to watch.
+   nav first, form second, sidebar keepsakes last.
+   ============================================================ */
+@media (max-width:700px) {
+  body { overflow-x:hidden; -webkit-text-size-adjust:100%; }
+
+  .site-shell {
+    width:calc(100% - 8px);
+    max-width:none;
+    margin:4px auto 18px;
+    border-width:4px;
+    box-shadow:3px 3px 0 #002b57;
+  }
+
+  .banner { padding:12px 8px 10px; }
+  .banner h1 { font-size:34px; }
+  .banner .corner-gif { display:none; }
+
+  .layout, .layout tbody { display:block; width:100%; }
+  .layout tr { display:flex; flex-direction:column; width:100%; }
+
+  /* let the sidebar's children be reordered around the content */
+  .sidebar { display:contents; }
+
+  .navbox { order:1; margin:8px 8px 10px; background:#cfcfcf; }
+  .navbox a { display:inline-block; width:calc(50% - 8px); margin:3px 2px; min-height:44px; }
+
+  .content { order:2; display:block; width:100%; padding:10px 9px 18px; }
+
+  .mailstatus { order:3; margin:10px 8px; }
+  .shrine     { order:4; margin:0 8px 10px; }
+  .side-badges{ order:5; margin:0 8px; }
+  .webring    { order:6; margin:10px 8px 0; }
+  .attached   { order:7; margin:10px 8px 0; }
+  .award      { order:8; margin:10px 8px 0; }
+  .side-counter { order:9; margin:10px 8px 14px; }
+
+  .fields { grid-template-columns:1fr; }
+  .notepad { padding:12px 13px 14px 40px; transform:none; }
+  .notepad h2 { font-size:18px; }
+  .taped::before, .taped::after { display:none; }
+  .deadtable { font-size:11px; }
+  .deadtable th:nth-child(2), .deadtable td:nth-child(2) { display:none; }
+  .stratum-neon h2 { font-size:17px; }
+  .button-wall img { margin:2px 1px; }
+  .send-bar .btn { flex:1 1 auto; }
+}
+
+@media (max-width:430px) {
+  .navbox a { width:100%; }
+  .banner h1 { font-size:28px; letter-spacing:0; }
+}
+
+/* nobody needs a running cat if a running cat makes them ill.
+   the marquees get stopped in script, css cannot reach them. */
+@media (prefers-reduced-motion:reduce) {
+  .neko-rail img { animation:none; left:12px; }
+  .blink, .led.live, .mailstatus .cursor { animation:none; }
+  .vhs::after { animation:none; display:none; }
+}
+
+/* the vhs flick between internal pages. kept from the old version. */
+.vhs::after {
+  content:"";
+  position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background:
+    linear-gradient(#000,transparent 12%,#0000 88%,#000),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+  animation:vhs 240ms steps(2,end);
+}
+@keyframes vhs { from { opacity:0; } to { opacity:1; } }
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <h1 id="glitter-title">Galaxy 981</h1>
+<div class="site-shell">
 
-    <div class="marquee-wrap">
-      <marquee behavior="alternate" scrollamount="6">
-        ★ slide into my inbox like it’s 1999 ★ stamp approved ★ ICQ vibes, modern pipes ★
-      </marquee>
-    </div>
+  <header class="banner">
+    <img class="corner-gif left"  src="mail.gif" alt="">
+    <img class="corner-gif right" src="mail.gif" alt="">
+    <h1>
+      <span class="r1">C</span><span class="r2">O</span><span class="r3">N</span><span class="r4">T</span><span class="r5">A</span><span class="r6">C</span><span class="r7">T</span>
+      <span class="r8">M</span><span class="r3">E</span>
+    </h1>
+    <div class="tiny">★ the form works ★ i am the slow part ★</div>
+  </header>
 
-    <table class="layout">
-      <tr>
-        <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-            <a href="chat.html"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+  <div class="system-message">
+    <img src="welcomer.gif" alt="" style="vertical-align:-9px;image-rendering:pixelated">
+    you have reached the part of the website where you can talk back
+  </div>
+
+  <div class="marquee-wrap">
+    <marquee scrollamount="5">
+      ★ write to me ★ i read everything ★ i answer eventually ★ no attachments, the form doesn't take them ★ corrections genuinely welcome ★ i have been wrong in public before ★
+    </marquee>
+  </div>
+
+  <table class="layout" role="presentation">
+    <tr>
+      <td class="sidebar">
+        <fieldset class="navbox">
+          <legend>Navigation</legend>
+          <a href="index.html"><img src="cutehome.gif" alt="">Home</a>
+          <a href="about.html"><img src="about.gif" alt="">About</a>
+          <a href="blog_posts.html"><img src="post.gif" alt="">Entries</a>
+          <a href="chat.html"><img src="chattt.gif" alt="">Chat</a>
+          <a href="coolsite.html"><img src="coollinks.gif" alt="">Kool Webpages</a>
+          <a href="guestbook.html"><img src="book-0037.gif" alt="">Guestbook</a>
+          <a href="books.html"><img src="catread.gif" alt="">Kool Books</a>
+          <a href="contact.html" aria-current="page"><img src="phone.gif" alt="">Contact</a>
+        </fieldset>
+
+        <!-- the readout. updated by hand, whenever i remember. -->
+        <div class="mailstatus">
+          <div class="head">MAIL_STATUS.TXT<span class="cursor" aria-hidden="true"></span></div>
+          <dl>
+            <dt>&gt; inbox:</dt>
+            <dd>3 unread (2 are newsletters)</dd>
+            <dt>&gt; last checked:</dt>
+            <dd>this morning, briefly, badly</dd>
+            <dt>&gt; reply queue:</dt>
+            <dd>one message from march. i see it. i am sorry.</dd>
+            <dt>&gt; connection:</dt>
+            <dd>56k, spiritually</dd>
+            <dt>&gt; mood:</dt>
+            <dd>receptive</dd>
+          </dl>
+        </div>
+
+        <!-- alice has been in this corner since the second version of
+             this page. i have redesigned around her four times. -->
+        <div class="shrine">
+          <div class="shrine-label">★ ALICE ★</div>
+          <img src="alice.gif" alt="Alice" data-fallback="alice.gif">
+          <div class="shrine-cap">
+            she has been in this corner since the second draft of this page.
+            i have redesigned around her four times rather than move her.
+          </div>
+        </div>
+
+        <div class="side-badges">
+          <img src="bestviewed.gif" alt="Best viewed with your eyes">
+          <img src="netscape.gif" alt="Netscape Now">
+          <img src="y2kcompliant.png" alt="Y2K compliant">
+          <img src="privacy.gif" alt="Privacy">
+        </div>
+
+        <!-- the ring still has a working "next". i have checked. once. -->
+        <div class="webring">
+          <img src="spinningplanet.gif" alt="">
+          <span class="ring-name">THE OLD WEB RING</span>
+          <div class="ring-nav">
+            <a href="index.html">‹prev</a> ·
+            <a href="coolsite.html">random</a> ·
+            <a href="index.html">next›</a>
+          </div>
+          <div class="ring-foot">site 4 of 5 · two are gone</div>
+        </div>
+
+        <div class="attached">
+          <div class="lbl">~ CURRENTLY ATTACHED TO ~</div>
+          <img src="genie.gif" alt="">
+          <img src="snoopy.gif" alt="">
+          <img src="3dskullspin.gif" alt="">
+          <img src="clubpenguin.gif" alt="">
+        </div>
+
+        <div class="award">
+          <img src="excellentwebsiteaward.gif" alt="Excellent Website Award" loading="lazy">
+          <div class="cap">awarded to this website<br>by this website, 2004</div>
+        </div>
+
+        <div class="side-counter">
+          messages this page has received:<br>
+          <span class="counter" id="hitCount">000000</span><br>
+          <span style="font-size:10px">(counts visits. i cannot count post.)</span>
+        </div>
+      </td>
+
+      <td class="content">
+        <div class="rainbow-bar" aria-hidden="true"></div>
+
+        <!-- ==========================================================
+             the actual form. i have not decorated this bit. it is the
+             one thing on the page with a job.
+             ========================================================== -->
+        <div class="dialog">
+          <div class="title-bar">
+            <span class="grow">✉ New Message — galaxy981</span>
+            <span class="boxes" aria-hidden="true"><span>_</span><span>□</span><span>×</span></span>
           </div>
 
-          <div class="mail-wall" aria-label="mail stickers">
-            <img src="email2.gif" alt="Email animation" class="stamp">
-            <img src="mail.gif" alt="Mail animation" class="stamp">
-            <img src="book-0037.gif" alt="Guestbook book icon" class="stamp">
-          </div>
-        </td>
+          <div class="dialog-body">
+            <div class="dialog-hint">
+              <img src="email2.gif" alt="" width="88" height="31">
+              <span>
+                goes straight to my actual inbox through Formspree. no account, no login,
+                nothing kept on this website. i am the only one who reads it.
+              </span>
+            </div>
 
-        <td class="content">
-          <hr class="retro">
+            <form id="contactForm" action="https://formspree.io/f/myyqoang" method="POST">
+              <!-- honeypot. bots fill this in, humans never see it. -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+                     style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
 
-          <div class="post">
-            <h3>Send a Postcard</h3>
-            <div class="meta">This form uses Formspree · no login needed</div>
-
-            <div class="mail-panel">
-              <form id="contactForm" class="postcard" action="https://formspree.io/f/myyqoang" method="POST">
-                <!-- Honeypot for bots -->
-                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
-
-                <div class="fields">
-                  <div>
-                    <label for="name">Your Name</label>
-                    <input id="name" name="name" type="text" required maxlength="80" autocomplete="name">
-                  </div>
-
-                  <div>
-                    <label for="email">Your Email</label>
-                    <input id="email" name="email" type="email" required maxlength="120" autocomplete="email">
-                  </div>
-
-                  <div class="full">
-                    <label for="subject">Subject</label>
-                    <input id="subject" name="subject" type="text" maxlength="120" placeholder="Hello from the web…">
-                  </div>
-
-                  <div class="full">
-                    <label for="message">Your Message <span class="tiny">(<span id="count" class="count">0</span>/2000)</span></label>
-                    <textarea id="message" name="message" required maxlength="2000" placeholder="Type like it’s a glittery guestbook."></textarea>
-                  </div>
+              <div class="fields">
+                <div>
+                  <label for="name">your name</label>
+                  <input id="name" name="name" type="text" required maxlength="80" autocomplete="name">
                 </div>
 
-                <div class="send-bar">
-                  <button type="submit" class="btn">Send ✉️</button>
-                  <button type="reset" class="btn" id="clearBtn">Clear</button>
-                  <span class="tiny">I’ll reply soon. Check your spam folder just in case.</span>
+                <div>
+                  <label for="email">your email</label>
+                  <input id="email" name="email" type="email" required maxlength="120" autocomplete="email">
                 </div>
 
-                <div id="msgArea" aria-live="polite"></div>
-              </form>
+                <div class="full">
+                  <label for="subject">subject</label>
+                  <input id="subject" name="subject" type="text" maxlength="120"
+                         placeholder="if it's about a post, please say which one">
+                </div>
 
-              <div>
-                <div class="postcard">
-                  <p style="margin:0 0 6px 0">Prefer direct links?</p>
-                  <ul style="margin:0 0 6px 18px; padding:0; color:#fff; font-size:13px;">
-                    <li><a href="mailto:" style="color:#a7ffff" onclick="alert('Use the form to avoid spam harvesters 😊'); return false;">Email client</a></li>
-                    <li><a href="guestbook.html" style="color:#a7ffff">Sign the Guestbook</a></li>
-                  </ul>
-                  <p class="tiny" style="margin:6px 0 0 0">Your message is sent over HTTPS through Formspree.</p>
+                <div class="full">
+                  <label for="message">
+                    your message
+                    <span class="tiny">(<span id="count" class="count">0</span>/2000)</span>
+                  </label>
+                  <textarea id="message" name="message" required maxlength="2000"
+                            placeholder="type like it is 2003 and you have all evening."></textarea>
                 </div>
               </div>
+
+              <div class="send-bar">
+                <button type="submit" class="btn">Send</button>
+                <button type="reset" class="btn" id="clearBtn">Clear</button>
+                <span class="tiny">check your spam folder in a few days. i end up there a lot.</span>
+              </div>
+
+              <div id="msgArea" aria-live="polite"></div>
+            </form>
+
+            <div class="sidecar">
+              <strong>would rather not use a form?</strong>
+              <ul>
+                <li><a href="guestbook.html">sign the guestbook</a> — public, and i like it better anyway</li>
+                <li><a href="chat.html">the chat room</a> — usually empty, occasionally not</li>
+                <li>no email address printed here, sorry. harvesters got the last one in about four days.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"><img src="dividerwindows.gif" alt=""></div>
+
+        <!-- ==========================================================
+             2001. black background era. every row in here used to be
+             a real way of finding me.
+             ========================================================== -->
+        <section class="stratum-neon">
+          <h2>OTHER WAYS TO REACH ME</h2>
+          <div class="sub">a historical survey · mostly obituaries</div>
+
+          <table class="deadtable">
+            <caption>i keep this table because deleting it felt worse than maintaining it.</caption>
+            <thead>
+              <tr>
+                <th scope="col">method</th>
+                <th scope="col">handle</th>
+                <th scope="col">status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ICQ</td>
+                <td class="handle">45 812 337</td>
+                <td class="st-dead"><span class="led dead"></span>offline since 2003</td>
+              </tr>
+              <tr>
+                <td>MSN Messenger</td>
+                <td class="handle">a name i will not repeat</td>
+                <td class="st-dead"><span class="led dead"></span>discontinued 2013</td>
+              </tr>
+              <tr>
+                <td>AIM</td>
+                <td class="handle">never got one, wanted one</td>
+                <td class="st-dead"><span class="led dead"></span>discontinued 2017</td>
+              </tr>
+              <tr>
+                <td>Neopets guild mail</td>
+                <td class="handle">~galaxy981</td>
+                <td class="st-dead"><span class="led dead"></span>guild disbanded, dramatically</td>
+              </tr>
+              <tr>
+                <td>a Nokia 3310</td>
+                <td class="handle">in a drawer in Doha</td>
+                <td class="st-dead"><span class="led dead"></span>charged. no sim. still works.</td>
+              </tr>
+              <tr>
+                <td>the form upstairs</td>
+                <td class="handle">↑ up there</td>
+                <td class="st-live"><span class="led live"></span>WORKING</td>
+              </tr>
+              <tr>
+                <td>the guestbook</td>
+                <td class="handle">↓ down there</td>
+                <td class="st-live"><span class="led live"></span>WORKING</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <div class="divider"><img src="rainbowswirldivider.gif" alt=""></div>
+
+        <!-- ==========================================================
+             2004. graph paper. i measured nothing. the numbers are
+             vibes, but they are accurate vibes.
+             ========================================================== -->
+        <section class="stratum-paper">
+          <h2>HOW FAST I REPLY</h2>
+          <div class="sub">an honest chart · no methodology · fig. 1</div>
+
+          <div class="chart">
+            <div class="chart-row">
+              <span class="lbl">within an hour — you are wrong about a philosopher i like</span>
+              <div class="chart-track"><div class="chart-fill c1" style="width:97%"></div></div>
+            </div>
+            <div class="chart-row">
+              <span class="lbl">two or three days — a normal, friendly message</span>
+              <div class="chart-track"><div class="chart-fill c2" style="width:64%"></div></div>
+            </div>
+            <div class="chart-row">
+              <span class="lbl">two weeks — it deserves a thoughtful answer, so i freeze</span>
+              <div class="chart-track"><div class="chart-fill c3" style="width:41%"></div></div>
+            </div>
+            <div class="chart-row">
+              <span class="lbl">never — you have attached a 40-page pdf with no note</span>
+              <div class="chart-track"><div class="chart-fill c4" style="width:12%"></div></div>
             </div>
           </div>
 
-          <hr class="retro">
+          <p class="chart-note">
+            the pattern is real and i am not proud of it: the kinder the message,
+            the longer i take, because i want to answer it properly and then i put it
+            somewhere safe and then it is march.
+          </p>
+        </section>
 
-          <div class="marquee-wrap small">
-            <marquee scrollamount="4" direction="right">
-              replies powered by stardust · if this page looks weird blame netscape
-            </marquee>
+        <div class="neko-rail" aria-hidden="true"><img src="neko1.gif" alt=""></div>
+
+        <!-- ==========================================================
+             written in one sitting, never edited. leaving the crossed
+             out one in because it is funnier with the mistake.
+             ========================================================== -->
+        <section class="notepad taped">
+          <h2>before you write ~ a short list</h2>
+          <ol>
+            <li>i do read everything. i am just slow. <span class="aside">see fig. 1</span></li>
+            <li>if it is about a post, <strong>say which post.</strong> i have written about a lot of things and i forget my own arguments.</li>
+            <li>corrections are genuinely welcome. i have been wrong in public before and will be again. i would rather know.</li>
+            <li>students asking about international law: yes. properly yes. that is the one subject where i will reply the same day.</li>
+            <li class="crossed">no politics arguments please</li>
+            <li><span class="aside">(crossed out — who am i kidding. fine. politics arguments. but be interesting.)</span></li>
+            <li>please do not send me a crypto newsletter. i do not know how you found me.</li>
+            <li>found a broken link? you are owed one (1) favour, redeemable never, but sincerely offered.</li>
+          </ol>
+        </section>
+
+        <div class="divider"><img src="dividerblackwhite.gif" alt=""></div>
+
+        <!-- same box as about.html. at least two pages agree on something. -->
+        <section class="update-box">
+          <div class="update-head">Message Board :: a note from the webmaster</div>
+          <div class="update-meta">posted 2026 · mood: still apologetic · re: reply times</div>
+          <div class="update-body">
+            <p>I said on the about page that I am a failure at updating this website. The same is broadly true of my inbox, so consider this the companion apology.</p>
+            <p>It is not that I don't want to hear from you. It is the opposite, embarrassingly. A message from a stranger who read something I wrote and thought about it is genuinely one of the better things that happens to me, and I handle that by staring at it for six weeks.</p>
+            <p>So: write anyway. Assume it landed. Assume I read it twice. Assume the reply is coming slowly, from a person who was pleased.</p>
+            <p><em>fiat lux!</em></p>
           </div>
-        </td>
-      </tr>
-    </table>
+        </section>
 
-    <div class="marquee-wrap small">
-      <marquee scrollamount="3" direction="right">© 1999–2000 Galaxy 981 — Part of the Galactic Webring</marquee>
+        <!-- i know. i am leaving it. -->
+        <section class="plug">
+          <div class="plug-top"><span class="blink">★</span> OR &mdash; DO IT IN PUBLIC <span class="blink">★</span></div>
+          <img class="bears" src="guestbookcute.gif" alt="Two bears holding a guest book">
+          <div class="plug-line">
+            the guestbook is better than the form and we both know it.<br>
+            it is public, it is permanent, and other people read it.
+          </div>
+          <a class="plug-btn" href="guestbook.html">SIGN THE GUESTBOOK</a>
+          <div class="stars">
+            <span class="r1">★</span><span class="r2">★</span><span class="r3">★</span><span class="r4">★</span><span class="r5">★</span><span class="r6">★</span><span class="r7">★</span><span class="r8">★</span>
+          </div>
+        </section>
+
+        <div class="rainbow-bar" aria-hidden="true" style="margin-top:20px"></div>
+      </td>
+    </tr>
+  </table>
+
+  <footer class="footer">
+    <div class="button-wall">
+      <div class="wall-label">~* buttons, awarded by nobody, displayed with pride *~</div>
+      <img src="bestviewed.gif" alt="Best viewed with">
+      <img src="netscape.gif" alt="Netscape Now">
+      <img src="survivedy2k.gif" alt="I survived Y2K">
+      <img src="y2kcompliant.png" alt="Y2K compliant">
+      <img src="notfriendlytomobile.gif" alt="Not friendly to mobile">
+      <img src="hatesquarespace.png" alt="This site hates Squarespace">
+      <img src="privacy.gif" alt="Privacy">
+      <img src="nyan.gif" alt="Nyan">
+      <img src="ieload.gif" alt="Internet Explorer">
+      <img src="pals.png" alt="Pals">
+      <img src="piracy.png" alt="Piracy">
+      <img src="anarchynow.jpeg" alt="Anarchy now">
+      <img src="eattherichbutton.jpg" alt="Eat the rich">
     </div>
-  </div>
 
-  <!-- Internal VHS transition for relative links -->
-  <script>
-    document.querySelectorAll('.page a[href]').forEach(a => {
-      const url = a.getAttribute('href') || '';
-      if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.documentElement.classList.add('vhs');
-        setTimeout(() => { window.location.href = url; }, 200);
-      });
-    });
-  </script>
+    <div class="ring">
+      <a href="index.html">home</a> ·
+      <a href="guestbook.html">guestbook</a> ·
+      <a href="coolsite.html">kool webpages</a> ·
+      <a href="about.html">about</a>
+    </div>
 
-  <!-- Form: live counter, AJAX submit to Formspree, friendly messages -->
-  <script>
-    const form = document.getElementById('contactForm');
-    const message = document.getElementById('message');
-    const count = document.getElementById('count');
-    const msgArea = document.getElementById('msgArea');
+    <div>
+      Galaxy 981 · handmade html, excessive colours, occasional mistakes · 1999&ndash;2026<br>
+      contact.html last modified: <span id="lastUpdated">unknown</span>
+    </div>
 
-    function updateCount(){
-      count.textContent = (message.value || '').length.toString();
+    <div class="starrow">
+      <span class="r1">★</span><span class="r2">★</span><span class="r3">★</span><span class="r4">★</span><span class="r5">★</span><span class="r6">★</span><span class="r7">★</span><span class="r8">★</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ---- if the reader asked for less motion, stop the marquees too ----
+   css cannot reach a <marquee>, so it has to happen here. */
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('marquee').forEach(m => {
+    m.setAttribute('scrollamount', '0');
+    if (typeof m.stop === 'function') m.stop();
+  });
+}
+
+/* ---- gifs that have not made it onto the server yet ----
+   show a small honest note instead of the browser's broken image icon. */
+document.querySelectorAll('img[data-fallback]').forEach(img => {
+  img.addEventListener('error', () => {
+    const note = document.createElement('div');
+    note.className = 'gif-missing';
+    note.textContent = '[ ' + img.dataset.fallback + ' — not uploaded yet ]';
+    img.replaceWith(note);
+  });
+});
+
+/* ---- visit counter, same trick as about.html ---- */
+(() => {
+  try {
+    const key = 'galaxy981_contact_visits';
+    const n = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+    localStorage.setItem(key, n);
+    document.getElementById('hitCount').textContent = String(n).padStart(6, '0');
+  } catch (e) {}
+})();
+
+document.getElementById('lastUpdated').textContent = document.lastModified || 'unknown';
+
+/* ---- vhs flick between internal pages ---- */
+document.querySelectorAll('.site-shell a[href]').forEach(a => {
+  const url = a.getAttribute('href') || '';
+  if (url.startsWith('#') || /^(https?:)?\/\//i.test(url) || url.startsWith('mailto:')) return;
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.documentElement.classList.add('vhs');
+    setTimeout(() => { window.location.href = url; }, 200);
+  });
+});
+
+/* ---- the form ---- */
+(() => {
+  const form    = document.getElementById('contactForm');
+  const message = document.getElementById('message');
+  const count   = document.getElementById('count');
+  const msgArea = document.getElementById('msgArea');
+
+  const updateCount = () => { count.textContent = (message.value || '').length.toString(); };
+  message.addEventListener('input', updateCount);
+  updateCount();
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    setTimeout(updateCount, 0);
+    msgArea.innerHTML = '';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msgArea.innerHTML = '';
+
+    const fd = new FormData(form);
+
+    /* honeypot filled == bot. pretend everything went beautifully. */
+    if ((fd.get('_gotcha') || '').trim() !== '') {
+      form.reset(); updateCount();
+      msgArea.innerHTML = '<div class="ok">Thanks! Your message has been filed.</div>';
+      return;
     }
-    message.addEventListener('input', updateCount);
-    updateCount();
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
-      setTimeout(updateCount, 0);
-      msgArea.innerHTML = '';
-    });
-
-    form.addEventListener('submit', async (e) => {
-      // Progressive enhancement: AJAX; falls back if blocked
-      e.preventDefault();
-      msgArea.innerHTML = '';
-
-      const fd = new FormData(form);
-      // if honeypot filled, quietly succeed
-      if ((fd.get('_gotcha')||'').trim() !== '') {
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
         form.reset(); updateCount();
-        msgArea.innerHTML = '<div class="ok">Thanks! Your postcard has been filed.</div>';
-        return;
+        msgArea.innerHTML = '<div class="ok">★ sent. it landed. i read these. give me a bit.</div>';
+        document.documentElement.classList.add('vhs');
+        setTimeout(() => document.documentElement.classList.remove('vhs'), 260);
+      } else {
+        msgArea.innerHTML = '<div class="err">Formspree did not accept that. Try again, or leave it in the <a href="guestbook.html">guestbook</a> instead.</div>';
       }
-
-      try{
-        const res = await fetch(form.action, { method:'POST', body:fd, headers:{ 'Accept':'application/json' }});
-        if (res.ok){
-          form.reset(); updateCount();
-          msgArea.innerHTML = '<div class="ok">✨ Message sent! I’ll get back to you soon.</div>';
-          // brief sparkle
-          document.documentElement.classList.add('vhs');
-          setTimeout(()=>document.documentElement.classList.remove('vhs'), 260);
-        } else {
-          msgArea.innerHTML = '<div class="err">Hmm, Formspree did not accept that. Try again or email via your client.</div>';
-        }
-      } catch{
-        msgArea.innerHTML = '<div class="err">Network hiccup. Please try again in a moment.</div>';
-      }
-    });
-  </script>
+    } catch {
+      msgArea.innerHTML = '<div class="err">Network hiccup. Try again in a moment — nothing was lost, your text is still in the box.</div>';
+    }
+  });
+})();
+</script>
 </body>
 </html>
