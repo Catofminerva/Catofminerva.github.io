@@ -9,6 +9,36 @@ permalink: /blog_posts.html
 <title>{{ page.title }} · {{ site.title | default: "Galaxy 981" }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
+{%- assign og_desc = page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 180 -%}
+{%- if og_desc == "" or og_desc == nil -%}
+  {%- assign og_desc = "Notes on philosophy, politics and the old web." -%}
+{%- endif -%}
+<link rel="icon" href="/Minerva.png" type="image/png">
+<link rel="apple-touch-icon" href="/Minerva.png">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta name="description" content="{{ og_desc | escape }}">
+<meta name="theme-color" content="#12002e">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Galaxy 981">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="{{ page.title | escape }}">
+<meta property="og:description" content="{{ og_desc | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/preview.png' | absolute_url }}">
+<meta property="og:image:secure_url" content="{{ '/preview.png' | absolute_url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Galaxy 981 — catofminerva.com">
+{%- if page.date %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title | escape }}">
+<meta name="twitter:description" content="{{ og_desc | escape }}">
+<meta name="twitter:image" content="{{ '/preview.png' | absolute_url }}">
+
+
 <style>
 /* ============================================================
    GALAXY 981 · THE ENTRY LOG  (v2)
