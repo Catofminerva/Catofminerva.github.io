@@ -26,25 +26,30 @@
 
 <style>
     :root{
+      /* tweak these if you want different neons later */
       --neon-blue:   #00e5ff;
       --neon-green:  #39ff14;
       --neon-yellow: #ffff33;
       --neon-purple: #8f00ff;
-      --ink:         #00ffea;
-      --panel-bg: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url("BACK1.jpg");
-      --sidebar-a:   #0d0022;
-      --sidebar-b:   #12002e;
+
+      --ink:         #00ffea;          /* base text */
+      --panel-bg: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url("BACK1.jpg");  /* content panel */
+      --sidebar-a:   #0d0022;           /* stripe A */
+      --sidebar-b:   #12002e;           /* stripe B */
       --marquee-bg:  #001a4d;
     }
 
+/* === Ithaca webfont === */
 @font-face{
   font-family: "IthacaLVB";
-  src: url("Ithaca.woff2") format("woff2"), url("Ithaca.woff") format("woff");
+  src:
+    url("Ithaca.woff2") format("woff2"),
+    url("Ithaca.woff")  format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
+    
 html, body {
   margin: 0;
   padding: 0;
@@ -56,241 +61,3351 @@ html, body {
   cursor: crosshair;
 }
 
-.page { filter: contrast(115%) saturate(125%); }
+/* put the color pop on the page box instead */
 .page {
-  width: 760px;
-  margin: 18px auto 32px;
-  position: relative;
-  left: 7px;
-  border: 6px ridge var(--neon-blue);
-  outline: 4px solid #00131a;
-  background: var(--panel-bg);
-  box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
-  z-index: 1;
+  filter: contrast(115%) saturate(125%);
 }
 
+
+    .page {
+      width: 760px;
+      margin: 18px auto 32px;
+      position: relative;
+      left: 7px; /* tiny off-center nudge */
+      border: 6px ridge var(--neon-blue);
+      outline: 4px solid #00131a;
+      background: var(--panel-bg);
+      box-shadow: 0 0 40px var(--neon-blue), inset 0 0 6px #000;
+z-index: 1;
+    }
+
+/* Title: the welcometocyber.gif banner.
+   it used to be type — pastel letters, then gold WordArt — and neither
+   belonged. the gif is the header now. the kirbys either side are the
+   point, so the image is sized to sit between them and never over them. */
 #glitter-title{
   margin: 10px 0 6px;
-  padding-inline: 120px;
-  position: relative;
+  padding-inline: 120px;         /* keeps the image clear of the kirbys */
+  position: relative;            /* anchors the kirbys */
   text-align: center;
-  line-height: 0;
-  font-size: 0;
+  line-height: 0;                /* no stray text leading under the gif */
+  font-size: 0;                  /* the h1 has no text, only the image */
 }
+
 #glitter-title img{
   display: inline-block;
   width: 100%;
-  max-width: 480px;
+  max-width: 480px;              /* the gif's own width; never upscale it */
   height: auto;
   image-rendering: pixelated;
   border: 3px ridge var(--neon-blue);
 }
 
-.marquee-wrap {
-  margin: 10px 20px;
-  border: 6px groove var(--neon-blue);
-  background: var(--marquee-bg);
-}
-.marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
-marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
 
-.layout { width: 100%; border-collapse: collapse; }
-.sidebar {
-  width: 210px;
-  background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
-  border-right: 6px ridge var(--neon-purple);
-  vertical-align: top;
+
+    .marquee-wrap {
+      margin: 10px 20px;
+      border: 6px groove var(--neon-blue);
+      background: var(--marquee-bg);
+    }
+    .marquee-wrap.small { margin: 6px 20px 14px; border-width: 4px; }
+    marquee { color: var(--neon-yellow); font-weight: bold; font-size: 18px; }
+
+    .layout { width: 100%; border-collapse: collapse; }
+    .sidebar {
+      width: 210px;
+      background: repeating-linear-gradient(135deg, var(--sidebar-a) 0 12px, var(--sidebar-b) 12px 24px);
+      border-right: 6px ridge var(--neon-purple);
+      vertical-align: top;
+    }
+    .content {
+      padding: 10px 14px 20px;
+      vertical-align: top;
+      background: rgba(15,0,20,0.45);
+      border-left: 4px solid #21003a;
+    }
+
+    .nav a {
+      display: block;
+      margin: 10px 6px;
+      padding: 6px 8px;
+      border: 3px outset #6af7ff;
+      background: #0e0e33;
+      color: #a7ffff;
+      text-decoration: none;
+      text-align: left;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px var(--neon-blue);
+      box-shadow: 2px 2px 0 #000;
+    }
+    .nav a:hover {
+      border-style: inset;
+      color: var(--neon-green);
+      background: #140043;
+      transform: translate(1px,1px);
+    }
+    .nav-icon {
+      vertical-align: middle;
+      width: 26px;
+      height: 26px;
+      margin-right: 6px;
+      image-rendering: pixelated;
+    }
+
+    .post {
+      margin: 14px 0 28px;
+      padding: 10px 10px 14px;
+      border: 4px groove var(--neon-purple);
+      background: rgba(20,0,30,0.62);
+    }
+    .post h3 {
+      margin: 0 0 6px 0;
+      color: var(--neon-purple);
+      text-shadow: 0 0 6px var(--neon-purple);
+    }
+    .post .meta { font-size: 12px; color: var(--neon-yellow); }
+
+    hr.retro {
+      height: 12px; border: 0; margin: 10px 0 14px;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #ff0000 0 14px,
+        #ffa500 14px 28px,
+        #ffff00 28px 42px,
+        #00cc00 42px 56px,
+        #00aaff 56px 70px,
+        #0000ff 70px 84px,
+        #8000ff 84px 98px
+      );
+    }
+
+    .blink { animation: blink 0.9s steps(1,end) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .footer { padding: 8px; text-align: center; color: #fff; }
+
+    /* Let the rainbow bar host the cat */
+hr.retro {
+  position: relative;
+  overflow: visible;   /* so the cat can start off-screen */
 }
-.content {
-  padding: 10px 14px 20px;
-  vertical-align: top;
-  background: rgba(15,0,20,0.45);
-  border-left: 4px solid #21003a;
+
+/* target the FIRST rainbow bar in the main content */
+.content > hr.retro:first-of-type {
+  position: relative;
+  overflow: visible;        /* let the cat start off-screen */
 }
-.nav a {
+
+/* bigger cat, above the bar, slower run */
+.content > hr.retro:first-of-type::after {
+  content: "";
+  position: absolute;
+  left: -64px;              /* start just off the left edge */
+  top: -60px;               /* place ABOVE the bar; tweak this */
+  width: 160px;              /* cat size — increase for larger */
+  height: 160px;
+  background: url("kitty.gif?v=10") center / contain no-repeat;
+  image-rendering: pixelated;
+  animation: kitty-rail 12s linear infinite;  /* increase seconds = slower */
+  pointer-events: none;
+  z-index: 9;
+}
+
+@keyframes kitty-rail {
+  from { left: -64px; }
+  to   { left: 100%; }      /* runs across the same bar */
+}
+
+
+@keyframes kitty-on-rail {
+  from { left: -48px; }
+  to   { left: 100%; }                  /* run across the existing bar */
+}
+
+
+/* bottom button strip */
+.button-strip {
+  margin: 8px 20px 12px;
+  padding: 10px;
+  border: 4px groove var(--neon-blue);
+  background: rgba(10, 0, 25, 0.6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-strip img {
+  height: 31px;                 /* bump to 40px if you want bigger badges */
+  image-rendering: pixelated;
   display: block;
-  margin: 10px 6px;
-  padding: 6px 8px;
+}
+
+
+
+/* sidebar sticker wall */
+.sticker-wall{
+  margin: 10px 8px 14px;
+  padding: 8px;
+  border: 3px inset #6af7ff;
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+}
+.sticker-wall img{
+  width: 88px;          /* classic button size; scales different gifs uniformly */
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+}
+.sticker-wall img:hover{
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 6px var(--neon-green));
+}
+.sticker-wall .wide{
+  grid-column: span 2;  /* let a wide one span the row */
+  width: 188px;
+}
+
+  /* gifs flanking the site title */
+/* Centered title, space reserved for gifs */
+#glitter-title{
+  text-align:center;
+  padding-inline:120px;         /* room for the gifs */
+  margin:10px auto 0;
+  position: relative;           /* anchor for gifs */
+}
+
+/* gifs INSIDE the title box */
+#glitter-title::before,
+#glitter-title::after{
+  content:"";
+  position:absolute; top:50%;
+  width:100px; height:64px;
+  transform: translateY(-50%);  /* no horizontal shove */
+  background: center/contain no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 4px var(--neon-blue));
+  pointer-events:none;
+}
+#glitter-title::before{ left:12px;  background-image:url("kirby.gif?v=1"); }
+#glitter-title::after { right:12px; background-image:url("kirby.gif?v=1"); }
+
+/* keep the wiggle without moving outside */
+#glitter-title:hover::before{ transform: translateY(-50%) rotate(-3deg); }
+#glitter-title:hover::after { transform: translateY(-50%) rotate(3deg); }
+
+/* sizing for small screens lives in the 700px block further down, which
+   uses !important and would win over anything set here. */
+
+
+
+
+
+
+
+
+  .hyperspace::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(0,255,255,.35) 0 3px, transparent 3px 8px);
+  animation: warp 600ms ease-in-out;
+}
+@keyframes warp{
+  0% { opacity:0; transform: scaleX(1) }
+  40%{ opacity:1; transform: scaleX(1.8) }
+  100%{ opacity:0; transform: scaleX(1) }
+}
+
+.vhs::after{
+  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background:
+    linear-gradient(#000,transparent 12%,#0000 88%,#000),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 4px);
+  animation: vhs 240ms steps(2,end);
+}
+@keyframes vhs { from{ opacity:0 } to{ opacity:1 } }
+
+    @keyframes flybyL { 0%{ transform:translate(-120%, -10px) rotate(8deg) }
+  70%{ transform:translate(10%, 4px) rotate(-6deg) } 100%{ transform:none } }
+@keyframes flybyR { 0%{ transform:translate(120%, 10px) rotate(-8deg) }
+  70%{ transform:translate(-10%, -6px) rotate(6deg) } 100%{ transform:none } }
+
+/* trigger class you can add via JS */
+.flyby #glitter-title::before { animation: flybyL 1.6s ease-out; }
+.flyby #glitter-title::after  { animation: flybyR 1.6s ease-out; }
+
+
+:root.morning { --neon-blue:#00e5ff; --neon-purple:#00b2ff; }
+:root.night   { --neon-blue:#39a0ff; --neon-purple:#8f00ff; }
+
+    .sound-toggle{
+  margin: 6px auto 12px; display:block;
+  background:#0e0e33; color:#a7ffff;
+  border:2px outset #6af7ff; padding:6px 10px;
+  font-family: inherit; cursor: pointer; box-shadow: 2px 2px 0 #000;
+}
+.sound-toggle[aria-pressed="true"]{ border-style: inset; color: var(--neon-green); }
+
+
+.sticker-controls{
+  display:flex; gap:8px; justify-content:center; margin:6px 0 10px;
+}
+.sticker-controls button{
+  padding:6px 10px; border:2px outset #6af7ff; background:#0e0e33; color:#a7ffff;
+  font-family:inherit; cursor:pointer; box-shadow:2px 2px 0 #000;
+}
+.sticker-controls button:active{ border-style: inset; color:var(--neon-green); }
+
+.sticker-wall img{ transition: transform 120ms ease; }   /* keep your existing rule, add this line */
+@keyframes pop { 50% { transform: scale(1.08) } }
+.sticker-wall.shuffled img{ animation: pop 180ms; }
+
+
+/* homepage-embedded chat */
+.chat-frame {
+  width: 100%;
+  height: 720px;         /* tweak to taste */
+  border: 4px groove var(--neon-blue);
+  background: #000;
+}
+@media (max-width: 800px){
+  .chat-frame { height: 85vh; }
+}
+
+/* inline warning banner */
+.warnline{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color: var(--neon-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 4px #000, 0 0 8px var(--neon-purple);
+}
+.warn-ico{
+  width: 28px;           /* tweak size */
+  height: 28px;
+  image-rendering: pixelated;
+  display: inline-block;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+}
+
+    /* === ALT NEOCITY UPGRADE PACK === */
+
+/* Nebula canvas sits under .page but above the tiled stars.gif */
+#neoNebula {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;                    /* off until alt skin toggled */
+  transition: opacity .35s ease;
+  mix-blend-mode: screen;
+}
+
+/* Floating control bar */
+
+/* When the alt skin is active… */
+html[data-skin="neo"] #neoNebula { opacity: .9; }
+
+html[data-skin="neo"] .page {
+  position: relative;
+  z-index: 1;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(0,255,221,.10), transparent 60%),
+    radial-gradient(1200px 700px at 120% 120%, rgba(255,0,200,.08), transparent 60%),
+    var(--panel-bg);
+  border-image: conic-gradient(
+    from 0.25turn,
+    #00e5ff 0 10%, #8f00ff 10% 20%, #39ff14 20% 30%, #ffff33 30% 40%,
+    #00e5ff 40% 50%, #8f00ff 50% 60%, #39ff14 60% 70%, #ffff33 70% 80%,
+    #00e5ff 80% 100%
+  ) 8;
+  outline-color: #050a16;
+  box-shadow:
+    0 0 40px rgba(0,238,255,.35),
+    0 0 120px rgba(143,0,255,.25) inset,
+    0 0 10px #000 inset;
+}
+
+/* Holographic title sheen */
+html[data-skin="neo"] #glitter-title {
+  background: conic-gradient(
+    from 0.25turn,
+    #e6ffff 0%,
+    #7df 12%,
+    #0ff 22%,
+    #9f7 35%,
+    #ff9 48%,
+    #f8f 64%,
+    #c8f 78%,
+    #e6ffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 6px #fff, 0 0 18px rgba(0,255,255,.55);
+  position: relative;
+  overflow: visible;
+}
+html[data-skin="neo"] #glitter-title::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+  transform: skewX(-20deg);
+  filter: blur(1px);
+  animation: neoSheen 3.8s linear infinite;
+}
+@keyframes neoSheen { from { left: -25% } to { left: 110% } }
+
+/* Animate the rainbow bar */
+html[data-skin="neo"] hr.retro {
+  background-size: 700px 100%;
+  animation: slidebar 18s linear infinite;
+}
+@keyframes slidebar {
+  from { background-position: 0 0 }
+  to   { background-position: 700px 0 }
+}
+
+/* Subtle hover glitch on posts */
+html[data-skin="neo"] .post {
+  position: relative;
+  overflow: hidden;
+  transition: filter .2s ease;
+}
+html[data-skin="neo"] .post:hover {
+  filter: hue-rotate(10deg) saturate(140%);
+}
+html[data-skin="neo"] .post::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(180deg, rgba(255,255,255,.03) 0 2px, transparent 2px 4px);
+  opacity: .0;
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+html[data-skin="neo"] .post:hover::after { opacity: .25; }
+    
+/* CRT scanlines toggle on the whole page */
+/* CRT overlay that works even with body filters */
+body[data-crt="on"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483647;
+  background:
+    linear-gradient(transparent 96%, rgba(0,0,0,.35)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,0) 2px 4px);
+  mix-blend-mode: multiply;
+}
+
+
+/* Cursor sparkles */
+.neo-sparkle {
+  position: fixed; width: 9px; height: 9px; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, #fff, #fff0 70%);
+  box-shadow:
+    0 0 6px var(--neon-blue),
+    0 0 14px var(--neon-purple);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: transform .6s ease-out, opacity .6s ease-out;
+  z-index: 10000;
+}
+@media (prefers-reduced-motion: reduce) {
+  #neoNebula { display: none; }
+  .neo-sparkle { display: none; }
+}
+
+
+    /* Neon grid and soft glow behind everything when alt skin is on */
+html[data-skin="neo"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5000;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(0,255,221,.08), transparent 60%),
+    radial-gradient(1200px 700px at 120% 120%, rgba(255,0,200,.06), transparent 60%),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  opacity: .55;
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift {
+  to { background-position: 0 0, 0 0, 1000px 0, 0 1000px; }
+}
+
+/* Page gets a subtle 3D tilt in alt skin */
+html[data-skin="neo"] .page {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Louder nav hover in alt skin */
+html[data-skin="neo"] .nav a:hover {
+  box-shadow: 0 0 18px rgba(0,238,255,.6), 0 0 36px rgba(143,0,255,.4);
+  text-shadow: 0 0 6px var(--neon-blue), 0 0 14px var(--neon-purple);
+}
+
+
+    /* blinkies are 150x20, not 88x31, so don't stretch them */
+.button-strip img.blinky{ height: 20px; }
+    
+
+/* rainbow swirl divider, drop anywhere */
+.swirl{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 14px 0;
+  image-rendering: pixelated;
+}
+/* if the gif is a narrow tile rather than one wide image, use this instead:
+.swirl-tile{
+  height: 22px;
+  background: url("rainbowswirldivider.gif") repeat-x center / auto 100%;
+  margin: 14px 0;
+}
+*/
+
+    
+    
+/* === Status Cafe: speaker + speech bubble === */
+.status-say {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin: 10px 8px 14px;
+  padding: 8px;
+  border: 3px inset #6af7ff;
+  background: rgba(0,0,0,0.35);
+}
+
+.status-avatar {
+  width: 72px; height: 72px;
   border: 3px outset #6af7ff;
   background: #0e0e33;
-  color: #a7ffff;
-  text-decoration: none;
-  text-align: left;
-  text-transform: uppercase;
-  text-shadow: 0 0 4px var(--neon-blue);
   box-shadow: 2px 2px 0 #000;
+  overflow: hidden;
 }
-.nav a:hover { border-style: inset; color: var(--neon-green); background: #140043; transform: translate(1px,1px); }
-.nav-icon { vertical-align: middle; width: 26px; height: 26px; margin-right: 6px; image-rendering: pixelated; }
-.post {
-  margin: 14px 0 28px;
-  padding: 10px 10px 14px;
+.status-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.status-bubble {
+  position: relative;
+  padding: 8px 10px;
   border: 4px groove var(--neon-purple);
-  background: rgba(20,0,30,0.62);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,0.06), transparent 40%),
+    rgba(20,0,30,0.70);
+  color: var(--ink);
+  box-shadow: 0 0 10px rgba(143,0,255,0.35) inset;
 }
-.post h3 { margin: 0 0 6px 0; color: var(--neon-purple); text-shadow: 0 0 6px var(--neon-purple); }
-.post .meta { font-size: 12px; color: var(--neon-yellow); }
-hr.retro {
-  height: 12px; border: 0; margin: 10px 0 14px;
-  background-image: repeating-linear-gradient(90deg,#ff0000 0 14px,#ffa500 14px 28px,#ffff00 28px 42px,#00cc00 42px 56px,#00aaff 56px 70px,#0000ff 70px 84px,#8000ff 84px 98px);
-}
-.blink { animation: blink 0.9s steps(1,end) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.footer { padding: 8px; text-align: center; color: #fff; }
-hr.retro { position: relative; overflow: visible; }
-.content > hr.retro:first-of-type { position: relative; overflow: visible; }
-.content > hr.retro:first-of-type::after {
-  content: ""; position: absolute; left: -64px; top: -60px; width: 160px; height: 160px;
-  background: url("kitty.gif?v=10") center / contain no-repeat;
-  image-rendering: pixelated; animation: kitty-rail 12s linear infinite; pointer-events: none; z-index: 9;
-}
-@keyframes kitty-rail { from { left: -64px; } to { left: 100%; } }
-@keyframes kitty-on-rail { from { left: -48px; } to { left: 100%; } }
-.button-strip {
-  margin: 8px 20px 12px; padding: 10px; border: 4px groove var(--neon-blue); background: rgba(10,0,25,.6);
-  display:flex; flex-wrap:wrap; gap:10px 12px; justify-content:center; align-items:center;
-}
-.button-strip img { height:31px; image-rendering:pixelated; display:block; }
-.sticker-wall{
-  margin:10px 8px 14px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,.35);
-  display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center; position:relative;
-}
-.sticker-wall img{ width:88px; height:auto; image-rendering:pixelated; display:block; transition:transform 120ms ease; }
-.sticker-wall img:hover{ transform:translateY(-1px); filter:drop-shadow(0 0 6px var(--neon-green)); }
-.sticker-wall .wide{ grid-column:span 2; width:188px; }
-
-#glitter-title{ text-align:center; padding-inline:120px; margin:10px auto 0; position:relative; }
-#glitter-title::before,#glitter-title::after{
-  content:""; position:absolute; top:50%; width:100px; height:64px; transform:translateY(-50%);
-  background:center/contain no-repeat; image-rendering:pixelated; filter:drop-shadow(0 0 4px var(--neon-blue)); pointer-events:none;
-}
-#glitter-title::before{ left:12px; background-image:url("kirby.gif?v=1"); }
-#glitter-title::after{ right:12px; background-image:url("kirby.gif?v=1"); }
-#glitter-title:hover::before{ transform:translateY(-50%) rotate(-3deg); }
-#glitter-title:hover::after{ transform:translateY(-50%) rotate(3deg); }
-
-.hyperspace::before{ content:""; position:fixed; inset:0; pointer-events:none; z-index:9999; background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.25),transparent 60%),repeating-linear-gradient(90deg,rgba(0,255,255,.35) 0 3px,transparent 3px 8px); animation:warp 600ms ease-in-out; }
-@keyframes warp{ 0%{opacity:0;transform:scaleX(1)}40%{opacity:1;transform:scaleX(1.8)}100%{opacity:0;transform:scaleX(1)} }
-.vhs::after{ content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; background:linear-gradient(#000,transparent 12%,#0000 88%,#000),repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 2px,transparent 2px 4px); animation:vhs 240ms steps(2,end); }
-@keyframes vhs{from{opacity:0}to{opacity:1}}
-@keyframes flybyL{0%{transform:translate(-120%,-10px) rotate(8deg)}70%{transform:translate(10%,4px) rotate(-6deg)}100%{transform:none}}
-@keyframes flybyR{0%{transform:translate(120%,10px) rotate(-8deg)}70%{transform:translate(-10%,-6px) rotate(6deg)}100%{transform:none}}
-.flyby #glitter-title::before{animation:flybyL 1.6s ease-out}.flyby #glitter-title::after{animation:flybyR 1.6s ease-out}
-:root.morning{--neon-blue:#00e5ff;--neon-purple:#00b2ff}:root.night{--neon-blue:#39a0ff;--neon-purple:#8f00ff}
-.sound-toggle{margin:6px auto 12px;display:block;background:#0e0e33;color:#a7ffff;border:2px outset #6af7ff;padding:6px 10px;font-family:inherit;cursor:pointer;box-shadow:2px 2px 0 #000}.sound-toggle[aria-pressed="true"]{border-style:inset;color:var(--neon-green)}
-.sticker-controls{display:flex;gap:8px;justify-content:center;margin:6px 0 10px}.sticker-controls button{padding:6px 10px;border:2px outset #6af7ff;background:#0e0e33;color:#a7ffff;font-family:inherit;cursor:pointer;box-shadow:2px 2px 0 #000}.sticker-controls button:active{border-style:inset;color:var(--neon-green)}
-@keyframes pop{50%{transform:scale(1.08)}}.sticker-wall.shuffled img{animation:pop 180ms}
-.chat-frame{width:100%;height:720px;border:4px groove var(--neon-blue);background:#000}@media(max-width:800px){.chat-frame{height:85vh}}
-.warnline{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--neon-yellow);font-weight:bold;text-shadow:0 0 4px #000,0 0 8px var(--neon-purple)}.warn-ico{width:28px;height:28px;image-rendering:pixelated;display:inline-block;filter:drop-shadow(0 0 6px var(--neon-blue))}
-#neoNebula{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .35s ease;mix-blend-mode:screen}html[data-skin="neo"] #neoNebula{opacity:.9}
-html[data-skin="neo"] .page{position:relative;z-index:1;background:radial-gradient(1200px 600px at 20% -10%,rgba(0,255,221,.10),transparent 60%),radial-gradient(1200px 700px at 120% 120%,rgba(255,0,200,.08),transparent 60%),var(--panel-bg);border-image:conic-gradient(from .25turn,#00e5ff 0 10%,#8f00ff 10% 20%,#39ff14 20% 30%,#ffff33 30% 40%,#00e5ff 40% 50%,#8f00ff 50% 60%,#39ff14 60% 70%,#ffff33 70% 80%,#00e5ff 80% 100%) 8;outline-color:#050a16;box-shadow:0 0 40px rgba(0,238,255,.35),0 0 120px rgba(143,0,255,.25) inset,0 0 10px #000 inset}
-html[data-skin="neo"] #glitter-title{background:conic-gradient(from .25turn,#e6ffff 0%,#7df 12%,#0ff 22%,#9f7 35%,#ff9 48%,#f8f 64%,#c8f 78%,#e6ffff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 6px #fff,0 0 18px rgba(0,255,255,.55);position:relative;overflow:visible}
-html[data-skin="neo"] #glitter-title::after{content:"";position:absolute;left:-5%;top:0;width:20%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);filter:blur(1px);animation:neoSheen 3.8s linear infinite}@keyframes neoSheen{from{left:-25%}to{left:110%}}
-html[data-skin="neo"] hr.retro{background-size:700px 100%;animation:slidebar 18s linear infinite}@keyframes slidebar{from{background-position:0 0}to{background-position:700px 0}}
-html[data-skin="neo"] .post{position:relative;overflow:hidden;transition:filter .2s ease}html[data-skin="neo"] .post:hover{filter:hue-rotate(10deg) saturate(140%)}html[data-skin="neo"] .post::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.03) 0 2px,transparent 2px 4px);opacity:0;transition:opacity .2s ease;pointer-events:none}html[data-skin="neo"] .post:hover::after{opacity:.25}
-body[data-crt="on"]::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2147483647;background:linear-gradient(transparent 96%,rgba(0,0,0,.35)),repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,rgba(0,0,0,0) 2px 4px);mix-blend-mode:multiply}
-.neo-sparkle{position:fixed;width:9px;height:9px;pointer-events:none;background:radial-gradient(circle at 50% 50%,#fff,#fff0 70%);box-shadow:0 0 6px var(--neon-blue),0 0 14px var(--neon-purple);border-radius:50%;transform:translate(-50%,-50%) scale(1);opacity:1;transition:transform .6s ease-out,opacity .6s ease-out;z-index:10000}@media(prefers-reduced-motion:reduce){#neoNebula{display:none}.neo-sparkle{display:none}}
-html[data-skin="neo"] body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:5000;background:radial-gradient(1200px 600px at 20% -10%,rgba(0,255,221,.08),transparent 60%),radial-gradient(1200px 700px at 120% 120%,rgba(255,0,200,.06),transparent 60%),linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:auto,auto,40px 40px,40px 40px;background-position:0 0,0 0,0 0,0 0;opacity:.55;animation:gridDrift 40s linear infinite}@keyframes gridDrift{to{background-position:0 0,0 0,1000px 0,0 1000px}}html[data-skin="neo"] .page{will-change:transform;transform-style:preserve-3d}html[data-skin="neo"] .nav a:hover{box-shadow:0 0 18px rgba(0,238,255,.6),0 0 36px rgba(143,0,255,.4);text-shadow:0 0 6px var(--neon-blue),0 0 14px var(--neon-purple)}
-.button-strip img.blinky{height:20px}.swirl{display:block;width:100%;height:auto;margin:14px 0;image-rendering:pixelated}
-.status-say{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:start;margin:10px 8px 14px;padding:8px;border:3px inset #6af7ff;background:rgba(0,0,0,.35)}.status-avatar{width:72px;height:72px;border:3px outset #6af7ff;background:#0e0e33;box-shadow:2px 2px 0 #000;overflow:hidden}.status-avatar img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated}.status-bubble{position:relative;padding:8px 10px;border:4px groove var(--neon-purple);background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.06),transparent 40%),rgba(20,0,30,.70);color:var(--ink);box-shadow:0 0 10px rgba(143,0,255,.35) inset}.status-bubble::after{content:"";position:absolute;left:-12px;top:18px;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-right:12px solid rgba(20,0,30,.70);filter:drop-shadow(0 0 2px rgba(143,0,255,.6))}#statuscafe-username{margin:0 0 6px;font-size:13px;color:var(--neon-yellow)}#statuscafe-username a{color:var(--neon-blue);text-decoration:none;text-shadow:0 0 4px var(--neon-blue)}#statuscafe-content{margin:0;font-size:14px;line-height:1.35;white-space:pre-wrap}.status-bubble.pop{animation:say-pop 260ms ease-out}@keyframes say-pop{0%{transform:scale(.98);box-shadow:0 0 0 rgba(143,0,255,0) inset}100%{transform:scale(1);box-shadow:0 0 10px rgba(143,0,255,.35) inset}}
-#dancecat,#spinguy{position:fixed;width:min(28vmin,260px);height:auto;z-index:12000;image-rendering:pixelated;filter:drop-shadow(0 0 10px rgba(0,0,0,.65));transition:transform .15s ease,opacity .2s ease;cursor:grab}#dancecat:active,#spinguy:active{cursor:grabbing}#dancecat.snooze,#spinguy.snooze{opacity:.25}#dancecat{right:14px;bottom:12px;animation:cat-bob 2.2s ease-in-out infinite}#spinguy{left:14px;bottom:12px;animation:spin 6s linear infinite}@keyframes cat-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){#dancecat,#spinguy{animation:none}}html[data-skin="neo"] #dancecat,html[data-skin="neo"] #spinguy{filter:drop-shadow(0 0 10px var(--neon-blue)) drop-shadow(0 0 22px rgba(143,0,255,.5))}
-#threebg{position:fixed;inset:0;z-index:0;pointer-events:none;width:100vw;height:100svh}.page{position:relative;z-index:1}@supports not(height:100svh){#threebg{height:100vh}}@media(max-width:860px){.page{width:min(96vw,760px);margin:12px auto 24px}.layout{display:block}.sidebar{width:auto;border-right:0;border-bottom:6px ridge var(--neon-purple)}}html,body{height:100%}body{touch-action:manipulation}
-.welcome-flex{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 6px}.y2k-welcome{margin:6px 0 10px;font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.05;letter-spacing:.5px;max-width:100%;text-wrap:balance;overflow-wrap:anywhere;white-space:normal;padding-right:8px;font-family:"Arial Rounded MT Bold","Helvetica Rounded","VAG Rounded","Trebuchet MS","Verdana","Comic Sans MS",system-ui,sans-serif;text-shadow:0 1px 0 rgba(255,255,255,.85),0 8px 10px rgba(0,0,0,.28)}.hello-gif{width:clamp(110px,18vw,220px);height:auto;image-rendering:pixelated;filter:drop-shadow(0 0 6px var(--neon-blue));flex:0 0 auto}@media(max-width:560px){.hello-gif{width:clamp(120px,36vw,220px)}}
-.post{--paper:#fff;--rule:#c0c0c0;background:var(--paper);color:#111;border:3px groove var(--rule);box-shadow:inset 0 1px 0 #fff}.post h3{color:#222;text-shadow:none}.post .meta{color:#555}.post a{color:#0645ad;text-decoration:underline}.post a:visited{color:#551a8b}.post a:hover{color:#d400ff}.post .chat-frame{background:#fff;border-color:#c0c0c0}
-:root{--w95-bg:#c0c0c0;--w95-mid:#d9d9d9;--w95-hi:#fff;--w95-shadow:#808080;--w95-dark:#000;--w95-link:#0000ff;--w95-vlink:#800080}.sidebar{background:var(--w95-bg)!important;color:#000;padding:8px 6px 12px;font-family:"Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;text-transform:none;letter-spacing:0;box-shadow:inset -1px -1px 0 var(--w95-dark),inset 1px 1px 0 var(--w95-hi),inset -2px -2px 0 var(--w95-shadow),inset 2px 2px 0 #dfdfdf;border-right:none}.sidebar .nav{position:relative;margin:8px 4px 12px;padding:8px 6px 6px;background:var(--w95-bg);border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi)}.sidebar .nav::before{content:"Navigation";position:absolute;top:-9px;left:10px;padding:0 4px;background:var(--w95-bg);font-size:12px}.sidebar .nav a{display:flex;align-items:center;gap:6px;margin:6px 2px;padding:5px 8px;background:var(--w95-bg);color:#000;text-decoration:none;text-shadow:none;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:1px 1px 0 var(--w95-dark),-1px -1px 0 var(--w95-hi);text-transform:none}.sidebar .nav a:hover{background:var(--w95-mid)}.sidebar .nav a:active{border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);transform:translate(1px,1px)}.sidebar .nav a:focus-visible{outline:1px dotted #000;outline-offset:-4px}.sidebar .nav-icon{width:20px;height:20px;image-rendering:pixelated}.sticker-wall,.status-say{background:var(--w95-bg)!important;color:#000;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 var(--w95-dark)}.sticker-wall{position:relative;padding-top:14px}.sticker-wall::before{content:"Stickers";position:absolute;top:-9px;left:10px;padding:0 4px;background:var(--w95-bg);font-size:12px}.status-say{position:relative;padding-top:14px}.status-say::before{content:"Status";position:absolute;top:-9px;left:10px;padding:0 4px;background:var(--w95-bg);font-size:12px}.sidebar a:not(.nav a){color:var(--w95-link)}.sidebar a:not(.nav a):visited{color:var(--w95-vlink)}
-td.content{background:var(--w95-bg)!important;color:#000;font-family:"Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;border-left:none!important;padding:10px 12px 16px;position:relative;box-shadow:inset -1px -1px 0 var(--w95-dark),inset 1px 1px 0 var(--w95-hi),inset -2px -2px 0 var(--w95-shadow),inset 2px 2px 0 #dfdfdf}td.content::before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--w95-hi);box-shadow:1px 0 0 var(--w95-shadow);pointer-events:none}td.content a{color:var(--w95-link)}td.content a:visited{color:var(--w95-vlink)}td.content .marquee-wrap{background:var(--w95-mid)!important;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:1px 1px 0 var(--w95-dark),-1px -1px 0 var(--w95-hi)}td.content hr.retro{border:none;height:10px;margin:10px 0 14px;box-shadow:inset 1px 1px 0 var(--w95-hi),inset -1px -1px 0 var(--w95-shadow)}td.content .post{background:#fff!important;color:#000;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 var(--w95-dark)}td.content .post h3{color:#000;text-shadow:none}
-.page>.marquee-wrap{margin:8px 12px 12px;padding:4px 6px;background:var(--w95-mid);border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:1px 1px 0 var(--w95-dark),-1px -1px 0 var(--w95-hi);position:relative}.page>.marquee-wrap marquee{color:#000;font:13px/1.4 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;text-shadow:none;font-weight:normal}.page>.marquee-wrap::before{content:"System Message";position:absolute;top:-9px;left:10px;padding:0 4px;background:var(--w95-bg);color:#000;font:12px/1 "Tahoma","MS Sans Serif",sans-serif}
-@media(max-width:700px){*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{overflow-x:hidden;min-width:0}.page{width:calc(100% - 36px)!important;max-width:760px;left:0!important;margin:14px auto 26px!important;border-width:4px;outline-width:2px;box-shadow:0 0 18px var(--neon-blue),inset 0 0 4px #000}#glitter-title{width:100%;min-width:0;padding:8px 62px 4px!important;margin:10px 0 6px!important}#glitter-title img{max-width:100%}#glitter-title::before,#glitter-title::after{width:54px!important;height:44px!important;top:50%!important;transform:translateY(-50%)!important;filter:drop-shadow(0 0 3px var(--neon-blue))}#glitter-title::before{left:3px!important}#glitter-title::after{right:3px!important}.page>.marquee-wrap{margin:8px 8px 10px}.page>.marquee-wrap marquee{font-size:12px}table.layout,.layout tbody,.layout tr,.layout td{display:block!important;width:100%!important;max-width:100%!important}.sidebar{width:100%!important;padding:9px 7px 10px!important;border:0!important;border-bottom:4px ridge var(--neon-purple)!important;box-shadow:inset -1px -1px 0 var(--w95-dark),inset 1px 1px 0 var(--w95-hi),inset -2px -2px 0 var(--w95-shadow),inset 2px 2px 0 #dfdfdf!important}.sidebar-extras{width:calc(100% - 14px);margin:10px auto 12px;padding:12px 7px 10px;background:var(--w95-bg);color:#000;border:3px groove #c0c0c0;box-shadow:inset -1px -1px 0 var(--w95-dark),inset 1px 1px 0 var(--w95-hi)}.sidebar .nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:calc(100% - 14px);margin:10px 7px 12px;padding:10px 6px 7px;background:var(--w95-bg)}.sidebar .nav a{min-width:0;min-height:44px;margin:0!important;padding:7px!important;font-size:14px!important;letter-spacing:0!important;line-height:1.15;overflow-wrap:anywhere}.sidebar .nav-icon{width:22px;height:22px;flex:0 0 22px}.sidebar-extras>div[style*="color:#fff"]{color:#000!important;font-size:13px!important;padding-left:10px!important;padding-right:10px!important}.sticker-wall{display:flex!important;flex-wrap:wrap;justify-content:center;gap:7px;padding:14px 7px 8px}.sticker-wall img,.sticker-wall .wide{width:auto!important;max-width:min(43%,150px)!important;max-height:72px;object-fit:contain}.sticker-controls{flex-wrap:wrap}.sticker-controls button,.sound-toggle{min-height:42px;font-size:14px}.status-say{grid-template-columns:58px minmax(0,1fr);gap:8px;margin:12px 5px 8px}.status-avatar{width:58px;height:58px}#statuscafe-content{overflow-wrap:anywhere}td.content{width:100%!important;min-width:0!important;padding:10px 8px 14px!important;border:0!important}td.content::before{display:none}td.content .post{width:100%;min-width:0;margin:11px 0 18px;padding:10px 10px 12px;overflow-wrap:anywhere}td.content .post p{max-width:100%}.welcome-flex{display:block;width:100%}.y2k-welcome{width:100%;margin:2px 0 10px;padding:0;font-size:clamp(31px,11vw,44px);line-height:1.04;text-align:left}.hello-gif{display:block;width:min(78%,235px)!important;max-width:100%;margin:4px auto 8px}.warnline{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;gap:6px;width:100%;font-size:13px;line-height:1.25;text-align:center}.warn-ico{width:24px;height:24px}td.content iframe{max-width:100%!important}td.content .post iframe:not(.chat-frame){display:block;width:min(100%,314px)!important;margin:0 auto}.chat-frame{width:100%!important;height:72svh!important;min-height:440px}.marquee-wrap.small{margin:6px 2px 12px}.marquee-wrap.small marquee{font-size:12px}.button-strip{margin:8px 7px 10px;padding:8px 6px;gap:7px}.button-strip img{max-width:46%;height:auto;max-height:31px}.footer{padding:7px 5px 9px;font-size:12px;overflow:hidden}#dancecat,#spinguy{width:min(20vw,72px)!important;max-width:72px!important;bottom:6px!important;filter:drop-shadow(0 0 5px rgba(0,0,0,.55))}#dancecat{right:5px!important}#spinguy{left:5px!important}.neo-sparkle{display:none!important}}
-@media(max-width:390px){#glitter-title{padding-inline:48px!important}#glitter-title::before,#glitter-title::after{width:42px!important;height:34px!important}.sidebar .nav{grid-template-columns:1fr}.status-say{display:block}.status-avatar{display:block;margin:0 auto 9px}.status-bubble::after{display:none}.button-strip img{max-width:90%}}
-@media(hover:none) and (pointer:coarse){html,body{cursor:auto}.nav a:hover,.sticker-wall img:hover{transform:none;filter:none}}
-.w95-box{position:relative;margin:16px 5px 12px;padding:14px 8px 9px;background:var(--w95-bg);color:#000;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 var(--w95-dark);text-align:center}.w95-box::before{content:attr(data-label);position:absolute;top:-9px;left:10px;padding:0 4px;background:var(--w95-bg);font:12px/1 "Tahoma","MS Sans Serif",sans-serif;color:#000}.w95-box .cap{margin:6px 2px 0;font:11px/1.45 "Tahoma","MS Sans Serif",sans-serif;color:#333}.server-shot img{display:block;width:100%;max-width:168px;height:auto;margin:0 auto;image-rendering:pixelated;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);background:#000}.archive-shot img{display:block;width:100%;max-width:190px;height:auto;margin:0 auto;image-rendering:pixelated}.award-solo{margin:18px 0 20px;text-align:center}.award-solo img{max-width:min(340px,92%);height:auto;image-rendering:pixelated;transform:rotate(-1deg)}
-.win95-window{margin:16px 0 22px;background:var(--w95-bg);border:2px solid;border-color:var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);box-shadow:inset -1px -1px 0 var(--w95-shadow),inset 1px 1px 0 #dfdfdf}.win95-window .titlebar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px;padding:3px 4px 3px 6px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font:bold 12px/1.3 "Tahoma","MS Sans Serif",sans-serif}.win95-window .titlebar .tb-buttons{display:flex;gap:2px}.win95-window .titlebar .tb-buttons span{width:16px;height:14px;display:grid;place-items:center;background:var(--w95-bg);color:#000;border:1px solid;border-color:var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);font:10px/1 Tahoma,sans-serif}.win95-window .win-body{margin:2px;padding:12px 10px 10px;background:#008080;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow)}.win95-window .win-status{margin:2px;padding:3px 6px;background:var(--w95-bg);border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);font:11px/1.4 "Tahoma","MS Sans Serif",sans-serif;color:#222}.plinth-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:flex-end}.plinth{width:168px;padding:9px 8px 7px;background:#000;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);text-align:center}.plinth img{display:block;width:100%;max-width:132px;height:auto;margin:0 auto;image-rendering:pixelated}.plinth .lab{margin-top:7px;color:var(--neon-green);font:10px/1.4 "Courier New",monospace;letter-spacing:.4px}
-.hamster-plant{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;margin:10px 20px 4px;padding:8px 12px;background:var(--w95-bg);color:#000;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:1px 1px 0 var(--w95-dark),-1px -1px 0 var(--w95-hi)}.hamster-plant figure{margin:0;text-align:center}.hamster-plant img{display:block;height:58px;width:auto;margin:0 auto;image-rendering:pixelated}.hamster-plant figcaption{margin-top:3px;font:9px/1.3 "Courier New",monospace;color:#444}.hamster-plant .hp-title{font:bold 13px/1.35 "Tahoma","MS Sans Serif",sans-serif;letter-spacing:.4px;text-align:center}.hamster-plant .hp-sub{display:block;margin-top:3px;font:10px/1.4 "Courier New",monospace;font-weight:normal;color:#444}
-@media(max-width:700px){.w95-box{margin:16px 2px 12px}.award-solo img{max-width:92%}.win95-window{margin:12px 0 18px}.win95-window .win-body{padding:10px 6px 8px}.plinth{width:calc(50% - 8px);min-width:128px;padding:7px 5px 6px}.plinth img{max-width:104px}.hamster-plant{margin:8px 7px 4px;padding:8px;gap:8px 12px}.hamster-plant img{height:46px}.hamster-plant .hp-title{font-size:12px}}
-.marquee-planet{height:26px;width:auto;vertical-align:middle;margin:0 8px;image-rendering:pixelated}.div-checker{height:20px;margin:14px 0;border:0;background:url("dividerblackwhite.gif") repeat-x center/auto 100%;image-rendering:pixelated}.sidebar .div-checker{margin:12px 4px}.div-win{display:block;width:100%;height:auto;margin:16px 0 10px;image-rendering:pixelated}.construction-bar{display:block;width:100%;height:auto;margin:14px 0 4px;image-rendering:pixelated}.cam-screen{padding:5px;background:#000;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow)}.cam-screen img{display:block;width:100%;max-width:152px;height:auto;margin:0 auto;image-rendering:pixelated}.cam-osd{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:4px;padding:0 1px;font:9px/1.4 "Courier New",monospace;color:var(--neon-green)}.cam-osd .rec{color:#ff2b2b}
-.wish-lamp{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:16px 0 20px;padding:10px 12px;background:#fff;color:#111;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 var(--w95-dark)}.wish-lamp img{flex:0 0 auto;height:104px;width:auto;image-rendering:pixelated;cursor:pointer;transition:transform 120ms ease}.wish-lamp img:active{transform:scale(.96) rotate(-2deg)}.wish-lamp .wish-copy{flex:1 1 210px;min-width:0;font:12px/1.55 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif}.wish-lamp .wish-out{display:block;margin-top:5px;padding:5px 7px;background:#000;color:var(--neon-green);font:11px/1.5 "Courier New",monospace;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);overflow-wrap:anywhere}.wish-lamp .wish-count{display:block;margin-top:4px;font:10px/1.4 "Courier New",monospace;color:#555}
-.pet-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 14px}.pet-sidekick{flex:0 0 auto;width:150px;max-width:46%;height:auto;image-rendering:pixelated;align-self:center}.pet-sidekick-cap{width:100%;margin:6px 0 0;font:10px/1.45 "Courier New",monospace;color:#555}
-.win95-window .titlebar .tb-ico{width:15px;height:15px;margin-right:5px;vertical-align:-3px;image-rendering:pixelated}.win95-window.dancefloor .win-body{background:url("dividerblackwhite.gif") repeat;image-rendering:pixelated;padding:14px 10px 12px}.floor-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-end}.dancer{width:124px;margin:0;padding:8px 6px 6px;background:#fff;border:2px solid;border-color:var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);box-shadow:2px 2px 0 rgba(0,0,0,.55);text-align:center}.dancer img{display:block;height:104px;width:auto;max-width:100%;margin:0 auto;image-rendering:pixelated}.dancer .lab{margin-top:7px;font:10px/1.4 "Courier New",monospace;color:#333;letter-spacing:.3px}
-.taskbar{position:relative;display:flex;align-items:center;gap:5px;margin:0;padding:3px 4px;background:var(--w95-bg);color:#000;border-top:2px solid var(--w95-hi);box-shadow:inset 0 1px 0 #dfdfdf;font:12px/1 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif}.taskbar button{all:unset;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;background:var(--w95-bg);color:#000;border:2px solid;border-color:var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);box-shadow:inset -1px -1px 0 var(--w95-shadow),inset 1px 1px 0 var(--w95-hi);cursor:pointer;user-select:none;white-space:nowrap}.taskbar button:hover{background:var(--w95-mid)}.taskbar button:active,.taskbar button[aria-expanded="true"]{border-color:var(--w95-dark) var(--w95-hi) var(--w95-hi) var(--w95-dark);box-shadow:inset 1px 1px 0 var(--w95-shadow),inset -1px -1px 0 var(--w95-hi);background:var(--w95-mid)}.taskbar button:focus-visible{outline:1px dotted #000;outline-offset:-4px}.taskbar .start{font-weight:bold}.taskbar .start img{width:19px;height:19px;image-rendering:pixelated}.taskbar .tray{margin-left:auto;display:flex;align-items:center;gap:7px;padding:3px 7px;border:2px solid;border-color:var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow)}.taskbar .tray img{height:19px;width:auto;image-rendering:pixelated;cursor:help}.taskbar .clock{font:11px/1 "Tahoma","MS Sans Serif",sans-serif}.start-menu{position:absolute;left:2px;bottom:calc(100% + 2px);z-index:500;min-width:188px;padding:3px;background:var(--w95-bg);border:2px solid;border-color:var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);box-shadow:2px 2px 0 rgba(0,0,0,.5)}.start-menu[hidden]{display:none}.start-menu a,.start-menu button.sm-item{display:block;width:auto;padding:5px 10px;color:#000;font:12px/1.25 "Tahoma","MS Sans Serif",sans-serif;text-decoration:none;border:0;box-shadow:none;background:transparent;cursor:pointer}.start-menu a:hover,.start-menu button.sm-item:hover{background:#000080;color:#fff}.start-menu hr{height:2px;margin:3px 2px;border:0;border-top:1px solid var(--w95-shadow);border-bottom:1px solid var(--w95-hi)}
-@media(max-width:700px){.marquee-planet{height:20px;margin:0 4px}.wish-lamp{justify-content:center;text-align:center}.wish-lamp img{height:88px}.pet-sidekick{width:128px;max-width:44%}.dancer{width:calc(50% - 8px);min-width:116px;padding:6px 4px 5px}.dancer img{height:84px}.cam-screen img{max-width:130px}.taskbar{flex-wrap:wrap;gap:4px;padding:4px}.taskbar .tray{margin-left:auto}.taskbar button{padding:5px 6px;font-size:11px}.taskbar .task-label{font-size:11px}}
-
-/* 2026-08-31: the cyber banner also becomes a local backdrop. */
-#glitter-title{
-  background: url("welcometocyber.gif") center center / cover no-repeat !important;
-}
-td.content .post:has(.pet-row){
-  background: url("welcometocyber.gif") center center / cover no-repeat !important;
+.status-bubble::after {
+  /* tail pointing from bubble to avatar */
+  content: "";
+  position: absolute;
+  left: -12px; top: 18px;
+  width: 0; height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 12px solid rgba(20,0,30,0.70);
+  filter: drop-shadow(0 0 2px rgba(143,0,255,0.6));
 }
 
-</style>
+/* Style the official embed’s nodes */
+#statuscafe-username {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: var(--neon-yellow);
+}
+#statuscafe-username a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  text-shadow: 0 0 4px var(--neon-blue);
+}
+#statuscafe-content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  white-space: pre-wrap; /* keep line breaks from feed */
+}
+
+/* Subtle pop when new content arrives */
+.status-bubble.pop { animation: say-pop 260ms ease-out; }
+@keyframes say-pop {
+  0% { transform: scale(0.98); box-shadow: 0 0 0 rgba(143,0,255,0) inset; }
+  100%{ transform: scale(1);    box-shadow: 0 0 10px rgba(143,0,255,0.35) inset; }
+}
+
+
+    /* === Dancing Cat mascot === */
+#dancecat {
+  position: fixed;
+  right: 14px;
+  bottom: 12px;
+  width: min(28vmin, 260px);  /* large, but scales with viewport */
+  height: auto;
+  z-index: 12000;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,.65));
+  transition: transform .15s ease, opacity .2s ease;
+  animation: cat-bob 2.2s ease-in-out infinite;
+  cursor: grab;
+}
+#dancecat:active { cursor: grabbing; }
+#dancecat.snooze { opacity: .25; }
+
+@keyframes cat-bob {
+  0%,100% { transform: translateY(0) }
+  50%     { transform: translateY(-6px) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dancecat { animation: none; }
+}
+
+/* neon glow when your alt skin is on */
+html[data-skin="neo"] #dancecat {
+  filter:
+    drop-shadow(0 0 10px var(--neon-blue))
+    drop-shadow(0 0 22px rgba(143,0,255,.5));
+}
+
+
+    /* Shared mascot base */
+#dancecat, #spinguy {
+  position: fixed;
+  width: min(28vmin, 260px);
+  height: auto;
+  z-index: 12000;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,.65));
+  transition: transform .15s ease, opacity .2s ease;
+  cursor: grab;
+}
+#dancecat:active, #spinguy:active { cursor: grabbing; }
+#dancecat.snooze, #spinguy.snooze { opacity: .25; }
+
+/* Individual defaults */
+#dancecat { right: 14px; bottom: 12px; animation: cat-bob 2.2s ease-in-out infinite; }
+#spinguy  { left: 14px;  bottom: 12px; animation: spin 6s linear infinite; }
+
+@keyframes cat-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes spin    { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+
+@media (prefers-reduced-motion: reduce) {
+  #dancecat, #spinguy { animation: none; }
+}
+
+/* Extra glow in alt skin */
+html[data-skin="neo"] #dancecat,
+html[data-skin="neo"] #spinguy {
+  filter:
+    drop-shadow(0 0 10px var(--neon-blue))
+    drop-shadow(0 0 22px rgba(143,0,255,.5));
+}
+
+
+
+    /* 3D background canvas under .page, above stars.gif */
+#threebg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;     /* don't block clicks */
+}
+
+/* make sure your content sits above it */
+.page { position: relative; z-index: 1; }
+
+    /* full-viewport canvas that survives iOS Chrome/Safari bars */
+#threebg{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;           /* dynamic mobile viewport height */
+  z-index: 0;
+  pointer-events: none;
+}
+@supports not (height: 100svh) {
+  #threebg{ height: 100vh; } /* fallback */
+}
+
+/* let the page scale down on phones so you still see the background */
+@media (max-width: 860px){
+  .page{
+    width: min(96vw, 760px);
+    margin: 12px auto 24px;
+  }
+  .layout{ display: block; }
+  .sidebar{
+    width: auto;
+    border-right: 0;
+    border-bottom: 6px ridge var(--neon-purple);
+  }
+}
+
+/* help browsers choose the right baseline sizes */
+html, body{ height: 100%; }
+
+/* reduce accidental zoom on taps without blocking accessibility zoom */
+body{ touch-action: manipulation; }
+
+/* Y2K rainbow headline + hello.gif layout */
+.welcome-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;                 /* drops the gif underneath on narrow screens */
+  margin: 0 0 6px 0;
+}
+
+/* Smaller rainbow headline */
+/* Rainbow headline — stays inside the post */
+.y2k-welcome{
+  margin: 6px 0 10px;
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 42px);   /* smaller cap */
+  line-height: 1.05;
+  letter-spacing: .5px;
+  max-width: 100%;
+  text-wrap: balance;                     /* nicer multi-line wrap */
+  overflow-wrap: anywhere;                /* allow breaks even with colored spans */
+  white-space: normal;                    /* IMPORTANT: let it wrap */
+  padding-right: 8px;                     /* keeps the glow off the border */
+  font-family:
+    "Arial Rounded MT Bold", "Helvetica Rounded", "VAG Rounded",
+    "Trebuchet MS", "Verdana", "Comic Sans MS", system-ui, sans-serif;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.85),
+    0 8px 10px rgba(0,0,0,.28);
+}
+
+
+
+/* Make the hello.gif a touch smaller too */
+.hello-gif{
+  width: clamp(110px, 18vw, 220px);
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
+  flex: 0 0 auto;
+}
+
+
+@media (max-width: 560px){
+  .hello-gif{ width: clamp(120px, 36vw, 220px); }
+}
+
+
+/* === 90s "paper" look for posts ONLY === */
+.post{
+  --paper:#ffffff;
+  --rule:#c0c0c0;
+
+  background: var(--paper);
+  color:#111;
+  border: 3px groove var(--rule);   /* Win95-ish edge */
+  box-shadow: inset 0 1px 0 #fff;   /* subtle highlight */
+}
+
+.post h3{ color:#222; text-shadow:none; }
+.post .meta{ color:#555; }
+
+/* classic link colors inside posts */
+.post a{ color:#0645ad; text-decoration: underline; }
+.post a:visited{ color:#551a8b; }
+.post a:hover{ color:#d400ff; }
+
+/* (optional) make chat iframe match the paper */
+.post .chat-frame{ background:#fff; border-color:#c0c0c0; }
+
+
+    /* === Windows 95 Sidebar Theme =================================== */
+:root{
+  --w95-bg:#c0c0c0;
+  --w95-mid:#d9d9d9;
+  --w95-hi:#ffffff;
+  --w95-shadow:#808080;
+  --w95-dark:#000000;
+  --w95-link:#0000ff;
+  --w95-vlink:#800080;
+}
+
+/* Panel */
+.sidebar{
+  background: var(--w95-bg) !important;         /* kill the neon stripes */
+  color:#000;
+  padding: 8px 6px 12px;
+  font-family: "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  text-transform: none;
+  letter-spacing: 0;
+  /* 3D recessed panel */
+  box-shadow:
+    inset -1px -1px 0 var(--w95-dark),
+    inset  1px  1px 0 var(--w95-hi),
+    inset -2px -2px 0 var(--w95-shadow),
+    inset  2px  2px 0 #dfdfdf;
+  border-right: none;
+}
+
+/* Group box label for the nav (pure CSS) */
+.sidebar .nav{
+  position: relative;
+  margin: 8px 4px 12px;
+  padding: 8px 6px 6px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+}
+.sidebar .nav::before{
+  content: "Navigation";
+  position: absolute;
+  top: -9px; left: 10px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  font-size: 12px;
+}
+
+/* Buttons look like Win95 */
+.sidebar .nav a{
+  display: flex; align-items: center; gap: 6px;
+  margin: 6px 2px;
+  padding: 5px 8px;
+  background: var(--w95-bg);
+  color:#000; text-decoration: none; text-shadow: none;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+  text-transform: none;                    /* not screaming caps */
+}
+.sidebar .nav a:hover{ background: var(--w95-mid); }
+.sidebar .nav a:active{
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  transform: translate(1px,1px);           /* pressed */
+}
+.sidebar .nav a:focus-visible{ outline: 1px dotted #000; outline-offset: -4px; }
+.sidebar .nav-icon{ width:20px; height:20px; image-rendering: pixelated; }
+
+/* Other widgets in the sidebar get sunken Win95 frames */
+.sticker-wall,
+.status-say{
+  background: var(--w95-bg) !important;
+  color:#000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow); /* sunken */
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+
+/* Tiny labels like classic group boxes (optional, looks nice) */
+.sticker-wall{ position: relative; padding-top: 14px; }
+.sticker-wall::before{
+  content: "Stickers";
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 4px; background: var(--w95-bg); font-size: 12px;
+}
+.status-say{ position: relative; padding-top: 14px; }
+.status-say::before{
+  content: "Status";
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 4px; background: var(--w95-bg); font-size: 12px;
+}
+
+/* Hyperlink colors inside the sidebar (Win95 defaults) */
+.sidebar a:not(.nav a){ color: var(--w95-link); }
+.sidebar a:not(.nav a):visited{ color: var(--w95-vlink); }
+
+
+
+
+
+
+    /* === Windows 95 Main Content Panel ================================= */
+:root{
+  --w95-bg:#c0c0c0;
+  --w95-mid:#d9d9d9;
+  --w95-hi:#ffffff;
+  --w95-shadow:#808080;
+  --w95-dark:#000000;
+  --w95-link:#0000ff;
+  --w95-vlink:#800080;
+}
+
+/* Make the td.content a raised Win95 panel */
+td.content{
+  background: var(--w95-bg) !important;    /* replace the translucent black */
+  color:#000;
+  font-family: "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  border-left: none !important;            /* kill the purple divider */
+  padding: 10px 12px 16px;
+  position: relative;                      /* for the seam pseudo-element */
+  /* subtle 3D bevel like Win95 shell */
+  box-shadow:
+    inset -1px -1px 0 var(--w95-dark),
+    inset  1px  1px 0 var(--w95-hi),
+    inset -2px -2px 0 var(--w95-shadow),
+    inset  2px  2px 0 #dfdfdf;
+}
+
+/* A thin Win95-style seam between sidebar and content */
+td.content::before{
+  content:"";
+  position:absolute; inset:0 auto 0 0; width:2px;
+  background: var(--w95-hi);
+  box-shadow: 1px 0 0 var(--w95-shadow);
+  pointer-events:none;
+}
+
+/* Links inside content use classic Win95 colors (doesn't touch your nav buttons) */
+td.content a{ color: var(--w95-link); }
+td.content a:visited{ color: var(--w95-vlink); }
+
+/* OPTIONAL niceties: make in-content marquee and hr feel native */
+td.content .marquee-wrap{
+  background: var(--w95-mid) !important;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+}
+td.content hr.retro{
+  border: none; height: 10px; margin: 10px 0 14px;
+  box-shadow: inset 1px 1px 0 var(--w95-hi), inset -1px -1px 0 var(--w95-shadow);
+}
+
+/* If you haven't already restyled .post, here’s a Win95 document card */
+td.content .post{
+  background:#fff !important;
+  color:#000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+td.content .post h3{ color:#000; text-shadow:none; }
+
+
+
+    /* === Top-of-page marquee: Win95 look =============================== */
+.page > .marquee-wrap{
+  margin: 8px 12px 12px;
+  padding: 4px 6px;
+  background: var(--w95-mid);
+  border: 2px solid; /* 3D bevel */
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+}
+
+.page > .marquee-wrap marquee{
+  color: #000;                      /* Win95 text color */
+  font: 13px/1.4 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  text-shadow: none;
+  font-weight: normal;
+}
+
+/* optional tiny caption badge (comment out if you don’t want it) */
+.page > .marquee-wrap{
+  position: relative;
+}
+.page > .marquee-wrap::before{
+  content: "System Message";
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  color: #000;
+  font: 12px/1 "Tahoma","MS Sans Serif",sans-serif;
+}
+
+
+
+    /* === Win95 toolbar for the ALT / CRT / MOTION bar =================== */
+/* Uses the same --w95-* vars you already added */
+
+
+/* tiny caption above the bar (optional) */
+
+/* Win95 push buttons */
+
+
+
+/* classic dotted focus */
+
+
+
+/* ============================================================
+   MOBILE PASS — keep the desktop homepage intact, but make the
+   old 760px layout genuinely usable on phones.
+   ============================================================ */
+@media (max-width: 700px){
+  *, *::before, *::after{ box-sizing:border-box; }
+
+  html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    overflow-x:hidden;
+    min-width:0;
+  }
+
+  /* desktop-only display toys are hidden on phones */
+
+  /* gutter so the backdrop shows around the page, not a 6px sliver */
+  .page{
+    width:calc(100% - 36px) !important;
+    max-width:760px;
+    left:0 !important;
+    margin:14px auto 26px !important;
+    border-width:4px;
+    outline-width:2px;
+    box-shadow:0 0 18px var(--neon-blue), inset 0 0 4px #000;
+  }
+
+  /* the kirbys stay flanking and stay uncovered: the padding here is what
+     reserves their column, so the banner can only ever sit between them. */
+  #glitter-title{
+    width:100%;
+    min-width:0;
+    padding:8px 62px 4px !important;
+    margin:10px 0 6px !important;
+  }
+  #glitter-title img{
+    max-width:100%;
+  }
+  #glitter-title::before,
+  #glitter-title::after{
+    width:54px !important;
+    height:44px !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    filter:drop-shadow(0 0 3px var(--neon-blue));
+  }
+  #glitter-title::before{ left:3px !important; }
+  #glitter-title::after{ right:3px !important; }
+
+  .page > .marquee-wrap{
+    margin:8px 8px 10px;
+  }
+  .page > .marquee-wrap marquee{
+    font-size:12px;
+  }
+
+  /* Stack the desktop table. JS moves the non-nav sidebar bits below it. */
+  table.layout,
+  .layout tbody,
+  .layout tr,
+  .layout td{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .sidebar{
+    width:100% !important;
+    padding:9px 7px 10px !important;
+    border:0 !important;
+    border-bottom:4px ridge var(--neon-purple) !important;
+    box-shadow:
+      inset -1px -1px 0 var(--w95-dark),
+      inset  1px  1px 0 var(--w95-hi),
+      inset -2px -2px 0 var(--w95-shadow),
+      inset  2px  2px 0 #dfdfdf !important;
+  }
+
+  .sidebar-extras{
+    width:calc(100% - 14px);
+    margin:10px auto 12px;
+    padding:12px 7px 10px;
+    background:var(--w95-bg);
+    color:#000;
+    border:3px groove #c0c0c0;
+    box-shadow:
+      inset -1px -1px 0 var(--w95-dark),
+      inset  1px  1px 0 var(--w95-hi);
+  }
+
+  /* two-column launch-menu feel, then one column on very small phones */
+  .sidebar .nav{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:6px;
+    width:calc(100% - 14px);
+    margin:10px 7px 12px;
+    padding:10px 6px 7px;
+    background:var(--w95-bg);
+  }
+  .sidebar .nav a{
+    min-width:0;
+    min-height:44px;
+    margin:0 !important;
+    padding:7px 7px !important;
+    font-size:14px !important;
+    letter-spacing:0 !important;
+    line-height:1.15;
+    overflow-wrap:anywhere;
+  }
+  .sidebar .nav-icon{
+    width:22px;
+    height:22px;
+    flex:0 0 22px;
+  }
+
+  /* the little info block had inline white text intended for the old dark sidebar */
+  .sidebar-extras > div[style*="color:#fff"]{
+    color:#000 !important;
+    font-size:13px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+  .sticker-wall{
+    display:flex !important;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:7px;
+    padding:14px 7px 8px;
+  }
+  .sticker-wall img,
+  .sticker-wall .wide{
+    width:auto !important;
+    max-width:min(43%, 150px) !important;
+    max-height:72px;
+    object-fit:contain;
+  }
+  .sticker-controls{
+    flex-wrap:wrap;
+  }
+  .sticker-controls button,
+  .sound-toggle{
+    min-height:42px;
+    font-size:14px;
+  }
+
+  .status-say{
+    grid-template-columns:58px minmax(0,1fr);
+    gap:8px;
+    margin:12px 5px 8px;
+  }
+  .status-avatar{
+    width:58px;
+    height:58px;
+  }
+  #statuscafe-content{
+    overflow-wrap:anywhere;
+  }
+
+  td.content{
+    width:100% !important;
+    min-width:0 !important;
+    padding:10px 8px 14px !important;
+    border:0 !important;
+  }
+  td.content::before{ display:none; }
+
+  td.content .post{
+    width:100%;
+    min-width:0;
+    margin:11px 0 18px;
+    padding:10px 10px 12px;
+    overflow-wrap:anywhere;
+  }
+  td.content .post p{
+    max-width:100%;
+  }
+
+  .welcome-flex{
+    display:block;
+    width:100%;
+  }
+  .y2k-welcome{
+    width:100%;
+    margin:2px 0 10px;
+    padding:0;
+    font-size:clamp(31px, 11vw, 44px);
+    line-height:1.04;
+    text-align:left;
+  }
+  .hello-gif{
+    display:block;
+    width:min(78%, 235px) !important;
+    max-width:100%;
+    margin:4px auto 8px;
+  }
+
+  .warnline{
+    display:grid;
+    grid-template-columns:24px minmax(0,1fr) 24px;
+    gap:6px;
+    width:100%;
+    font-size:13px;
+    line-height:1.25;
+    text-align:center;
+  }
+  .warn-ico{
+    width:24px;
+    height:24px;
+  }
+
+  /* old embedded widgets may retain fixed intrinsic widths */
+  td.content iframe{
+    max-width:100% !important;
+  }
+  td.content .post iframe:not(.chat-frame){
+    display:block;
+    width:min(100%, 314px) !important;
+    margin:0 auto;
+  }
+  .chat-frame{
+    width:100% !important;
+    height:72svh !important;
+    min-height:440px;
+  }
+
+  .marquee-wrap.small{
+    margin:6px 2px 12px;
+  }
+  .marquee-wrap.small marquee{
+    font-size:12px;
+  }
+
+  .button-strip{
+    margin:8px 7px 10px;
+    padding:8px 6px;
+    gap:7px;
+  }
+  .button-strip img{
+    max-width:46%;
+    height:auto;
+    max-height:31px;
+  }
+
+  .footer{
+    padding:7px 5px 9px;
+    font-size:12px;
+    overflow:hidden;
+  }
+
+  /* keep the mascots, but stop them covering half the viewport */
+  #dancecat,
+  #spinguy{
+    width:min(20vw, 72px) !important;
+    max-width:72px !important;
+    bottom:6px !important;
+    filter:drop-shadow(0 0 5px rgba(0,0,0,.55));
+  }
+  #dancecat{ right:5px !important; }
+  #spinguy{ left:5px !important; }
+
+  /* hover-only cursor decorations are irrelevant on touchscreens */
+  .neo-sparkle{ display:none !important; }
+}
+
+@media (max-width: 390px){
+  #glitter-title{
+    padding-inline:48px !important;
+  }
+  #glitter-title::before,
+  #glitter-title::after{
+    width:42px !important;
+    height:34px !important;
+  }
+
+  .sidebar .nav{
+    grid-template-columns:1fr;
+  }
+
+  .status-say{
+    display:block;
+  }
+  .status-avatar{
+    display:block;
+    margin:0 auto 9px;
+  }
+  .status-bubble::after{ display:none; }
+
+  .button-strip img{
+    max-width:90%;
+  }
+}
+
+@media (hover:none) and (pointer:coarse){
+  html, body{ cursor:auto; }
+  .nav a:hover,
+  .sticker-wall img:hover{
+    transform:none;
+    filter:none;
+  }
+}
+
+
+/* ============================================================
+   2026-08-28: GIF DEPOSIT. found a folder of them, put them in.
+   everything below here is new. nothing above was touched.
+   ============================================================ */
+
+/* --- reusable Win95 group box (matches the sidebar theme) --- */
+.w95-box{
+  position: relative;
+  margin: 16px 5px 12px;
+  padding: 14px 8px 9px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+  text-align: center;
+}
+.w95-box::before{
+  content: attr(data-label);
+  position: absolute;
+  top: -9px; left: 10px;
+  padding: 0 4px;
+  background: var(--w95-bg);
+  font: 12px/1 "Tahoma","MS Sans Serif",sans-serif;
+  color: #000;
+}
+.w95-box .cap{
+  margin: 6px 2px 0;
+  font: 11px/1.45 "Tahoma","MS Sans Serif",sans-serif;
+  color: #333;
+}
+
+/* --- the server, allegedly --- */
+.server-shot img{
+  display: block;
+  width: 100%;
+  max-width: 168px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  background: #000;
+}
+
+/* --- archive curio banner in the sidebar --- */
+.archive-shot img{
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+
+/* --- the award. no caption. it speaks for itself. --- */
+.award-solo{
+  margin: 18px 0 20px;
+  text-align: center;
+}
+.award-solo img{
+  max-width: min(340px, 92%);
+  height: auto;
+  image-rendering: pixelated;
+  transform: rotate(-1deg);
+}
+
+/* --- 3D GALLERY window --- */
+.win95-window{
+  margin: 16px 0 22px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: inset -1px -1px 0 var(--w95-shadow), inset 1px 1px 0 #dfdfdf;
+}
+.win95-window .titlebar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 2px;
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font: bold 12px/1.3 "Tahoma","MS Sans Serif",sans-serif;
+}
+.win95-window .titlebar .tb-buttons{
+  display: flex;
+  gap: 2px;
+}
+.win95-window .titlebar .tb-buttons span{
+  width: 16px; height: 14px;
+  display: grid; place-items: center;
+  background: var(--w95-bg);
+  color: #000;
+  border: 1px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  font: 10px/1 "Tahoma",sans-serif;
+}
+.win95-window .win-body{
+  margin: 2px;
+  padding: 12px 10px 10px;
+  background: #008080;              /* the teal desktop, obviously */
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.win95-window .win-status{
+  margin: 2px;
+  padding: 3px 6px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  font: 11px/1.4 "Tahoma","MS Sans Serif",sans-serif;
+  color: #222;
+}
+
+.plinth-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.plinth{
+  width: 168px;
+  padding: 9px 8px 7px;
+  background: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  text-align: center;
+}
+.plinth img{
+  display: block;
+  width: 100%;
+  max-width: 132px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.plinth .lab{
+  margin-top: 7px;
+  color: var(--neon-green);
+  font: 10px/1.4 "Courier New",monospace;
+  letter-spacing: .4px;
+}
+
+/* --- the power plant --- */
+.hamster-plant{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 16px;
+  margin: 10px 20px 4px;
+  padding: 8px 12px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
+}
+.hamster-plant figure{
+  margin: 0;
+  text-align: center;
+}
+.hamster-plant img{
+  display: block;
+  height: 58px;
+  width: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.hamster-plant figcaption{
+  margin-top: 3px;
+  font: 9px/1.3 "Courier New",monospace;
+  color: #444;
+}
+.hamster-plant .hp-title{
+  font: bold 13px/1.35 "Tahoma","MS Sans Serif",sans-serif;
+  letter-spacing: .4px;
+  text-align: center;
+}
+.hamster-plant .hp-sub{
+  display: block;
+  margin-top: 3px;
+  font: 10px/1.4 "Courier New",monospace;
+  font-weight: normal;
+  color: #444;
+}
+
+@media (max-width: 700px){
+  .w95-box{ margin: 16px 2px 12px; }
+  .award-solo img{ max-width: 92%; }
+  .win95-window{ margin: 12px 0 18px; }
+  .win95-window .win-body{ padding: 10px 6px 8px; }
+  .plinth{ width: calc(50% - 8px); min-width: 128px; padding: 7px 5px 6px; }
+  .plinth img{ max-width: 104px; }
+  .hamster-plant{
+    margin: 8px 7px 4px;
+    padding: 8px 8px;
+    gap: 8px 12px;
+  }
+  .hamster-plant img{ height: 46px; }
+  .hamster-plant .hp-title{ font-size: 12px; }
+}
+
+
+/* ============================================================
+   2026-08-30: GIF DEPOSIT III. the folder was deeper than i thought.
+   additive only. nothing above this line was touched.
+   ============================================================ */
+
+/* --- a planet, orbiting the system message --- */
+.marquee-planet{
+  height: 26px;
+  width: auto;
+  vertical-align: middle;
+  margin: 0 8px;
+  image-rendering: pixelated;
+}
+
+/* --- animated checkerboard rule --- */
+.div-checker{
+  height: 20px;
+  margin: 14px 0;
+  border: 0;
+  background: url("dividerblackwhite.gif") repeat-x center / auto 100%;
+  image-rendering: pixelated;
+}
+.sidebar .div-checker{ margin: 12px 4px; }
+
+/* --- window chrome, demoted to a divider --- */
+.div-win{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 16px 0 10px;
+  image-rendering: pixelated;
+}
+
+/* --- the roadworks banner --- */
+.construction-bar{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 14px 0 4px;
+  image-rendering: pixelated;
+}
+
+/* --- sidebar webcam, permanently recording nothing --- */
+.cam-screen{
+  padding: 5px;
+  background: #000;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.cam-screen img{
+  display: block;
+  width: 100%;
+  max-width: 152px;
+  height: auto;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.cam-osd{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 0 1px;
+  font: 9px/1.4 "Courier New", monospace;
+  color: var(--neon-green);
+}
+.cam-osd .rec{ color: #ff2b2b; }
+
+/* --- the lamp --- */
+.wish-lamp{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 16px 0 20px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #111;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+}
+.wish-lamp img{
+  flex: 0 0 auto;
+  height: 104px;
+  width: auto;
+  image-rendering: pixelated;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.wish-lamp img:active{ transform: scale(.96) rotate(-2deg); }
+.wish-lamp .wish-copy{
+  flex: 1 1 210px;
+  min-width: 0;
+  font: 12px/1.55 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+}
+.wish-lamp .wish-out{
+  display: block;
+  margin-top: 5px;
+  padding: 5px 7px;
+  background: #000;
+  color: var(--neon-green);
+  font: 11px/1.5 "Courier New", monospace;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  overflow-wrap: anywhere;
+}
+.wish-lamp .wish-count{
+  display: block;
+  margin-top: 4px;
+  font: 10px/1.4 "Courier New", monospace;
+  color: #555;
+}
+
+/* --- pikachu, loitering in the pet enclosure --- */
+.pet-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 14px;
+}
+.pet-sidekick{
+  flex: 0 0 auto;
+  width: 150px;
+  max-width: 46%;
+  height: auto;
+  image-rendering: pixelated;
+  align-self: center;
+}
+.pet-sidekick-cap{
+  width: 100%;
+  margin: 6px 0 0;
+  font: 10px/1.45 "Courier New", monospace;
+  color: #555;
+}
+
+/* --- DANCEFLOOR.EXE --- */
+.win95-window .titlebar .tb-ico{
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: -3px;
+  image-rendering: pixelated;
+}
+.win95-window.dancefloor .win-body{
+  background: url("dividerblackwhite.gif") repeat;
+  image-rendering: pixelated;
+  padding: 14px 10px 12px;
+}
+.floor-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.dancer{
+  width: 124px;
+  margin: 0;
+  padding: 8px 6px 6px;
+  background: #fff;              /* these gifs ship on white, so give them white */
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.55);
+  text-align: center;
+}
+.dancer img{
+  display: block;
+  height: 104px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  image-rendering: pixelated;
+}
+.dancer .lab{
+  margin-top: 7px;
+  font: 10px/1.4 "Courier New", monospace;
+  color: #333;
+  letter-spacing: .3px;
+}
+
+/* --- taskbar --- */
+.taskbar{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 3px 4px;
+  background: var(--w95-bg);
+  color: #000;
+  border-top: 2px solid var(--w95-hi);
+  box-shadow: inset 0 1px 0 #dfdfdf;
+  font: 12px/1 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+}
+.taskbar button{
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: var(--w95-bg);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: inset -1px -1px 0 var(--w95-shadow), inset 1px 1px 0 var(--w95-hi);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.taskbar button:hover{ background: var(--w95-mid); }
+.taskbar button:active,
+.taskbar button[aria-expanded="true"]{
+  border-color: var(--w95-dark) var(--w95-hi) var(--w95-hi) var(--w95-dark);
+  box-shadow: inset 1px 1px 0 var(--w95-shadow), inset -1px -1px 0 var(--w95-hi);
+  background: var(--w95-mid);
+}
+.taskbar button:focus-visible{ outline: 1px dotted #000; outline-offset: -4px; }
+.taskbar .start{ font-weight: bold; }
+.taskbar .start img{ width: 19px; height: 19px; image-rendering: pixelated; }
+.taskbar .tray{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 7px;
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+}
+.taskbar .tray img{
+  height: 19px;
+  width: auto;
+  image-rendering: pixelated;
+  cursor: help;
+}
+.taskbar .clock{ font: 11px/1 "Tahoma","MS Sans Serif",sans-serif; }
+
+.start-menu{
+  position: absolute;
+  left: 2px;
+  bottom: calc(100% + 2px);
+  z-index: 500;
+  min-width: 188px;
+  padding: 3px;
+  background: var(--w95-bg);
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.5);
+}
+.start-menu[hidden]{ display: none; }
+.start-menu a,
+.start-menu button.sm-item{
+  display: block;
+  width: auto;
+  padding: 5px 10px;
+  color: #000;
+  font: 12px/1.25 "Tahoma","MS Sans Serif",sans-serif;
+  text-decoration: none;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+}
+.start-menu a:hover,
+.start-menu button.sm-item:hover{ background: #000080; color: #fff; }
+.start-menu hr{
+  height: 2px;
+  margin: 3px 2px;
+  border: 0;
+  border-top: 1px solid var(--w95-shadow);
+  border-bottom: 1px solid var(--w95-hi);
+}
+
+@media (max-width: 700px){
+  .marquee-planet{ height: 20px; margin: 0 4px; }
+  .wish-lamp{ justify-content: center; text-align: center; }
+  .wish-lamp img{ height: 88px; }
+  .pet-sidekick{ width: 128px; max-width: 44%; }
+  .dancer{ width: calc(50% - 8px); min-width: 116px; padding: 6px 4px 5px; }
+  .dancer img{ height: 84px; }
+  .cam-screen img{ max-width: 130px; }
+  .taskbar{ flex-wrap: wrap; gap: 4px; padding: 4px; }
+  .taskbar .tray{ margin-left: auto; }
+  .taskbar button{ padding: 5px 6px; font-size: 11px; }
+  .taskbar .task-label{ font-size: 11px; }
+}
+
+  </style>
 </head>
 <body>
-<canvas id="threebg" aria-hidden="true"></canvas>
-<canvas id="neoNebula" aria-hidden="true"></canvas>
-<div class="page">
+
+  <canvas id="threebg" aria-hidden="true"></canvas>
+
+  <canvas id="neoNebula" aria-hidden="true"></canvas>
+  
+  <div class="page">
 <h1 id="glitter-title"><img src="welcometocyber.gif" alt="Welcome to Cyber Space"></h1>
-<div class="marquee-wrap"><marquee behavior="alternate" scrollamount="6"><img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true"> &#9733; cool people zone &#9733; best viewed on desktop &#9733; <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true"></marquee></div>
-<table class="layout"><tr><td class="sidebar">
-<div class="nav">
-<a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-<a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-<a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
+    <div class="marquee-wrap">
+      <marquee behavior="alternate" scrollamount="6">
+        <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true">
+        &#9733; cool people zone &#9733; best viewed on desktop &#9733;
+        <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true">
+      </marquee>
+    </div>
+
+    <table class="layout">
+      <tr>
+        <td class="sidebar">
+          <div class="nav">
+            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
 <a href="chat.html"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-<a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-<a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-<a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-<a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
+            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
+          </div>
+
+          <div class="sidebar-extras">
+          <div style="text-align:center; padding:10px">
+            <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
+            <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
+          </div>
+
+<div style="padding: 0 10px 12px; color:#fff; font-size:12px">
+  <div>
+    <a href="https://catofminerva.com/contact.html">Email Me</a>
+  </div>
+  <div style="margin-top:6px">
+    <a href="https://catofminerva.com/guestbook.html">Sign my Guestbook</a>
+  </div>
+  <div style="margin-top:6px">
+    Last updated: <span id="lastUpdated">sometime in 1999</span>
+  </div>
 </div>
-<div class="sidebar-extras">
-<div style="text-align:center; padding:10px"><span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span><span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span></div>
-<div style="padding: 0 10px 12px; color:#fff; font-size:12px"><div><a href="https://catofminerva.com/contact.html">Email Me</a></div><div style="margin-top:6px"><a href="https://catofminerva.com/guestbook.html">Sign my Guestbook</a></div><div style="margin-top:6px">Last updated: <span id="lastUpdated">sometime in 1999</span></div></div>
-<div class="w95-box server-shot" data-label="Server"><img src="computerinspace.gif" alt="a desktop computer floating in space"><p class="cap">THE SERVER (artist&rsquo;s impression). it is out there. it is cold. it is serving you this page anyway.</p></div>
-<div class="sticker-wall"><img src="arabic.gif" alt="Arabic"><img src="qatar.gif" alt="Qatar"><img src="pali.gif" alt="Palestine"><img src="sleepycat.gif" alt="Sleepy cat"><img src="peta.gif" alt="PETA"><img src="fist.gif" alt="Fist"><img src="freespeechonline.gif" alt="Free Speech Online"><img src="scifi.gif" alt="Sci-Fi" class="wide"><img src="pals.png" alt="Sci-Fi" class="wide"><img src="intifada.gif" alt="Sci-Fi" class="wide"></div>
-<div class="sticker-controls"><button id="shuffleStickers">Shuffle</button><button id="resetStickers" title="Put them back how they were">Reset</button></div>
-<div class="status-say"><a class="status-avatar" href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener"><img src="meme.gif" alt="speaker" loading="lazy" onerror="this.src='sleepycat.gif'"></a><div class="status-bubble"><div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content">loading&#8230;</div></div></div></div>
-<div class="w95-box" data-label="Webcam"><div class="cam-screen"><img src="manpeakingintoscreen.gif" alt="a man leaning in towards the camera"><div class="cam-osd"><span class="rec">&#9679; REC</span><span>CAM 01 &#183; LOBBY</span></div></div><p class="cap">he has been checking on the site since 2003. he does not know the tab is still open.</p></div>
+
+          <!-- where this website actually lives -->
+          <div class="w95-box server-shot" data-label="Server">
+            <img src="computerinspace.gif" alt="a desktop computer floating in space">
+            <p class="cap">THE SERVER (artist&rsquo;s impression). it is out there. it is cold. it is serving you this page anyway.</p>
+          </div>
+
+          <div class="sticker-wall">
+  <img src="arabic.gif" alt="Arabic">
+  <img src="qatar.gif" alt="Qatar">
+  <img src="pali.gif" alt="Palestine">
+  <img src="sleepycat.gif" alt="Sleepy cat">
+  <img src="peta.gif" alt="PETA">
+  <img src="fist.gif" alt="Fist">
+  <img src="freespeechonline.gif" alt="Free Speech Online">
+  <img src="scifi.gif" alt="Sci-Fi" class="wide">
+<img src="pals.png" alt="Sci-Fi" class="wide">
+<img src="intifada.gif" alt="Sci-Fi" class="wide">
+</div>
+
+          <div class="sticker-controls">
+  <button id="shuffleStickers">Shuffle</button>
+  <button id="resetStickers"   title="Put them back how they were">Reset</button>
+</div>
+
+<!-- Status Cafe speaking widget -->
+<div class="status-say">
+  <a class="status-avatar" href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">
+    <img src="meme.gif" alt="speaker" loading="lazy" onerror="this.src='sleepycat.gif'">
+  </a>
+
+  <div class="status-bubble">
+    <!-- official embed, unchanged -->
+    <div id="statuscafe">
+      <div id="statuscafe-username"></div>
+      <div id="statuscafe-content">loading&#8230;</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2026-08-30: CAM 01 -->
+<div class="w95-box" data-label="Webcam">
+  <div class="cam-screen">
+    <img src="manpeakingintoscreen.gif" alt="a man leaning in towards the camera">
+    <div class="cam-osd">
+      <span class="rec">&#9679; REC</span>
+      <span>CAM 01 &#183; LOBBY</span>
+    </div>
+  </div>
+  <p class="cap">he has been checking on the site since 2003. he does not know the tab is still open.</p>
+</div>
+
 <div class="div-checker" aria-hidden="true"></div>
-<div class="w95-box archive-shot" data-label="Archive"><img src="saddamscyberpalace.gif" alt="Saddam's Cyber Palace banner"><p class="cap">rescued from a dead geocities ring. i have no further information.</p></div>
-<div class="award-solo"><img src="excellentwebsiteaward.gif" alt="excellent website award"></div>
+
+<!-- salvaged banner, kept purely because it exists -->
+<div class="w95-box archive-shot" data-label="Archive">
+  <img src="saddamscyberpalace.gif" alt="Saddam's Cyber Palace banner">
+  <p class="cap">rescued from a dead geocities ring. i have no further information.</p>
+</div>
+
+<div class="award-solo">
+  <img src="excellentwebsiteaward.gif" alt="excellent website award">
+</div>
+
 <script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
-</div></td>
-<td class="content"><hr class="retro">
-<div class="post"><div class="welcome-flex"><h3 class="y2k-welcome"><span style="color:#FF0000">w</span><span style="color:#FF5100">e</span><span style="color:#FFA100">l</span><span style="color:#FFF200">c</span><span style="color:#BCFF00">o</span><span style="color:#6BFF00">m</span><span style="color:#1BFF00">e</span> <span style="color:#00FF36">t</span><span style="color:#00FF86">o</span> <span style="color:#00FFD7">m</span><span style="color:#00D7FF">y</span> <span style="color:#0086FF">w</span><span style="color:#0036FF">e</span><span style="color:#1B00FF">b</span><span style="color:#6B00FF">s</span><span style="color:#BC00FF">p</span><span style="color:#FF00F2">a</span><span style="color:#FF00A1">c</span><span style="color:#FF0051">e</span></h3><img src="hello.gif" alt="hello" class="hello-gif" loading="lazy"></div><div class="meta">1999 &#183;</div><p class="warnline"><img src="warning.gif" alt="Warning" class="warn-ico"><span>BEST VIEWED ON DESKTOP!!</span><img src="warning.gif" alt="" class="warn-ico" aria-hidden="true"></p><p>hi...still figuring this out lol</p><p>&nbsp;</p><p>i&rsquo;ve been messing with the html and it kinda works?? don&rsquo;t click around too much yet coz half the links are broken ;-)</p><br><p>&nbsp;</p><p>i&rsquo;m gonna add more posts when i get to it :')).</p></div>
-<div class="div-checker" aria-hidden="true"></div>
-<div class="wish-lamp"><img src="genie.gif" alt="genie" id="wishGenie" title="rub the lamp"><div class="wish-copy"><strong>THE LAMP</strong> &#183; found it in the same folder as everything else. click him and he grants one, terms unfavourable.<span class="wish-out" id="wishOut">he is asleep. click to wake him.</span><span class="wish-count" id="wishCount">wishes granted: 0</span></div></div>
-<div class="post"><h3>Pet and feed Zaki</h3><div class="meta">Virtual pet &#183; 2 occupants</div><div class="pet-row"><iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe><img src="pikadiglettQ.gif" alt="pikachu with a poke ball" class="pet-sidekick" loading="lazy"><p class="pet-sidekick-cap">unregistered second pet. wandered in, would not leave, keeps opening the ball at Zaki. feeding is not required, it eats the electricity.</p></div></div>
-<div class="win95-window" id="threedee"><div class="titlebar"><span>3D_GALLERY.EXE</span><span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span></div><div class="win-body"><div class="plinth-row"><div class="plinth"><img src="3dskullspin.gif" alt="spinning 3D skull"><div class="lab">SKULL.3DS &#9679; 24 fps &#9679; still cool</div></div><div class="plinth"><img src="3dpinkpantherhead.gif" alt="rotating 3D Pink Panther head"><div class="lab">PANTHER.3DS &#9679; renders in 1998 &#9679; unlicensed probably</div></div></div></div><div class="win-status">2 object(s) &#9679; rendering at maximum quality</div></div>
-<div class="win95-window dancefloor" id="danceflooor"><div class="titlebar"><span><img src="windowsflag.gif" alt="" class="tb-ico" aria-hidden="true">DANCEFLOOR.EXE</span><span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span></div><div class="win-body"><div class="floor-row"><figure class="dancer"><img src="dancingfigure.gif" alt="a man dancing"><figcaption class="lab">GUEST_01 &#9679; unnamed &#9679; will not stop</figcaption></figure><figure class="dancer"><img src="dancingsoldier.gif" alt="a soldier dancing"><figcaption class="lab">GUEST_02 &#9679; off duty &#9679; 500 frames</figcaption></figure><figure class="dancer"><img src="robot.gif" alt="a robot walking"><figcaption class="lab">STAFF &#9679; runs the lights &#9679; 9 frames only</figcaption></figure></div></div><div class="win-status">3 object(s) on the floor &#9679; music not included &#9679; :DDD</div></div>
-<img src="underconstruct.gif" alt="under construction" class="construction-bar"><div class="marquee-wrap small"><marquee scrollamount="4" direction="right">under construction &#9733; if the page looks weird blame netscape &#9733; ring me on icq 12345678</marquee></div><hr class="retro"><div class="post" id="chat-room"><h3>Live Chat</h3><div class="meta">web chat &#183; room=lobby</div><iframe class="chat-frame" src="chat.html?room=lobby&embed=1&v=2" title="Galaxy 981&rsquo;s Web Chat" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
-</td></tr></table>
-<div class="hamster-plant"><figure><img src="hamsterwheel.gif" alt="hamster running in a wheel"><figcaption>generator no.1</figcaption></figure><div class="hp-title">THIS SITE IS POWERED BY HAMSTERS<span class="hp-sub">uptime depends entirely on their mood. no refunds.</span></div><figure><img src="adancinghamster.gif" alt="dancing hamster"><figcaption>off shift</figcaption></figure></div>
-<img src="rainbowswirldivider.gif" alt="" class="swirl" aria-hidden="true"><img src="dividerwindows.gif" alt="" class="div-win" aria-hidden="true">
-<div class="button-strip" aria-label="buttons"><img src="icc.gif" alt="ICC"><img src="dp.gif" alt="DP"><img src="anarchynow.jpeg" alt="Anarchy Now"><img src="freespeech.gif" alt="Free Speech"><img src="privacy.gif" alt="Privacy"><img src="piracy.png" alt="Piracy"><img src="hamsters.gif" alt="Piracy"><img src="sucks.gif" alt="Piracy"><img src="riversea.gif" alt="Piracy"><img src="notfriendlytomobile.gif" alt="Piracy"><img src="crypto.png" alt="Piracy"><img src="bestviewed.gif" alt="Piracy"><img src="pirates.gif" alt="Piracy"><img src="clubpenguin.gif" alt="Club Penguin"><img src="googlethebrain.gif" alt="Google is the brain"><img src="nyan.gif" alt="Nyan"><img src="y2kcompliant.png" alt="Y2K compliant"><img src="hatesquarespace.png" alt="I hate Squarespace"><img src="dragons.gif" alt="Dragons"><img src="piratemovies.gif" alt="Pirate movies"><img src="survivedy2k.gif" alt="I survived Y2K"><img src="thisuserisradioactive.jpg" alt="This user is radioactive"><img src="eattherichbutton.jpg" alt="Eat the rich"></div>
-<div class="footer"><marquee scrollamount="3" direction="right">&copy; 1999&ndash;2000 Galaxy 981 &mdash; Part of the Galactic Webring &#183; <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee></div>
-<div class="taskbar" id="taskbar"><button class="start" id="startBtn" type="button" aria-expanded="false" aria-controls="startMenu"><img src="windowsflag.gif" alt="">Start</button><div class="start-menu" id="startMenu" hidden><a href="about.html">About this site</a><a href="blog_posts.html">Entries</a><a href="guestbook.html">Sign the guestbook</a><a href="coolsite.html">Kool Webpages</a><hr><button class="sm-item" type="button" data-jump="#danceflooor">Go to the dancefloor</button><button class="sm-item" type="button" data-jump="#threedee">Go to 3D_GALLERY</button><hr><button class="sm-item" type="button" id="shutDownBtn">Shut Down&#8230;</button></div><button class="task" type="button" data-jump="#threedee"><span class="task-label">3D_GALLERY.EXE</span></button><button class="task" type="button" data-jump="#danceflooor"><span class="task-label">DANCEFLOOR.EXE</span></button><div class="tray"><img src="mewtwo.gif" alt="mewtwo" title="MEWTWO.EXE - background process, cannot be ended"><span class="clock" id="taskClock">--:--</span></div></div>
-<button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">&#128263; sound</button>
+          </div><!-- /.sidebar-extras -->
+
+          
+        </td>
+
+        <td class="content">
+          <hr class="retro">
+
+          <div class="post">
+<div class="welcome-flex">
+  <h3 class="y2k-welcome">
+    <span style="color:#FF0000">w</span><span style="color:#FF5100">e</span><span style="color:#FFA100">l</span><span style="color:#FFF200">c</span><span style="color:#BCFF00">o</span><span style="color:#6BFF00">m</span><span style="color:#1BFF00">e</span>
+    <span style="color:#00FF36">t</span><span style="color:#00FF86">o</span>
+    <span style="color:#00FFD7">m</span><span style="color:#00D7FF">y</span>
+    <span style="color:#0086FF">w</span><span style="color:#0036FF">e</span><span style="color:#1B00FF">b</span><span style="color:#6B00FF">s</span><span style="color:#BC00FF">p</span><span style="color:#FF00F2">a</span><span style="color:#FF00A1">c</span><span style="color:#FF0051">e</span>
+    <!-- keep your blinking ! if you want -->
+    <!-- <span class="blink" style="color:#fff">!</span> -->
+  </h3>
+  <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
 </div>
-<script>
-(()=>{try{const key='geocities_hit_counter';const n=parseInt(localStorage.getItem(key)||'0',10)+1;localStorage.setItem(key,n);document.getElementById('hitCount').textContent=String(n).padStart(6,'0')}catch(e){}})();
-document.getElementById('lastUpdated').textContent=document.lastModified||'1999-08-01';
-(()=>{document.querySelectorAll('.nav a').forEach(a=>{a.style.marginLeft=(6+Math.floor(Math.random()*7))+'px';a.style.fontSize=(12+Math.floor(Math.random()*3))+'px';if(Math.random()<.4)a.style.letterSpacing='1px'})})();
-(()=>{const seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let buf=[];document.addEventListener('keydown',e=>{buf.push(e.key.length===1?e.key.toLowerCase():e.key);buf=buf.slice(-seq.length);if(seq.every((k,i)=>k===buf[i])){document.documentElement.classList.add('hyperspace');setTimeout(()=>document.documentElement.classList.remove('hyperspace'),650)}})})();
-(()=>{document.querySelectorAll('.page a[href]').forEach(a=>{const url=a.getAttribute('href')||'';if(url.startsWith('#')||/^(https?:)?\/\//i.test(url))return;a.addEventListener('click',e=>{e.preventDefault();document.documentElement.classList.add('vhs');setTimeout(()=>{window.location.href=url},200)})})})();
-setInterval(()=>{document.documentElement.classList.add('flyby');setTimeout(()=>document.documentElement.classList.remove('flyby'),1700)},14000);
-(()=>{const h=new Date().getHours();document.documentElement.classList.add((h>=6&&h<17)?'morning':'night')})();
-(()=>{const btn=document.getElementById('soundToggle'),KEY='g981_ui_sound';let enabled=false;try{enabled=localStorage.getItem(KEY)==='1'}catch(_){}let actx=null;function blip(freq=880){if(!enabled)return;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();const t=actx.currentTime,osc=actx.createOscillator(),gain=actx.createGain();osc.type='square';osc.frequency.value=freq;osc.frequency.setValueAtTime(freq,t);osc.frequency.exponentialRampToValueAtTime(freq*1.5,t+.05);gain.gain.setValueAtTime(.12,t);gain.gain.exponentialRampToValueAtTime(.0001,t+.11);osc.connect(gain).connect(actx.destination);osc.start(t);osc.stop(t+.12)}catch(_){}}function paint(){if(!btn)return;btn.setAttribute('aria-pressed',String(enabled));btn.textContent=enabled?'🔊 sound':'🔇 sound'}if(btn){paint();btn.addEventListener('click',()=>{enabled=!enabled;try{localStorage.setItem(KEY,enabled?'1':'0')}catch(_){}paint();if(enabled)blip(660)});document.querySelectorAll('.nav a').forEach(el=>{el.addEventListener('pointerdown',()=>blip());el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')blip()})})}document.querySelectorAll('.page a[href]').forEach(aTag=>{const url=aTag.getAttribute('href')||'';if(url.startsWith('#')||/^(https?:)?\/\//i.test(url))return;aTag.addEventListener('click',e=>{e.preventDefault();document.documentElement.classList.add('vhs');setTimeout(()=>{window.location.href=url},350)})})})();
-(()=>{const wall=document.querySelector('.sticker-wall');if(!wall)return;const key='sticker_order_v1',imgs=Array.from(wall.querySelectorAll('img')),idOf=img=>img.getAttribute('src')||img.alt,original=imgs.map(idOf);function apply(order){const map=new Map(imgs.map(img=>[idOf(img),img]));order.forEach(id=>{const img=map.get(id);if(img)wall.appendChild(img)})}try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(Array.isArray(saved)&&saved.length)apply(saved)}catch(_){}function shuffle(){const order=Array.from(wall.querySelectorAll('img')).map(idOf);for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}apply(order);localStorage.setItem(key,JSON.stringify(order));wall.classList.add('shuffled');setTimeout(()=>wall.classList.remove('shuffled'),220)}function reset(){apply(original);localStorage.setItem(key,JSON.stringify(original))}document.getElementById('shuffleStickers')?.addEventListener('click',shuffle);document.getElementById('resetStickers')?.addEventListener('click',reset)})();
-(()=>{const root=document.documentElement,STORE='neo_prefs_v2',prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;function load(){try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch(_){return{}}}let state=load();if(state.motion==null)state.motion=!prefersReduced;if(state.skin==null)state.skin=false;if(state.crt==null)state.crt=false;let canvas=document.getElementById('neoNebula');if(!canvas){canvas=document.createElement('canvas');canvas.id='neoNebula';document.body.prepend(canvas)}const ctx=canvas.getContext('2d');let DPR=Math.max(1,window.devicePixelRatio||1);function fit(){DPR=Math.max(1,window.devicePixelRatio||1);canvas.width=Math.floor(innerWidth*DPR);canvas.height=Math.floor(innerHeight*DPR);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px'}fit();addEventListener('resize',fit);const layers=[];function initStars(){layers.length=0;const counts=[80,120,200],speeds=[.06,.12,.24],sizes=[.6,1,1.4];for(let i=0;i<3;i++){const arr=[];for(let j=0;j<counts[i];j++)arr.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:sizes[i]*DPR*(.6+Math.random()*.8),a:.4+Math.random()*.6,tw:.5+Math.random(),ph:Math.random()*Math.PI*2,sp:speeds[i]*DPR*(.7+Math.random()*.6),hue:200+Math.random()*100});layers.push(arr)}}initStars();function render(){if(!state.skin){ctx.clearRect(0,0,canvas.width,canvas.height);requestAnimationFrame(render);return}ctx.clearRect(0,0,canvas.width,canvas.height);for(const arr of layers)for(const s of arr){if(state.motion){s.y-=s.sp;if(s.y< -2)s.y=canvas.height+2;s.ph+=.02*s.tw}const twinkle=.6+.4*Math.sin(s.ph);ctx.globalAlpha=s.a*twinkle;ctx.fillStyle=`hsl(${s.hue},90%,85%)`;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;requestAnimationFrame(render)}requestAnimationFrame(render);root.dataset.skin=state.skin?'neo':'';root.dataset.crt=state.crt?'on':'';document.body.dataset.crt=root.dataset.crt})();
-window.addEventListener('load',()=>{const u=document.getElementById('statuscafe-username');if(u&&u.textContent.trim()){const n=u.textContent.trim();u.innerHTML=`<a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">@${n}</a>`}});
-(()=>{const genie=document.getElementById('wishGenie'),out=document.getElementById('wishOut'),count=document.getElementById('wishCount');if(!genie||!out)return;const KEY='wishes_granted_v1',WISHES=['granted: your page now loads. it always did.','granted: one (1) working hyperlink. i will not say which.','granted: the hamsters get a lunch break. uptime unaffected.','granted: netscape renders it correctly on a machine you do not own.','granted: infinite wishes. void where prohibited, prohibited here.','granted: the guestbook is spam-free for eleven minutes.','granted: someone in 2004 bookmarked this. they never came back.','granted: your visitor counter is honest now. sorry.','granted: the server in space gets a blanket.','denied: that one was too big even for me. pick a smaller one.','granted: squarespace hears about it.','granted: the pet has been fed. by pikachu. incorrectly.'];let n=0;try{n=parseInt(localStorage.getItem(KEY)||'0',10)||0}catch(_){}const render=()=>{if(count)count.textContent='wishes granted: '+n};render();let last=-1;genie.addEventListener('click',()=>{let i=Math.floor(Math.random()*WISHES.length);if(i===last)i=(i+1)%WISHES.length;last=i;out.textContent=WISHES[i];n++;render();try{localStorage.setItem(KEY,String(n))}catch(_){}})})();
-(()=>{const bar=document.getElementById('taskbar');if(!bar)return;const clock=document.getElementById('taskClock');if(clock){const tick=()=>clock.textContent=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});tick();setInterval(tick,15000)}const startBtn=document.getElementById('startBtn'),menu=document.getElementById('startMenu'),setMenu=open=>{if(!menu||!startBtn)return;menu.hidden=!open;startBtn.setAttribute('aria-expanded',String(open))};startBtn?.addEventListener('click',e=>{e.stopPropagation();setMenu(menu.hidden)});document.addEventListener('click',e=>{if(menu&&!menu.hidden&&!menu.contains(e.target))setMenu(false)});bar.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelector(btn.getAttribute('data-jump'))?.scrollIntoView({behavior:'smooth',block:'center'});setMenu(false)}));document.getElementById('shutDownBtn')?.addEventListener('click',()=>{setMenu(false);document.documentElement.classList.add('vhs');setTimeout(()=>{document.documentElement.classList.remove('vhs');alert('It is now safe to turn off your computer.')},260)})})();
+
+            <div class="meta">1999 &#183;</div>
+<p class="warnline">
+  <img src="warning.gif" alt="Warning" class="warn-ico">
+  <span>BEST VIEWED ON DESKTOP!!</span>
+  <img src="warning.gif" alt="" class="warn-ico" aria-hidden="true">
+</p>
+            <p>hi...still figuring this out lol</p>
+            <p>&nbsp;</p>
+            <p>i&rsquo;ve been messing with the html and it kinda works?? don&rsquo;t click around too much yet coz half the links are broken ;-)</p>
+            <br>
+            <p>&nbsp;</p>
+            <p>i&rsquo;m gonna add more posts when i get to it :')).</p>
+          </div>
+
+          <div class="div-checker" aria-hidden="true"></div>
+
+          <!-- 2026-08-30: the lamp -->
+          <div class="wish-lamp">
+            <img src="genie.gif" alt="genie" id="wishGenie" title="rub the lamp">
+            <div class="wish-copy">
+              <strong>THE LAMP</strong> &#183; found it in the same folder as everything else.
+              click him and he grants one, terms unfavourable.
+              <span class="wish-out" id="wishOut">he is asleep. click to wake him.</span>
+              <span class="wish-count" id="wishCount">wishes granted: 0</span>
+            </div>
+          </div>
+
+          <div class="post">
+            <h3>Pet and feed Zaki</h3>
+            <div class="meta">Virtual pet &#183; 2 occupants</div>
+            <div class="pet-row">
+              <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
+              <img src="pikadiglettQ.gif" alt="pikachu with a poke ball" class="pet-sidekick" loading="lazy">
+              <p class="pet-sidekick-cap">
+                unregistered second pet. wandered in, would not leave, keeps opening the ball
+                at Zaki. feeding is not required, it eats the electricity.
+              </p>
+            </div>
+          </div>
+
+          <div class="win95-window" id="threedee">
+            <div class="titlebar">
+              <span>3D_GALLERY.EXE</span>
+              <span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span>
+            </div>
+            <div class="win-body">
+              <div class="plinth-row">
+                <div class="plinth">
+                  <img src="3dskullspin.gif" alt="spinning 3D skull">
+                  <div class="lab">SKULL.3DS &#9679; 24 fps &#9679; still cool</div>
+                </div>
+                <div class="plinth">
+                  <img src="3dpinkpantherhead.gif" alt="rotating 3D Pink Panther head">
+                  <div class="lab">PANTHER.3DS &#9679; renders in 1998 &#9679; unlicensed probably</div>
+                </div>
+              </div>
+            </div>
+            <div class="win-status">2 object(s) &#9679; rendering at maximum quality</div>
+          </div>
+
+          <!-- 2026-08-30: DANCEFLOOR.EXE -->
+          <div class="win95-window dancefloor" id="danceflooor">
+            <div class="titlebar">
+              <span><img src="windowsflag.gif" alt="" class="tb-ico" aria-hidden="true">DANCEFLOOR.EXE</span>
+              <span class="tb-buttons"><span>_</span><span>&#9633;</span><span>&#215;</span></span>
+            </div>
+            <div class="win-body">
+              <div class="floor-row">
+                <figure class="dancer">
+                  <img src="dancingfigure.gif" alt="a man dancing">
+                  <figcaption class="lab">GUEST_01 &#9679; unnamed &#9679; will not stop</figcaption>
+                </figure>
+                <figure class="dancer">
+                  <img src="dancingsoldier.gif" alt="a soldier dancing">
+                  <figcaption class="lab">GUEST_02 &#9679; off duty &#9679; 500 frames</figcaption>
+                </figure>
+                <figure class="dancer">
+                  <img src="robot.gif" alt="a robot walking">
+                  <figcaption class="lab">STAFF &#9679; runs the lights &#9679; 9 frames only</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="win-status">3 object(s) on the floor &#9679; music not included &#9679; :DDD</div>
+          </div>
+
+          <img src="underconstruct.gif" alt="under construction" class="construction-bar">
+
+          <div class="marquee-wrap small">
+            <marquee scrollamount="4" direction="right">
+              under construction &#9733; if the page looks weird blame netscape &#9733; ring me on icq 12345678
+            </marquee>
+          </div>
+
+          <hr class="retro">
+          <div class="post" id="chat-room">
+  <h3>Live Chat</h3>
+  <div class="meta">web chat &#183; room=lobby</div>
+<iframe class="chat-frame"
+        src="chat.html?room=lobby&embed=1&v=2"
+        title="Galaxy 981&rsquo;s Web Chat"
+        loading="lazy"
+        referrerpolicy="no-referrer"></iframe>
+
+</div>
+
+        </td>
+      </tr>
+    </table>
+
+    <div class="hamster-plant">
+      <figure>
+        <img src="hamsterwheel.gif" alt="hamster running in a wheel">
+        <figcaption>generator no.1</figcaption>
+      </figure>
+      <div class="hp-title">
+        THIS SITE IS POWERED BY HAMSTERS
+        <span class="hp-sub">uptime depends entirely on their mood. no refunds.</span>
+      </div>
+      <figure>
+        <img src="adancinghamster.gif" alt="dancing hamster">
+        <figcaption>off shift</figcaption>
+      </figure>
+    </div>
+
+    <img src="rainbowswirldivider.gif" alt="" class="swirl" aria-hidden="true">
+
+    <img src="dividerwindows.gif" alt="" class="div-win" aria-hidden="true">
+
+    <div class="button-strip" aria-label="buttons">
+  <img src="icc.gif" alt="ICC">
+  <img src="dp.gif" alt="DP">
+  <img src="anarchynow.jpeg" alt="Anarchy Now">
+  <img src="freespeech.gif" alt="Free Speech">
+  <img src="privacy.gif" alt="Privacy">
+  <img src="piracy.png" alt="Piracy">
+<img src="hamsters.gif" alt="Piracy">
+      <img src="sucks.gif" alt="Piracy">
+      <img src="riversea.gif" alt="Piracy">
+      <img src="notfriendlytomobile.gif" alt="Piracy">
+            <img src="crypto.png" alt="Piracy">
+      <img src="bestviewed.gif" alt="Piracy">
+  <img src="pirates.gif" alt="Piracy">
+  <!-- 2026-08-28: gif deposit, part two -->
+  <img src="clubpenguin.gif" alt="Club Penguin">
+  <img src="googlethebrain.gif" alt="Google is the brain">
+  <img src="nyan.gif" alt="Nyan">
+  <img src="y2kcompliant.png" alt="Y2K compliant">
+  <img src="hatesquarespace.png" alt="I hate Squarespace">
+  <img src="dragons.gif" alt="Dragons">
+  <img src="piratemovies.gif" alt="Pirate movies">
+  <!-- 2026-08-30: gif deposit, part three -->
+  <img src="survivedy2k.gif" alt="I survived Y2K">
+  <img src="thisuserisradioactive.jpg" alt="This user is radioactive">
+  <img src="eattherichbutton.jpg" alt="Eat the rich">
+
+  
+</div>
+
+    <div class="footer">
+      <marquee scrollamount="3" direction="right">&copy; 1999&ndash;2000 Galaxy 981 &mdash; Part of the Galactic Webring &#183; <a href="#" onclick="alert('Prev page broken'); return false;">Prev</a> | <a href="#" onclick="alert('Next page loading...'); return false;">Next</a></marquee>
+    </div>
+
+    <!-- 2026-08-30: taskbar -->
+    <div class="taskbar" id="taskbar">
+      <button class="start" id="startBtn" type="button" aria-expanded="false" aria-controls="startMenu">
+        <img src="windowsflag.gif" alt="">Start
+      </button>
+
+      <div class="start-menu" id="startMenu" hidden>
+        <a href="about.html">About this site</a>
+        <a href="blog_posts.html">Entries</a>
+        <a href="guestbook.html">Sign the guestbook</a>
+        <a href="coolsite.html">Kool Webpages</a>
+        <hr>
+        <button class="sm-item" type="button" data-jump="#danceflooor">Go to the dancefloor</button>
+        <button class="sm-item" type="button" data-jump="#threedee">Go to 3D_GALLERY</button>
+        <hr>
+        <button class="sm-item" type="button" id="shutDownBtn">Shut Down&#8230;</button>
+      </div>
+
+      <button class="task" type="button" data-jump="#threedee">
+        <span class="task-label">3D_GALLERY.EXE</span>
+      </button>
+      <button class="task" type="button" data-jump="#danceflooor">
+        <span class="task-label">DANCEFLOOR.EXE</span>
+      </button>
+
+      <div class="tray">
+        <img src="mewtwo.gif" alt="mewtwo" title="MEWTWO.EXE - background process, cannot be ended">
+        <span class="clock" id="taskClock">--:--</span>
+      </div>
+    </div>
+
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">&#128263; sound</button>
+  </div>
+
+
+  <script>
+/* hit counter */
+(() => {
+  try {
+    const key = 'geocities_hit_counter';
+    const n = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
+    localStorage.setItem(key, n);
+    document.getElementById('hitCount').textContent = String(n).padStart(6,'0');
+  } catch(e){}
+})();
+
+/* last updated label */
+document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
+
+/* tiny nav misalignment */
+(() => {
+  const links = document.querySelectorAll('.nav a');
+  links.forEach(a => {
+    const ml = 6 + Math.floor(Math.random()*7);
+    const fs = 12 + Math.floor(Math.random()*3);
+    a.style.marginLeft = ml + 'px';
+    a.style.fontSize   = fs + 'px';
+    if (Math.random() < 0.4) a.style.letterSpacing = '1px';
+  });
+})();
+
+
+
+
+/* Konami hyperspace: up up down down left right left right B A */
+(() => {
+  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let buf = [];
+  document.addEventListener('keydown', e => {
+    buf.push(e.key.length===1 ? e.key.toLowerCase() : e.key);
+    buf = buf.slice(-seq.length);
+    if (seq.every((k,i)=>k===buf[i])) {
+      document.documentElement.classList.add('hyperspace');
+      setTimeout(() => document.documentElement.classList.remove('hyperspace'), 650);
+    }
+  });
+})();
+
+/* VHS page transition on internal links */
+(() => {
+  document.querySelectorAll('.page a[href]').forEach(a => {
+    const url = a.getAttribute('href') || '';
+    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(() => { window.location.href = url; }, 200);
+    });
+  });
+})();
+
+/* periodic title flyby for the gifs flanking */
+setInterval(() => {
+  document.documentElement.classList.add('flyby');
+  setTimeout(() => document.documentElement.classList.remove('flyby'), 1700);
+}, 14000);
+
+/* time-of-day palette */
+(() => {
+  const h = new Date().getHours();
+  document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
+})();
+
+/* UI sounds.
+   this used to point at kawaii 8bit.mp3, which is a 57 second song, not a
+   click sound. it preloaded 1.4MB, the toggle made no noise at all so it
+   looked broken, and a nav click started the track and then navigated away
+   350ms later. the blip is synthesised now: nothing to download, it fires
+   instantly, and it finishes long before the page changes. */
+(() => {
+  const btn = document.getElementById('soundToggle');
+  const KEY = 'g981_ui_sound';
+
+  let enabled = false;
+  try { enabled = localStorage.getItem(KEY) === '1'; } catch (_) {}
+
+  let actx = null;
+  function blip(freq = 880) {
+    if (!enabled) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      const t = actx.currentTime;
+      const osc = actx.createOscillator();
+      const gain = actx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, t + 0.05);
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+      osc.connect(gain).connect(actx.destination);
+      osc.start(t);
+      osc.stop(t + 0.12);
+    } catch (_) {}
+  }
+
+  function paint() {
+    if (!btn) return;
+    btn.setAttribute('aria-pressed', String(enabled));
+    btn.textContent = enabled ? '\uD83D\uDD0A sound' : '\uD83D\uDD07 sound';
+  }
+
+  if (btn) {
+    paint();
+    btn.addEventListener('click', () => {
+      enabled = !enabled;
+      try { localStorage.setItem(KEY, enabled ? '1' : '0'); } catch (_) {}
+      paint();
+      /* the toggle itself has to make a noise, otherwise turning it on
+         looks exactly like nothing happening. */
+      if (enabled) blip(660);
+    });
+
+    document.querySelectorAll('.nav a').forEach(el => {
+      el.addEventListener('pointerdown', () => blip());
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') blip();
+      });
+    });
+  }
+
+  /* page transition. deliberately outside the button check so it still
+     runs when the sound button is absent. */
+  document.querySelectorAll('.page a[href]').forEach(aTag => {
+    const url = aTag.getAttribute('href') || '';
+    if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
+    aTag.addEventListener('click', e => {
+      e.preventDefault();
+      document.documentElement.classList.add('vhs');
+      setTimeout(() => { window.location.href = url; }, 350);
+    });
+  });
+})();
+
+
+  /* Sticker shuffle with visible buttons; remembers order */
+(() => {
+  const wall = document.querySelector('.sticker-wall');
+  if (!wall) return;
+
+  const key = 'sticker_order_v1';
+  const imgs = Array.from(wall.querySelectorAll('img'));
+  const idOf = img => img.getAttribute('src') || img.alt;
+
+  // Save the original order once
+  const original = imgs.map(idOf);
+
+  function apply(order){
+    const map = new Map(imgs.map(img => [idOf(img), img]));
+    order.forEach(id => { const img = map.get(id); if (img) wall.appendChild(img); });
+  }
+
+  // Load saved order if present
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || 'null');
+    if (Array.isArray(saved) && saved.length) apply(saved);
+  } catch(_) {}
+
+  function shuffle(){
+    const order = Array.from(wall.querySelectorAll('img')).map(idOf);
+    for (let i = order.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    apply(order);
+    localStorage.setItem(key, JSON.stringify(order));
+    wall.classList.add('shuffled'); setTimeout(()=>wall.classList.remove('shuffled'), 220);
+  }
+
+  function reset(){
+    apply(original);
+    localStorage.setItem(key, JSON.stringify(original));
+  }
+
+  document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
+  document.getElementById('resetStickers')?.addEventListener('click', reset);
+})();
+
+
+
+
+
+/* === NEO FINAL — single source of truth for alt skin, CRT, motion, sparkles === */
+
+(() => {
+  const root  = document.documentElement;
+  const STORE = 'neo_prefs_v2';
+
+  // Load prefs or seed them
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'{}'); }catch(_){ return {}; } }
+  function save(s){ localStorage.setItem(STORE, JSON.stringify(s)); }
+  let state = load();
+  if (state.motion == null) state.motion = !prefersReduced; // animate by default unless OS says reduce
+  if (state.skin   == null) state.skin   = false;           // alt skin off by default
+  if (state.crt    == null) state.crt    = false;
+
+  // Ensure helpers exist
+  let canvas = document.getElementById('neoNebula');
+  if (!canvas) { canvas = document.createElement('canvas'); canvas.id = 'neoNebula'; document.body.prepend(canvas); }
+  /* the display-options toolbar is gone. the skin/crt/motion state below
+     still loads from storage and applies, it just has no buttons now. */
+  const bar = null, altBtn = null, crtBtn = null, motBtn = null;
+
+  // Canvas starfield + aurora (cleaner than bubbles)
+  const ctx = canvas.getContext('2d');
+  let DPR = Math.max(1, window.devicePixelRatio || 1);
+  function fit(){
+    DPR = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width  = Math.floor(innerWidth * DPR);
+    canvas.height = Math.floor(innerHeight * DPR);
+    canvas.style.width  = innerWidth + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  fit(); addEventListener('resize', fit);
+
+  const layers = [];
+  function initStars(){
+    layers.length = 0;
+    const counts = [80, 120, 200], speeds = [0.06, 0.12, 0.24], sizes = [0.6, 1.0, 1.4];
+    for (let i=0;i<3;i++){
+      const arr = [];
+      for (let j=0;j<counts[i];j++){
+        arr.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: (sizes[i]*DPR) * (0.6 + Math.random()*0.8),
+          a: 0.4 + Math.random()*0.6,
+          tw: 0.5 + Math.random()*1.0,
+          ph: Math.random()*Math.PI*2,
+          sp: speeds[i]*DPR*(0.7 + Math.random()*0.6),
+          hue: 200 + Math.random()*100
+        });
+      }
+      layers.push(arr);
+    }
+  }
+  initStars();
+
+  function aurora(){
+    const g1 = ctx.createRadialGradient(canvas.width*0.2, canvas.height*0.1, 0, canvas.width*0.2, canvas.height*0.1, canvas.height*0.9);
+    g1.addColorStop(0, 'rgba(120,220,255,.08)'); g1.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g1; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const g2 = ctx.createRadialGradient(canvas.width*0.85, canvas.height*0.8, 0, canvas.width*0.85, canvas.height*0.8, canvas.height*0.9);
+    g2.addColorStop(0, 'rgba(220,120,255,.06)'); g2.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g2; ctx.fillRect(0,0,canvas.width,canvas.height);
+  }
+
+  function render(){
+    if (!state.skin){ ctx.clearRect(0,0,canvas.width,canvas.height); requestAnimationFrame(render); return; }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    aurora();
+    for (const arr of layers){
+      for (const s of arr){
+        if (state.motion){
+          s.y -= s.sp;
+          if (s.y < -2) s.y = canvas.height + 2;
+          s.ph += 0.02*s.tw;
+        }
+        const twinkle = 0.6 + 0.4*Math.sin(s.ph);
+        ctx.globalAlpha = s.a * twinkle;
+        ctx.fillStyle = `hsl(${s.hue}, 90%, 85%)`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+
+  // Sparkles that keep working after scroll (outside iframes)
+  let sparkleRoot = document.getElementById('neoSparkles');
+  if (!sparkleRoot){
+    sparkleRoot = document.createElement('div');
+    sparkleRoot.id = 'neoSparkles';
+    sparkleRoot.style.position = 'fixed';
+    sparkleRoot.style.inset = '0';
+    sparkleRoot.style.pointerEvents = 'none';
+    sparkleRoot.style.zIndex = '100000';
+    document.body.appendChild(sparkleRoot);
+  }
+  let last = 0, lastX = innerWidth/2, lastY = innerHeight/2;
+  function sparkle(ev){
+    if (!state.skin || !state.motion) return;
+    const x = ('clientX' in ev) ? ev.clientX : lastX;
+    const y = ('clientY' in ev) ? ev.clientY : lastY;
+    lastX = x; lastY = y;
+
+    const now = performance.now();
+    if (now - last < 16) return; last = now;
+
+    const d = document.createElement('div');
+    d.className = 'neo-sparkle';
+    d.style.left = x + 'px';
+    d.style.top  = y + 'px';
+    sparkleRoot.appendChild(d);
+    requestAnimationFrame(()=>{ d.style.transform='translate(-50%,-50%) scale(0.2)'; d.style.opacity='0'; });
+    setTimeout(()=> d.remove(), 700);
+  }
+  // Use window-level listeners so they continue after scroll; iframes cannot dispatch to parent
+  window.addEventListener('pointermove', sparkle, {passive:true});
+  window.addEventListener('mousemove', sparkle, {passive:true});
+  window.addEventListener('wheel', () => sparkle({clientX:lastX, clientY:lastY}), {passive:true});
+
+  // Subtle 3D tilt on the page in alt skin
+  const page = document.querySelector('.page');
+  function tilt(ev){
+    if (!page || !state.skin) { if(page) page.style.transform='none'; return; }
+    if (!state.motion) { page.style.transform='none'; return; }
+    const rx = ((ev.clientY / innerHeight) - 0.5) * -6; // degrees
+    const ry = ((ev.clientX / innerWidth)  - 0.5) *  6;
+    page.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+  }
+  window.addEventListener('pointermove', tilt, {passive:true});
+
+  // Apply prefs to DOM and buttons
+function apply(){
+  root.dataset.skin = state.skin ? 'neo' : '';
+  root.dataset.crt  = state.crt  ? 'on'  : '';
+  document.body.dataset.crt = root.dataset.crt;
+  if (altBtn) {
+    altBtn.textContent = state.skin ? 'ALT SKIN: ON' : 'ALT SKIN: OFF';
+    altBtn.setAttribute('aria-pressed', String(state.skin));     // ← add
+  }
+  if (crtBtn) {
+    crtBtn.textContent = state.crt ? 'CRT: ON' : 'CRT: OFF';
+    crtBtn.setAttribute('aria-pressed', String(state.crt));       // ← add
+  }
+  if (motBtn) {
+    motBtn.textContent = state.motion ? 'MOTION: ON' : 'MOTION: OFF';
+    motBtn.setAttribute('aria-pressed', String(state.motion));    // ← add
+  }
+  if (!state.skin && page) page.style.transform = 'none';
+}
+  apply();
+
+})();
+
+
+
+/* Make the username a link and “pop” the bubble when the feed updates */
+window.addEventListener('load', () => {
+  const u = document.getElementById('statuscafe-username');
+  if (u && u.textContent.trim()) {
+    const name = u.textContent.trim();
+    u.innerHTML = `<a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">@${name}</a>`;
+  }
+  const bubble = document.querySelector('.status-bubble');
+  const content = document.getElementById('statuscafe-content');
+  if (bubble && content) {
+    const obs = new MutationObserver(() => {
+      bubble.classList.add('pop');
+      setTimeout(() => bubble.classList.remove('pop'), 280);
+    });
+    obs.observe(content, { childList: true, characterData: true, subtree: true });
+  }
+});
+
+  window.addEventListener('load', () => {
+  const u = document.getElementById('statuscafe-username');
+  if (u && u.textContent.trim() && !u.querySelector('a')) {
+    const name = u.textContent.trim();
+    u.innerHTML = `<a href="https://status.cafe/users/catofminerva" target="_blank" rel="noopener">@${name}</a>`;
+  }
+  const bubble = document.querySelector('.status-bubble');
+  const content = document.getElementById('statuscafe-content');
+  if (bubble && content) {
+    new MutationObserver(() => {
+      bubble.classList.add('pop');
+      setTimeout(() => bubble.classList.remove('pop'), 280);
+    }).observe(content, { childList: true, characterData: true, subtree: true });
+  }
+});
+
+
+
+
+(() => {
+  const cat = document.getElementById('dancecat');
+  if (!cat) return;
+
+  const KEY = 'dancecat_pos_v1';
+
+  // default: fixed to bottom-right
+  function resetToCorner() {
+    cat.style.right = '14px';
+    cat.style.bottom = '12px';
+    cat.style.left = 'auto';
+    cat.style.top = 'auto';
+    try { localStorage.removeItem(KEY); } catch(_) {}
+  }
+
+  // try to restore, but clamp to viewport; if absurd, reset
+  function restore() {
+    let pos = null;
+    try { pos = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(_){}
+    if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number') {
+      resetToCorner(); return;
+    }
+    const rect = cat.getBoundingClientRect();
+    const maxX = Math.max(0, innerWidth  - rect.width);
+    const maxY = Math.max(0, innerHeight - rect.height);
+
+    // clamp
+    const x = Math.min(Math.max(0, pos.x), maxX);
+    const y = Math.min(Math.max(0, pos.y), maxY);
+
+    // if clamping changed anything a lot (old doc-anchored coords), drop them
+    if (Math.abs(x - pos.x) > 100 || Math.abs(y - pos.y) > 100) {
+      resetToCorner(); return;
+    }
+    cat.style.left = x + 'px';
+    cat.style.top  = y + 'px';
+    cat.style.right = 'auto';
+    cat.style.bottom = 'auto';
+  }
+
+  // drag to move
+  let dragging = false, offX = 0, offY = 0;
+  cat.addEventListener('pointerdown', e => {
+    dragging = true;
+    const r = cat.getBoundingClientRect();
+    offX = e.clientX - r.left;
+    offY = e.clientY - r.top;
+    cat.setPointerCapture?.(e.pointerId);
+  });
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const r = cat.getBoundingClientRect();
+    const w = r.width, h = r.height;
+    const x = Math.max(0, Math.min(innerWidth  - w, e.clientX - offX));
+    const y = Math.max(0, Math.min(innerHeight - h, e.clientY - offY));
+    cat.style.left = x + 'px';
+    cat.style.top  = y + 'px';
+    cat.style.right = 'auto';
+    cat.style.bottom = 'auto';
+  }, {passive:true});
+  window.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging = false;
+    cat.releasePointerCapture?.(e.pointerId);
+    const r = cat.getBoundingClientRect();
+    try { localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top })); } catch(_){}
+  });
+
+  // handy reset: Shift + double-click
+  cat.addEventListener('dblclick', e => {
+    if (e.shiftKey) resetToCorner();
+    else cat.classList.toggle('snooze');
+  });
+
+  // first layout, then restore
+  window.requestAnimationFrame(restore);
+})();
+
+
+  (() => {
+  // Viewport-anchored fixed elements need body without a filter.
+  // You already moved your filter onto .page, so we're good.
+
+  function wireMascot(id, corner) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const KEY = 'mascot_' + id + '_pos_v1';
+
+    function setCorner(c) {
+      el.style.top = el.style.left = el.style.right = el.style.bottom = 'auto';
+      if (c.includes('bottom')) el.style.bottom = '12px'; else el.style.top = '12px';
+      if (c.includes('right'))  el.style.right  = '14px'; else el.style.left = '14px';
+    }
+
+    function clampToViewport(x, y) {
+      const r = el.getBoundingClientRect();
+      const maxX = Math.max(0, innerWidth  - r.width);
+      const maxY = Math.max(0, innerHeight - r.height);
+      return { x: Math.min(Math.max(0, x), maxX), y: Math.min(Math.max(0, y), maxY) };
+    }
+
+    function reset() {
+      setCorner(corner);
+      try { localStorage.removeItem(KEY); } catch(_) {}
+    }
+
+    function restore() {
+      let pos = null;
+      try { pos = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(_) {}
+      if (!pos || typeof pos.x !== 'number' || typeof pos.y !== 'number') { reset(); return; }
+      const clamped = clampToViewport(pos.x, pos.y);
+      if (Math.abs(clamped.x - pos.x) > 100 || Math.abs(clamped.y - pos.y) > 100) { reset(); return; }
+      el.style.left = clamped.x + 'px';
+      el.style.top  = clamped.y + 'px';
+      el.style.right = el.style.bottom = 'auto';
+    }
+
+    // Dragging
+    let dragging = false, offX = 0, offY = 0;
+    el.addEventListener('pointerdown', e => {
+      dragging = true;
+      const r = el.getBoundingClientRect();
+      offX = e.clientX - r.left;
+      offY = e.clientY - r.top;
+      el.setPointerCapture?.(e.pointerId);
+    });
+    window.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const r = el.getBoundingClientRect();
+      const pos = clampToViewport(e.clientX - offX, e.clientY - offY);
+      el.style.left = pos.x + 'px';
+      el.style.top  = pos.y + 'px';
+      el.style.right = el.style.bottom = 'auto';
+    }, { passive: true });
+    window.addEventListener('pointerup', e => {
+      if (!dragging) return;
+      dragging = false;
+      el.releasePointerCapture?.(e.pointerId);
+      const r = el.getBoundingClientRect();
+      try { localStorage.setItem(KEY, JSON.stringify({ x: r.left, y: r.top })); } catch(_) {}
+    });
+
+    // Double-click to snooze; Shift + double-click to reset to corner
+    el.addEventListener('dblclick', e => {
+      if (e.shiftKey) reset();
+      else el.classList.toggle('snooze');
+    });
+
+    // Keep inside viewport on resize
+    window.addEventListener('resize', () => {
+      const r = el.getBoundingClientRect();
+      const pos = clampToViewport(r.left, r.top);
+      el.style.left = pos.x + 'px';
+      el.style.top  = pos.y + 'px';
+    }, { passive: true });
+
+    // First layout, then restore
+    requestAnimationFrame(restore);
+  }
+
+  wireMascot('dancecat', 'bottom-right');
+  wireMascot('spinguy',  'bottom-left');
+})();
+
+
+/* === 2026-08-30: lamp + taskbar ============================== */
+
+/* the genie. one wish per click, none of them useful. */
+(() => {
+  const genie = document.getElementById('wishGenie');
+  const out   = document.getElementById('wishOut');
+  const count = document.getElementById('wishCount');
+  if (!genie || !out) return;
+
+  const KEY = 'wishes_granted_v1';
+  const WISHES = [
+    'granted: your page now loads. it always did.',
+    'granted: one (1) working hyperlink. i will not say which.',
+    'granted: the hamsters get a lunch break. uptime unaffected.',
+    'granted: netscape renders it correctly on a machine you do not own.',
+    'granted: infinite wishes. void where prohibited, prohibited here.',
+    'granted: the guestbook is spam-free for eleven minutes.',
+    'granted: someone in 2004 bookmarked this. they never came back.',
+    'granted: your visitor counter is honest now. sorry.',
+    'granted: the server in space gets a blanket.',
+    'denied: that one was too big even for me. pick a smaller one.',
+    'granted: squarespace hears about it.',
+    'granted: the pet has been fed. by pikachu. incorrectly.'
+  ];
+
+  let n = 0;
+  try { n = parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch(_) {}
+  const render = () => { if (count) count.textContent = 'wishes granted: ' + n; };
+  render();
+
+  let last = -1;
+  genie.addEventListener('click', () => {
+    let i = Math.floor(Math.random() * WISHES.length);
+    if (i === last) i = (i + 1) % WISHES.length;
+    last = i;
+    out.textContent = WISHES[i];
+    n++;
+    render();
+    try { localStorage.setItem(KEY, String(n)); } catch(_) {}
+  });
+})();
+
+/* taskbar: clock, start menu, jump buttons */
+(() => {
+  const bar = document.getElementById('taskbar');
+  if (!bar) return;
+
+  const clock = document.getElementById('taskClock');
+  if (clock) {
+    const tick = () => {
+      clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    };
+    tick();
+    setInterval(tick, 15000);
+  }
+
+  const startBtn = document.getElementById('startBtn');
+  const menu     = document.getElementById('startMenu');
+  const setMenu = (open) => {
+    if (!menu || !startBtn) return;
+    menu.hidden = !open;
+    startBtn.setAttribute('aria-expanded', String(open));
+  };
+  startBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenu(menu.hidden);
+  });
+  document.addEventListener('click', (e) => {
+    if (menu && !menu.hidden && !menu.contains(e.target)) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  bar.querySelectorAll('[data-jump]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.querySelector(btn.getAttribute('data-jump'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setMenu(false);
+    });
+  });
+
+  /* Shut Down borrows the VHS transition already written above. */
+  document.getElementById('shutDownBtn')?.addEventListener('click', () => {
+    setMenu(false);
+    document.documentElement.classList.add('vhs');
+    setTimeout(() => {
+      document.documentElement.classList.remove('vhs');
+      alert('It is now safe to turn off your computer.');
+    }, 260);
+  });
+})();
 </script>
+
+
+
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-(()=>{const canvas=document.getElementById("threebg");if(!canvas)return;const prefersReduce=matchMedia("(prefers-reduced-motion: reduce)").matches,reduceScale=prefersReduce?.7:1;const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:false});renderer.setPixelRatio(1);canvas.style.imageRendering="pixelated";const scene=new THREE.Scene(),SKY=0xb36af0;scene.fog=new THREE.Fog(SKY,18,140);const camera=new THREE.PerspectiveCamera(60,1,.1,600);function fit(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}fit();addEventListener("resize",fit,{passive:true});camera.position.set(0,3,12);scene.add(new THREE.HemisphereLight(0xffe6ff,0x221533,.85));const sun=new THREE.DirectionalLight(0xffffff,.9);sun.position.set(-2.5,4.5,1.5);scene.add(sun);const g=new THREE.PlaneGeometry(120,240,48,96);g.rotateX(-Math.PI/2);const m=new THREE.MeshLambertMaterial({color:0x48c94d,flatShading:true});const land=new THREE.Mesh(g,m);scene.add(land);const river=new THREE.Mesh(new THREE.PlaneGeometry(18,240,1,1).rotateX(-Math.PI/2),new THREE.MeshPhongMaterial({color:0x1c46ff,emissive:0x0a155f,shininess:90}));river.position.y=.1;scene.add(river);const clock=new THREE.Clock();function animate(){const t=clock.getElapsedTime();land.rotation.y=Math.sin(t*.05)*.03;renderer.setClearColor(SKY,1);renderer.render(scene,camera);requestAnimationFrame(animate)}animate()})();
+ 
+(() => {
+  const canvas = document.getElementById("threebg");
+  if (!canvas) return;
+ 
+  const prefersReduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceScale   = prefersReduce ? 0.7 : 1;
+ 
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+  renderer.setPixelRatio(1);
+  canvas.style.imageRendering = "pixelated";
+ 
+  const scene = new THREE.Scene();
+  const SKY = 0xb36af0;
+  scene.fog = new THREE.Fog(SKY, 18, 140);
+ 
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 600);
+  function fit(){
+    const w = innerWidth, h = innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  addEventListener("resize", fit, { passive: true });
+  if (window.visualViewport){
+    visualViewport.addEventListener("resize", fit, { passive: true });
+    visualViewport.addEventListener("scroll",  fit, { passive: true });
+  }
+  camera.position.set(0, 3.0, 12);
+ 
+  // Lights
+  scene.add(new THREE.HemisphereLight(0xffe6ff, 0x221533, 0.85));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.9);
+  sun.position.set(-2.5, 4.5, 1.5);
+  scene.add(sun);
+ 
+  // Skydome (bigger so stars/planet sit comfortably inside)
+  {
+    const g = new THREE.SphereGeometry(280, 16, 12);
+    const m = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      uniforms: {
+        top:    { value: new THREE.Color(0xffaeea) },
+        bottom: { value: new THREE.Color(0x6c33d6) }
+      },
+      vertexShader: `
+        varying float vY;
+        void main(){
+          vY = normalize(modelMatrix * vec4(position,1.0)).y * 0.5 + 0.5;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+        }`,
+      fragmentShader: `
+        uniform vec3 top; uniform vec3 bottom; varying float vY;
+        void main(){ gl_FragColor = vec4(mix(bottom, top, pow(vY, 1.4)), 1.0); }`
+    });
+    scene.add(new THREE.Mesh(g, m));
+  }
+ 
+  // === Twinkling stars (Galaxy 981 vibes) ==========================
+  const starsMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, fog: false,
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      uniform float uTime;
+      attribute float aPhase, aSpeed, aSize;
+      varying float vTw;
+      void main(){
+        float tw = 0.5 + 0.5*sin(uTime*aSpeed + aPhase);
+        vTw = tw;
+        gl_PointSize = aSize * (0.7 + tw*0.7);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`,
+    fragmentShader: `
+      varying float vTw;
+      void main(){
+        vec2 p = gl_PointCoord - 0.5;
+        float d = length(p);
+        float a = smoothstep(0.5, 0.05, d);
+        // sparkle cross
+        float cx = max(0.0, 1.0 - abs(p.x)*7.0) * max(0.0, 1.0 - abs(p.y)*0.7);
+        float cy = max(0.0, 1.0 - abs(p.y)*7.0) * max(0.0, 1.0 - abs(p.x)*0.7);
+        a = max(a, (cx + cy)*0.55);
+        gl_FragColor = vec4(vec3(1.0, 0.96, 1.0), a * (0.25 + vTw*0.75));
+      }`
+  });
+  {
+    const N = 700;
+    const pos = new Float32Array(N*3);
+    const phase = new Float32Array(N);
+    const speed = new Float32Array(N);
+    const size  = new Float32Array(N);
+    for (let i=0;i<N;i++){
+      const u = Math.random()*Math.PI*2;
+      const v = Math.acos(1 - Math.random()*0.9); // bias upward
+      const r = 240;
+      pos[i*3]   = r * Math.sin(v) * Math.cos(u);
+      pos[i*3+1] = r * Math.cos(v) * 0.5 + 28;
+      pos[i*3+2] = r * Math.sin(v) * Math.sin(u);
+      phase[i] = Math.random() * Math.PI * 2;
+      speed[i] = 0.7 + Math.random()*1.8;
+      size[i]  = 1.5 + Math.random()*3.5;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute("aPhase",   new THREE.BufferAttribute(phase, 1));
+    geo.setAttribute("aSpeed",   new THREE.BufferAttribute(speed, 1));
+    geo.setAttribute("aSize",    new THREE.BufferAttribute(size, 1));
+    scene.add(new THREE.Points(geo, starsMat));
+  }
+  // =================================================================
+ 
+  // === Ringed planet + small moon ==================================
+  const planet = new THREE.Group();
+  {
+    const ball = new THREE.Mesh(
+      new THREE.SphereGeometry(7, 18, 14),
+      new THREE.MeshLambertMaterial({ color: 0xff6ec7, emissive: 0x551133, flatShading: true })
+    );
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(9.5, 12.5, 48),
+      new THREE.MeshBasicMaterial({
+        color: 0xffd1f4, side: THREE.DoubleSide,
+        transparent: true, opacity: 0.55, fog: false
+      })
+    );
+    ring.rotation.x = Math.PI/2 - 0.35;
+    planet.add(ball, ring);
+    planet.position.set(70, 38, -160);
+    scene.add(planet);
+  }
+  const moon = new THREE.Mesh(
+    new THREE.SphereGeometry(2.0, 12, 10),
+    new THREE.MeshLambertMaterial({ color: 0xfff2c1, emissive: 0x3b2c0f, flatShading: true })
+  );
+  moon.position.set(-58, 32, -130);
+  scene.add(moon);
+  // =================================================================
+ 
+  // ===== Terrain constants
+  const WORLD_W = 120, TILE = 120, SX = 96, SZ = 96;
+  const RIVER_WIDTH     = 18;
+  const CHANNEL_MARGIN  = 4;
+  const CHANNEL_DEPTH   = 0.5;
+  const riverHalf       = (RIVER_WIDTH + CHANNEL_MARGIN) * 0.5;
+ 
+  function fnoise(x, z){
+    return (
+      Math.sin(x*0.25 + z*0.33) +
+      Math.sin(x*0.61 - z*0.47) +
+      Math.sin(x*1.70 + z*1.30)
+    ) / 3;
+  }
+ 
+  function hfun(x, z){
+    const nx = x / WORLD_W;
+    const left  = 5.0 * Math.exp(-Math.pow(((nx + 0.38)/0.22), 2));
+    const right = 5.0 * Math.exp(-Math.pow(((nx - 0.38)/0.22), 2));
+    const carve = -2.1 * Math.exp(-Math.pow((nx/0.26), 2)) - 0.42 + 0.22*Math.sin(z*0.06);
+    const bumps = 0.9 * fnoise(x*0.8, z*0.8) + 0.35 * fnoise(x*1.7, z*1.3);
+    const channel = -CHANNEL_DEPTH * Math.exp(-Math.pow(x / riverHalf, 2));
+    return left + right + carve + bumps + channel;
+  }
+ 
+  function colorFor(h, minH, maxH){
+    const t = Math.min(1, Math.max(0, (h - minH) / (maxH - minH + 1e-6)));
+    const stops = [
+      { t:0.00, c:0x21e34c }, { t:0.35, c:0x77ff59 },
+      { t:0.55, c:0xeaff6a }, { t:0.75, c:0xffa433 }, { t:1.00, c:0xffd7ab }
+    ];
+    let a=stops[0], b=stops[stops.length-1];
+    for (let i=1;i<stops.length;i++){ if (t <= stops[i].t){ a=stops[i-1]; b=stops[i]; break; } }
+    const u = (t - a.t) / Math.max(1e-6, b.t - a.t);
+    return new THREE.Color(a.c).lerp(new THREE.Color(b.c), u);
+  }
+ 
+  function makeLand(zoff){
+    const geo = new THREE.PlaneGeometry(WORLD_W, TILE, SX, SZ);
+    geo.rotateX(-Math.PI/2);
+    const pos = geo.attributes.position;
+    let min=1e9, max=-1e9;
+    for (let i=0;i<pos.count;i++){
+      const x = pos.getX(i);
+      const zAbs = pos.getZ(i) + zoff - TILE*0.5;   // = world Z
+      const h = hfun(x, zAbs);
+      pos.setY(i, h);
+      if (h<min) min=h; if (h>max) max=h;
+    }
+    const cols = new Float32Array(pos.count*3);
+    for (let i=0;i<pos.count;i++){
+      const c = colorFor(pos.getY(i), min, max);
+      cols[i*3] = c.r; cols[i*3+1] = c.g; cols[i*3+2] = c.b;
+    }
+    geo.setAttribute("color", new THREE.BufferAttribute(cols,3));
+    geo.computeVertexNormals();
+    const mat = new THREE.MeshLambertMaterial({ vertexColors:true, flatShading:true, dithering:true });
+    const m = new THREE.Mesh(geo, mat);
+    m.position.z = zoff - TILE*0.5;
+    m.userData.kind = "land";
+    return m;
+  }
+ 
+  function makeRiver(zoff){
+    const sx = 48, sz = 64; // a touch coarser so wave updates stay cheap
+    const geo = new THREE.PlaneGeometry(RIVER_WIDTH, TILE, sx, sz);
+    geo.rotateX(-Math.PI/2);
+    const pos = geo.attributes.position;
+    const base = new Float32Array(pos.count);
+    for (let i=0;i<pos.count;i++){
+      const x = pos.getX(i);
+      const zAbs = pos.getZ(i) + zoff - TILE*0.5;
+      const b = hfun(x, zAbs) + 0.14;
+      pos.setY(i, b);
+      base[i] = b;
+    }
+    geo.computeVertexNormals();
+    const mat = new THREE.MeshPhongMaterial({
+      color: 0x1c46ff, emissive: 0x0a155f, shininess: 90,
+      flatShading: true, polygonOffset: true,
+      polygonOffsetFactor: -2, polygonOffsetUnits: -2
+    });
+    const m = new THREE.Mesh(geo, mat);
+    m.position.z = zoff - TILE*0.5;
+    m.userData.kind = "river";
+    m.userData.pos  = pos;
+    m.userData.base = base; // unanimated bed heights
+    return m;
+  }
+ 
+  // === Trees =======================================================
+  // Shared geometries / materials so we can spawn lots cheaply.
+  const TRUNK_GEO  = new THREE.CylinderGeometry(0.10, 0.14, 0.7, 5);
+  const LEAVES_GEO = new THREE.ConeGeometry(0.7, 1.6, 6);
+  const TRUNK_MAT  = new THREE.MeshLambertMaterial({ color: 0x5a2e0d, flatShading: true });
+  const LEAF_MATS  = [
+    new THREE.MeshLambertMaterial({ color: 0x1f8a3a, flatShading: true }),
+    new THREE.MeshLambertMaterial({ color: 0x2a9c46, flatShading: true }),
+    new THREE.MeshLambertMaterial({ color: 0x158244, flatShading: true }),
+    new THREE.MeshLambertMaterial({ color: 0x3aa860, flatShading: true })
+  ];
+ 
+  function makeTreesForLand(meshZ){
+    const group = new THREE.Group();
+    let placed = 0, attempts = 0;
+    while (placed < 55 && attempts < 220){
+      attempts++;
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const x = side * (riverHalf + 2.5 + Math.random() * 38);
+      if (Math.abs(x) > WORLD_W*0.46) continue;
+      const localZ = (Math.random() - 0.5) * TILE;
+      const zAbs   = localZ + meshZ;            // world Z
+      const h = hfun(x, zAbs);
+      // skip water + over-tall peaks
+      if (h < 0.25 || h > 4.4) continue;
+ 
+      const tree = new THREE.Group();
+      const trunk  = new THREE.Mesh(TRUNK_GEO, TRUNK_MAT);
+      const leaves = new THREE.Mesh(LEAVES_GEO, LEAF_MATS[Math.floor(Math.random()*LEAF_MATS.length)]);
+      trunk.position.y  = 0.35;
+      leaves.position.y = 1.15;
+      tree.add(trunk, leaves);
+      tree.position.set(x, h - 0.05, localZ);
+      tree.scale.setScalar(0.65 + Math.random()*0.95);
+      tree.rotation.y = Math.random() * Math.PI * 2;
+      group.add(tree);
+      placed++;
+    }
+    return group;
+  }
+ 
+  function attachTrees(landMesh){
+    if (landMesh.userData.trees) landMesh.remove(landMesh.userData.trees);
+    const trees = makeTreesForLand(landMesh.position.z);
+    landMesh.add(trees);
+    landMesh.userData.trees = trees;
+  }
+  // =================================================================
+ 
+  // === Floating Y2K wireframe shapes ===============================
+  function makeFloaters(){
+    const group = new THREE.Group();
+    const palette = [0x00e5ff, 0xff66cc, 0x39ff14, 0xffff33, 0x8f00ff, 0xff8a3a];
+    const shapes = [
+      new THREE.OctahedronGeometry(1.0, 0),
+      new THREE.TetrahedronGeometry(1.1, 0),
+      new THREE.IcosahedronGeometry(1.0, 0),
+      new THREE.BoxGeometry(1.4, 1.4, 1.4),
+      new THREE.TorusGeometry(0.9, 0.32, 6, 12)
+    ];
+    for (let i=0;i<14;i++){
+      const g = shapes[i % shapes.length];
+      const wire = new THREE.WireframeGeometry(g);
+      const mat = new THREE.LineBasicMaterial({
+        color: palette[i % palette.length],
+        transparent: true, opacity: 0.78
+      });
+      const m = new THREE.LineSegments(wire, mat);
+      m.position.set(
+        -WORLD_W*0.5 + Math.random()*WORLD_W,
+        7 + Math.random()*16,
+        -TILE*0.4 + Math.random()*TILE*1.4
+      );
+      m.scale.setScalar(0.7 + Math.random()*1.5);
+      m.userData = {
+        spinX: (Math.random()-0.5)*0.6,
+        spinY: (Math.random()-0.5)*0.6,
+        spinZ: (Math.random()-0.5)*0.4,
+        bobPh: Math.random()*Math.PI*2,
+        bobAmp: 0.3 + Math.random()*0.8
+      };
+      m.userData.baseY = m.position.y;
+      group.add(m);
+    }
+    return group;
+  }
+ 
+  function updateFloaters(group, dt, t, dz){
+    for (const m of group.children){
+      m.rotation.x += m.userData.spinX * dt;
+      m.rotation.y += m.userData.spinY * dt;
+      m.rotation.z += m.userData.spinZ * dt;
+      m.position.y = m.userData.baseY + Math.sin(t*0.8 + m.userData.bobPh) * m.userData.bobAmp;
+      m.position.z += dz * 0.6;
+      if (m.position.z > TILE*0.6){
+        m.position.z -= TILE*2.0;
+        m.position.x = -WORLD_W*0.5 + Math.random()*WORLD_W;
+        m.userData.baseY = 7 + Math.random()*16;
+      }
+    }
+  }
+  // =================================================================
+ 
+  // === Cloud layer (kept) ==========================================
+  function makeCloudLayer(camera){
+    const group = new THREE.Group();
+    const puffGeo = new THREE.PlaneGeometry(1, 1);
+    function puff(w, h){
+      const mat = new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false,
+        uniforms: { uColor: { value: new THREE.Color(0xffffff) }, uAlpha: { value: 0.23 } },
+        vertexShader: `
+          varying vec2 vUv;
+          varying float vDepth;
+          void main(){
+            vUv = uv;
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            vDepth = -mvPosition.z;
+            gl_Position = projectionMatrix * mvPosition;
+          }`,
+        fragmentShader: `
+          uniform vec3  uColor;
+          uniform float uAlpha;
+          varying vec2  vUv;
+          varying float vDepth;
+          void main(){
+            vec2 p = vUv - 0.5;
+            float d  = length(p * vec2(1.4, 1.0));
+            float soft = smoothstep(0.52, 0.20, d);
+            float df   = smoothstep(10.0, 140.0, vDepth);
+            gl_FragColor = vec4(uColor, soft * uAlpha * df);
+          }`
+      });
+      const m = new THREE.Mesh(puffGeo, mat);
+      m.renderOrder = 10;
+      m.scale.set(w, h, 1);
+      return m;
+    }
+    for (let i=0;i<18;i++){
+      const w = 20 + Math.random()*28;
+      const h =  8 + Math.random()*14;
+      const y = 20 + Math.random()*2.0;
+      const x = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
+      const z = -TILE + Math.random()*TILE*3.0;
+      const cloud = new THREE.Group();
+      const puffs = 3 + Math.floor(Math.random()*3);
+      for (let k=0;k<puffs;k++){
+        const m = puff(w*(0.6+Math.random()*0.6), h*(0.6+Math.random()*0.6));
+        m.position.set((Math.random()-0.5)*w*0.4, (Math.random()-0.5)*h*0.2, 0);
+        cloud.add(m);
+      }
+      cloud.position.set(x, y, z);
+      cloud.userData.speed = 0.2 + Math.random()*0.3;
+      cloud.userData.wind  = -0.15 + Math.random()*0.3;
+      group.add(cloud);
+    }
+    group.userData.billboardTo = camera;
+    return group;
+  }
+ 
+  function updateClouds(group, dt, dz){
+    const cam = group.userData.billboardTo;
+    for (const c of group.children){
+      c.lookAt(cam.position.x, c.position.y, cam.position.z);
+      c.position.z += dz * 0.45 * c.userData.speed;
+      c.position.x += dt * c.userData.wind;
+      if (c.position.z > TILE*1.2){
+        c.position.z -= TILE*2.4;
+        c.position.x  = -WORLD_W*0.6 + Math.random()*WORLD_W*1.2;
+      }
+    }
+  }
+  // =================================================================
+ 
+  // World assembly
+  const landA = makeLand(0), landB = makeLand(TILE);
+  const rivA  = makeRiver(0), rivB  = makeRiver(TILE);
+  attachTrees(landA);
+  attachTrees(landB);
+ 
+  const world = new THREE.Group();
+  world.add(landA, landB, rivA, rivB);
+  scene.add(world);
+ 
+  const clouds   = makeCloudLayer(camera); scene.add(clouds);
+  const floaters = makeFloaters();         scene.add(floaters);
+ 
+  const clock = new THREE.Clock();
+  const SPEED        = 2.1  * reduceScale;
+  const SPIN_RATE    = 0.06 * reduceScale;
+  const POINTER_TURN = 0.90 * reduceScale;
+ 
+  const isTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
+  let mx=0, my=0, mxTarget=0, myTarget=0;
+  const DESKTOP_MULT = 4.0;
+  const YAW_STEER    = isTouch ? 0.020 : 0.020 * DESKTOP_MULT;
+  const PITCH_STEER  = isTouch ? 0.010 : 0.010 * DESKTOP_MULT;
+  const SMOOTH       = isTouch ? 0.10  : 0.36;
+ 
+  addEventListener("pointermove", e => {
+    mxTarget = (e.clientX / innerWidth  - 0.5);
+    myTarget = (e.clientY / innerHeight - 0.5);
+  }, { passive: true });
+  addEventListener("pointerleave", () => { mxTarget = 0; myTarget = 0; }, { passive: true });
+ 
+  // Wave displacement on top of stored bed heights
+  function animateRiverWaves(mesh, t){
+    const pos  = mesh.userData.pos;
+    const base = mesh.userData.base;
+    for (let i=0;i<pos.count;i++){
+      const x = pos.getX(i);
+      const zLocal = pos.getZ(i);
+      const zAbs = zLocal + mesh.position.z;
+      const wave = Math.sin(zAbs*0.45 + t*1.6) * 0.05 +
+                   Math.sin(x*0.7   - t*1.1) * 0.04;
+      pos.setY(i, base[i] + wave);
+    }
+    pos.needsUpdate = true;
+  }
+ 
+  function recycle(mesh, other){
+    if (mesh.position.z > TILE*0.5){
+      mesh.position.z = other.position.z - TILE;
+      if (mesh.userData.kind === "land"){
+        const pos = mesh.geometry.attributes.position;
+        let min=1e9, max=-1e9;
+        for (let i=0;i<pos.count;i++){
+          const x = pos.getX(i);
+          const zAbs = pos.getZ(i) + mesh.position.z; // FIXED: was off by TILE/2
+          const h = hfun(x, zAbs);
+          pos.setY(i, h);
+          if (h<min) min=h; if (h>max) max=h;
+        }
+        const cols = mesh.geometry.getAttribute("color");
+        for (let i=0;i<pos.count;i++){
+          const c = colorFor(pos.getY(i), min, max);
+          cols.setXYZ(i, c.r, c.g, c.b);
+        }
+        pos.needsUpdate = true; cols.needsUpdate = true;
+        mesh.geometry.computeVertexNormals();
+        attachTrees(mesh); // regrow forest for the new section
+      } else {
+        const pos  = mesh.userData.pos;
+        const base = mesh.userData.base;
+        for (let i=0;i<pos.count;i++){
+          const x = pos.getX(i);
+          const zAbs = pos.getZ(i) + mesh.position.z; // FIXED: was off by TILE/2
+          base[i] = hfun(x, zAbs) + 0.14;
+          pos.setY(i, base[i]);
+        }
+        pos.needsUpdate = true;
+        mesh.geometry.computeVertexNormals();
+      }
+    }
+  }
+ 
+  function animate(){
+    const dt = clock.getDelta();
+    const t  = clock.getElapsedTime();
+ 
+    // input smoothing
+    mx += (mxTarget - mx) * SMOOTH;
+    my += (myTarget - my) * SMOOTH;
+ 
+    camera.position.y = 3.0 + Math.sin(performance.now()*0.001)*0.08*reduceScale;
+    camera.lookAt(0, 1.5, -20);
+    camera.rotation.y +=  mx * YAW_STEER;
+    camera.rotation.x += -my * PITCH_STEER;
+ 
+    world.rotation.y += (SPIN_RATE + mx * POINTER_TURN) * dt;
+ 
+    // celestial bodies
+    starsMat.uniforms.uTime.value = t;
+    planet.rotation.y           += dt * 0.05;
+    planet.children[0].rotation.y += dt * 0.18; // the ball spins faster than the rings
+    moon.rotation.y             += dt * 0.10;
+ 
+    // treadmill
+    const dz = SPEED * dt;
+    landA.position.z += dz; landB.position.z += dz;
+    rivA.position.z  += dz; rivB.position.z  += dz;
+ 
+    animateRiverWaves(rivA, t);
+    animateRiverWaves(rivB, t);
+ 
+    updateClouds(clouds, dt, dz);
+    updateFloaters(floaters, dt, t, dz);
+ 
+    recycle(landA, landB); recycle(landB, landA);
+    recycle(rivA,  rivB ); recycle(rivB,  rivA );
+ 
+    renderer.setClearColor(SKY, 1);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
 </script>
-<img id="dancecat" src="dancingcat.gif" alt="dancing cat" draggable="false"><img id="spinguy" src="spin.gif" alt="spinning guy" draggable="false">
-<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script><script>window.addEventListener('load',()=>{new cursoreffects.ghostCursor()});</script>
-<script>(()=>{const mq=matchMedia('(max-width:700px)'),extras=document.querySelector('.sidebar-extras'),sidebar=document.querySelector('.sidebar'),table=document.querySelector('table.layout');if(!extras||!sidebar||!table)return;const home=document.createComment('sidebar-extras-home');sidebar.insertBefore(home,extras);const placeExtras=()=>{if(mq.matches)table.insertAdjacentElement('afterend',extras);else if(home.parentNode)home.parentNode.insertBefore(extras,home.nextSibling)};placeExtras();if(mq.addEventListener)mq.addEventListener('change',placeExtras);else mq.addListener(placeExtras)})();</script>
+
+
+
+
+
+  <img id="dancecat" src="dancingcat.gif" alt="dancing cat" draggable="false">
+<img id="spinguy" src="spin.gif" alt="spinning guy" draggable="false">
+
+
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
+<!-- 2) Turn on the ghost cursor -->
+<script>
+  window.addEventListener('load', () => {
+    new cursoreffects.ghostCursor();
+  });
+</script>
+
+
+<script>
+/* Mobile housekeeping: keep navigation near the top, move the busy
+   sidebar extras below the actual homepage content. */
+(() => {
+  const mq = matchMedia('(max-width:700px)');
+  const extras = document.querySelector('.sidebar-extras');
+  const sidebar = document.querySelector('.sidebar');
+  const table = document.querySelector('table.layout');
+  if (!extras || !sidebar || !table) return;
+
+  const home = document.createComment('sidebar-extras-home');
+  sidebar.insertBefore(home, extras);
+
+  const placeExtras = () => {
+    if (mq.matches) {
+      table.insertAdjacentElement('afterend', extras);
+    } else if (home.parentNode) {
+      home.parentNode.insertBefore(extras, home.nextSibling);
+    }
+  };
+
+  placeExtras();
+  if (mq.addEventListener) mq.addEventListener('change', placeExtras);
+  else mq.addListener(placeExtras);
+})();
+</script>
+
 </body>
 </html>
