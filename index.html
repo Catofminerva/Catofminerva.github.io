@@ -79,23 +79,75 @@ html, body {
 z-index: 1;
     }
 
-/* Title: crisp Y2K green, centered, subtle glow */
+/* Title: gold WordArt.
+   the pastel letters were washing out against the mountain photo behind
+   them; this sits on top of it instead. gold rather than the blue chrome
+   on chat.html so the two pages do not share a wordmark.
+
+   two layers, and it has to be two: background-clip:text makes the glyph
+   itself transparent, so any text-shadow paints OVER the gradient rather
+   than behind it and you end up with solid dark letters. the ::before is
+   a plain dark copy carrying the outline and drop shadow, sat behind the
+   clipped gold. */
 #glitter-title{
-  font-family: "Arial Rounded MT Bold","Helvetica Rounded","VAG Rounded",
-               "Trebuchet MS","Verdana","Comic Sans MS",system-ui,sans-serif;
-  font-weight: 800;
-  font-size: clamp(40px, 7vw, 84px);
-  line-height: 1.05;
-  letter-spacing: 1px;
+  font-family: "Arial Black","Arial Bold",Impact,Haettenschweiler,
+               "Trebuchet MS","Verdana",sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 7.6vw, 92px);
+  line-height: 1.04;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   text-align: center;
-  margin: 8px 0 6px;
-  color: #fff; /* fallback if inline colors fail */
-  text-shadow: 0 1px 0 rgba(255,255,255,.30), 0 0 8px rgba(0,0,0,.45);
-  position: relative;            /* anchor gifs */
-  padding-inline: 120px;         /* reserves space so gifs stay inside */
+  margin: 12px 0 10px;
+  padding-inline: 120px;         /* reserves space so the gifs stay inside */
+  position: relative;            /* anchors the kirby gifs */
+  color: #ffdf7a;                /* fallback if background-clip:text is out */
 }
+
+#glitter-title .wa{
+  position: relative;
+  display: inline-block;
+  transform: skewX(-6deg);       /* the WordArt lean. only the text, so the
+                                    kirbys either side stay upright. */
+  /* the back layer: solid dark, carrying the outline and the drop shadow */
+  color: #2b1704;
+  text-shadow:
+    -3px -3px 0 #2b1704,  3px -3px 0 #2b1704,
+    -3px  3px 0 #2b1704,  3px  3px 0 #2b1704,
+    -4px  0   0 #2b1704,  4px  0   0 #2b1704,
+     0   -4px 0 #2b1704,  0    4px 0 #2b1704,
+     7px  8px 0 rgba(0,0,0,.55);
+}
+
+/* the gold, stacked on top.
+   it goes on ::after rather than ::before-with-z-index:-1 because the skew
+   above makes .wa a stacking context, and a negative z-index child then
+   sits above .wa's own background instead of behind it, which put the dark
+   copy over the gold. later sibling, no z-index, no such problem. */
+#glitter-title .wa::after{
+  content: attr(data-text);
+  position: absolute;
+  left: 0; right: 0; top: 0;     /* same width as the span so both layers
+                                    wrap identically and stay aligned */
+  color: #ffdf7a;                /* fallback if background-clip:text is out */
+  text-shadow: none;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)){
+  #glitter-title .wa::after{
+    background-image: linear-gradient(180deg,
+        #fffdf2 0%,  #ffe9a8 14%, #f7c948 30%, #b8791a 49%,
+        #8a5310 55%, #f0bf49 72%, #ffeeb4 88%, #fffdf5 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+}
+
 @media (max-width: 560px){
-  #glitter-title{ padding-inline: 80px; font-size: clamp(32px, 8vw, 60px); }
+  #glitter-title{
+    padding-inline: 80px;
+    font-size: clamp(30px, 8.4vw, 58px);
+  }
 }
 
 
@@ -275,9 +327,9 @@ hr.retro {
   text-align:center;
   padding-inline:120px;         /* room for the gifs */
   margin:12px auto 0;
-  color: var(--neon-green);
-  text-shadow: 0 1px 0 rgba(255,255,255,.35), 0 0 4px rgba(57,255,20,.55);
   position: relative;           /* anchor for gifs */
+  /* colour and shadow live in the WordArt block above; setting them again
+     here would just paint over it. */
 }
 
 /* gifs INSIDE the title box */
@@ -1866,10 +1918,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
   <canvas id="neoNebula" aria-hidden="true"></canvas>
   
   <div class="page">
-<h1 id="glitter-title" class="pastel-title">
-  <span style="color:#FFA3A3">G</span><span style="color:#FFDAA3">A</span><span style="color:#EDFFA3">L</span><span style="color:#B6FFA3">A</span><span style="color:#A3FFC8">X</span><span style="color:#A3FFFF">Y</span>
-  <span style="color:#A3C8FF">9</span><span style="color:#B6A3FF">8</span><span style="color:#EDA3FF">1</span>
-</h1>
+<h1 id="glitter-title"><span class="wa" data-text="Galaxy 981">Galaxy 981</span></h1>
     <div class="marquee-wrap">
       <marquee behavior="alternate" scrollamount="6">
         <img src="spinningplanet.gif" alt="" class="marquee-planet" aria-hidden="true">
@@ -1969,6 +2018,10 @@ td.content .post h3{ color:#000; text-shadow:none; }
   <p class="cap">rescued from a dead geocities ring. i have no further information.</p>
 </div>
 
+<div class="award-solo">
+  <img src="excellentwebsiteaward.gif" alt="excellent website award">
+</div>
+
 <script src="https://status.cafe/current-status.js?name=catofminerva" defer></script>
           </div><!-- /.sidebar-extras -->
 
@@ -2016,10 +2069,6 @@ td.content .post h3{ color:#000; text-shadow:none; }
               <span class="wish-out" id="wishOut">he is asleep. click to wake him.</span>
               <span class="wish-count" id="wishCount">wishes granted: 0</span>
             </div>
-          </div>
-
-          <div class="award-solo">
-            <img src="excellentwebsiteaward.gif" alt="excellent website award">
           </div>
 
           <div class="post">
