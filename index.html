@@ -1941,50 +1941,43 @@ html.seizing, html.seizing body{ overflow:hidden; }
 #seizure{
   position:fixed; inset:0; z-index:99999;
   overflow-y:auto;
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 3px),
-    radial-gradient(120% 80% at 50% 0%, #10131c 0%, #06070b 70%);
-  color:#e7e9ef;
-  font:14px/1.6 "Courier New",Courier,monospace;
-  -webkit-font-smoothing:antialiased;
+  background:#fff;
+  color:#111;
+  font:14px/1.6 Arial, Helvetica, sans-serif;
 }
 #seizure .sheet{
-  max-width:760px;
+  max-width:880px;
   margin:0 auto;
-  padding:26px 20px 40px;
+  padding:34px 22px 44px;
   text-align:center;
+  /* min-height, not height: the notice sits centred when it fits and simply
+     grows past the fold when it does not, so nothing is ever clipped */
+  box-sizing:border-box;
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
 }
 
-/* the crest */
-#seizure .crest{
-  width:96px; height:96px; margin:0 auto 14px;
-  border:3px double #9aa6c4;
-  border-radius:50%;
-  display:grid; place-items:center;
-  font:bold 9px/1.25 "Courier New",monospace;
-  letter-spacing:.06em;
-  color:#c8d2ea;
-  background:radial-gradient(circle,#1a2033 0%,#0b0e17 75%);
+#seizure .seal{
+  width:112px; height:auto; display:block; margin:0 auto 16px;
 }
 
 #seizure .authority{
-  margin:0 0 4px; color:#9fb0d6;
-  font-size:11px; letter-spacing:.34em; text-transform:uppercase;
+  margin:0 0 4px; color:#111;
+  font-size:12px; letter-spacing:.28em; text-transform:uppercase; font-weight:bold;
 }
 #seizure .sub{
-  margin:0 0 20px; color:#6f7c9c;
-  font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  margin:0 0 24px; color:#666;
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase;
 }
 
 #seizure h2{
-  margin:0 0 6px;
-  font:900 clamp(26px,6.4vw,54px)/1.02 "Arial Black",Impact,sans-serif;
-  letter-spacing:-1px; color:#fff;
-  text-shadow:0 0 18px rgba(120,160,255,.35);
+  margin:0 0 8px;
+  font:bold clamp(26px,6vw,50px)/1.05 Arial, Helvetica, sans-serif;
+  letter-spacing:-.5px; color:#0a0a0a;
 }
 #seizure .byline{
-  margin:0 0 20px; color:#ff5c5c;
-  font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  margin:0 0 26px; color:#a01414;
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
 }
 
 /* the gif. the box is reserved up front and the 14k still sits behind the
@@ -1992,8 +1985,8 @@ html.seizing, html.seizing body{ overflow:hidden; }
 #seizure .screen{
   width:min(399px,86vw);
   aspect-ratio:399/360;
-  margin:0 auto 20px;
-  border:3px ridge #59627d;
+  margin:0 auto 22px;
+  border:1px solid #bbb;
   background:#f5c518 url("seized-still.jpg") center/cover no-repeat;
   display:grid; place-items:center;
   overflow:hidden;
@@ -2001,108 +1994,71 @@ html.seizing, html.seizing body{ overflow:hidden; }
 #seizure .screen img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 #seizure .charges{
-  max-width:560px; margin:0 auto 20px;
-  border:1px solid #2c3550; background:rgba(255,255,255,.03);
+  max-width:540px; margin:0 auto 26px;
   text-align:left;
 }
 #seizure .charges h3{
-  margin:0; padding:7px 12px;
-  background:#1b2340; color:#c9d5f5;
-  font:bold 11px "Courier New",monospace; letter-spacing:.18em; text-transform:uppercase;
+  margin:0 0 10px; padding:0 0 7px;
+  border-bottom:1px solid #ccc;
+  color:#111;
+  font:bold 11px Arial, Helvetica, sans-serif; letter-spacing:.2em; text-transform:uppercase;
 }
-#seizure .charges ul{ margin:0; padding:12px 18px 14px 34px; }
-#seizure .charges li{ margin:0 0 7px; color:#dfe4f0; font-size:13px; }
+#seizure .charges ul{ margin:0; padding:0 0 0 20px; }
+#seizure .charges li{ margin:0 0 9px; color:#222; font-size:14px; }
 #seizure .charges li:last-child{ margin-bottom:0; }
-#seizure .charges .stat{ color:#7f8db3; font-size:11px; }
-
-#seizure .docket{
-  max-width:560px; margin:0 auto 22px;
-  display:grid; grid-template-columns:1fr 1fr; gap:1px;
-  background:#2c3550; border:1px solid #2c3550;
-  font-size:11px;
-}
-#seizure .docket div{ background:#0a0d16; padding:6px 10px; text-align:left; color:#93a0c2; }
-#seizure .docket b{ color:#dfe4f0; font-weight:normal; }
-
-#seizure .warn{
-  max-width:600px; margin:0 auto 20px; padding:12px 14px;
-  border:2px solid #b4321f; background:rgba(180,50,31,.12);
-  color:#ffd9d2; font-size:13px; line-height:1.65;
-}
-#seizure .warn strong{ color:#ff6a52; }
-#seizure .blink{ animation:seiz-blink 1.05s steps(1,end) infinite; }
-@keyframes seiz-blink{ 50%{ opacity:0; } }
+#seizure .charges .stat{ display:block; color:#777; font-size:11px; letter-spacing:.02em; }
 
 #seizure .buttons{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
 #seizure button{
-  font:bold 13px "Courier New",monospace; letter-spacing:.06em;
-  padding:12px 20px; cursor:pointer;
-  border:3px outset #6f7a99; background:#141a2b; color:#dfe4f0;
-  box-shadow:3px 3px 0 #000;
+  font:bold 13px Arial, Helvetica, sans-serif; letter-spacing:.04em;
+  padding:12px 22px; cursor:pointer;
+  border:1px solid #333; background:#fff; color:#111;
 }
-#seizure #seiz-enter{ border-color:#7fe08a; color:#b9ffc4; }
-#seizure #seiz-enter:hover{ background:#16311d; color:#eaffef; }
-#seizure #seiz-enter:active{ border-style:inset; transform:translate(1px,1px); }
-#seizure #seiz-no{ border-color:#8a6f6f; color:#ffc9c9; position:relative; }
-
-#seizure .smallprint{
-  margin:22px auto 0; max-width:600px;
-  color:#5d6884; font-size:10px; line-height:1.75;
-}
-#seizure .marq{
-  margin:18px auto 0; max-width:600px;
-  border-top:1px solid #222b44; border-bottom:1px solid #222b44;
-  color:#6f7c9c; font-size:11px;
-}
+#seizure #seiz-enter{ background:#111; color:#fff; border-color:#111; }
+#seizure #seiz-enter:hover{ background:#333; }
+#seizure #seiz-enter:active{ transform:translateY(1px); }
+#seizure #seiz-no{ color:#555; border-color:#bbb; position:relative; }
+#seizure #seiz-no:hover{ color:#111; border-color:#777; }
 
 /* leaving */
-#seizure.go{ animation:seiz-out .45s ease forwards; }
+#seizure.go{ animation:seiz-out .4s ease forwards; }
 @keyframes seiz-out{
   from{ opacity:1; }
-  40%{ opacity:1; filter:invert(1) contrast(2); }
   to{ opacity:0; visibility:hidden; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  #seizure .blink{ animation:none; }
   #seizure.go{ animation:none; opacity:0; visibility:hidden; }
 }
 
-/* on anything wider than a phone the monitor and the paperwork sit side by
+/* on anything wider than a phone the monitor and the charge sheet sit side by
    side, the way a filing does, so the way in stays near the fold */
 @media (min-width:780px){
-  #seizure .sheet{ max-width:900px; }
   #seizure .filing{
     display:grid; grid-template-columns:340px minmax(0,1fr);
-    gap:24px; align-items:start; margin-bottom:22px;
+    gap:30px; align-items:start; margin-bottom:26px;
   }
   #seizure .filing .screen{ width:340px; margin:0; }
-  #seizure .papers{ display:grid; gap:14px; }
-  #seizure .papers .charges,
-  #seizure .papers .docket{ max-width:none; margin:0; }
+  #seizure .papers .charges{ max-width:none; margin:0; }
 }
 
 /* short windows: take the air out so the buttons stay reachable */
 @media (max-height:820px){
-  #seizure .sheet{ padding-top:14px; padding-bottom:24px; }
-  #seizure .crest{ width:58px; height:58px; font-size:7px; margin-bottom:8px; }
-  #seizure .sub{ margin-bottom:10px; }
-  #seizure h2{ font:900 clamp(24px,5vw,36px)/1.02 "Arial Black",Impact,sans-serif; }
-  #seizure .byline{ margin-bottom:12px; }
-  #seizure .warn{ padding:8px 12px; margin-bottom:12px; font-size:12px; line-height:1.5; }
-  #seizure .charges li{ margin-bottom:4px; font-size:12px; }
-  #seizure .charges ul{ padding:9px 16px 11px 32px; }
-  #seizure .filing{ margin-bottom:14px !important; }
-  #seizure .smallprint{ margin-top:14px; }
-  #seizure .marq{ margin-top:12px; }
+  #seizure .sheet{ padding-top:20px; padding-bottom:26px; }
+  #seizure .seal{ width:82px; margin-bottom:12px; }
+  #seizure .sub{ margin-bottom:16px; }
+  #seizure h2{ font-size:clamp(24px,5vw,36px); }
+  #seizure .byline{ margin-bottom:18px; }
+  #seizure .charges li{ margin-bottom:6px; font-size:13px; }
+  #seizure .filing{ margin-bottom:18px !important; }
 }
 
 /* the way out, for anyone who lands and does not think to scroll */
 #seizure .cue{
-  position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
-  padding:7px 14px; border:2px outset #6f7a99; background:#141a2b;
-  color:#b9ffc4; font:bold 11px "Courier New",monospace; letter-spacing:.1em;
-  box-shadow:3px 3px 0 #000; cursor:pointer; z-index:2;
+  position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
+  padding:9px 16px; border:1px solid #111; background:#111; color:#fff;
+  font:bold 11px Arial, Helvetica, sans-serif; letter-spacing:.1em;
+  cursor:pointer; z-index:2;
   /* bobs a few times to catch the eye, then holds still so it stays easy to hit */
   animation:seiz-bob 1.5s ease-in-out 4 both;
 }
@@ -2111,9 +2067,9 @@ html.seizing, html.seizing body{ overflow:hidden; }
 @media (prefers-reduced-motion: reduce){ #seizure .cue{ animation:none; } }
 
 @media (max-width:560px){
-  #seizure .sheet{ padding:18px 12px 30px; }
-  #seizure .docket{ grid-template-columns:1fr; }
-  #seizure .crest{ width:76px; height:76px; }
+  #seizure .sheet{ padding:22px 14px 34px; }
+  #seizure .seal{ width:92px; }
+  #seizure .authority{ letter-spacing:.18em; }
 }
 </style>
 </head>
@@ -2123,12 +2079,12 @@ html.seizing, html.seizing body{ overflow:hidden; }
 <div id="seizure" role="dialog" aria-modal="true" aria-labelledby="seiz-title">
   <div class="sheet">
 
-    <div class="crest" aria-hidden="true">DEPT.<br>OF THE<br>INTERNET</div>
+    <img class="seal" src="FBI.png" alt="" aria-hidden="true" width="112" height="115">
 
-    <p class="authority">The Federal Bureau of Investigation</p>
-    <p class="sub">The Justice Department &#183; &#183; Region 9</p>
+    <p class="authority">Joint Task Force on Online Sincerity</p>
+    <p class="sub">Bureau of Vibes &#183; Office of Content Standards &#183; Region 9</p>
 
-    <h2 id="seiz-title">THIS DOMAIN<br>HAS BEEN SEIZED</h2>
+    <h2 id="seiz-title">THIS DOMAIN HAS BEEN SEIZED</h2>
     <p class="byline">catofminerva.com &#183; seized pursuant to a warrant nobody read</p>
 
     <div class="filing">
@@ -2140,57 +2096,33 @@ html.seizing, html.seizing body{ overflow:hidden; }
     <div class="papers">
 
     <div class="charges">
-      <h3>Violations</h3>
+      <h3>Alleged violations</h3>
       <ul>
         <li>Anarchist activity
-          <span class="stat">&#8212;</span></li>
+          <span class="stat">contrary to s.4(b), Everything Is Fine Act</span></li>
         <li>Woke activity, persistent and unrepentant
-          <span class="stat">&#8212; </span></li>
+          <span class="stat">contrary to s.11, Do Not Read Theory Order</span></li>
         <li>Operating a personal website outside an approved platform
-          <span class="stat">&#8212; </span></li>
+          <span class="stat">contrary to s.2, Please Just Use An App Regulations</span></li>
         <li>Possession of animated GIFs in excess of the household limit
-          <span class="stat">&#8212; 400+ counts</span></li>
+          <span class="stat">400+ counts</span></li>
         <li>Refusal to monetise a hobby
-          <span class="stat">&#8212; aggravating factor</span></li>
+          <span class="stat">aggravating factor</span></li>
       </ul>
-    </div>
-
-    <div class="docket">
-      <div>Case no. <b>981/AW/2026</b></div>
-      <div>Seized on <b id="seiz-date">&#8212;</b></div>
-      <div>Issuing officer <b>UNREADABLE</b></div>
-      <div>Appeals <b>not accepted</b></div>
     </div>
 
     </div><!-- /papers -->
     </div><!-- /filing -->
-
-    <div class="warn">
-      <strong class="blink">&#9888; WARNING &#9888;</strong><br>
-      Continuing past this notice is done <strong>entirely at your own peril</strong>.
-      Beyond this point lies unmoderated enthusiasm, a chat room, and a guestbook.
-      The Department accepts no responsibility for opinions formed on the other side.
-    </div>
 
     <div class="buttons">
       <button type="button" id="seiz-enter">I ACCEPT THE RISK &#8212; ENTER</button>
       <button type="button" id="seiz-no">no, take me somewhere safe</button>
     </div>
 
-    <div class="marq">
-      <marquee scrollamount="4">&#9733; this notice is a joke &#9733; nothing has been seized &#9733; there is no Department of the Internet &#9733; there is however a guestbook &#9733;</marquee>
-    </div>
-
-    <p class="smallprint">
-      Parody. No agency, real or imagined, has seized anything. Press
-      <b>Esc</b> or click either button to carry on to the website.
-    </p>
-
   </div>
 
   <button type="button" class="cue" id="seiz-cue" hidden>&#9660; CONTINUE BELOW &#9660;</button>
 </div>
-
   <canvas id="threebg" aria-hidden="true"></canvas>
 
   <canvas id="neoNebula" aria-hidden="true"></canvas>
@@ -3754,14 +3686,6 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
   var enter = document.getElementById('seiz-enter');
   var no    = document.getElementById('seiz-no');
-  var dateEl= document.getElementById('seiz-date');
-
-  if (dateEl){
-    try{
-      dateEl.textContent = new Date().toLocaleDateString('en-GB',
-        { day:'2-digit', month:'short', year:'numeric' }).toUpperCase();
-    }catch(_){ dateEl.textContent = 'TODAY'; }
-  }
 
   /* show the scroll cue only while the way in is off screen. the tab order
      already reaches the buttons, so this is hidden from assistive tech. */
