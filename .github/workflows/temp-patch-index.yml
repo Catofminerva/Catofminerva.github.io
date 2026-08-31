@@ -16,39 +16,32 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Patch index.html
-        shell: python
+        shell: python {0}
         run: |
           from pathlib import Path
 
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
           marker = '  </style>'
-          tag = 'zaki-bg-patch-2026-08-31'
+          tag = 'cyber-gif-bg-patch-2026-08-31'
 
           css = r'''
 
-/* zaki-bg-patch-2026-08-31
-   Use Zaki's animated landscape as the local backdrop for the cyber header
-   and the whole pet card. BACK1.jpg remains untouched everywhere else. */
+/* cyber-gif-bg-patch-2026-08-31
+   Keep BACK1.jpg everywhere else, but cover the title area and Zaki card
+   with the Welcome to Cyber Space GIF. The original banner and kirbys stay. */
 #glitter-title{
-  background-image: url("https://media.giphy.com/media/FlodpfQUBSp20/giphy.gif") !important;
+  background-image: url("welcometocyber.gif") !important;
   background-position: center center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
 }
 
 td.content .post:has(.pet-row){
-  background-image: url("https://media.giphy.com/media/FlodpfQUBSp20/giphy.gif") !important;
+  background-image: url("welcometocyber.gif") !important;
   background-position: center center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-}
-
-td.content .post:has(.pet-row) > h3,
-td.content .post:has(.pet-row) > .meta,
-td.content .post:has(.pet-row) .pet-sidekick-cap{
-  color: #fff !important;
-  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 0 0 5px #000 !important;
 }
 '''
 
@@ -67,5 +60,5 @@ td.content .post:has(.pet-row) .pet-sidekick-cap{
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Use Zaki GIF as header and pet background"
+          git commit -m "Use cyber GIF behind header and Zaki"
           git push
