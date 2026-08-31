@@ -143,10 +143,35 @@ z-index: 1;
   }
 }
 
+/* On a phone the old rule left 80px of padding either side for the gifs,
+   which squeezed the title down to about 33px on one line. It read as a
+   tidy little label on a sliver of the photo rather than a banner. The
+   gifs drop to the corners instead so the text can have the full width,
+   go big, and wrap to two lines the way it does on desktop. */
 @media (max-width: 560px){
   #glitter-title{
-    padding-inline: 80px;
-    font-size: clamp(30px, 8.4vw, 58px);
+    padding-inline: 6px;
+    font-size: clamp(46px, 16.5vw, 78px);
+    line-height: .96;
+    letter-spacing: 1px;
+    margin: 16px 0 12px;
+  }
+  #glitter-title::before,
+  #glitter-title::after{
+    width: 58px; height: 44px;
+    top: auto; bottom: -10px;
+    transform: none;
+  }
+  #glitter-title::before{ left: 2px; }
+  #glitter-title::after { right: 2px; }
+  /* a 4px ring is proportionally heavy once the type is smaller */
+  #glitter-title .wa{
+    text-shadow:
+      -2px -2px 0 #2b1704,  2px -2px 0 #2b1704,
+      -2px  2px 0 #2b1704,  2px  2px 0 #2b1704,
+      -3px  0   0 #2b1704,  3px  0   0 #2b1704,
+       0   -3px 0 #2b1704,  0    3px 0 #2b1704,
+       5px  6px 0 rgba(0,0,0,.55);
   }
 }
 
@@ -351,10 +376,8 @@ hr.retro {
 #glitter-title:hover::before{ transform: translateY(-50%) rotate(-3deg); }
 #glitter-title:hover::after { transform: translateY(-50%) rotate(3deg); }
 
-@media (max-width:560px){
-  #glitter-title{ padding-inline:80px; }
-  #glitter-title::before,#glitter-title::after{ width:72px; height:46px; }
-}
+/* sizing for small screens lives in the 700px block further down, which
+   uses !important and would win over anything set here. */
 
 
 
@@ -1138,25 +1161,32 @@ td.content .post h3{ color:#000; text-shadow:none; }
     box-shadow:0 0 18px var(--neon-blue), inset 0 0 4px #000;
   }
 
-  /* title still has the Kirbys, but they no longer force horizontal overflow */
+  /* The title goes big and wraps to two lines here, the way it does on
+     desktop. It used to be nowrap at ~37px with 52px of gutter either
+     side for the Kirbys, which left it a small tidy label on a sliver of
+     the background photo. The Kirbys sit in the bottom corners now so the
+     text gets the whole width. */
   #glitter-title{
     width:100%;
     min-width:0;
-    padding:8px 52px 2px !important;
-    margin:7px 0 3px !important;
-    font-size:clamp(30px, 10.5vw, 46px) !important;
-    line-height:1;
-    letter-spacing:0;
-    white-space:nowrap;
+    padding:10px 6px 4px !important;
+    margin:14px 0 10px !important;
+    font-size:clamp(44px, 15.5vw, 72px) !important;
+    line-height:.96;
+    letter-spacing:1px;
+    white-space:normal;
   }
   #glitter-title::before,
   #glitter-title::after{
-    width:48px !important;
-    height:42px !important;
+    width:56px !important;
+    height:44px !important;
+    top:auto !important;
+    bottom:-8px;
+    transform:none !important;
     filter:drop-shadow(0 0 3px var(--neon-blue));
   }
-  #glitter-title::before{ left:3px !important; }
-  #glitter-title::after{ right:3px !important; }
+  #glitter-title::before{ left:2px !important; }
+  #glitter-title::after{ right:2px !important; }
 
   .page > .marquee-wrap{
     margin:8px 8px 10px;
@@ -1377,13 +1407,13 @@ td.content .post h3{ color:#000; text-shadow:none; }
 
 @media (max-width: 390px){
   #glitter-title{
-    padding-inline:43px !important;
-    font-size:clamp(27px, 10vw, 37px) !important;
+    padding-inline:4px !important;
+    font-size:clamp(40px, 15.5vw, 60px) !important;
   }
   #glitter-title::before,
   #glitter-title::after{
-    width:40px !important;
-    height:36px !important;
+    width:46px !important;
+    height:38px !important;
   }
 
   .sidebar .nav{
