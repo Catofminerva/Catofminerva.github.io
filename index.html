@@ -412,28 +412,6 @@ hr.retro {
 }
 
 /* Floating control bar */
-#neoBar {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 10000;
-  display: flex;
-  gap: 8px;
-  padding: 6px 8px;
-  border: 3px ridge var(--neon-blue);
-  background: rgba(0,0,0,.55);
-  box-shadow: 0 10px 24px rgba(0,0,0,.6);
-  font-family: inherit;
-}
-#neoBar button {
-  cursor: pointer;
-  background: #0e0e33;
-  color: #a7ffff;
-  border: 2px outset #6af7ff;
-  padding: 6px 10px;
-  image-rendering: pixelated;
-}
-#neoBar button:active { border-style: inset; color: var(--neon-green); }
 
 /* When the alt skin is active… */
 html[data-skin="neo"] #neoNebula { opacity: .9; }
@@ -1067,75 +1045,14 @@ td.content .post h3{ color:#000; text-shadow:none; }
     /* === Win95 toolbar for the ALT / CRT / MOTION bar =================== */
 /* Uses the same --w95-* vars you already added */
 
-#neoBar{
-  position: fixed;
-  top: 10px; right: 10px;
-  z-index: 10000;
-  display: flex;
-  gap: 6px;
-  align-items: center;
-
-  padding: 6px 6px;
-  background: var(--w95-bg);
-  border: 2px solid; /* 3D bevel */
-  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
-  box-shadow: 1px 1px 0 var(--w95-dark), -1px -1px 0 var(--w95-hi);
-
-  font: 12px/1 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
-  color: #000;
-}
 
 /* tiny caption above the bar (optional) */
-#neoBar{ position: fixed; }
-#neoBar::before{
-  content: "Display Options";
-  position: absolute;
-  left: 6px; top: -11px;
-  padding: 0 4px;
-  background: var(--w95-bg);
-  border: 1px solid var(--w95-shadow);
-  border-top-color: var(--w95-hi);
-  border-left-color: var(--w95-hi);
-  font: 11px/1 "Tahoma","MS Sans Serif",sans-serif;
-}
 
 /* Win95 push buttons */
-#neoBar button{
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  min-width: 0;
-  background: var(--w95-bg);
-  color: #000;
-  border: 2px solid;
-  border-color: var(--w95-hi) var(--w95-dark) var(--w95-dark) var(--w95-hi);
-  box-shadow:
-    inset -1px -1px 0 var(--w95-shadow),
-    inset  1px  1px 0 var(--w95-hi);
-  cursor: pointer;
-  user-select: none;
-}
 
-#neoBar button:hover{
-  background: var(--w95-mid);
-}
 
-#neoBar button:active,
-#neoBar button[aria-pressed="true"]{
-  border-color: var(--w95-dark) var(--w95-hi) var(--w95-hi) var(--w95-dark);
-  box-shadow:
-    inset  1px  1px 0 var(--w95-shadow),
-    inset -1px -1px 0 var(--w95-hi);
-  background: var(--w95-mid);
-  transform: translate(1px,1px);
-}
 
 /* classic dotted focus */
-#neoBar button:focus-visible{
-  outline: 1px dotted #000;
-  outline-offset: -4px;
-}
 
 
 
@@ -1157,7 +1074,6 @@ td.content .post h3{ color:#000; text-shadow:none; }
   }
 
   /* desktop-only display toys are hidden on phones */
-  #neoBar{ display:none !important; }
 
   /* gutter so the backdrop shows around the page, not a 6px sliver */
   .page{
@@ -1948,11 +1864,6 @@ td.content .post h3{ color:#000; text-shadow:none; }
   <canvas id="threebg" aria-hidden="true"></canvas>
 
   <canvas id="neoNebula" aria-hidden="true"></canvas>
-<div id="neoBar" role="toolbar" aria-label="Neo controls">
-  <button id="neoAltBtn"    type="button">ALT SKIN</button>
-  <button id="neoCRTBtn"    type="button">CRT</button>
-  <button id="neoMotionBtn" type="button">MOTION</button>
-</div>
   
   <div class="page">
 <h1 id="glitter-title" class="pastel-title">
@@ -2278,9 +2189,6 @@ td.content .post h3{ color:#000; text-shadow:none; }
       </div>
     </div>
 
-  <audio id="blip" preload="auto">
-  <source src="kawaii%208bit.mp3" type="audio/mpeg">
-</audio>
     <button id="soundToggle" class="sound-toggle" aria-pressed="false" title="Toggle UI sounds">&#128263; sound</button>
   </div>
 
@@ -2353,48 +2261,74 @@ setInterval(() => {
   document.documentElement.classList.add((h>=6 && h<17) ? 'morning' : 'night');
 })();
 
-/* UI sounds: opt-in with button; play on click (pointerdown) */
+/* UI sounds.
+   this used to point at kawaii 8bit.mp3, which is a 57 second song, not a
+   click sound. it preloaded 1.4MB, the toggle made no noise at all so it
+   looked broken, and a nav click started the track and then navigated away
+   350ms later. the blip is synthesised now: nothing to download, it fires
+   instantly, and it finishes long before the page changes. */
 (() => {
-  const a = document.getElementById('blip');
   const btn = document.getElementById('soundToggle');
-  if (!a || !btn) return;
-
-  // Ensure the audio element has a concrete src, even if only <source> was provided
-  if (!a.currentSrc) { a.src = 'kawaii%208bit.mp3'; a.load(); }
+  const KEY = 'g981_ui_sound';
 
   let enabled = false;
-  a.volume = 0.5;
+  try { enabled = localStorage.getItem(KEY) === '1'; } catch (_) {}
 
-  btn.addEventListener('click', () => {
-    enabled = !enabled;
-    btn.setAttribute('aria-pressed', String(enabled));
-    btn.textContent = enabled ? '🔊 sound' : '🔇 sound';
-    // prime audio without making noise
-    try { a.play().then(() => { a.pause(); a.currentTime = 0; }).catch(()=>{}); } catch(_){}
-  });
-
-  const beep = () => {
+  let actx = null;
+  function blip(freq = 880) {
     if (!enabled) return;
-    try { a.currentTime = 0; a.play(); } catch(_){}
-  };
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      const t = actx.currentTime;
+      const osc = actx.createOscillator();
+      const gain = actx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, t + 0.05);
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+      osc.connect(gain).connect(actx.destination);
+      osc.start(t);
+      osc.stop(t + 0.12);
+    } catch (_) {}
+  }
 
-  // fire on pointerdown so it plays before navigation
-  document.querySelectorAll('.nav a').forEach(el => {
-    el.addEventListener('pointerdown', beep);
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') beep();
+  function paint() {
+    if (!btn) return;
+    btn.setAttribute('aria-pressed', String(enabled));
+    btn.textContent = enabled ? '\uD83D\uDD0A sound' : '\uD83D\uDD07 sound';
+  }
+
+  if (btn) {
+    paint();
+    btn.addEventListener('click', () => {
+      enabled = !enabled;
+      try { localStorage.setItem(KEY, enabled ? '1' : '0'); } catch (_) {}
+      paint();
+      /* the toggle itself has to make a noise, otherwise turning it on
+         looks exactly like nothing happening. */
+      if (enabled) blip(660);
     });
-  });
 
-  // give the beep a hair more time before the VHS transition navigates
-  const links = document.querySelectorAll('.page a[href]');
-  links.forEach(aTag => {
+    document.querySelectorAll('.nav a').forEach(el => {
+      el.addEventListener('pointerdown', () => blip());
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') blip();
+      });
+    });
+  }
+
+  /* page transition. deliberately outside the button check so it still
+     runs when the sound button is absent. */
+  document.querySelectorAll('.page a[href]').forEach(aTag => {
     const url = aTag.getAttribute('href') || '';
     if (url.startsWith('#') || /^(https?:)?\/\//i.test(url)) return;
     aTag.addEventListener('click', e => {
       e.preventDefault();
       document.documentElement.classList.add('vhs');
-      setTimeout(() => { window.location.href = url; }, 350); // was 200
+      setTimeout(() => { window.location.href = url; }, 350);
     });
   });
 })();
@@ -2465,17 +2399,9 @@ setInterval(() => {
   // Ensure helpers exist
   let canvas = document.getElementById('neoNebula');
   if (!canvas) { canvas = document.createElement('canvas'); canvas.id = 'neoNebula'; document.body.prepend(canvas); }
-  let bar = document.getElementById('neoBar');
-  if (!bar) {
-    bar = document.createElement('div'); bar.id = 'neoBar';
-    bar.innerHTML = `<button id="neoAltBtn" type="button">ALT SKIN</button>
-                     <button id="neoCRTBtn" type="button">CRT</button>
-                     <button id="neoMotionBtn" type="button">MOTION</button>`;
-    document.body.appendChild(bar);
-  }
-  const altBtn = document.getElementById('neoAltBtn');
-  const crtBtn = document.getElementById('neoCRTBtn');
-  const motBtn = document.getElementById('neoMotionBtn');
+  /* the display-options toolbar is gone. the skin/crt/motion state below
+     still loads from storage and applies, it just has no buttons now. */
+  const bar = null, altBtn = null, crtBtn = null, motBtn = null;
 
   // Canvas starfield + aurora (cleaner than bubbles)
   const ctx = canvas.getContext('2d');
@@ -2609,13 +2535,6 @@ function apply(){
 }
   apply();
 
-  // Wire controls
-  bar.addEventListener('click', (e) => {
-    const id = e.target && e.target.id;
-    if (id === 'neoAltBtn')    { state.skin   = !state.skin;   apply(); save(state); }
-    if (id === 'neoCRTBtn')    { state.crt    = !state.crt;    apply(); save(state); }
-    if (id === 'neoMotionBtn') { state.motion = !state.motion; apply(); save(state); }
-  });
 })();
 
 
