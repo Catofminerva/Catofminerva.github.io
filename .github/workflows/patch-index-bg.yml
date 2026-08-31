@@ -1,0 +1,64 @@
+name: Patch index backgrounds
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-index-bg.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch index.html
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          marker = '  </style>'
+          tag = 'cyber-gif-bg-patch-2026-08-31'
+
+          css = r'''
+
+/* cyber-gif-bg-patch-2026-08-31
+   The existing Welcome to Cyber Space GIF becomes the backdrop in the
+   title area and behind Zaki, while the original banner and kirbys remain. */
+#glitter-title{
+  background-image: url("welcometocyber.gif") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+td.content .post:has(.pet-row){
+  background-image: url("welcometocyber.gif") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+'''
+
+          if tag not in text:
+              if marker not in text:
+                  raise SystemExit('closing style tag not found')
+              text = text.replace(marker, css + '\n' + marker, 1)
+              p.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit change
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index change needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Use cyber GIF behind header and Zaki"
+          git push
