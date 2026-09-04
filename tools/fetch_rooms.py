@@ -9,6 +9,15 @@ reddit still serves its public listings as JSON to a plain GET.
     python3 tools/fetch_rooms.py --limit 400     # collect more
     python3 tools/fetch_rooms.py --sub Backrooms # somewhere else
 
+Two ways in. From a home connection the public listings answer a plain GET
+and nothing else is needed. From a datacentre, which includes every CI
+runner, reddit answers 403 to anonymous requests, so set REDDIT_CLIENT_ID
+and REDDIT_CLIENT_SECRET and the script authenticates first:
+
+    make a "script" app at https://www.reddit.com/prefs/apps
+    export REDDIT_CLIENT_ID=... REDDIT_CLIENT_SECRET=...
+    python3 tools/fetch_rooms.py
+
 Run it locally and commit the result, or let .github/workflows/refresh-rooms.yml
 do it on a schedule. The page keeps working when the file is stale or empty;
 it falls back to asking reddit from the visitor's own browser, and failing
@@ -16,11 +25,14 @@ that to the drawn corridor.
 """
 
 import argparse
+import base64
 import json
+import os
 import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -31,10 +43,52 @@ UA = "catofminerva.com liminal-space room collector (+https://catofminerva.com/l
 IMAGE_URL = re.compile(r"^https://i\.redd\.it/[\w.\-]+\.(?:jpg|jpeg|png|webp)$", re.I)
 
 
+# Filled in by authenticate() when credentials are present. Anonymous
+# requests are fine from a home connection and refused from a datacentre.
+TOKEN = None
+HOST = "https://www.reddit.com"
+
+
+def authenticate():
+    """Swap a script app's id and secret for an app-only bearer token.
+
+    Without this every request from a CI runner comes back 403, because
+    reddit does not serve its public JSON to datacentre addresses.
+    """
+    global TOKEN, HOST
+    cid = os.environ.get("REDDIT_CLIENT_ID", "").strip()
+    secret = os.environ.get("REDDIT_CLIENT_SECRET", "").strip()
+    if not cid or not secret:
+        return False
+
+    body = urllib.parse.urlencode({"grant_type": "client_credentials"}).encode()
+    basic = base64.b64encode(("%s:%s" % (cid, secret)).encode()).decode()
+    req = urllib.request.Request(
+        "https://www.reddit.com/api/v1/access_token",
+        data=body,
+        headers={"Authorization": "Basic " + basic, "User-Agent": UA},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            TOKEN = json.loads(r.read().decode("utf-8")).get("access_token")
+    except Exception as e:                            # noqa: BLE001
+        print("could not authenticate: %s" % e, file=sys.stderr)
+        return False
+
+    if not TOKEN:
+        return False
+    HOST = "https://oauth.reddit.com"
+    print("authenticated. using %s" % HOST, file=sys.stderr)
+    return True
+
+
 def fetch(url, tries=4):
     """GET a reddit listing, backing off when it says slow down."""
     for attempt in range(tries):
-        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+        headers = {"User-Agent": UA, "Accept": "application/json"}
+        if TOKEN:
+            headers["Authorization"] = "bearer " + TOKEN
+        req = urllib.request.Request(url, headers=headers)
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 return json.loads(r.read().decode("utf-8"))
@@ -45,6 +99,10 @@ def fetch(url, tries=4):
                 time.sleep(wait)
                 continue
             print("  http %s on %s" % (e.code, url), file=sys.stderr)
+            if e.code in (401, 403) and not TOKEN:
+                print("  reddit refuses anonymous requests from this address."
+                      " set REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET, or run"
+                      " this from a home connection.", file=sys.stderr)
             return None
         except Exception as e:                        # noqa: BLE001 - network is network
             if attempt < tries - 1:
@@ -100,7 +158,8 @@ def harvest(sub, limit, pause):
         after = None
         pages = 0
         while len(rooms) < limit and pages < 4:
-            url = "https://www.reddit.com/r/%s/%s.json%s" % (sub, sort, query)
+            suffix = "" if TOKEN else ".json"      # oauth.reddit.com wants no extension
+            url = "%s/r/%s/%s%s%s" % (HOST, sub, sort, suffix, query)
             if after:
                 url += "&after=" + after
             print("%s %s page %d (%d kept)" % (sub, sort, pages + 1, len(rooms)), file=sys.stderr)
@@ -138,6 +197,7 @@ def main():
     ap.add_argument("--out", default="rooms.json")
     args = ap.parse_args()
 
+    authenticate()
     rooms = harvest(args.sub, args.limit, args.pause)
     if not rooms:
         print("collected nothing. rooms.json left as it was.", file=sys.stderr)

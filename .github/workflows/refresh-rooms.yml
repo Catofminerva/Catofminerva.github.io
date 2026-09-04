@@ -19,12 +19,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
+      # Anonymous requests are refused from Actions runners, which sit in a
+      # datacentre. Add REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET as repo
+      # secrets (a "script" app at reddit.com/prefs/apps) and the crawl
+      # authenticates instead.
       - name: collect rooms
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: python3 tools/fetch_rooms.py --limit 250
 
       - name: commit if anything changed
