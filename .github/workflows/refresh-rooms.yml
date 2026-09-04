@@ -8,6 +8,11 @@ name: refresh liminal rooms
 
 on:
   workflow_dispatch:
+    inputs:
+      args:
+        description: 'arguments for tools/fetch_rooms.py'
+        default: '--limit 250'
+        required: false
   schedule:
     - cron: '17 4 * * 1'
 
@@ -30,11 +35,15 @@ jobs:
       # datacentre. Add REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET as repo
       # secrets (a "script" app at reddit.com/prefs/apps) and the crawl
       # authenticates instead.
+      # ARGS goes through the environment rather than straight into the
+      # shell line, which is the documented way to keep a dispatch input
+      # from being read as script.
       - name: collect rooms
         env:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-        run: python3 tools/fetch_rooms.py --limit 250
+          ARGS: ${{ inputs.args || '--limit 250' }}
+        run: python3 tools/fetch_rooms.py $ARGS
 
       - name: commit if anything changed
         run: |

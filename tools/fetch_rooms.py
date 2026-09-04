@@ -308,8 +308,53 @@ def harvest_commons(limit, pause):
     return rooms[:limit]
 
 
+def probe():
+    """Print what the image sources actually answer.
+
+    Nothing that can run this unattended is allowed to reach them from a
+    shell, so when a parser comes back empty the only way to see the
+    response is to have the runner print it.
+    """
+    urls = [
+        ("commons search",
+         "https://commons.wikimedia.org/w/api.php?action=query&format=json"
+         "&formatversion=2&generator=search&gsrsearch=empty%20corridor"
+         "&gsrnamespace=6&gsrlimit=3&prop=imageinfo&iiprop=url%7Cextmetadata"
+         "&iiurlwidth=1600"),
+        ("commons search, no filetype",
+         "https://commons.wikimedia.org/w/api.php?action=query&format=json"
+         "&formatversion=2&generator=search&gsrsearch=empty%20corridor%20filetype%3Abitmap"
+         "&gsrnamespace=6&gsrlimit=3&prop=imageinfo&iiprop=url%7Cextmetadata"
+         "&iiurlwidth=1600"),
+        ("commons category",
+         "https://commons.wikimedia.org/w/api.php?action=query&format=json"
+         "&formatversion=2&generator=categorymembers&gcmtitle=Category%3ACorridors"
+         "&gcmtype=file&gcmlimit=3&prop=imageinfo&iiprop=url%7Cextmetadata"
+         "&iiurlwidth=1600"),
+        ("openverse",
+         "https://api.openverse.org/v1/images/?q=empty+corridor&page_size=3&format=json"),
+    ]
+    for name, url in urls:
+        print("\n===== %s =====" % name, file=sys.stderr)
+        print(url, file=sys.stderr)
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=30, context=CTX) as r:
+                body = r.read(2500).decode("utf-8", "replace")
+                print("status %s" % r.status, file=sys.stderr)
+                print(body, file=sys.stderr)
+        except urllib.error.HTTPError as e:
+            print("http %s" % e.code, file=sys.stderr)
+            print(e.read(900).decode("utf-8", "replace"), file=sys.stderr)
+        except Exception as e:                        # noqa: BLE001
+            print("error %s" % e, file=sys.stderr)
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--probe", action="store_true",
+                    help="print what each source answers, and change nothing")
     ap.add_argument("--sub", default="LiminalSpace")
     ap.add_argument("--limit", type=int, default=250)
     ap.add_argument("--pause", type=float, default=1.5, help="seconds between requests")
@@ -321,6 +366,9 @@ def main():
 
     global CTX
     CTX = ssl_context()
+
+    if args.probe:
+        return probe()
 
     rooms, source = [], args.source
     if args.source in ("auto", "reddit"):
