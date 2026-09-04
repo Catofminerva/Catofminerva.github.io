@@ -2027,8 +2027,68 @@ td.content .post h3{ color:#000; text-shadow:none; }
 }
 
 
+
+/* --- 2026-09-04: the door to the rooms ------------------------------
+   the way through to liminal.html. it is a door standing against a patch
+   of the dull yellow that page is made of, which is the only warning the
+   visitor gets about where it goes. */
+.doorway{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 16px 0 20px;
+  padding: 0;
+  background: #efe9d6;
+  border: 2px solid;
+  border-color: var(--w95-hi) var(--w95-shadow) var(--w95-shadow) var(--w95-hi);
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 var(--w95-dark);
+  color: #111 !important;
+  text-decoration: none !important;
+}
+.doorway .dw-wall{
+  flex: 0 0 auto;
+  display: block;
+  padding: 12px 18px 0;
+  background: linear-gradient(180deg, #cdba6d 0%, #c2ae62 66%, #b6a259 100%);
+  border-right: 2px solid #8a7a3f;
+  border-bottom: 9px solid #6f6231;    /* the floor, seen edge on */
+}
+.doorway .dw-wall img{
+  display: block;
+  width: 96px; height: auto;
+  image-rendering: pixelated;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.doorway .dw-copy{
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 14px 12px 0;
+  font: 12px/1.6 "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
+  color: #111;
+}
+.doorway .dw-go{
+  display: block;
+  margin-top: 6px;
+  font: bold 11px/1.5 "Courier New", monospace;
+  letter-spacing: .1em;
+  color: #7a6a2f;
+}
+.doorway:hover .dw-wall img,
+.doorway:focus-visible .dw-wall img{
+  transform: scale(1.06) translateY(-2px);
+  filter: drop-shadow(0 0 9px rgba(255,246,205,.95));
+}
+.doorway:hover .dw-go{ color: #b8330c; }
+@media (prefers-reduced-motion: reduce){
+  .doorway .dw-wall img{ transition: none; }
+}
+
 @media (max-width: 700px){
   .marquee-planet{ height: 20px; margin: 0 4px; }
+  .doorway .dw-wall{ padding: 10px 14px 0; }
+  .doorway .dw-wall img{ width: 74px; }
+  .doorway .dw-copy{ padding: 0 12px 12px; }
   .shrine{ padding: 13px 13px 12px; }
   .shrine-text{ font-size: 14px; }
   .shrine-text p{ text-align: left; }
@@ -2416,6 +2476,19 @@ html.seizing, html.seizing body{ overflow:hidden; }
               <span class="wish-count" id="wishCount">wishes granted: 0</span>
             </div>
           </div>
+
+          <!-- 2026-09-04: the door -->
+          <a class="doorway" href="liminal.html">
+            <span class="dw-wall">
+              <img src="door.gif" alt="" width="96">
+            </span>
+            <span class="dw-copy">
+              <strong>THE DOOR</strong> &#183; it is not on any plan of this building.
+              it opens onto a room somebody photographed, and that room has a door
+              in it, and so does the one after that.
+              <span class="dw-go">open it &#8594;</span>
+            </span>
+          </a>
 
           <div class="post">
             <h3>Pet and feed Zaki</h3>

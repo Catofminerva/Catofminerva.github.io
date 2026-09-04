@@ -508,7 +508,7 @@ a:hover{ color:#c00; }
 
           <div class="keys">
             <span class="kbdhint">
-              click a door &#183; or press <kbd>1</kbd> <kbd>2</kbd> &#183;
+              click the door &#183; or press <kbd>1</kbd> &#183;
               <kbd>B</kbd> goes back through a door, which does not return you
             </span>
           </div>
@@ -636,26 +636,24 @@ a:hover{ color:#c00; }
     return next;
   }
 
-  /* --- the doors of a room --------------------------------------------
-     always two. where they stand comes from a hash of the photograph
-     they stand in, so a room you walk back into has its doors where it
-     had them, and no two rooms put them in the same place. they are kept
-     small, and kept apart, and kept out of the very top of the frame
-     where a door would be standing in the ceiling. */
-  const DOORS = ['door.gif', 'door2.gif'];
+  /* --- the door out of a room -----------------------------------------
+     one door. two of them made the eye pick between them, which is a
+     decision, and a labyrinth does not offer you one: it offers you the
+     door that is there.
 
+     where it stands comes from a hash of the photograph it stands in, so
+     a room you walk back into has its door where it had it, and no two
+     rooms put it in the same place. it is kept small, and kept out of
+     the top of the frame where a door would be standing in the ceiling.  */
   function doorsOf(roomIdx){
     const id = plates.length ? plates[roomIdx].u : String(roomIdx);
-    const out = [];
-    for (let i = 0; i < 2; i++){
-      const w = 7 + hash(id, 11 + i * 5) * 5;              // 7-12% of the width
-      /* one door in each half of the frame, so they never sit on top of
-         one another however the numbers fall */
-      const left = (i === 0 ? 4 : 52) + hash(id, 23 + i * 5) * (44 - w);
-      const top  = 28 + hash(id, 37 + i * 5) * 46;         // 28-74% down
-      out.push({ src: DOORS[i], left: left, top: top, width: w });
-    }
-    return out;
+    const w = 7 + hash(id, 11) * 5;                  // 7-12% of the width
+    return [{
+      src: 'door.gif',
+      left: 6 + hash(id, 23) * (88 - w),
+      top:  28 + hash(id, 37) * 46,                  // 28-74% down
+      width: w
+    }];
   }
 
   /* --- entering a room -------------------------------------------------- */
@@ -712,7 +710,7 @@ a:hover{ color:#c00; }
       b.style.top   = d.top.toFixed(2) + '%';
       b.style.width = d.width.toFixed(2) + '%';
       b.style.animationDelay = (i * 1.3).toFixed(1) + 's';
-      b.setAttribute('aria-label', 'Go through the ' + (i === 0 ? 'first' : 'second') + ' door');
+      b.setAttribute('aria-label', 'Go through the door');
 
       const img = document.createElement('img');
       img.src = d.src;
@@ -724,55 +722,124 @@ a:hover{ color:#c00; }
     });
   }
 
-  /* --- the sound a door makes -------------------------------------------
-     a latch, then the swing, then the thud of it meeting the frame.
-     synthesised rather than downloaded: it is a few hundred bytes of
-     arithmetic instead of a file, it fires the instant the door is
-     clicked, and there is nothing to go missing. the context is only
-     built on the first click, which is a user gesture, so no browser
-     objects to it. */
-  let dctx = null;
-  function doorSound(){
-    try {
-      dctx = dctx || new (window.AudioContext || window.webkitAudioContext)();
-      if (dctx.state === 'suspended') dctx.resume();
-      const t = dctx.currentTime;
+  /* --- sound ------------------------------------------------------------
+     one context for the room tone and the doors. it is built at once and
+     starts suspended, because no browser will make a noise before the
+     visitor has touched the page; the first click or keypress resumes it.
+     the hum is on unless it has been turned off, and that choice is
+     remembered. */
+  const SND = 'g981_liminal_hum';
+  let actx = null, humGain = null;
+  let humOn = true;
+  try { humOn = localStorage.getItem(SND) !== 'off'; } catch (_) {}
 
-      /* the latch: a very short click of high filtered noise */
-      const n = dctx.createBuffer(1, dctx.sampleRate * 0.4, dctx.sampleRate);
+  function audio(){
+    if (actx) return actx;
+    try { actx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch (_) { return null; }
+    return actx;
+  }
+
+  function buildHum(){
+    const A = audio();
+    if (!A || humGain) return;
+    humGain = A.createGain();
+    humGain.gain.value = 0.0001;
+    humGain.connect(A.destination);
+
+    const o1 = A.createOscillator(); o1.type = 'sine'; o1.frequency.value = 49.5;
+    const o2 = A.createOscillator(); o2.type = 'sine'; o2.frequency.value = 99.7;
+    const g1 = A.createGain(); g1.gain.value = 0.5;
+    const g2 = A.createGain(); g2.gain.value = 0.16;
+    o1.connect(g1).connect(humGain); o2.connect(g2).connect(humGain);
+
+    const len = A.sampleRate * 4;
+    const buf = A.createBuffer(1, len, A.sampleRate);
+    const ch = buf.getChannelData(0);
+    let v = 0;
+    for (let i = 0; i < len; i++){ v = (v + (Math.random() * 2 - 1) * 0.06) * 0.985; ch[i] = v; }
+    const src = A.createBufferSource(); src.buffer = buf; src.loop = true;
+    const lp = A.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 620;
+    const gn = A.createGain(); gn.gain.value = 0.9;
+    src.connect(lp).connect(gn).connect(humGain);
+
+    o1.start(); o2.start(); src.start();
+  }
+
+  function humLevel(){
+    if (!humGain || !actx) return;
+    const t = actx.currentTime;
+    humGain.gain.cancelScheduledValues(t);
+    humGain.gain.setValueAtTime(Math.max(0.0001, humGain.gain.value), t);
+    humGain.gain.exponentialRampToValueAtTime(humOn ? 0.09 : 0.0001, t + 0.8);
+  }
+
+  function paintHum(){
+    const btn = document.getElementById('humBtn');
+    if (!btn) return;
+    btn.textContent = 'hum: ' + (humOn ? 'on' : 'off');
+    btn.setAttribute('aria-pressed', String(humOn));
+  }
+
+  /* the page cannot make a sound until the visitor has done something,
+     so the hum waits for the first thing they do and then comes up. */
+  function wake(){
+    const A = audio();
+    if (!A) return;
+    buildHum();
+    if (A.state === 'suspended') A.resume();
+    humLevel();
+  }
+  ['pointerdown', 'keydown'].forEach(ev =>
+    window.addEventListener(ev, wake, { once: true, passive: true }));
+
+  paintHum();
+  buildHum();
+  humLevel();
+
+  /* the sound a door makes: a latch, the swing, and the thud of it
+     meeting the frame. synthesised rather than downloaded, so there is
+     no file to fetch and nothing to go missing. */
+  function doorSound(){
+    const A = audio();
+    if (!A) return;
+    try {
+      if (A.state === 'suspended') A.resume();
+      const t = A.currentTime;
+
+      const n = A.createBuffer(1, A.sampleRate * 0.4, A.sampleRate);
       const ch = n.getChannelData(0);
       for (let i = 0; i < ch.length; i++) ch[i] = (Math.random() * 2 - 1);
-      const latch = dctx.createBufferSource(); latch.buffer = n;
-      const lbp = dctx.createBiquadFilter();
+
+      const latch = A.createBufferSource(); latch.buffer = n;
+      const lbp = A.createBiquadFilter();
       lbp.type = 'bandpass'; lbp.frequency.value = 2600; lbp.Q.value = 3;
-      const lg = dctx.createGain();
+      const lg = A.createGain();
       lg.gain.setValueAtTime(0.22, t);
       lg.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
-      latch.connect(lbp).connect(lg).connect(dctx.destination);
+      latch.connect(lbp).connect(lg).connect(A.destination);
       latch.start(t); latch.stop(t + 0.08);
 
-      /* the swing: the same noise, low and brief, a moment later */
-      const swing = dctx.createBufferSource(); swing.buffer = n;
-      const slp = dctx.createBiquadFilter();
+      const swing = A.createBufferSource(); swing.buffer = n;
+      const slp = A.createBiquadFilter();
       slp.type = 'lowpass'; slp.frequency.setValueAtTime(900, t + 0.05);
       slp.frequency.exponentialRampToValueAtTime(260, t + 0.3);
-      const sg = dctx.createGain();
+      const sg = A.createGain();
       sg.gain.setValueAtTime(0.0001, t + 0.05);
       sg.gain.exponentialRampToValueAtTime(0.08, t + 0.12);
       sg.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
-      swing.connect(slp).connect(sg).connect(dctx.destination);
+      swing.connect(slp).connect(sg).connect(A.destination);
       swing.start(t + 0.05); swing.stop(t + 0.36);
 
-      /* the thud: the door meeting the frame */
-      const osc = dctx.createOscillator();
+      const osc = A.createOscillator();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(150, t + 0.3);
       osc.frequency.exponentialRampToValueAtTime(58, t + 0.44);
-      const og = dctx.createGain();
+      const og = A.createGain();
       og.gain.setValueAtTime(0.0001, t + 0.3);
       og.gain.exponentialRampToValueAtTime(0.3, t + 0.33);
       og.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
-      osc.connect(og).connect(dctx.destination);
+      osc.connect(og).connect(A.destination);
       osc.start(t + 0.3); osc.stop(t + 0.52);
     } catch (_) {}
   }
@@ -849,7 +916,7 @@ a:hover{ color:#c00; }
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const tag = (document.activeElement && document.activeElement.tagName) || '';
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-    if (e.key === '1' || e.key === '2'){
+    if (e.key === '1'){
       const i = Number(e.key) - 1;
       if (i < doorsOf(here).length){ go(i); e.preventDefault(); }
     } else if (e.key === 'b' || e.key === 'B'){
@@ -863,44 +930,12 @@ a:hover{ color:#c00; }
     enter(Math.floor(Math.random() * plates.length), 'you start again, in a room you have not asked for.');
   });
 
-  /* --- the hum ----------------------------------------------------------
-     two low sines under filtered noise. it is the sound of a building
-     with nobody in it, and it stays off until asked for. */
-  (() => {
-    const btn = document.getElementById('humBtn');
-    let actx = null, out = null, on = false;
-    btn.addEventListener('click', () => {
-      try {
-        if (!actx){
-          actx = new (window.AudioContext || window.webkitAudioContext)();
-          out = actx.createGain(); out.gain.value = 0.0001; out.connect(actx.destination);
-          const o1 = actx.createOscillator(); o1.type = 'sine'; o1.frequency.value = 49.5;
-          const o2 = actx.createOscillator(); o2.type = 'sine'; o2.frequency.value = 99.7;
-          const g1 = actx.createGain(); g1.gain.value = 0.5;
-          const g2 = actx.createGain(); g2.gain.value = 0.16;
-          o1.connect(g1).connect(out); o2.connect(g2).connect(out);
-          const len = actx.sampleRate * 4;
-          const buf = actx.createBuffer(1, len, actx.sampleRate);
-          const ch = buf.getChannelData(0);
-          let v = 0;
-          for (let i = 0; i < len; i++){ v = (v + (Math.random() * 2 - 1) * 0.06) * 0.985; ch[i] = v; }
-          const src = actx.createBufferSource(); src.buffer = buf; src.loop = true;
-          const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 620;
-          const gn = actx.createGain(); gn.gain.value = 0.9;
-          src.connect(lp).connect(gn).connect(out);
-          o1.start(); o2.start(); src.start();
-        }
-        if (actx.state === 'suspended') actx.resume();
-        on = !on;
-        const t = actx.currentTime;
-        out.gain.cancelScheduledValues(t);
-        out.gain.setValueAtTime(Math.max(0.0001, out.gain.value), t);
-        out.gain.exponentialRampToValueAtTime(on ? 0.09 : 0.0001, t + 0.8);
-        btn.textContent = on ? 'hum: on' : 'hum: off';
-        btn.setAttribute('aria-pressed', String(on));
-      } catch (_) { btn.textContent = 'hum: unavailable'; }
-    });
-  })();
+  document.getElementById('humBtn').addEventListener('click', () => {
+    humOn = !humOn;
+    try { localStorage.setItem(SND, humOn ? 'on' : 'off'); } catch (_) {}
+    wake();
+    paintHum();
+  });
 
   document.addEventListener('visibilitychange', () => {
     document.title = document.hidden ? 'liminal space (still open)' : 'liminal space';
