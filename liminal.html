@@ -197,16 +197,6 @@ dl.now dd{ margin:0 0 2px 60px; }
 }
 #roomImg[hidden]{ display:none; }
 
-/* the room's number, the way a fire door is labelled */
-.roomtag{
-  position:absolute; left:8px; top:8px;
-  padding:2px 7px;
-  background:rgba(20,17,10,.62);
-  color:#f4ecd0;
-  font:11px/1.5 "Courier New", monospace;
-  letter-spacing:.14em;
-  pointer-events:none;
-}
 .loading{
   position:absolute; inset:0;
   display:grid; place-items:center;
@@ -218,44 +208,58 @@ dl.now dd{ margin:0 0 2px 60px; }
 }
 .loading[hidden]{ display:none; }
 
-/* the doors. flat dark openings standing on the floor of whatever room
-   you are in, which is how a door looks when the room behind it has no
-   light on. */
-.doorframe{ position:absolute; inset:0; }
+/* the wall you are facing, with the doors out of this room in it. the
+   photograph above is left alone: the black rectangles that used to sit
+   on it read as damage to the picture rather than as somewhere to go. */
+.doorwall{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:clamp(14px, 6vw, 54px);
+  margin:0 6px 6px;
+  padding:14px 10px 0;
+  min-height:74px;
+  background:
+    linear-gradient(180deg, #cdba6d 0%, #c2ae62 62%, #b6a259 100%);
+  border:2px solid;
+  border-color:#8a7a3f #e0d29a #e0d29a #8a7a3f;
+  border-bottom-width:9px;               /* the floor, seen edge on */
+  border-bottom-color:#6f6231;
+}
 .door{
-  position:absolute;
-  bottom:0;
-  padding:0;
-  /* not flat black: a dark room has a little light in the top of the
-     doorway and none at the floor, and that is what makes it read as an
-     opening rather than a rectangle laid on the picture */
-  background:linear-gradient(180deg, #221b0c 0%, #120e06 45%, #080602 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  padding:4px 8px 6px;
+  background:none;
   border:0;
-  box-shadow:
-    inset 0 0 0 3px #b8a557,
-    inset 0 0 0 5px rgba(0,0,0,.55),
-    0 0 22px rgba(0,0,0,.45);
+  color:#4a4020;
+  font:10px/1.4 Verdana, Geneva, sans-serif;
+  letter-spacing:.1em;
+  text-transform:lowercase;
   cursor:pointer;
-  transition:box-shadow 120ms linear, background 120ms linear;
 }
-.door::after{
-  content:attr(data-n);
-  position:absolute; left:50%; top:8px;
-  transform:translateX(-50%);
-  color:#8a7a3f;
-  font:10px/1 "Courier New", monospace;
-  transition:color 120ms linear;
+.door img{
+  width:38px; height:38px;
+  image-rendering:pixelated;
+  transition:transform 120ms ease, filter 120ms ease;
 }
-.door:hover, .door:focus-visible{
-  background:linear-gradient(180deg, #322813 0%, #191305 55%, #0b0803 100%);
-  box-shadow:
-    inset 0 0 0 3px #f0e2a6,
-    inset 0 0 0 5px rgba(0,0,0,.55),
-    0 0 34px rgba(255,240,180,.35);
-  outline:0;
+.door:hover img, .door:focus-visible img{
+  transform:scale(1.22) translateY(-2px);
+  filter:drop-shadow(0 0 7px rgba(255,244,190,.95));
 }
-.door:hover::after, .door:focus-visible::after{ color:#f0e2a6; }
-.door:active{ background:#0d0b04; }
+.door:hover, .door:focus-visible{ color:#221d0c; outline:0; }
+.door:active img{ transform:scale(1.05); }
+.door .num{
+  display:inline-block;
+  min-width:13px;
+  padding:0 3px;
+  border:1px solid #8a7a3f;
+  background:#dccb8c;
+  font:9px/1.4 "Courier New", monospace;
+  color:#4a4020;
+}
 
 /* going through one. a short cut to black, because a doorway is not a
    journey and the walking was the part that dragged. */
@@ -590,11 +594,13 @@ a:hover{ color:#c00; }
                the doors, and nothing is drawn on it at all. -->
           <div class="screen" id="screen">
             <img id="roomImg" alt="" decoding="async" referrerpolicy="no-referrer">
-            <div class="doorframe" id="doors"></div>
-            <div class="roomtag" id="roomTag">ROOM 0</div>
             <div class="fade" id="fade" aria-hidden="true"></div>
             <p class="loading" id="loading">finding a room&#8230;</p>
           </div>
+
+          <!-- the doors out of this room. they stand below the photograph
+               rather than on it, so nothing is ever laid over the picture. -->
+          <div class="doorwall" id="doors"></div>
 
           <table class="hud">
             <tbody>
@@ -772,7 +778,6 @@ a:hover{ color:#c00; }
     screen:  document.getElementById('screen'),
     img:     document.getElementById('roomImg'),
     doors:   document.getElementById('doors'),
-    tag:     document.getElementById('roomTag'),
     fade:    document.getElementById('fade'),
     loading: document.getElementById('loading'),
     log:     document.getElementById('log'),
@@ -843,24 +848,18 @@ a:hover{ color:#c00; }
   }
 
   /* --- the doors of a room --------------------------------------------
-     between two and three of them, standing on the floor, never
-     overlapping, always in the same places for the same room. */
+     two or three of them, fixed per room, since a room you walk back
+     into should not have grown a door while you were away. */
   function doorsOf(roomIdx){
     const id = plates.length ? plates[roomIdx].u : String(roomIdx);
-    const count = 2 + (hash(id, 3) > 0.62 ? 1 : 0);
-    const out = [];
-    const slot = 100 / count;
-    for (let i = 0; i < count; i++){
-      const w = 11 + hash(id, 11 + i) * 5;          // 11-16% of the width
-      const h = 33 + hash(id, 23 + i) * 19;         // 33-52% of the height
-      const jitter = hash(id, 31 + i) * (slot - w - 4);
-      out.push({
-        left: slot * i + 2 + jitter,
-        width: w,
-        height: h
-      });
-    }
-    return out;
+    return 2 + (hash(id, 3) > 0.62 ? 1 : 0);
+  }
+
+  /* what to call each one. positions rather than numbers, because a
+     door in a wall is on your left or it is not. */
+  function doorName(i, count){
+    if (count === 2) return i === 0 ? 'to the left' : 'to the right';
+    return ['to the left', 'straight ahead', 'to the right'][i];
   }
 
   /* --- entering a room -------------------------------------------------- */
@@ -892,7 +891,6 @@ a:hover{ color:#c00; }
     el.img.src = meta.u;
     el.img.alt = 'A photograph of an empty room: ' + (meta.t || 'untitled');
 
-    el.tag.textContent = 'ROOM ' + depth;
     paintDoors();
     caption(meta);
     hud();
@@ -902,26 +900,38 @@ a:hover{ color:#c00; }
     else say(LINES[Math.floor(hash(meta.u, 71) * LINES.length)]);
 
     /* whatever is behind these doors, fetched while you decide */
-    doorsOf(here).forEach((_, i) => {
+    for (let i = 0; i < doorsOf(here); i++){
       const n = plates[behind(here, i)];
       if (n){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = n.u; }
-    });
+    }
   }
 
   function paintDoors(){
     el.doors.textContent = '';
-    doorsOf(here).forEach((d, i) => {
+    const count = doorsOf(here);
+    for (let i = 0; i < count; i++){
+      const name = doorName(i, count);
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'door';
-      b.style.left = d.left.toFixed(2) + '%';
-      b.style.width = d.width.toFixed(2) + '%';
-      b.style.height = d.height.toFixed(2) + '%';
-      b.dataset.n = String(i + 1);
-      b.setAttribute('aria-label', 'Go through door ' + (i + 1));
+      b.setAttribute('aria-label', 'Go through the door ' + name);
+
+      const img = document.createElement('img');
+      img.src = 'i-49995.gif';
+      img.alt = '';
+      img.width = 38; img.height = 38;
+
+      const cap = document.createElement('span');
+      cap.append(document.createTextNode(name + ' '));
+      const n = document.createElement('span');
+      n.className = 'num';
+      n.textContent = String(i + 1);
+      cap.appendChild(n);
+
+      b.append(img, cap);
       b.addEventListener('click', () => go(i));
       el.doors.appendChild(b);
-    });
+    }
   }
 
   /* --- going through ---------------------------------------------------- */
@@ -946,7 +956,7 @@ a:hover{ color:#c00; }
   /* the way back is a door like any other, and it does not go back */
   function goBack(){
     if (busy || !plates.length) return;
-    const doors = doorsOf(here).length;
+    const doors = doorsOf(here);
     go(Math.floor(hash(plates[here].u, 91) * doors));
     setTimeout(() => say('that was the door you came in by. it is not.'), 200);
   }
@@ -997,7 +1007,7 @@ a:hover{ color:#c00; }
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
     if (e.key >= '1' && e.key <= '3'){
       const i = Number(e.key) - 1;
-      if (i < doorsOf(here).length){ go(i); e.preventDefault(); }
+      if (i < doorsOf(here)){ go(i); e.preventDefault(); }
     } else if (e.key === 'b' || e.key === 'B'){
       goBack(); e.preventDefault();
     }
