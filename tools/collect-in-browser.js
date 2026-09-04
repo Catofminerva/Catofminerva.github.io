@@ -13,11 +13,10 @@
  *      .../top/?t=month&limit=100
  *      .../hot/?limit=100
  *      .../new/?limit=100
- * 5. it downloads rooms.json to your Downloads folder, and also puts it on
- *    the clipboard if the console allows that. the download is the one to
- *    trust: a clipboard can still be holding whatever you copied last,
- *    and pasting that over rooms.json is how the file ends up full of
- *    something else.
+ * 5. a panel appears at the bottom of the page holding the finished
+ *    rooms.json, with a button to download it and a button to copy it.
+ *    the text is sitting there either way, so nothing about this step can
+ *    fail without you seeing it.
  *
  *    then, in the browser: github.com/<you>/<repo> -> Add file ->
  *    Upload files -> drag rooms.json in -> Commit changes. A file of the
@@ -76,12 +75,50 @@
   };
   const text = JSON.stringify(payload, null, 1);
 
-  /* Download it as a file. The clipboard is not reliable here: copy()
-     is a console convenience, it fails quietly when the page has not got
-     focus, and it leaves whatever you copied last sitting there looking
-     exactly like success. A file on disk cannot be mistaken for one. */
-  let saved = false;
-  try {
+  /* Put the result on the page.
+
+     Everything quieter than this has failed at least once: copy() leaves
+     the previous clipboard in place when it cannot write, and a download
+     started without a click is blocked outright by chrome on some sites,
+     with nothing to see either way. A panel with the text in it and two
+     buttons cannot fail silently, and a click is a user gesture, which is
+     what the download and clipboard APIs want anyway. */
+  const old = document.getElementById('liminal-out');
+  if (old) old.remove();
+
+  const box = document.createElement('div');
+  box.id = 'liminal-out';
+  box.style.cssText = [
+    'position:fixed', 'inset:auto 12px 12px 12px', 'z-index:2147483647',
+    'background:#111', 'color:#eee', 'border:2px solid #666', 'padding:10px',
+    'font:12px/1.5 -apple-system,Helvetica,Arial,sans-serif',
+    'box-shadow:0 0 30px rgba(0,0,0,.6)', 'border-radius:6px'
+  ].join(';');
+
+  const head = document.createElement('div');
+  head.style.cssText = 'margin-bottom:8px;font-weight:bold';
+  head.textContent = rooms.length + ' rooms collected (' + added + ' new here, '
+    + skipped + ' skipped). Save this as rooms.json:';
+
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.readOnly = true;
+  area.style.cssText = 'width:100%;height:120px;box-sizing:border-box;'
+    + 'font:11px/1.4 Menlo,monospace;background:#000;color:#9f9;border:1px solid #444;padding:6px';
+
+  const row = document.createElement('div');
+  row.style.cssText = 'margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap';
+
+  const mkBtn = (label) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.style.cssText = 'padding:7px 14px;font:12px -apple-system,Helvetica,sans-serif;'
+      + 'background:#eee;color:#111;border:0;border-radius:4px;cursor:pointer';
+    return b;
+  };
+
+  const dl = mkBtn('Download rooms.json');
+  dl.onclick = () => {
     const blob = new Blob([text], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -89,20 +126,32 @@
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    saved = true;
-  } catch (e) {
-    console.log('%ccould not download: ' + e.message, 'color:#c00');
-  }
+    dl.textContent = 'Downloaded. Check your Downloads folder';
+  };
 
-  try { if (typeof copy === 'function') copy(text); } catch (_) {}
+  const cp = mkBtn('Copy to clipboard');
+  cp.onclick = async () => {
+    area.select();
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {}
+    if (!ok) { try { ok = document.execCommand('copy'); } catch (_) {} }
+    cp.textContent = ok ? 'Copied' : 'Could not copy, press Cmd-C now';
+  };
 
-  console.log('%c+' + added + ' new. ' + rooms.length + ' rooms collected in total.',
-    'color:#080;font-weight:bold;font-size:13px');
-  console.log(saved
-    ? '%crooms.json is in your Downloads folder. Upload that file to the repo.'
-    : '%cthe download did not start. copy the text logged below into rooms.json.',
-    'color:#080');
-  console.log('%cskipped ' + skipped + ' posts that were not plain images.', 'color:#666');
-  if (!saved) console.log(text);
+  const shut = mkBtn('Close');
+  shut.onclick = () => box.remove();
+
+  const note = document.createElement('span');
+  note.style.cssText = 'color:#999';
+  note.textContent = 'or click in the box, Cmd-A, Cmd-C';
+
+  row.append(dl, cp, shut, note);
+  box.append(head, area, row);
+  document.body.appendChild(box);
+  area.focus();
+  area.select();
+
+  console.log('%c' + rooms.length + ' rooms collected. Use the panel at the '
+    + 'bottom of the page.', 'color:#080;font-weight:bold;font-size:13px');
   return payload.count;
 })();
