@@ -1,0 +1,10 @@
+# python leaves these next to any script it runs
+__pycache__/
+*.py[cod]
+
+# eleventy: the build output and its dependencies are rebuilt, never committed
+_site/
+node_modules/
+
+# macOS
+.DS_Store
