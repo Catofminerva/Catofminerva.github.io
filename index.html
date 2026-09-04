@@ -1903,51 +1903,59 @@ td.content .post h3{ color:#000; text-shadow:none; }
    one claims the domain, this is the paragraph that said the domain
    was never theirs to claim.
 
-   dark panel, serif type, gold light. everything else on this page is
-   comic sans and neon, so the shrine only reads as a shrine if it
-   refuses to look like the rest of the site. */
+   plain white page, black Times, a double rule round the edge, which
+   is what the declaration would have looked like on the web it was
+   written for. everything around it is comic sans and neon, so the
+   shrine only reads as a shrine by refusing that. */
 .shrine{
   margin: 18px 0 22px;
-  padding: 13px 14px 11px;
-  background: radial-gradient(120% 95% at 50% 0%, #1d1233 0%, #0a0519 62%, #05020e 100%);
-  border: 2px solid;
-  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
-  box-shadow: inset 0 0 26px rgba(255,170,60,.10), 0 0 12px rgba(0,0,0,.55);
-  color: #ded3bd;
+  padding: 16px 20px 14px;
+  background: #ffffff;
+  border: 3px double #000;
+  color: #000;
+  font: 15px/1.6 "Times New Roman", Times, serif;
 }
 .shrine-head{
-  margin: 0 0 3px;
-  font: bold 11px/1.55 "Tahoma","MS Sans Serif",sans-serif;
-  letter-spacing: .2em;
+  margin: 0;
+  text-align: center;
+  font: bold 15px/1.4 "Times New Roman", Times, serif;
+  letter-spacing: .16em;
   text-transform: uppercase;
-  color: #ffcc66;
-  text-shadow: 0 0 7px rgba(255,170,60,.5);
+  color: #000080;
+}
+.shrine-rule{
+  height: 0;
+  margin: 8px 0 10px;
+  border: 0;
+  border-top: 1px solid #808080;
 }
 .shrine-sub{
-  margin: 0 0 11px;
-  font: 10px/1.55 "Courier New", monospace;
-  letter-spacing: .04em;
-  color: #9186a6;
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+  color: #444;
 }
 .shrine-text{
   margin: 0;
-  padding: 0 0 0 12px;
-  border-left: 2px solid rgba(255,170,60,.35);
-  font: 13px/1.72 Georgia,"Times New Roman",serif;
-  color: #e9e0cf;
+  padding: 0;
 }
-.shrine-text p{ margin: 0 0 9px; }
+.shrine-text p{ margin: 0 0 10px; text-align: justify; }
 .shrine-text p:last-child{ margin-bottom: 0; }
-/* the opening clause takes the candlelight, the rest of it sits in shadow */
-.shrine-text p:first-child::first-line{ color: #ffd98a; }
-.shrine-cite{
-  margin: 10px 0 12px;
-  font: 10px/1.6 "Courier New", monospace;
-  letter-spacing: .03em;
-  color: #8f84a3;
-  text-align: right;
+/* the drop cap. every home page with something serious to say had one. */
+.shrine-text p:first-child::first-letter{
+  float: left;
+  margin: 4px 5px 0 0;
+  font: bold 40px/32px "Times New Roman", Times, serif;
+  color: #000080;
 }
-.shrine-cite cite{ font-style: italic; color: #b8aec9; }
+.shrine-cite{
+  margin: 12px 0 0;
+  text-align: right;
+  font-size: 13px;
+  color: #333;
+}
+.shrine-cite cite{ font-style: italic; }
 .shrine-cite .nb{ white-space: nowrap; }
 
 /* the shelf */
@@ -1956,8 +1964,9 @@ td.content .post h3{ color:#000; text-shadow:none; }
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 10px 14px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,.09);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #808080;
 }
 .candles{
   flex: 1 1 190px;
@@ -1970,7 +1979,7 @@ td.content .post h3{ color:#000; text-shadow:none; }
   position: relative;
   width: 9px;
   height: var(--h, 30px);
-  background: linear-gradient(90deg,#b9a880 0%,#fff6de 45%,#a3906a 100%);
+  background: linear-gradient(90deg,#d8d2bc 0%,#fffdf3 45%,#c6bda2 100%);
   border: 1px solid #6b5c3e;
   border-bottom: 0;
 }
@@ -1982,35 +1991,35 @@ td.content .post h3{ color:#000; text-shadow:none; }
   width: 8px; height: 13px;
   margin-left: -4px;
   border-radius: 50% 50% 50% 50% / 66% 66% 34% 34%;
-  background: radial-gradient(circle at 50% 72%, #fffbcf 0%, #ffc251 48%, rgba(255,110,0,.35) 100%);
-  box-shadow: 0 0 11px rgba(255,165,50,.8), 0 0 22px rgba(255,120,20,.35);
+  background: radial-gradient(circle at 50% 72%, #fff6b8 0%, #ffa41f 52%, #e2620a 100%);
+  box-shadow: 0 0 7px rgba(255,150,20,.55);
   animation: candle-flick 1.15s var(--d, 0s) infinite ease-in-out alternate;
 }
 @keyframes candle-flick{
-  from{ transform: scale(1) translateY(0); opacity:.92; }
+  from{ transform: scale(1) translateY(0); opacity:.9; }
   to  { transform: scale(1.14,.9) translateY(-1px); opacity:1; }
 }
 .candle.new{ animation: candle-set 260ms ease-out; }
 @keyframes candle-set{ from{ transform: translateY(5px); opacity:0; } }
 
+/* a plain grey button, the kind the browser drew itself in 1996 */
 .shrine-light{
   flex: 0 0 auto;
-  padding: 6px 12px;
-  background: #17102b;
-  color: #ffcf7a;
-  border: 2px outset #6a5a92;
-  font-family: inherit;
-  font-size: 12px;
+  padding: 4px 12px;
+  background: #c0c0c0;
+  color: #000;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  font: 12px/1.4 "Tahoma","MS Sans Serif",sans-serif;
   cursor: pointer;
-  box-shadow: 2px 2px 0 #000;
 }
-.shrine-light:hover{ color: #fff0c4; }
-.shrine-light:active{ border-style: inset; }
+.shrine-light:active{ border-color: #808080 #ffffff #ffffff #808080; }
 .shrine-count{
   flex: 1 1 100%;
-  margin: 2px 0 0;
-  font: 10px/1.6 "Courier New", monospace;
-  color: #8f84a3;
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  color: #555;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -2020,8 +2029,9 @@ td.content .post h3{ color:#000; text-shadow:none; }
 
 @media (max-width: 700px){
   .marquee-planet{ height: 20px; margin: 0 4px; }
-  .shrine{ padding: 11px 11px 10px; }
-  .shrine-text{ font-size: 12.5px; padding-left: 10px; }
+  .shrine{ padding: 13px 13px 12px; }
+  .shrine-text{ font-size: 14px; }
+  .shrine-text p{ text-align: left; }
   .shrine-cite{ text-align: left; }
   .wish-lamp{ justify-content: center; text-align: center; }
   .wish-lamp img{ height: 88px; }
@@ -2398,6 +2408,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
           <!-- 2026-09-04: the shrine -->
           <div class="shrine">
             <p class="shrine-head">Cyberspace, 1996</p>
+            <hr class="shrine-rule">
             <p class="shrine-sub">
               Written in davos in answer to a telecommunications act.
             RIP to the old net.
