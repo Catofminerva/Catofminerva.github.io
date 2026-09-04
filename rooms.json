@@ -1,7 +1,2509 @@
 {
- "subreddit": "LiminalSpace",
- "generated": null,
- "note": "run tools/fetch_rooms.py, or the refresh-liminal-rooms action, to fill this. photographs stay on reddit's servers; the page hotlinks them and credits every post.",
- "count": 0,
- "rooms": []
+ "source": "commons",
+ "subreddit": null,
+ "generated": "2026-09-04T09:47:43Z",
+ "note": "photographs stay on their own servers. the page hotlinks them and credits every one.",
+ "count": 250,
+ "rooms": [
+  {
+   "i": "7419946",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/2009_-_Laeken_-_Grave_galleries.jpg/1920px-2009_-_Laeken_-_Grave_galleries.jpg",
+   "t": "2009 - Laeken - Grave galleries",
+   "a": "P.J.L Laurens",
+   "p": "https://commons.wikimedia.org/wiki/File:2009_-_Laeken_-_Grave_galleries.jpg",
+   "d": "2009-07-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 3.0"
+  },
+  {
+   "i": "21152354",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Passage_des_Princes%2C_Paris_2e.jpg/1920px-Passage_des_Princes%2C_Paris_2e.jpg",
+   "t": "Passage des Princes, Paris 2e",
+   "a": "Moonik",
+   "p": "https://commons.wikimedia.org/wiki/File:Passage_des_Princes,_Paris_2e.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "39935413",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Corridor%2C_Radiance_of_the_Seas.jpg/1920px-Corridor%2C_Radiance_of_the_Seas.jpg",
+   "t": "Corridor, Radiance of the Seas",
+   "a": "Mitch Ames",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor,_Radiance_of_the_Seas.jpg",
+   "d": "2013-11-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "53923682",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Interior_of_the_Royal_Corridor_01.jpg/1920px-Interior_of_the_Royal_Corridor_01.jpg",
+   "t": "Interior of the Royal Corridor 01",
+   "a": "Artinpl",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_01.jpg",
+   "d": "2016",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "53923683",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Interior_of_the_Royal_Corridor_02.jpg/1920px-Interior_of_the_Royal_Corridor_02.jpg",
+   "t": "Interior of the Royal Corridor 02",
+   "a": "Artinpl",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_02.jpg",
+   "d": "2016",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "53923685",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Interior_of_the_Royal_Corridor_03.jpg/1920px-Interior_of_the_Royal_Corridor_03.jpg",
+   "t": "Interior of the Royal Corridor 03",
+   "a": "Artinpl",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_03.jpg",
+   "d": "2016",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "56653158",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs.jpg",
+   "t": "Santa Giustina (Padua) - Corridor of the Martyrs",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "56688348",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_well.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_well.jpg",
+   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - well",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_well.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "56768641",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_Ceiling.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_Ceiling.jpg",
+   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - Ceiling",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_Ceiling.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "56798395",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg",
+   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - The old cage of St Luc",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "63234508",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Ferens_Hall_%28Interior_Corridor%29.jpg/1920px-Ferens_Hall_%28Interior_Corridor%29.jpg",
+   "t": "Ferens Hall (Interior Corridor)",
+   "a": "Robin S. Taylor",
+   "p": "https://commons.wikimedia.org/wiki/File:Ferens_Hall_(Interior_Corridor).jpg",
+   "d": "2017-10-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "72728269",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/The_Cloisters_at_Gloucester_Cathedral.jpg/1920px-The_Cloisters_at_Gloucester_Cathedral.jpg",
+   "t": "The Cloisters at Gloucester Cathedral",
+   "a": "Christopher JT Cherrington",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Cloisters_at_Gloucester_Cathedral.jpg",
+   "d": "2018-01-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "74756768",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg/1920px-Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg",
+   "t": "Long corridor with someone sitting on the floor in the distance at Marina Bay MRT Station Singapore",
+   "a": "Basile Morin",
+   "p": "https://commons.wikimedia.org/wiki/File:Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg",
+   "d": "2018-06-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "77044191",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Explorer_of_the_Seas_corridor.jpg/1920px-Explorer_of_the_Seas_corridor.jpg",
+   "t": "Explorer of the Seas corridor",
+   "a": "Mitch Ames",
+   "p": "https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_corridor.jpg",
+   "d": "2019-02-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "78492793",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg",
+   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0486",
+   "a": "Paul R. Burley",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg",
+   "d": "2019-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "78492835",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg",
+   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0494",
+   "a": "Paul R. Burley",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg",
+   "d": "2019-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "78492863",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg",
+   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0506",
+   "a": "Paul R. Burley",
+   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg",
+   "d": "2019-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "80020278",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg/1920px-Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg",
+   "t": "Igreja de Santo Antônio Além do Carmo Corridor 2019-0665",
+   "a": "Paul R. Burley",
+   "p": "https://commons.wikimedia.org/wiki/File:Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg",
+   "d": "2019-03-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "80252921",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg/1920px-School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
+   "t": "School corridor in the Building of College of Humanities and Social Sciences of NTHU 01",
+   "a": "H. H. Tsai",
+   "p": "https://commons.wikimedia.org/wiki/File:School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
+   "d": "2019-05-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "94746361",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Castle_De_Haar_%281892-1913%29_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg/1920px-Castle_De_Haar_%281892-1913%29_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg",
+   "t": "Castle De Haar (1892-1913) - Staircase leading to 1st Floor - Corridor",
+   "a": "Txllxt TxllxT",
+   "p": "https://commons.wikimedia.org/wiki/File:Castle_De_Haar_(1892-1913)_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg",
+   "d": "2020-09-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "107818076",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg/1920px-Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
+   "t": "Hotel room corridor at Circus Circus Reno in 2010",
+   "a": "Sam Craig",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "108622025",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Corridor_Image.jpg",
+   "t": "Corridor Image",
+   "a": "Latte1703",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Image.jpg",
+   "d": "2021-08-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "110643739",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Corridor_inside_Riksdag.jpg/1920px-Corridor_inside_Riksdag.jpg",
+   "t": "Corridor inside Riksdag",
+   "a": "ANKAN",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_inside_Riksdag.jpg",
+   "d": "2019-08-14",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "121633361",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Capitol_Corridor_Amtrak_interior%2C_2022.jpg/1920px-Capitol_Corridor_Amtrak_interior%2C_2022.jpg",
+   "t": "Capitol Corridor Amtrak interior, 2022",
+   "a": "CarmenEsparzaAmoux",
+   "p": "https://commons.wikimedia.org/wiki/File:Capitol_Corridor_Amtrak_interior,_2022.jpg",
+   "d": "2022-08-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "121675318",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Capitol_Corridor%2C_interior_train_2022.jpg/1920px-Capitol_Corridor%2C_interior_train_2022.jpg",
+   "t": "Capitol Corridor, interior train 2022",
+   "a": "CarmenEsparzaAmoux",
+   "p": "https://commons.wikimedia.org/wiki/File:Capitol_Corridor,_interior_train_2022.jpg",
+   "d": "2022-08-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "125107128",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg/1920px-Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg",
+   "t": "Dublin Castle Interior - State Corridor - geograph.org.uk - 3966097",
+   "a": "Suzanne Mischyshyn",
+   "p": "https://commons.wikimedia.org/wiki/File:Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg",
+   "d": "2013-09-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "130813500",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Interi%C3%B6r%2C_Stena_Danica%2C_corridor%2C_20230410%2C_pic_17.jpg/1920px-Interi%C3%B6r%2C_Stena_Danica%2C_corridor%2C_20230410%2C_pic_17.jpg",
+   "t": "Interiör, Stena Danica, corridor, 20230410, pic 17",
+   "a": "AleWi",
+   "p": "https://commons.wikimedia.org/wiki/File:Interi%C3%B6r,_Stena_Danica,_corridor,_20230410,_pic_17.jpg",
+   "d": "2023-04-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "132327727",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_%28interior%29.jpg/1920px-Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_%28interior%29.jpg",
+   "t": "Building of the Supreme Administrative Court of the Czech Republic (interior)",
+   "a": "Qasinka",
+   "p": "https://commons.wikimedia.org/wiki/File:Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_(interior).jpg",
+   "d": "2023-05-24",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "138384661",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg/1920px-Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
+   "t": "Corridor leading to indoor pool of spa at Amantaka luxury Resort & Hotel in Luang Prabang Laos front view",
+   "a": "Basile Morin",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
+   "d": "2023-09-19",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "139891008",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg/1920px-Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg",
+   "t": "Interior of Grand Hotel Kaohsiung-09.2023-10-31",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg",
+   "d": "2023-10-31",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "141881939",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg/1920px-Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg",
+   "t": "Stairs lit with colorful neon lights inside a corridor of the Atomium in Brussels Belgium",
+   "a": "Basile Morin",
+   "p": "https://commons.wikimedia.org/wiki/File:Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg",
+   "d": "2023-07-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "149818998",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg/1920px-Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg",
+   "t": "Corridor Viikinmäki Wastewater Treatment Plant 1",
+   "a": "Antti Leppänen",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg",
+   "d": "2024-06-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "149844764",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg/1920px-Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg",
+   "t": "Corridor Viikinmäki Wastewater Treatment Plant 2",
+   "a": "Antti Leppänen",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg",
+   "d": "2024-06-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "150116680",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg/1920px-Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
+   "t": "Corridor Stanley Hotel Estes Park Colorado 2024",
+   "a": "Larry D. Moore",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
+   "d": "Taken on 3",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "152270446",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg",
+   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-02ASD",
+   "a": "Asurnipal",
+   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg",
+   "d": "2024-09-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152270447",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg",
+   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-03ASD",
+   "a": "Asurnipal",
+   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg",
+   "d": "2024-09-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152270449",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg",
+   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-01ASD",
+   "a": "Asurnipal",
+   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg",
+   "d": "2024-09-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "155442931",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor%2C_side_corridor%2C_Michalovce%2C_Michalovce_district%2C_Slovakia.jpg/1920px-Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor%2C_side_corridor%2C_Michalovce%2C_Michalovce_district%2C_Slovakia.jpg",
+   "t": "Modern market hall interior - shops and businesses on the upper floor, side corridor, Michalovce, Michalovce district, Slovakia",
+   "a": "ZemplinTemplar",
+   "p": "https://commons.wikimedia.org/wiki/File:Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor,_side_corridor,_Michalovce,_Michalovce_district,_Slovakia.jpg",
+   "d": "2024-09-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "162034289",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg/1920px-Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg",
+   "t": "Self-serve aisle in IKEA Torp Uddevalla - Cinematic edit",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg",
+   "d": "2018-05-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "172255512",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg/1920px-SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg",
+   "t": "SM Megamall Mega B Interior with LGBT pride color strips",
+   "a": "LastCelebration",
+   "p": "https://commons.wikimedia.org/wiki/File:SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg",
+   "d": "2025-06-23",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "174680704",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_01.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_01.jpg",
+   "t": "Corridor at The Retreat, Heslington Road Aug25 01",
+   "a": "Malcolmxl5",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_Road_Aug25_01.jpg",
+   "d": "2025-08-31",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "174680710",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Corridor_at_The_Retreat%2C_Heslington_RoadAug25_05.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_RoadAug25_05.jpg",
+   "t": "Corridor at The Retreat, Heslington RoadAug25 05",
+   "a": "Malcolmxl5",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_RoadAug25_05.jpg",
+   "d": "2025-08-31",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "174680713",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_06.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_06.jpg",
+   "t": "Corridor at The Retreat, Heslington Road Aug25 06",
+   "a": "Malcolmxl5",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_Road_Aug25_06.jpg",
+   "d": "2025-08-31",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "175180740",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/0/05/Corridor_in_Maastricht_Uni.jpg",
+   "t": "Corridor in Maastricht Uni",
+   "a": "HerrGutmannsWiki",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Maastricht_Uni.jpg",
+   "d": "2025-09-16",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "175207154",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/20250815_side_corridor_Panewniki_Basilica_01.jpg/1920px-20250815_side_corridor_Panewniki_Basilica_01.jpg",
+   "t": "20250815 side corridor Panewniki Basilica 01",
+   "a": "Abraham",
+   "p": "https://commons.wikimedia.org/wiki/File:20250815_side_corridor_Panewniki_Basilica_01.jpg",
+   "d": "2025-08-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "175589290",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Corridor_inside_the_Grandmaster%27s_Palace%2C_Valletta%2C_Malta.jpg/1920px-Corridor_inside_the_Grandmaster%27s_Palace%2C_Valletta%2C_Malta.jpg",
+   "t": "Corridor inside the Grandmaster's Palace, Valletta, Malta",
+   "a": "Julian Lupyan",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_inside_the_Grandmaster%27s_Palace,_Valletta,_Malta.jpg",
+   "d": "2025-05-31",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "191391879",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Servants%27_Corridor%2C_Petworth_House_2026-03-03.jpg/1920px-Servants%27_Corridor%2C_Petworth_House_2026-03-03.jpg",
+   "t": "Servants' Corridor, Petworth House 2026-03-03",
+   "a": "Andy Li",
+   "p": "https://commons.wikimedia.org/wiki/File:Servants%27_Corridor,_Petworth_House_2026-03-03.jpg",
+   "d": "2026-03-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "196893879",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Corridor_in_Arundel_Castle_2026-05-14.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14.jpg",
+   "t": "Corridor in Arundel Castle 2026-05-14",
+   "a": "Andy Li",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14.jpg",
+   "d": "2026-05-14",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "196931022",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Corridor_in_Arundel_Castle_2026-05-14_%282%29.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14_%282%29.jpg",
+   "t": "Corridor in Arundel Castle 2026-05-14 (2)",
+   "a": "Andy Li",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14_(2).jpg",
+   "d": "2026-05-14",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "196970038",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Corridor_in_Arundel_Castle_2026-05-14_%283%29.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14_%283%29.jpg",
+   "t": "Corridor in Arundel Castle 2026-05-14 (3)",
+   "a": "Andy Li",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14_(3).jpg",
+   "d": "2026-05-14",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "25231335",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Nordiska_Museet_Mars_2013.jpg/1920px-Nordiska_Museet_Mars_2013.jpg",
+   "t": "Nordiska Museet Mars 2013",
+   "a": "Arild Vågen",
+   "p": "https://commons.wikimedia.org/wiki/File:Nordiska_Museet_Mars_2013.jpg",
+   "d": "2013-03-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "36039242",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/8/83/Interior_hallway_of_Bergbau_Museum_Bochum.jpg",
+   "t": "Interior hallway of Bergbau Museum Bochum",
+   "a": "Thorsten Lohmann",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_hallway_of_Bergbau_Museum_Bochum.jpg",
+   "d": "2014-08-31",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "38549666",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Ely_Hall_hallway%2C_February_2015.jpg/1920px-Ely_Hall_hallway%2C_February_2015.jpg",
+   "t": "Ely Hall hallway, February 2015",
+   "a": "Collin Knopp-Schwyn",
+   "p": "https://commons.wikimedia.org/wiki/File:Ely_Hall_hallway,_February_2015.jpg",
+   "d": "2015-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "41219873",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Petrovsky_Passage_interior_06-2015.jpg/1920px-Petrovsky_Passage_interior_06-2015.jpg",
+   "t": "Petrovsky Passage interior 06-2015",
+   "a": "A.Savin",
+   "p": "https://commons.wikimedia.org/wiki/File:Petrovsky_Passage_interior_06-2015.jpg",
+   "d": "2015-06-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "43896913",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg/1920px-Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg",
+   "t": "Deambulatory north Saint-Eutropius romanesque Basilica Saintes Charente-Maritime",
+   "a": "Jebulon",
+   "p": "https://commons.wikimedia.org/wiki/File:Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg",
+   "d": "2015-08-08",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "51798477",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Interior_Hallway%2C_Gamble_Plantation.jpg/1920px-Interior_Hallway%2C_Gamble_Plantation.jpg",
+   "t": "Interior Hallway, Gamble Plantation",
+   "a": "TlyleSheph3rd",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_Hallway,_Gamble_Plantation.jpg",
+   "d": "2016-09-26",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "80623213",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/L%C3%A4ck%C3%B6_slott_interior_11.jpg/1920px-L%C3%A4ck%C3%B6_slott_interior_11.jpg",
+   "t": "Läckö slott interior 11",
+   "a": "Netha Hussain",
+   "p": "https://commons.wikimedia.org/wiki/File:L%C3%A4ck%C3%B6_slott_interior_11.jpg",
+   "d": "2019-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "81648324",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Corridors_of_Classroom_Complex.jpg/1920px-Corridors_of_Classroom_Complex.jpg",
+   "t": "Corridors of Classroom Complex",
+   "a": "WannabeUrbanNaxal",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridors_of_Classroom_Complex.jpg",
+   "d": "2019-08-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "84250807",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/ChateauDeCassan_Hallway.jpg/1920px-ChateauDeCassan_Hallway.jpg",
+   "t": "ChateauDeCassan Hallway",
+   "a": "Martinvl",
+   "p": "https://commons.wikimedia.org/wiki/File:ChateauDeCassan_Hallway.jpg",
+   "d": "2019-09-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "91065334",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Corridor_of_the_Kaneyu.jpg/1920px-Corridor_of_the_Kaneyu.jpg",
+   "t": "Corridor of the Kaneyu",
+   "a": "掬茶",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_the_Kaneyu.jpg",
+   "d": "2020-06-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "91259245",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg/1920px-CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg",
+   "t": "CICR-ICRC-Archives-Satigny-Corridor RomanDeckert09062020",
+   "a": "RomanDeckert",
+   "p": "https://commons.wikimedia.org/wiki/File:CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg",
+   "d": "2020-06-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "99898795",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg/1920px-Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg",
+   "t": "Hester Diamond hallway by Rachel Kaminsky",
+   "a": "Rachel Kaminsky",
+   "p": "https://commons.wikimedia.org/wiki/File:Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg",
+   "d": "2020-07-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "106214262",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Hallway_in_the_theater_at_Taliesin_West_%285721972876%29.jpg/1920px-Hallway_in_the_theater_at_Taliesin_West_%285721972876%29.jpg",
+   "t": "Hallway in the theater at Taliesin West (5721972876)",
+   "a": "istolethetv",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_the_theater_at_Taliesin_West_(5721972876).jpg",
+   "d": "2011-03-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "107528007",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Corridor_of_Laboratory_School.jpg",
+   "t": "Corridor of Laboratory School",
+   "a": "WrackAce",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Laboratory_School.jpg",
+   "d": "2010-07-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "111214699",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Hallway_in_a_house_in_Corinda%2C_Queensland.jpg/1920px-Hallway_in_a_house_in_Corinda%2C_Queensland.jpg",
+   "t": "Hallway in a house in Corinda, Queensland",
+   "a": "Kgbo",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_a_house_in_Corinda,_Queensland.jpg",
+   "d": "2021-10-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "113509555",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_%28Q3896297%29.jpg/1920px-Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_%28Q3896297%29.jpg",
+   "t": "Sagunto - Roman Theatre - Corridor 20200225 PvE (Q3896297)",
+   "a": "Pieter van Everdingen",
+   "p": "https://commons.wikimedia.org/wiki/File:Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_(Q3896297).jpg",
+   "d": "2020-02-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "115302343",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Katowice_Dyrekcyjna_10_hallway_2022.jpg/1920px-Katowice_Dyrekcyjna_10_hallway_2022.jpg",
+   "t": "Katowice Dyrekcyjna 10 hallway 2022",
+   "a": "Adrian Tync",
+   "p": "https://commons.wikimedia.org/wiki/File:Katowice_Dyrekcyjna_10_hallway_2022.jpg",
+   "d": "2022-02-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "122491818",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg/1920px-Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg",
+   "t": "Hallway at the entrance of an apartment building on Rue de Berri in Paris",
+   "a": "Neoclassicism Enthusiast",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg",
+   "d": "23 July 20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "122709981",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Arboretum_Hallway_in_Winchester_Mystery_House.jpg/1920px-Arboretum_Hallway_in_Winchester_Mystery_House.jpg",
+   "t": "Arboretum Hallway in Winchester Mystery House",
+   "a": "Sgerbic",
+   "p": "https://commons.wikimedia.org/wiki/File:Arboretum_Hallway_in_Winchester_Mystery_House.jpg",
+   "d": "2019-09-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "125358002",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/The_Canadian_Prestige_Car_hallway.jpg/1920px-The_Canadian_Prestige_Car_hallway.jpg",
+   "t": "The Canadian Prestige Car hallway",
+   "a": "Kosboot",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Canadian_Prestige_Car_hallway.jpg",
+   "d": "2022-11-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "127256020",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Perpendicular_hallway_02.jpg/1920px-Perpendicular_hallway_02.jpg",
+   "t": "Perpendicular hallway 02",
+   "a": "Almanta",
+   "p": "https://commons.wikimedia.org/wiki/File:Perpendicular_hallway_02.jpg",
+   "d": "2023-01-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "135259508",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg/1920px-Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg",
+   "t": "Bossier High School hallway Colquittt Interior NRHP LASHPO 13",
+   "a": "Donna Fricker",
+   "p": "https://commons.wikimedia.org/wiki/File:Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg",
+   "d": "1998-04",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "137258010",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg/1920px-An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg",
+   "t": "An interior hallway at Portland Union Station in Oregon",
+   "a": "Harrison Keely",
+   "p": "https://commons.wikimedia.org/wiki/File:An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg",
+   "d": "2019-06-14",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "137321301",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Castle%2C_Elmina_%28P1100209%29.jpg/1920px-Castle%2C_Elmina_%28P1100209%29.jpg",
+   "t": "Castle, Elmina (P1100209)",
+   "a": "Matti Blume",
+   "p": "https://commons.wikimedia.org/wiki/File:Castle,_Elmina_(P1100209).jpg",
+   "d": "2023-02-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "141067890",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_01.jpg/1920px-Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_01.jpg",
+   "t": "Corridor above road, Nantes, Rue du Ballet - 01",
+   "a": "Koreller",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_above_road,_Nantes,_Rue_du_Ballet_-_01.jpg",
+   "d": "2023-10-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "141067896",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_02.jpg/1920px-Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_02.jpg",
+   "t": "Corridor above road, Nantes, Rue du Ballet - 02",
+   "a": "Koreller",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_above_road,_Nantes,_Rue_du_Ballet_-_02.jpg",
+   "d": "2023-10-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "142113018",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Corridor_2023-12_1702130219.jpg/1920px-Corridor_2023-12_1702130219.jpg",
+   "t": "Corridor 2023-12 1702130219",
+   "a": "Artyom Svetlov",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_2023-12_1702130219.jpg",
+   "d": "Taken on 9",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "142113033",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Corridor_2023-12_1702130467.jpg/1920px-Corridor_2023-12_1702130467.jpg",
+   "t": "Corridor 2023-12 1702130467",
+   "a": "Artyom Svetlov",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_2023-12_1702130467.jpg",
+   "d": "Taken on 9",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "145690311",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/CERN_hallway_in_building_304.jpg/1920px-CERN_hallway_in_building_304.jpg",
+   "t": "CERN hallway in building 304",
+   "a": "Unnerving duck",
+   "p": "https://commons.wikimedia.org/wiki/File:CERN_hallway_in_building_304.jpg",
+   "d": "22 Februar",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "147593595",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Tenry%C5%AB_Shisei-zenji_%28Ukyo-Ku_Kyoto%29_corridor_hdsr_S5_0.jpg/1920px-Tenry%C5%AB_Shisei-zenji_%28Ukyo-Ku_Kyoto%29_corridor_hdsr_S5_0.jpg",
+   "t": "Tenryū Shisei-zenji (Ukyo-Ku Kyoto) corridor hdsr S5 0",
+   "a": "Hyppolyte de Saint-Rambert",
+   "p": "https://commons.wikimedia.org/wiki/File:Tenry%C5%AB_Shisei-zenji_(Ukyo-Ku_Kyoto)_corridor_hdsr_S5_0.jpg",
+   "d": "2023-12-13",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "158908474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A_cat_in_a_low_light_corridor.jpg/1920px-A_cat_in_a_low_light_corridor.jpg",
+   "t": "A cat in a low light corridor",
+   "a": "AlexTref871",
+   "p": "https://commons.wikimedia.org/wiki/File:A_cat_in_a_low_light_corridor.jpg",
+   "d": "2024-06-13",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "162663045",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Hallway_in_the_Thomas_Jefferson_Building.jpg/1920px-Hallway_in_the_Thomas_Jefferson_Building.jpg",
+   "t": "Hallway in the Thomas Jefferson Building",
+   "a": "Sdkb",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_the_Thomas_Jefferson_Building.jpg",
+   "d": "2025-03-19",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "165780925",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Hallway_05-03-2025.jpg/1920px-Hallway_05-03-2025.jpg",
+   "t": "Hallway 05-03-2025",
+   "a": "Luckytent",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_05-03-2025.jpg",
+   "d": "2025-05-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "166293774",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Hallway_Sprengel_Museum_Hannover.jpg/1920px-Hallway_Sprengel_Museum_Hannover.jpg",
+   "t": "Hallway Sprengel Museum Hannover",
+   "a": "AshDammeyer",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_Sprengel_Museum_Hannover.jpg",
+   "d": "2025-05-09",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "169788509",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Hyatt_Regency_Embarcadero_Atrium%2C_San_Francisco%2C_US.jpg/1920px-Hyatt_Regency_Embarcadero_Atrium%2C_San_Francisco%2C_US.jpg",
+   "t": "Hyatt Regency Embarcadero Atrium, San Francisco, US",
+   "a": "Dale Cruse",
+   "p": "https://commons.wikimedia.org/wiki/File:Hyatt_Regency_Embarcadero_Atrium,_San_Francisco,_US.jpg",
+   "d": "2024-10-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "179563021",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Wredes_passage_November_2025_01.jpg/1920px-Wredes_passage_November_2025_01.jpg",
+   "t": "Wredes passage November 2025 01",
+   "a": "ArildV",
+   "p": "https://commons.wikimedia.org/wiki/File:Wredes_passage_November_2025_01.jpg",
+   "d": "2025-11-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "182381900",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Andrews_Building_interior_hallway.jpg/1920px-Andrews_Building_interior_hallway.jpg",
+   "t": "Andrews Building interior hallway",
+   "a": "JasonParis",
+   "p": "https://commons.wikimedia.org/wiki/File:Andrews_Building_interior_hallway.jpg",
+   "d": "2011-08-13",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "193326104",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Interior_hallway_in_Hampton_Court_Palace.jpg/1920px-Interior_hallway_in_Hampton_Court_Palace.jpg",
+   "t": "Interior hallway in Hampton Court Palace",
+   "a": "APK",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_hallway_in_Hampton_Court_Palace.jpg",
+   "d": "2026-05-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "194363416",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg",
+   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 01",
+   "a": "ELIZABETH XIONG",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg",
+   "d": "2026-03-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "194363420",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg",
+   "t": "Interior of Snow Clinic Ansan branch in March 2026",
+   "a": "ELIZABETH XIONG",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg",
+   "d": "2026-03-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "194363421",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg",
+   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 03",
+   "a": "ELIZABETH XIONG",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg",
+   "d": "2026-03-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "194363422",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg",
+   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 04",
+   "a": "ELIZABETH XIONG",
+   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg",
+   "d": "2026-04-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "33134779",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg/1920px-Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg",
+   "t": "Corridor Birdview of Golden Dragon Room, Grand Hotel Taipei 20100822",
+   "a": "玄史生",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Birdview_of_Golden_Dragon_Room,_Grand_Hotel_Taipei_20100822.jpg",
+   "d": "2010-08-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "54248675",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Be_Live_Hotel_Corridor_%285369026126%29.jpg/1920px-Be_Live_Hotel_Corridor_%285369026126%29.jpg",
+   "t": "Be Live Hotel Corridor (5369026126)",
+   "a": "Allen McGregor from Brampton, Canada",
+   "p": "https://commons.wikimedia.org/wiki/File:Be_Live_Hotel_Corridor_(5369026126).jpg",
+   "d": "2011-01-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "63069326",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Plaza_Hotel_corridor%2C_Sept_2017.jpg/1920px-Plaza_Hotel_corridor%2C_Sept_2017.jpg",
+   "t": "Plaza Hotel corridor, Sept 2017",
+   "a": "Thomson200",
+   "p": "https://commons.wikimedia.org/wiki/File:Plaza_Hotel_corridor,_Sept_2017.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "71693239",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Corridor_in_Wuling_Villa.jpg",
+   "t": "Corridor in Wuling Villa",
+   "a": "Dquai",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Wuling_Villa.jpg",
+   "d": "2009-01-26",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "71852744",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Hotel_Corridor_%28184413335%29.jpeg/1920px-Hotel_Corridor_%28184413335%29.jpeg",
+   "t": "Hotel Corridor (184413335)",
+   "a": "Uwe Jelting",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Corridor_(184413335).jpeg",
+   "d": "before 22 ",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "107803054",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno%2C_Nevada.jpg",
+   "t": "Hotel room corridor at the Silver Legacy Casino Resort in Reno, Nevada",
+   "a": "Mark Hogan",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno,_Nevada.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "112762338",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Corridor_of_Renaissance_Hotel%2C_Edmonton_airport.jpg/1920px-Corridor_of_Renaissance_Hotel%2C_Edmonton_airport.jpg",
+   "t": "Corridor of Renaissance Hotel, Edmonton airport",
+   "a": "Daniel Case",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Renaissance_Hotel,_Edmonton_airport.jpg",
+   "d": "2015-07-14",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "125907045",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Corridor_at_Thon_Hotel_Kirkenes.jpg/1920px-Corridor_at_Thon_Hotel_Kirkenes.jpg",
+   "t": "Corridor at Thon Hotel Kirkenes",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Thon_Hotel_Kirkenes.jpg",
+   "d": "2020-08-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "126981277",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Corridor_at_Hotel_Katajanokka.jpg/1920px-Corridor_at_Hotel_Katajanokka.jpg",
+   "t": "Corridor at Hotel Katajanokka",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Katajanokka.jpg",
+   "d": "2022-12-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "138625966",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Corridor_at_Elite_Hotel_Ideon_Lund.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "142096199",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Corridor_at_Hotel_Esplanade_Stockholm.jpg/1920px-Corridor_at_Hotel_Esplanade_Stockholm.jpg",
+   "t": "Corridor at Hotel Esplanade Stockholm",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_Stockholm.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "143607622",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg/1920px-Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
+   "t": "Upper corridor in the hotel - geograph.org.uk - 6081126",
+   "a": "Bob Harvey",
+   "p": "https://commons.wikimedia.org/wiki/File:Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
+   "d": "2019-03-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "148769511",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg/1920px-A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg",
+   "t": "A corridor in the Imperial Hotel, Torquay - geograph.org.uk - 6376057",
+   "a": "Roger A Smith",
+   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_the_Imperial_Hotel,_Torquay_-_geograph.org.uk_-_6376057.jpg",
+   "d": "2020-01-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "155084327",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "156417481",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg/1920px-Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
+   "t": "Hotel corridor of the past - geograph.org.uk - 7048292",
+   "a": "Mr Ignavy",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
+   "d": "2021-08-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "156688455",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "t": "Corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "158020802",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund (no exposure compensation)",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_(no_exposure_compensation).jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "163724474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "t": "Corridor on floor 2 at Elite Hotel Ideon Lund in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "164902530",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "t": "End of corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "168711924",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 03",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711925",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 02",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711927",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 01",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711931",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 04",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711933",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 05",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168867549",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/1/10/Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
+   "t": "Liverpool - Titanic Hotel - Interior corridor - geograph.org.uk - 7855145",
+   "a": "Rob Farrow",
+   "p": "https://commons.wikimedia.org/wiki/File:Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
+   "d": "2024-08-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "169416671",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Hotel_Central_-_Corridor.jpg/1920px-Hotel_Central_-_Corridor.jpg",
+   "t": "Hotel Central - Corridor",
+   "a": "Fred Cherrygarden",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Central_-_Corridor.jpg",
+   "d": "2025-04-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "171892500",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Wizz_Hotel_Corridor.jpg/1920px-Wizz_Hotel_Corridor.jpg",
+   "t": "Wizz Hotel Corridor",
+   "a": "Alharomain354",
+   "p": "https://commons.wikimedia.org/wiki/File:Wizz_Hotel_Corridor.jpg",
+   "d": "2025-07-11",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "172731623",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg",
+   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403",
+   "a": "Hirho",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg",
+   "d": "2025-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "172732983",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg",
+   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154908",
+   "a": "Hirho",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg",
+   "d": "2025-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "172739624",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg",
+   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154914",
+   "a": "Hirho",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg",
+   "d": "2025-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "172740720",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg",
+   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154925",
+   "a": "Hirho",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg",
+   "d": "2025-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "179532453",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund on an evening in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "179959559",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Corridor_at_Sokos_Hotel_Pier_4.jpg/1920px-Corridor_at_Sokos_Hotel_Pier_4.jpg",
+   "t": "Corridor at Sokos Hotel Pier 4",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Sokos_Hotel_Pier_4.jpg",
+   "d": "2025-10-11",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "180391325",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
+   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 01",
+   "a": "HSOMWEI mATIWM Uatnm LUNGA",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
+   "d": "2025-12-17",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "180391327",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
+   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 02",
+   "a": "HSOMWEI mATIWM Uatnm LUNGA",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
+   "d": "2025-12-17",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "181910549",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Corridor_of_Hotel_Alpha-one_Yonago.jpg/1920px-Corridor_of_Hotel_Alpha-one_Yonago.jpg",
+   "t": "Corridor of Hotel Alpha-one Yonago",
+   "a": "ノボホショコロトソ",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Hotel_Alpha-one_Yonago.jpg",
+   "d": "2025-12-02",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "183681003",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 03",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681005",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 01",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681006",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 02",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681530",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor view 安里 Asato February 2026 N13P 02",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "188161289",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around third floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "188169304",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around first floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "188170913",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
+   "t": "Another Jerma Hotel corridor (around first floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Another_Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "192224474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg/1920px-Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
+   "t": "Long corridor lined with framed artwork in a hotel undefined",
+   "a": "Shixart1985",
+   "p": "https://commons.wikimedia.org/wiki/File:Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
+   "d": "2025-08-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "193962096",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg",
+   "t": "Jerma Hotel corridor (around third floor), in 2026 (second angle)",
+   "a": "Anonymous Unknown author",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026_(second_angle).jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "193962870",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around first or third floor), in 2026",
+   "a": "Anonymous Unknown author",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_or_third_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "1448446",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Whitchurch_Hospital_Corridor_Abandoned_West5_Ward.jpg",
+   "t": "Whitchurch Hospital Corridor Abandoned West5 Ward",
+   "a": "No machine-readable author provided. Vaughan~commonswiki assumed (based on copyr",
+   "p": "https://commons.wikimedia.org/wiki/File:Whitchurch_Hospital_Corridor_Abandoned_West5_Ward.jpg",
+   "d": "27 Septemb",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "1448517",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Whitchurch_Hospital_West_Wing_Corridor.jpg",
+   "t": "Whitchurch Hospital West Wing Corridor",
+   "a": "No machine-readable author provided. Vaughan~commonswiki assumed (based on copyr",
+   "p": "https://commons.wikimedia.org/wiki/File:Whitchurch_Hospital_West_Wing_Corridor.jpg",
+   "d": "27 Septemb",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "14444613",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Demolition_In_Progress%2C_Vickers_Corridor%2C_Northern_Geneal_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724084.jpg/1920px-Demolition_In_Progress%2C_Vickers_Corridor%2C_Northern_Geneal_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724084.jpg",
+   "t": "Demolition In Progress, Vickers Corridor, Northern Geneal Hospital, Sheffield - geograph.org.uk - 1724084",
+   "a": "Terry Robinson",
+   "p": "https://commons.wikimedia.org/wiki/File:Demolition_In_Progress,_Vickers_Corridor,_Northern_Geneal_Hospital,_Sheffield_-_geograph.org.uk_-_1724084.jpg",
+   "d": "2008-11-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "14447954",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/No_Access%2C_Vickers_Corridor%2C_Northern_General_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724054.jpg/1920px-No_Access%2C_Vickers_Corridor%2C_Northern_General_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724054.jpg",
+   "t": "No Access, Vickers Corridor, Northern General Hospital, Sheffield - geograph.org.uk - 1724054",
+   "a": "Terry Robinson",
+   "p": "https://commons.wikimedia.org/wiki/File:No_Access,_Vickers_Corridor,_Northern_General_Hospital,_Sheffield_-_geograph.org.uk_-_1724054.jpg",
+   "d": "2009-01-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "14452246",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Vickers_Corridor%2C_Northern_General_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724026.jpg/1920px-Vickers_Corridor%2C_Northern_General_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724026.jpg",
+   "t": "Vickers Corridor, Northern General Hospital, Sheffield - geograph.org.uk - 1724026",
+   "a": "Terry Robinson",
+   "p": "https://commons.wikimedia.org/wiki/File:Vickers_Corridor,_Northern_General_Hospital,_Sheffield_-_geograph.org.uk_-_1724026.jpg",
+   "d": "2008-11-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "16012204",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Musgrove_Park_Hospital_corridor.jpg/1920px-Musgrove_Park_Hospital_corridor.jpg",
+   "t": "Musgrove Park Hospital corridor",
+   "a": "Adrian Boliston",
+   "p": "https://commons.wikimedia.org/wiki/File:Musgrove_Park_Hospital_corridor.jpg",
+   "d": "2008-05-26",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "21159386",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Alcatraz_hospital_corridor.jpg/1920px-Alcatraz_hospital_corridor.jpg",
+   "t": "Alcatraz hospital corridor",
+   "a": "Cory Doctorow",
+   "p": "https://commons.wikimedia.org/wiki/File:Alcatraz_hospital_corridor.jpg",
+   "d": "2012-07-31",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "35700180",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/The_Prison_Hospital_corridor.JPG/1920px-The_Prison_Hospital_corridor.JPG",
+   "t": "The Prison Hospital corridor",
+   "a": "Stan Fong",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Prison_Hospital_corridor.JPG",
+   "d": "2014-09-23",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "36044569",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Bellevue_Hospital%2C_New_York_City%3B_a_corridor_inside_entrance_Wellcome_L0031140.jpg/1920px-Bellevue_Hospital%2C_New_York_City%3B_a_corridor_inside_entrance_Wellcome_L0031140.jpg",
+   "t": "Bellevue Hospital, New York City; a corridor inside entrance Wellcome L0031140",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Bellevue_Hospital,_New_York_City;_a_corridor_inside_entrance_Wellcome_L0031140.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "36489124",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Royal_Free_Hospital%2C_London%3B_the_corridor_to_the_maternity_w_Wellcome_V0014879.jpg/1920px-Royal_Free_Hospital%2C_London%3B_the_corridor_to_the_maternity_w_Wellcome_V0014879.jpg",
+   "t": "Royal Free Hospital, London; the corridor to the maternity w Wellcome V0014879",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Royal_Free_Hospital,_London;_the_corridor_to_the_maternity_w_Wellcome_V0014879.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "45596240",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hospital_of_the_Sisters_of_Charity._Corridor._-_V%C3%A1c.JPG",
+   "t": "Hospital of the Sisters of Charity. Corridor. - Vác",
+   "a": "Globetrotter19",
+   "p": "https://commons.wikimedia.org/wiki/File:Hospital_of_the_Sisters_of_Charity._Corridor._-_V%C3%A1c.JPG",
+   "d": "2015",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "46121364",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Main_Corridor%2C_Lovell_General_Hospital%2C_Fort_Devens%2C_Mass_%2871546%29.jpg/1920px-Main_Corridor%2C_Lovell_General_Hospital%2C_Fort_Devens%2C_Mass_%2871546%29.jpg",
+   "t": "Main Corridor, Lovell General Hospital, Fort Devens, Mass (71546)",
+   "a": "Pub. by The Lovell General Hospital, Post Exchange, Fort Devens, Mass. Tichnor B",
+   "p": "https://commons.wikimedia.org/wiki/File:Main_Corridor,_Lovell_General_Hospital,_Fort_Devens,_Mass_(71546).jpg",
+   "d": "between ci",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "50291798",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/HK_%E5%B1%AF%E9%96%80%E9%86%AB%E9%99%A2_Tuen_Mun_Hospital_ground_floor_corridor_interior_July_2016_DSC.jpg/1920px-HK_%E5%B1%AF%E9%96%80%E9%86%AB%E9%99%A2_Tuen_Mun_Hospital_ground_floor_corridor_interior_July_2016_DSC.jpg",
+   "t": "HK 屯門醫院 Tuen Mun Hospital ground floor corridor interior July 2016 DSC",
+   "a": "YipshaiukOWL",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_%E5%B1%AF%E9%96%80%E9%86%AB%E9%99%A2_Tuen_Mun_Hospital_ground_floor_corridor_interior_July_2016_DSC.jpg",
+   "d": "2016-07-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "60658110",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg/1920px-Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg",
+   "t": "Red Cross Society Central Hospital corridor 2014 Museum Meiji Mura",
+   "a": "Morio",
+   "p": "https://commons.wikimedia.org/wiki/File:Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg",
+   "d": "2014-08-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "62137038",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/A_corridor_in_Chittagong_General_Hospital-1.jpg/1920px-A_corridor_in_Chittagong_General_Hospital-1.jpg",
+   "t": "A corridor in Chittagong General Hospital-1",
+   "a": "Intakhab",
+   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_Chittagong_General_Hospital-1.jpg",
+   "d": "2017-08-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "62137065",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/A_corridor_in_Chittagong_General_Hospital-2.jpg/1920px-A_corridor_in_Chittagong_General_Hospital-2.jpg",
+   "t": "A corridor in Chittagong General Hospital-2",
+   "a": "Intakhab",
+   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_Chittagong_General_Hospital-2.jpg",
+   "d": "2017-08-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "62748540",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Main_Corridor%2C_Cave_Hospital%2C_Cat_Ba_Island%2C_Vietnam.jpg/1920px-Main_Corridor%2C_Cave_Hospital%2C_Cat_Ba_Island%2C_Vietnam.jpg",
+   "t": "Main Corridor, Cave Hospital, Cat Ba Island, Vietnam",
+   "a": "TomFitzhenry",
+   "p": "https://commons.wikimedia.org/wiki/File:Main_Corridor,_Cave_Hospital,_Cat_Ba_Island,_Vietnam.jpg",
+   "d": "2016-12-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "68058662",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Corridor_at_point_A_-_N%C3%84L_hospital.jpg/1920px-Corridor_at_point_A_-_N%C3%84L_hospital.jpg",
+   "t": "Corridor at point A - NÄL hospital",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_point_A_-_N%C3%84L_hospital.jpg",
+   "d": "2018-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "68058663",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Corridor_on_the_second_level_-_N%C3%84L_hospital_1.jpg/1920px-Corridor_on_the_second_level_-_N%C3%84L_hospital_1.jpg",
+   "t": "Corridor on the second level - NÄL hospital 1",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_the_second_level_-_N%C3%84L_hospital_1.jpg",
+   "d": "2018-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "68058664",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Corridor_on_the_second_level_-_N%C3%84L_hospital_2.jpg/1920px-Corridor_on_the_second_level_-_N%C3%84L_hospital_2.jpg",
+   "t": "Corridor on the second level - NÄL hospital 2",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_the_second_level_-_N%C3%84L_hospital_2.jpg",
+   "d": "2018-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "68058667",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Corridor_on_the_second_level_-_N%C3%84L_hospital_3.jpg/1920px-Corridor_on_the_second_level_-_N%C3%84L_hospital_3.jpg",
+   "t": "Corridor on the second level - NÄL hospital 3",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_the_second_level_-_N%C3%84L_hospital_3.jpg",
+   "d": "2018-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "68146443",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Corridor_for_Clinical_Physiology_-_N%C3%84L_hospital_1.jpg/1920px-Corridor_for_Clinical_Physiology_-_N%C3%84L_hospital_1.jpg",
+   "t": "Corridor for Clinical Physiology - NÄL hospital 1",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_for_Clinical_Physiology_-_N%C3%84L_hospital_1.jpg",
+   "d": "2018-04-03",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "92230229",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Corridor_at_Mater_Private_Hospital%2C_Brisbane.jpg/1920px-Corridor_at_Mater_Private_Hospital%2C_Brisbane.jpg",
+   "t": "Corridor at Mater Private Hospital, Brisbane",
+   "a": "Kgbo",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Mater_Private_Hospital,_Brisbane.jpg",
+   "d": "2020-07-14",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "109292047",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg/1920px-Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg",
+   "t": "Hospital corridor of Sir Ganga Ram Hospital",
+   "a": "Nalbarian",
+   "p": "https://commons.wikimedia.org/wiki/File:Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg",
+   "d": "2021-08-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "110253309",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg/1920px-Corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg",
+   "t": "Corridor of the General Lying In Hospital on York Road. Now a hotel",
+   "a": "LondonHistoryatHome",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg",
+   "d": "2017-01-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "110253310",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Tiles_in_the_corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg/1920px-Tiles_in_the_corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg",
+   "t": "Tiles in the corridor of the General Lying In Hospital on York Road. Now a hotel",
+   "a": "LondonHistoryatHome",
+   "p": "https://commons.wikimedia.org/wiki/File:Tiles_in_the_corridor_of_the_General_Lying_In_Hospital_on_York_Road._Now_a_hotel.jpg",
+   "d": "2017-01-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "114358798",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_1_-_geograph.org.uk_-_3069687.jpg/1920px-Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_1_-_geograph.org.uk_-_3069687.jpg",
+   "t": "Northern General Hospital - Vickers Corridor Entrance near to the Original Main Entrance - 1 - geograph.org.uk - 3069687",
+   "a": "Terry Robinson",
+   "p": "https://commons.wikimedia.org/wiki/File:Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_1_-_geograph.org.uk_-_3069687.jpg",
+   "d": "2011-07-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "114358881",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_2_-_geograph.org.uk_-_3069697.jpg/1920px-Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_2_-_geograph.org.uk_-_3069697.jpg",
+   "t": "Northern General Hospital - Vickers Corridor Entrance near to the Original Main Entrance - 2 - geograph.org.uk - 3069697",
+   "a": "Terry Robinson",
+   "p": "https://commons.wikimedia.org/wiki/File:Northern_General_Hospital_-_Vickers_Corridor_Entrance_near_to_the_Original_Main_Entrance_-_2_-_geograph.org.uk_-_3069697.jpg",
+   "d": "2011-07-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "115011085",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/The_Link_Corridor_at_North_Devon_District_Hospital_-_geograph.org.uk_-_3187901.jpg/1920px-The_Link_Corridor_at_North_Devon_District_Hospital_-_geograph.org.uk_-_3187901.jpg",
+   "t": "The Link Corridor at North Devon District Hospital - geograph.org.uk - 3187901",
+   "a": "Roger A Smith",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Link_Corridor_at_North_Devon_District_Hospital_-_geograph.org.uk_-_3187901.jpg",
+   "d": "2012-09-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "127886552",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Hospital_corridor_in_Turkey.jpg",
+   "t": "Hospital corridor in Turkey",
+   "a": "Eyluleyel",
+   "p": "https://commons.wikimedia.org/wiki/File:Hospital_corridor_in_Turkey.jpg",
+   "d": "2023-01-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "136455951",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/A_corridor_on_level_0_in_the_North_Devon_District_Hospital_-_geograph.org.uk_-_5326232.jpg/1920px-A_corridor_on_level_0_in_the_North_Devon_District_Hospital_-_geograph.org.uk_-_5326232.jpg",
+   "t": "A corridor on level 0 in the North Devon District Hospital - geograph.org.uk - 5326232",
+   "a": "Roger A Smith",
+   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_on_level_0_in_the_North_Devon_District_Hospital_-_geograph.org.uk_-_5326232.jpg",
+   "d": "2017-03-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "144661172",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Corridor_in_Uddevalla_Hospital.jpg/1920px-Corridor_in_Uddevalla_Hospital.jpg",
+   "t": "Corridor in Uddevalla Hospital",
+   "a": "W.carter",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Uddevalla_Hospital.jpg",
+   "d": "2023-10-31",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "147535036",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Hospital_hallway_in_Lagos.jpg/1920px-Hospital_hallway_in_Lagos.jpg",
+   "t": "Hospital hallway in Lagos",
+   "a": "Beendy234",
+   "p": "https://commons.wikimedia.org/wiki/File:Hospital_hallway_in_Lagos.jpg",
+   "d": "2024-04-19",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "148210771",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/3/34/Corridor_of_the_Br%C3%A2ncovenesc_Hospital_in_Bucharest%2C_in_1931.jpg",
+   "t": "Corridor of the Brâncovenesc Hospital in Bucharest, in 1931",
+   "a": "Unknown author Unknown author",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_the_Br%C3%A2ncovenesc_Hospital_in_Bucharest,_in_1931.jpg",
+   "d": "1931",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "153794351",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/5/56/A_long_corridor_in_Seacroft_Hospital_-_geograph.org.uk_-_6837541.jpg",
+   "t": "A long corridor in Seacroft Hospital - geograph.org.uk - 6837541",
+   "a": "Rich Tea",
+   "p": "https://commons.wikimedia.org/wiki/File:A_long_corridor_in_Seacroft_Hospital_-_geograph.org.uk_-_6837541.jpg",
+   "d": "2021-05-14",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "164551380",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Corridor%2C_Amersham_Hospital_-_geograph.org.uk_-_7628891.jpg/1920px-Corridor%2C_Amersham_Hospital_-_geograph.org.uk_-_7628891.jpg",
+   "t": "Corridor, Amersham Hospital - geograph.org.uk - 7628891",
+   "a": "Bryn Holmes",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor,_Amersham_Hospital_-_geograph.org.uk_-_7628891.jpg",
+   "d": "2023-10-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "170443899",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Corridor%2C_Nambour_General_Hospital%2C_2025%2C.jpg/1920px-Corridor%2C_Nambour_General_Hospital%2C_2025%2C.jpg",
+   "t": "Corridor, Nambour General Hospital, 2025,",
+   "a": "Chris Olszewski",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor,_Nambour_General_Hospital,_2025,.jpg",
+   "d": "2025-07-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "11214164",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Illustration_of_a_corridor_of_the_new_campus_of_the_School_of_Science_and_Technology%2C_Singapore.jpg",
+   "t": "Illustration of a corridor of the new campus of the School of Science and Technology, Singapore",
+   "a": "Wrc Ynapmoc .",
+   "p": "https://commons.wikimedia.org/wiki/File:Illustration_of_a_corridor_of_the_new_campus_of_the_School_of_Science_and_Technology,_Singapore.jpg",
+   "d": "2010-08-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 3.0"
+  },
+  {
+   "i": "12234772",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/6/63/The_Corridor_of_Zong-Zheng_Elementary_School_of_Chang-Hua_County_2010-11-1.jpg",
+   "t": "The Corridor of Zong-Zheng Elementary School of Chang-Hua County 2010-11-1",
+   "a": "lordcolus",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Corridor_of_Zong-Zheng_Elementary_School_of_Chang-Hua_County_2010-11-1.jpg",
+   "d": "2010-11-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "14759754",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/The_Corridor_of_Keelung_Z.S._Senior_High_School_1_2011-4-1.JPG/1920px-The_Corridor_of_Keelung_Z.S._Senior_High_School_1_2011-4-1.JPG",
+   "t": "The Corridor of Keelung Z.S. Senior High School 1 2011-4-1",
+   "a": "燈火闌珊處",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Corridor_of_Keelung_Z.S._Senior_High_School_1_2011-4-1.JPG",
+   "d": "2011-04-01",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "14766474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/The_Corridor_of_Keelung_Z.S._Senior_High_School_2_2011-3-30.JPG/1920px-The_Corridor_of_Keelung_Z.S._Senior_High_School_2_2011-3-30.JPG",
+   "t": "The Corridor of Keelung Z.S. Senior High School 2 2011-3-30",
+   "a": "燈火闌珊處",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Corridor_of_Keelung_Z.S._Senior_High_School_2_2011-3-30.JPG",
+   "d": "2011-03-30",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "17384594",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/300_Corridor%2C_Inside.jpg/1920px-300_Corridor%2C_Inside.jpg",
+   "t": "300 Corridor, Inside",
+   "a": "Gabbyly",
+   "p": "https://commons.wikimedia.org/wiki/File:300_Corridor,_Inside.jpg",
+   "d": "2010-11-08",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "21952078",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/St._Vincent%27s_High_School_Corridor_by_Faizan_Ansari.JPG/1920px-St._Vincent%27s_High_School_Corridor_by_Faizan_Ansari.JPG",
+   "t": "St. Vincent's High School Corridor by Faizan Ansari",
+   "a": "Faizanansari",
+   "p": "https://commons.wikimedia.org/wiki/File:St._Vincent%27s_High_School_Corridor_by_Faizan_Ansari.JPG",
+   "d": "2012-10-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "38330909",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Ground_Floor_Corridor_-_Hare_School_-_Kolkata_2015-02-09_2241.JPG/1920px-Ground_Floor_Corridor_-_Hare_School_-_Kolkata_2015-02-09_2241.JPG",
+   "t": "Ground Floor Corridor - Hare School - Kolkata 2015-02-09 2241",
+   "a": "Biswarup Ganguly",
+   "p": "https://commons.wikimedia.org/wiki/File:Ground_Floor_Corridor_-_Hare_School_-_Kolkata_2015-02-09_2241.JPG",
+   "d": "2015-02-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 3.0"
+  },
+  {
+   "i": "51698602",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Long_Corridor_at_St._Aloysius_High_School%2C_Mangalore.jpg/1920px-Long_Corridor_at_St._Aloysius_High_School%2C_Mangalore.jpg",
+   "t": "Long Corridor at St. Aloysius High School, Mangalore",
+   "a": "Harshith JV",
+   "p": "https://commons.wikimedia.org/wiki/File:Long_Corridor_at_St._Aloysius_High_School,_Mangalore.jpg",
+   "d": "18 Septemb",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "53313115",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/9/94/School_Corridor_-_panoramio.jpg",
+   "t": "School Corridor - panoramio",
+   "a": "arches",
+   "p": "https://commons.wikimedia.org/wiki/File:School_Corridor_-_panoramio.jpg",
+   "d": "Taken on 9",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "54987538",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Saint_Emeric_school_corridor%2C_2016_%C3%9Ajbuda.jpg",
+   "t": "Saint Emeric school corridor, 2016 Újbuda",
+   "a": "Globetrotter19",
+   "p": "https://commons.wikimedia.org/wiki/File:Saint_Emeric_school_corridor,_2016_%C3%9Ajbuda.jpg",
+   "d": "2016",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "64005657",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/HK_SYP_%E8%81%96%E9%A1%9E%E6%96%AF%E4%B8%AD%E5%AD%B8_St_Louis_School_open_day_Nov_2017_IX1_7th_floor_corridor_interior_n_visitors_02.jpg/1920px-HK_SYP_%E8%81%96%E9%A1%9E%E6%96%AF%E4%B8%AD%E5%AD%B8_St_Louis_School_open_day_Nov_2017_IX1_7th_floor_corridor_interior_n_visitors_02.jpg",
+   "t": "HK SYP 聖類斯中學 St Louis School open day Nov 2017 IX1 7th floor corridor interior n visitors 02",
+   "a": "Szeluemens",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_SYP_%E8%81%96%E9%A1%9E%E6%96%AF%E4%B8%AD%E5%AD%B8_St_Louis_School_open_day_Nov_2017_IX1_7th_floor_corridor_interior_n_visitors_02.jpg",
+   "d": "2017-11-11",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "70023803",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Students_on_corridor_in_Viator_High_School.jpg/1920px-Students_on_corridor_in_Viator_High_School.jpg",
+   "t": "Students on corridor in Viator High School",
+   "a": "Dquai",
+   "p": "https://commons.wikimedia.org/wiki/File:Students_on_corridor_in_Viator_High_School.jpg",
+   "d": "2009-01-04",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "70145810",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/9/94/Corridor_in_Viator_High_School.jpg",
+   "t": "Corridor in Viator High School",
+   "a": "Dquai",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Viator_High_School.jpg",
+   "d": "2007-06-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "70145818",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/4/49/Corridor_in_Viator_High_School_01.jpg",
+   "t": "Corridor in Viator High School 01",
+   "a": "Dquai",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Viator_High_School_01.jpg",
+   "d": "2007-06-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "89062568",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Main_Building_corridor_at_Doon_School.jpg/1920px-Main_Building_corridor_at_Doon_School.jpg",
+   "t": "Main Building corridor at Doon School",
+   "a": "KramerVsSchramer",
+   "p": "https://commons.wikimedia.org/wiki/File:Main_Building_corridor_at_Doon_School.jpg",
+   "d": "2020-02-04",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "96073899",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Ogawa_Shimozato_Branch_School_Corridor_1.JPG/1920px-Ogawa_Shimozato_Branch_School_Corridor_1.JPG",
+   "t": "Ogawa Shimozato Branch School Corridor 1",
+   "a": "京浜にけ",
+   "p": "https://commons.wikimedia.org/wiki/File:Ogawa_Shimozato_Branch_School_Corridor_1.JPG",
+   "d": "2012-06-04",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "100101333",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Open_Air_Corridor_at_Baranagore_Ramakrishna_Mission_Ashrama_High_School_campus.jpg/1920px-Open_Air_Corridor_at_Baranagore_Ramakrishna_Mission_Ashrama_High_School_campus.jpg",
+   "t": "Open Air Corridor at Baranagore Ramakrishna Mission Ashrama High School campus",
+   "a": "পথিক ঘোষ",
+   "p": "https://commons.wikimedia.org/wiki/File:Open_Air_Corridor_at_Baranagore_Ramakrishna_Mission_Ashrama_High_School_campus.jpg",
+   "d": "2021-01-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "103035202",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Habu_Elementary_School_1st_Building_Corridor_2019_01.JPG/1920px-Habu_Elementary_School_1st_Building_Corridor_2019_01.JPG",
+   "t": "Habu Elementary School 1st Building Corridor 2019 01",
+   "a": "ja:User:Sanjo",
+   "p": "https://commons.wikimedia.org/wiki/File:Habu_Elementary_School_1st_Building_Corridor_2019_01.JPG",
+   "d": "2019-11-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "104864373",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/School_corridor_at_Goa%2C_India.jpg/1920px-School_corridor_at_Goa%2C_India.jpg",
+   "t": "School corridor at Goa, India",
+   "a": "Fredericknoronha",
+   "p": "https://commons.wikimedia.org/wiki/File:School_corridor_at_Goa,_India.jpg",
+   "d": "2021-02-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "104864377",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/School_corridors_at_Goa%2C_India_02.jpg/1920px-School_corridors_at_Goa%2C_India_02.jpg",
+   "t": "School corridors at Goa, India 02",
+   "a": "Fredericknoronha",
+   "p": "https://commons.wikimedia.org/wiki/File:School_corridors_at_Goa,_India_02.jpg",
+   "d": "2021-02-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "110577785",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/View_from_corridor_end%2C_Culford_School_-_geograph.org.uk_-_2690608.jpg/1920px-View_from_corridor_end%2C_Culford_School_-_geograph.org.uk_-_2690608.jpg",
+   "t": "View from corridor end, Culford School - geograph.org.uk - 2690608",
+   "a": "John Goldsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:View_from_corridor_end,_Culford_School_-_geograph.org.uk_-_2690608.jpg",
+   "d": "2011-10-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "131201819",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Curving_corridor%2C_Hallfield_Primary_School_-_geograph.org.uk_-_4679118.jpg/1920px-Curving_corridor%2C_Hallfield_Primary_School_-_geograph.org.uk_-_4679118.jpg",
+   "t": "Curving corridor, Hallfield Primary School - geograph.org.uk - 4679118",
+   "a": "David Hawgood",
+   "p": "https://commons.wikimedia.org/wiki/File:Curving_corridor,_Hallfield_Primary_School_-_geograph.org.uk_-_4679118.jpg",
+   "d": "2015-09-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "131256838",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Windows_in_curving_corridor%2C_Hallfield_Primary_School_-_geograph.org.uk_-_4684935.jpg/1920px-Windows_in_curving_corridor%2C_Hallfield_Primary_School_-_geograph.org.uk_-_4684935.jpg",
+   "t": "Windows in curving corridor, Hallfield Primary School - geograph.org.uk - 4684935",
+   "a": "David Hawgood",
+   "p": "https://commons.wikimedia.org/wiki/File:Windows_in_curving_corridor,_Hallfield_Primary_School_-_geograph.org.uk_-_4684935.jpg",
+   "d": "2015-09-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "135261773",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Corridor_in_Koivukyl%C3%A4_School_in_Rekola%2C_Vantaa%2C_Finland%2C_2022.jpg/1920px-Corridor_in_Koivukyl%C3%A4_School_in_Rekola%2C_Vantaa%2C_Finland%2C_2022.jpg",
+   "t": "Corridor in Koivukylä School in Rekola, Vantaa, Finland, 2022",
+   "a": "Anni Koponen",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Koivukyl%C3%A4_School_in_Rekola,_Vantaa,_Finland,_2022.jpg",
+   "d": "21 Septemb",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "136449435",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/A_school_corridor_Meqqal.jpg/1920px-A_school_corridor_Meqqal.jpg",
+   "t": "A school corridor Meqqal",
+   "a": "Meqqal",
+   "p": "https://commons.wikimedia.org/wiki/File:A_school_corridor_Meqqal.jpg",
+   "d": "2023-06-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "137901089",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Sazan_school_corridor_-_2023.jpg/1920px-Sazan_school_corridor_-_2023.jpg",
+   "t": "Sazan school corridor - 2023",
+   "a": "Hotolmo22",
+   "p": "https://commons.wikimedia.org/wiki/File:Sazan_school_corridor_-_2023.jpg",
+   "d": "2023-09-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "143226692",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/CAN-Ont-Wallaceburg-WDSS_corridor_2006.jpg/1920px-CAN-Ont-Wallaceburg-WDSS_corridor_2006.jpg",
+   "t": "CAN-Ont-Wallaceburg-WDSS corridor 2006",
+   "a": "Q8682",
+   "p": "https://commons.wikimedia.org/wiki/File:CAN-Ont-Wallaceburg-WDSS_corridor_2006.jpg",
+   "d": "2006-06-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "149786510",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Corridor_inside_St._Francis_College_for_Women.jpg/1920px-Corridor_inside_St._Francis_College_for_Women.jpg",
+   "t": "Corridor inside St. Francis College for Women",
+   "a": "Mouryan",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_inside_St._Francis_College_for_Women.jpg",
+   "d": "2024-05-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152103042",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/At_a_school_corridor_in_Baozhong_Junior_High_School_20130503.jpg/1920px-At_a_school_corridor_in_Baozhong_Junior_High_School_20130503.jpg",
+   "t": "At a school corridor in Baozhong Junior High School 20130503",
+   "a": "褒忠國中 雲端網",
+   "p": "https://commons.wikimedia.org/wiki/File:At_a_school_corridor_in_Baozhong_Junior_High_School_20130503.jpg",
+   "d": "2013-05-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "170383086",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Corridor_of_Taipei_Municipal_Ximen_Elementary_School_01_20250720.jpg/1920px-Corridor_of_Taipei_Municipal_Ximen_Elementary_School_01_20250720.jpg",
+   "t": "Corridor of Taipei Municipal Ximen Elementary School 01 20250720",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Taipei_Municipal_Ximen_Elementary_School_01_20250720.jpg",
+   "d": "2025-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "170383164",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Corridor_of_Taipei_Municipal_Ximen_Elementary_School_02_20250720.jpg/1920px-Corridor_of_Taipei_Municipal_Ximen_Elementary_School_02_20250720.jpg",
+   "t": "Corridor of Taipei Municipal Ximen Elementary School 02 20250720",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Taipei_Municipal_Ximen_Elementary_School_02_20250720.jpg",
+   "d": "2025-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "170383427",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Corridor_of_Taipei_Municipal_Ximen_Elementary_School_04_20250720.jpg/1920px-Corridor_of_Taipei_Municipal_Ximen_Elementary_School_04_20250720.jpg",
+   "t": "Corridor of Taipei Municipal Ximen Elementary School 04 20250720",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Taipei_Municipal_Ximen_Elementary_School_04_20250720.jpg",
+   "d": "2025-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "170383525",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Corridor_of_Taipei_Municipal_Ximen_Elementary_School_05_20250720.jpg/1920px-Corridor_of_Taipei_Municipal_Ximen_Elementary_School_05_20250720.jpg",
+   "t": "Corridor of Taipei Municipal Ximen Elementary School 05 20250720",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Taipei_Municipal_Ximen_Elementary_School_05_20250720.jpg",
+   "d": "2025-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "170383770",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Corridor_of_Taipei_Municipal_Ximen_Elementary_School_06_20250720.jpg/1920px-Corridor_of_Taipei_Municipal_Ximen_Elementary_School_06_20250720.jpg",
+   "t": "Corridor of Taipei Municipal Ximen Elementary School 06 20250720",
+   "a": "阿道",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Taipei_Municipal_Ximen_Elementary_School_06_20250720.jpg",
+   "d": "2025-07-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "170966110",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Tejgaon_Government_High_School_Corridor_of_the_North_Building_%282025%29.jpg/1920px-Tejgaon_Government_High_School_Corridor_of_the_North_Building_%282025%29.jpg",
+   "t": "Tejgaon Government High School Corridor of the North Building (2025)",
+   "a": "Sajid Ahmed Nijhu",
+   "p": "https://commons.wikimedia.org/wiki/File:Tejgaon_Government_High_School_Corridor_of_the_North_Building_(2025).jpg",
+   "d": "26 July 20",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "180219921",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Corridor_in_Robert_E._Bell_school%2C_1990s.jpg/1920px-Corridor_in_Robert_E._Bell_school%2C_1990s.jpg",
+   "t": "Corridor in Robert E. Bell school, 1990s",
+   "a": "Htetrasme",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Robert_E._Bell_school,_1990s.jpg",
+   "d": "2025-12-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "180262047",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Haverford_Middle_School_Main_Corridor.jpg/1920px-Haverford_Middle_School_Main_Corridor.jpg",
+   "t": "Haverford Middle School Main Corridor",
+   "a": "A.Classical-Futurist",
+   "p": "https://commons.wikimedia.org/wiki/File:Haverford_Middle_School_Main_Corridor.jpg",
+   "d": "2025-12-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "6758443",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Chennai_Mathematical_Institute_main_building_curved_corridor_with_office_doors_at_night_2.JPG/1920px-Chennai_Mathematical_Institute_main_building_curved_corridor_with_office_doors_at_night_2.JPG",
+   "t": "Chennai Mathematical Institute main building curved corridor with office doors at night 2",
+   "a": "Prateek Karandikar",
+   "p": "https://commons.wikimedia.org/wiki/File:Chennai_Mathematical_Institute_main_building_curved_corridor_with_office_doors_at_night_2.JPG",
+   "d": "2009-05-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "8115861",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Barack_Obama_in_the_Oval_Office_view_from_the_west_corridor.jpg/1920px-Barack_Obama_in_the_Oval_Office_view_from_the_west_corridor.jpg",
+   "t": "Barack Obama in the Oval Office view from the west corridor",
+   "a": "Pete Souza",
+   "p": "https://commons.wikimedia.org/wiki/File:Barack_Obama_in_the_Oval_Office_view_from_the_west_corridor.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "10245304",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Blue_Corridor_U.S._Patent_Office%2C_by_E._%26_H.T._Anthony_%28Firm%29.jpg/1920px-Blue_Corridor_U.S._Patent_Office%2C_by_E._%26_H.T._Anthony_%28Firm%29.jpg",
+   "t": "Blue Corridor U.S. Patent Office, by E. & H.T. Anthony (Firm)",
+   "a": "E. &amp; H.T. Anthony (Firm) -- Publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:Blue_Corridor_U.S._Patent_Office,_by_E._%26_H.T._Anthony_(Firm).jpg",
+   "d": "<p>Created",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "22717769",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/HK_One8One_181_Queen%27s_Road_Central_office_building_corridor_Grand_Millinium_Plaza_15-Nov-2012.JPG/1920px-HK_One8One_181_Queen%27s_Road_Central_office_building_corridor_Grand_Millinium_Plaza_15-Nov-2012.JPG",
+   "t": "HK One8One 181 Queen's Road Central office building corridor Grand Millinium Plaza 15-Nov-2012",
+   "a": "Hsiaopeitoo",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_One8One_181_Queen%27s_Road_Central_office_building_corridor_Grand_Millinium_Plaza_15-Nov-2012.JPG",
+   "d": "2012-11-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "22717770",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/HK_One8One_181_Queen%27s_Road_Central_office_building_Grand_Millinium_Plaza_corridor_Nov-2012.JPG/1920px-HK_One8One_181_Queen%27s_Road_Central_office_building_Grand_Millinium_Plaza_corridor_Nov-2012.JPG",
+   "t": "HK One8One 181 Queen's Road Central office building Grand Millinium Plaza corridor Nov-2012",
+   "a": "Hsiaopeitoo",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_One8One_181_Queen%27s_Road_Central_office_building_Grand_Millinium_Plaza_corridor_Nov-2012.JPG",
+   "d": "2012-11-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "32936239",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_001.JPG/1920px-HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_001.JPG",
+   "t": "HK Sheung Wan PMQ mall Hollywood Road night shop corridor May-2014 S6 PMQ Management Office 001",
+   "a": "EIaomelums",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_001.JPG",
+   "d": "2014-05-23",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "32936240",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_002.JPG/1920px-HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_002.JPG",
+   "t": "HK Sheung Wan PMQ mall Hollywood Road night shop corridor May-2014 S6 PMQ Management Office 002",
+   "a": "EIaomelums",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_Sheung_Wan_PMQ_mall_Hollywood_Road_night_shop_corridor_May-2014_S6_PMQ_Management_Office_002.JPG",
+   "d": "2014-05-23",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "50969046",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Corridor%2C_John_W._McCormack_U.S._Post_Office_and_Courthouse%2C_Boston%2C_Massachusetts_LCCN2010719350.tif/lossy-page1-1920px-Corridor%2C_John_W._McCormack_U.S._Post_Office_and_Courthouse%2C_Boston%2C_Massachusetts_LCCN2010719350.tif.jpg",
+   "t": "Corridor, John W. McCormack U.S. Post Office and Courthouse, Boston, Massachusetts LCCN2010719350",
+   "a": "Carol M. Highsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor,_John_W._McCormack_U.S._Post_Office_and_Courthouse,_Boston,_Massachusetts_LCCN2010719350.tif",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "51110561",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Corridor_at_the_U.S._Post_Office_%26_Court_House%2C_Lexington%2C_Kentucky_LCCN2013634289.tif/lossy-page1-1920px-Corridor_at_the_U.S._Post_Office_%26_Court_House%2C_Lexington%2C_Kentucky_LCCN2013634289.tif.jpg",
+   "t": "Corridor at the U.S. Post Office & Court House, Lexington, Kentucky LCCN2013634289",
+   "a": "Carol M. Highsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_the_U.S._Post_Office_%26_Court_House,_Lexington,_Kentucky_LCCN2013634289.tif",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "51748626",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Corridor._U.S._Post_Office_and_Courthouse%2C_Alexandria%2C_Louisiana_LCCN2015645908.tif/lossy-page1-1920px-Corridor._U.S._Post_Office_and_Courthouse%2C_Alexandria%2C_Louisiana_LCCN2015645908.tif.jpg",
+   "t": "Corridor. U.S. Post Office and Courthouse, Alexandria, Louisiana LCCN2015645908",
+   "a": "Carol M. Highsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor._U.S._Post_Office_and_Courthouse,_Alexandria,_Louisiana_LCCN2015645908.tif",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "52043361",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Corridor._New_Carrollton_Federal_Office_Building%2C_New_Carrollton%2C_Maryland_LCCN2016648244.tif/lossy-page1-1920px-Corridor._New_Carrollton_Federal_Office_Building%2C_New_Carrollton%2C_Maryland_LCCN2016648244.tif.jpg",
+   "t": "Corridor. New Carrollton Federal Office Building, New Carrollton, Maryland LCCN2016648244",
+   "a": "Carol M. Highsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor._New_Carrollton_Federal_Office_Building,_New_Carrollton,_Maryland_LCCN2016648244.tif",
+   "d": "Taken on 5",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "52043592",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Corridor._New_Carrollton_Federal_Office_Building%2C_New_Carrollton%2C_Maryland_LCCN2016648250.tif/lossy-page1-1920px-Corridor._New_Carrollton_Federal_Office_Building%2C_New_Carrollton%2C_Maryland_LCCN2016648250.tif.jpg",
+   "t": "Corridor. New Carrollton Federal Office Building, New Carrollton, Maryland LCCN2016648250",
+   "a": "Carol M. Highsmith",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor._New_Carrollton_Federal_Office_Building,_New_Carrollton,_Maryland_LCCN2016648250.tif",
+   "d": "Taken on 5",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "53474791",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Corridor_in_the_U.S._Patent_Office%2C_1867_%2827880988325%29.jpg/1920px-Corridor_in_the_U.S._Patent_Office%2C_1867_%2827880988325%29.jpg",
+   "t": "Corridor in the U.S. Patent Office, 1867 (27880988325)",
+   "a": "DC Public Library Commons",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_the_U.S._Patent_Office,_1867_(27880988325).jpg",
+   "d": "2015-09-03",
+   "s": "Wikimedia Commons",
+   "l": "No restrictions"
+  },
+  {
+   "i": "58336951",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/HK_WAN_CHAI_HOPEWELL_CENTRE_38TH_FLOOR_EAA_OFFICE_CORRIDOR_APRIL_2017_LNV2_07.jpg/1920px-HK_WAN_CHAI_HOPEWELL_CENTRE_38TH_FLOOR_EAA_OFFICE_CORRIDOR_APRIL_2017_LNV2_07.jpg",
+   "t": "HK WAN CHAI HOPEWELL CENTRE 38TH FLOOR EAA OFFICE CORRIDOR APRIL 2017 LNV2 07",
+   "a": "TAM MEN TAU GG",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_WAN_CHAI_HOPEWELL_CENTRE_38TH_FLOOR_EAA_OFFICE_CORRIDOR_APRIL_2017_LNV2_07.jpg",
+   "d": "2017-04-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "64234466",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg/1920px-HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg",
+   "t": "HK 觀塘 Kwun Tong 廣生行中心 Kwong Sang Hong Centre corridor office sign November 2017 IX1",
+   "a": "Pinggieamai",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg",
+   "d": "2017-11-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "67265745",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/N.Y._Post_Office_-_main_corridor_LCCN2014697409.jpg/1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697409.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697409",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697409.jpg",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "67265751",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/N.Y._Post_Office_-_main_corridor_LCCN2014697410.jpg/1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697410.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697410",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697410.jpg",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "67265752",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/N.Y._Post_Office_-_main_corridor_LCCN2014697409.tif/lossy-page1-1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697409.tif.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697409",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697409.tif",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "67265755",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/N.Y._Post_Office_-_main_corridor_LCCN2014697411.jpg/1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697411.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697411",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697411.jpg",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "67265756",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/N.Y._Post_Office_-_main_corridor_LCCN2014697410.tif/lossy-page1-1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697410.tif.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697410",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697410.tif",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "67265761",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/N.Y._Post_Office_-_main_corridor_LCCN2014697411.tif/lossy-page1-1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697411.tif.jpg",
+   "t": "N.Y. Post Office - main corridor LCCN2014697411",
+   "a": "Bain News Service, publisher",
+   "p": "https://commons.wikimedia.org/wiki/File:N.Y._Post_Office_-_main_corridor_LCCN2014697411.tif",
+   "d": "1914",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "90869142",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Taichung_Municipal_Office_Building_Corridor_2019.jpg/1920px-Taichung_Municipal_Office_Building_Corridor_2019.jpg",
+   "t": "Taichung Municipal Office Building Corridor 2019",
+   "a": "Wpcpey",
+   "p": "https://commons.wikimedia.org/wiki/File:Taichung_Municipal_Office_Building_Corridor_2019.jpg",
+   "d": "2019-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "126984098",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Office_corridor%2C_1960s_office_building_in_Mascot%2C_NSW%2C_2022.jpg/1920px-Office_corridor%2C_1960s_office_building_in_Mascot%2C_NSW%2C_2022.jpg",
+   "t": "Office corridor, 1960s office building in Mascot, NSW, 2022",
+   "a": "Kgbo",
+   "p": "https://commons.wikimedia.org/wiki/File:Office_corridor,_1960s_office_building_in_Mascot,_NSW,_2022.jpg",
+   "d": "2022-12-23",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "128773445",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 01",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773461",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 05",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773468",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_06.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_06.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 06",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_06.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773475",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/2/24/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_07.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 07",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_07.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773607",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_12.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 12",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_12.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773621",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 15",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773622",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 16",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773627",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_18.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_18.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 18",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_18.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "130998967",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/View_of_the_central_plaza_in_the_Foreign_and_Commonwealth_Office_from_the_upper_floor_corridor_-_geograph.org.uk_-_4668998.jpg/1920px-View_of_the_central_plaza_in_the_Foreign_and_Commonwealth_Office_from_the_upper_floor_corridor_-_geograph.org.uk_-_4668998.jpg",
+   "t": "View of the central plaza in the Foreign and Commonwealth Office from the upper floor corridor - geograph.org.uk - 4668998",
+   "a": "Robert Lamb",
+   "p": "https://commons.wikimedia.org/wiki/File:View_of_the_central_plaza_in_the_Foreign_and_Commonwealth_Office_from_the_upper_floor_corridor_-_geograph.org.uk_-_4668998.jpg",
+   "d": "2015-09-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "159844951",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Cable_distribution_corridor_at_a_telephone_central_office.jpg",
+   "t": "Cable distribution corridor at a telephone central office",
+   "a": "Vivien Guéant",
+   "p": "https://commons.wikimedia.org/wiki/File:Cable_distribution_corridor_at_a_telephone_central_office.jpg",
+   "d": "2013-02",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "164502124",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Connecting_Corridor_of_Kapanewon_Tempel_Buildings_%281%29.jpg/1920px-Connecting_Corridor_of_Kapanewon_Tempel_Buildings_%281%29.jpg",
+   "t": "Connecting Corridor of Kapanewon Tempel Buildings (1)",
+   "a": "Sam Hidayat",
+   "p": "https://commons.wikimedia.org/wiki/File:Connecting_Corridor_of_Kapanewon_Tempel_Buildings_(1).jpg",
+   "d": "2025-04-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "164502125",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Connecting_Corridor_of_Kapanewon_Tempel_Buildings_%282%29.jpg/1920px-Connecting_Corridor_of_Kapanewon_Tempel_Buildings_%282%29.jpg",
+   "t": "Connecting Corridor of Kapanewon Tempel Buildings (2)",
+   "a": "Sam Hidayat",
+   "p": "https://commons.wikimedia.org/wiki/File:Connecting_Corridor_of_Kapanewon_Tempel_Buildings_(2).jpg",
+   "d": "2025-04-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "169370296",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Corridor_at_Postitalo_on_a_morning_in_June_2025.jpg/1920px-Corridor_at_Postitalo_on_a_morning_in_June_2025.jpg",
+   "t": "Corridor at Postitalo on a morning in June 2025",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Postitalo_on_a_morning_in_June_2025.jpg",
+   "d": "2025-06-26",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "178975127",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg/1920px-Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg",
+   "t": "Office Corridor of St Andrew’s Basilica",
+   "a": "9kb",
+   "p": "https://commons.wikimedia.org/wiki/File:Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg",
+   "d": "2013-05-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "4829241",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Auckland_Museum_Underground_Car_Park.jpg",
+   "t": "Auckland Museum Underground Car Park",
+   "a": "Ingolfson",
+   "p": "https://commons.wikimedia.org/wiki/File:Auckland_Museum_Underground_Car_Park.jpg",
+   "d": "2008",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  }
+ ]
 }
