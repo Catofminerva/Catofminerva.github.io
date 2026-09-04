@@ -227,12 +227,18 @@ def harvest(sub, limit, pause):
 # list is the whole aesthetic: an interior with the lights on and nobody
 # in it, photographed by someone who was passing through.
 QUERIES = [
-    "empty corridor", "hotel hallway night", "abandoned shopping mall interior",
-    "empty indoor swimming pool", "underground car park interior",
-    "empty waiting room", "office corridor fluorescent", "empty airport terminal night",
-    "concrete stairwell", "empty classroom", "empty subway station platform",
-    "motel exterior night", "empty car park at night", "hospital corridor empty",
+    "corridor interior", "hallway interior", "hotel corridor", "hospital corridor",
+    "school corridor", "office corridor", "underground car park",
+    "multi-storey car park interior", "indoor swimming pool empty",
+    "waiting room interior", "airport terminal interior", "shopping mall interior",
+    "stairwell interior", "subway station platform empty", "basement corridor",
+    "pedestrian tunnel", "parking garage interior", "motel corridor",
+    "empty classroom", "hotel lobby night",
 ]
+
+# Commons documents everything, including things that are not photographs.
+NOT_A_ROOM = ("map", "diagram", "plan ", "schematic", "logo", "icon", "chart",
+              "drawing", "sketch", "blueprint", "coat of arms", "seal of")
 
 
 def strip_tags(text):
@@ -273,37 +279,56 @@ def harvest_openverse(limit, pause):
 
 
 def harvest_commons(limit, pause):
-    """Wikimedia Commons. Slower to look at, but it is always there."""
+    """Wikimedia Commons. Openly licensed, and it blocks nobody.
+
+    Two things the response shape demands. Thumbnail urls arrive with
+    tracking parameters on the end, so an extension check has to look at
+    the path and not the whole string, which is what silently emptied
+    this function the first time. And Commons documents subjects as well
+    as photographing them, so schematics and floor plans have to go.
+    """
     seen, rooms = set(), []
     for q in QUERIES:
         if len(rooms) >= limit:
             break
         url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json"
                "&formatversion=2&generator=search&gsrsearch=%s&gsrnamespace=6"
-               "&gsrlimit=40&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1600"
-               % urllib.parse.quote(q + " filetype:bitmap"))
-        print("commons: %s (%d kept)" % (q, len(rooms)), file=sys.stderr)
+               "&gsrlimit=50&prop=imageinfo&iiprop=url%%7Csize%%7Cextmetadata"
+               "&iiurlwidth=1600" % urllib.parse.quote(q))
         data = fetch(url)
-        if not data:
-            continue
-        for page in ((data.get("query") or {}).get("pages") or []):
-            info = (page.get("imageinfo") or [{}])[0]
-            u = info.get("thumburl") or info.get("url") or ""
-            pid = page.get("pageid")
-            if not u.lower().endswith((".jpg", ".jpeg", ".png")) or pid in seen:
-                continue
-            seen.add(pid)
-            meta = info.get("extmetadata") or {}
-            rooms.append({
-                "i": str(pid),
-                "u": u,
-                "t": " ".join((page.get("title") or "").replace("File:", "").rsplit(".", 1)[0].split())[:180],
-                "a": strip_tags((meta.get("Artist") or {}).get("value", ""))[:80] or "unknown",
-                "p": info.get("descriptionurl") or u,
-                "d": ((meta.get("DateTimeOriginal") or {}).get("value", "") or "")[:10],
-                "s": "Wikimedia Commons",
-                "l": strip_tags((meta.get("LicenseShortName") or {}).get("value", "")),
-            })
+        kept_here = 0
+        if data:
+            for page in ((data.get("query") or {}).get("pages") or []):
+                info = (page.get("imageinfo") or [{}])[0]
+                pid = page.get("pageid")
+                title = (page.get("title") or "").replace("File:", "")
+                if pid in seen:
+                    continue
+
+                raw = info.get("thumburl") or info.get("url") or ""
+                clean = raw.split("?", 1)[0]              # drop the utm tail
+                if not clean.lower().endswith((".jpg", ".jpeg")):
+                    continue                              # photographs, not diagrams
+                low = title.lower()
+                if any(word in low for word in NOT_A_ROOM):
+                    continue
+                if (info.get("width") or 0) < 900:
+                    continue
+
+                seen.add(pid)
+                meta = info.get("extmetadata") or {}
+                rooms.append({
+                    "i": str(pid),
+                    "u": clean,
+                    "t": " ".join(title.rsplit(".", 1)[0].split())[:180],
+                    "a": strip_tags((meta.get("Artist") or {}).get("value", ""))[:80] or "unknown",
+                    "p": info.get("descriptionurl") or clean,
+                    "d": ((meta.get("DateTimeOriginal") or {}).get("value", "") or "")[:10],
+                    "s": "Wikimedia Commons",
+                    "l": strip_tags((meta.get("LicenseShortName") or {}).get("value", "")),
+                })
+                kept_here += 1
+        print("commons: %-32s +%-3d (%d total)" % (q, kept_here, len(rooms)), file=sys.stderr)
         time.sleep(pause)
     return rooms[:limit]
 
@@ -355,6 +380,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--probe", action="store_true",
                     help="print what each source answers, and change nothing")
+    ap.add_argument("--from-file", nargs="+", metavar="PATH", default=None,
+                    help="convert reddit listings already saved with curl")
     ap.add_argument("--sub", default="LiminalSpace")
     ap.add_argument("--limit", type=int, default=250)
     ap.add_argument("--pause", type=float, default=1.5, help="seconds between requests")
@@ -371,13 +398,21 @@ def main():
         return probe()
 
     rooms, source = [], args.source
-    if args.source in ("auto", "reddit"):
+    if args.from_file:
+        rooms = from_files(args.from_file, args.limit)
+        source = "reddit"
+        if not rooms:
+            print("those files held no usable image posts.", file=sys.stderr)
+            return 1
+    if not rooms and args.source in ("auto", "reddit"):
         authenticate()
         rooms = harvest(args.sub, args.limit, args.pause)
         source = "reddit"
         if not rooms and args.source == "auto":
             print("reddit gave nothing here. trying the open sources.", file=sys.stderr)
-    if not rooms and args.source in ("auto", "openverse"):
+    if not rooms and args.source == "openverse":
+        # anonymous openverse rate-limits hard from a shared runner address,
+        # so it is available on request and not part of the auto chain
         rooms = harvest_openverse(args.limit, args.pause)
         source = "openverse"
     if not rooms and args.source in ("auto", "commons"):
