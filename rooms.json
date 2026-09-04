@@ -59,3 +59,66 @@
 VM303:74 +60 new, 179 collected in total. On your clipboard: pbpaste > rooms.json
 VM303:78 Skipped 37 posts that were not plain images.
 179
+
+
+(() => {
+  const STORE = 'liminal_rooms_collected';
+  const IMAGE = /^https:\/\/i\.redd\.it\/[\w.\-]+\.(jpg|jpeg|png|webp)$/i;
+
+  let held = {};
+  try { held = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (_) {}
+
+  const posts = document.querySelectorAll('#siteTable .thing, .sitetable .thing');
+  if (!posts.length) {
+    console.log('%cNo posts found. Are you on old.reddit.com?', 'color:#c00');
+    return;
+  }
+
+  let added = 0, skipped = 0;
+  posts.forEach(el => {
+    const d = el.dataset || {};
+    const url = d.url || '';
+    if (!IMAGE.test(url)) { skipped++; return; }
+    if (d.nsfw === 'true' || d.promoted === 'true') { skipped++; return; }
+    if (held[url]) return;
+
+    const titleEl = el.querySelector('a.title');
+    const stamp = el.querySelector('time');
+    held[url] = {
+      i: d.fullname || url,
+      u: url,
+      t: (titleEl ? titleEl.textContent : '').trim().slice(0, 180),
+      a: 'u/' + (d.author || 'unknown'),
+      p: 'https://www.reddit.com' + (d.permalink || ''),
+      d: stamp ? (stamp.getAttribute('datetime') || '').slice(0, 10) : '',
+      s: 'r/LiminalSpace',
+      l: ''
+    };
+    added++;
+  });
+
+  try { localStorage.setItem(STORE, JSON.stringify(held)); } catch (_) {}
+
+  const rooms = Object.values(held);
+  const payload = {
+    source: 'reddit',
+    subreddit: 'LiminalSpace',
+    generated: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
+    note: 'collected in a browser. photographs stay on reddit servers and every room links its thread.',
+    count: rooms.length,
+    rooms: rooms
+  };
+  const text = JSON.stringify(payload, null, 1);
+
+  if (typeof copy === 'function') copy(text);
+  console.log('%c+' + added + ' new, ' + rooms.length + ' collected in total. '
+    + (typeof copy === 'function' ? 'On your clipboard: pbpaste > rooms.json'
+                                  : 'Copy the object logged below.'),
+    'color:#080;font-weight:bold');
+  console.log('%cSkipped ' + skipped + ' posts that were not plain images.', 'color:#666');
+  if (typeof copy !== 'function') console.log(text);
+  return payload.count;
+})();
+VM122:74 +63 new, 242 collected in total. On your clipboard: pbpaste > rooms.json
+VM122:78 Skipped 34 posts that were not plain images.
+242
