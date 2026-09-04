@@ -1,0 +1,7 @@
+{
+ "subreddit": "LiminalSpace",
+ "generated": null,
+ "note": "run tools/fetch_rooms.py, or the refresh-liminal-rooms action, to fill this. photographs stay on reddit's servers; the page hotlinks them and credits every post.",
+ "count": 0,
+ "rooms": []
+}

@@ -334,6 +334,22 @@ table.hud td.wide{ white-space:normal; }
 .log p{ margin:0 0 3px; }
 .log p:last-child{ margin:0; color:#e6ffd9; }
 
+/* the credit under the frame. these are other people's photographs and
+   the page says so, with the thread one click away. */
+.plate{
+  margin:0 6px 8px;
+  padding:5px 8px;
+  background:#e6dfc7;
+  border:1px solid #b3a880;
+  font:11px/1.6 Verdana, Geneva, sans-serif;
+  color:#4a442f;
+}
+.plate[hidden]{ display:none; }
+.plate .src{ font-weight:bold; color:#2b2718; }
+.plate .ttl{ font-style:italic; }
+.plate .by{ color:#6a624a; }
+.plate a{ color:#00c; }
+
 /* --- the weblog itself -------------------------------------------- */
 .entry{ margin:0 0 26px; }
 .entry h3{
@@ -510,6 +526,19 @@ a:hover{ color:#c00; }
         </div>
 
         <div class="box">
+          <h2>The file</h2>
+          <div class="inner">
+            every door opens onto a photograph somebody took and posted to
+            <a href="https://www.reddit.com/r/LiminalSpace/" target="_blank" rel="noopener nofollow">r/LiminalSpace</a>.
+            the pictures stay on their servers; the thread each one came from is
+            linked under the frame.
+            <br><br>
+            the list lives in <code>rooms.json</code> and is refilled by
+            <code>tools/fetch_rooms.py</code>.
+          </div>
+        </div>
+
+        <div class="box">
           <h2>Badges</h2>
           <div class="inner badges">
             <img src="bestviewed.gif" alt="best viewed with a browser" width="88" height="31" loading="lazy">
@@ -531,8 +560,8 @@ a:hover{ color:#c00; }
         <!-- ============ the corridor ============ -->
         <div class="applet">
           <div class="bar">
-            <span>CORRIDOR.EXE</span>
-            <span class="dim">640 &#215; 480 &#183; 256 colours &#183; no sound card detected</span>
+            <span id="barTitle">CORRIDOR.EXE</span>
+            <span class="dim" id="barInfo">640 &#215; 480 &#183; 256 colours &#183; no sound card detected</span>
           </div>
 
           <div class="screen">
@@ -554,7 +583,7 @@ a:hover{ color:#c00; }
                 <th>exit in</th><td id="exitVal">40 m</td>
               </tr>
               <tr>
-                <th>section</th><td class="wide" colspan="3" id="roomVal">WEST CORRIDOR &#183; BAY 1 &#183; SUBLEVEL ?</td>
+                <th id="roomLabel">section</th><td class="wide" colspan="3" id="roomVal">WEST CORRIDOR &#183; BAY 1 &#183; SUBLEVEL ?</td>
               </tr>
             </tbody>
           </table>
@@ -564,16 +593,18 @@ a:hover{ color:#c00; }
             <p>the vents are running. they run all night.</p>
           </div>
 
+          <div class="plate" id="plateCap" hidden></div>
+
           <div class="keys">
             <span class="kbdhint">
               <kbd>&#8593;</kbd> walk &#183; <kbd>&#8592;</kbd><kbd>&#8594;</kbd> across the corridor &#183;
-              <kbd>E</kbd> open the door &#183; <kbd>&#8595;</kbd> back
+              <kbd>E</kbd> through the door &#183; <kbd>&#8595;</kbd> back out of the room
             </span>
             <div class="pads" id="pads">
               <button type="button" data-hold="left">&#8592;</button>
               <button type="button" data-hold="fwd">HOLD TO WALK</button>
               <button type="button" data-hold="right">&#8594;</button>
-              <button type="button" id="padOpen">OPEN DOOR</button>
+              <button type="button" id="padOpen">GO THROUGH</button>
             </div>
           </div>
 
@@ -707,14 +738,20 @@ a:hover{ color:#c00; }
 /* ===================================================================
    CORRIDOR.EXE
 
-   a corridor drawn the way 1997 would have drawn it: flat quads, one
-   fill per surface, fog by lerping every colour toward the far haze.
-   no textures and no lighting model, because neither was available,
-   and because the flat bands are the point.
+   two spaces, one engine.
 
-   the whole thing is four numbers: how far you have walked, how far
-   across the corridor you stand, which section you are in, and how
-   many doors you have opened. everything on screen comes off those.
+   the corridor is drawn the way 1997 would have drawn it: flat quads,
+   one fill per surface, fog by lerping every colour toward the haze at
+   the vanishing point. no textures, because there were none.
+
+   the rooms are photographs other people took and posted to
+   r/LiminalSpace. each one is hung across the far end of a corridor
+   stub, so you walk toward a room instead of looking at a picture of
+   one, and the light coming back down the stub is the photograph
+   itself, blurred. every room has a door. the counter only goes up.
+
+   the pictures stay on reddit's servers. the page links the thread it
+   took each one from, under the frame.
    =================================================================== */
 (() => {
   'use strict';
@@ -734,8 +771,16 @@ a:hover{ color:#c00; }
   const DOOR_N = 3;       // a door every third panel, sides alternating
   const SPEED  = 2.7;     // metres per second, walking pace
 
+  /* the room aperture is wider than the corridor, because a room is not
+     a hallway and a photograph of one never fits a 2.3m opening */
+  const R_HALF = 2.0, R_TOP = 1.5, R_BOT = -1.5;
+  /* the aperture reaches the edges of the screen at about z = 2.4, so
+     3.6 puts you in the doorway looking in, and walking past 2.4 leaves
+     you inside the photograph with the frame behind you. */
+  const R_FAR  = 3.2, R_NEAR = 2.05;
+
   /* --- the sections. the joke is how alike they are. ---------------- */
-  const ROOMS = [
+  const SECTIONS = [
     { name:'WEST CORRIDOR',   wall:'#cabb85', ceil:'#d9cc9b', floor:'#9c8f66',
       light:'#fff8dc', fog:'#e2d8b2', trim:'#8e8054', door:'#7c6a45' },
     { name:'ANNEXE, LEVEL 2', wall:'#b8bdae', ceil:'#c8cdbe', floor:'#767f6f',
@@ -749,12 +794,9 @@ a:hover{ color:#c00; }
     { name:'THE BEIGE ONE',   wall:'#e3dbc6', ceil:'#ece5d3', floor:'#cfc6ad',
       light:'#ffffff', fog:'#ece6d6', trim:'#c3b99e', door:'#c3b99e' }
   ];
-  /* the last two are rare. the draw is weighted so that most doors give
-     you back the corridor you just left, which is the honest outcome. */
   const COMMON = [0,1,2,0,1,0,2,0,3];
 
-  /* what the log says when a door puts you somewhere with a different
-     name on it. one line per section, so the line and the walls agree. */
+  /* said when a door puts you somewhere with a different name on it */
   const ARRIVAL = [
     'the west corridor again. the plate on this door also says 12.',
     'the annexe. the carpet in here repeats every 4.6 metres.',
@@ -763,25 +805,52 @@ a:hover{ color:#c00; }
     'this section is on the after-hours circuit. half the tubes stay dark.',
     'the beige section. no doors along it. facilities have it down as storage.'
   ];
+  const BEHIND = [
+    'you open door 12. behind it is the corridor you were standing in.',
+    'door 12 gives on the second push. the lights on the far section are already on.',
+    'the floor beyond has been waxed recently. nothing has walked on it.',
+    'door 12. the air on the other side is exactly the same temperature.',
+    'it opens onto a bay identical to this one, numbered differently.',
+    'the vents do not change pitch when the door swings.'
+  ];
+  /* said on the way into a photograph. deliberately flat: the picture is
+     doing the work and does not need a caption talking over it. */
+  const ENTERING = [
+    'the door gives onto a room somebody photographed.',
+    'through. the light in here was already on when the picture was taken.',
+    'another room. no one in it, same as the last one.',
+    'the door closes behind you at its own speed.',
+    'this one was posted at three in the morning, which explains nothing.',
+    'you are further in than you were.'
+  ];
 
   /* --- state -------------------------------------------------------- */
+  let mode   = 'corridor';
   let walked = 0;         // metres, cumulative, never reset by a door
   let across = 0;         // where you stand between the walls
-  let room   = 0;         // index into ROOMS
-  let bay    = 1;         // increments every door
+  let section = 0;        // index into SECTIONS
+  let bay    = 1;
   let opened = 0;
-  let roomStart = 0;      // metres on the clock when this section began
-  let exitAt = 40;        // the exit is always about forty metres away
+  let sectionStart = 0;
+  let exitAt = 40;
   let recalcUntil = 0;
-  let engaged = false;    // has the visitor clicked in
+  let engaged = false;
   let running = false;
   let last = 0;
+
+  let roomZ = R_FAR;      // how far the photograph is
+  let pushing = 0;        // ms left of the lunge through a doorway
+  let deep  = 0;          // rooms in
+  let plates = [];        // the photographs, from rooms.json or reddit
+  let plateIdx = -1;
+  let plate = null;       // { img, meta, blur }
+  let plateMsg = 'LOADING PLATE';
 
   const held = { fwd:false, back:false, left:false, right:false };
 
   /* --- persistence. the page remembers you, which is the whole trick. */
   const KEY = 'g981_liminal_v1';
-  let saved = { metres:0, doors:0, visits:0 };
+  let saved = { metres:0, doors:0, visits:0, rooms:0 };
   try { saved = Object.assign(saved, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (_) {}
 
   /* --- canvas sizing ------------------------------------------------ */
@@ -795,7 +864,8 @@ a:hover{ color:#c00; }
     cv.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cx = W / 2; cy = H * 0.5; f = H * 0.82;
-    draw(0);
+    if (plate) plate.blur = makeBlur(plate.img);
+    frameOnce();
   }
 
   /* --- colour helpers ----------------------------------------------- */
@@ -836,24 +906,20 @@ a:hover{ color:#c00; }
   }
 
   /* --- doors --------------------------------------------------------- */
-  /* a panel carries a door when its global index divides by DOOR_N. the
-     side alternates, so you pass one on the left, then one on the right,
-     which is what stops the corridor reading as a tunnel. */
   function doorSide(gi){
     if (gi % DOOR_N !== 0) return 0;
     /* storage has no doors along it, which is fine until it is the
        section you are standing in. one turns up after forty-odd metres.
        it was not there on the way in. */
-    if (room === 5 && (walked - roomStart) < 46) return 0;
+    if (section === 5 && (walked - sectionStart) < 46) return 0;
     return (gi % (DOOR_N * 2) === 0) ? -1 : 1;
   }
 
-  /* --- the frame ------------------------------------------------------ */
-  function draw(dt){
-    const R = ROOMS[room];
+  /* --- the corridor --------------------------------------------------- */
+  function drawCorridor(){
+    const R = SECTIONS[section];
     const far = DEPTH * SEG;
 
-    /* the haze at the vanishing point, painted first as the backdrop */
     ctx.fillStyle = R.fog;
     ctx.fillRect(0, 0, W, H);
 
@@ -862,38 +928,30 @@ a:hover{ color:#c00; }
     const t    = performance.now() / 1000;
 
     for (let k = DEPTH; k >= 1; k--){
-      const zF = base + k * SEG;             // far edge of this panel
-      const zN = Math.max(0.08, zF - SEG);   // near edge
+      const zF = base + k * SEG;
+      const zN = Math.max(0.08, zF - SEG);
       if (zF <= 0.1) continue;
 
       const gi   = gi0 + k;
       const mid  = (zN + zF) / 2;
       const fade = Math.min(1, Math.pow(mid / far, 0.78));
-
-      /* panels alternate very slightly, the way real joins catch light */
       const band = (gi % 2 === 0) ? 1.0 : 0.965;
 
-      /* ceiling and floor */
       quad(-HALF_W, CEIL, zN,  HALF_W, CEIL, zN,  HALF_W, CEIL, zF, -HALF_W, CEIL, zF,
            fogged(R.ceil, R.fog, fade, band));
       quad(-HALF_W, FLOOR, zN,  HALF_W, FLOOR, zN,  HALF_W, FLOOR, zF, -HALF_W, FLOOR, zF,
            fogged(R.floor, R.fog, fade, band * 0.94));
-
-      /* the two walls */
       quad(-HALF_W, FLOOR, zN, -HALF_W, CEIL, zN, -HALF_W, CEIL, zF, -HALF_W, FLOOR, zF,
            fogged(R.wall, R.fog, fade, band * 0.90));
       quad( HALF_W, FLOOR, zN,  HALF_W, CEIL, zN,  HALF_W, CEIL, zF,  HALF_W, FLOOR, zF,
            fogged(R.wall, R.fog, fade, band * 0.99));
 
-      /* skirting, which is most of what sells it as a building */
       const sk = FLOOR + 0.13;
       quad(-HALF_W, FLOOR, zN, -HALF_W, sk, zN, -HALF_W, sk, zF, -HALF_W, FLOOR, zF,
            fogged(R.trim, R.fog, fade, 0.92));
       quad( HALF_W, FLOOR, zN,  HALF_W, sk, zN,  HALF_W, sk, zF,  HALF_W, FLOOR, zF,
            fogged(R.trim, R.fog, fade, 1.0));
 
-      /* the light. every second panel, one tube, and tube 4 of every
-         seven is failing, because one always is. */
       if (gi % 2 === 0){
         const dying = (gi % 7 === 4);
         let lit = 1;
@@ -907,8 +965,6 @@ a:hover{ color:#c00; }
               0.44, CEIL - 0.005, lz2, -0.44, CEIL - 0.005, lz2,
              fogged(R.light, R.fog, fade * 0.7, lit));
 
-        /* the pool it throws on the floor. no bounce lighting in 1997,
-           so it is drawn as a shape, which is what everyone did. */
         ctx.globalAlpha = 0.16 * lit * (1 - fade);
         quad(-0.9, FLOOR + 0.002, lz1 - 0.5,  0.9, FLOOR + 0.002, lz1 - 0.5,
               0.9, FLOOR + 0.002, lz2 + 0.5, -0.9, FLOOR + 0.002, lz2 + 0.5,
@@ -916,13 +972,11 @@ a:hover{ color:#c00; }
         ctx.globalAlpha = 1;
       }
 
-      /* the door */
       const side = doorSide(gi);
       if (side !== 0){
         const x  = side * (HALF_W - 0.012);
         const z1 = zN + 0.5, z2 = zN + 1.55;
         const dTop = FLOOR + 2.05;
-        /* frame, then leaf, then the plate that says 12 */
         quad(x, FLOOR, z1 - 0.07, x, dTop + 0.07, z1 - 0.07,
              x, dTop + 0.07, z2 + 0.07, x, FLOOR, z2 + 0.07,
              fogged(R.trim, R.fog, fade, 0.86));
@@ -931,7 +985,6 @@ a:hover{ color:#c00; }
         quad(x, dTop + 0.12, z1 + 0.35, x, dTop + 0.30, z1 + 0.35,
              x, dTop + 0.30, z1 + 0.62, x, dTop + 0.12, z1 + 0.62,
              fogged('#f3ecd6', R.fog, fade, 1));
-        /* handle */
         const hz = (side < 0) ? z2 - 0.16 : z1 + 0.16;
         quad(x, FLOOR + 1.02, hz - 0.06, x, FLOOR + 1.10, hz - 0.06,
              x, FLOOR + 1.10, hz + 0.06, x, FLOOR + 1.02, hz + 0.06,
@@ -939,16 +992,90 @@ a:hover{ color:#c00; }
       }
     }
 
-    /* the haze again, over the far end, so the corridor dissolves rather
-       than ending in a wall */
     const g = ctx.createRadialGradient(px(0, far), py(0, far), 0,
                                        px(0, far), py(0, far), H * 0.52);
     g.addColorStop(0, R.fog);
     g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
+  }
 
-    grain();
+  /* --- the room ------------------------------------------------------- */
+  /* the photograph is a flat plane at z = roomZ, filling an aperture
+     wider than the corridor. everything between you and it is drawn as
+     four dark gradients running from the edges of the screen to the
+     edges of the aperture, so the stub reads as a short passage with a
+     lit room at the end of it. */
+  function drawRoom(){
+    const z  = roomZ;
+    const x1 = px(-R_HALF, z), x2 = px(R_HALF, z);
+    const y1 = py(R_TOP, z),   y2 = py(R_BOT, z);
+
+    if (plate && plate.blur) ctx.drawImage(plate.blur, 0, 0, W, H);
+    else { ctx.fillStyle = '#0c0b08'; ctx.fillRect(0, 0, W, H); }
+
+    /* once the aperture is past the edges of the screen there is no stub
+       left to draw and the photograph is the whole view */
+    const swallowed = (x1 <= 0 && x2 >= W && y1 <= 0 && y2 >= H);
+
+    if (!swallowed){
+      function face(pts, gx0, gy0, gx1, gy1, a0, a1){
+        const g = ctx.createLinearGradient(gx0, gy0, gx1, gy1);
+        g.addColorStop(0, 'rgba(9,8,6,' + a0 + ')');
+        g.addColorStop(1, 'rgba(9,8,6,' + a1 + ')');
+        ctx.beginPath();
+        ctx.moveTo(pts[0], pts[1]);
+        for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i+1]);
+        ctx.closePath();
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+      face([0,0, x1,y1, x1,y2, 0,H], 0, cy, x1, cy, .95, .13);   // left wall
+      face([W,0, x2,y1, x2,y2, W,H], W, cy, x2, cy, .95, .13);   // right wall
+      face([0,0, W,0, x2,y1, x1,y1], cx, 0, cx, y1, .97, .09);   // ceiling
+      face([0,H, W,H, x2,y2, x1,y2], cx, H, cx, y2, .90, .19);   // floor
+    }
+
+    /* the photograph. contained rather than cropped, because these are
+       other people's pictures and cutting the edges off them to fit a
+       frame is the one thing you should not do with them. */
+    const ow = x2 - x1, oh = y2 - y1;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x1, y1, ow, oh);
+    ctx.clip();
+    /* whatever the photograph does not cover is filled with the
+       photograph out of focus, so the opening is lit all the way to its
+       edges instead of matted in black like a frame on a wall */
+    if (plate && plate.blur){
+      const br = plate.blur.width / plate.blur.height;
+      let bw = ow, bh = ow / br;
+      if (bh < oh){ bh = oh; bw = oh * br; }
+      ctx.drawImage(plate.blur, x1 + (ow - bw) / 2, y1 + (oh - bh) / 2, bw, bh);
+    } else {
+      ctx.fillStyle = '#07070a';
+      ctx.fillRect(x1, y1, ow, oh);
+    }
+
+    if (plate && plate.img.complete && plate.img.naturalWidth){
+      const ir = plate.img.naturalWidth / plate.img.naturalHeight;
+      let dw = ow, dh = ow / ir;
+      if (dh > oh){ dh = oh; dw = oh * ir; }
+      ctx.drawImage(plate.img, x1 + (ow - dw) / 2, y1 + (oh - dh) / 2, dw, dh);
+    } else {
+      ctx.fillStyle = '#9fe89f';
+      ctx.font = '11px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(plateMsg, x1 + ow / 2, y1 + oh / 2);
+      ctx.textAlign = 'left';
+    }
+    ctx.restore();
+
+    if (!swallowed){
+      ctx.strokeStyle = 'rgba(255,248,224,.13)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x1 + 0.5, y1 + 0.5, ow - 1, oh - 1);
+    }
   }
 
   /* --- grain. one tile, stamped at a new offset each frame. ---------- */
@@ -979,15 +1106,43 @@ a:hover{ color:#c00; }
     ctx.globalAlpha = 1;
   }
 
+  /* --- the blurred backdrop ------------------------------------------ */
+  /* the photograph, out of focus, standing in for the light it would be
+     throwing back down the stub. drawn once per room rather than per
+     frame, because a blur filter every frame is not free. the canvas is
+     tainted by the cross-origin image and never read back, which is
+     allowed: drawing out of it is fine, getImageData would not be. */
+  function makeBlur(img){
+    try {
+      const c = document.createElement('canvas');
+      c.width = Math.max(64, Math.round(W / 6));
+      c.height = Math.max(48, Math.round(H / 6));
+      const g = c.getContext('2d');
+      const ir = img.naturalWidth / img.naturalHeight;
+      let dw = c.width, dh = c.width / ir;
+      if (dh < c.height){ dh = c.height; dw = c.height * ir; }
+      if (g.filter !== undefined) g.filter = 'blur(6px)';
+      g.drawImage(img, (c.width - dw) / 2, (c.height - dh) / 2, dw, dh);
+      g.filter = 'none';
+      g.fillStyle = 'rgba(10,9,7,.26)';
+      g.fillRect(0, 0, c.width, c.height);
+      return c;
+    } catch (_) { return null; }
+  }
+
   /* --- readouts ------------------------------------------------------ */
   const el = {
     met:  document.getElementById('metVal'),
     door: document.getElementById('doorVal'),
     open: document.getElementById('openVal'),
     exit: document.getElementById('exitVal'),
-    roomv:document.getElementById('roomVal'),
+    where:document.getElementById('roomVal'),
+    whereLabel: document.getElementById('roomLabel'),
     prompt: document.getElementById('prompt'),
-    log:  document.getElementById('log')
+    log:  document.getElementById('log'),
+    cap:  document.getElementById('plateCap'),
+    bar:  document.getElementById('barInfo'),
+    title:document.getElementById('barTitle')
   };
   let hudTick = 0;
   function hud(){
@@ -998,7 +1153,6 @@ a:hover{ color:#c00; }
 
     let left = exitAt - walked;
     if (left < 4){
-      /* it recalculates. it has always recalculated. */
       exitAt = walked + 36 + Math.random() * 9;
       recalcUntil = performance.now() + 1400;
       left = exitAt - walked;
@@ -1007,7 +1161,14 @@ a:hover{ color:#c00; }
     el.exit.textContent = recalcing ? 'RECALCULATING' : Math.round(left) + ' m';
     el.exit.className = recalcing ? 'recalc' : '';
 
-    el.roomv.innerHTML = ROOMS[room].name + ' &#183; BAY ' + bay + ' &#183; SUBLEVEL ?';
+    if (mode === 'room'){
+      el.whereLabel.textContent = 'rooms in';
+      el.where.innerHTML = deep + (deep === 1 ? ' room' : ' rooms') +
+        ' deep &#183; every door so far has been numbered 12';
+    } else {
+      el.whereLabel.textContent = 'section';
+      el.where.innerHTML = SECTIONS[section].name + ' &#183; BAY ' + bay + ' &#183; SUBLEVEL ?';
+    }
   }
 
   function say(line){
@@ -1018,7 +1179,6 @@ a:hover{ color:#c00; }
   }
 
   /* --- the door in front of you -------------------------------------- */
-  /* returns the distance to the nearest door leaf, or -1 for none. */
   function doorAhead(){
     const base = SEG - (walked % SEG);
     const gi0  = Math.floor(walked / SEG);
@@ -1028,51 +1188,205 @@ a:hover{ color:#c00; }
       if (!side) continue;
       const zN = base + (k - 1) * SEG;
       const centre = zN + 1.0;
-      /* you have to be near it and standing on that side of the corridor */
       if (centre > 0.15 && centre < 2.2 && (side < 0 ? across < 0.15 : across > -0.15))
         return centre;
     }
     return -1;
   }
 
-  const BEHIND = [
-    'you open door 12. behind it is the corridor you were standing in.',
-    'door 12 gives on the second push. the lights on the far section are already on.',
-    'the floor beyond has been waxed recently. nothing has walked on it.',
-    'door 12. the air on the other side is exactly the same temperature.',
-    'it opens onto a bay identical to this one, numbered differently.',
-    'the vents do not change pitch when the door swings.'
-  ];
-  function openDoor(){
-    const d = doorAhead();
-    if (d < 0) return;
+  /* --- the photographs ------------------------------------------------ */
+  /* rooms.json is written by tools/fetch_rooms.py, which is the reliable
+     route because it runs somewhere that can reach reddit. if the file is
+     empty the page asks reddit itself, which works only where the
+     visitor's browser is allowed to. if that fails too, the doors go on
+     opening onto drawn corridors and nothing breaks. */
+  function usable(d){
+    return d && !d.over_18 && !d.is_video &&
+      typeof (d.url_overridden_by_dest || d.url) === 'string' &&
+      /^https:\/\/i\.redd\.it\/[\w.\-]+\.(jpg|jpeg|png|webp)$/i.test(d.url_overridden_by_dest || d.url);
+  }
+  function asPlate(d){
+    const u = d.url_overridden_by_dest || d.url;
+    return {
+      u: u,
+      t: (d.title || '').slice(0, 180),
+      a: d.author || 'unknown',
+      p: 'https://www.reddit.com' + (d.permalink || ''),
+      d: new Date((d.created_utc || 0) * 1000).toISOString().slice(0, 10)
+    };
+  }
 
-    /* which section is behind it. mostly the same one. */
+  async function loadPlates(){
+    try {
+      const r = await fetch('rooms.json', { cache:'no-cache' });
+      if (r.ok){
+        const j = await r.json();
+        if (j && Array.isArray(j.rooms) && j.rooms.length) return j.rooms;
+      }
+    } catch (_) {}
+
+    for (const url of [
+      'https://www.reddit.com/r/LiminalSpace/top.json?t=year&limit=100&raw_json=1',
+      'https://api.reddit.com/r/LiminalSpace/hot?limit=100&raw_json=1'
+    ]){
+      try {
+        const r = await fetch(url, { mode:'cors', credentials:'omit' });
+        if (!r.ok) continue;
+        const j = await r.json();
+        const kids = (j && j.data && j.data.children) || [];
+        const out = kids.map(c => c && c.data).filter(usable).map(asPlate);
+        if (out.length) return out;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function shuffle(a){
+    for (let i = a.length - 1; i > 0; i--){
+      const j = (Math.random() * (i + 1)) | 0;
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function showPlate(i){
+    if (!plates.length) return;
+    plateIdx = ((i % plates.length) + plates.length) % plates.length;
+    const meta = plates[plateIdx];
+    plateMsg = 'LOADING PLATE ' + (plateIdx + 1);
+    plate = null;
+    caption(null);
+
+    const img = new Image();
+    img.decoding = 'async';
+    img.referrerPolicy = 'no-referrer';
+    img.onload = () => {
+      if (plates[plateIdx] !== meta) return;      // moved on already
+      plate = { img: img, meta: meta, blur: makeBlur(img) };
+      caption(meta);
+      if (el.bar) el.bar.textContent =
+        img.naturalWidth + ' × ' + img.naturalHeight + ' · r/LiminalSpace';
+      /* the next one, fetched while this one is being looked at */
+      const nxt = plates[(plateIdx + 1) % plates.length];
+      if (nxt){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = nxt.u; }
+    };
+    img.onerror = () => {
+      if (plates[plateIdx] !== meta) return;
+      say('the photograph is missing from the file. the post was taken down.');
+      plates.splice(plateIdx, 1);
+      if (plates.length) showPlate(plateIdx);
+      else { plateMsg = 'NO PLATES'; caption(null); }
+    };
+    img.src = meta.u;
+  }
+
+  function caption(meta){
+    if (!el.cap) return;
+    if (!meta){ el.cap.hidden = true; el.cap.textContent = ''; return; }
+    el.cap.hidden = false;
+    el.cap.innerHTML = '';
+    const who = document.createElement('span');
+    who.className = 'src';
+    who.textContent = 'r/LiminalSpace';
+    const t = document.createElement('span');
+    t.className = 'ttl';
+    t.textContent = meta.t || '(untitled)';
+    const by = document.createElement('span');
+    by.className = 'by';
+    by.textContent = 'u/' + meta.a + (meta.d ? ' · ' + meta.d : '');
+    const a = document.createElement('a');
+    a.href = meta.p; a.target = '_blank'; a.rel = 'noopener nofollow';
+    a.textContent = 'the thread';
+    el.cap.append(who, document.createTextNode(' · '), t,
+                  document.createTextNode(' · '), by,
+                  document.createTextNode(' · '), a);
+  }
+
+  /* --- going through doors -------------------------------------------- */
+  function enterRoom(){
+    mode = 'room';
+    pushing = 0;
+    roomZ = R_FAR;
+    across = 0;
+    deep += 1;
+    opened += 1;
+    say(ENTERING[(Math.random() * ENTERING.length) | 0]);
+    showPlate(plateIdx + 1);
+    if (el.title) el.title.textContent = 'ROOM.JPG';
+    flash();
+    save();
+    hud();
+  }
+
+  /* going through is a movement, not a cut: you lunge at the opening
+     until the photograph is past the edges of the screen, and the next
+     doorway is already standing there when the frame clears. */
+  function nextRoom(){
+    if (pushing > 0) return;
+    pushing = reduce ? 1 : 300;
+  }
+  function arrive(){
+    deep += 1;
+    opened += 1;
+    roomZ = R_FAR;
+    across = 0;
+    say(ENTERING[(Math.random() * ENTERING.length) | 0]);
+    showPlate(plateIdx + 1);
+    flash();
+    save();
+    hud();
+  }
+
+  function leaveRoom(){
+    mode = 'corridor';
+    pushing = 0;
+    roomZ = R_FAR;
+    across = 0;
+    if (el.title) el.title.textContent = 'CORRIDOR.EXE';
+    if (el.bar) el.bar.textContent = '640 × 480 · 256 colours · no sound card detected';
+    caption(null);
+    say('back out into the corridor. the door does not stay open behind you.');
+    hud();
+  }
+
+  /* the drawn version, for when there are no photographs to be had */
+  function openSection(d){
     const roll = Math.random();
     let next;
     if (roll < 0.07) next = 5;
     else if (roll < 0.18) next = 4;
     else next = COMMON[(Math.random() * COMMON.length) | 0];
 
-    const same = (next === room);
+    const same = (next === section);
     opened++;
     bay++;
-    walked += d + 0.6;        // stepping through counts as walking
+    walked += d + 0.6;
     across = 0;
-    room = next;
-    roomStart = walked;
-
-    /* if the name on the section did not change, the log says so in the
-       flattest way available. if it did, the line matches the walls. */
+    section = next;
+    sectionStart = walked;
     say(same ? BEHIND[(Math.random() * BEHIND.length) | 0] : ARRIVAL[next]);
+    flash();
+    save();
+    hud();
+  }
 
+  function flash(){
     const fl = document.getElementById('flash');
     if (fl && !reduce){
       fl.classList.add('on');
       requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove('on')));
     }
-    save();
-    hud();
+  }
+
+  function through(){
+    if (mode === 'room'){
+      if (roomZ < 2.62) nextRoom();
+      return;
+    }
+    const d = doorAhead();
+    if (d < 0) return;
+    if (plates.length) { walked += d + 0.6; enterRoom(); }
+    else openSection(d);
   }
 
   function save(){
@@ -1080,33 +1394,66 @@ a:hover{ color:#c00; }
       localStorage.setItem(KEY, JSON.stringify({
         metres: Math.round(saved.metres + walked),
         doors:  saved.doors + opened,
-        visits: saved.visits
+        visits: saved.visits,
+        rooms:  Math.max(saved.rooms || 0, deep)
       }));
     } catch (_) {}
   }
 
   /* --- the loop ------------------------------------------------------- */
+  function step(dt){
+    const auto = document.getElementById('autoWalk');
+    const moving = held.fwd || (auto && auto.checked && !held.back);
+
+    if (mode === 'room'){
+      if (pushing > 0){
+        pushing -= dt * 1000;
+        roomZ = Math.max(1.02, roomZ - 5.2 * dt);
+        walked += SPEED * dt;
+        if (pushing <= 0){ pushing = 0; arrive(); }
+        return;
+      }
+      if (moving)     { roomZ = Math.max(R_NEAR, roomZ - SPEED * 0.30 * dt); walked += SPEED * 0.62 * dt; }
+      if (held.back)  { roomZ = Math.min(R_FAR + 0.55, roomZ + SPEED * 0.28 * dt); }
+      if (held.left)  across = Math.max(-0.55, across - 1.1 * dt);
+      if (held.right) across = Math.min( 0.55, across + 1.1 * dt);
+      /* keep backing away and you are in the corridor again */
+      if (roomZ >= R_FAR + 0.45) leaveRoom();
+      /* a room with nobody in it is not perfectly still on a tape */
+      bob = reduce ? 0 : Math.sin(performance.now() / 2600) * 0.012 +
+                         (moving ? Math.sin(walked * 3.1) * 0.014 : 0);
+    } else {
+      if (moving)     walked += SPEED * dt;
+      if (held.back)  walked = Math.max(0, walked - SPEED * 0.7 * dt);
+      if (held.left)  across = Math.max(-HALF_W + 0.42, across - 1.6 * dt);
+      if (held.right) across = Math.min( HALF_W - 0.42, across + 1.6 * dt);
+      bob = (moving && !reduce) ? Math.sin(walked * 3.1) * 0.028 : 0;
+    }
+  }
+
+  function frameOnce(){
+    if (mode === 'room') drawRoom(); else drawCorridor();
+    grain();
+  }
+
   function frame(now){
     if (!running) return;
     const dt = Math.min(0.05, (now - last) / 1000 || 0);
     last = now;
 
-    const auto = document.getElementById('autoWalk');
-    const moving = held.fwd || (auto && auto.checked && !held.back);
+    step(dt);
+    frameOnce();
 
-    if (moving)      walked += SPEED * dt;
-    if (held.back)   walked = Math.max(0, walked - SPEED * 0.7 * dt);
-    if (held.left)   across = Math.max(-HALF_W + 0.42, across - 1.6 * dt);
-    if (held.right)  across = Math.min( HALF_W - 0.42, across + 1.6 * dt);
-
-    /* the walk itself. a small rise and fall, and nothing at all if the
-       visitor has asked for less motion. */
-    bob = (moving && !reduce) ? Math.sin(walked * 3.1) * 0.028 : 0;
-
-    draw(dt);
-
-    const d = doorAhead();
-    el.prompt.hidden = !(d > 0.15 && d < 1.9);
+    if (mode === 'room'){
+      const close = roomZ < 2.62 && pushing === 0;
+      el.prompt.hidden = !close;
+      if (close) el.prompt.innerHTML = 'PRESS <b>E</b> &#183; GO THROUGH';
+    } else {
+      const d = doorAhead();
+      const near = (d > 0.15 && d < 1.9);
+      el.prompt.hidden = !near;
+      if (near) el.prompt.innerHTML = 'PRESS <b>E</b> &#183; DOOR 12';
+    }
 
     if (++hudTick % 6 === 0) hud();
     requestAnimationFrame(frame);
@@ -1137,11 +1484,9 @@ a:hover{ color:#c00; }
     ArrowLeft:'left', a:'left', A:'left',
     ArrowRight:'right', d:'right', D:'right'
   };
-  /* keys are only taken once the visitor has clicked into the corridor,
-     so the page still scrolls with the arrows until they ask for it. */
   window.addEventListener('keydown', e => {
     if (!engaged) return;
-    if (e.key === 'e' || e.key === 'E'){ openDoor(); e.preventDefault(); return; }
+    if (e.key === 'e' || e.key === 'E'){ through(); e.preventDefault(); return; }
     if (e.key === 'Escape'){ engaged = false; veil.hidden = false; cv.blur(); return; }
     const k = KEYS[e.key];
     if (k){ held[k] = true; e.preventDefault(); }
@@ -1152,7 +1497,6 @@ a:hover{ color:#c00; }
   });
   window.addEventListener('blur', () => { held.fwd = held.back = held.left = held.right = false; });
 
-  /* touch pads */
   document.querySelectorAll('[data-hold]').forEach(b => {
     const k = b.getAttribute('data-hold');
     const on  = e => { engage(); held[k] = true;  e.preventDefault(); };
@@ -1163,17 +1507,16 @@ a:hover{ color:#c00; }
     b.addEventListener('pointerleave', off);
   });
   const padOpen = document.getElementById('padOpen');
-  if (padOpen) padOpen.addEventListener('click', () => { engage(); openDoor(); });
+  if (padOpen) padOpen.addEventListener('click', () => { engage(); through(); });
 
   document.getElementById('resetBtn').addEventListener('click', () => {
-    walked = 0; across = 0; room = 0; bay = 1; exitAt = 40; roomStart = 0;
+    walked = 0; across = 0; section = 0; bay = 1; exitAt = 40; sectionStart = 0;
+    if (mode === 'room') leaveRoom();
     say('back at the start. the start is a bay like the others.');
     hud();
   });
 
   /* --- the hum -------------------------------------------------------- */
-  /* two low sines and a lowpassed noise bed. it is the sound of a
-     building with nobody in it, and it stays off until asked for. */
   (() => {
     const btn = document.getElementById('humBtn');
     let actx = null, nodes = null, on = false;
@@ -1188,13 +1531,12 @@ a:hover{ color:#c00; }
       const g2 = A.createGain(); g2.gain.value = 0.16;
       o1.connect(g1).connect(out); o2.connect(g2).connect(out);
 
-      /* room tone: four seconds of noise, looped through a lowpass */
       const len = A.sampleRate * 4;
       const buf = A.createBuffer(1, len, A.sampleRate);
       const ch = buf.getChannelData(0);
       let v = 0;
       for (let i = 0; i < len; i++){
-        v = (v + (Math.random() * 2 - 1) * 0.06) * 0.985;   // brown-ish
+        v = (v + (Math.random() * 2 - 1) * 0.06) * 0.985;
         ch[i] = v;
       }
       const src = A.createBufferSource(); src.buffer = buf; src.loop = true;
@@ -1254,13 +1596,26 @@ a:hover{ color:#c00; }
       if (note) note.textContent = 'you have signed in ' + saved.visits + ' times.';
       welcome.innerHTML =
         'you have been here before. last time you walked ' + m + ' metres and ' +
-        (saved.doors ? 'opened ' + saved.doors + ' doors. ' : 'opened nothing. ') +
+        (saved.rooms ? 'got ' + saved.rooms + ' rooms in. ' :
+         saved.doors ? 'opened ' + saved.doors + ' doors. ' : 'opened nothing. ') +
         'the lights are on. nobody is expecting you.';
       say('badge recognised. ' + m + ' metres on record.');
     } else {
       if (note) note.textContent = 'first sign-in tonight.';
     }
   })();
+
+  /* --- fetch the photographs ------------------------------------------ */
+  loadPlates().then(list => {
+    plates = shuffle(list.slice());
+    if (plates.length){
+      say(plates.length + ' photographs in the file. every door opens onto one.');
+      const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = plates[0].u;
+    } else {
+      say('no photographs in the file. the doors open onto drawn corridors instead.');
+      if (el.bar) el.bar.textContent = '640 × 480 · no plates loaded';
+    }
+  });
 
   const lm = document.getElementById('lastMod');
   if (lm) lm.textContent = '3:14 am';
