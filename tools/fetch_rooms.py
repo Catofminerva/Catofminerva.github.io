@@ -29,6 +29,7 @@ import base64
 import json
 import os
 import re
+import ssl
 import sys
 import time
 import urllib.error
@@ -47,6 +48,25 @@ IMAGE_URL = re.compile(r"^https://i\.redd\.it/[\w.\-]+\.(?:jpg|jpeg|png|webp)$",
 # requests are fine from a home connection and refused from a datacentre.
 TOKEN = None
 HOST = "https://www.reddit.com"
+
+
+def ssl_context():
+    """A verifying SSL context that also works on python.org's macOS build.
+
+    That build ships without a certificate store, so every https request
+    dies with CERTIFICATE_VERIFY_FAILED until someone runs its
+    "Install Certificates.command". Where certifi is available we hand
+    urllib those roots instead. Verification stays on either way: a
+    crawler that skips it is worse than a crawler that fails.
+    """
+    try:
+        import certifi
+        return ssl.create_default_context(cafile=certifi.where())
+    except Exception:                                 # noqa: BLE001
+        return None
+
+
+CTX = None
 
 
 def authenticate():
@@ -69,7 +89,7 @@ def authenticate():
         headers={"Authorization": "Basic " + basic, "User-Agent": UA},
     )
     try:
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=30, context=CTX) as r:
             TOKEN = json.loads(r.read().decode("utf-8")).get("access_token")
     except Exception as e:                            # noqa: BLE001
         print("could not authenticate: %s" % e, file=sys.stderr)
@@ -90,7 +110,7 @@ def fetch(url, tries=4):
             headers["Authorization"] = "bearer " + TOKEN
         req = urllib.request.Request(url, headers=headers)
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=30, context=CTX) as r:
                 return json.loads(r.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503) and attempt < tries - 1:
@@ -105,6 +125,12 @@ def fetch(url, tries=4):
                       " this from a home connection.", file=sys.stderr)
             return None
         except Exception as e:                        # noqa: BLE001 - network is network
+            if "CERTIFICATE_VERIFY_FAILED" in str(e):
+                print("  this python has no certificate store. either run"
+                      " /usr/bin/python3 instead, or run the"
+                      " \"Install Certificates.command\" that came with your"
+                      " python, or pip3 install certifi.", file=sys.stderr)
+                return None
             if attempt < tries - 1:
                 time.sleep(4)
                 continue
@@ -197,6 +223,8 @@ def main():
     ap.add_argument("--out", default="rooms.json")
     args = ap.parse_args()
 
+    global CTX
+    CTX = ssl_context()
     authenticate()
     rooms = harvest(args.sub, args.limit, args.pause)
     if not rooms:
