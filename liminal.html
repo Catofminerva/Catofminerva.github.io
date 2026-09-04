@@ -534,16 +534,41 @@ a:hover{ color:#c00; }
     return (h >>> 0) / 4294967296;      // 0..1
   }
 
-  /* --- what is behind a door ------------------------------------------
-     fixed per room and per door, so the labyrinth has a shape even
-     though you can never check it. */
-  function behind(roomIdx, doorIdx){
-    if (!plates.length) return 0;
-    const id = plates[roomIdx].u;
-    const r = hash(id, 101 + doorIdx * 7);
-    let next = Math.floor(r * plates.length);
-    if (next === roomIdx) next = (next + 1) % plates.length;
-    return next;
+  /* --- the order the rooms come in --------------------------------------
+     One door per room means one exit per room, and a graph where every
+     node has exactly one out-edge is a chain that must eventually bite
+     its own tail. With 242 rooms that loop came out at thirteen, so a
+     visitor saw thirteen photographs and then the same thirteen again.
+
+     So the rooms are dealt from a shuffled deck instead. Every one in
+     the file is visited before any of them comes round a second time,
+     and the order is different on every visit. The door itself still
+     stands where that room's own hash puts it, so a room still looks
+     like itself. */
+  let order = [];
+  let cursor = 0;
+
+  function deal(){
+    order = plates.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--){
+      const j = (Math.random() * (i + 1)) | 0;
+      const t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+    cursor = 0;
+  }
+
+  function nextRoom(){
+    if (!order.length) return 0;
+    cursor += 1;
+    if (cursor >= order.length){
+      const last = order[order.length - 1];
+      deal();
+      /* a fresh deck must not open with the room just left */
+      if (order[0] === last && order.length > 1){
+        order[0] = order[1]; order[1] = last;
+      }
+    }
+    return order[cursor];
   }
 
   /* --- the door out of a room -----------------------------------------
@@ -588,7 +613,10 @@ a:hover{ color:#c00; }
     };
     el.img.onerror = () => {
       plates.splice(idx, 1);
-      if (plates.length) enter(idx % plates.length);
+      if (plates.length){
+        deal();
+        enter(order[0]);
+      }
       else { el.loading.textContent = 'no rooms in the file.'; el.doors.textContent = ''; }
     };
     el.img.src = meta.u;
@@ -599,10 +627,8 @@ a:hover{ color:#c00; }
     hud();
 
     /* whatever is behind these doors, fetched while you decide */
-    for (let i = 0; i < doorsOf(here).length; i++){
-      const n = plates[behind(here, i)];
-      if (n){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = n.u; }
-    }
+    const soon = order.length ? plates[order[(cursor + 1) % order.length]] : null;
+    if (soon){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = soon.u; }
   }
 
   function paintDoors(){
@@ -622,7 +648,7 @@ a:hover{ color:#c00; }
       img.alt = '';
       b.appendChild(img);
 
-      b.addEventListener('click', () => go(i));
+      b.addEventListener('click', () => go());
       el.doors.appendChild(b);
     });
   }
@@ -784,12 +810,12 @@ a:hover{ color:#c00; }
   }
 
   /* --- going through ---------------------------------------------------- */
-  function go(doorIdx){
+  function go(){
     if (busy || !plates.length) return;
     busy = true;
     taken += 1;
     doorSound();
-    const next = behind(here, doorIdx);
+    const next = nextRoom();
 
     const finish = () => {
       depth += 1;
@@ -804,11 +830,7 @@ a:hover{ color:#c00; }
   }
 
   /* the way back is a door like any other, and it does not go back */
-  function goBack(){
-    if (busy || !plates.length) return;
-    const doors = doorsOf(here).length;
-    go(Math.floor(hash(plates[here].u, 91) * doors));
-  }
+  function goBack(){ go(); }
 
   function hud(){
     el.room.textContent = String(depth);
@@ -855,8 +877,7 @@ a:hover{ color:#c00; }
     const tag = (document.activeElement && document.activeElement.tagName) || '';
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
     if (e.key === '1'){
-      const i = Number(e.key) - 1;
-      if (i < doorsOf(here).length){ go(i); e.preventDefault(); }
+      go(); e.preventDefault();
     } else if (e.key === 'b' || e.key === 'B'){
       goBack(); e.preventDefault();
     }
@@ -865,7 +886,8 @@ a:hover{ color:#c00; }
   document.getElementById('backBtn').addEventListener('click', goBack);
   document.getElementById('resetBtn').addEventListener('click', () => {
     depth = 1; taken = 0; again = 0; visited.clear();
-    enter(Math.floor(Math.random() * plates.length));
+    deal();
+    enter(order[0]);
   });
 
   document.getElementById('humBtn').addEventListener('click', () => {
@@ -927,8 +949,9 @@ a:hover{ color:#c00; }
       return;
     }
     if (el.bar) el.bar.textContent = plates.length + ' rooms in the file';
+    deal();
     depth = 1;
-    enter(Math.floor(Math.random() * plates.length));
+    enter(order[0]);
   });
 
   /* --- the welcome, which is where the page does its remembering -------- */
