@@ -1896,8 +1896,133 @@ td.content .post h3{ color:#000; text-shadow:none; }
   border-bottom: 1px solid var(--w95-hi);
 }
 
+
+/* --- 2026-09-04: the shrine ---------------------------------------
+   a small altar in the content column holding the 1996 declaration.
+   it sits opposite the seizure notice at the door on purpose: that
+   one claims the domain, this is the paragraph that said the domain
+   was never theirs to claim.
+
+   dark panel, serif type, gold light. everything else on this page is
+   comic sans and neon, so the shrine only reads as a shrine if it
+   refuses to look like the rest of the site. */
+.shrine{
+  margin: 18px 0 22px;
+  padding: 13px 14px 11px;
+  background: radial-gradient(120% 95% at 50% 0%, #1d1233 0%, #0a0519 62%, #05020e 100%);
+  border: 2px solid;
+  border-color: var(--w95-shadow) var(--w95-hi) var(--w95-hi) var(--w95-shadow);
+  box-shadow: inset 0 0 26px rgba(255,170,60,.10), 0 0 12px rgba(0,0,0,.55);
+  color: #ded3bd;
+}
+.shrine-head{
+  margin: 0 0 3px;
+  font: bold 11px/1.55 "Tahoma","MS Sans Serif",sans-serif;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #ffcc66;
+  text-shadow: 0 0 7px rgba(255,170,60,.5);
+}
+.shrine-sub{
+  margin: 0 0 11px;
+  font: 10px/1.55 "Courier New", monospace;
+  letter-spacing: .04em;
+  color: #9186a6;
+}
+.shrine-text{
+  margin: 0;
+  padding: 0 0 0 12px;
+  border-left: 2px solid rgba(255,170,60,.35);
+  font: 13px/1.72 Georgia,"Times New Roman",serif;
+  color: #e9e0cf;
+}
+.shrine-text p{ margin: 0 0 9px; }
+.shrine-text p:last-child{ margin-bottom: 0; }
+/* the opening clause takes the candlelight, the rest of it sits in shadow */
+.shrine-text p:first-child::first-line{ color: #ffd98a; }
+.shrine-cite{
+  margin: 10px 0 12px;
+  font: 10px/1.6 "Courier New", monospace;
+  letter-spacing: .03em;
+  color: #8f84a3;
+  text-align: right;
+}
+.shrine-cite cite{ font-style: italic; color: #b8aec9; }
+.shrine-cite .nb{ white-space: nowrap; }
+
+/* the shelf */
+.shrine-altar{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.09);
+}
+.candles{
+  flex: 1 1 190px;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  min-height: 46px;
+}
+.candle{
+  position: relative;
+  width: 9px;
+  height: var(--h, 30px);
+  background: linear-gradient(90deg,#b9a880 0%,#fff6de 45%,#a3906a 100%);
+  border: 1px solid #6b5c3e;
+  border-bottom: 0;
+}
+/* the flame. a teardrop with the point up, lit from below. */
+.candle::before{
+  content: "";
+  position: absolute;
+  left: 50%; top: -12px;
+  width: 8px; height: 13px;
+  margin-left: -4px;
+  border-radius: 50% 50% 50% 50% / 66% 66% 34% 34%;
+  background: radial-gradient(circle at 50% 72%, #fffbcf 0%, #ffc251 48%, rgba(255,110,0,.35) 100%);
+  box-shadow: 0 0 11px rgba(255,165,50,.8), 0 0 22px rgba(255,120,20,.35);
+  animation: candle-flick 1.15s var(--d, 0s) infinite ease-in-out alternate;
+}
+@keyframes candle-flick{
+  from{ transform: scale(1) translateY(0); opacity:.92; }
+  to  { transform: scale(1.14,.9) translateY(-1px); opacity:1; }
+}
+.candle.new{ animation: candle-set 260ms ease-out; }
+@keyframes candle-set{ from{ transform: translateY(5px); opacity:0; } }
+
+.shrine-light{
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  background: #17102b;
+  color: #ffcf7a;
+  border: 2px outset #6a5a92;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+}
+.shrine-light:hover{ color: #fff0c4; }
+.shrine-light:active{ border-style: inset; }
+.shrine-count{
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+  font: 10px/1.6 "Courier New", monospace;
+  color: #8f84a3;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .candle::before, .candle.new{ animation: none; }
+}
+
+
 @media (max-width: 700px){
   .marquee-planet{ height: 20px; margin: 0 4px; }
+  .shrine{ padding: 11px 11px 10px; }
+  .shrine-text{ font-size: 12.5px; padding-left: 10px; }
+  .shrine-cite{ text-align: left; }
   .wish-lamp{ justify-content: center; text-align: center; }
   .wish-lamp img{ height: 88px; }
   .pet-sidekick{ width: 128px; max-width: 44%; }
@@ -2270,6 +2395,31 @@ html.seizing, html.seizing body{ overflow:hidden; }
 
           <div class="div-checker" aria-hidden="true"></div>
 
+          <!-- 2026-09-04: the shrine -->
+          <div class="shrine">
+            <p class="shrine-head">Shrine &#183; Cyberspace, 1996</p>
+            <p class="shrine-sub">
+              written in davos in one evening, in answer to a telecommunications act.
+              it did not work. i keep it anyway.
+            </p>
+
+            <blockquote class="shrine-text">
+              <p>Governments of the Industrial World, you weary giants of flesh and steel, I come from Cyberspace, the new home of Mind. On behalf of the future, I ask you of the past to leave us alone. You are not welcome among us. You have no sovereignty where we gather.</p>
+              <p>We have no elected government, nor are we likely to have one, so I address you with no greater authority than that with which liberty itself always speaks. I declare the global social space we are building to be naturally independent of the tyrannies you seek to impose on us. You have no moral right to rule us nor do you possess any methods of enforcement we have true reason to fear.</p>
+            </blockquote>
+
+            <p class="shrine-cite">
+              John Perry Barlow, <cite>A Declaration of the Independence of Cyberspace</cite>
+              <span class="nb">&#183; 8 February 1996</span>
+            </p>
+
+            <div class="shrine-altar">
+              <div class="candles" id="shrineCandles" aria-hidden="true"></div>
+              <button type="button" class="shrine-light" id="shrineLight">Light a candle</button>
+              <p class="shrine-count" id="shrineCount">the shelf is cold.</p>
+            </div>
+          </div>
+
           <!-- 2026-08-30: the lamp -->
           <div class="wish-lamp">
             <img src="genie.gif" alt="genie" id="wishGenie" title="rub the lamp">
@@ -2634,6 +2784,51 @@ setInterval(() => {
   document.getElementById('shuffleStickers')?.addEventListener('click', shuffle);
   document.getElementById('resetStickers')?.addEventListener('click', reset);
 })();
+
+/* 2026-09-04: candles on the shrine.
+   the count lives in localStorage, so it is this visitor's own tally and
+   not a public one. twelve fit on the shelf; anything past that is
+   treated as having burned down, and only the number carries on. */
+(() => {
+  const shelf = document.getElementById('shrineCandles');
+  const light = document.getElementById('shrineLight');
+  const out   = document.getElementById('shrineCount');
+  if (!shelf || !light || !out) return;
+
+  const KEY  = 'g981_shrine_candles';
+  const ROOM = 12;
+
+  let n = 0;
+  try { n = Math.max(0, parseInt(localStorage.getItem(KEY) || '0', 10) || 0); } catch (_) {}
+
+  function paint(justLit){
+    const showing = Math.min(n, ROOM);
+    shelf.textContent = '';
+    for (let i = 0; i < showing; i++){
+      const c = document.createElement('span');
+      c.className = 'candle';
+      /* uneven heights and offset flicker, so it looks like twelve candles
+         rather than one candle printed twelve times */
+      c.style.setProperty('--h', (25 + ((i * 5) % 14)) + 'px');
+      c.style.setProperty('--d', ((i * 0.19) % 1.1).toFixed(2) + 's');
+      if (justLit && i === showing - 1) c.classList.add('new');
+      shelf.appendChild(c);
+    }
+    out.textContent = n === 0
+      ? 'the shelf is cold. nobody has lit one on this machine.'
+      : 'lit on this machine: ' + n +
+        (n > ROOM ? ' \u00b7 the shelf holds twelve, the rest burned down' : '');
+  }
+
+  light.addEventListener('click', () => {
+    n += 1;
+    try { localStorage.setItem(KEY, String(n)); } catch (_) {}
+    paint(true);
+  });
+
+  paint(false);
+})();
+
 
 
 
