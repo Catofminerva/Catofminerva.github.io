@@ -423,33 +423,6 @@ a:hover{ color:#c00; }
         </div>
 
         <div class="box">
-          <h2>Site map</h2>
-          <div class="inner">
-            <ul>
-              <li><a href="liminal.html">west corridor</a></li>
-              <li><a href="liminal.html">west corridor (annexe)</a></li>
-              <li><a href="liminal.html">level 2, north</a></li>
-              <li><a href="liminal.html">level 2, north</a></li>
-              <li><a href="liminal.html">stairwell C</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="box">
-          <h2>The file</h2>
-          <div class="inner">
-            every door opens onto a photograph somebody took of a real place:
-            <a href="https://www.reddit.com/r/LiminalSpace/" target="_blank" rel="noopener nofollow">r/LiminalSpace</a>
-            where it can be reached, openly licensed pictures otherwise. they stay
-            on their own servers and each one is credited under the frame, with a
-            link back to where it came from.
-            <br><br>
-            the list lives in <code>rooms.json</code> and is refilled by
-            <code>tools/fetch_rooms.py</code>.
-          </div>
-        </div>
-
-        <div class="box">
           <h2>Badges</h2>
           <div class="inner badges">
             <img src="bestviewed.gif" alt="best viewed with a browser" width="88" height="31" loading="lazy">
@@ -998,9 +971,7 @@ a:hover{ color:#c00; }
   const welcome = document.getElementById('welcome');
   if (saved.visits > 1 && welcome){
     welcome.textContent =
-      'you have been here before. you got ' + (saved.rooms || 0) +
-      ' rooms in and came out the way everyone does, by closing the tab. ' +
-      'the lights are on. nobody is expecting you.';
+      'you have been here before. or did you?.';
   }
 
   const lm = document.getElementById('lastMod');
