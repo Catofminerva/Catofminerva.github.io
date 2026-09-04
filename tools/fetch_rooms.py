@@ -227,18 +227,36 @@ def harvest(sub, limit, pause):
 # list is the whole aesthetic: an interior with the lights on and nobody
 # in it, photographed by someone who was passing through.
 QUERIES = [
-    "corridor interior", "hallway interior", "hotel corridor", "hospital corridor",
-    "school corridor", "office corridor", "underground car park",
-    "multi-storey car park interior", "indoor swimming pool empty",
-    "waiting room interior", "airport terminal interior", "shopping mall interior",
-    "stairwell interior", "subway station platform empty", "basement corridor",
-    "pedestrian tunnel", "parking garage interior", "motel corridor",
-    "empty classroom", "hotel lobby night",
+    # the aesthetic is mundane, modern and institutional. anything ornate,
+    # historic or built to be admired is the opposite of it.
+    "hospital corridor", "school corridor", "office corridor", "hotel corridor",
+    "apartment building corridor", "dormitory corridor", "basement corridor",
+    "underground car park", "parking garage interior", "multi-storey car park",
+    "shopping mall interior", "shopping centre interior", "supermarket aisle",
+    "airport terminal interior", "subway station platform", "metro station corridor",
+    "railway station underpass", "pedestrian underpass", "pedestrian tunnel",
+    "indoor swimming pool", "swimming pool hall", "empty classroom",
+    "waiting room interior", "hospital waiting room", "office staircase",
+    "concrete staircase interior", "escalator interior", "laundromat interior",
+    "motel exterior", "gymnasium interior", "school canteen", "corridor fluorescent",
 ]
 
-# Commons documents everything, including things that are not photographs.
+# Commons documents subjects as well as photographing them.
 NOT_A_ROOM = ("map", "diagram", "plan ", "schematic", "logo", "icon", "chart",
               "drawing", "sketch", "blueprint", "coat of arms", "seal of")
+
+# and it is full of buildings people travel to look at, which is the
+# wrong end of architecture entirely for this.
+TOO_GRAND = ("cathedral", "church", "chapel", "abbey", "basilica", "monastery",
+             "convent", "cloister", "crypt", "tomb", "mosque", "synagogue",
+             "temple", "castle", "palace", "chateau", "château", "manor",
+             "mansion", "villa", "museum", "palazzo", "opera", "theatre",
+             "theater", "ruins", "archaeolog", "medieval", "baroque", "gothic",
+             "renaissance", "century", "historic", "heritage", "memorial")
+
+GRAND_CATEGORIES = ("Churches", "Cathedrals", "Castles", "Palaces", "Museums",
+                    "Monasteries", "Chapels", "Abbeys", "Basilicas", "Temples",
+                    "Mosques", "Synagogues", "Historic")
 
 
 def strip_tags(text):
@@ -312,11 +330,16 @@ def harvest_commons(limit, pause):
                 low = title.lower()
                 if any(word in low for word in NOT_A_ROOM):
                     continue
+                if any(word in low for word in TOO_GRAND):
+                    continue
                 if (info.get("width") or 0) < 900:
                     continue
 
-                seen.add(pid)
                 meta = info.get("extmetadata") or {}
+                cats = (meta.get("Categories") or {}).get("value", "")
+                if any(word in cats for word in GRAND_CATEGORIES):
+                    continue
+                seen.add(pid)
                 rooms.append({
                     "i": str(pid),
                     "u": clean,
