@@ -1,1 +1,1271 @@
-liminal
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/faviconcat.gif" type="image/gif">
+<link rel="canonical" href="https://catofminerva.com/liminal.html">
+<title>liminal space</title>
+
+<meta name="description" content="the west corridor. it does not end. night shift log, 1999 to 2000.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Galaxy 981">
+<meta property="og:title" content="liminal space">
+<meta property="og:description" content="the west corridor. it does not end.">
+<meta property="og:url" content="https://catofminerva.com/liminal.html">
+
+<style>
+/* ===================================================================
+   liminal space
+   a night-shift weblog from a building that will not finish.
+
+   built the way a 1999 weblog was built: one table, one column of
+   entries, a sidebar of small boxes, borders drawn by the browser.
+   the only modern thing on the page is the corridor itself, and the
+   corridor is deliberately drawn the way a 1997 java applet would
+   have drawn it: flat quads, no textures, banded fog.
+   =================================================================== */
+
+html{ background:#8f8560; }
+body{
+  margin:0;
+  padding:18px 10px 40px;
+  /* the wallpaper. two dull yellows and a seam every 260px, which is
+     roughly how often the panels join in a real corridor. */
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.05) 0 1px, rgba(0,0,0,0) 1px 260px),
+    repeating-linear-gradient(0deg,
+      #a2966d 0 3px, #9c9068 3px 6px);
+  color:#221f16;
+  font:15px/1.62 "Times New Roman", Times, serif;
+}
+
+/* --- the page slab ------------------------------------------------ */
+.slab{
+  width:100%;
+  max-width:820px;
+  margin:0 auto;
+  background:#efe9d6;
+  border:1px solid #4b4632;
+  box-shadow:0 0 0 6px rgba(0,0,0,.12);
+}
+
+/* --- masthead ----------------------------------------------------- */
+.masthead{
+  padding:22px 20px 16px;
+  background:#e6dfc7;
+  border-bottom:1px solid #4b4632;
+  text-align:center;
+}
+.masthead h1{
+  margin:0;
+  font:normal 40px/1.05 "Times New Roman", Times, serif;
+  letter-spacing:.34em;
+  text-indent:.34em;             /* letter-spacing pads the right side only */
+  text-transform:lowercase;
+  color:#2b2718;
+}
+.masthead .tag{
+  margin:8px 0 0;
+  font:italic 14px/1.5 "Times New Roman", Times, serif;
+  color:#5b543c;
+}
+.masthead .strip{
+  margin:14px auto 0;
+  max-width:560px;
+  padding:3px 0;
+  background:#d6cdae;
+  border:1px solid #b3a880;
+  font:11px/1.6 Verdana, Geneva, sans-serif;
+  color:#4a442f;
+  overflow:hidden;
+}
+
+/* --- the two columns. a table, because it was a table. ------------- */
+table.layout{ width:100%; border-collapse:collapse; }
+table.layout > tbody > tr > td{ vertical-align:top; padding:0; }
+td.side{
+  width:212px;
+  padding:14px 12px 22px;
+  background:#e3dcc3;
+  border-right:1px solid #b3a880;
+}
+td.main{ padding:18px 20px 26px; }
+
+@media (max-width:720px){
+  table.layout, table.layout > tbody, table.layout > tbody > tr,
+  table.layout > tbody > tr > td{ display:block; width:auto; }
+  td.side{ border-right:0; border-top:1px solid #b3a880; }
+  .masthead h1{ font-size:27px; letter-spacing:.2em; text-indent:.2em; }
+}
+
+/* --- sidebar boxes ------------------------------------------------ */
+.box{
+  margin:0 0 14px;
+  background:#efe9d6;
+  border:1px solid #a89d76;
+}
+.box h2{
+  margin:0;
+  padding:4px 7px;
+  background:#c9bf9c;
+  border-bottom:1px solid #a89d76;
+  font:bold 10px/1.5 Verdana, Geneva, sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#3b361f;
+}
+.box .inner{ padding:8px 9px; font:11px/1.62 Verdana, Geneva, sans-serif; color:#3a3524; }
+.box ul{ margin:0; padding:0 0 0 15px; }
+.box li{ margin:0 0 5px; }
+.box a{ color:#00c; }
+.box a:visited{ color:#551a8b; }
+
+.navlist a{ display:block; padding:2px 0; }
+.navlist img{ vertical-align:-2px; margin-right:5px; }
+
+dl.now{ margin:0; }
+dl.now dt{
+  float:left; clear:left; width:56px;
+  color:#6a624a; text-transform:uppercase; font-size:10px; letter-spacing:.06em;
+  line-height:1.75;
+}
+dl.now dd{ margin:0 0 2px 60px; }
+
+/* the counter, the one piece of chrome every weblog had */
+.odo{
+  display:inline-block;
+  padding:2px 5px;
+  background:#000;
+  border:2px inset #9b9169;
+  font:12px/1.35 "Courier New", monospace;
+  letter-spacing:2px;
+  color:#9fe89f;
+}
+
+/* the clock that has read the same time since the refit */
+.clock{
+  padding:7px 0 5px;
+  text-align:center;
+  font:20px/1.2 "Courier New", monospace;
+  letter-spacing:2px;
+  color:#2b2718;
+}
+.clock .note{ display:block; margin-top:3px; font:italic 10px/1.4 "Times New Roman",serif; color:#6a624a; }
+
+.badges{ text-align:center; }
+.badges img{ display:inline-block; margin:3px 2px; image-rendering:pixelated; }
+
+/* --- the corridor, boxed like an applet --------------------------- */
+.applet{
+  margin:0 0 22px;
+  background:#cdc4a4;
+  border:2px solid;
+  border-color:#f2ecd8 #6f6748 #6f6748 #f2ecd8;
+}
+.applet .bar{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:3px 6px;
+  background:#6f6748;
+  color:#f2ecd8;
+  font:bold 10px/1.6 Verdana, Geneva, sans-serif;
+  letter-spacing:.1em;
+}
+.applet .bar .dim{ font-weight:normal; opacity:.72; letter-spacing:.04em; }
+
+.screen{
+  position:relative;
+  margin:6px;
+  background:#000;
+  border:2px solid;
+  border-color:#6f6748 #f2ecd8 #f2ecd8 #6f6748;
+  overflow:hidden;
+}
+#corridor{
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  background:#cabb85;
+  cursor:crosshair;
+  outline:0;
+}
+/* scanlines and a vignette, sat over the canvas. the corridor is drawn
+   flat; the tube it is being watched through supplies the rest. */
+.screen::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 50%, rgba(0,0,0,0) 42%, rgba(0,0,0,.44) 100%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 1px, rgba(0,0,0,0) 1px 3px);
+}
+/* the white flash when a door opens */
+.flash{
+  position:absolute; inset:0;
+  background:#fff;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 420ms ease-out;
+}
+.flash.on{ opacity:1; transition:none; }
+
+/* the prompt that appears when a door is within reach */
+.prompt{
+  position:absolute; left:50%; bottom:11%;
+  transform:translateX(-50%);
+  padding:4px 10px;
+  background:rgba(0,0,0,.66);
+  color:#fff8dc;
+  font:bold 11px/1.5 Verdana, Geneva, sans-serif;
+  letter-spacing:.12em;
+  white-space:nowrap;
+}
+.prompt[hidden]{ display:none; }
+
+/* the click-in notice, so keys are never stolen from the page */
+.veil{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  background:rgba(20,18,10,.55);
+  color:#f4eed9;
+  font:12px/1.7 Verdana, Geneva, sans-serif;
+  letter-spacing:.1em;
+  text-align:center;
+  cursor:pointer;
+}
+.veil[hidden]{ display:none; }
+.veil b{ display:block; font-size:15px; letter-spacing:.2em; margin-bottom:4px; }
+
+/* --- readouts ----------------------------------------------------- */
+table.hud{
+  width:calc(100% - 12px);
+  margin:0 6px 6px;
+  border-collapse:collapse;
+  background:#e6dfc7;
+  border:1px solid #6f6748;
+  font:11px/1.5 "Courier New", monospace;
+}
+table.hud th, table.hud td{
+  padding:3px 6px;
+  border:1px solid #b3a880;
+  text-align:left;
+  white-space:nowrap;
+}
+table.hud th{
+  width:1%;
+  background:#d6cdae;
+  font-weight:normal;
+  color:#5b543c;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+table.hud td{ color:#221f16; }
+table.hud td.wide{ white-space:normal; }
+#exitVal.recalc{ background:#000; color:#9fe89f; }
+
+.keys{
+  margin:0 6px 6px;
+  padding:5px 7px;
+  background:#e6dfc7;
+  border:1px solid #b3a880;
+  font:11px/1.7 Verdana, Geneva, sans-serif;
+  color:#4a442f;
+}
+.keys kbd{
+  display:inline-block;
+  min-width:15px;
+  padding:1px 4px;
+  background:#efe9d6;
+  border:1px solid; border-color:#fff #8d8259 #8d8259 #fff;
+  font:11px/1.4 "Courier New", monospace;
+  text-align:center;
+}
+.pads{ display:none; gap:6px; flex-wrap:wrap; margin:6px 0 0; }
+.pads button{
+  flex:1 1 60px;
+  padding:9px 6px;
+  background:#d6cdae;
+  border:2px solid; border-color:#f2ecd8 #6f6748 #6f6748 #f2ecd8;
+  font:11px/1.3 Verdana, Geneva, sans-serif;
+  color:#3b361f;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-user-select:none; user-select:none;
+}
+.pads button:active{ border-color:#6f6748 #f2ecd8 #f2ecd8 #6f6748; }
+/* on a touch device the pads are the controls, so the key legend goes */
+@media (hover:none) and (pointer:coarse){
+  .pads{ display:flex; }
+  .kbdhint{ display:none; }
+  .keys{ padding:0; background:none; border:0; }
+}
+
+.applet .strip2{
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+  margin:0 6px 6px;
+  padding:5px 7px;
+  background:#e6dfc7;
+  border:1px solid #b3a880;
+  font:11px/1.6 Verdana, Geneva, sans-serif;
+  color:#4a442f;
+}
+.applet .strip2 button{
+  padding:3px 9px;
+  background:#d6cdae;
+  border:2px solid; border-color:#f2ecd8 #6f6748 #6f6748 #f2ecd8;
+  font:11px/1.4 Verdana, Geneva, sans-serif;
+  color:#3b361f;
+  cursor:pointer;
+}
+.applet .strip2 button:active{ border-color:#6f6748 #f2ecd8 #f2ecd8 #6f6748; }
+.applet .strip2 label{ cursor:pointer; }
+
+/* the log of what happened behind each door */
+.log{
+  margin:0 6px 8px;
+  padding:6px 8px;
+  min-height:58px;
+  background:#000;
+  border:2px inset #9b9169;
+  font:11px/1.65 "Courier New", monospace;
+  color:#9fe89f;
+}
+.log p{ margin:0 0 3px; }
+.log p:last-child{ margin:0; color:#e6ffd9; }
+
+/* --- the weblog itself -------------------------------------------- */
+.entry{ margin:0 0 26px; }
+.entry h3{
+  margin:0 0 2px;
+  font:bold 13px/1.5 Verdana, Geneva, sans-serif;
+  letter-spacing:.05em;
+  color:#2b2718;
+}
+.entry .stamp{
+  margin:0 0 8px;
+  font:10px/1.6 Verdana, Geneva, sans-serif;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#6a624a;
+}
+.entry p{ margin:0 0 10px; }
+.entry p:last-child{ margin:0; }
+.entry .cut{ color:#4a442f; }
+.entry .cut::after{
+  content:"\258C";
+  margin-left:1px;
+  animation:blink 1.06s steps(1) infinite;
+}
+@keyframes blink{ 50%{ opacity:0; } }
+@media (prefers-reduced-motion:reduce){ .entry .cut::after{ animation:none; } }
+
+hr.rule{
+  height:0; margin:22px 0;
+  border:0; border-top:1px solid #b3a880; border-bottom:1px solid #f5efdc;
+}
+
+h2.section{
+  margin:0 0 12px;
+  font:bold 11px/1.6 Verdana, Geneva, sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#5b543c;
+}
+
+.notice{
+  margin:0 0 18px;
+  padding:9px 12px;
+  background:#e6dfc7;
+  border:1px solid #a89d76;
+  border-left:5px solid #8d8259;
+  font:12px/1.7 Verdana, Geneva, sans-serif;
+  color:#3a3524;
+}
+
+/* comments, in the shape every weblog comment box had */
+.cmt{
+  margin:0 0 10px;
+  padding:8px 10px;
+  background:#e9e3cd;
+  border:1px solid #c2b891;
+  font:12px/1.65 Verdana, Geneva, sans-serif;
+}
+.cmt .who{ font-weight:bold; color:#2b2718; }
+.cmt .when{ color:#6a624a; font-size:10px; letter-spacing:.05em; }
+.cmt p{ margin:5px 0 0; }
+
+.ring{
+  margin:0;
+  padding:9px 10px;
+  background:#e6dfc7;
+  border:1px solid #a89d76;
+  text-align:center;
+  font:11px/1.8 Verdana, Geneva, sans-serif;
+  color:#4a442f;
+}
+.ring a{ color:#00c; }
+
+.foot{
+  padding:14px 16px 18px;
+  background:#e3dcc3;
+  border-top:1px solid #b3a880;
+  text-align:center;
+  font:11px/1.7 Verdana, Geneva, sans-serif;
+  color:#5b543c;
+}
+.foot img{ image-rendering:pixelated; margin:4px 3px 0; vertical-align:middle; }
+.foot a{ color:#00c; }
+
+a{ color:#00c; }
+a:visited{ color:#551a8b; }
+a:hover{ color:#c00; }
+</style>
+</head>
+<body>
+
+<div class="slab">
+
+  <div class="masthead">
+    <h1>liminal space</h1>
+    <p class="tag">night shift log &#183; the annexe &#183; west corridor</p>
+    <div class="strip">
+      <marquee scrollamount="3" behavior="scroll">
+        the lights switch off by section, not all at once &#183; this is normal &#183;
+        keep to the marked route &#183; door 12 is on the west corridor
+      </marquee>
+    </div>
+  </div>
+
+  <table class="layout">
+   <tbody>
+    <tr>
+      <td class="side">
+
+        <div class="box">
+          <h2>Navigation</h2>
+          <div class="inner navlist">
+            <a href="index.html"><img src="home.gif" alt="" width="14" height="14">back to the site</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="" width="14" height="14">other entries</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="" width="14" height="14">guestbook</a>
+            <a href="contact.html"><img src="email2.gif" alt="" width="14" height="14">mail the caretaker</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>Now</h2>
+          <div class="inner">
+            <dl class="now">
+              <dt>mood</dt><dd>awake</dd>
+              <dt>music</dt><dd>the vents, in B flat</dd>
+              <dt>weather</dt><dd>indoors</dd>
+              <dt>eating</dt><dd>vending machine</dd>
+              <dt>status</dt><dd>still walking</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>West corridor clock</h2>
+          <div class="inner">
+            <div class="clock">3:14 AM
+              <span class="note">stuck since the refit. reported twice.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>The rules</h2>
+          <div class="inner">
+            <ul>
+              <li>keep to the marked route.</li>
+              <li>lights switch off by section, not all at once. this is normal.</li>
+              <li>if a corridor is longer than the plan says, use the plan.</li>
+              <li>do not prop the fire doors.</li>
+              <li>door 12 is on the west corridor.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>Visitors</h2>
+          <div class="inner" style="text-align:center">
+            you are visitor<br>
+            <span class="odo" id="visitCount">000000</span>
+            <div style="margin-top:6px; color:#6a624a" id="visitNote">nobody has signed in tonight.</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>Site map</h2>
+          <div class="inner">
+            <ul>
+              <li><a href="liminal.html">west corridor</a></li>
+              <li><a href="liminal.html">west corridor (annexe)</a></li>
+              <li><a href="liminal.html">level 2, north</a></li>
+              <li><a href="liminal.html">level 2, north</a></li>
+              <li><a href="liminal.html">stairwell C</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>Badges</h2>
+          <div class="inner badges">
+            <img src="bestviewed.gif" alt="best viewed with a browser" width="88" height="31" loading="lazy">
+            <img src="netscape.gif" alt="Netscape Now" width="88" height="31" loading="lazy">
+            <img src="y2kcompliant.png" alt="Y2K compliant" width="88" loading="lazy">
+            <img src="construction.gif" alt="under construction" width="60" loading="lazy">
+          </div>
+        </div>
+
+      </td>
+
+      <td class="main">
+
+        <p class="notice" id="welcome">
+          you are standing in the west corridor of the annexe. the lights are on.
+          nobody is expecting you.
+        </p>
+
+        <!-- ============ the corridor ============ -->
+        <div class="applet">
+          <div class="bar">
+            <span>CORRIDOR.EXE</span>
+            <span class="dim">640 &#215; 480 &#183; 256 colours &#183; no sound card detected</span>
+          </div>
+
+          <div class="screen">
+            <canvas id="corridor" width="640" height="480" tabindex="0"
+                    aria-label="A first-person view down a fluorescent-lit corridor that continues without end. Walk with the arrow keys."></canvas>
+            <div class="flash" id="flash" aria-hidden="true"></div>
+            <div class="prompt" id="prompt" hidden>PRESS <b>E</b> &#183; DOOR 12</div>
+            <div class="veil" id="veil"><span><b>CLICK TO WALK</b>arrow keys, or the buttons underneath</span></div>
+          </div>
+
+          <table class="hud">
+            <tbody>
+              <tr>
+                <th>walked</th><td id="metVal">0 m</td>
+                <th>doors passed</th><td id="doorVal">0</td>
+              </tr>
+              <tr>
+                <th>opened</th><td id="openVal">0</td>
+                <th>exit in</th><td id="exitVal">40 m</td>
+              </tr>
+              <tr>
+                <th>section</th><td class="wide" colspan="3" id="roomVal">WEST CORRIDOR &#183; BAY 1 &#183; SUBLEVEL ?</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="log" id="log" aria-live="polite">
+            <p>fluorescent tube 4 is on its way out.</p>
+            <p>the vents are running. they run all night.</p>
+          </div>
+
+          <div class="keys">
+            <span class="kbdhint">
+              <kbd>&#8593;</kbd> walk &#183; <kbd>&#8592;</kbd><kbd>&#8594;</kbd> across the corridor &#183;
+              <kbd>E</kbd> open the door &#183; <kbd>&#8595;</kbd> back
+            </span>
+            <div class="pads" id="pads">
+              <button type="button" data-hold="left">&#8592;</button>
+              <button type="button" data-hold="fwd">HOLD TO WALK</button>
+              <button type="button" data-hold="right">&#8594;</button>
+              <button type="button" id="padOpen">OPEN DOOR</button>
+            </div>
+          </div>
+
+          <div class="strip2">
+            <label><input type="checkbox" id="autoWalk"> walk on its own</label>
+            <button type="button" id="humBtn" aria-pressed="false">hum: off</button>
+            <button type="button" id="resetBtn">back to the start</button>
+          </div>
+        </div>
+        <!-- ============ /the corridor ============ -->
+
+        <hr class="rule">
+
+        <h2 class="section">The log</h2>
+
+        <div class="entry">
+          <h3>first post</h3>
+          <p class="stamp">12 august 1999 &#183; 3:14 am &#183; mood: awake</p>
+          <p>got the night contract at the annexe. eleven hours, four floors, one badge that
+          opens most things. the day people leave at six and the building carries on without
+          them: the vents, the compressor under the vending machine, the lights on the east
+          side that stay on because nobody can find the switch for them.</p>
+          <p>i brought a book. i have not opened it. i walk instead, and by the third hour the
+          walking is the whole job.</p>
+        </div>
+
+        <div class="entry">
+          <h3>the carpet</h3>
+          <p class="stamp">19 august 1999 &#183; 3:14 am &#183; mood: precise</p>
+          <p>the carpet on level 2 repeats every 4.6 metres. i counted it in strides first and
+          then measured it properly with the tape from the supply cupboard, which is how i know
+          it is 4.6 and not 5.</p>
+          <p>for the first eight repeats you see the pattern. after that you only see the join,
+          and once you have seen the join you cannot go back to seeing the pattern.</p>
+        </div>
+
+        <div class="entry">
+          <h3>door 12</h3>
+          <p class="stamp">2 september 1999 &#183; 3:14 am &#183; mood: reasonable</p>
+          <p>there are two doors numbered 12. one on the west corridor, one on the north.
+          facilities say the north one was renumbered during the refit and the plate was never
+          swapped, which is the sort of answer that closes a phone call without settling
+          anything.</p>
+          <p>i have opened the west one. i have not opened the north one and i intend to keep it
+          that way, because the west one opens onto a corridor that is the corridor i was
+          already standing in.</p>
+        </div>
+
+        <div class="entry">
+          <h3>the clock</h3>
+          <p class="stamp">30 october 1999 &#183; 3:14 am &#183; mood: tired of this</p>
+          <p>the clock outside the west stairwell has read 3:14 since the refit. i reported it
+          in june and again in september. the second time, the man on the phone asked me what
+          time it was. i told him 3:14. there was a pause on the line, and then he said he meant
+          on my watch.</p>
+        </div>
+
+        <div class="entry">
+          <h3>y2k</h3>
+          <p class="stamp">1 january 2000 &#183; 3:14 am &#183; mood: fine, actually</p>
+          <p>nothing happened. the lights stayed on. the vending machine reset itself to 1980 and
+          started handing out free drinks, which is the most eventful thing that has occurred in
+          this building since i started. i took a lemonade, walked level 3, came back, and it had
+          corrected itself.</p>
+        </div>
+
+        <div class="entry">
+          <h3>(untitled)</h3>
+          <p class="stamp">march 2000 &#183; 3:14 am &#183; mood: &#8212;</p>
+          <p>i will write this one properly when i am back at the desk. the short version is that
+          i went down to check the fire door at the end of the west corridor, and the west
+          corridor was longer than it has<span class="cut"> </span></p>
+        </div>
+
+        <p style="font:11px/1.6 Verdana,Geneva,sans-serif; color:#6a624a">
+          // there are no further entries in this archive.
+        </p>
+
+        <hr class="rule">
+
+        <h2 class="section">Comments (4)</h2>
+
+        <div class="cmt">
+          <span class="who">dave_r</span> <span class="when">&#183; 14 feb 2001, 11:02 pm</span>
+          <p>found you through the ring. the carpet thing is true in my building too, except ours
+          is 4.2 and it is on the ground floor. i have never told anyone this.</p>
+        </div>
+
+        <div class="cmt">
+          <span class="who">anon</span> <span class="when">&#183; 3 nov 2002, 3:14 am</span>
+          <p>is the annexe a real address. i drove to where i thought it was and there is a car
+          park there now, and the car park has a fire door on the far wall.</p>
+        </div>
+
+        <div class="cmt">
+          <span class="who">(no name given)</span> <span class="when">&#183; 8 aug 2004, 3:14 am</span>
+          <p>hello?</p>
+        </div>
+
+        <div class="cmt">
+          <span class="who">(no name given)</span> <span class="when">&#183; 8 aug 2004, 3:14 am</span>
+          <p>hello?</p>
+        </div>
+
+        <hr class="rule">
+
+        <div class="ring">
+          <b>THE NIGHT SHIFT WEBRING</b><br>
+          <a href="liminal.html">&#171; prev</a> &#183;
+          <a href="liminal.html">random</a> &#183;
+          <a href="liminal.html">next &#187;</a><br>
+          this ring has one site in it.
+        </div>
+
+      </td>
+    </tr>
+   </tbody>
+  </table>
+
+  <div class="foot">
+    <img src="dividerblackwhite.gif" alt="" width="240" aria-hidden="true"><br>
+    the corridor stops when you look away. that is a browser feature, not a promise.<br>
+    <a href="index.html">&#8592; back to the site</a> &#183; last modified <span id="lastMod">3:14 am</span><br>
+    <img src="underconstruct.gif" alt="under construction" width="120" loading="lazy">
+    <img src="warning.gif" alt="" width="20" loading="lazy" aria-hidden="true">
+  </div>
+
+</div>
+
+<script>
+/* ===================================================================
+   CORRIDOR.EXE
+
+   a corridor drawn the way 1997 would have drawn it: flat quads, one
+   fill per surface, fog by lerping every colour toward the far haze.
+   no textures and no lighting model, because neither was available,
+   and because the flat bands are the point.
+
+   the whole thing is four numbers: how far you have walked, how far
+   across the corridor you stand, which section you are in, and how
+   many doors you have opened. everything on screen comes off those.
+   =================================================================== */
+(() => {
+  'use strict';
+
+  const cv = document.getElementById('corridor');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d', { alpha:false });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- the building, in metres ------------------------------------- */
+  const HALF_W = 1.15;    // corridor 2.3m wide
+  const FLOOR  = -1.62;   // eye height
+  const CEIL   =  1.18;   // 2.8m ceiling
+  const SEG    = 2.40;    // wall panels this long
+  const DEPTH  = 20;      // panels drawn ahead
+  const DOOR_N = 3;       // a door every third panel, sides alternating
+  const SPEED  = 2.7;     // metres per second, walking pace
+
+  /* --- the sections. the joke is how alike they are. ---------------- */
+  const ROOMS = [
+    { name:'WEST CORRIDOR',   wall:'#cabb85', ceil:'#d9cc9b', floor:'#9c8f66',
+      light:'#fff8dc', fog:'#e2d8b2', trim:'#8e8054', door:'#7c6a45' },
+    { name:'ANNEXE, LEVEL 2', wall:'#b8bdae', ceil:'#c8cdbe', floor:'#767f6f',
+      light:'#f4fff0', fog:'#d3d8c9', trim:'#7d8375', door:'#5f6a5c' },
+    { name:'STAIRWELL C',     wall:'#c3bba6', ceil:'#d2cbb8', floor:'#8d8674',
+      light:'#fffdf2', fog:'#dcd6c4', trim:'#8a8271', door:'#6d6555' },
+    { name:'PLANT ROOM',      wall:'#bcdadd', ceil:'#d3ecee', floor:'#8fbcc2',
+      light:'#ffffff', fog:'#d9eef0', trim:'#7fa5aa', door:'#5f8b91' },
+    { name:'AFTER HOURS',     wall:'#7e7554', ceil:'#8a8059', floor:'#5d5540',
+      light:'#ffe9ae', fog:'#6b6449', trim:'#57503a', door:'#463f2d' },
+    { name:'THE BEIGE ONE',   wall:'#e3dbc6', ceil:'#ece5d3', floor:'#cfc6ad',
+      light:'#ffffff', fog:'#ece6d6', trim:'#c3b99e', door:'#c3b99e' }
+  ];
+  /* the last two are rare. the draw is weighted so that most doors give
+     you back the corridor you just left, which is the honest outcome. */
+  const COMMON = [0,1,2,0,1,0,2,0,3];
+
+  /* what the log says when a door puts you somewhere with a different
+     name on it. one line per section, so the line and the walls agree. */
+  const ARRIVAL = [
+    'the west corridor again. the plate on this door also says 12.',
+    'the annexe. the carpet in here repeats every 4.6 metres.',
+    'stairwell C, which contains no stairs along this section.',
+    'the plant room. the tiles are wet and there is no pool in the building.',
+    'this section is on the after-hours circuit. half the tubes stay dark.',
+    'the beige section. no doors along it. facilities have it down as storage.'
+  ];
+
+  /* --- state -------------------------------------------------------- */
+  let walked = 0;         // metres, cumulative, never reset by a door
+  let across = 0;         // where you stand between the walls
+  let room   = 0;         // index into ROOMS
+  let bay    = 1;         // increments every door
+  let opened = 0;
+  let roomStart = 0;      // metres on the clock when this section began
+  let exitAt = 40;        // the exit is always about forty metres away
+  let recalcUntil = 0;
+  let engaged = false;    // has the visitor clicked in
+  let running = false;
+  let last = 0;
+
+  const held = { fwd:false, back:false, left:false, right:false };
+
+  /* --- persistence. the page remembers you, which is the whole trick. */
+  const KEY = 'g981_liminal_v1';
+  let saved = { metres:0, doors:0, visits:0 };
+  try { saved = Object.assign(saved, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (_) {}
+
+  /* --- canvas sizing ------------------------------------------------ */
+  let W = 640, H = 480, cx = 320, cy = 240, f = 380, dpr = 1;
+  function resize(){
+    const r = cv.getBoundingClientRect();
+    if (!r.width) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.round(r.width); H = Math.round(r.height);
+    cv.width  = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = W / 2; cy = H * 0.5; f = H * 0.82;
+    draw(0);
+  }
+
+  /* --- colour helpers ----------------------------------------------- */
+  function rgb(hex){
+    const n = parseInt(hex.slice(1), 16);
+    return [ (n >> 16) & 255, (n >> 8) & 255, n & 255 ];
+  }
+  const cache = new Map();
+  function fogged(hex, fogHex, t, mul){
+    const key = hex + fogHex + ((t * 40) | 0) + '_' + ((mul * 20) | 0);
+    let v = cache.get(key);
+    if (v) return v;
+    const a = rgb(hex), b = rgb(fogHex);
+    const out = [0,0,0];
+    for (let i = 0; i < 3; i++){
+      const lit = Math.min(255, a[i] * mul);
+      out[i] = Math.round(lit + (b[i] - lit) * t);
+    }
+    v = 'rgb(' + out[0] + ',' + out[1] + ',' + out[2] + ')';
+    cache.set(key, v);
+    return v;
+  }
+
+  /* --- projection ---------------------------------------------------- */
+  let bob = 0;
+  function px(x, z){ return cx + ((x - across) * f) / z; }
+  function py(y, z){ return cy - ((y - bob) * f) / z; }
+
+  function quad(x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4, fill){
+    ctx.beginPath();
+    ctx.moveTo(px(x1,z1), py(y1,z1));
+    ctx.lineTo(px(x2,z2), py(y2,z2));
+    ctx.lineTo(px(x3,z3), py(y3,z3));
+    ctx.lineTo(px(x4,z4), py(y4,z4));
+    ctx.closePath();
+    ctx.fillStyle = fill;
+    ctx.fill();
+  }
+
+  /* --- doors --------------------------------------------------------- */
+  /* a panel carries a door when its global index divides by DOOR_N. the
+     side alternates, so you pass one on the left, then one on the right,
+     which is what stops the corridor reading as a tunnel. */
+  function doorSide(gi){
+    if (gi % DOOR_N !== 0) return 0;
+    /* storage has no doors along it, which is fine until it is the
+       section you are standing in. one turns up after forty-odd metres.
+       it was not there on the way in. */
+    if (room === 5 && (walked - roomStart) < 46) return 0;
+    return (gi % (DOOR_N * 2) === 0) ? -1 : 1;
+  }
+
+  /* --- the frame ------------------------------------------------------ */
+  function draw(dt){
+    const R = ROOMS[room];
+    const far = DEPTH * SEG;
+
+    /* the haze at the vanishing point, painted first as the backdrop */
+    ctx.fillStyle = R.fog;
+    ctx.fillRect(0, 0, W, H);
+
+    const base = SEG - (walked % SEG);
+    const gi0  = Math.floor(walked / SEG);
+    const t    = performance.now() / 1000;
+
+    for (let k = DEPTH; k >= 1; k--){
+      const zF = base + k * SEG;             // far edge of this panel
+      const zN = Math.max(0.08, zF - SEG);   // near edge
+      if (zF <= 0.1) continue;
+
+      const gi   = gi0 + k;
+      const mid  = (zN + zF) / 2;
+      const fade = Math.min(1, Math.pow(mid / far, 0.78));
+
+      /* panels alternate very slightly, the way real joins catch light */
+      const band = (gi % 2 === 0) ? 1.0 : 0.965;
+
+      /* ceiling and floor */
+      quad(-HALF_W, CEIL, zN,  HALF_W, CEIL, zN,  HALF_W, CEIL, zF, -HALF_W, CEIL, zF,
+           fogged(R.ceil, R.fog, fade, band));
+      quad(-HALF_W, FLOOR, zN,  HALF_W, FLOOR, zN,  HALF_W, FLOOR, zF, -HALF_W, FLOOR, zF,
+           fogged(R.floor, R.fog, fade, band * 0.94));
+
+      /* the two walls */
+      quad(-HALF_W, FLOOR, zN, -HALF_W, CEIL, zN, -HALF_W, CEIL, zF, -HALF_W, FLOOR, zF,
+           fogged(R.wall, R.fog, fade, band * 0.90));
+      quad( HALF_W, FLOOR, zN,  HALF_W, CEIL, zN,  HALF_W, CEIL, zF,  HALF_W, FLOOR, zF,
+           fogged(R.wall, R.fog, fade, band * 0.99));
+
+      /* skirting, which is most of what sells it as a building */
+      const sk = FLOOR + 0.13;
+      quad(-HALF_W, FLOOR, zN, -HALF_W, sk, zN, -HALF_W, sk, zF, -HALF_W, FLOOR, zF,
+           fogged(R.trim, R.fog, fade, 0.92));
+      quad( HALF_W, FLOOR, zN,  HALF_W, sk, zN,  HALF_W, sk, zF,  HALF_W, FLOOR, zF,
+           fogged(R.trim, R.fog, fade, 1.0));
+
+      /* the light. every second panel, one tube, and tube 4 of every
+         seven is failing, because one always is. */
+      if (gi % 2 === 0){
+        const dying = (gi % 7 === 4);
+        let lit = 1;
+        if (dying && !reduce){
+          const n = Math.sin(t * 21 + gi) * Math.sin(t * 6.3 + gi * 2.1);
+          lit = n > 0.55 ? 0.25 : 1;
+        } else if (dying){ lit = 0.7; }
+
+        const lz1 = zN + 0.55, lz2 = zN + 1.6;
+        quad(-0.44, CEIL - 0.005, lz1,  0.44, CEIL - 0.005, lz1,
+              0.44, CEIL - 0.005, lz2, -0.44, CEIL - 0.005, lz2,
+             fogged(R.light, R.fog, fade * 0.7, lit));
+
+        /* the pool it throws on the floor. no bounce lighting in 1997,
+           so it is drawn as a shape, which is what everyone did. */
+        ctx.globalAlpha = 0.16 * lit * (1 - fade);
+        quad(-0.9, FLOOR + 0.002, lz1 - 0.5,  0.9, FLOOR + 0.002, lz1 - 0.5,
+              0.9, FLOOR + 0.002, lz2 + 0.5, -0.9, FLOOR + 0.002, lz2 + 0.5,
+             R.light);
+        ctx.globalAlpha = 1;
+      }
+
+      /* the door */
+      const side = doorSide(gi);
+      if (side !== 0){
+        const x  = side * (HALF_W - 0.012);
+        const z1 = zN + 0.5, z2 = zN + 1.55;
+        const dTop = FLOOR + 2.05;
+        /* frame, then leaf, then the plate that says 12 */
+        quad(x, FLOOR, z1 - 0.07, x, dTop + 0.07, z1 - 0.07,
+             x, dTop + 0.07, z2 + 0.07, x, FLOOR, z2 + 0.07,
+             fogged(R.trim, R.fog, fade, 0.86));
+        quad(x, FLOOR, z1, x, dTop, z1, x, dTop, z2, x, FLOOR, z2,
+             fogged(R.door, R.fog, fade, side < 0 ? 0.94 : 1.02));
+        quad(x, dTop + 0.12, z1 + 0.35, x, dTop + 0.30, z1 + 0.35,
+             x, dTop + 0.30, z1 + 0.62, x, dTop + 0.12, z1 + 0.62,
+             fogged('#f3ecd6', R.fog, fade, 1));
+        /* handle */
+        const hz = (side < 0) ? z2 - 0.16 : z1 + 0.16;
+        quad(x, FLOOR + 1.02, hz - 0.06, x, FLOOR + 1.10, hz - 0.06,
+             x, FLOOR + 1.10, hz + 0.06, x, FLOOR + 1.02, hz + 0.06,
+             fogged('#2a2418', R.fog, fade, 1));
+      }
+    }
+
+    /* the haze again, over the far end, so the corridor dissolves rather
+       than ending in a wall */
+    const g = ctx.createRadialGradient(px(0, far), py(0, far), 0,
+                                       px(0, far), py(0, far), H * 0.52);
+    g.addColorStop(0, R.fog);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    grain();
+  }
+
+  /* --- grain. one tile, stamped at a new offset each frame. ---------- */
+  let noise = null;
+  function makeNoise(){
+    const n = document.createElement('canvas');
+    n.width = n.height = 96;
+    const nc = n.getContext('2d');
+    const img = nc.createImageData(96, 96);
+    for (let i = 0; i < img.data.length; i += 4){
+      const v = 128 + ((Math.random() * 70) | 0) - 35;
+      img.data[i] = img.data[i+1] = img.data[i+2] = v;
+      img.data[i+3] = 255;
+    }
+    nc.putImageData(img, 0, 0);
+    noise = n;
+  }
+  function grain(){
+    if (!noise) makeNoise();
+    ctx.globalAlpha = 0.055;
+    ctx.globalCompositeOperation = 'overlay';
+    const ox = reduce ? 0 : -((Math.random() * 96) | 0);
+    const oy = reduce ? 0 : -((Math.random() * 96) | 0);
+    for (let x = ox; x < W; x += 96)
+      for (let y = oy; y < H; y += 96)
+        ctx.drawImage(noise, x, y);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+  }
+
+  /* --- readouts ------------------------------------------------------ */
+  const el = {
+    met:  document.getElementById('metVal'),
+    door: document.getElementById('doorVal'),
+    open: document.getElementById('openVal'),
+    exit: document.getElementById('exitVal'),
+    roomv:document.getElementById('roomVal'),
+    prompt: document.getElementById('prompt'),
+    log:  document.getElementById('log')
+  };
+  let hudTick = 0;
+  function hud(){
+    const passed = Math.floor(walked / (SEG * DOOR_N));
+    el.met.textContent  = Math.round(walked) + ' m';
+    el.door.textContent = String(passed);
+    el.open.textContent = String(opened);
+
+    let left = exitAt - walked;
+    if (left < 4){
+      /* it recalculates. it has always recalculated. */
+      exitAt = walked + 36 + Math.random() * 9;
+      recalcUntil = performance.now() + 1400;
+      left = exitAt - walked;
+    }
+    const recalcing = performance.now() < recalcUntil;
+    el.exit.textContent = recalcing ? 'RECALCULATING' : Math.round(left) + ' m';
+    el.exit.className = recalcing ? 'recalc' : '';
+
+    el.roomv.innerHTML = ROOMS[room].name + ' &#183; BAY ' + bay + ' &#183; SUBLEVEL ?';
+  }
+
+  function say(line){
+    const p = document.createElement('p');
+    p.textContent = line;
+    el.log.appendChild(p);
+    while (el.log.children.length > 4) el.log.removeChild(el.log.firstChild);
+  }
+
+  /* --- the door in front of you -------------------------------------- */
+  /* returns the distance to the nearest door leaf, or -1 for none. */
+  function doorAhead(){
+    const base = SEG - (walked % SEG);
+    const gi0  = Math.floor(walked / SEG);
+    for (let k = 0; k <= 2; k++){
+      const gi = gi0 + k;
+      const side = doorSide(gi);
+      if (!side) continue;
+      const zN = base + (k - 1) * SEG;
+      const centre = zN + 1.0;
+      /* you have to be near it and standing on that side of the corridor */
+      if (centre > 0.15 && centre < 2.2 && (side < 0 ? across < 0.15 : across > -0.15))
+        return centre;
+    }
+    return -1;
+  }
+
+  const BEHIND = [
+    'you open door 12. behind it is the corridor you were standing in.',
+    'door 12 gives on the second push. the lights on the far section are already on.',
+    'the floor beyond has been waxed recently. nothing has walked on it.',
+    'door 12. the air on the other side is exactly the same temperature.',
+    'it opens onto a bay identical to this one, numbered differently.',
+    'the vents do not change pitch when the door swings.'
+  ];
+  function openDoor(){
+    const d = doorAhead();
+    if (d < 0) return;
+
+    /* which section is behind it. mostly the same one. */
+    const roll = Math.random();
+    let next;
+    if (roll < 0.07) next = 5;
+    else if (roll < 0.18) next = 4;
+    else next = COMMON[(Math.random() * COMMON.length) | 0];
+
+    const same = (next === room);
+    opened++;
+    bay++;
+    walked += d + 0.6;        // stepping through counts as walking
+    across = 0;
+    room = next;
+    roomStart = walked;
+
+    /* if the name on the section did not change, the log says so in the
+       flattest way available. if it did, the line matches the walls. */
+    say(same ? BEHIND[(Math.random() * BEHIND.length) | 0] : ARRIVAL[next]);
+
+    const fl = document.getElementById('flash');
+    if (fl && !reduce){
+      fl.classList.add('on');
+      requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove('on')));
+    }
+    save();
+    hud();
+  }
+
+  function save(){
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        metres: Math.round(saved.metres + walked),
+        doors:  saved.doors + opened,
+        visits: saved.visits
+      }));
+    } catch (_) {}
+  }
+
+  /* --- the loop ------------------------------------------------------- */
+  function frame(now){
+    if (!running) return;
+    const dt = Math.min(0.05, (now - last) / 1000 || 0);
+    last = now;
+
+    const auto = document.getElementById('autoWalk');
+    const moving = held.fwd || (auto && auto.checked && !held.back);
+
+    if (moving)      walked += SPEED * dt;
+    if (held.back)   walked = Math.max(0, walked - SPEED * 0.7 * dt);
+    if (held.left)   across = Math.max(-HALF_W + 0.42, across - 1.6 * dt);
+    if (held.right)  across = Math.min( HALF_W - 0.42, across + 1.6 * dt);
+
+    /* the walk itself. a small rise and fall, and nothing at all if the
+       visitor has asked for less motion. */
+    bob = (moving && !reduce) ? Math.sin(walked * 3.1) * 0.028 : 0;
+
+    draw(dt);
+
+    const d = doorAhead();
+    el.prompt.hidden = !(d > 0.15 && d < 1.9);
+
+    if (++hudTick % 6 === 0) hud();
+    requestAnimationFrame(frame);
+  }
+
+  function start(){
+    if (running) return;
+    running = true;
+    last = performance.now();
+    requestAnimationFrame(frame);
+  }
+  function stop(){ running = false; }
+
+  /* --- input ---------------------------------------------------------- */
+  const veil = document.getElementById('veil');
+  function engage(){
+    engaged = true;
+    veil.hidden = true;
+    cv.focus();
+  }
+  veil.addEventListener('click', engage);
+  cv.addEventListener('pointerdown', engage);
+  cv.addEventListener('focus', () => { veil.hidden = true; engaged = true; });
+
+  const KEYS = {
+    ArrowUp:'fwd', w:'fwd', W:'fwd',
+    ArrowDown:'back', s:'back', S:'back',
+    ArrowLeft:'left', a:'left', A:'left',
+    ArrowRight:'right', d:'right', D:'right'
+  };
+  /* keys are only taken once the visitor has clicked into the corridor,
+     so the page still scrolls with the arrows until they ask for it. */
+  window.addEventListener('keydown', e => {
+    if (!engaged) return;
+    if (e.key === 'e' || e.key === 'E'){ openDoor(); e.preventDefault(); return; }
+    if (e.key === 'Escape'){ engaged = false; veil.hidden = false; cv.blur(); return; }
+    const k = KEYS[e.key];
+    if (k){ held[k] = true; e.preventDefault(); }
+  });
+  window.addEventListener('keyup', e => {
+    const k = KEYS[e.key];
+    if (k) held[k] = false;
+  });
+  window.addEventListener('blur', () => { held.fwd = held.back = held.left = held.right = false; });
+
+  /* touch pads */
+  document.querySelectorAll('[data-hold]').forEach(b => {
+    const k = b.getAttribute('data-hold');
+    const on  = e => { engage(); held[k] = true;  e.preventDefault(); };
+    const off = () => { held[k] = false; };
+    b.addEventListener('pointerdown', on);
+    b.addEventListener('pointerup', off);
+    b.addEventListener('pointercancel', off);
+    b.addEventListener('pointerleave', off);
+  });
+  const padOpen = document.getElementById('padOpen');
+  if (padOpen) padOpen.addEventListener('click', () => { engage(); openDoor(); });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    walked = 0; across = 0; room = 0; bay = 1; exitAt = 40; roomStart = 0;
+    say('back at the start. the start is a bay like the others.');
+    hud();
+  });
+
+  /* --- the hum -------------------------------------------------------- */
+  /* two low sines and a lowpassed noise bed. it is the sound of a
+     building with nobody in it, and it stays off until asked for. */
+  (() => {
+    const btn = document.getElementById('humBtn');
+    let actx = null, nodes = null, on = false;
+
+    function build(){
+      const A = new (window.AudioContext || window.webkitAudioContext)();
+      const out = A.createGain(); out.gain.value = 0.0001; out.connect(A.destination);
+
+      const o1 = A.createOscillator(); o1.type = 'sine'; o1.frequency.value = 49.5;
+      const o2 = A.createOscillator(); o2.type = 'sine'; o2.frequency.value = 99.7;
+      const g1 = A.createGain(); g1.gain.value = 0.5;
+      const g2 = A.createGain(); g2.gain.value = 0.16;
+      o1.connect(g1).connect(out); o2.connect(g2).connect(out);
+
+      /* room tone: four seconds of noise, looped through a lowpass */
+      const len = A.sampleRate * 4;
+      const buf = A.createBuffer(1, len, A.sampleRate);
+      const ch = buf.getChannelData(0);
+      let v = 0;
+      for (let i = 0; i < len; i++){
+        v = (v + (Math.random() * 2 - 1) * 0.06) * 0.985;   // brown-ish
+        ch[i] = v;
+      }
+      const src = A.createBufferSource(); src.buffer = buf; src.loop = true;
+      const lp = A.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 620;
+      const gn = A.createGain(); gn.gain.value = 0.9;
+      src.connect(lp).connect(gn).connect(out);
+
+      o1.start(); o2.start(); src.start();
+      actx = A; nodes = { out };
+    }
+
+    btn.addEventListener('click', () => {
+      try {
+        if (!actx) build();
+        if (actx.state === 'suspended') actx.resume();
+        on = !on;
+        const t = actx.currentTime;
+        nodes.out.gain.cancelScheduledValues(t);
+        nodes.out.gain.setValueAtTime(Math.max(0.0001, nodes.out.gain.value), t);
+        nodes.out.gain.exponentialRampToValueAtTime(on ? 0.09 : 0.0001, t + 0.8);
+        btn.textContent = on ? 'hum: on' : 'hum: off';
+        btn.setAttribute('aria-pressed', String(on));
+      } catch (_) {
+        btn.textContent = 'hum: unavailable';
+      }
+    });
+  })();
+
+  /* --- stop when nobody is looking ------------------------------------ */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden){ stop(); document.title = 'liminal space (still open)'; }
+    else { document.title = 'liminal space'; start(); }
+  });
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => {
+      es.forEach(e => e.isIntersecting ? start() : stop());
+    }, { threshold: 0.05 }).observe(cv);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  hud();
+  start();
+
+  /* --- the welcome, which is where the page does its remembering ----- */
+  (() => {
+    saved.visits = (saved.visits || 0) + 1;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) {}
+
+    const counter = document.getElementById('visitCount');
+    const note    = document.getElementById('visitNote');
+    const welcome = document.getElementById('welcome');
+    if (counter) counter.textContent = String(saved.visits).padStart(6, '0');
+
+    if (saved.visits > 1){
+      const m = Math.round(saved.metres || 0);
+      if (note) note.textContent = 'you have signed in ' + saved.visits + ' times.';
+      welcome.innerHTML =
+        'you have been here before. last time you walked ' + m + ' metres and ' +
+        (saved.doors ? 'opened ' + saved.doors + ' doors. ' : 'opened nothing. ') +
+        'the lights are on. nobody is expecting you.';
+      say('badge recognised. ' + m + ' metres on record.');
+    } else {
+      if (note) note.textContent = 'first sign-in tonight.';
+    }
+  })();
+
+  const lm = document.getElementById('lastMod');
+  if (lm) lm.textContent = '3:14 am';
+})();
+</script>
+
+</body>
+</html>
