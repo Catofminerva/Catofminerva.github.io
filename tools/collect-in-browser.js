@@ -13,9 +13,15 @@
  *      .../top/?t=month&limit=100
  *      .../hot/?limit=100
  *      .../new/?limit=100
- * 5. the finished rooms.json is on your clipboard each time. in the repo:
- *      pbpaste > rooms.json
- *      git add rooms.json && git commit -m "Reddit rooms" && git push
+ * 5. it downloads rooms.json to your Downloads folder, and also puts it on
+ *    the clipboard if the console allows that. the download is the one to
+ *    trust: a clipboard can still be holding whatever you copied last,
+ *    and pasting that over rooms.json is how the file ends up full of
+ *    something else.
+ *
+ *    then, in the browser: github.com/<you>/<repo> -> Add file ->
+ *    Upload files -> drag rooms.json in -> Commit changes. A file of the
+ *    same name replaces the one that is there.
  *
  * old.reddit is deliberate: every post there carries the real image url in
  * a data attribute, while the modern site renders signed thumbnail urls
@@ -70,12 +76,33 @@
   };
   const text = JSON.stringify(payload, null, 1);
 
-  if (typeof copy === 'function') copy(text);
-  console.log('%c+' + added + ' new, ' + rooms.length + ' collected in total. '
-    + (typeof copy === 'function' ? 'On your clipboard: pbpaste > rooms.json'
-                                  : 'Copy the object logged below.'),
-    'color:#080;font-weight:bold');
-  console.log('%cSkipped ' + skipped + ' posts that were not plain images.', 'color:#666');
-  if (typeof copy !== 'function') console.log(text);
+  /* Download it as a file. The clipboard is not reliable here: copy()
+     is a console convenience, it fails quietly when the page has not got
+     focus, and it leaves whatever you copied last sitting there looking
+     exactly like success. A file on disk cannot be mistaken for one. */
+  let saved = false;
+  try {
+    const blob = new Blob([text], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'rooms.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    saved = true;
+  } catch (e) {
+    console.log('%ccould not download: ' + e.message, 'color:#c00');
+  }
+
+  try { if (typeof copy === 'function') copy(text); } catch (_) {}
+
+  console.log('%c+' + added + ' new. ' + rooms.length + ' rooms collected in total.',
+    'color:#080;font-weight:bold;font-size:13px');
+  console.log(saved
+    ? '%crooms.json is in your Downloads folder. Upload that file to the repo.'
+    : '%cthe download did not start. copy the text logged below into rooms.json.',
+    'color:#080');
+  console.log('%cskipped ' + skipped + ' posts that were not plain images.', 'color:#666');
+  if (!saved) console.log(text);
   return payload.count;
 })();
