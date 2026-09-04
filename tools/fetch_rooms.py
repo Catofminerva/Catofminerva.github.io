@@ -383,11 +383,38 @@ def from_files(paths, limit):
             print("could not read %s: %s" % (path, e), file=sys.stderr)
             continue
 
-        blobs = data if isinstance(data, list) else [data]
         found = 0
+
+        # Three shapes are accepted, because there are three ways to get
+        # the data out of reddit by hand and no reason to be fussy:
+        # a listing saved from the browser, a list of listings, or rooms
+        # already in this file's own shape from the console snippet.
+        if isinstance(data, dict) and isinstance(data.get("rooms"), list):
+            data = data["rooms"]
+        blobs = data if isinstance(data, list) else [data]
+
         for blob in blobs:
             if not isinstance(blob, dict):
                 continue
+
+            if "u" in blob and "p" in blob:            # already a room
+                key = blob.get("i") or blob["u"]
+                if key in seen:
+                    continue
+                seen.add(key)
+                rooms.append({
+                    "i": str(key),
+                    "u": blob["u"],
+                    "t": " ".join(str(blob.get("t") or "").split())[:180],
+                    "a": blob.get("a") or "unknown",
+                    "p": blob.get("p") or blob["u"],
+                    "d": blob.get("d") or "",
+                    "s": blob.get("s") or "r/LiminalSpace",
+                    "l": blob.get("l") or "",
+                })
+                found += 1
+                continue
+
             children = (blob.get("data") or {}).get("children") or []
             if not children and blob.get("message"):
                 print("  %s says: %s" % (path, blob.get("message")), file=sys.stderr)
