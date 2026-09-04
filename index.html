@@ -2188,21 +2188,6 @@ html.seizing, html.seizing body{ overflow:hidden; }
 }
 #seizure .screen img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-#seizure .charges{
-  max-width:540px; margin:0 auto 26px;
-  text-align:left;
-}
-#seizure .charges h3{
-  margin:0 0 10px; padding:0 0 7px;
-  border-bottom:1px solid #ccc;
-  color:#111;
-  font:bold 11px Arial, Helvetica, sans-serif; letter-spacing:.2em; text-transform:uppercase;
-}
-#seizure .charges ul{ margin:0; padding:0 0 0 20px; }
-#seizure .charges li{ margin:0 0 9px; color:#222; font-size:14px; }
-#seizure .charges li:last-child{ margin-bottom:0; }
-#seizure .charges .stat{ display:block; color:#777; font-size:11px; letter-spacing:.02em; }
-
 #seizure .buttons{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
 #seizure button{
   font:bold 13px Arial, Helvetica, sans-serif; letter-spacing:.04em;
@@ -2229,12 +2214,11 @@ html.seizing, html.seizing body{ overflow:hidden; }
 /* on anything wider than a phone the monitor and the charge sheet sit side by
    side, the way a filing does, so the way in stays near the fold */
 @media (min-width:780px){
-  #seizure .filing{
-    display:grid; grid-template-columns:340px minmax(0,1fr);
-    gap:30px; align-items:start; margin-bottom:26px;
-  }
-  #seizure .filing .screen{ width:340px; margin:0; }
-  #seizure .papers .charges{ max-width:none; margin:0; }
+  /* the monitor used to sit in the left column of a two column filing,
+     with the charge sheet beside it. the charges are gone, so there is
+     one thing to place and it belongs in the middle. */
+  #seizure .filing{ margin-bottom:26px; }
+  #seizure .filing .screen{ width:340px; margin:0 auto; }
 }
 
 /* short windows: take the air out so the buttons stay reachable */
@@ -2244,7 +2228,6 @@ html.seizing, html.seizing body{ overflow:hidden; }
   #seizure .sub{ margin-bottom:16px; }
   #seizure h2{ font-size:clamp(24px,5vw,36px); }
   #seizure .byline{ margin-bottom:18px; }
-  #seizure .charges li{ margin-bottom:6px; font-size:13px; }
   #seizure .filing{ margin-bottom:18px !important; }
 }
 
@@ -2285,8 +2268,6 @@ html.seizing, html.seizing body{ overflow:hidden; }
     <div class="screen">
       <img src="seized.gif" alt="An old CRT monitor displaying the internet" decoding="async">
     </div>
-    <div class="papers">
-    </div><!-- /papers -->
     </div><!-- /filing -->
     <div class="buttons">
       <button type="button" id="seiz-enter">I ACCEPT THE RISK &#8212; ENTER</button>
