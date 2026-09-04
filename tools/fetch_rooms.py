@@ -359,6 +359,49 @@ def harvest_commons(limit, pause):
     return rooms[:limit]
 
 
+def from_files(paths, limit):
+    """Turn saved reddit listings into rooms without touching the network.
+
+    curl on a home machine has working certificates and an address reddit
+    will talk to, which are two problems this script cannot solve for
+    itself. Save the listing with curl, convert it here:
+
+        curl -s -A "liminal rooms" \
+          "https://www.reddit.com/r/LiminalSpace/top.json?t=year&limit=100&raw_json=1" \
+          -o /tmp/lim.json
+        python3 tools/fetch_rooms.py --from-file /tmp/lim.json
+
+    Several files at once are fine, which is how you get past the hundred
+    posts a single listing will hand over.
+    """
+    seen, rooms = set(), []
+    for path in paths:
+        try:
+            with open(path, encoding="utf-8") as fh:
+                data = json.load(fh)
+        except Exception as e:                        # noqa: BLE001
+            print("could not read %s: %s" % (path, e), file=sys.stderr)
+            continue
+
+        blobs = data if isinstance(data, list) else [data]
+        found = 0
+        for blob in blobs:
+            if not isinstance(blob, dict):
+                continue
+            children = (blob.get("data") or {}).get("children") or []
+            if not children and blob.get("message"):
+                print("  %s says: %s" % (path, blob.get("message")), file=sys.stderr)
+            for child in children:
+                post = child.get("data") or {}
+                if post.get("id") in seen or not keep(post):
+                    continue
+                seen.add(post["id"])
+                rooms.append(as_room(post))
+                found += 1
+        print("%s: +%d (%d total)" % (path, found, len(rooms)), file=sys.stderr)
+    return rooms[:limit]
+
+
 def probe():
     """Print what the image sources actually answer.
 
