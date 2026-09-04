@@ -317,21 +317,6 @@ table.hud td.wide{ white-space:normal; }
 .applet .strip2 button:active{ border-color:#6f6748 #f2ecd8 #f2ecd8 #6f6748; }
 .applet .strip2 label{ cursor:pointer; }
 
-/* the log of what happened behind each door */
-.log{
-  margin:0 6px 8px;
-  padding:6px 8px;
-  min-height:58px;
-  background:#000;
-  border:2px inset #9b9169;
-  font:11px/1.65 "Courier New", monospace;
-  color:#9fe89f;
-}
-.log p{ margin:0 0 3px; }
-.log p:last-child{ margin:0; color:#e6ffd9; }
-
-/* the credit under the frame. these are other people's photographs and
-   the page says so, with the thread one click away. */
 .plate{
   margin:0 6px 8px;
   padding:5px 8px;
@@ -455,14 +440,7 @@ a:hover{ color:#c00; }
             </tbody>
           </table>
 
-          <div class="log" id="log" aria-live="polite">
-            <p>the lights are on. they were on before you got here.</p>
-          </div>
-
           <div class="plate" id="plateCap" hidden></div>
-
-      
-          </div>
 
           <div class="strip2">
             <button type="button" id="humBtn" aria-pressed="false">hum: off</button>
@@ -520,7 +498,6 @@ a:hover{ color:#c00; }
     doors:   document.getElementById('doors'),
     fade:    document.getElementById('fade'),
     loading: document.getElementById('loading'),
-    log:     document.getElementById('log'),
     cap:     document.getElementById('plateCap'),
     bar:     document.getElementById('barInfo'),
     room:    document.getElementById('roomVal'),
@@ -555,24 +532,6 @@ a:hover{ color:#c00; }
       h = Math.imul(h, 16777619);
     }
     return (h >>> 0) / 4294967296;      // 0..1
-  }
-
-  const LINES = [
-    'the door closes behind you. it does not open again from this side.',
-    'same light. same hum. a different room.',
-    'the floor in here has been cleaned recently. nothing has walked on it.',
-    'no windows in this one either.',
-    'the air is the same temperature it was in the last one.',
-    'somewhere a fan is running. it is not in this room.',
-    'you have gone through another door.',
-    'nobody has been through here since the picture was taken.'
-  ];
-
-  function say(line){
-    const p = document.createElement('p');
-    p.textContent = line;
-    el.log.appendChild(p);
-    while (el.log.children.length > 4) el.log.removeChild(el.log.firstChild);
   }
 
   /* --- what is behind a door ------------------------------------------
@@ -611,7 +570,7 @@ a:hover{ color:#c00; }
   /* enter() renders a room. it does not count one: a photograph that
      will not load is not a room you walked into, and counting it made
      the number climb on its own while nothing was on screen. */
-  function enter(idx, note){
+  function enter(idx){
     if (!plates.length) return;
     here = idx;
     const meta = plates[idx];
@@ -628,9 +587,8 @@ a:hover{ color:#c00; }
         el.img.naturalWidth + ' × ' + el.img.naturalHeight + ' · ' + (meta.s || 'r/LiminalSpace');
     };
     el.img.onerror = () => {
-      say('that room is not in the file any more.');
       plates.splice(idx, 1);
-      if (plates.length) enter(idx % plates.length, null);
+      if (plates.length) enter(idx % plates.length);
       else { el.loading.textContent = 'no rooms in the file.'; el.doors.textContent = ''; }
     };
     el.img.src = meta.u;
@@ -639,10 +597,6 @@ a:hover{ color:#c00; }
     paintDoors();
     caption(meta);
     hud();
-
-    if (note) say(note);
-    else if (beenHere) say('you have been in this room before. the doors are where they were.');
-    else say(LINES[Math.floor(hash(meta.u, 71) * LINES.length)]);
 
     /* whatever is behind these doors, fetched while you decide */
     for (let i = 0; i < doorsOf(here).length; i++){
@@ -686,6 +640,13 @@ a:hover{ color:#c00; }
 
   function audio(){
     if (actx) return actx;
+    try {
+      /* iOS silences web audio when the ringer switch is off, unless the
+         page says what kind of sound it is making. this line is the
+         difference between a hum and silence on a phone that happens to
+         be on silent, which is most phones. */
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    } catch (_) {}
     try { actx = new (window.AudioContext || window.webkitAudioContext)(); }
     catch (_) { return null; }
     return actx;
@@ -733,16 +694,42 @@ a:hover{ color:#c00; }
   }
 
   /* the page cannot make a sound until the visitor has done something,
-     so the hum waits for the first thing they do and then comes up. */
+     so the hum waits for the first thing they do and then comes up.
+
+     mobile safari, which is also chrome on an iphone, is stricter than
+     this suggests. it wants the resume to happen inside the gesture, it
+     wants a buffer actually played before it will treat the context as
+     unlocked, and it will hand back a context that claims to be running
+     while producing nothing. so: several kinds of gesture are listened
+     for, a silent buffer is played on each one, and the listeners stay
+     attached until the context is genuinely running rather than being
+     removed after the first try. */
+  let unlocked = false;
   function wake(){
     const A = audio();
     if (!A) return;
     buildHum();
     if (A.state === 'suspended') A.resume();
+
+    if (!unlocked){
+      try {
+        const b = A.createBuffer(1, 1, A.sampleRate);
+        const src = A.createBufferSource();
+        src.buffer = b;
+        src.connect(A.destination);
+        src.start(0);
+        unlocked = true;
+      } catch (_) {}
+    }
     humLevel();
+
+    if (A.state === 'running') detachWake();
   }
-  ['pointerdown', 'keydown'].forEach(ev =>
-    window.addEventListener(ev, wake, { once: true, passive: true }));
+  const WAKERS = ['pointerdown', 'touchend', 'click', 'keydown'];
+  function detachWake(){
+    WAKERS.forEach(ev => window.removeEventListener(ev, wake, true));
+  }
+  WAKERS.forEach(ev => window.addEventListener(ev, wake, true));
 
   paintHum();
   buildHum();
@@ -756,6 +743,7 @@ a:hover{ color:#c00; }
     if (!A) return;
     try {
       if (A.state === 'suspended') A.resume();
+      if (!unlocked) wake();
       const t = A.currentTime;
 
       const n = A.createBuffer(1, A.sampleRate * 0.4, A.sampleRate);
@@ -820,7 +808,6 @@ a:hover{ color:#c00; }
     if (busy || !plates.length) return;
     const doors = doorsOf(here).length;
     go(Math.floor(hash(plates[here].u, 91) * doors));
-    setTimeout(() => say('that was the door you came in by. it is not.'), 200);
   }
 
   function hud(){
@@ -878,12 +865,15 @@ a:hover{ color:#c00; }
   document.getElementById('backBtn').addEventListener('click', goBack);
   document.getElementById('resetBtn').addEventListener('click', () => {
     depth = 1; taken = 0; again = 0; visited.clear();
-    enter(Math.floor(Math.random() * plates.length), 'you start again, in a room you have not asked for.');
+    enter(Math.floor(Math.random() * plates.length));
   });
 
   document.getElementById('humBtn').addEventListener('click', () => {
     humOn = !humOn;
     try { localStorage.setItem(SND, humOn ? 'on' : 'off'); } catch (_) {}
+    /* this click is itself a gesture, so it is the most reliable moment
+       there is to get the context going on a phone */
+    unlocked = false;
     wake();
     paintHum();
   });
@@ -934,13 +924,11 @@ a:hover{ color:#c00; }
     if (!plates.length){
       el.loading.textContent = 'no rooms in the file.';
       if (el.bar) el.bar.textContent = 'rooms.json is empty';
-      say('there are no photographs in the file, so there are no rooms.');
       return;
     }
     if (el.bar) el.bar.textContent = plates.length + ' rooms in the file';
     depth = 1;
-    enter(Math.floor(Math.random() * plates.length),
-          'you are in a room. you do not remember the door you came in by.');
+    enter(Math.floor(Math.random() * plates.length));
   });
 
   /* --- the welcome, which is where the page does its remembering -------- */
