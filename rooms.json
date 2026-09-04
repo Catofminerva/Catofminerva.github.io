@@ -1,1410 +1,10 @@
 {
  "source": "commons",
  "subreddit": null,
- "generated": "2026-09-04T09:47:43Z",
+ "generated": "2026-09-04T09:49:57Z",
  "note": "photographs stay on their own servers. the page hotlinks them and credits every one.",
  "count": 250,
  "rooms": [
-  {
-   "i": "7419946",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/2009_-_Laeken_-_Grave_galleries.jpg/1920px-2009_-_Laeken_-_Grave_galleries.jpg",
-   "t": "2009 - Laeken - Grave galleries",
-   "a": "P.J.L Laurens",
-   "p": "https://commons.wikimedia.org/wiki/File:2009_-_Laeken_-_Grave_galleries.jpg",
-   "d": "2009-07-25",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 3.0"
-  },
-  {
-   "i": "21152354",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Passage_des_Princes%2C_Paris_2e.jpg/1920px-Passage_des_Princes%2C_Paris_2e.jpg",
-   "t": "Passage des Princes, Paris 2e",
-   "a": "Moonik",
-   "p": "https://commons.wikimedia.org/wiki/File:Passage_des_Princes,_Paris_2e.jpg",
-   "d": "Taken on 2",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
-   "i": "39935413",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Corridor%2C_Radiance_of_the_Seas.jpg/1920px-Corridor%2C_Radiance_of_the_Seas.jpg",
-   "t": "Corridor, Radiance of the Seas",
-   "a": "Mitch Ames",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor,_Radiance_of_the_Seas.jpg",
-   "d": "2013-11-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "53923682",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Interior_of_the_Royal_Corridor_01.jpg/1920px-Interior_of_the_Royal_Corridor_01.jpg",
-   "t": "Interior of the Royal Corridor 01",
-   "a": "Artinpl",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_01.jpg",
-   "d": "2016",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "53923683",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Interior_of_the_Royal_Corridor_02.jpg/1920px-Interior_of_the_Royal_Corridor_02.jpg",
-   "t": "Interior of the Royal Corridor 02",
-   "a": "Artinpl",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_02.jpg",
-   "d": "2016",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "53923685",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Interior_of_the_Royal_Corridor_03.jpg/1920px-Interior_of_the_Royal_Corridor_03.jpg",
-   "t": "Interior of the Royal Corridor 03",
-   "a": "Artinpl",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Royal_Corridor_03.jpg",
-   "d": "2016",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "56653158",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs.jpg",
-   "t": "Santa Giustina (Padua) - Corridor of the Martyrs",
-   "a": "Didier Descouens",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "56688348",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_well.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_well.jpg",
-   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - well",
-   "a": "Didier Descouens",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_well.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "56768641",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_Ceiling.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_Ceiling.jpg",
-   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - Ceiling",
-   "a": "Didier Descouens",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_Ceiling.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "56798395",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg/1920px-Santa_Giustina_%28Padua%29_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg",
-   "t": "Santa Giustina (Padua) - Corridor of the Martyrs - The old cage of St Luc",
-   "a": "Didier Descouens",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Giustina_(Padua)_-_Corridor_of_the_Martyrs_-_The_old_cage_of_St_Luc.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "63234508",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Ferens_Hall_%28Interior_Corridor%29.jpg/1920px-Ferens_Hall_%28Interior_Corridor%29.jpg",
-   "t": "Ferens Hall (Interior Corridor)",
-   "a": "Robin S. Taylor",
-   "p": "https://commons.wikimedia.org/wiki/File:Ferens_Hall_(Interior_Corridor).jpg",
-   "d": "2017-10-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "72728269",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/The_Cloisters_at_Gloucester_Cathedral.jpg/1920px-The_Cloisters_at_Gloucester_Cathedral.jpg",
-   "t": "The Cloisters at Gloucester Cathedral",
-   "a": "Christopher JT Cherrington",
-   "p": "https://commons.wikimedia.org/wiki/File:The_Cloisters_at_Gloucester_Cathedral.jpg",
-   "d": "2018-01-17",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "74756768",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg/1920px-Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg",
-   "t": "Long corridor with someone sitting on the floor in the distance at Marina Bay MRT Station Singapore",
-   "a": "Basile Morin",
-   "p": "https://commons.wikimedia.org/wiki/File:Long_corridor_with_someone_sitting_on_the_floor_in_the_distance_at_Marina_Bay_MRT_Station_Singapore.jpg",
-   "d": "2018-06-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "77044191",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Explorer_of_the_Seas_corridor.jpg/1920px-Explorer_of_the_Seas_corridor.jpg",
-   "t": "Explorer of the Seas corridor",
-   "a": "Mitch Ames",
-   "p": "https://commons.wikimedia.org/wiki/File:Explorer_of_the_Seas_corridor.jpg",
-   "d": "2019-02-05",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "78492793",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg",
-   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0486",
-   "a": "Paul R. Burley",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0486.jpg",
-   "d": "2019-03-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "78492835",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg",
-   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0494",
-   "a": "Paul R. Burley",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0494.jpg",
-   "d": "2019-03-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "78492863",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg/1920px-Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg",
-   "t": "Santa Casa de Misericórdia Salvador Bahia Corridor 2019-0506",
-   "a": "Paul R. Burley",
-   "p": "https://commons.wikimedia.org/wiki/File:Santa_Casa_de_Miseric%C3%B3rdia_Salvador_Bahia_Corridor_2019-0506.jpg",
-   "d": "2019-03-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "80020278",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg/1920px-Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg",
-   "t": "Igreja de Santo Antônio Além do Carmo Corridor 2019-0665",
-   "a": "Paul R. Burley",
-   "p": "https://commons.wikimedia.org/wiki/File:Igreja_de_Santo_Ant%C3%B4nio_Al%C3%A9m_do_Carmo_Corridor_2019-0665.jpg",
-   "d": "2019-03-29",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "80252921",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg/1920px-School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
-   "t": "School corridor in the Building of College of Humanities and Social Sciences of NTHU 01",
-   "a": "H. H. Tsai",
-   "p": "https://commons.wikimedia.org/wiki/File:School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
-   "d": "2019-05-30",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "94746361",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Castle_De_Haar_%281892-1913%29_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg/1920px-Castle_De_Haar_%281892-1913%29_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg",
-   "t": "Castle De Haar (1892-1913) - Staircase leading to 1st Floor - Corridor",
-   "a": "Txllxt TxllxT",
-   "p": "https://commons.wikimedia.org/wiki/File:Castle_De_Haar_(1892-1913)_-_Staircase_leading_to_1st_Floor_-_Corridor.jpg",
-   "d": "2020-09-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "107818076",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg/1920px-Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
-   "t": "Hotel room corridor at Circus Circus Reno in 2010",
-   "a": "Sam Craig",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "108622025",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Corridor_Image.jpg",
-   "t": "Corridor Image",
-   "a": "Latte1703",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Image.jpg",
-   "d": "2021-08-15",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "110643739",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Corridor_inside_Riksdag.jpg/1920px-Corridor_inside_Riksdag.jpg",
-   "t": "Corridor inside Riksdag",
-   "a": "ANKAN",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_inside_Riksdag.jpg",
-   "d": "2019-08-14",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "121633361",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Capitol_Corridor_Amtrak_interior%2C_2022.jpg/1920px-Capitol_Corridor_Amtrak_interior%2C_2022.jpg",
-   "t": "Capitol Corridor Amtrak interior, 2022",
-   "a": "CarmenEsparzaAmoux",
-   "p": "https://commons.wikimedia.org/wiki/File:Capitol_Corridor_Amtrak_interior,_2022.jpg",
-   "d": "2022-08-09",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "121675318",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Capitol_Corridor%2C_interior_train_2022.jpg/1920px-Capitol_Corridor%2C_interior_train_2022.jpg",
-   "t": "Capitol Corridor, interior train 2022",
-   "a": "CarmenEsparzaAmoux",
-   "p": "https://commons.wikimedia.org/wiki/File:Capitol_Corridor,_interior_train_2022.jpg",
-   "d": "2022-08-09",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "125107128",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg/1920px-Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg",
-   "t": "Dublin Castle Interior - State Corridor - geograph.org.uk - 3966097",
-   "a": "Suzanne Mischyshyn",
-   "p": "https://commons.wikimedia.org/wiki/File:Dublin_Castle_Interior_-_State_Corridor_-_geograph.org.uk_-_3966097.jpg",
-   "d": "2013-09-21",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "130813500",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Interi%C3%B6r%2C_Stena_Danica%2C_corridor%2C_20230410%2C_pic_17.jpg/1920px-Interi%C3%B6r%2C_Stena_Danica%2C_corridor%2C_20230410%2C_pic_17.jpg",
-   "t": "Interiör, Stena Danica, corridor, 20230410, pic 17",
-   "a": "AleWi",
-   "p": "https://commons.wikimedia.org/wiki/File:Interi%C3%B6r,_Stena_Danica,_corridor,_20230410,_pic_17.jpg",
-   "d": "2023-04-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "132327727",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_%28interior%29.jpg/1920px-Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_%28interior%29.jpg",
-   "t": "Building of the Supreme Administrative Court of the Czech Republic (interior)",
-   "a": "Qasinka",
-   "p": "https://commons.wikimedia.org/wiki/File:Building_of_the_Supreme_Administrative_Court_of_the_Czech_Republic_(interior).jpg",
-   "d": "2023-05-24",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "138384661",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg/1920px-Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
-   "t": "Corridor leading to indoor pool of spa at Amantaka luxury Resort & Hotel in Luang Prabang Laos front view",
-   "a": "Basile Morin",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
-   "d": "2023-09-19",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "139891008",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg/1920px-Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg",
-   "t": "Interior of Grand Hotel Kaohsiung-09.2023-10-31",
-   "a": "阿道",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Grand_Hotel_Kaohsiung-09.2023-10-31.jpg",
-   "d": "2023-10-31",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "141881939",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg/1920px-Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg",
-   "t": "Stairs lit with colorful neon lights inside a corridor of the Atomium in Brussels Belgium",
-   "a": "Basile Morin",
-   "p": "https://commons.wikimedia.org/wiki/File:Stairs_lit_with_colorful_neon_lights_inside_a_corridor_of_the_Atomium_in_Brussels_Belgium.jpg",
-   "d": "2023-07-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "149818998",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg/1920px-Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg",
-   "t": "Corridor Viikinmäki Wastewater Treatment Plant 1",
-   "a": "Antti Leppänen",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_1.jpg",
-   "d": "2024-06-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "149844764",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg/1920px-Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg",
-   "t": "Corridor Viikinmäki Wastewater Treatment Plant 2",
-   "a": "Antti Leppänen",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Viikinm%C3%A4ki_Wastewater_Treatment_Plant_2.jpg",
-   "d": "2024-06-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "150116680",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg/1920px-Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
-   "t": "Corridor Stanley Hotel Estes Park Colorado 2024",
-   "a": "Larry D. Moore",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
-   "d": "Taken on 3",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "152270446",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg",
-   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-02ASD",
-   "a": "Asurnipal",
-   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-02ASD.jpg",
-   "d": "2024-09-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "152270447",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg",
-   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-03ASD",
-   "a": "Asurnipal",
-   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-03ASD.jpg",
-   "d": "2024-09-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "152270449",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg/1920px-Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg",
-   "t": "Dornbirn-ORF Vorarlberg-Television studio-corridor-01ASD",
-   "a": "Asurnipal",
-   "p": "https://commons.wikimedia.org/wiki/File:Dornbirn-ORF_Vorarlberg-Television_studio-corridor-01ASD.jpg",
-   "d": "2024-09-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "155442931",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor%2C_side_corridor%2C_Michalovce%2C_Michalovce_district%2C_Slovakia.jpg/1920px-Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor%2C_side_corridor%2C_Michalovce%2C_Michalovce_district%2C_Slovakia.jpg",
-   "t": "Modern market hall interior - shops and businesses on the upper floor, side corridor, Michalovce, Michalovce district, Slovakia",
-   "a": "ZemplinTemplar",
-   "p": "https://commons.wikimedia.org/wiki/File:Modern_market_hall_interior_-_shops_and_businesses_on_the_upper_floor,_side_corridor,_Michalovce,_Michalovce_district,_Slovakia.jpg",
-   "d": "2024-09-27",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "162034289",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg/1920px-Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg",
-   "t": "Self-serve aisle in IKEA Torp Uddevalla - Cinematic edit",
-   "a": "W.carter",
-   "p": "https://commons.wikimedia.org/wiki/File:Self-serve_aisle_in_IKEA_Torp_Uddevalla_-_Cinematic_edit.jpg",
-   "d": "2018-05-06",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "172255512",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg/1920px-SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg",
-   "t": "SM Megamall Mega B Interior with LGBT pride color strips",
-   "a": "LastCelebration",
-   "p": "https://commons.wikimedia.org/wiki/File:SM_Megamall_Mega_B_Interior_with_LGBT_pride_color_strips.jpg",
-   "d": "2025-06-23",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "174680704",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_01.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_01.jpg",
-   "t": "Corridor at The Retreat, Heslington Road Aug25 01",
-   "a": "Malcolmxl5",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_Road_Aug25_01.jpg",
-   "d": "2025-08-31",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "174680710",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Corridor_at_The_Retreat%2C_Heslington_RoadAug25_05.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_RoadAug25_05.jpg",
-   "t": "Corridor at The Retreat, Heslington RoadAug25 05",
-   "a": "Malcolmxl5",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_RoadAug25_05.jpg",
-   "d": "2025-08-31",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "174680713",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_06.jpg/1920px-Corridor_at_The_Retreat%2C_Heslington_Road_Aug25_06.jpg",
-   "t": "Corridor at The Retreat, Heslington Road Aug25 06",
-   "a": "Malcolmxl5",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_The_Retreat,_Heslington_Road_Aug25_06.jpg",
-   "d": "2025-08-31",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "175180740",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/0/05/Corridor_in_Maastricht_Uni.jpg",
-   "t": "Corridor in Maastricht Uni",
-   "a": "HerrGutmannsWiki",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Maastricht_Uni.jpg",
-   "d": "2025-09-16",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "175207154",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/20250815_side_corridor_Panewniki_Basilica_01.jpg/1920px-20250815_side_corridor_Panewniki_Basilica_01.jpg",
-   "t": "20250815 side corridor Panewniki Basilica 01",
-   "a": "Abraham",
-   "p": "https://commons.wikimedia.org/wiki/File:20250815_side_corridor_Panewniki_Basilica_01.jpg",
-   "d": "2025-08-15",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "175589290",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Corridor_inside_the_Grandmaster%27s_Palace%2C_Valletta%2C_Malta.jpg/1920px-Corridor_inside_the_Grandmaster%27s_Palace%2C_Valletta%2C_Malta.jpg",
-   "t": "Corridor inside the Grandmaster's Palace, Valletta, Malta",
-   "a": "Julian Lupyan",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_inside_the_Grandmaster%27s_Palace,_Valletta,_Malta.jpg",
-   "d": "2025-05-31",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "191391879",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Servants%27_Corridor%2C_Petworth_House_2026-03-03.jpg/1920px-Servants%27_Corridor%2C_Petworth_House_2026-03-03.jpg",
-   "t": "Servants' Corridor, Petworth House 2026-03-03",
-   "a": "Andy Li",
-   "p": "https://commons.wikimedia.org/wiki/File:Servants%27_Corridor,_Petworth_House_2026-03-03.jpg",
-   "d": "2026-03-03",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "196893879",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Corridor_in_Arundel_Castle_2026-05-14.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14.jpg",
-   "t": "Corridor in Arundel Castle 2026-05-14",
-   "a": "Andy Li",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14.jpg",
-   "d": "2026-05-14",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "196931022",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Corridor_in_Arundel_Castle_2026-05-14_%282%29.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14_%282%29.jpg",
-   "t": "Corridor in Arundel Castle 2026-05-14 (2)",
-   "a": "Andy Li",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14_(2).jpg",
-   "d": "2026-05-14",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "196970038",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Corridor_in_Arundel_Castle_2026-05-14_%283%29.jpg/1920px-Corridor_in_Arundel_Castle_2026-05-14_%283%29.jpg",
-   "t": "Corridor in Arundel Castle 2026-05-14 (3)",
-   "a": "Andy Li",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Arundel_Castle_2026-05-14_(3).jpg",
-   "d": "2026-05-14",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "25231335",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Nordiska_Museet_Mars_2013.jpg/1920px-Nordiska_Museet_Mars_2013.jpg",
-   "t": "Nordiska Museet Mars 2013",
-   "a": "Arild Vågen",
-   "p": "https://commons.wikimedia.org/wiki/File:Nordiska_Museet_Mars_2013.jpg",
-   "d": "2013-03-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
-   "i": "36039242",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/8/83/Interior_hallway_of_Bergbau_Museum_Bochum.jpg",
-   "t": "Interior hallway of Bergbau Museum Bochum",
-   "a": "Thorsten Lohmann",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_hallway_of_Bergbau_Museum_Bochum.jpg",
-   "d": "2014-08-31",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "38549666",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Ely_Hall_hallway%2C_February_2015.jpg/1920px-Ely_Hall_hallway%2C_February_2015.jpg",
-   "t": "Ely Hall hallway, February 2015",
-   "a": "Collin Knopp-Schwyn",
-   "p": "https://commons.wikimedia.org/wiki/File:Ely_Hall_hallway,_February_2015.jpg",
-   "d": "2015-02-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "41219873",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Petrovsky_Passage_interior_06-2015.jpg/1920px-Petrovsky_Passage_interior_06-2015.jpg",
-   "t": "Petrovsky Passage interior 06-2015",
-   "a": "A.Savin",
-   "p": "https://commons.wikimedia.org/wiki/File:Petrovsky_Passage_interior_06-2015.jpg",
-   "d": "2015-06-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
-   "i": "43896913",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg/1920px-Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg",
-   "t": "Deambulatory north Saint-Eutropius romanesque Basilica Saintes Charente-Maritime",
-   "a": "Jebulon",
-   "p": "https://commons.wikimedia.org/wiki/File:Deambulatory_north_Saint-Eutropius_romanesque_Basilica_Saintes_Charente-Maritime.jpg",
-   "d": "2015-08-08",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "51798477",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Interior_Hallway%2C_Gamble_Plantation.jpg/1920px-Interior_Hallway%2C_Gamble_Plantation.jpg",
-   "t": "Interior Hallway, Gamble Plantation",
-   "a": "TlyleSheph3rd",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_Hallway,_Gamble_Plantation.jpg",
-   "d": "2016-09-26",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "80623213",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/L%C3%A4ck%C3%B6_slott_interior_11.jpg/1920px-L%C3%A4ck%C3%B6_slott_interior_11.jpg",
-   "t": "Läckö slott interior 11",
-   "a": "Netha Hussain",
-   "p": "https://commons.wikimedia.org/wiki/File:L%C3%A4ck%C3%B6_slott_interior_11.jpg",
-   "d": "2019-07-20",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "81648324",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Corridors_of_Classroom_Complex.jpg/1920px-Corridors_of_Classroom_Complex.jpg",
-   "t": "Corridors of Classroom Complex",
-   "a": "WannabeUrbanNaxal",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridors_of_Classroom_Complex.jpg",
-   "d": "2019-08-27",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "84250807",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/ChateauDeCassan_Hallway.jpg/1920px-ChateauDeCassan_Hallway.jpg",
-   "t": "ChateauDeCassan Hallway",
-   "a": "Martinvl",
-   "p": "https://commons.wikimedia.org/wiki/File:ChateauDeCassan_Hallway.jpg",
-   "d": "2019-09-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "91065334",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Corridor_of_the_Kaneyu.jpg/1920px-Corridor_of_the_Kaneyu.jpg",
-   "t": "Corridor of the Kaneyu",
-   "a": "掬茶",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_the_Kaneyu.jpg",
-   "d": "2020-06-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "91259245",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg/1920px-CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg",
-   "t": "CICR-ICRC-Archives-Satigny-Corridor RomanDeckert09062020",
-   "a": "RomanDeckert",
-   "p": "https://commons.wikimedia.org/wiki/File:CICR-ICRC-Archives-Satigny-Corridor_RomanDeckert09062020.jpg",
-   "d": "2020-06-09",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "99898795",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg/1920px-Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg",
-   "t": "Hester Diamond hallway by Rachel Kaminsky",
-   "a": "Rachel Kaminsky",
-   "p": "https://commons.wikimedia.org/wiki/File:Hester_Diamond_hallway_by_Rachel_Kaminsky.jpg",
-   "d": "2020-07-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "106214262",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Hallway_in_the_theater_at_Taliesin_West_%285721972876%29.jpg/1920px-Hallway_in_the_theater_at_Taliesin_West_%285721972876%29.jpg",
-   "t": "Hallway in the theater at Taliesin West (5721972876)",
-   "a": "istolethetv",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_the_theater_at_Taliesin_West_(5721972876).jpg",
-   "d": "2011-03-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
-   "i": "107528007",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Corridor_of_Laboratory_School.jpg",
-   "t": "Corridor of Laboratory School",
-   "a": "WrackAce",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Laboratory_School.jpg",
-   "d": "2010-07-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "111214699",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Hallway_in_a_house_in_Corinda%2C_Queensland.jpg/1920px-Hallway_in_a_house_in_Corinda%2C_Queensland.jpg",
-   "t": "Hallway in a house in Corinda, Queensland",
-   "a": "Kgbo",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_a_house_in_Corinda,_Queensland.jpg",
-   "d": "2021-10-05",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "113509555",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_%28Q3896297%29.jpg/1920px-Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_%28Q3896297%29.jpg",
-   "t": "Sagunto - Roman Theatre - Corridor 20200225 PvE (Q3896297)",
-   "a": "Pieter van Everdingen",
-   "p": "https://commons.wikimedia.org/wiki/File:Sagunto_-_Roman_Theatre_-_Corridor_20200225_PvE_(Q3896297).jpg",
-   "d": "2020-02-25",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "115302343",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Katowice_Dyrekcyjna_10_hallway_2022.jpg/1920px-Katowice_Dyrekcyjna_10_hallway_2022.jpg",
-   "t": "Katowice Dyrekcyjna 10 hallway 2022",
-   "a": "Adrian Tync",
-   "p": "https://commons.wikimedia.org/wiki/File:Katowice_Dyrekcyjna_10_hallway_2022.jpg",
-   "d": "2022-02-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "122491818",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg/1920px-Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg",
-   "t": "Hallway at the entrance of an apartment building on Rue de Berri in Paris",
-   "a": "Neoclassicism Enthusiast",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_at_the_entrance_of_an_apartment_building_on_Rue_de_Berri_in_Paris.jpg",
-   "d": "23 July 20",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "122709981",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Arboretum_Hallway_in_Winchester_Mystery_House.jpg/1920px-Arboretum_Hallway_in_Winchester_Mystery_House.jpg",
-   "t": "Arboretum Hallway in Winchester Mystery House",
-   "a": "Sgerbic",
-   "p": "https://commons.wikimedia.org/wiki/File:Arboretum_Hallway_in_Winchester_Mystery_House.jpg",
-   "d": "2019-09-18",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "125358002",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/The_Canadian_Prestige_Car_hallway.jpg/1920px-The_Canadian_Prestige_Car_hallway.jpg",
-   "t": "The Canadian Prestige Car hallway",
-   "a": "Kosboot",
-   "p": "https://commons.wikimedia.org/wiki/File:The_Canadian_Prestige_Car_hallway.jpg",
-   "d": "2022-11-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "127256020",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Perpendicular_hallway_02.jpg/1920px-Perpendicular_hallway_02.jpg",
-   "t": "Perpendicular hallway 02",
-   "a": "Almanta",
-   "p": "https://commons.wikimedia.org/wiki/File:Perpendicular_hallway_02.jpg",
-   "d": "2023-01-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "135259508",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg/1920px-Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg",
-   "t": "Bossier High School hallway Colquittt Interior NRHP LASHPO 13",
-   "a": "Donna Fricker",
-   "p": "https://commons.wikimedia.org/wiki/File:Bossier_High_School_hallway_Colquittt_Interior_NRHP_LASHPO_13.jpg",
-   "d": "1998-04",
-   "s": "Wikimedia Commons",
-   "l": "Public domain"
-  },
-  {
-   "i": "137258010",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg/1920px-An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg",
-   "t": "An interior hallway at Portland Union Station in Oregon",
-   "a": "Harrison Keely",
-   "p": "https://commons.wikimedia.org/wiki/File:An_interior_hallway_at_Portland_Union_Station_in_Oregon.jpg",
-   "d": "2019-06-14",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "137321301",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Castle%2C_Elmina_%28P1100209%29.jpg/1920px-Castle%2C_Elmina_%28P1100209%29.jpg",
-   "t": "Castle, Elmina (P1100209)",
-   "a": "Matti Blume",
-   "p": "https://commons.wikimedia.org/wiki/File:Castle,_Elmina_(P1100209).jpg",
-   "d": "2023-02-09",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "141067890",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_01.jpg/1920px-Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_01.jpg",
-   "t": "Corridor above road, Nantes, Rue du Ballet - 01",
-   "a": "Koreller",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_above_road,_Nantes,_Rue_du_Ballet_-_01.jpg",
-   "d": "2023-10-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "141067896",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_02.jpg/1920px-Corridor_above_road%2C_Nantes%2C_Rue_du_Ballet_-_02.jpg",
-   "t": "Corridor above road, Nantes, Rue du Ballet - 02",
-   "a": "Koreller",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_above_road,_Nantes,_Rue_du_Ballet_-_02.jpg",
-   "d": "2023-10-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "142113018",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Corridor_2023-12_1702130219.jpg/1920px-Corridor_2023-12_1702130219.jpg",
-   "t": "Corridor 2023-12 1702130219",
-   "a": "Artyom Svetlov",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_2023-12_1702130219.jpg",
-   "d": "Taken on 9",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "142113033",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Corridor_2023-12_1702130467.jpg/1920px-Corridor_2023-12_1702130467.jpg",
-   "t": "Corridor 2023-12 1702130467",
-   "a": "Artyom Svetlov",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_2023-12_1702130467.jpg",
-   "d": "Taken on 9",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "145690311",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/CERN_hallway_in_building_304.jpg/1920px-CERN_hallway_in_building_304.jpg",
-   "t": "CERN hallway in building 304",
-   "a": "Unnerving duck",
-   "p": "https://commons.wikimedia.org/wiki/File:CERN_hallway_in_building_304.jpg",
-   "d": "22 Februar",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "147593595",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Tenry%C5%AB_Shisei-zenji_%28Ukyo-Ku_Kyoto%29_corridor_hdsr_S5_0.jpg/1920px-Tenry%C5%AB_Shisei-zenji_%28Ukyo-Ku_Kyoto%29_corridor_hdsr_S5_0.jpg",
-   "t": "Tenryū Shisei-zenji (Ukyo-Ku Kyoto) corridor hdsr S5 0",
-   "a": "Hyppolyte de Saint-Rambert",
-   "p": "https://commons.wikimedia.org/wiki/File:Tenry%C5%AB_Shisei-zenji_(Ukyo-Ku_Kyoto)_corridor_hdsr_S5_0.jpg",
-   "d": "2023-12-13",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "158908474",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/A_cat_in_a_low_light_corridor.jpg/1920px-A_cat_in_a_low_light_corridor.jpg",
-   "t": "A cat in a low light corridor",
-   "a": "AlexTref871",
-   "p": "https://commons.wikimedia.org/wiki/File:A_cat_in_a_low_light_corridor.jpg",
-   "d": "2024-06-13",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "162663045",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Hallway_in_the_Thomas_Jefferson_Building.jpg/1920px-Hallway_in_the_Thomas_Jefferson_Building.jpg",
-   "t": "Hallway in the Thomas Jefferson Building",
-   "a": "Sdkb",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_in_the_Thomas_Jefferson_Building.jpg",
-   "d": "2025-03-19",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "165780925",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Hallway_05-03-2025.jpg/1920px-Hallway_05-03-2025.jpg",
-   "t": "Hallway 05-03-2025",
-   "a": "Luckytent",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_05-03-2025.jpg",
-   "d": "2025-05-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "166293774",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Hallway_Sprengel_Museum_Hannover.jpg/1920px-Hallway_Sprengel_Museum_Hannover.jpg",
-   "t": "Hallway Sprengel Museum Hannover",
-   "a": "AshDammeyer",
-   "p": "https://commons.wikimedia.org/wiki/File:Hallway_Sprengel_Museum_Hannover.jpg",
-   "d": "2025-05-09",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "169788509",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Hyatt_Regency_Embarcadero_Atrium%2C_San_Francisco%2C_US.jpg/1920px-Hyatt_Regency_Embarcadero_Atrium%2C_San_Francisco%2C_US.jpg",
-   "t": "Hyatt Regency Embarcadero Atrium, San Francisco, US",
-   "a": "Dale Cruse",
-   "p": "https://commons.wikimedia.org/wiki/File:Hyatt_Regency_Embarcadero_Atrium,_San_Francisco,_US.jpg",
-   "d": "2024-10-05",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
-   "i": "179563021",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Wredes_passage_November_2025_01.jpg/1920px-Wredes_passage_November_2025_01.jpg",
-   "t": "Wredes passage November 2025 01",
-   "a": "ArildV",
-   "p": "https://commons.wikimedia.org/wiki/File:Wredes_passage_November_2025_01.jpg",
-   "d": "2025-11-25",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "182381900",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Andrews_Building_interior_hallway.jpg/1920px-Andrews_Building_interior_hallway.jpg",
-   "t": "Andrews Building interior hallway",
-   "a": "JasonParis",
-   "p": "https://commons.wikimedia.org/wiki/File:Andrews_Building_interior_hallway.jpg",
-   "d": "2011-08-13",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
-   "i": "193326104",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Interior_hallway_in_Hampton_Court_Palace.jpg/1920px-Interior_hallway_in_Hampton_Court_Palace.jpg",
-   "t": "Interior hallway in Hampton Court Palace",
-   "a": "APK",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_hallway_in_Hampton_Court_Palace.jpg",
-   "d": "2026-05-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "194363416",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg",
-   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 01",
-   "a": "ELIZABETH XIONG",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_01.jpg",
-   "d": "2026-03-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "194363420",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg",
-   "t": "Interior of Snow Clinic Ansan branch in March 2026",
-   "a": "ELIZABETH XIONG",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg",
-   "d": "2026-03-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "194363421",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg",
-   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 03",
-   "a": "ELIZABETH XIONG",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_03.jpg",
-   "d": "2026-03-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "194363422",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg/1920px-Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg",
-   "t": "Interior of Snow Clinic Ansan branch in March 2026.jpg 04",
-   "a": "ELIZABETH XIONG",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Snow_Clinic_Ansan_branch_in_March_2026.jpg_04.jpg",
-   "d": "2026-04-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "33134779",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg/1920px-Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg",
-   "t": "Corridor Birdview of Golden Dragon Room, Grand Hotel Taipei 20100822",
-   "a": "玄史生",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Birdview_of_Golden_Dragon_Room,_Grand_Hotel_Taipei_20100822.jpg",
-   "d": "2010-08-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
-   "i": "54248675",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Be_Live_Hotel_Corridor_%285369026126%29.jpg/1920px-Be_Live_Hotel_Corridor_%285369026126%29.jpg",
-   "t": "Be Live Hotel Corridor (5369026126)",
-   "a": "Allen McGregor from Brampton, Canada",
-   "p": "https://commons.wikimedia.org/wiki/File:Be_Live_Hotel_Corridor_(5369026126).jpg",
-   "d": "2011-01-15",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
-   "i": "63069326",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Plaza_Hotel_corridor%2C_Sept_2017.jpg/1920px-Plaza_Hotel_corridor%2C_Sept_2017.jpg",
-   "t": "Plaza Hotel corridor, Sept 2017",
-   "a": "Thomson200",
-   "p": "https://commons.wikimedia.org/wiki/File:Plaza_Hotel_corridor,_Sept_2017.jpg",
-   "d": "Taken on 2",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "71693239",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Corridor_in_Wuling_Villa.jpg",
-   "t": "Corridor in Wuling Villa",
-   "a": "Dquai",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_in_Wuling_Villa.jpg",
-   "d": "2009-01-26",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "71852744",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Hotel_Corridor_%28184413335%29.jpeg/1920px-Hotel_Corridor_%28184413335%29.jpeg",
-   "t": "Hotel Corridor (184413335)",
-   "a": "Uwe Jelting",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Corridor_(184413335).jpeg",
-   "d": "before 22 ",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "107803054",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno%2C_Nevada.jpg",
-   "t": "Hotel room corridor at the Silver Legacy Casino Resort in Reno, Nevada",
-   "a": "Mark Hogan",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno,_Nevada.jpg",
-   "d": "Taken on 1",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "112762338",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Corridor_of_Renaissance_Hotel%2C_Edmonton_airport.jpg/1920px-Corridor_of_Renaissance_Hotel%2C_Edmonton_airport.jpg",
-   "t": "Corridor of Renaissance Hotel, Edmonton airport",
-   "a": "Daniel Case",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Renaissance_Hotel,_Edmonton_airport.jpg",
-   "d": "2015-07-14",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "125907045",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Corridor_at_Thon_Hotel_Kirkenes.jpg/1920px-Corridor_at_Thon_Hotel_Kirkenes.jpg",
-   "t": "Corridor at Thon Hotel Kirkenes",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Thon_Hotel_Kirkenes.jpg",
-   "d": "2020-08-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "126981277",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Corridor_at_Hotel_Katajanokka.jpg/1920px-Corridor_at_Hotel_Katajanokka.jpg",
-   "t": "Corridor at Hotel Katajanokka",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Katajanokka.jpg",
-   "d": "2022-12-24",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "138625966",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Corridor_at_Elite_Hotel_Ideon_Lund.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
-   "t": "Corridor at Elite Hotel Ideon Lund",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
-   "d": "2023-10-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "142096199",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Corridor_at_Hotel_Esplanade_Stockholm.jpg/1920px-Corridor_at_Hotel_Esplanade_Stockholm.jpg",
-   "t": "Corridor at Hotel Esplanade Stockholm",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_Stockholm.jpg",
-   "d": "2023-10-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "143607622",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg/1920px-Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
-   "t": "Upper corridor in the hotel - geograph.org.uk - 6081126",
-   "a": "Bob Harvey",
-   "p": "https://commons.wikimedia.org/wiki/File:Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
-   "d": "2019-03-06",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "148769511",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg/1920px-A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg",
-   "t": "A corridor in the Imperial Hotel, Torquay - geograph.org.uk - 6376057",
-   "a": "Roger A Smith",
-   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_the_Imperial_Hotel,_Torquay_-_geograph.org.uk_-_6376057.jpg",
-   "d": "2020-01-21",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "155084327",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
-   "t": "Corridor at Elite Hotel Ideon Lund in September 2024",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
-   "d": "2024-09-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "156417481",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg/1920px-Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
-   "t": "Hotel corridor of the past - geograph.org.uk - 7048292",
-   "a": "Mr Ignavy",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
-   "d": "2021-08-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "156688455",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
-   "t": "Corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
-   "d": "2023-10-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "158020802",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg",
-   "t": "Corridor at Elite Hotel Ideon Lund (no exposure compensation)",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_(no_exposure_compensation).jpg",
-   "d": "2023-10-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "163724474",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
-   "t": "Corridor on floor 2 at Elite Hotel Ideon Lund in September 2024",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
-   "d": "2024-09-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "164902530",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
-   "t": "End of corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
-   "d": "2023-10-01",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "168711924",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
-   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 03",
-   "a": "MeiOLA 2290 WMENSZ",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
-   "d": "2025-06-15",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "168711925",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
-   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 02",
-   "a": "MeiOLA 2290 WMENSZ",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
-   "d": "2025-06-15",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "168711927",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
-   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 01",
-   "a": "MeiOLA 2290 WMENSZ",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
-   "d": "2025-06-15",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "168711931",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
-   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 04",
-   "a": "MeiOLA 2290 WMENSZ",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
-   "d": "2025-06-15",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "168711933",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
-   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 05",
-   "a": "MeiOLA 2290 WMENSZ",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
-   "d": "2025-06-15",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "168867549",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/1/10/Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
-   "t": "Liverpool - Titanic Hotel - Interior corridor - geograph.org.uk - 7855145",
-   "a": "Rob Farrow",
-   "p": "https://commons.wikimedia.org/wiki/File:Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
-   "d": "2024-08-18",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "169416671",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Hotel_Central_-_Corridor.jpg/1920px-Hotel_Central_-_Corridor.jpg",
-   "t": "Hotel Central - Corridor",
-   "a": "Fred Cherrygarden",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Central_-_Corridor.jpg",
-   "d": "2025-04-17",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "171892500",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Wizz_Hotel_Corridor.jpg/1920px-Wizz_Hotel_Corridor.jpg",
-   "t": "Wizz Hotel Corridor",
-   "a": "Alharomain354",
-   "p": "https://commons.wikimedia.org/wiki/File:Wizz_Hotel_Corridor.jpg",
-   "d": "2025-07-11",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "172731623",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg",
-   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403",
-   "a": "Hirho",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403.jpg",
-   "d": "2025-04-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "172732983",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg",
-   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154908",
-   "a": "Hirho",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154908.jpg",
-   "d": "2025-04-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "172739624",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg",
-   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154914",
-   "a": "Hirho",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154914.jpg",
-   "d": "2025-04-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "172740720",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg/1920px-Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg",
-   "t": "Hotel Il Palazzo the corridor on the basement floor Haruyoshi 3-chōme Chūō-ku Fukuoka 20250403 154925",
-   "a": "Hirho",
-   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Il_Palazzo_the_corridor_on_the_basement_floor_Haruyoshi_3-ch%C5%8Dme_Ch%C5%AB%C5%8D-ku_Fukuoka_20250403_154925.jpg",
-   "d": "2025-04-03",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "179532453",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
-   "t": "Corridor at Elite Hotel Ideon Lund on an evening in September 2024",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
-   "d": "2024-09-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "179959559",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Corridor_at_Sokos_Hotel_Pier_4.jpg/1920px-Corridor_at_Sokos_Hotel_Pier_4.jpg",
-   "t": "Corridor at Sokos Hotel Pier 4",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Sokos_Hotel_Pier_4.jpg",
-   "d": "2025-10-11",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "180391325",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
-   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 01",
-   "a": "HSOMWEI mATIWM Uatnm LUNGA",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
-   "d": "2025-12-17",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "180391327",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
-   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 02",
-   "a": "HSOMWEI mATIWM Uatnm LUNGA",
-   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
-   "d": "2025-12-17",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "181910549",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Corridor_of_Hotel_Alpha-one_Yonago.jpg/1920px-Corridor_of_Hotel_Alpha-one_Yonago.jpg",
-   "t": "Corridor of Hotel Alpha-one Yonago",
-   "a": "ノボホショコロトソ",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Hotel_Alpha-one_Yonago.jpg",
-   "d": "2025-12-02",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "183681003",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
-   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 03",
-   "a": "NORTLAUKAU 26088 JP",
-   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
-   "d": "2026-02-07",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "183681005",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
-   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 01",
-   "a": "NORTLAUKAU 26088 JP",
-   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
-   "d": "2026-02-07",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "183681006",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
-   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 02",
-   "a": "NORTLAUKAU 26088 JP",
-   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
-   "d": "2026-02-07",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "183681530",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
-   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor view 安里 Asato February 2026 N13P 02",
-   "a": "NORTLAUKAU 26088 JP",
-   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
-   "d": "2026-02-07",
-   "s": "Wikimedia Commons",
-   "l": "CC0"
-  },
-  {
-   "i": "188161289",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg",
-   "t": "Jerma Hotel corridor (around third floor), in 2026",
-   "a": "Anonymous",
-   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026.jpg",
-   "d": "2026-03-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "188169304",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
-   "t": "Jerma Hotel corridor (around first floor), in 2026",
-   "a": "Anonymous",
-   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
-   "d": "2026-03-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "188170913",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
-   "t": "Another Jerma Hotel corridor (around first floor), in 2026",
-   "a": "Anonymous",
-   "p": "https://commons.wikimedia.org/wiki/File:Another_Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
-   "d": "2026-03-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "192224474",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg/1920px-Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
-   "t": "Long corridor lined with framed artwork in a hotel undefined",
-   "a": "Shixart1985",
-   "p": "https://commons.wikimedia.org/wiki/File:Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
-   "d": "2025-08-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
-   "i": "193962096",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg",
-   "t": "Jerma Hotel corridor (around third floor), in 2026 (second angle)",
-   "a": "Anonymous Unknown author",
-   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026_(second_angle).jpg",
-   "d": "2026-03-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "193962870",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg",
-   "t": "Jerma Hotel corridor (around first or third floor), in 2026",
-   "a": "Anonymous Unknown author",
-   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_or_third_floor),_in_2026.jpg",
-   "d": "2026-03-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "1448446",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Whitchurch_Hospital_Corridor_Abandoned_West5_Ward.jpg",
-   "t": "Whitchurch Hospital Corridor Abandoned West5 Ward",
-   "a": "No machine-readable author provided. Vaughan~commonswiki assumed (based on copyr",
-   "p": "https://commons.wikimedia.org/wiki/File:Whitchurch_Hospital_Corridor_Abandoned_West5_Ward.jpg",
-   "d": "27 Septemb",
-   "s": "Wikimedia Commons",
-   "l": "Public domain"
-  },
-  {
-   "i": "1448517",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Whitchurch_Hospital_West_Wing_Corridor.jpg",
-   "t": "Whitchurch Hospital West Wing Corridor",
-   "a": "No machine-readable author provided. Vaughan~commonswiki assumed (based on copyr",
-   "p": "https://commons.wikimedia.org/wiki/File:Whitchurch_Hospital_West_Wing_Corridor.jpg",
-   "d": "27 Septemb",
-   "s": "Wikimedia Commons",
-   "l": "Public domain"
-  },
   {
    "i": "14444613",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Demolition_In_Progress%2C_Vickers_Corridor%2C_Northern_Geneal_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724084.jpg/1920px-Demolition_In_Progress%2C_Vickers_Corridor%2C_Northern_Geneal_Hospital%2C_Sheffield_-_geograph.org.uk_-_1724084.jpg",
@@ -1454,16 +54,6 @@
    "d": "2012-07-31",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 2.0"
-  },
-  {
-   "i": "35700180",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/The_Prison_Hospital_corridor.JPG/1920px-The_Prison_Hospital_corridor.JPG",
-   "t": "The Prison Hospital corridor",
-   "a": "Stan Fong",
-   "p": "https://commons.wikimedia.org/wiki/File:The_Prison_Hospital_corridor.JPG",
-   "d": "2014-09-23",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
   },
   {
    "i": "36044569",
@@ -1516,16 +106,6 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "60658110",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg/1920px-Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg",
-   "t": "Red Cross Society Central Hospital corridor 2014 Museum Meiji Mura",
-   "a": "Morio",
-   "p": "https://commons.wikimedia.org/wiki/File:Red_Cross_Society_Central_Hospital_corridor_2014_Museum_Meiji_Mura.jpg",
-   "d": "2014-08-29",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
    "i": "62137038",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/A_corridor_in_Chittagong_General_Hospital-1.jpg/1920px-A_corridor_in_Chittagong_General_Hospital-1.jpg",
    "t": "A corridor in Chittagong General Hospital-1",
@@ -1542,16 +122,6 @@
    "a": "Intakhab",
    "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_Chittagong_General_Hospital-2.jpg",
    "d": "2017-08-25",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "62748540",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Main_Corridor%2C_Cave_Hospital%2C_Cat_Ba_Island%2C_Vietnam.jpg/1920px-Main_Corridor%2C_Cave_Hospital%2C_Cat_Ba_Island%2C_Vietnam.jpg",
-   "t": "Main Corridor, Cave Hospital, Cat Ba Island, Vietnam",
-   "a": "TomFitzhenry",
-   "p": "https://commons.wikimedia.org/wiki/File:Main_Corridor,_Cave_Hospital,_Cat_Ba_Island,_Vietnam.jpg",
-   "d": "2016-12-07",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -1896,6 +466,16 @@
    "l": "CC BY-SA 4.0"
   },
   {
+   "i": "80252921",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg/1920px-School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
+   "t": "School corridor in the Building of College of Humanities and Social Sciences of NTHU 01",
+   "a": "H. H. Tsai",
+   "p": "https://commons.wikimedia.org/wiki/File:School_corridor_in_the_Building_of_College_of_Humanities_and_Social_Sciences_of_NTHU_01.jpg",
+   "d": "2019-05-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
    "i": "89062568",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Main_Building_corridor_at_Doon_School.jpg/1920px-Main_Building_corridor_at_Doon_School.jpg",
    "t": "Main Building corridor at Doon School",
@@ -1952,6 +532,16 @@
    "a": "Fredericknoronha",
    "p": "https://commons.wikimedia.org/wiki/File:School_corridors_at_Goa,_India_02.jpg",
    "d": "2021-02-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "107528007",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Corridor_of_Laboratory_School.jpg",
+   "t": "Corridor of Laboratory School",
+   "a": "WrackAce",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Laboratory_School.jpg",
+   "d": "2010-07-22",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -2266,16 +856,6 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "64234466",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg/1920px-HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg",
-   "t": "HK 觀塘 Kwun Tong 廣生行中心 Kwong Sang Hong Centre corridor office sign November 2017 IX1",
-   "a": "Pinggieamai",
-   "p": "https://commons.wikimedia.org/wiki/File:HK_%E8%A7%80%E5%A1%98_Kwun_Tong_%E5%BB%A3%E7%94%9F%E8%A1%8C%E4%B8%AD%E5%BF%83_Kwong_Sang_Hong_Centre_corridor_office_sign_November_2017_IX1.jpg",
-   "d": "2017-11-21",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
    "i": "67265745",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/N.Y._Post_Office_-_main_corridor_LCCN2014697409.jpg/1920px-N.Y._Post_Office_-_main_corridor_LCCN2014697409.jpg",
    "t": "N.Y. Post Office - main corridor LCCN2014697409",
@@ -2356,21 +936,11 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "128773445",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg",
-   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 01",
+   "i": "128773449",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_03.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_03.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 03",
    "a": "Press Service of the President of the Republic of Azerbaijan",
-   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_01.jpg",
-   "d": "2020-02-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
-   "i": "128773461",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg",
-   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 05",
-   "a": "Press Service of the President of the Republic of Azerbaijan",
-   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_05.jpg",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_03.jpg",
    "d": "2020-02-28",
    "s": "Wikimedia Commons",
    "l": "CC BY 4.0"
@@ -2396,6 +966,26 @@
    "l": "CC BY 4.0"
   },
   {
+   "i": "128773481",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/5/53/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_08.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 08",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_08.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773603",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_11.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_11.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 11",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_11.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
    "i": "128773607",
    "u": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_12.jpg",
    "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 12",
@@ -2406,21 +996,21 @@
    "l": "CC BY 4.0"
   },
   {
-   "i": "128773621",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg",
-   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 15",
-   "a": "Press Service of the President of the Republic of Azerbaijan",
-   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_15.jpg",
-   "d": "2020-02-28",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
    "i": "128773622",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg/1920px-Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg",
    "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 16",
    "a": "Press Service of the President of the Republic of Azerbaijan",
    "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_16.jpg",
+   "d": "2020-02-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "128773626",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_17.jpg",
+   "t": "Sixth Ministerial Meeting of Southern Gas Corridor Advisory Council held in Baku 17",
+   "a": "Press Service of the President of the Republic of Azerbaijan",
+   "p": "https://commons.wikimedia.org/wiki/File:Sixth_Ministerial_Meeting_of_Southern_Gas_Corridor_Advisory_Council_held_in_Baku_17.jpg",
    "d": "2020-02-28",
    "s": "Wikimedia Commons",
    "l": "CC BY 4.0"
@@ -2486,22 +1076,1432 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "178975127",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg/1920px-Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg",
-   "t": "Office Corridor of St Andrew’s Basilica",
-   "a": "9kb",
-   "p": "https://commons.wikimedia.org/wiki/File:Office_Corridor_of_St_Andrew%E2%80%99s_Basilica.jpg",
-   "d": "2013-05-15",
+   "i": "33134779",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg/1920px-Corridor_Birdview_of_Golden_Dragon_Room%2C_Grand_Hotel_Taipei_20100822.jpg",
+   "t": "Corridor Birdview of Golden Dragon Room, Grand Hotel Taipei 20100822",
+   "a": "玄史生",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Birdview_of_Golden_Dragon_Room,_Grand_Hotel_Taipei_20100822.jpg",
+   "d": "2010-08-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "54248675",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Be_Live_Hotel_Corridor_%285369026126%29.jpg/1920px-Be_Live_Hotel_Corridor_%285369026126%29.jpg",
+   "t": "Be Live Hotel Corridor (5369026126)",
+   "a": "Allen McGregor from Brampton, Canada",
+   "p": "https://commons.wikimedia.org/wiki/File:Be_Live_Hotel_Corridor_(5369026126).jpg",
+   "d": "2011-01-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "63069326",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Plaza_Hotel_corridor%2C_Sept_2017.jpg/1920px-Plaza_Hotel_corridor%2C_Sept_2017.jpg",
+   "t": "Plaza Hotel corridor, Sept 2017",
+   "a": "Thomson200",
+   "p": "https://commons.wikimedia.org/wiki/File:Plaza_Hotel_corridor,_Sept_2017.jpg",
+   "d": "Taken on 2",
    "s": "Wikimedia Commons",
    "l": "CC0"
   },
   {
-   "i": "4829241",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Auckland_Museum_Underground_Car_Park.jpg",
-   "t": "Auckland Museum Underground Car Park",
+   "i": "71852744",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Hotel_Corridor_%28184413335%29.jpeg/1920px-Hotel_Corridor_%28184413335%29.jpeg",
+   "t": "Hotel Corridor (184413335)",
+   "a": "Uwe Jelting",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Corridor_(184413335).jpeg",
+   "d": "before 22 ",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "107803054",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno%2C_Nevada.jpg",
+   "t": "Hotel room corridor at the Silver Legacy Casino Resort in Reno, Nevada",
+   "a": "Mark Hogan",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_the_Silver_Legacy_Casino_Resort_in_Reno,_Nevada.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "107818076",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg/1920px-Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
+   "t": "Hotel room corridor at Circus Circus Reno in 2010",
+   "a": "Sam Craig",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_room_corridor_at_Circus_Circus_Reno_in_2010.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "125907045",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Corridor_at_Thon_Hotel_Kirkenes.jpg/1920px-Corridor_at_Thon_Hotel_Kirkenes.jpg",
+   "t": "Corridor at Thon Hotel Kirkenes",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Thon_Hotel_Kirkenes.jpg",
+   "d": "2020-08-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "126981277",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Corridor_at_Hotel_Katajanokka.jpg/1920px-Corridor_at_Hotel_Katajanokka.jpg",
+   "t": "Corridor at Hotel Katajanokka",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Katajanokka.jpg",
+   "d": "2022-12-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "138384661",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg/1920px-Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
+   "t": "Corridor leading to indoor pool of spa at Amantaka luxury Resort & Hotel in Luang Prabang Laos front view",
+   "a": "Basile Morin",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_leading_to_indoor_pool_of_spa_at_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos_front_view.jpg",
+   "d": "2023-09-19",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "138625966",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Corridor_at_Elite_Hotel_Ideon_Lund.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "142096199",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Corridor_at_Hotel_Esplanade_Stockholm.jpg/1920px-Corridor_at_Hotel_Esplanade_Stockholm.jpg",
+   "t": "Corridor at Hotel Esplanade Stockholm",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_Stockholm.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "143607622",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg/1920px-Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
+   "t": "Upper corridor in the hotel - geograph.org.uk - 6081126",
+   "a": "Bob Harvey",
+   "p": "https://commons.wikimedia.org/wiki/File:Upper_corridor_in_the_hotel_-_geograph.org.uk_-_6081126.jpg",
+   "d": "2019-03-06",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "148769511",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg/1920px-A_corridor_in_the_Imperial_Hotel%2C_Torquay_-_geograph.org.uk_-_6376057.jpg",
+   "t": "A corridor in the Imperial Hotel, Torquay - geograph.org.uk - 6376057",
+   "a": "Roger A Smith",
+   "p": "https://commons.wikimedia.org/wiki/File:A_corridor_in_the_Imperial_Hotel,_Torquay_-_geograph.org.uk_-_6376057.jpg",
+   "d": "2020-01-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "150116680",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg/1920px-Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
+   "t": "Corridor Stanley Hotel Estes Park Colorado 2024",
+   "a": "Larry D. Moore",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
+   "d": "Taken on 3",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "155084327",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "156417481",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg/1920px-Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
+   "t": "Hotel corridor of the past - geograph.org.uk - 7048292",
+   "a": "Mr Ignavy",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_corridor_of_the_past_-_geograph.org.uk_-_7048292.jpg",
+   "d": "2021-08-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "156688455",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "t": "Corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "158020802",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_%28no_exposure_compensation%29.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund (no exposure compensation)",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_(no_exposure_compensation).jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "163724474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg/1920px-Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "t": "Corridor on floor 2 at Elite Hotel Ideon Lund in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_on_floor_2_at_Elite_Hotel_Ideon_Lund_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "164902530",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg/1920px-End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "t": "End of corridor at Hotel Esplanade in Stockholm on an evening in October 2023",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:End_of_corridor_at_Hotel_Esplanade_in_Stockholm_on_an_evening_in_October_2023.jpg",
+   "d": "2023-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "168711924",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 03",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_03.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711925",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 02",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_02.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711927",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 01",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_01.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711931",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 04",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_04.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168711933",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
+   "t": "GD 廣東 Guangdong 廣州 Guangzhou Huangpu MUSTEL Hotel Knowledge City 走廊 corridor passageway June 2025 R12S 05",
+   "a": "MeiOLA 2290 WMENSZ",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1_Guangdong_%E5%BB%A3%E5%B7%9E_Guangzhou_Huangpu_MUSTEL_Hotel_Knowledge_City_%E8%B5%B0%E5%BB%8A_corridor_passageway_June_2025_R12S_05.jpg",
+   "d": "2025-06-15",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "168867549",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/1/10/Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
+   "t": "Liverpool - Titanic Hotel - Interior corridor - geograph.org.uk - 7855145",
+   "a": "Rob Farrow",
+   "p": "https://commons.wikimedia.org/wiki/File:Liverpool_-_Titanic_Hotel_-_Interior_corridor_-_geograph.org.uk_-_7855145.jpg",
+   "d": "2024-08-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "169416671",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Hotel_Central_-_Corridor.jpg/1920px-Hotel_Central_-_Corridor.jpg",
+   "t": "Hotel Central - Corridor",
+   "a": "Fred Cherrygarden",
+   "p": "https://commons.wikimedia.org/wiki/File:Hotel_Central_-_Corridor.jpg",
+   "d": "2025-04-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "171892500",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Wizz_Hotel_Corridor.jpg/1920px-Wizz_Hotel_Corridor.jpg",
+   "t": "Wizz Hotel Corridor",
+   "a": "Alharomain354",
+   "p": "https://commons.wikimedia.org/wiki/File:Wizz_Hotel_Corridor.jpg",
+   "d": "2025-07-11",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "179532453",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg/1920px-Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
+   "t": "Corridor at Elite Hotel Ideon Lund on an evening in September 2024",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Elite_Hotel_Ideon_Lund_on_an_evening_in_September_2024.jpg",
+   "d": "2024-09-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "179959559",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Corridor_at_Sokos_Hotel_Pier_4.jpg/1920px-Corridor_at_Sokos_Hotel_Pier_4.jpg",
+   "t": "Corridor at Sokos Hotel Pier 4",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Sokos_Hotel_Pier_4.jpg",
+   "d": "2025-10-11",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "180391325",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
+   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 01",
+   "a": "HSOMWEI mATIWM Uatnm LUNGA",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_01.jpg",
+   "d": "2025-12-17",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "180391327",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg/1920px-GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
+   "t": "GD 廣東省 Guangdong DG 東莞市 DongGuan 粵龍酒店 Yue Long Hotel corridor December 2025 N13P 02",
+   "a": "HSOMWEI mATIWM Uatnm LUNGA",
+   "p": "https://commons.wikimedia.org/wiki/File:GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_corridor_December_2025_N13P_02.jpg",
+   "d": "2025-12-17",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "181910549",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Corridor_of_Hotel_Alpha-one_Yonago.jpg/1920px-Corridor_of_Hotel_Alpha-one_Yonago.jpg",
+   "t": "Corridor of Hotel Alpha-one Yonago",
+   "a": "ノボホショコロトソ",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_of_Hotel_Alpha-one_Yonago.jpg",
+   "d": "2025-12-02",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "183681003",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 03",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_03.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681005",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 01",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_01.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681006",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor 安里 Asato February 2026 N13P 02",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "183681530",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg/1920px-JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "t": "JP 沖繩 Okinawa 那霸市 Hewitt Resort Naha Okinawa Hotel red carpet n wall corridor view 安里 Asato February 2026 N13P 02",
+   "a": "NORTLAUKAU 26088 JP",
+   "p": "https://commons.wikimedia.org/wiki/File:JP_%E6%B2%96%E7%B9%A9_Okinawa_%E9%82%A3%E9%9C%B8%E5%B8%82_Hewitt_Resort_Naha_Okinawa_Hotel_red_carpet_n_wall_corridor_view_%E5%AE%89%E9%87%8C_Asato_February_2026_N13P_02.jpg",
+   "d": "2026-02-07",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "188161289",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around third floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "188169304",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around first floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "188170913",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg/1920px-Another_Jerma_Hotel_corridor_%28around_first_floor%29%2C_in_2026.jpg",
+   "t": "Another Jerma Hotel corridor (around first floor), in 2026",
+   "a": "Anonymous",
+   "p": "https://commons.wikimedia.org/wiki/File:Another_Jerma_Hotel_corridor_(around_first_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "192224474",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg/1920px-Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
+   "t": "Long corridor lined with framed artwork in a hotel undefined",
+   "a": "Shixart1985",
+   "p": "https://commons.wikimedia.org/wiki/File:Long_corridor_lined_with_framed_artwork_in_a_hotel_undefined.jpg",
+   "d": "2025-08-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "193962096",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg/1920px-Jerma_Hotel_corridor_%28around_third_floor%29%2C_in_2026_%28second_angle%29.jpg",
+   "t": "Jerma Hotel corridor (around third floor), in 2026 (second angle)",
+   "a": "Anonymous Unknown author",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_third_floor),_in_2026_(second_angle).jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "193962870",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg/1920px-Jerma_Hotel_corridor_%28around_first_or_third_floor%29%2C_in_2026.jpg",
+   "t": "Jerma Hotel corridor (around first or third floor), in 2026",
+   "a": "Anonymous Unknown author",
+   "p": "https://commons.wikimedia.org/wiki/File:Jerma_Hotel_corridor_(around_first_or_third_floor),_in_2026.jpg",
+   "d": "2026-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "2225209",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Hallway_insulation.jpg/1920px-Hallway_insulation.jpg",
+   "t": "Hallway insulation",
+   "a": "Achim Hering",
+   "p": "https://commons.wikimedia.org/wiki/File:Hallway_insulation.jpg",
+   "d": "2007-06-10",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "6438950",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/White_corridor.JPG/1920px-White_corridor.JPG",
+   "t": "White corridor",
+   "a": "myself ( User:Piotrus )",
+   "p": "https://commons.wikimedia.org/wiki/File:White_corridor.JPG",
+   "d": "late 2008/",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "14674098",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Toulouse_-_Rue_de_la_Pomme_-_20110322_%281%29.jpg/1920px-Toulouse_-_Rue_de_la_Pomme_-_20110322_%281%29.jpg",
+   "t": "Toulouse - Rue de la Pomme - 20110322 (1)",
+   "a": "Olybrius",
+   "p": "https://commons.wikimedia.org/wiki/File:Toulouse_-_Rue_de_la_Pomme_-_20110322_(1).jpg",
+   "d": "2011-03-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "16250243",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Symonds_Street_Bus_Corridor_And_Apartments.jpg",
+   "t": "Symonds Street Bus Corridor And Apartments",
    "a": "Ingolfson",
-   "p": "https://commons.wikimedia.org/wiki/File:Auckland_Museum_Underground_Car_Park.jpg",
-   "d": "2008",
+   "p": "https://commons.wikimedia.org/wiki/File:Symonds_Street_Bus_Corridor_And_Apartments.jpg",
+   "d": "2011-01",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "18156979",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Kivila_11_-_hallway_before_reconstruction.JPG/1920px-Kivila_11_-_hallway_before_reconstruction.JPG",
+   "t": "Kivila 11 - hallway before reconstruction",
+   "a": "Dmitry G",
+   "p": "https://commons.wikimedia.org/wiki/File:Kivila_11_-_hallway_before_reconstruction.JPG",
+   "d": "2012-01-24",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "35473061",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Apartment_complex%2C_Fairfax_County%2C_Virginia.jpg/1920px-Apartment_complex%2C_Fairfax_County%2C_Virginia.jpg",
+   "t": "Apartment complex, Fairfax County, Virginia",
+   "a": "Ser Amantio di Nicolao",
+   "p": "https://commons.wikimedia.org/wiki/File:Apartment_complex,_Fairfax_County,_Virginia.jpg",
+   "d": "18 Septemb",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "39175419",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Odesa_Lva_Tolstogo_28_7.jpg/1920px-Odesa_Lva_Tolstogo_28_7.jpg",
+   "t": "Odesa Lva Tolstogo 28 7",
+   "a": "Investigatio",
+   "p": "https://commons.wikimedia.org/wiki/File:Odesa_Lva_Tolstogo_28_7.jpg",
+   "d": "2011-04-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "40990130",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/H%C3%A1rsfa_street_from_the_Dob_street._Glass_Corridor._City_Hotel_Condominium._City_Caf%C3%A9_-_Budapest_District_VII._H%C3%A1rsfa_Street.JPG/1920px-H%C3%A1rsfa_street_from_the_Dob_street._Glass_Corridor._City_Hotel_Condominium._City_Caf%C3%A9_-_Budapest_District_VII._H%C3%A1rsfa_Street.JPG",
+   "t": "Hársfa street from the Dob street. Glass Corridor. City Hotel Condominium. City Café - Budapest District VII. Hársfa Street",
+   "a": "Globetrotter19",
+   "p": "https://commons.wikimedia.org/wiki/File:H%C3%A1rsfa_street_from_the_Dob_street._Glass_Corridor._City_Hotel_Condominium._City_Caf%C3%A9_-_Budapest_District_VII._H%C3%A1rsfa_Street.JPG",
+   "d": "2015",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "45560610",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/HK_LNV_Corridor_55_Conduit_Road_8th_Floor_Dec-2015.jpg/1920px-HK_LNV_Corridor_55_Conduit_Road_8th_Floor_Dec-2015.jpg",
+   "t": "HK LNV Corridor 55 Conduit Road 8th Floor Dec-2015",
+   "a": "Beauty Kwok Angela",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_LNV_Corridor_55_Conduit_Road_8th_Floor_Dec-2015.jpg",
+   "d": "2015-12-10",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "57261990",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Korridor_i_l%C3%A4genhetshus_i_Santa_Clara_2017.jpg/1920px-Korridor_i_l%C3%A4genhetshus_i_Santa_Clara_2017.jpg",
+   "t": "Korridor i lägenhetshus i Santa Clara 2017",
+   "a": "Johan Jönsson ( Julle )",
+   "p": "https://commons.wikimedia.org/wiki/File:Korridor_i_l%C3%A4genhetshus_i_Santa_Clara_2017.jpg",
+   "d": "2017-01-08",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "63552997",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Loftg%C3%A5ng%2C_Liedstrandsgatan%2C_G%C3%B6teborg%2C_redigerad_version.jpg",
+   "t": "Loftgång, Liedstrandsgatan, Göteborg, redigerad version",
+   "a": "Johan Jönsson ( Julle )",
+   "p": "https://commons.wikimedia.org/wiki/File:Loftg%C3%A5ng,_Liedstrandsgatan,_G%C3%B6teborg,_redigerad_version.jpg",
+   "d": "2017-10-21",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "69493789",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Main_Street_Elder_Av_td_11_-_Kissena_Corridor_Pk_W.jpg/1920px-Main_Street_Elder_Av_td_11_-_Kissena_Corridor_Pk_W.jpg",
+   "t": "Main Street Elder Av td 11 - Kissena Corridor Pk W",
+   "a": "Tdorante10",
+   "p": "https://commons.wikimedia.org/wiki/File:Main_Street_Elder_Av_td_11_-_Kissena_Corridor_Pk_W.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "69493792",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Main_Street_Elder_Av_td_12_-_Kissena_Corridor_Pk_W.jpg/1920px-Main_Street_Elder_Av_td_12_-_Kissena_Corridor_Pk_W.jpg",
+   "t": "Main Street Elder Av td 12 - Kissena Corridor Pk W",
+   "a": "Tdorante10",
+   "p": "https://commons.wikimedia.org/wiki/File:Main_Street_Elder_Av_td_12_-_Kissena_Corridor_Pk_W.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "69496261",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Kissena_Corridor_Park_W_td_12_-_Field_11.jpg/1920px-Kissena_Corridor_Park_W_td_12_-_Field_11.jpg",
+   "t": "Kissena Corridor Park W td 12 - Field 11",
+   "a": "Tdorante10",
+   "p": "https://commons.wikimedia.org/wiki/File:Kissena_Corridor_Park_W_td_12_-_Field_11.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "69496277",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Kissena_Corridor_Park_W_td_21_-_Field_11.jpg/1920px-Kissena_Corridor_Park_W_td_21_-_Field_11.jpg",
+   "t": "Kissena Corridor Park W td 21 - Field 11",
+   "a": "Tdorante10",
+   "p": "https://commons.wikimedia.org/wiki/File:Kissena_Corridor_Park_W_td_21_-_Field_11.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "69820662",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Corridor_and_gate%2C_7_Hunyadi_square%2C_2018_Ter%C3%A9zv%C3%A1ros.jpg/960px-Corridor_and_gate%2C_7_Hunyadi_square%2C_2018_Ter%C3%A9zv%C3%A1ros.jpg",
+   "t": "Corridor and gate, 7 Hunyadi square, 2018 Terézváros",
+   "a": "Globetrotter19",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_and_gate,_7_Hunyadi_square,_2018_Ter%C3%A9zv%C3%A1ros.jpg",
+   "d": "Taken on 5",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "70461429",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Typical_household_in_northeastern_china_44.jpg/1920px-Typical_household_in_northeastern_china_44.jpg",
+   "t": "Typical household in northeastern china 44",
+   "a": "Tomskyhaha",
+   "p": "https://commons.wikimedia.org/wiki/File:Typical_household_in_northeastern_china_44.jpg",
+   "d": "2016-04-02",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "76926420",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Retail_and_new_apartment_buildings_along_14th_St._NW%2C_U_Street_Corridor%2C_Washington%2C_D.C.%2C_February_2019.jpg/1920px-Retail_and_new_apartment_buildings_along_14th_St._NW%2C_U_Street_Corridor%2C_Washington%2C_D.C.%2C_February_2019.jpg",
+   "t": "Retail and new apartment buildings along 14th St. NW, U Street Corridor, Washington, D.C., February 2019",
+   "a": "Keizers",
+   "p": "https://commons.wikimedia.org/wiki/File:Retail_and_new_apartment_buildings_along_14th_St._NW,_U_Street_Corridor,_Washington,_D.C.,_February_2019.jpg",
+   "d": "2019-02-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "77648802",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/8/8e/1925_and_1923_14th_Street_NW%2C_March_2019.jpg",
+   "t": "1925 and 1923 14th Street NW, March 2019",
+   "a": "Keizers",
+   "p": "https://commons.wikimedia.org/wiki/File:1925_and_1923_14th_Street_NW,_March_2019.jpg",
+   "d": "2019-03-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "82364745",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/530_Meeting.jpg/1920px-530_Meeting.jpg",
+   "t": "530 Meeting",
+   "a": "ProfReader",
+   "p": "https://commons.wikimedia.org/wiki/File:530_Meeting.jpg",
+   "d": "2019-09-20",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "89989645",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Downtown_skyline_from_atop_parking_ramp_at_corner_of_Michigan_Avenue_and_Virginia_Street%2C_Buffalo%2C_New_York_-_20200506.jpg/1920px-Downtown_skyline_from_atop_parking_ramp_at_corner_of_Michigan_Avenue_and_Virginia_Street%2C_Buffalo%2C_New_York_-_20200506.jpg",
+   "t": "Downtown skyline from atop parking ramp at corner of Michigan Avenue and Virginia Street, Buffalo, New York - 20200506",
+   "a": "Andre Carrotflower",
+   "p": "https://commons.wikimedia.org/wiki/File:Downtown_skyline_from_atop_parking_ramp_at_corner_of_Michigan_Avenue_and_Virginia_Street,_Buffalo,_New_York_-_20200506.jpg",
+   "d": "2020-05-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "94005715",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Soundproofing_of_apartment_houses._%28IA_soundproofingo1927337chri%29.pdf/page1-500px-Soundproofing_of_apartment_houses._%28IA_soundproofingo1927337chri%29.pdf.jpg",
+   "t": "Soundproofing of apartment houses. (IA soundproofingo1927337chri)",
+   "a": "Chrisler,V.L.",
+   "p": "https://commons.wikimedia.org/wiki/File:Soundproofing_of_apartment_houses._(IA_soundproofingo1927337chri).pdf",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "101725368",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Monterey_Corridor%2C_San_Jose%2C_San_Jose0430.jpg/1920px-Monterey_Corridor%2C_San_Jose%2C_San_Jose0430.jpg",
+   "t": "Monterey Corridor, San Jose, San Jose0430",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose,_San_Jose0430.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725369",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Monterey_Corridor%2C_San_Jose_0429.jpg/1920px-Monterey_Corridor%2C_San_Jose_0429.jpg",
+   "t": "Monterey Corridor, San Jose 0429",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0429.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725371",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Monterey_Corridor%2C_San_Jose_0431.jpg/1920px-Monterey_Corridor%2C_San_Jose_0431.jpg",
+   "t": "Monterey Corridor, San Jose 0431",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0431.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725374",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Monterey_Corridor%2C_San_Jose_0432.jpg/1920px-Monterey_Corridor%2C_San_Jose_0432.jpg",
+   "t": "Monterey Corridor, San Jose 0432",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0432.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725377",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Monterey_Corridor%2C_San_Jose_0435.jpg/1920px-Monterey_Corridor%2C_San_Jose_0435.jpg",
+   "t": "Monterey Corridor, San Jose 0435",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0435.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725378",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Monterey_Corridor%2C_San_Jose_0437.jpg/1920px-Monterey_Corridor%2C_San_Jose_0437.jpg",
+   "t": "Monterey Corridor, San Jose 0437",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0437.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725379",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Monterey_Corridor%2C_San_Jose_0436.jpg/1920px-Monterey_Corridor%2C_San_Jose_0436.jpg",
+   "t": "Monterey Corridor, San Jose 0436",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0436.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725381",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Monterey_Corridor%2C_San_Jose_0438.jpg/1920px-Monterey_Corridor%2C_San_Jose_0438.jpg",
+   "t": "Monterey Corridor, San Jose 0438",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0438.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "101725382",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Monterey_Corridor%2C_San_Jose_0439.jpg/1920px-Monterey_Corridor%2C_San_Jose_0439.jpg",
+   "t": "Monterey Corridor, San Jose 0439",
+   "a": "Cristiano Tomás",
+   "p": "https://commons.wikimedia.org/wiki/File:Monterey_Corridor,_San_Jose_0439.jpg",
+   "d": "2021-03-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "118044536",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_temporary_barriers_on_North_7th_Street.jpg/1920px-Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_temporary_barriers_on_North_7th_Street.jpg",
+   "t": "Union Pacific Warm Springs Corridor Quiet Zone - temporary barriers on North 7th Street",
+   "a": "Minh Nguyen",
+   "p": "https://commons.wikimedia.org/wiki/File:Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_temporary_barriers_on_North_7th_Street.jpg",
+   "d": "2022-03-28",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "118044543",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_Jackson_Street_at_railroad_crossing.jpg/1920px-Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_Jackson_Street_at_railroad_crossing.jpg",
+   "t": "Union Pacific Warm Springs Corridor Quiet Zone - Jackson Street at railroad crossing",
+   "a": "Minh Nguyen",
+   "p": "https://commons.wikimedia.org/wiki/File:Union_Pacific_Warm_Springs_Corridor_Quiet_Zone_-_Jackson_Street_at_railroad_crossing.jpg",
+   "d": "2022-03-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "121649773",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/4/44/Retail_and_new_apartment_buildings_along_14th_St._NW%2C_U_Street_Corridor%2C_Washington%2C_D.C.%2C_February_2019_%28cropped%29.jpg",
+   "t": "Retail and new apartment buildings along 14th St. NW, U Street Corridor, Washington, D.C., February 2019 (cropped)",
+   "a": "Keizers",
+   "p": "https://commons.wikimedia.org/wiki/File:Retail_and_new_apartment_buildings_along_14th_St._NW,_U_Street_Corridor,_Washington,_D.C.,_February_2019_(cropped).jpg",
+   "d": "2019-02-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "123669847",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Ligota_Toszecka%2C_Gromadzka_1%2C_wn%C4%99trze_budynku%2C_korytarz_I_pi%C4%99tro.jpg/1920px-Ligota_Toszecka%2C_Gromadzka_1%2C_wn%C4%99trze_budynku%2C_korytarz_I_pi%C4%99tro.jpg",
+   "t": "Ligota Toszecka, Gromadzka 1, wnętrze budynku, korytarz I piętro",
+   "a": "Kamil Czaiński",
+   "p": "https://commons.wikimedia.org/wiki/File:Ligota_Toszecka,_Gromadzka_1,_wn%C4%99trze_budynku,_korytarz_I_pi%C4%99tro.jpg",
+   "d": "2022-10-01",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "129883183",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Retail_and_new_apartment_buildings_along_14th_St._NW%2C_U_Street_Corridor%2C_Washington%2C_D.C.%2C_February_2019_%28cropped2%29.jpg/1920px-Retail_and_new_apartment_buildings_along_14th_St._NW%2C_U_Street_Corridor%2C_Washington%2C_D.C.%2C_February_2019_%28cropped2%29.jpg",
+   "t": "Retail and new apartment buildings along 14th St. NW, U Street Corridor, Washington, D.C., February 2019 (cropped2)",
+   "a": "Keizers",
+   "p": "https://commons.wikimedia.org/wiki/File:Retail_and_new_apartment_buildings_along_14th_St._NW,_U_Street_Corridor,_Washington,_D.C.,_February_2019_(cropped2).jpg",
+   "d": "2019-02-27",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "136129286",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Myself_in_2023_B%26W.jpg/1920px-Myself_in_2023_B%26W.jpg",
+   "t": "Myself in 2023 B&W",
+   "a": "SilkDirksoak2ek3",
+   "p": "https://commons.wikimedia.org/wiki/File:Myself_in_2023_B%26W.jpg",
+   "d": "2023-08-17",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "141039459",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/New_Belgrade_rooftop_corridor.jpg/1920px-New_Belgrade_rooftop_corridor.jpg",
+   "t": "New Belgrade rooftop corridor",
+   "a": "kallerna",
+   "p": "https://commons.wikimedia.org/wiki/File:New_Belgrade_rooftop_corridor.jpg",
+   "d": "2023-11-09",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "158146494",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/St._Urban_New_York_vestibule.jpg/1920px-St._Urban_New_York_vestibule.jpg",
+   "t": "St. Urban New York vestibule",
+   "a": "CVB",
+   "p": "https://commons.wikimedia.org/wiki/File:St._Urban_New_York_vestibule.jpg",
+   "d": "Taken on 3",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "166774744",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Bloom%E2%80%99s_Arcade%2C_2025_03.jpg/1920px-Bloom%E2%80%99s_Arcade%2C_2025_03.jpg",
+   "t": "Bloom’s Arcade, 2025 03",
+   "a": "Ktkvtsh",
+   "p": "https://commons.wikimedia.org/wiki/File:Bloom%E2%80%99s_Arcade,_2025_03.jpg",
+   "d": "2025-05-31",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "167389569",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/04_Mailboxes_in_lobby_of_apartment_building_in_Spain%2C_common_area_in_apartment_building.jpg/1920px-04_Mailboxes_in_lobby_of_apartment_building_in_Spain%2C_common_area_in_apartment_building.jpg",
+   "t": "04 Mailboxes in lobby of apartment building in Spain, common area in apartment building",
+   "a": "Marek Ślusarczyk ( Tupungato ) Photo portfolio",
+   "p": "https://commons.wikimedia.org/wiki/File:04_Mailboxes_in_lobby_of_apartment_building_in_Spain,_common_area_in_apartment_building.jpg",
+   "d": "2024-12-04",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 3.0"
+  },
+  {
+   "i": "194111584",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Modern_type_of_apartment_hotels_thruout_United_States_%28IA_moderntypeofapar00cashrich%29.pdf/page1-1280px-Modern_type_of_apartment_hotels_thruout_United_States_%28IA_moderntypeofapar00cashrich%29.pdf.jpg",
+   "t": "Modern type of apartment hotels thruout United States (IA moderntypeofapar00cashrich)",
+   "a": "Cash, Robert Carroll",
+   "p": "https://commons.wikimedia.org/wiki/File:Modern_type_of_apartment_hotels_thruout_United_States_(IA_moderntypeofapar00cashrich).pdf",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "197850566",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Apartment_at_Refurbed_17_The_Hard_2_-_55469800285.jpg/1920px-Apartment_at_Refurbed_17_The_Hard_2_-_55469800285.jpg",
+   "t": "Apartment at Refurbed 17 The Hard 2 - 55469800285",
+   "a": "Tim Sheerman-Chase",
+   "p": "https://commons.wikimedia.org/wiki/File:Apartment_at_Refurbed_17_The_Hard_2_-_55469800285.jpg",
+   "d": "2026-08-16",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "147512",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Fra_Angelico_043.jpg",
+   "t": "Fra Angelico 043",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_043.jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "4518815",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Annunciation_-_Jan_van_Eyck_-_1434_-_NG_Wash_DC.jpg/1920px-Annunciation_-_Jan_van_Eyck_-_1434_-_NG_Wash_DC.jpg",
+   "t": "Annunciation - Jan van Eyck - 1434 - NG Wash DC",
+   "a": "Jan van Eyck",
+   "p": "https://commons.wikimedia.org/wiki/File:Annunciation_-_Jan_van_Eyck_-_1434_-_NG_Wash_DC.jpg",
+   "d": "between ci",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "5446878",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/1/1b/ANGELICO%2C_Fra_Annunciation%2C_1437-46_%282236990916%29.jpg",
+   "t": "ANGELICO, Fra Annunciation, 1437-46 (2236990916)",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:ANGELICO,_Fra_Annunciation,_1437-46_(2236990916).jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "15451061",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Fra_Angelico_-_The_Annunciation_-_WGA00555.jpg",
+   "t": "Fra Angelico - The Annunciation - WGA00555",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_The_Annunciation_-_WGA00555.jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "15451066",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Fra_Angelico_-_The_Annunciation_%28detail%29_-_WGA00557.jpg",
+   "t": "Fra Angelico - The Annunciation (detail) - WGA00557",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_The_Annunciation_(detail)_-_WGA00557.jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "39887531",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Annunciation_Memling.jpg/1920px-Annunciation_Memling.jpg",
+   "t": "Annunciation Memling",
+   "a": "Hans Memling",
+   "p": "https://commons.wikimedia.org/wiki/File:Annunciation_Memling.jpg",
+   "d": "between 14",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "41347574",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/The_Annunciation%2C_with_Saint_Emidius_-_Carlo_Crivelli_-_National_Gallery.jpg/1920px-The_Annunciation%2C_with_Saint_Emidius_-_Carlo_Crivelli_-_National_Gallery.jpg",
+   "t": "The Annunciation, with Saint Emidius - Carlo Crivelli - National Gallery",
+   "a": "Carlo Crivelli",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Annunciation,_with_Saint_Emidius_-_Carlo_Crivelli_-_National_Gallery.jpg",
+   "d": "1486<div s",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "43714921",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Florence_in_poetry%2C_history_and_art_%281913%29_%2814576752430%29.jpg/1920px-Florence_in_poetry%2C_history_and_art_%281913%29_%2814576752430%29.jpg",
+   "t": "Florence in poetry, history and art (1913) (14576752430)",
+   "a": "Internet Archive Book Images",
+   "p": "https://commons.wikimedia.org/wiki/File:Florence_in_poetry,_history_and_art_(1913)_(14576752430).jpg",
+   "d": "1913",
+   "s": "Wikimedia Commons",
+   "l": "No restrictions"
+  },
+  {
+   "i": "44112335",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/In_and_out_of_Florence%3B_a_new_introduction_to_a_well-known_city_%281910%29_%2814595909439%29.jpg/1920px-In_and_out_of_Florence%3B_a_new_introduction_to_a_well-known_city_%281910%29_%2814595909439%29.jpg",
+   "t": "In and out of Florence; a new introduction to a well-known city (1910) (14595909439)",
+   "a": "Internet Archive Book Images",
+   "p": "https://commons.wikimedia.org/wiki/File:In_and_out_of_Florence;_a_new_introduction_to_a_well-known_city_(1910)_(14595909439).jpg",
+   "d": "1910",
+   "s": "Wikimedia Commons",
+   "l": "No restrictions"
+  },
+  {
+   "i": "45633727",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Annunciation_%28Leonardo%29.jpg/1920px-Annunciation_%28Leonardo%29.jpg",
+   "t": "Annunciation (Leonardo)",
+   "a": "Livioandronico2013",
+   "p": "https://commons.wikimedia.org/wiki/File:Annunciation_(Leonardo).jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "45793599",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Angelico_Anunciaci%C3%B3n_01.JPG/1920px-Angelico_Anunciaci%C3%B3n_01.JPG",
+   "t": "Angelico Anunciación 01",
+   "a": "Miguel Hermoso Cuesta",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico_Anunciaci%C3%B3n_01.JPG",
+   "d": "2015-07-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "45793600",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Angelico_Anunciaci%C3%B3n_02.JPG/1920px-Angelico_Anunciaci%C3%B3n_02.JPG",
+   "t": "Angelico Anunciación 02",
+   "a": "Miguel Hermoso Cuesta",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico_Anunciaci%C3%B3n_02.JPG",
+   "d": "2015-07-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "54040218",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/San_Geremia_%28Venice%29_Annunciation_by_Palma_il_giovane_1628.jpg/1920px-San_Geremia_%28Venice%29_Annunciation_by_Palma_il_giovane_1628.jpg",
+   "t": "San Geremia (Venice) Annunciation by Palma il giovane 1628",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:San_Geremia_(Venice)_Annunciation_by_Palma_il_giovane_1628.jpg",
+   "d": "Taken on 3",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "57754243",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Accademia_-_The_Annunciation_-_Veronese.jpg/1920px-Accademia_-_The_Annunciation_-_Veronese.jpg",
+   "t": "Accademia - The Annunciation - Veronese",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:Accademia_-_The_Annunciation_-_Veronese.jpg",
+   "d": "Taken on 4",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "96543029",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/The_Annunciation%2C_Gladzor.jpg/1920px-The_Annunciation%2C_Gladzor.jpg",
+   "t": "The Annunciation, Gladzor",
+   "a": "Toros Taronatsi",
+   "p": "https://commons.wikimedia.org/wiki/File:The_Annunciation,_Gladzor.jpg",
+   "d": "1323",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "118173788",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/San_Marco%2C_Florence_%2826677766215%29.jpg/1920px-San_Marco%2C_Florence_%2826677766215%29.jpg",
+   "t": "San Marco, Florence (26677766215)",
+   "a": "Dimitris Kamaras from Athens, Greece",
+   "p": "https://commons.wikimedia.org/wiki/File:San_Marco,_Florence_(26677766215).jpg",
+   "d": "2016-04-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "118174029",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Annunciation_%28Annunciazione%29%2C_San_Marco%2C_Florence_%2826403832010%29.jpg/1920px-Annunciation_%28Annunciazione%29%2C_San_Marco%2C_Florence_%2826403832010%29.jpg",
+   "t": "Annunciation (Annunciazione), San Marco, Florence (26403832010)",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:Annunciation_(Annunciazione),_San_Marco,_Florence_(26403832010).jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "132860302",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/The_corridor_of_researchers_dormitory.jpg/1920px-The_corridor_of_researchers_dormitory.jpg",
+   "t": "The corridor of researchers dormitory",
+   "a": "Rafi Bin Tofa",
+   "p": "https://commons.wikimedia.org/wiki/File:The_corridor_of_researchers_dormitory.jpg",
+   "d": "2023-06-03",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "135597142",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/%28Venice%29_Annunciation_by_Sebastiano_Mazzoni_-_Gallerie_Accademia.jpg/1920px-%28Venice%29_Annunciation_by_Sebastiano_Mazzoni_-_Gallerie_Accademia.jpg",
+   "t": "(Venice) Annunciation by Sebastiano Mazzoni - Gallerie Accademia",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:(Venice)_Annunciation_by_Sebastiano_Mazzoni_-_Gallerie_Accademia.jpg",
+   "d": "Taken on 9",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "136654622",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/%28Venice%29_Annunciation_by_Giambattista_Pittoni_-_Gallerie_Accademia.jpg/1920px-%28Venice%29_Annunciation_by_Giambattista_Pittoni_-_Gallerie_Accademia.jpg",
+   "t": "(Venice) Annunciation by Giambattista Pittoni - Gallerie Accademia",
+   "a": "Didier Descouens",
+   "p": "https://commons.wikimedia.org/wiki/File:(Venice)_Annunciation_by_Giambattista_Pittoni_-_Gallerie_Accademia.jpg",
+   "d": "Taken on 9",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "147450147",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Fra_Angelico_-_Annunciation.jpg/1920px-Fra_Angelico_-_Annunciation.jpg",
+   "t": "Fra Angelico - Annunciation",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Annunciation.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "150585055",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Annunciation_-_Antonello_da_Messina.jpg/1920px-Annunciation_-_Antonello_da_Messina.jpg",
+   "t": "Annunciation - Antonello da Messina",
+   "a": "GoldenArtists",
+   "p": "https://commons.wikimedia.org/wiki/File:Annunciation_-_Antonello_da_Messina.jpg",
+   "d": "2023-08-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "152595215",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._02.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._02.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 02",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._02.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595216",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._01.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._01.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 01",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._01.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595229",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._03.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._03.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 03",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._03.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595230",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._04.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._04.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 04",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._04.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595231",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._05.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._05.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 05",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._05.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595240",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._07.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._07.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 07",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._07.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595241",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._06.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._06.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 06",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._06.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "152595242",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._08.jpg/1920px-Angelico%2C_annunciazione_del_corridoio_nord%2C_1440-50_ca._08.jpg",
+   "t": "Angelico, annunciazione del corridoio nord, 1440-50 ca. 08",
+   "a": "Francesco Bini",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico,_annunciazione_del_corridoio_nord,_1440-50_ca._08.jpg",
+   "d": "2014-02-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "153197022",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Corrdior_Kuurojenkoulu_Oulu_20240907_01.jpg/1920px-Corrdior_Kuurojenkoulu_Oulu_20240907_01.jpg",
+   "t": "Corrdior Kuurojenkoulu Oulu 20240907 01",
+   "a": "Estormiz",
+   "p": "https://commons.wikimedia.org/wiki/File:Corrdior_Kuurojenkoulu_Oulu_20240907_01.jpg",
+   "d": "Taken on 7",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "154032131",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+   "t": "Angelico - Annunciation - San Marco north corridor",
+   "a": "Fra Angelico",
+   "p": "https://commons.wikimedia.org/wiki/File:Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+   "d": "from 1438 ",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "184704649",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Moscow_-_2026_-_Kremlin_Wall_between_the_Vodovzvodnaya_and_the_Annunciation_Towers.jpg/1920px-Moscow_-_2026_-_Kremlin_Wall_between_the_Vodovzvodnaya_and_the_Annunciation_Towers.jpg",
+   "t": "Moscow - 2026 - Kremlin Wall between the Vodovzvodnaya and the Annunciation Towers",
+   "a": "Юрий Д.К.",
+   "p": "https://commons.wikimedia.org/wiki/File:Moscow_-_2026_-_Kremlin_Wall_between_the_Vodovzvodnaya_and_the_Annunciation_Towers.jpg",
+   "d": "Taken on 1",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "488139",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Stasi_Basement_Hallway.jpg",
+   "t": "Stasi Basement Hallway",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Stasi_Basement_Hallway.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "5212258",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/8/88/Apulian_Amphora_350BC_Staatliche_Antikensammlungen_Basement_Corridor_01.jpg",
+   "t": "Apulian Amphora 350BC Staatliche Antikensammlungen Basement Corridor 01",
+   "a": "Darius Painter",
+   "p": "https://commons.wikimedia.org/wiki/File:Apulian_Amphora_350BC_Staatliche_Antikensammlungen_Basement_Corridor_01.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "5212264",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Apulian_Lutrophe_330BC_Staatliche_antikensammlungen_Basement_Corridor_01.jpg",
+   "t": "Apulian Lutrophe 330BC Staatliche antikensammlungen Basement Corridor 01",
+   "a": "Unterwelt Maler 330 BC",
+   "p": "https://commons.wikimedia.org/wiki/File:Apulian_Lutrophe_330BC_Staatliche_antikensammlungen_Basement_Corridor_01.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "5212268",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Apulian_Lutrophore_350BC_Staatliche_Antikensammlungen_Basement_corridor_00.jpg",
+   "t": "Apulian Lutrophore 350BC Staatliche Antikensammlungen Basement corridor 00",
+   "a": "Varrese Painter 350 BC",
+   "p": "https://commons.wikimedia.org/wiki/File:Apulian_Lutrophore_350BC_Staatliche_Antikensammlungen_Basement_corridor_00.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "35731093",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/HK_Central_The_Center_%E4%B8%AD%E7%92%B0%E4%B8%AD%E5%BF%83_basement_interior_corridor_Sep-2014.JPG/1920px-HK_Central_The_Center_%E4%B8%AD%E7%92%B0%E4%B8%AD%E5%BF%83_basement_interior_corridor_Sep-2014.JPG",
+   "t": "HK Central The Center 中環中心 basement interior corridor Sep-2014",
+   "a": "Deyoadutrys",
+   "p": "https://commons.wikimedia.org/wiki/File:HK_Central_The_Center_%E4%B8%AD%E7%92%B0%E4%B8%AD%E5%BF%83_basement_interior_corridor_Sep-2014.JPG",
+   "d": "2014-09-22",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "37834629",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/6/69/Aalto_Uni%3B_basement_hallways-fd0000_%289501378959%29.jpg",
+   "t": "Aalto Uni; basement hallways-fd0000 (9501378959)",
+   "a": "Open Knowledge Foundation Deutschland from Deutschland",
+   "p": "https://commons.wikimedia.org/wiki/File:Aalto_Uni;_basement_hallways-fd0000_(9501378959).jpg",
+   "d": "2013-08-13",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "64054668",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Basement_corridor_in_shut_down_paper_mill.jpg/1920px-Basement_corridor_in_shut_down_paper_mill.jpg",
+   "t": "Basement corridor in shut down paper mill",
+   "a": "ImagePerson",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_corridor_in_shut_down_paper_mill.jpg",
+   "d": "2015-07-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "77954805",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2839763144573%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2839763144573%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (39763144573)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(39763144573).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "77954808",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846003433274%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846003433274%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (46003433274)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(46003433274).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "77954810",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2845812482925%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2845812482925%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (45812482925)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(45812482925).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "77954811",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846728007231%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846728007231%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (46728007231)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(46728007231).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "77954813",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846728004171%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2846728004171%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (46728004171)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(46728004171).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "77954814",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2845812476695%29.jpg/1920px-Basement_Corridor%2C_Biltmore_House%2C_Biltmore_Estate%2C_Asheville%2C_NC_%2845812476695%29.jpg",
+   "t": "Basement Corridor, Biltmore House, Biltmore Estate, Asheville, NC (45812476695)",
+   "a": "Warren LeMay from Cincinnati, OH, United States",
+   "p": "https://commons.wikimedia.org/wiki/File:Basement_Corridor,_Biltmore_House,_Biltmore_Estate,_Asheville,_NC_(45812476695).jpg",
+   "d": "2019-01-11",
+   "s": "Wikimedia Commons",
+   "l": "CC0"
+  },
+  {
+   "i": "106580082",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Tiled_corridor%2C_basement_of_Liverpool_Cotton_Exchange_2.jpg/1920px-Tiled_corridor%2C_basement_of_Liverpool_Cotton_Exchange_2.jpg",
+   "t": "Tiled corridor, basement of Liverpool Cotton Exchange 2",
+   "a": "Rodhullandemu",
+   "p": "https://commons.wikimedia.org/wiki/File:Tiled_corridor,_basement_of_Liverpool_Cotton_Exchange_2.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "106580085",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Tiled_corridor%2C_basement_of_Liverpool_Cotton_Exchange_1.jpg/1920px-Tiled_corridor%2C_basement_of_Liverpool_Cotton_Exchange_1.jpg",
+   "t": "Tiled corridor, basement of Liverpool Cotton Exchange 1",
+   "a": "Rodhullandemu",
+   "p": "https://commons.wikimedia.org/wiki/File:Tiled_corridor,_basement_of_Liverpool_Cotton_Exchange_1.jpg",
+   "d": "Taken on 2",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "107560284",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/McEwan_Hall_basement_corridor_%2846194942151%29.jpg/1920px-McEwan_Hall_basement_corridor_%2846194942151%29.jpg",
+   "t": "McEwan Hall basement corridor (46194942151)",
+   "a": "Magnus Hagdorn from UK",
+   "p": "https://commons.wikimedia.org/wiki/File:McEwan_Hall_basement_corridor_(46194942151).jpg",
+   "d": "2018-12-05",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "128571789",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/MR_basement_corridor_%283092764049%29.jpg/1920px-MR_basement_corridor_%283092764049%29.jpg",
+   "t": "MR basement corridor (3092764049)",
+   "a": "craigfinlay",
+   "p": "https://commons.wikimedia.org/wiki/File:MR_basement_corridor_(3092764049).jpg",
+   "d": "2008-11-30",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 2.0"
+  },
+  {
+   "i": "134769303",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Columbus_Metropolitan_Library_Basement_Corridor_-_DPLA_-_89ad55a402b561df8fb1a12f7660b681.jpg/1920px-Columbus_Metropolitan_Library_Basement_Corridor_-_DPLA_-_89ad55a402b561df8fb1a12f7660b681.jpg",
+   "t": "Columbus Metropolitan Library Basement Corridor - DPLA - 89ad55a402b561df8fb1a12f7660b681",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Columbus_Metropolitan_Library_Basement_Corridor_-_DPLA_-_89ad55a402b561df8fb1a12f7660b681.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "139293376",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Willa_Jasny_Dom%2C_basement_corridor%2C_fragment_1%2C_W%C5%82ochy_by_Warsaw%2C_photo_of_19_October_2023.jpg/1920px-Willa_Jasny_Dom%2C_basement_corridor%2C_fragment_1%2C_W%C5%82ochy_by_Warsaw%2C_photo_of_19_October_2023.jpg",
+   "t": "Willa Jasny Dom, basement corridor, fragment 1, Włochy by Warsaw, photo of 19 October 2023",
+   "a": "Jedrzej1224",
+   "p": "https://commons.wikimedia.org/wiki/File:Willa_Jasny_Dom,_basement_corridor,_fragment_1,_W%C5%82ochy_by_Warsaw,_photo_of_19_October_2023.jpg",
+   "d": "2023-10-19",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "139293569",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Willa_Jasny_Dom%2C_basement_corridor%2C_fragment_2%2C_W%C5%82ochy_by_Warsaw%2C_photo_of_19_October_2023.jpg/1920px-Willa_Jasny_Dom%2C_basement_corridor%2C_fragment_2%2C_W%C5%82ochy_by_Warsaw%2C_photo_of_19_October_2023.jpg",
+   "t": "Willa Jasny Dom, basement corridor, fragment 2, Włochy by Warsaw, photo of 19 October 2023",
+   "a": "Jedrzej1224",
+   "p": "https://commons.wikimedia.org/wiki/File:Willa_Jasny_Dom,_basement_corridor,_fragment_2,_W%C5%82ochy_by_Warsaw,_photo_of_19_October_2023.jpg",
+   "d": "2023-10-19",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "155522977",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Adams_School_Basement_Corridor_-_DPLA_-_2865cde7b2a358243e5a2ee257c0dda8.jpg/1920px-Adams_School_Basement_Corridor_-_DPLA_-_2865cde7b2a358243e5a2ee257c0dda8.jpg",
+   "t": "Adams School Basement Corridor - DPLA - 2865cde7b2a358243e5a2ee257c0dda8",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Adams_School_Basement_Corridor_-_DPLA_-_2865cde7b2a358243e5a2ee257c0dda8.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "155534201",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Prescott_School_Basement_Corridor_-_DPLA_-_67065094a06bee26fb6a259844a96a15.jpg/1920px-Prescott_School_Basement_Corridor_-_DPLA_-_67065094a06bee26fb6a259844a96a15.jpg",
+   "t": "Prescott School Basement Corridor - DPLA - 67065094a06bee26fb6a259844a96a15",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Prescott_School_Basement_Corridor_-_DPLA_-_67065094a06bee26fb6a259844a96a15.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "155704694",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Madison_School_Basement_Corridor_-_DPLA_-_ead9a46e1456db33dac975e6757818a8.jpg/1920px-Madison_School_Basement_Corridor_-_DPLA_-_ead9a46e1456db33dac975e6757818a8.jpg",
+   "t": "Madison School Basement Corridor - DPLA - ead9a46e1456db33dac975e6757818a8",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Madison_School_Basement_Corridor_-_DPLA_-_ead9a46e1456db33dac975e6757818a8.jpg",
+   "d": "",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "156279955",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Whittier_School_Basement_Corridor_-_DPLA_-_14e1182b5c58f27dea4c224164cf9d11.jpg/1920px-Whittier_School_Basement_Corridor_-_DPLA_-_14e1182b5c58f27dea4c224164cf9d11.jpg",
+   "t": "Whittier School Basement Corridor - DPLA - 14e1182b5c58f27dea4c224164cf9d11",
+   "a": "unknown",
+   "p": "https://commons.wikimedia.org/wiki/File:Whittier_School_Basement_Corridor_-_DPLA_-_14e1182b5c58f27dea4c224164cf9d11.jpg",
+   "d": "",
    "s": "Wikimedia Commons",
    "l": "Public domain"
   }
