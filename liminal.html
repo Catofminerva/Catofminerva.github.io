@@ -1275,10 +1275,18 @@ a:hover{ color:#c00; }
     };
     img.onerror = () => {
       if (plates[plateIdx] !== meta) return;
-      say('the photograph is missing from the file. the post was taken down.');
+      /* the picture has gone from wherever it was kept. drop the entry and
+         try the next one; if they have all gone, the corridor is still
+         there, which is the point of the corridor. */
+      say('the photograph is missing from the file.');
       plates.splice(plateIdx, 1);
-      if (plates.length) showPlate(plateIdx);
-      else { plateMsg = 'NO PLATES'; caption(null); }
+      if (plates.length){ showPlate(plateIdx); return; }
+      plateMsg = 'NO PLATES';
+      caption(null);
+      if (mode === 'room'){
+        say('none of the photographs will load. back to the corridor.');
+        leaveRoom();
+      }
     };
     img.src = meta.u;
   }
