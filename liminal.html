@@ -125,25 +125,6 @@ td.main{ padding:18px 20px 26px; }
 .navlist a{ display:block; padding:2px 0; }
 .navlist img{ vertical-align:-2px; margin-right:5px; }
 
-dl.now{ margin:0; }
-dl.now dt{
-  float:left; clear:left; width:56px;
-  color:#6a624a; text-transform:uppercase; font-size:10px; letter-spacing:.06em;
-  line-height:1.75;
-}
-dl.now dd{ margin:0 0 2px 60px; }
-
-/* the counter, the one piece of chrome every weblog had */
-.odo{
-  display:inline-block;
-  padding:2px 5px;
-  background:#000;
-  border:2px inset #9b9169;
-  font:12px/1.35 "Courier New", monospace;
-  letter-spacing:2px;
-  color:#9fe89f;
-}
-
 /* the clock that has read the same time since the refit */
 .clock{
   padding:7px 0 5px;
@@ -208,57 +189,47 @@ dl.now dd{ margin:0 0 2px 60px; }
 }
 .loading[hidden]{ display:none; }
 
-/* the wall you are facing, with the doors out of this room in it. the
-   photograph above is left alone: the black rectangles that used to sit
-   on it read as damage to the picture rather than as somewhere to go. */
-.doorwall{
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  gap:clamp(14px, 6vw, 54px);
-  margin:0 6px 6px;
-  padding:14px 10px 0;
-  min-height:74px;
-  background:
-    linear-gradient(180deg, #cdba6d 0%, #c2ae62 62%, #b6a259 100%);
-  border:2px solid;
-  border-color:#8a7a3f #e0d29a #e0d29a #8a7a3f;
-  border-bottom-width:9px;               /* the floor, seen edge on */
-  border-bottom-color:#6f6231;
-}
+/* the doors. small, standing somewhere in the photograph, one of two
+   gifs each. big shapes laid over a picture read as damage to it; a door
+   the size of a door in the distance reads as a door. */
+.doors{ position:absolute; inset:0; pointer-events:none; }
 .door{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:3px;
-  padding:4px 8px 6px;
+  position:absolute;
+  padding:0;
   background:none;
   border:0;
-  color:#4a4020;
-  font:10px/1.4 Verdana, Geneva, sans-serif;
-  letter-spacing:.1em;
-  text-transform:lowercase;
+  line-height:0;
   cursor:pointer;
+  pointer-events:auto;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.55));
+  transition:transform 140ms ease, filter 140ms ease;
 }
 .door img{
-  width:38px; height:38px;
+  display:block;
+  width:100%; height:auto;
   image-rendering:pixelated;
-  transition:transform 120ms ease, filter 120ms ease;
 }
-.door:hover img, .door:focus-visible img{
-  transform:scale(1.22) translateY(-2px);
-  filter:drop-shadow(0 0 7px rgba(255,244,190,.95));
+.door:hover, .door:focus-visible{
+  transform:scale(1.14) translateY(-2px);
+  filter:drop-shadow(0 0 9px rgba(255,246,205,.95)) drop-shadow(0 2px 6px rgba(0,0,0,.5));
+  outline:0;
 }
-.door:hover, .door:focus-visible{ color:#221d0c; outline:0; }
-.door:active img{ transform:scale(1.05); }
-.door .num{
-  display:inline-block;
-  min-width:13px;
-  padding:0 3px;
-  border:1px solid #8a7a3f;
-  background:#dccb8c;
-  font:9px/1.4 "Courier New", monospace;
-  color:#4a4020;
+.door:active{ transform:scale(1.02); }
+
+/* a door nobody has noticed yet breathes very slightly, which is the
+   only way to find one in a photograph of a room you have never seen */
+@keyframes doorbreath{
+  0%, 100%{ filter:drop-shadow(0 2px 5px rgba(0,0,0,.55)); }
+  50%     { filter:drop-shadow(0 0 7px rgba(255,246,205,.5)) drop-shadow(0 2px 5px rgba(0,0,0,.55)); }
+}
+.door{ animation:doorbreath 3.4s ease-in-out infinite; }
+.door:hover, .door:focus-visible{ animation:none; }
+@media (prefers-reduced-motion:reduce){
+  .door{ animation:none; transition:none; }
+}
+/* a door on a phone still has to be big enough to hit with a thumb */
+@media (hover:none) and (pointer:coarse){
+  .door{ min-width:46px; }
 }
 
 /* going through one. a short cut to black, because a doorway is not a
@@ -375,45 +346,6 @@ table.hud td.wide{ white-space:normal; }
 .plate .by{ color:#6a624a; }
 .plate a{ color:#00c; }
 
-/* --- the weblog itself -------------------------------------------- */
-.entry{ margin:0 0 26px; }
-.entry h3{
-  margin:0 0 2px;
-  font:bold 13px/1.5 Verdana, Geneva, sans-serif;
-  letter-spacing:.05em;
-  color:#2b2718;
-}
-.entry .stamp{
-  margin:0 0 8px;
-  font:10px/1.6 Verdana, Geneva, sans-serif;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color:#6a624a;
-}
-.entry p{ margin:0 0 10px; }
-.entry p:last-child{ margin:0; }
-.entry .cut{ color:#4a442f; }
-.entry .cut::after{
-  content:"\258C";
-  margin-left:1px;
-  animation:blink 1.06s steps(1) infinite;
-}
-@keyframes blink{ 50%{ opacity:0; } }
-@media (prefers-reduced-motion:reduce){ .entry .cut::after{ animation:none; } }
-
-hr.rule{
-  height:0; margin:22px 0;
-  border:0; border-top:1px solid #b3a880; border-bottom:1px solid #f5efdc;
-}
-
-h2.section{
-  margin:0 0 12px;
-  font:bold 11px/1.6 Verdana, Geneva, sans-serif;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#5b543c;
-}
-
 .notice{
   margin:0 0 18px;
   padding:9px 12px;
@@ -423,18 +355,6 @@ h2.section{
   font:12px/1.7 Verdana, Geneva, sans-serif;
   color:#3a3524;
 }
-
-/* comments, in the shape every weblog comment box had */
-.cmt{
-  margin:0 0 10px;
-  padding:8px 10px;
-  background:#e9e3cd;
-  border:1px solid #c2b891;
-  font:12px/1.65 Verdana, Geneva, sans-serif;
-}
-.cmt .who{ font-weight:bold; color:#2b2718; }
-.cmt .when{ color:#6a624a; font-size:10px; letter-spacing:.05em; }
-.cmt p{ margin:5px 0 0; }
 
 .ring{
   margin:0;
@@ -494,46 +414,11 @@ a:hover{ color:#c00; }
         </div>
 
         <div class="box">
-          <h2>Now</h2>
-          <div class="inner">
-            <dl class="now">
-              <dt>mood</dt><dd>awake</dd>
-              <dt>music</dt><dd>the vents, in B flat</dd>
-              <dt>weather</dt><dd>indoors</dd>
-              <dt>eating</dt><dd>vending machine</dd>
-              <dt>status</dt><dd>still walking</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="box">
           <h2>West corridor clock</h2>
           <div class="inner">
             <div class="clock">3:14 AM
               <span class="note">stuck since the refit. reported twice.</span>
             </div>
-          </div>
-        </div>
-
-        <div class="box">
-          <h2>The rules</h2>
-          <div class="inner">
-            <ul>
-              <li>keep to the marked route.</li>
-              <li>lights switch off by section, not all at once. this is normal.</li>
-              <li>if a corridor is longer than the plan says, use the plan.</li>
-              <li>do not prop the fire doors.</li>
-              <li>door 12 is on the west corridor.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="box">
-          <h2>Visitors</h2>
-          <div class="inner" style="text-align:center">
-            you are visitor<br>
-            <span class="odo" id="visitCount">000000</span>
-            <div style="margin-top:6px; color:#6a624a" id="visitNote">nobody has signed in tonight.</div>
           </div>
         </div>
 
@@ -592,15 +477,15 @@ a:hover{ color:#c00; }
 
           <!-- the photograph is the room. nothing is drawn over it except
                the doors, and nothing is drawn on it at all. -->
+          <!-- two doors, somewhere in the room. small, and never in the
+               same place twice: where they stand comes from a hash of the
+               photograph they stand in. -->
           <div class="screen" id="screen">
             <img id="roomImg" alt="" decoding="async" referrerpolicy="no-referrer">
+            <div class="doors" id="doors"></div>
             <div class="fade" id="fade" aria-hidden="true"></div>
             <p class="loading" id="loading">finding a room&#8230;</p>
           </div>
-
-          <!-- the doors out of this room. they stand below the photograph
-               rather than on it, so nothing is ever laid over the picture. -->
-          <div class="doorwall" id="doors"></div>
 
           <table class="hud">
             <tbody>
@@ -623,7 +508,7 @@ a:hover{ color:#c00; }
 
           <div class="keys">
             <span class="kbdhint">
-              click a door &#183; or press <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> &#183;
+              click a door &#183; or press <kbd>1</kbd> <kbd>2</kbd> &#183;
               <kbd>B</kbd> goes back through a door, which does not return you
             </span>
           </div>
@@ -635,101 +520,6 @@ a:hover{ color:#c00; }
           </div>
         </div>
         <!-- ============ /the rooms ============ -->
-
-        <hr class="rule">
-
-        <h2 class="section">The log</h2>
-
-        <div class="entry">
-          <h3>first post</h3>
-          <p class="stamp">12 august 1999 &#183; 3:14 am &#183; mood: awake</p>
-          <p>got the night contract at the annexe. eleven hours, four floors, one badge that
-          opens most things. the day people leave at six and the building carries on without
-          them: the vents, the compressor under the vending machine, the lights on the east
-          side that stay on because nobody can find the switch for them.</p>
-          <p>i brought a book. i have not opened it. i walk instead, and by the third hour the
-          walking is the whole job.</p>
-        </div>
-
-        <div class="entry">
-          <h3>the carpet</h3>
-          <p class="stamp">19 august 1999 &#183; 3:14 am &#183; mood: precise</p>
-          <p>the carpet on level 2 repeats every 4.6 metres. i counted it in strides first and
-          then measured it properly with the tape from the supply cupboard, which is how i know
-          it is 4.6 and not 5.</p>
-          <p>for the first eight repeats you see the pattern. after that you only see the join,
-          and once you have seen the join you cannot go back to seeing the pattern.</p>
-        </div>
-
-        <div class="entry">
-          <h3>door 12</h3>
-          <p class="stamp">2 september 1999 &#183; 3:14 am &#183; mood: reasonable</p>
-          <p>there are two doors numbered 12. one on the west corridor, one on the north.
-          facilities say the north one was renumbered during the refit and the plate was never
-          swapped, which is the sort of answer that closes a phone call without settling
-          anything.</p>
-          <p>i have opened the west one. i have not opened the north one and i intend to keep it
-          that way, because the west one opens onto a corridor that is the corridor i was
-          already standing in.</p>
-        </div>
-
-        <div class="entry">
-          <h3>the clock</h3>
-          <p class="stamp">30 october 1999 &#183; 3:14 am &#183; mood: tired of this</p>
-          <p>the clock outside the west stairwell has read 3:14 since the refit. i reported it
-          in june and again in september. the second time, the man on the phone asked me what
-          time it was. i told him 3:14. there was a pause on the line, and then he said he meant
-          on my watch.</p>
-        </div>
-
-        <div class="entry">
-          <h3>y2k</h3>
-          <p class="stamp">1 january 2000 &#183; 3:14 am &#183; mood: fine, actually</p>
-          <p>nothing happened. the lights stayed on. the vending machine reset itself to 1980 and
-          started handing out free drinks, which is the most eventful thing that has occurred in
-          this building since i started. i took a lemonade, walked level 3, came back, and it had
-          corrected itself.</p>
-        </div>
-
-        <div class="entry">
-          <h3>(untitled)</h3>
-          <p class="stamp">march 2000 &#183; 3:14 am &#183; mood: &#8212;</p>
-          <p>i will write this one properly when i am back at the desk. the short version is that
-          i went down to check the fire door at the end of the west corridor, and the west
-          corridor was longer than it has<span class="cut"> </span></p>
-        </div>
-
-        <p style="font:11px/1.6 Verdana,Geneva,sans-serif; color:#6a624a">
-          // there are no further entries in this archive.
-        </p>
-
-        <hr class="rule">
-
-        <h2 class="section">Comments (4)</h2>
-
-        <div class="cmt">
-          <span class="who">dave_r</span> <span class="when">&#183; 14 feb 2001, 11:02 pm</span>
-          <p>found you through the ring. the carpet thing is true in my building too, except ours
-          is 4.2 and it is on the ground floor. i have never told anyone this.</p>
-        </div>
-
-        <div class="cmt">
-          <span class="who">anon</span> <span class="when">&#183; 3 nov 2002, 3:14 am</span>
-          <p>is the annexe a real address. i drove to where i thought it was and there is a car
-          park there now, and the car park has a fire door on the far wall.</p>
-        </div>
-
-        <div class="cmt">
-          <span class="who">(no name given)</span> <span class="when">&#183; 8 aug 2004, 3:14 am</span>
-          <p>hello?</p>
-        </div>
-
-        <div class="cmt">
-          <span class="who">(no name given)</span> <span class="when">&#183; 8 aug 2004, 3:14 am</span>
-          <p>hello?</p>
-        </div>
-
-        <hr class="rule">
 
         <div class="ring">
           <b>THE NIGHT SHIFT WEBRING</b><br>
@@ -746,7 +536,6 @@ a:hover{ color:#c00; }
 
   <div class="foot">
     <img src="dividerblackwhite.gif" alt="" width="240" aria-hidden="true"><br>
-    the corridor stops when you look away. that is a browser feature, not a promise.<br>
     <a href="index.html">&#8592; back to the site</a> &#183; last modified <span id="lastMod">3:14 am</span><br>
     <img src="underconstruct.gif" alt="under construction" width="120" loading="lazy">
     <img src="warning.gif" alt="" width="20" loading="lazy" aria-hidden="true">
@@ -848,18 +637,25 @@ a:hover{ color:#c00; }
   }
 
   /* --- the doors of a room --------------------------------------------
-     two or three of them, fixed per room, since a room you walk back
-     into should not have grown a door while you were away. */
+     always two. where they stand comes from a hash of the photograph
+     they stand in, so a room you walk back into has its doors where it
+     had them, and no two rooms put them in the same place. they are kept
+     small, and kept apart, and kept out of the very top of the frame
+     where a door would be standing in the ceiling. */
+  const DOORS = ['door.gif', 'door2.gif'];
+
   function doorsOf(roomIdx){
     const id = plates.length ? plates[roomIdx].u : String(roomIdx);
-    return 2 + (hash(id, 3) > 0.62 ? 1 : 0);
-  }
-
-  /* what to call each one. positions rather than numbers, because a
-     door in a wall is on your left or it is not. */
-  function doorName(i, count){
-    if (count === 2) return i === 0 ? 'to the left' : 'to the right';
-    return ['to the left', 'straight ahead', 'to the right'][i];
+    const out = [];
+    for (let i = 0; i < 2; i++){
+      const w = 7 + hash(id, 11 + i * 5) * 5;              // 7-12% of the width
+      /* one door in each half of the frame, so they never sit on top of
+         one another however the numbers fall */
+      const left = (i === 0 ? 4 : 52) + hash(id, 23 + i * 5) * (44 - w);
+      const top  = 28 + hash(id, 37 + i * 5) * 46;         // 28-74% down
+      out.push({ src: DOORS[i], left: left, top: top, width: w });
+    }
+    return out;
   }
 
   /* --- entering a room -------------------------------------------------- */
@@ -900,7 +696,7 @@ a:hover{ color:#c00; }
     else say(LINES[Math.floor(hash(meta.u, 71) * LINES.length)]);
 
     /* whatever is behind these doors, fetched while you decide */
-    for (let i = 0; i < doorsOf(here); i++){
+    for (let i = 0; i < doorsOf(here).length; i++){
       const n = plates[behind(here, i)];
       if (n){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = n.u; }
     }
@@ -908,30 +704,77 @@ a:hover{ color:#c00; }
 
   function paintDoors(){
     el.doors.textContent = '';
-    const count = doorsOf(here);
-    for (let i = 0; i < count; i++){
-      const name = doorName(i, count);
+    doorsOf(here).forEach((d, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'door';
-      b.setAttribute('aria-label', 'Go through the door ' + name);
+      b.style.left  = d.left.toFixed(2) + '%';
+      b.style.top   = d.top.toFixed(2) + '%';
+      b.style.width = d.width.toFixed(2) + '%';
+      b.style.animationDelay = (i * 1.3).toFixed(1) + 's';
+      b.setAttribute('aria-label', 'Go through the ' + (i === 0 ? 'first' : 'second') + ' door');
 
       const img = document.createElement('img');
-      img.src = 'i-49995.gif';
+      img.src = d.src;
       img.alt = '';
-      img.width = 38; img.height = 38;
+      b.appendChild(img);
 
-      const cap = document.createElement('span');
-      cap.append(document.createTextNode(name + ' '));
-      const n = document.createElement('span');
-      n.className = 'num';
-      n.textContent = String(i + 1);
-      cap.appendChild(n);
-
-      b.append(img, cap);
       b.addEventListener('click', () => go(i));
       el.doors.appendChild(b);
-    }
+    });
+  }
+
+  /* --- the sound a door makes -------------------------------------------
+     a latch, then the swing, then the thud of it meeting the frame.
+     synthesised rather than downloaded: it is a few hundred bytes of
+     arithmetic instead of a file, it fires the instant the door is
+     clicked, and there is nothing to go missing. the context is only
+     built on the first click, which is a user gesture, so no browser
+     objects to it. */
+  let dctx = null;
+  function doorSound(){
+    try {
+      dctx = dctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (dctx.state === 'suspended') dctx.resume();
+      const t = dctx.currentTime;
+
+      /* the latch: a very short click of high filtered noise */
+      const n = dctx.createBuffer(1, dctx.sampleRate * 0.4, dctx.sampleRate);
+      const ch = n.getChannelData(0);
+      for (let i = 0; i < ch.length; i++) ch[i] = (Math.random() * 2 - 1);
+      const latch = dctx.createBufferSource(); latch.buffer = n;
+      const lbp = dctx.createBiquadFilter();
+      lbp.type = 'bandpass'; lbp.frequency.value = 2600; lbp.Q.value = 3;
+      const lg = dctx.createGain();
+      lg.gain.setValueAtTime(0.22, t);
+      lg.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+      latch.connect(lbp).connect(lg).connect(dctx.destination);
+      latch.start(t); latch.stop(t + 0.08);
+
+      /* the swing: the same noise, low and brief, a moment later */
+      const swing = dctx.createBufferSource(); swing.buffer = n;
+      const slp = dctx.createBiquadFilter();
+      slp.type = 'lowpass'; slp.frequency.setValueAtTime(900, t + 0.05);
+      slp.frequency.exponentialRampToValueAtTime(260, t + 0.3);
+      const sg = dctx.createGain();
+      sg.gain.setValueAtTime(0.0001, t + 0.05);
+      sg.gain.exponentialRampToValueAtTime(0.08, t + 0.12);
+      sg.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+      swing.connect(slp).connect(sg).connect(dctx.destination);
+      swing.start(t + 0.05); swing.stop(t + 0.36);
+
+      /* the thud: the door meeting the frame */
+      const osc = dctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, t + 0.3);
+      osc.frequency.exponentialRampToValueAtTime(58, t + 0.44);
+      const og = dctx.createGain();
+      og.gain.setValueAtTime(0.0001, t + 0.3);
+      og.gain.exponentialRampToValueAtTime(0.3, t + 0.33);
+      og.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+      osc.connect(og).connect(dctx.destination);
+      osc.start(t + 0.3); osc.stop(t + 0.52);
+    } catch (_) {}
   }
 
   /* --- going through ---------------------------------------------------- */
@@ -939,6 +782,7 @@ a:hover{ color:#c00; }
     if (busy || !plates.length) return;
     busy = true;
     taken += 1;
+    doorSound();
     const next = behind(here, doorIdx);
 
     const finish = () => {
@@ -956,7 +800,7 @@ a:hover{ color:#c00; }
   /* the way back is a door like any other, and it does not go back */
   function goBack(){
     if (busy || !plates.length) return;
-    const doors = doorsOf(here);
+    const doors = doorsOf(here).length;
     go(Math.floor(hash(plates[here].u, 91) * doors));
     setTimeout(() => say('that was the door you came in by. it is not.'), 200);
   }
@@ -1005,9 +849,9 @@ a:hover{ color:#c00; }
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const tag = (document.activeElement && document.activeElement.tagName) || '';
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-    if (e.key >= '1' && e.key <= '3'){
+    if (e.key === '1' || e.key === '2'){
       const i = Number(e.key) - 1;
-      if (i < doorsOf(here)){ go(i); e.preventDefault(); }
+      if (i < doorsOf(here).length){ go(i); e.preventDefault(); }
     } else if (e.key === 'b' || e.key === 'B'){
       goBack(); e.preventDefault();
     }
@@ -1116,18 +960,12 @@ a:hover{ color:#c00; }
   /* --- the welcome, which is where the page does its remembering -------- */
   saved.visits = (saved.visits || 0) + 1;
   try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) {}
-  const counter = document.getElementById('visitCount');
-  const note    = document.getElementById('visitNote');
   const welcome = document.getElementById('welcome');
-  if (counter) counter.textContent = String(saved.visits).padStart(6, '0');
-  if (saved.visits > 1){
-    if (note) note.textContent = 'you have signed in ' + saved.visits + ' times.';
-    if (welcome) welcome.textContent =
+  if (saved.visits > 1 && welcome){
+    welcome.textContent =
       'you have been here before. you got ' + (saved.rooms || 0) +
       ' rooms in and came out the way everyone does, by closing the tab. ' +
       'the lights are on. nobody is expecting you.';
-  } else if (note){
-    note.textContent = 'first sign-in tonight.';
   }
 
   const lm = document.getElementById('lastMod');
