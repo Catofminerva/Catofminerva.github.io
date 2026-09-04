@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/faviconcat.gif" type="image/gif">
 <link rel="canonical" href="https://catofminerva.com/liminal.html">
+<!-- the rooms all come from one host, so the connection to it is opened
+     while the page is still parsing rather than when the first door is
+     clicked. worth a second on a phone. -->
+<link rel="preconnect" href="https://i.redd.it" crossorigin>
+<link rel="dns-prefetch" href="https://i.redd.it">
 <title>liminal space</title>
 
 <meta name="description" content="the west corridor. it does not end. night shift log, 1999 to 2000.">
@@ -548,6 +553,40 @@ a:hover{ color:#c00; }
   let order = [];
   let cursor = 0;
 
+  /* --- keeping rooms ready ----------------------------------------------
+     These are phone photographs at full size, a few megabytes each, and
+     the page used to start fetching the next one only once the current
+     one had finished arriving. On a phone that meant every door was a
+     wait. Since the deck is dealt in advance, the next few rooms can be
+     pulled down while the visitor is standing still in this one, and a
+     door then opens on something already in the cache. */
+  const ready = new Map();
+  const AHEAD = 3;
+
+  function prefetch(url){
+    if (!url || ready.has(url)) return ready.get(url);
+    const im = new Image();
+    im.referrerPolicy = 'no-referrer';
+    im.decoding = 'async';
+    ready.set(url, im);
+    im.src = url;
+    /* a handful is enough. holding every room would keep a hundred
+       photographs in memory on a device that has none to spare. */
+    if (ready.size > 10){
+      const oldest = ready.keys().next().value;
+      if (oldest !== url) ready.delete(oldest);
+    }
+    return im;
+  }
+
+  function prefetchAhead(){
+    if (!order.length) return;
+    for (let k = 1; k <= AHEAD; k++){
+      const m = plates[order[(cursor + k) % order.length]];
+      if (m) prefetch(m.u);
+    }
+  }
+
   function deal(){
     order = plates.map((_, i) => i);
     for (let i = order.length - 1; i > 0; i--){
@@ -603,32 +642,51 @@ a:hover{ color:#c00; }
     if (beenHere) again += 1;
     visited.add(meta.u);
 
-    el.loading.hidden = false;
-    el.img.hidden = true;
-    el.img.onload = () => {
-      el.img.hidden = false;
-      el.loading.hidden = true;
-      if (el.bar) el.bar.textContent =
-        el.img.naturalWidth + ' × ' + el.img.naturalHeight + ' · ' + (meta.s || 'r/LiminalSpace');
-    };
-    el.img.onerror = () => {
-      plates.splice(idx, 1);
-      if (plates.length){
-        deal();
-        enter(order[0]);
-      }
-      else { el.loading.textContent = 'no rooms in the file.'; el.doors.textContent = ''; }
-    };
-    el.img.src = meta.u;
-    el.img.alt = 'A photograph of an empty room: ' + (meta.t || 'untitled');
-
     paintDoors();
     caption(meta);
     hud();
 
-    /* whatever is behind these doors, fetched while you decide */
-    const soon = order.length ? plates[order[(cursor + 1) % order.length]] : null;
-    if (soon){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = soon.u; }
+    /* the photograph is loaded off screen and only put in the frame once
+       it has actually arrived. blanking the frame first, which is what
+       this used to do, made every door on a phone a few seconds of empty
+       yellow. the room the visitor is standing in stays where it is
+       until there is another one to show them. */
+    const im = prefetch(meta.u);
+
+    const reveal = () => {
+      el.img.src = meta.u;
+      el.img.alt = 'A photograph of an empty room: ' + (meta.t || 'untitled');
+      el.img.hidden = false;
+      el.loading.hidden = true;
+      if (el.bar) el.bar.textContent =
+        im.naturalWidth + ' × ' + im.naturalHeight + ' · ' + (meta.s || 'r/LiminalSpace');
+      el.fade.classList.remove('on');
+      busy = false;
+      prefetchAhead();
+    };
+
+    const lost = () => {
+      ready.delete(meta.u);
+      plates.splice(idx, 1);
+      busy = false;
+      if (plates.length){
+        deal();
+        enter(order[0]);
+      } else {
+        el.loading.textContent = 'no rooms in the file.';
+        el.loading.hidden = false;
+        el.doors.textContent = '';
+        el.fade.classList.remove('on');
+      }
+    };
+
+    if (im.complete && im.naturalWidth){ reveal(); return; }
+
+    /* the waiting message only appears if there is really a wait, so a
+       room that was already fetched does not flash one on its way in */
+    const slow = setTimeout(() => { el.loading.hidden = false; }, 350);
+    im.onload  = () => { clearTimeout(slow); reveal(); };
+    im.onerror = () => { clearTimeout(slow); lost(); };
   }
 
   function paintDoors(){
@@ -816,17 +874,10 @@ a:hover{ color:#c00; }
     taken += 1;
     doorSound();
     const next = nextRoom();
-
-    const finish = () => {
-      depth += 1;
-      enter(next);
-      el.fade.classList.remove('on');
-      busy = false;
-      save();
-    };
-    if (reduce){ finish(); return; }
+    const step = () => { depth += 1; enter(next); };
+    if (reduce){ step(); return; }
     el.fade.classList.add('on');
-    setTimeout(finish, 175);
+    setTimeout(step, 175);
   }
 
   /* the way back is a door like any other, and it does not go back */
@@ -952,6 +1003,7 @@ a:hover{ color:#c00; }
     deal();
     depth = 1;
     enter(order[0]);
+    prefetchAhead();
   });
 
   /* --- the welcome, which is where the page does its remembering -------- */
