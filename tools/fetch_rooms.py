@@ -306,9 +306,10 @@ def harvest_commons(limit, pause):
     as photographing them, so schematics and floor plans have to go.
     """
     seen, rooms = set(), []
+    # a cap per query, so the file is not two hundred hospital corridors
+    # and nothing else. every search contributes a share.
+    per_query = max(5, limit // max(1, len(QUERIES)) + 3)
     for q in QUERIES:
-        if len(rooms) >= limit:
-            break
         url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json"
                "&formatversion=2&generator=search&gsrsearch=%s&gsrnamespace=6"
                "&gsrlimit=50&prop=imageinfo&iiprop=url%%7Csize%%7Cextmetadata"
@@ -340,6 +341,7 @@ def harvest_commons(limit, pause):
                 if any(word in cats for word in GRAND_CATEGORIES):
                     continue
                 seen.add(pid)
+                kept_here += 1
                 rooms.append({
                     "i": str(pid),
                     "u": clean,
@@ -350,7 +352,8 @@ def harvest_commons(limit, pause):
                     "s": "Wikimedia Commons",
                     "l": strip_tags((meta.get("LicenseShortName") or {}).get("value", "")),
                 })
-                kept_here += 1
+                if kept_here >= per_query:
+                    break
         print("commons: %-32s +%-3d (%d total)" % (q, kept_here, len(rooms)), file=sys.stderr)
         time.sleep(pause)
     return rooms[:limit]
