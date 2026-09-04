@@ -9,14 +9,22 @@ reddit still serves its public listings as JSON to a plain GET.
     python3 tools/fetch_rooms.py --limit 400     # collect more
     python3 tools/fetch_rooms.py --sub Backrooms # somewhere else
 
-Two ways in. From a home connection the public listings answer a plain GET
-and nothing else is needed. From a datacentre, which includes every CI
-runner, reddit answers 403 to anonymous requests, so set REDDIT_CLIENT_ID
-and REDDIT_CLIENT_SECRET and the script authenticates first:
+Reddit is the first choice and is not always available. It serves its
+public listings to home connections and answers 403 to anonymous requests
+from datacentres, which is every CI runner. Credentials lift that:
 
     make a "script" app at https://www.reddit.com/prefs/apps
     export REDDIT_CLIENT_ID=... REDDIT_CLIENT_SECRET=...
     python3 tools/fetch_rooms.py
+
+When reddit cannot be reached, --source auto falls through to Openverse
+and then Wikimedia Commons, which block nobody and carry openly licensed
+photographs of the same kind of place: corridors nobody is in, pools with
+the lights on, car parks at four in the morning. Every room credits its
+photographer and links back either way.
+
+    python3 tools/fetch_rooms.py --source openverse
+    python3 tools/fetch_rooms.py --source commons
 
 Run it locally and commit the result, or let .github/workflows/refresh-rooms.yml
 do it on a schedule. The page keeps working when the file is stale or empty;
@@ -161,11 +169,11 @@ def as_room(post):
         "i": post["id"],
         "u": url,
         "t": title[:180],
-        "a": post.get("author") or "unknown",
+        "a": "u/" + (post.get("author") or "unknown"),
         "p": "https://www.reddit.com" + post.get("permalink", ""),
         "d": created.strftime("%Y-%m-%d"),
-        "w": (post.get("preview") or {}).get("images", [{}])[0].get("source", {}).get("width", 0),
-        "h": (post.get("preview") or {}).get("images", [{}])[0].get("source", {}).get("height", 0),
+        "s": "r/LiminalSpace",
+        "l": "",
     }
 
 
@@ -215,26 +223,128 @@ def harvest(sub, limit, pause):
     return rooms[:limit]
 
 
+# What a liminal photograph is, expressed as things to search for. The
+# list is the whole aesthetic: an interior with the lights on and nobody
+# in it, photographed by someone who was passing through.
+QUERIES = [
+    "empty corridor", "hotel hallway night", "abandoned shopping mall interior",
+    "empty indoor swimming pool", "underground car park interior",
+    "empty waiting room", "office corridor fluorescent", "empty airport terminal night",
+    "concrete stairwell", "empty classroom", "empty subway station platform",
+    "motel exterior night", "empty car park at night", "hospital corridor empty",
+]
+
+
+def strip_tags(text):
+    return " ".join(re.sub(r"<[^>]+>", " ", text or "").split())
+
+
+def harvest_openverse(limit, pause):
+    """Openverse indexes openly licensed photographs and blocks nobody."""
+    seen, rooms = set(), []
+    for q in QUERIES:
+        if len(rooms) >= limit:
+            break
+        url = ("https://api.openverse.org/v1/images/?q=%s&page_size=40"
+               "&license_type=all-cc&mature=false&format=json"
+               % urllib.parse.quote(q))
+        print("openverse: %s (%d kept)" % (q, len(rooms)), file=sys.stderr)
+        data = fetch(url)
+        if not data:
+            continue
+        for r in data.get("results") or []:
+            u = r.get("url") or ""
+            rid = r.get("id")
+            if not u.startswith("https://") or rid in seen:
+                continue
+            seen.add(rid)
+            rooms.append({
+                "i": str(rid),
+                "u": u,
+                "t": " ".join((r.get("title") or q).split())[:180],
+                "a": (r.get("creator") or "unknown")[:80],
+                "p": r.get("foreign_landing_url") or u,
+                "d": (r.get("created_on") or "")[:10],
+                "s": "Openverse",
+                "l": (r.get("license") or "").upper() + " " + (r.get("license_version") or ""),
+            })
+        time.sleep(pause)
+    return rooms[:limit]
+
+
+def harvest_commons(limit, pause):
+    """Wikimedia Commons. Slower to look at, but it is always there."""
+    seen, rooms = set(), []
+    for q in QUERIES:
+        if len(rooms) >= limit:
+            break
+        url = ("https://commons.wikimedia.org/w/api.php?action=query&format=json"
+               "&formatversion=2&generator=search&gsrsearch=%s&gsrnamespace=6"
+               "&gsrlimit=40&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1600"
+               % urllib.parse.quote(q + " filetype:bitmap"))
+        print("commons: %s (%d kept)" % (q, len(rooms)), file=sys.stderr)
+        data = fetch(url)
+        if not data:
+            continue
+        for page in ((data.get("query") or {}).get("pages") or []):
+            info = (page.get("imageinfo") or [{}])[0]
+            u = info.get("thumburl") or info.get("url") or ""
+            pid = page.get("pageid")
+            if not u.lower().endswith((".jpg", ".jpeg", ".png")) or pid in seen:
+                continue
+            seen.add(pid)
+            meta = info.get("extmetadata") or {}
+            rooms.append({
+                "i": str(pid),
+                "u": u,
+                "t": " ".join((page.get("title") or "").replace("File:", "").rsplit(".", 1)[0].split())[:180],
+                "a": strip_tags((meta.get("Artist") or {}).get("value", ""))[:80] or "unknown",
+                "p": info.get("descriptionurl") or u,
+                "d": ((meta.get("DateTimeOriginal") or {}).get("value", "") or "")[:10],
+                "s": "Wikimedia Commons",
+                "l": strip_tags((meta.get("LicenseShortName") or {}).get("value", "")),
+            })
+        time.sleep(pause)
+    return rooms[:limit]
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--sub", default="LiminalSpace")
     ap.add_argument("--limit", type=int, default=250)
     ap.add_argument("--pause", type=float, default=1.5, help="seconds between requests")
     ap.add_argument("--out", default="rooms.json")
+    ap.add_argument("--source", default="auto",
+                    choices=["auto", "reddit", "openverse", "commons"],
+                    help="auto tries reddit first, then the sources that block nobody")
     args = ap.parse_args()
 
     global CTX
     CTX = ssl_context()
-    authenticate()
-    rooms = harvest(args.sub, args.limit, args.pause)
+
+    rooms, source = [], args.source
+    if args.source in ("auto", "reddit"):
+        authenticate()
+        rooms = harvest(args.sub, args.limit, args.pause)
+        source = "reddit"
+        if not rooms and args.source == "auto":
+            print("reddit gave nothing here. trying the open sources.", file=sys.stderr)
+    if not rooms and args.source in ("auto", "openverse"):
+        rooms = harvest_openverse(args.limit, args.pause)
+        source = "openverse"
+    if not rooms and args.source in ("auto", "commons"):
+        rooms = harvest_commons(args.limit, args.pause)
+        source = "commons"
+
     if not rooms:
         print("collected nothing. rooms.json left as it was.", file=sys.stderr)
         return 1
 
     payload = {
-        "subreddit": args.sub,
+        "source": source,
+        "subreddit": args.sub if source == "reddit" else None,
         "generated": datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "note": "photographs stay on reddit's servers. the page hotlinks them and credits every post.",
+        "note": "photographs stay on their own servers. the page hotlinks them and credits every one.",
         "count": len(rooms),
         "rooms": rooms,
     }

@@ -528,10 +528,11 @@ a:hover{ color:#c00; }
         <div class="box">
           <h2>The file</h2>
           <div class="inner">
-            every door opens onto a photograph somebody took and posted to
-            <a href="https://www.reddit.com/r/LiminalSpace/" target="_blank" rel="noopener nofollow">r/LiminalSpace</a>.
-            the pictures stay on their servers; the thread each one came from is
-            linked under the frame.
+            every door opens onto a photograph somebody took of a real place:
+            <a href="https://www.reddit.com/r/LiminalSpace/" target="_blank" rel="noopener nofollow">r/LiminalSpace</a>
+            where it can be reached, openly licensed pictures otherwise. they stay
+            on their own servers and each one is credited under the frame, with a
+            link back to where it came from.
             <br><br>
             the list lives in <code>rooms.json</code> and is refilled by
             <code>tools/fetch_rooms.py</code>.
@@ -1210,9 +1211,11 @@ a:hover{ color:#c00; }
     return {
       u: u,
       t: (d.title || '').slice(0, 180),
-      a: d.author || 'unknown',
+      a: 'u/' + (d.author || 'unknown'),
       p: 'https://www.reddit.com' + (d.permalink || ''),
-      d: new Date((d.created_utc || 0) * 1000).toISOString().slice(0, 10)
+      d: new Date((d.created_utc || 0) * 1000).toISOString().slice(0, 10),
+      s: 'r/LiminalSpace',
+      l: ''
     };
   }
 
@@ -1265,7 +1268,7 @@ a:hover{ color:#c00; }
       plate = { img: img, meta: meta, blur: makeBlur(img) };
       caption(meta);
       if (el.bar) el.bar.textContent =
-        img.naturalWidth + ' × ' + img.naturalHeight + ' · r/LiminalSpace';
+        img.naturalWidth + ' × ' + img.naturalHeight + ' · ' + (meta.s || 'r/LiminalSpace');
       /* the next one, fetched while this one is being looked at */
       const nxt = plates[(plateIdx + 1) % plates.length];
       if (nxt){ const pre = new Image(); pre.referrerPolicy = 'no-referrer'; pre.src = nxt.u; }
@@ -1287,16 +1290,18 @@ a:hover{ color:#c00; }
     el.cap.innerHTML = '';
     const who = document.createElement('span');
     who.className = 'src';
-    who.textContent = 'r/LiminalSpace';
+    who.textContent = meta.s || 'r/LiminalSpace';
     const t = document.createElement('span');
     t.className = 'ttl';
     t.textContent = meta.t || '(untitled)';
     const by = document.createElement('span');
     by.className = 'by';
-    by.textContent = 'u/' + meta.a + (meta.d ? ' · ' + meta.d : '');
+    by.textContent = (meta.a || 'unknown') +
+      (meta.d ? ' · ' + meta.d : '') +
+      (meta.l ? ' · ' + meta.l : '');
     const a = document.createElement('a');
     a.href = meta.p; a.target = '_blank'; a.rel = 'noopener nofollow';
-    a.textContent = 'the thread';
+    a.textContent = (meta.s === 'r/LiminalSpace' || !meta.s) ? 'the thread' : 'source';
     el.cap.append(who, document.createTextNode(' · '), t,
                   document.createTextNode(' · '), by,
                   document.createTextNode(' · '), a);
