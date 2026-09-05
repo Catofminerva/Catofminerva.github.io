@@ -913,18 +913,13 @@ body{ touch-action: manipulation; }
 
 /* Panel */
 .sidebar{
-  background: var(--w95-bg) !important;         /* kill the neon stripes */
+  background: url("stars.gif") repeat !important;
   color:#000;
   padding: 8px 6px 12px;
   font-family: "Tahoma","MS Sans Serif","Segoe UI",system-ui,sans-serif;
   text-transform: none;
   letter-spacing: 0;
-  /* 3D recessed panel */
-  box-shadow:
-    inset -1px -1px 0 var(--w95-dark),
-    inset  1px  1px 0 var(--w95-hi),
-    inset -2px -2px 0 var(--w95-shadow),
-    inset  2px  2px 0 #dfdfdf;
+  box-shadow: none;
   border-right: none;
 }
 
@@ -1179,24 +1174,17 @@ td.content .post h3{ color:#000; text-shadow:none; }
     width:100% !important;
     padding:9px 7px 10px !important;
     border:0 !important;
-    border-bottom:4px ridge var(--neon-purple) !important;
-    box-shadow:
-      inset -1px -1px 0 var(--w95-dark),
-      inset  1px  1px 0 var(--w95-hi),
-      inset -2px -2px 0 var(--w95-shadow),
-      inset  2px  2px 0 #dfdfdf !important;
+    box-shadow:none !important;
   }
 
   .sidebar-extras{
     width:calc(100% - 14px);
     margin:10px auto 12px;
     padding:12px 7px 10px;
-    background:var(--w95-bg);
+    background:url("stars.gif") repeat;
     color:#000;
-    border:3px groove #c0c0c0;
-    box-shadow:
-      inset -1px -1px 0 var(--w95-dark),
-      inset  1px  1px 0 var(--w95-hi);
+    border:0;
+    box-shadow:none;
   }
 
   /* two-column launch-menu feel, then one column on very small phones */
@@ -2105,6 +2093,169 @@ td.content .post h3{ color:#000; text-shadow:none; }
   .taskbar .task-label{ font-size: 11px; }
 }
 
+
+/* 2026-09-05: independent sidebar boxes and a smaller welcome. */
+.visitor-panel{
+  margin:14px 5px 4px;
+  background:#ffffcc;
+  border:1px solid #808080;
+  color:#000;
+}
+.visitor-panel > span:first-child{ color:#000080 !important; }
+.sidebar-details{
+  margin:0 5px 20px;
+  padding:8px 10px 10px;
+  background:#ffffcc;
+  border:1px solid #808080;
+  color:#000;
+  font:12px/1.5 Tahoma,Arial,sans-serif;
+}
+.sidebar-extras .sidebar-details a{ color:#0000ee; }
+.sidebar-extras .sidebar-details a:visited{ color:#551a8b; }
+
+.status-say{
+  display:block;
+  margin:18px 5px;
+  padding:0;
+  background:transparent !important;
+  border:0;
+  box-shadow:none;
+}
+.status-say::before{ content:none; }
+.status-avatar{
+  display:block;
+  width:64px;
+  height:64px;
+  margin:0 auto 16px;
+  border:1px solid #000;
+  background:#fff;
+  box-shadow:none;
+}
+.status-bubble{
+  min-width:0;
+  padding:10px;
+  border:1px solid #000;
+  background:#ffffe8;
+  color:#111;
+  box-shadow:none;
+  font:13px/1.5 Verdana,Arial,sans-serif;
+  overflow-wrap:anywhere;
+}
+.status-bubble::before,
+.status-bubble::after{
+  content:"";
+  display:block;
+  position:absolute;
+  left:50%;
+  width:0;
+  height:0;
+  transform:translateX(-50%);
+  filter:none;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-top:0;
+}
+.status-bubble::before{ top:-12px; border-bottom:12px solid #000; }
+.status-bubble::after{
+  top:-10px;
+  border-left-width:8px;
+  border-right-width:8px;
+  border-bottom:11px solid #ffffe8;
+}
+#statuscafe-username{
+  color:#444;
+  font:11px/1.5 Verdana,Arial,sans-serif;
+}
+#statuscafe-username a{
+  color:#0000ee;
+  text-decoration:underline;
+  text-shadow:none;
+}
+#statuscafe-content{ color:#111; font:13px/1.5 Verdana,Arial,sans-serif; }
+.status-bubble.pop{ animation:none; }
+
+.welcome-post .y2k-welcome{
+  margin:2px 0 7px;
+  padding:0;
+  font-size:clamp(25px,3vw,34px);
+  line-height:1.1;
+  text-align:left;
+}
+.welcome-greeting{
+  display:grid;
+  grid-template-columns:150px minmax(0,1fr);
+  align-items:center;
+  gap:14px;
+  margin:8px 0;
+}
+.welcome-greeting .hello-gif{
+  display:block;
+  width:100% !important;
+  max-width:150px;
+  height:auto;
+  margin:0;
+}
+.welcome-copy{ min-width:0; font:14px/1.5 Tahoma,Arial,sans-serif; }
+.welcome-copy p{ margin:0 0 10px; }
+.welcome-copy p:last-child{ margin-bottom:0; }
+.welcome-post .warnline{ margin:10px 0 0; font-size:12px; }
+.whats-new{
+  margin:0 5px 20px;
+  padding:8px 10px 10px;
+  border:1px dotted #000080;
+  background:#ffffe8;
+  color:#111;
+  font:13px/1.4 "Times New Roman",Times,serif;
+}
+.whats-new h2{
+  display:inline;
+  margin:0 8px 0 0;
+  color:#800000;
+  font:bold 17px/1.4 "Times New Roman",Times,serif;
+}
+.whats-new time{ display:inline-block; color:#555; font:10px/1.5 "Courier New",monospace; }
+.whats-new ul{ margin:5px 0 0; padding-left:17px; }
+.whats-new li{ margin:3px 0; }
+.whats-new a{ text-decoration:underline; }
+
+/* All three GIFs occupy one floor, without individual frames. */
+.win95-window.dancefloor .win-body{ padding:8px; }
+.floor-row{
+  display:block;
+  position:relative;
+  height:238px;
+  isolation:isolate;
+}
+.dancer{
+  position:absolute;
+  margin:0;
+  padding:0;
+  min-width:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+.dancer img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  margin:0;
+}
+.dancer:nth-child(1){ left:3%; bottom:12px; width:30%; max-width:140px; z-index:3; }
+.dancer:nth-child(2){ left:35%; bottom:43px; width:27%; max-width:122px; z-index:1; }
+.dancer:nth-child(3){ right:3%; bottom:7px; width:28%; max-width:120px; z-index:2; }
+
+@media (max-width:700px){
+  .welcome-greeting{ grid-template-columns:minmax(80px,38%) minmax(0,1fr); gap:10px; }
+  .welcome-copy{ font-size:13px; }
+  .welcome-post .y2k-welcome{ font-size:clamp(25px,8vw,34px); }
+  .floor-row{ height:200px; }
+  .dancer:nth-child(1){ left:1%; width:34%; bottom:8px; }
+  .dancer:nth-child(2){ left:35%; width:29%; bottom:45px; }
+  .dancer:nth-child(3){ right:0; width:30%; bottom:18px; }
+}
+
   </style>
 <!-- ============================================================
      THE SEIZURE NOTICE (door page)
@@ -2308,12 +2459,12 @@ html.seizing, html.seizing body{ overflow:hidden; }
           </div>
 
           <div class="sidebar-extras">
-          <div style="text-align:center; padding:10px">
+          <div class="visitor-panel" style="text-align:center; padding:10px">
             <span style="font-size:12px; color:var(--neon-yellow)">You are visitor #</span>
             <span id="hitCount" style="display:inline-block; padding:4px 8px; border:3px inset #0aa; background:#000; color:#00ff00; font-family:'Courier New', monospace; letter-spacing:2px;">000001</span>
           </div>
 
-<div style="padding: 0 10px 12px; color:#fff; font-size:12px">
+<div class="sidebar-details">
   <div>
     <a href="https://catofminerva.com/contact.html">Email Me</a>
   </div>
@@ -2328,7 +2479,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
           <!-- where this website actually lives -->
           <div class="w95-box server-shot" data-label="Server">
             <img src="computerinspace.gif" alt="a desktop computer floating in space">
-            <p class="cap">THE SERVER (artist&rsquo;s impression). it is out there. it is cold. it is serving you this page anyway.</p>
+            <p class="cap">THE SERVER (artist&rsquo;s impression). it is out there. it is cold.</p>
           </div>
 
           <div class="sticker-wall">
@@ -2373,7 +2524,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
       <span>CAM 01 &#183; LOBBY</span>
     </div>
   </div>
-  <p class="cap">he has been checking on the site since 2003. he does not know the tab is still open.</p>
+  <p class="cap">he has been checking on the site since 2003.</p>
 </div>
 
 <div class="div-checker" aria-hidden="true"></div>
@@ -2397,8 +2548,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
         <td class="content">
           <hr class="retro">
 
-          <div class="post">
-<div class="welcome-flex">
+          <div class="post welcome-post">
   <h3 class="y2k-welcome">
     <span style="color:#FF0000">w</span><span style="color:#FF5100">e</span><span style="color:#FFA100">l</span><span style="color:#FFF200">c</span><span style="color:#BCFF00">o</span><span style="color:#6BFF00">m</span><span style="color:#1BFF00">e</span>
     <span style="color:#00FF36">t</span><span style="color:#00FF86">o</span>
@@ -2407,19 +2557,30 @@ html.seizing, html.seizing body{ overflow:hidden; }
     <!-- keep your blinking ! if you want -->
     <!-- <span class="blink" style="color:#fff">!</span> -->
   </h3>
-  <img src="hello.gif" alt="hello" class="hello-gif" loading="lazy">
-</div>
-
             <div class="meta">1999 &#183;</div>
-<p class="warnline">
-  <img src="warning.gif" alt="Warning" class="warn-ico">
-  <span>BEST VIEWED ON DESKTOP!!</span>
-  <img src="warning.gif" alt="" class="warn-ico" aria-hidden="true">
-</p>
-            <p>hi...</p>
-            <p>&nbsp;</p>
-            <p>i&rsquo;ve been messing with the html and it kinda works??</p>
+            <div class="welcome-greeting">
+              <img src="hello.gif" alt="hello" class="hello-gif">
+              <div class="welcome-copy">
+                <p>hi...</p>
+                <p>i&rsquo;ve been messing with the html and it kinda works??</p>
+              </div>
+            </div>
+            <p class="warnline">
+              <img src="warning.gif" alt="Warning" class="warn-ico">
+              <span>BEST VIEWED ON DESKTOP!!</span>
+              <img src="warning.gif" alt="" class="warn-ico" aria-hidden="true">
+            </p>
           </div>
+
+          <section class="whats-new" aria-labelledby="whats-new-title">
+            <h2 id="whats-new-title">what&rsquo;s new</h2>
+            <time datetime="2026-09-05">5 September 2026</time>
+            <ul>
+              <li>Rearranged the homepage. The <a href="#danceflooor">dancers</a> now share a floor.</li>
+              <li>New <a href="guestbook.html">guestbook</a> colours and a fixed mobile background.</li>
+              <li>Redid the short list on the <a href="contact.html">contact page</a>.</li>
+            </ul>
+          </section>
 
           <div class="div-checker" aria-hidden="true"></div>
 
@@ -2452,8 +2613,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
           <div class="wish-lamp">
             <img src="genie.gif" alt="genie" id="wishGenie" title="rub the lamp">
             <div class="wish-copy">
-              <strong>THE LAMP</strong> &#183; found it in the same folder as everything else.
-              click him and he grants one, terms unfavourable.
+              <strong>THE LAMP</strong>
               <span class="wish-out" id="wishOut">he is asleep. click to wake him.</span>
               <span class="wish-count" id="wishCount">wishes granted: 0</span>
             </div>
@@ -2476,10 +2636,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
             <div class="pet-row">
               <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Zaki&amp;dob=1698667285&amp;gender=b&amp;element=Fire&amp;pet=cat.gif&amp;map=night.gif&amp;background=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFlodpfQUBSp20%2Fgiphy.gif&amp;tablecolor=%23000000&amp;textcolor=%238700e0" frameborder="0"></iframe>
               <img src="pikadiglettQ.gif" alt="pikachu with a poke ball" class="pet-sidekick" loading="lazy">
-              <p class="pet-sidekick-cap">
-                unregistered second pet. wandered in, would not leave, keeps opening the ball
-                at Zaki. feeding is not required, it eats the electricity.
-              </p>
+
             </div>
           </div>
 
@@ -2492,11 +2649,11 @@ html.seizing, html.seizing body{ overflow:hidden; }
               <div class="plinth-row">
                 <div class="plinth">
                   <img src="3dskullspin.gif" alt="spinning 3D skull">
-                  <div class="lab">SKULL.3DS &#9679; 24 fps &#9679; still cool</div>
+                  <div class="lab">SKULL.3DS</div>
                 </div>
                 <div class="plinth">
                   <img src="3dpinkpantherhead.gif" alt="rotating 3D Pink Panther head">
-                  <div class="lab">PANTHER.3DS &#9679; renders in 1998 &#9679; unlicensed probably</div>
+                  <div class="lab">PANTHER.3DS</div>
                 </div>
               </div>
             </div>
@@ -2513,19 +2670,16 @@ html.seizing, html.seizing body{ overflow:hidden; }
               <div class="floor-row">
                 <figure class="dancer">
                   <img src="dancingfigure.gif" alt="a man dancing">
-                  <figcaption class="lab">GUEST_01 &#9679; unnamed &#9679; will not stop</figcaption>
                 </figure>
                 <figure class="dancer">
                   <img src="dancingsoldier.gif" alt="a soldier dancing">
-                  <figcaption class="lab">GUEST_02 &#9679; off duty &#9679; 500 frames</figcaption>
                 </figure>
                 <figure class="dancer">
                   <img src="robot.gif" alt="a robot walking">
-                  <figcaption class="lab">STAFF &#9679; runs the lights &#9679; 9 frames only</figcaption>
                 </figure>
               </div>
             </div>
-            <div class="win-status">3 object(s) on the floor &#9679; music not included &#9679; :DDD</div>
+
           </div>
 
           <img src="underconstruct.gif" alt="under construction" class="construction-bar">
@@ -2555,15 +2709,15 @@ html.seizing, html.seizing body{ overflow:hidden; }
     <div class="hamster-plant">
       <figure>
         <img src="hamsterwheel.gif" alt="hamster running in a wheel">
-        <figcaption>generator no.1</figcaption>
+
       </figure>
       <div class="hp-title">
         THIS SITE IS POWERED BY HAMSTERS
-        <span class="hp-sub">uptime depends entirely on their mood. no refunds.</span>
+
       </div>
       <figure>
         <img src="adancinghamster.gif" alt="dancing hamster">
-        <figcaption>off shift</figcaption>
+
       </figure>
     </div>
 
