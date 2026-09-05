@@ -180,33 +180,6 @@ a:hover { color:#ff1493; background:#ffff66; }
   image-rendering:pixelated;
 }
 
-/* --- the mail status readout. green screen, always on. --- */
-.mailstatus {
-  margin:0 0 15px;
-  border:3px inset #888;
-  background:#000;
-  padding:7px 8px 8px;
-  font:11px/1.55 "Courier New",monospace;
-  color:#00ff42;
-}
-.mailstatus .head {
-  margin:0 0 5px;
-  padding-bottom:4px;
-  border-bottom:1px dashed #0a6;
-  color:#7cff9f;
-  letter-spacing:.08em;
-}
-.mailstatus dl { margin:0; }
-.mailstatus dt { color:#4de08a; }
-.mailstatus dd { margin:0 0 6px; color:#c9ffd9; }
-.mailstatus dd:last-of-type { margin-bottom:0; }
-.mailstatus .cursor {
-  display:inline-block;
-  width:7px; height:12px;
-  background:#00ff42;
-  vertical-align:-2px;
-  animation:blink-hard 1.05s steps(1,end) infinite;
-}
 @keyframes blink-hard { 50% { opacity:0; } }
 
 /* --- alice. she has been on this page longer than most of my
@@ -501,168 +474,127 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 .sidecar li { margin-bottom:4px; }
 
 /* ============================================================
-   2001 — i discovered black backgrounds and never fully
-   recovered. this is the dead-contacts table. every row here
-   used to be a real way to find me.
+   Other ways to reach me: a bordered contact directory.
    ============================================================ */
+.section-gif { width:24px; height:24px; object-fit:contain; vertical-align:middle; image-rendering:pixelated; margin-right:3px; }
+
 .stratum-neon {
-  margin:0 0 6px;
-  padding:12px 12px 14px;
-  border:4px ridge #8f00ff;
-  background:#05010f;
-  color:#c9ffff;
+  margin:0 0 6px; padding:10px;
+  border:3px ridge #b8b8d8; background:#eeeeff; color:#000040;
 }
 .stratum-neon h2 {
-  margin:0 0 3px;
-  color:#39ff14;
-  font:bold 21px "Courier New",monospace;
-  text-shadow:0 0 7px rgba(57,255,20,.55);
-  letter-spacing:.02em;
+  margin:0 0 6px; padding:5px 7px;
+  background:#000080; color:#ffff00;
+  font:bold 21px/1.3 "Times New Roman",Times,serif;
+  text-align:center;
 }
 .stratum-neon .sub {
-  margin:0 0 12px;
-  color:#ff73d1;
-  font:11px "Courier New",monospace;
+  margin:0 0 10px; color:#800080; text-align:center; font:italic 13px/1.5 "Times New Roman",Times,serif;
 }
 
-.deadtable { width:100%; border-collapse:collapse; font:12px "Courier New",monospace; }
+.deadtable {
+  width:100%; table-layout:fixed; border:2px outset #eeeeff; border-spacing:2px; border-collapse:separate; font:14px/1.4 "Times New Roman",Times,serif;
+}
 .deadtable caption {
-  caption-side:bottom;
-  padding-top:9px;
-  color:#8f8fb8;
-  font-size:11px;
-  text-align:left;
+  caption-side:bottom; padding-top:9px; color:#333366; font-size:12px; text-align:left;
 }
 .deadtable th {
-  padding:5px 7px;
-  border-bottom:2px solid #8f00ff;
-  color:#ffff33;
-  text-align:left;
-  font-weight:bold;
-  letter-spacing:.05em;
+  padding:5px 6px; border:1px outset #fff;
+  background:#ccccdf; color:#000080; text-align:left; font-weight:bold;
 }
 .deadtable td {
-  padding:5px 7px;
-  border-bottom:1px dotted #33265c;
-  vertical-align:top;
+  padding:6px; border:1px inset #eeeeff; background:#fff;
+  vertical-align:top; overflow-wrap:anywhere;
 }
-.deadtable tr:hover td { background:#160a2e; }
-.deadtable .handle { color:#8fe9ff; }
+.deadtable tr:hover td {
+  background:#ffffcc;
+}
+.deadtable .handle {
+  color:#800080; font:12px/1.5 "Courier New",monospace;
+}
 
 .led {
-  display:inline-block;
-  width:9px; height:9px;
-  margin-right:6px;
-  border-radius:50%;
-  vertical-align:0;
+  display:inline-block; width:8px; height:8px;
+  margin-right:5px; border:1px solid #555; vertical-align:0;
 }
-.led.dead { background:#5a1c1c; box-shadow:inset 0 0 3px #000; }
+.led.dead {
+  background:#999;
+}
 .led.live {
-  background:#39ff14;
-  box-shadow:0 0 6px #39ff14;
-  animation:blink-soft 1.4s ease-in-out infinite;
+  background:#008000;
 }
-@keyframes blink-soft { 50% { opacity:.28; } }
-.st-dead { color:#a97b7b; }
-.st-live { color:#39ff14; font-weight:bold; }
+.st-dead {
+  color:#666;
+}
+.st-live {
+  color:#006000; font-weight:bold;
+}
 
 /* ============================================================
-   2004 — graph paper phase. the reply-time chart is honest,
-   which is the worst thing about it.
+   Reply-time chart: system-grey panel and segmented bars.
    ============================================================ */
 .stratum-paper {
-  margin:0 0 6px;
-  padding:13px 14px 15px;
-  border:1px solid #b7b7a9;
-  background:
-    repeating-linear-gradient(0deg,  rgba(120,160,190,.20) 0 1px, transparent 1px 19px),
-    repeating-linear-gradient(90deg, rgba(120,160,190,.20) 0 1px, transparent 1px 19px),
-    #fffdf2;
-  box-shadow:2px 2px 0 #cfcfc2;
-  color:#25252b;
+  margin:0 0 6px; padding:4px;
+  border:3px outset #eee; background:#d4d0c8; color:#111;
 }
 .stratum-paper h2 {
-  margin:0 0 2px;
-  font:bold 19px "Courier New",monospace;
-  color:#123b6b;
+  margin:0; padding:4px 7px;
+  font:bold 16px/1.4 "MS Sans Serif",Tahoma,sans-serif;
+  color:#fff; background:#000080;
 }
-.stratum-paper .sub { margin:0 0 13px; font:11px "Courier New",monospace; color:#6a6a55; }
+.stratum-paper .sub {
+  margin:0; padding:6px 7px; font:11px/1.5 "Courier New",monospace; color:#444; border-bottom:2px groove #fff;
+}
 
-.chart { font:12px "Courier New",monospace; }
-.chart-row { margin-bottom:9px; }
-.chart-row .lbl { display:block; margin-bottom:3px; color:#25252b; }
+.chart {
+  padding:10px 7px 2px; font:12px/1.5 "MS Sans Serif",Tahoma,sans-serif;
+}
+.chart-row {
+  margin-bottom:12px;
+}
+.chart-row .lbl {
+  display:block; margin-bottom:4px; color:#111;
+}
 .chart-track {
-  position:relative;
-  height:17px;
-  background:rgba(255,255,255,.6);
-  border:1px solid #a9a99a;
+  height:20px; padding:2px; border:2px inset #eee; background:#e8e8e8;
 }
 .chart-fill {
   height:100%;
-  background-image:repeating-linear-gradient(45deg,
-    rgba(255,255,255,.28) 0 4px, transparent 4px 8px);
+  background:repeating-linear-gradient(to right,#000080 0 8px,transparent 8px 10px);
 }
-.chart-fill.c1 { background-color:#2fae5f; }
-.chart-fill.c2 { background-color:#4d8dff; }
-.chart-fill.c3 { background-color:#e8a020; }
-.chart-fill.c4 { background-color:#c94a4a; }
 .chart-row .pct {
   margin-left:7px;
   color:#555;
   font-size:11px;
 }
 .chart-note {
-  margin:12px 0 0;
-  padding-top:9px;
-  border-top:1px dashed #b7b7a9;
-  font:11px/1.6 "Courier New",monospace;
-  color:#4a4a3f;
+  margin:2px 5px 5px; padding:7px;
+  border:2px inset #eee; background:#ffffe1;
+  font:12px/1.5 "Times New Roman",Times,serif; color:#333;
 }
 
 /* ============================================================
-   the notebook. this is the bit i actually wrote by hand, in the
-   sense that i wrote it in one go and did not edit it.
+   Before you write: a simple numbered list.
    ============================================================ */
 .notepad {
-  margin:0 0 6px;
-  padding:14px 18px 16px 52px;
-  background:
-    linear-gradient(90deg, transparent 34px, rgba(216,74,138,.55) 34px 36px, transparent 36px),
-    repeating-linear-gradient(0deg, transparent 0 25px, rgba(90,120,160,.32) 25px 26px),
-    #fff9b8;
-  border:1px solid #ccc08a;
-  border-left:3px solid #d8b24a;
-  box-shadow:3px 4px 0 rgba(0,0,0,.16);
-  transform:rotate(-.55deg);
-  color:#1e2350;
-  font-family:"Comic Sans MS","Trebuchet MS",cursive;
+  margin:0 0 6px; padding:12px 15px 14px;
+  background:#ffffcc; border:4px double #000080; color:#000040;
+  font:16px/1.5 "Times New Roman",Times,serif;
 }
 .notepad h2 {
-  margin:0 0 10px;
-  font-size:21px;
-  color:#c02a6a;
-  text-decoration:underline;
-  text-underline-offset:3px;
+  margin:0 0 12px; padding-bottom:7px; border-bottom:2px groove #fff;
+  font:bold 21px/1.3 "Comic Sans MS","Trebuchet MS",sans-serif;
+  color:#800000;
 }
 .notepad ol { margin:0; padding-left:20px; }
 .notepad li { margin-bottom:9px; line-height:1.55; }
 .notepad li:last-child { margin-bottom:0; }
-.notepad .aside { color:#5c5f8a; font-size:12px; }
-.notepad .crossed { text-decoration:line-through; color:#8a8db0; }
-
-/* a bit of tape, because it is stuck on top of the page */
-.taped { position:relative; }
-.taped::before, .taped::after {
-  content:"";
-  position:absolute;
-  top:-9px;
-  width:64px; height:19px;
-  background:rgba(255,255,255,.55);
-  border:1px solid rgba(0,0,0,.10);
-  box-shadow:0 1px 2px rgba(0,0,0,.16);
+.notepad .aside {
+  color:#555; font-size:13px;
 }
-.taped::before { left:16px;  transform:rotate(-5deg); }
-.taped::after  { right:16px; transform:rotate(4deg); }
+.notepad .crossed {
+  text-decoration:line-through; color:#800000;
+}
 
 /* ============================================================
    the message-board box. copied wholesale off about.html so the
@@ -798,7 +730,6 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 
   .content { order:2; display:block; width:100%; padding:10px 9px 18px; }
 
-  .mailstatus { order:3; margin:10px 8px; }
   .side-badges{ order:4; margin:0 8px; }
   .webring    { order:5; margin:10px 8px 0; }
   .attached   { order:6; margin:10px 8px 0; }
@@ -810,11 +741,13 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
   .shrine .shrine-cap { font-size:10px; }
 
   .fields { grid-template-columns:1fr; }
-  .notepad { padding:12px 13px 14px 40px; transform:none; }
+  .notepad { padding:10px 11px 12px; }
   .notepad h2 { font-size:18px; }
-  .taped::before, .taped::after { display:none; }
-  .deadtable { font-size:11px; }
-  .deadtable th:nth-child(2), .deadtable td:nth-child(2) { display:none; }
+  .deadtable { display:table; width:100%; font-size:13px; }
+  .deadtable tbody { display:table-row-group; }
+  .deadtable tr { display:table-row; width:auto; }
+  .deadtable th, .deadtable td { padding:4px; }
+  .deadtable .handle { font-size:11px; }
   .stratum-neon h2 { font-size:17px; }
   .button-wall img { margin:2px 1px; }
   .send-bar .btn { flex:1 1 auto; }
@@ -829,7 +762,7 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
    the marquees get stopped in script, css cannot reach them. */
 @media (prefers-reduced-motion:reduce) {
   .neko-rail img { animation:none; left:12px; }
-  .blink, .led.live, .mailstatus .cursor { animation:none; }
+  .blink, .led.live { animation:none; }
   .vhs::after { animation:none; display:none; }
 }
 
@@ -885,23 +818,6 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
           <a href="contact.html" aria-current="page"><img src="phone.gif" alt="">Contact</a>
           <a href="liminal.html"><img style="width:14px;height:20px" width="14" height="20" src="door.gif" alt="Liminal Space">Liminal Space</a>
         </fieldset>
-
-        <!-- the readout. updated by hand, whenever i remember. -->
-        <div class="mailstatus">
-          <div class="head">MAIL_STATUS.TXT<span class="cursor" aria-hidden="true"></span></div>
-          <dl>
-            <dt>&gt; inbox:</dt>
-            <dd>3 unread (2 are newsletters)</dd>
-            <dt>&gt; last checked:</dt>
-            <dd>this morning</dd>
-            <dt>&gt; reply queue:</dt>
-            <dd>one message, i see it. i am sorry.</dd>
-            <dt>&gt; connection:</dt>
-            <dd>56k, spiritually</dd>
-            <dt>&gt; mood:</dt>
-            <dd>receptive</dd>
-          </dl>
-        </div>
 
         <div class="side-badges">
           <img src="bestviewed.gif" alt="Best viewed with your eyes">
@@ -1018,11 +934,10 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
         <div class="divider"><img src="dividerwindows.gif" alt=""></div>
 
         <!-- ==========================================================
-             2001. black background era. every row in here used to be
-             a real way of finding me.
+             Other ways to reach me.
              ========================================================== -->
         <section class="stratum-neon">
-          <h2>OTHER WAYS TO REACH ME</h2>
+          <h2><img class="section-gif" src="email2.gif" width="24" height="24" alt=""> OTHER WAYS TO REACH ME</h2>
           <div class="sub">a historical survey · aka obituaries</div>
 
           <table class="deadtable">
@@ -1077,8 +992,7 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
         <div class="divider"><img src="rainbowswirldivider.gif" alt=""></div>
 
         <!-- ==========================================================
-             2004. graph paper. i measured nothing. the numbers are
-             vibes, but they are accurate vibes.
+             Reply-time chart.
              ========================================================== -->
         <section class="stratum-paper">
           <h2>HOW FAST I REPLY</h2>
@@ -1115,8 +1029,8 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
              written in one sitting, never edited. leaving the crossed
              out one in because it is funnier with the mistake.
              ========================================================== -->
-        <section class="notepad taped">
-          <h2>before you write ~ a short list</h2>
+        <section class="notepad">
+          <h2><img class="section-gif" src="warning.gif" width="20" height="20" alt=""> before you write ~ a short list</h2>
           <ol>
             <li>I do read everything. I am just slow. <span class="aside">see fig. 1</span></li>
             <li>If it is about a post, <strong>say which post.</strong> I have written about a lot of things and i forget my own arguments.</li>
@@ -1308,3 +1222,4 @@ document.querySelectorAll('.site-shell a[href]').forEach(a => {
 </script>
 </body>
 </html>
+
