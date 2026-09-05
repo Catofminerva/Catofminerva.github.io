@@ -559,27 +559,44 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 }
 
 /* ============================================================
-   Before you write: a simple numbered list.
+   Before you write: the same silver-and-lavender guestbook table.
    ============================================================ */
 .notepad {
-  margin:0 0 6px; padding:12px 15px 14px;
-  background:#ffffcc; border:4px double #000080; color:#000040;
-  font:16px/1.5 "Times New Roman",Times,serif;
+  margin:0 0 6px; padding:4px;
+  border:3px outset #dedede; background:#c0c0c0; color:#000;
+  font:15px/1.45 "Times New Roman",Times,serif;
 }
 .notepad h2 {
-  margin:0 0 12px; padding-bottom:7px; border-bottom:2px groove #fff;
-  font:bold 21px/1.3 "Comic Sans MS","Trebuchet MS",sans-serif;
-  color:#800000;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin:0; padding:7px 5px; border:1px inset #eee;
+  background:#ccccff; color:#000080; text-align:center;
+  font:bold 25px/1.2 "Times New Roman",Times,serif;
 }
-.notepad ol { margin:0; padding-left:20px; }
-.notepad li { margin-bottom:9px; line-height:1.55; }
-.notepad li:last-child { margin-bottom:0; }
-.notepad .aside {
-  color:#555; font-size:13px;
+.notepad h2 .section-gif {
+  width:28px; height:28px; margin:0; flex:0 0 28px;
 }
-.notepad .crossed {
-  text-decoration:line-through; color:#800000;
+.notepad ol {
+  margin:0; padding:0; list-style:none; counter-reset:contact-note;
 }
+.notepad li {
+  display:grid; grid-template-columns:38px minmax(0,1fr);
+  margin:3px 0 0; border:1px inset #eee;
+  background:#fff; color:#000; counter-increment:contact-note;
+  overflow-wrap:anywhere;
+}
+.notepad li::before {
+  content:counter(contact-note) ".";
+  padding:9px 6px; border-right:1px solid #aaa;
+  background:#e6e6fa; color:#000080; text-align:center;
+  font:11px/1.5 Verdana,Arial,sans-serif;
+}
+.notepad .list-copy {
+  min-width:0; padding:9px 10px;
+}
+.notepad li:nth-child(even) { background:#ffffee; }
+.notepad li:nth-child(even)::before { background:#dce9ef; }
+.notepad .aside { color:#444; font-size:13px; }
+.notepad .crossed .list-copy { text-decoration:line-through; color:#800000; }
 
 /* ============================================================
    the message-board box. copied wholesale off about.html so the
@@ -728,7 +745,7 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
   .shrine .shrine-cap { font-size:10px; }
 
   .fields { grid-template-columns:1fr; }
-  .notepad { padding:10px 11px 12px; }
+  .notepad { padding:4px; }
   .notepad h2 { font-size:18px; }
   .deadtable { display:table; width:100%; font-size:13px; }
   .deadtable tbody { display:table-row-group; }
@@ -1020,15 +1037,15 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
              ========================================================== -->
         <section class="notepad">
           <h2><img class="section-gif" src="warning.gif" width="20" height="20" alt=""> before you write ~ a short list</h2>
-          <ol>
-            <li>I do read everything. I am just slow. <span class="aside">see fig. 1</span></li>
-            <li>If it is about a post, <strong>say which post.</strong> I have written about a lot of things and i forget my own arguments.</li>
-            <li>corrections are very welcome. I have been wrong in public before and will be again. I would rather know.</li>
-            <li>Students asking about international law: yes.</li>
-            <li class="crossed">No politics arguments please</li>
-            <li><span class="aside">(crossed out — who am i kidding. fine. politics arguments. but be interesting.)</span></li>
-            <li>please do not send me a crypto newsletter. i do not know how you found me.</li>
-            <li>found a broken link? you are owed one (1) favour, redeemable never, but sincerely offered.</li>
+          <ol role="list">
+            <li><span class="list-copy">I do read everything. I am just slow. <span class="aside">see fig. 1</span></span></li>
+            <li><span class="list-copy">If it is about a post, <strong>say which post.</strong> I have written about a lot of things and i forget my own arguments.</span></li>
+            <li><span class="list-copy">corrections are very welcome. I have been wrong in public before and will be again. I would rather know.</span></li>
+            <li><span class="list-copy">Students asking about international law: yes.</span></li>
+            <li class="crossed"><span class="list-copy">No politics arguments please</span></li>
+            <li><span class="list-copy"><span class="aside">(crossed out — who am i kidding. fine. politics arguments. but be interesting.)</span></span></li>
+            <li><span class="list-copy">please do not send me a crypto newsletter. i do not know how you found me.</span></li>
+            <li><span class="list-copy">found a broken link? you are owed one (1) favour, redeemable never, but sincerely offered.</span></li>
           </ol>
         </section>
 
