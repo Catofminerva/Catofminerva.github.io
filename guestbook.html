@@ -174,18 +174,9 @@
     .crawl marquee{ padding:4px 0 3px; }
 
     .tiny-corner-note{
-      position:absolute;
-      top:118px;
-      left:0;
-      width:92px;
-      padding:5px 6px;
-      color:#1a0027;
-      background:#d9ff66;
-      border:1px solid #849c21;
-      box-shadow:3px 4px 0 #000;
-      font:10px/1.1 Arial, sans-serif;
-      transform:rotate(-5deg);
-      z-index:4;
+      position:absolute; top:118px; left:0; width:92px;
+      padding:5px 6px; color:#000080; background:#ffffcc;
+      border:1px solid #808080; font:10px/1.2 Arial,sans-serif; z-index:4;
     }
 
     .workbench{
@@ -302,26 +293,9 @@
     }
 
     .postit{
-      width:164px;
-      margin:22px 0 0 23px;
-      padding:14px 9px 10px;
-      color:#322100;
-      background:#fff08b;
-      border:1px solid #a68d35;
-      font:12px/1.28 "Comic Sans MS", cursive;
-      box-shadow:5px 5px 0 rgba(0,0,0,.72);
-      transform:rotate(2.2deg);
-    }
-    .postit::before{
-      content:"";
-      position:absolute;
-      width:65px;
-      height:14px;
-      margin-top:-22px;
-      margin-left:38px;
-      background:rgba(195,235,255,.55);
-      border:1px solid rgba(110,150,170,.3);
-      transform:rotate(-5deg);
+      width:164px; margin:22px 0 0 23px; padding:9px;
+      color:#000040; background:#ffffcc; border:3px double #000080;
+      font:13px/1.4 "Times New Roman",Times,serif;
     }
 
     /* MIDDLE PILE ---------------------------------------------- */
@@ -331,21 +305,8 @@
     }
 
     .bead-divider{
-      height:13px;
-      margin:0 4px 13px 12px;
-      border-top:2px dotted #fff;
-      border-bottom:2px dotted #ff50d5;
-      background:
-        repeating-linear-gradient(90deg,
-          #ff384f 0 13px,
-          #ffb928 13px 26px,
-          #e9ff35 26px 39px,
-          #46e87b 39px 52px,
-          #36c8ff 52px 65px,
-          #6e52ff 65px 78px,
-          #e853ff 78px 91px);
-      box-shadow:2px 3px #000;
-      transform:rotate(.25deg);
+      display:block; width:calc(100% - 16px); max-width:432px; height:auto;
+      margin:0 4px 13px 12px; image-rendering:pixelated;
     }
 
     .guest-window{
@@ -622,22 +583,13 @@
     }
 
     .sticker{
-      position:relative;
-      margin-bottom:18px;
-      padding:7px 6px;
-      background:#ff62d7;
-      color:#270026;
-      border:3px double #fff;
-      box-shadow:4px 4px 0 #000;
-      font:bold 11px/1.2 Arial, sans-serif;
-      text-align:center;
-      transform:rotate(3deg);
+      margin-bottom:18px; padding:0; text-align:center;
+      color:#fff36b; font:11px/1.35 "Times New Roman",Times,serif;
     }
 
+    .sticker img{ display:block; max-width:100%; height:auto; margin:0 auto 5px; image-rendering:pixelated; }
     .sticker.alt{
-      background:#74f7ff;
-      color:#00202a;
-      transform:rotate(-2deg);
+      color:#cceeff;
     }
 
     .counterbox{
@@ -674,21 +626,12 @@
     }
 
     .underconstruction{
-      margin:0 -4px 18px 4px;
-      padding:5px;
-      border:2px dashed #111;
-      background:repeating-linear-gradient(135deg,#ffdc23 0 8px,#ffdc23 8px 16px,#151515 16px 24px,#151515 24px 32px);
-      color:#000;
-      text-align:center;
-      font:bold 10px Arial, sans-serif;
-      box-shadow:3px 3px 0 #000;
-      transform:rotate(-1.4deg);
+      margin:0 0 18px; padding:0; color:#ffff33;
+      text-align:center; font:bold 10px/1.4 Arial,sans-serif;
     }
+    .underconstruction img{ display:block; width:100%; height:auto; image-rendering:pixelated; }
     .underconstruction span{
-      display:inline-block;
-      padding:3px 4px;
-      background:#ffe86d;
-      border:1px solid #000;
+      display:block; margin-top:5px;
     }
 
     .side-links{
@@ -855,7 +798,7 @@ header.galaxy-header {
       </aside>
 
       <main class="main">
-        <div class="bead-divider" aria-hidden="true"></div>
+        <img class="bead-divider" src="rainbowswirldivider.gif" width="432" height="14" alt="" aria-hidden="true">
 
         <section class="guest-window" id="sign">
           <div class="windowbar">Galaxy 981 Guestbook Writer v1.3</div>
@@ -910,11 +853,14 @@ header.galaxy-header {
           </div>
         </section>
 
-        <div class="bead-divider" aria-hidden="true"></div>
+        <img class="bead-divider" src="rainbowswirldivider.gif" width="432" height="14" alt="" aria-hidden="true">
       </main>
 
       <aside class="right-rail" aria-label="Assorted site scraps">
-        <div class="sticker">BEST VIEWED<br>WITH TOO MANY<br>TABS OPEN</div>
+        <div class="sticker">
+          <img src="bestviewed.gif" width="88" height="31" alt="Best viewed with your eyes">
+          BEST VIEWED<br>WITH TOO MANY<br>TABS OPEN
+        </div>
 
         <div class="counterbox">
           visitors-ish
@@ -924,9 +870,15 @@ header.galaxy-header {
 
         <img src="guestbookcute.gif" alt="" class="mini-gif">
 
-        <div class="underconstruction"><span>UNDER<br>CONSTRUCTION<br>FOREVER</span></div>
+        <div class="underconstruction">
+          <img src="underconstruct.gif" width="410" height="49" alt="">
+          <span>UNDER<br>CONSTRUCTION<br>FOREVER</span>
+        </div>
 
-        <div class="sticker alt">★ YOU ARE HERE ★<br><small>somewhere in the web</small></div>
+        <div class="sticker alt">
+          <img src="spinningplanet.gif" width="112" alt="">
+          ★ YOU ARE HERE ★<br><small>somewhere in the web</small>
+        </div>
 
         <div class="side-links">
           <b>loose ends:</b><br>
@@ -1104,4 +1056,5 @@ header.galaxy-header {
   </script>
 </body>
 </html>
+
 
