@@ -53,28 +53,23 @@ a:hover { color:#ff1493; background:#ffff66; }
 }
 
 /* ============================================================
-   1999 — the masthead. rainbow letters, same trick as about.html,
-   because i only ever learned the one trick.
+   Masthead shared with the chat page.
    ============================================================ */
 .banner {
-  position:relative;
-  padding:14px 74px 12px;
-  text-align:center;
-  background:
-    linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.10)),
-    linear-gradient(180deg, #3a1670 0%, #7b3bb8 44%, #1f8fb0 45%, #0d5f86 100%);
-  border-bottom:4px solid #0088cc;
-  overflow:hidden;
+  padding:16px 12px 14px; text-align:center;
+  background:#000080 url("stars.gif") repeat;
+  border-bottom:3px double #ffff00; color:#ffff00;
 }
+.banner-title { display:flex; align-items:center; justify-content:center; gap:12px; }
+.banner-planet { width:112px; height:auto; flex:0 0 auto; image-rendering:pixelated; }
 
 .banner h1 {
-  margin:2px 0 6px;
-  font-family:"Comic Sans MS","Trebuchet MS",Arial,sans-serif;
-  font-size:50px;
-  line-height:1.05;
-  letter-spacing:1px;
-  text-shadow:2px 2px 0 rgba(0,0,0,.35);
+  margin:0;
+  font:bold italic clamp(34px, 7vw, 72px)/1.1 "Times New Roman", Times, serif;
+  color:#ffff00; text-shadow:2px 2px 0 #ff00ff;
 }
+.banner h1 .word { color:#ffff00; }
+.banner h1 .num { color:#00ffff; }
 
 /* the same eight rainbow classes as every other page here */
 .r1 { color:#ff4b4b; }
@@ -87,24 +82,14 @@ a:hover { color:#ff1493; background:#ffff66; }
 .r8 { color:#ff79d8; }
 
 .banner .tiny {
-  display:inline-block;
-  padding:2px 9px;
-  color:#111;
-  background:#fff;
-  border:2px outset #eee;
-  font:11px "MS Sans Serif",Tahoma,sans-serif;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin:8px 0 0; color:#ffff00;
+  font:bold 12px/1.5 "Comic Sans MS", "Comic Sans", cursive;
 }
+.banner .tiny span { min-width:0; }
 
-.banner .corner-gif {
-  position:absolute;
-  top:26px;
-  width:92px;
-  max-height:60px;
-  object-fit:contain;
-  image-rendering:pixelated;
-}
-.banner .corner-gif.left  { left:12px; }
-.banner .corner-gif.right { right:12px; transform:scaleX(-1); }
+.banner .mail-gif { width:32px; height:24px; object-fit:contain; flex:0 0 auto; image-rendering:pixelated; }
+.banner .mail-gif.right { transform:scaleX(-1); }
 
 .system-message {
   width:calc(100% - 28px);
@@ -715,9 +700,11 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
     box-shadow:3px 3px 0 #002b57;
   }
 
-  .banner { padding:12px 8px 10px; }
-  .banner h1 { font-size:34px; }
-  .banner .corner-gif { display:none; }
+  .banner { padding:12px 8px 14px; }
+  .banner-title { gap:6px; }
+  .banner-planet { width:64px; }
+  .banner h1 { font-size:clamp(30px, 7vw, 48px); }
+  .banner .tiny { gap:5px; }
 
   .layout, .layout tbody { display:block; width:100%; }
   .layout tr { display:flex; flex-direction:column; width:100%; }
@@ -755,7 +742,7 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 
 @media (max-width:430px) {
   .navbox a { width:100%; }
-  .banner h1 { font-size:28px; letter-spacing:0; }
+  .banner h1 { font-size:clamp(27px, 7vw, 30px); }
 }
 
 /* nobody needs a running cat if a running cat makes them ill.
@@ -783,13 +770,15 @@ textarea { min-height:150px; resize:vertical; line-height:1.5; }
 <div class="site-shell">
 
   <header class="banner">
-    <img class="corner-gif left"  src="mail.gif" alt="">
-    <img class="corner-gif right" src="mail.gif" alt="">
-    <h1>
-      <span class="r1">C</span><span class="r2">O</span><span class="r3">N</span><span class="r4">T</span><span class="r5">A</span><span class="r6">C</span><span class="r7">T</span>
-      <span class="r8">M</span><span class="r3">E</span>
-    </h1>
-    <div class="tiny">★ the form works ★ i am the slow part ★</div>
+    <div class="banner-title">
+      <img class="banner-planet" src="spinningplanet.gif" width="144" height="96" alt="">
+      <h1><span class="word">Contact</span> <span class="num">Me</span></h1>
+    </div>
+    <div class="tiny">
+      <img class="mail-gif" src="mail.gif" alt="">
+      <span>★ the form works ★ i am the slow part ★</span>
+      <img class="mail-gif right" src="mail.gif" alt="">
+    </div>
   </header>
 
   <div class="system-message">
