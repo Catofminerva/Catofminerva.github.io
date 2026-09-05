@@ -5,7 +5,7 @@
 <title>Galaxy 981 :: the chat room</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A live chat room on Galaxy 981. Bring a nickname.">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 
 <!-- ============================================================
      GALAXY 981 / chat.html
@@ -35,20 +35,19 @@
 <style>
 /* ================================================================
    0. TOKENS
-   the page has three palettes. they are hue shifts of one another
-   because i redid the header in march and never redid anything else.
+   page colours and the separate chat window palette.
    ================================================================ */
 :root{
-  --void:#06030e;
-  --void-2:#0d0620;
-  --cyan:#00e5ff;
-  --lime:#39ff14;
+  --void:#d4d3de;
+  --void-2:#eeedf3;
+  --cyan:#303e82;
+  --lime:#8b2844;
   --sun:#ffd23f;
-  --grape:#a855ff;
-  --hot:#ff3ba7;
-  --ink:#bdf7ff;
-  --ink-dim:#7fb9c9;
-  --rule:#2a1650;
+  --grape:#85809a;
+  --hot:#754266;
+  --ink:#292835;
+  --ink-dim:#595567;
+  --rule:#a8a4b7;
 
   /* the chat program has its own world and does not share these */
   --sys-face:#cfc9c0;
@@ -61,8 +60,6 @@
   --paper-alt:#f3eddd;
   --paper-ink:#181613;
 }
-:root[data-palette="dusk"]{ --cyan:#ff9e4f; --grape:#c0407a; --hot:#ffd23f; --ink:#ffe6c9; --ink-dim:#d3a179; --void:#170a12; --void-2:#2a0f1c; --rule:#5c1f36; }
-:root[data-palette="lagoon"]{ --cyan:#7cf9c8; --grape:#3aa0ff; --hot:#b8ff5c; --ink:#dcfff2; --ink-dim:#84c5b2; --void:#02100e; --void-2:#04241f; --rule:#0d4b3d; }
 
 *,*::before,*::after{ box-sizing:border-box; }
 
@@ -71,68 +68,11 @@ html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
 
 body{
   margin:0;
-      background:
-        linear-gradient(rgba(0,0,15,.24),rgba(0,0,15,.24)),
-        url("background2.gif") repeat,
-        #020008;
-     color:var(--ink);
+  background:#d4d3de;
+  color:var(--ink);
   font:15px/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;
   overflow-x:hidden;
 }
-
-/* ================================================================
-   1. ATMOSPHERE — sky, drift, scanlines
-   ================================================================ */
-/* the starfield drifts on a transform, not on background-position.
-   background-position is a paint property: animating it on a layer this
-   size forces the whole viewport to be re-rastered every single frame,
-   forever, and on a machine that cannot keep up that reads as the page
-   strobing. a transform is handed to the compositor and never repaints.
-   each layer has to travel a whole number of tiles or it jumps when the
-   animation loops, hence the odd sizes below. */
-.sky{
-  position:fixed; z-index:-3; pointer-events:none;
-  left:-400px; top:-800px;
-  width:calc(100vw + 800px);
-  height:calc(100vh + 1600px);
-  will-change:transform;
-  background-color:transparent;          /* was var(--void), which hid the tile */
-  background-image:
-    radial-gradient(1.6px 1.6px at 40px 60px,   #fffbe6 50%, transparent 51%),
-    radial-gradient(1.4px 1.4px at 150px 200px, #b9f6ff 50%, transparent 51%),
-    radial-gradient(1px 1px   at 260px 90px,    #ffffff 50%, transparent 51%),
-    radial-gradient(1px 1px   at 320px 300px,   #ffd6ff 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 90px 340px,  #d8fff0 50%, transparent 51%);
-  background-size:400px 400px;
-  animation:drift 200s linear infinite;
-  opacity:.85;
-}
-.sky--near{
-  z-index:-2; opacity:.5;
-  left:-640px; top:-640px;
-  width:calc(100vw + 1280px);
-  height:calc(100vh + 1280px);
-  background-image:
-    radial-gradient(2.4px 2.4px at 120px 80px,  #ffffff 50%, transparent 51%),
-    radial-gradient(2px 2px at 500px 420px,     #9de9ff 50%, transparent 51%),
-    radial-gradient(2.2px 2.2px at 300px 560px, #ffc2f0 50%, transparent 51%);
-  background-size:640px 640px;
-  animation:drift-near 90s linear infinite;
-}
-.sky--glow{
-  z-index:-3; opacity:1; animation:none; background-size:auto;
-  left:0; top:0; width:100vw; height:100vh;
-  background-image:
-    radial-gradient(60vw 40vh at 12% 8%, rgba(168,85,255,.34), transparent 70%),
-    radial-gradient(50vw 38vh at 88% 22%, rgba(0,229,255,.22), transparent 70%),
-    radial-gradient(70vw 50vh at 50% 110%, rgba(255,59,167,.18), transparent 70%);
-  background-image:
-    radial-gradient(60vw 40vh at 12% 8%,  color-mix(in srgb, var(--grape) 34%, transparent), transparent 70%),
-    radial-gradient(50vw 38vh at 88% 22%, color-mix(in srgb, var(--cyan) 22%, transparent), transparent 70%),
-    radial-gradient(70vw 50vh at 50% 110%, color-mix(in srgb, var(--hot) 18%, transparent), transparent 70%);
-}
-@keyframes drift{      to{ transform:translate3d(-400px,-800px,0); } }   /* 1 tile across, 2 down */
-@keyframes drift-near{ to{ transform:translate3d(-640px,-640px,0); } }   /* 1 tile each way */
 
 /* ================================================================
    2. SHELL
@@ -144,55 +84,35 @@ body{
 .skip:focus{ left:8px; top:8px; }
 
 .shell{
-  width:min(1140px, 95vw);
-  margin:20px auto 70px;
+  width:min(1100px, 95vw);
+  margin:20px auto 40px;
   position:relative;
-  border:6px ridge var(--cyan);
-  outline:4px solid #04010c;
-  background:
-    linear-gradient(180deg, rgba(12,4,28,.90), rgba(6,3,14,.94));
-  box-shadow:0 0 0 1px #000, 0 0 70px rgba(0,229,255,.28), inset 0 0 40px #000;
-  box-shadow:0 0 0 1px #000, 0 0 70px color-mix(in srgb, var(--cyan) 28%, transparent), inset 0 0 40px #000;
+  border:1px solid #898599;
+  background:#f2f1f5;
 }
 
 /* ================================================================
-   3. HEADER — the polished stratum. everything below it is older.
+   3. HEADER
    ================================================================ */
-.banner{ position:relative; padding:26px 18px 10px; text-align:center; overflow:hidden; }
+.banner{
+  position:relative; padding:22px 18px 14px; text-align:center;
+}
 .wordmark{
-  position:relative; margin:0; line-height:.86;
-  font-family:Impact, Haettenschweiler, "Arial Narrow Bold", "Trebuchet MS", sans-serif;
-  font-size:clamp(46px, 11vw, 108px);
-  letter-spacing:.01em; text-transform:uppercase;
-  transform:skewX(-4deg);
-  color:#d6fbff;
+  margin:0; line-height:1;
+  font:bold clamp(38px, 8vw, 68px)/1 "Times New Roman", Times, serif;
+  color:#303e82;
 }
-/* chrome letters. the gradient lives on the word, not the whole heading,
-   so the numerals can be hollow without arguing about background-clip. */
-.wordmark .word{
-  background:linear-gradient(180deg,
-    #ffffff 0 30%, #d6fbff 30% 46%, #24b9ff 46% 58%, #0b3f9c 58% 78%, #7fe9ff 78% 100%);
-  -webkit-background-clip:text; background-clip:text;
-  filter:drop-shadow(0 3px 0 #050018) drop-shadow(0 0 22px rgba(0,229,255,.7));
-}
-@supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .wordmark .word{ color:transparent; }
-}
-.wordmark .num{ color:var(--hot); filter:drop-shadow(0 0 12px var(--hot)); }
-@supports (-webkit-text-stroke: 2px red){
-  .wordmark .num{ -webkit-text-stroke:2px var(--hot); -webkit-text-fill-color:transparent; color:transparent; }
-}
+.wordmark .word{ color:#303e82; }
+.wordmark .num{ color:#754266; }
 .wordmark__sub{
   margin:10px 0 0; font:italic 15px/1.4 Georgia, "Times New Roman", serif; color:var(--ink-dim);
   position:relative;
 }
 .marqbox{
-  margin:14px 16px 0;
-  border:4px groove var(--cyan); background:#00113a;
+  margin:0 12px 12px; border:1px solid #a8a4b7; background:#e3e1ec;
 }
 .marqbox marquee{
-  display:block; padding:4px 0;
-  font:bold 15px/1.9 Verdana, sans-serif; color:var(--sun);
+  display:block; padding:3px 0; font:12px/1.9 Verdana,sans-serif; color:#443951;
 }
 
 /* ================================================================
@@ -203,13 +123,11 @@ body{
   align-items:start;
 }
 .rail{
-  background:
-    repeating-linear-gradient(135deg, #12042c 0 12px, #190740 12px 24px);
-  border-right:6px ridge var(--grape);
-  padding-bottom:18px;
-  position:relative;
+  background:#e4e2eb; border-right:1px solid #b5b0c2; padding-bottom:18px; position:relative;
 }
-.main{ padding:12px 18px 26px; min-width:0; background:rgba(10,2,20,.42); }
+.main{
+  padding:12px 18px 26px; min-width:0;
+}
 
 /* ================================================================
    5. RAIL WIDGETS
@@ -217,24 +135,22 @@ body{
 .nav{ padding:12px 8px 6px; }
 .nav a{
   display:flex; align-items:center; gap:8px;
-  margin:7px 4px; padding:6px 8px;
-  border:3px outset #6af7ff;
-  border:3px outset color-mix(in srgb, var(--cyan) 60%, #fff 10%);
-  background:#100f3d; color:#a9f6ff; text-decoration:none;
-  font:12px/1.2 Verdana, sans-serif; text-transform:uppercase; letter-spacing:.04em;
-  text-shadow:0 0 5px color-mix(in srgb, var(--cyan) 70%, transparent);
-  box-shadow:2px 2px 0 #000;
+  margin:5px 4px; padding:3px 4px;
+  color:#303e82; text-decoration:underline;
+  font:12px/1.4 Verdana, sans-serif;
 }
-.nav a:hover,.nav a:focus-visible{ border-style:inset; color:var(--lime); background:#180a4a; transform:translate(1px,1px); }
-.nav a[aria-current="page"]{ background:#2a0a52; color:var(--sun); border-color:var(--sun); }
+.nav a:hover,.nav a:focus-visible{
+  color:#8b2844; background:#eeedf3;
+}
+.nav a[aria-current="page"]{
+  color:#292835; font-weight:bold;
+}
 .nav .ico{ width:20px; height:20px; flex:0 0 20px; object-fit:contain; image-rendering:pixelated; }
 
 .box{
   margin:12px 8px; padding:8px 9px 10px;
-  border:3px inset #6af7ff;
-  border:3px inset color-mix(in srgb, var(--cyan) 55%, #fff);
-  background:rgba(0,0,0,.42);
-  font:12px/1.5 Verdana, sans-serif; color:#d9f6ff;
+  border:1px solid #aaa5b9; background:#efedf4;
+  font:12px/1.5 Verdana,sans-serif; color:#393444;
 }
 .box > h4{
   margin:-8px -9px 8px; padding:4px 8px;
@@ -242,13 +158,17 @@ body{
   color:#0a0018; background:var(--cyan);
 }
 .box p{ margin:6px 0; }
-.box a{ color:var(--sun); }
+.box a{
+  color:#303e82;
+}
 
-.counter{ text-align:center; padding:10px 6px 4px; font:11px/1.5 Verdana,sans-serif; color:var(--sun); }
+.counter{
+  text-align:center; padding:10px 6px 4px; font:11px/1.5 Verdana,sans-serif; color:#514b60;
+}
 .counter .odometer{
   display:inline-block; margin-top:4px; padding:4px 8px;
-  border:3px inset #0aa; background:#000; color:#00ff5a;
-  font:16px/1 "Courier New", monospace; letter-spacing:3px;
+  border:2px inset #c5c1ce; background:#24252c; color:#b8cfb2;
+  font:16px/1 "Courier New",monospace; letter-spacing:3px;
 }
 .counter small{ display:block; margin-top:5px; color:var(--ink-dim); font-size:10px; font-style:italic; }
 
@@ -262,11 +182,14 @@ body{
 
 /* sticker wall: real gifs from the folder */
 .sticker-wall{
-  margin:12px 8px; padding:8px; border:3px inset #6af7ff; background:rgba(0,0,0,.4);
-  display:grid; grid-template-columns:repeat(2,1fr); gap:8px; justify-items:center; align-items:center;
+  margin:12px 8px; padding:8px 0;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:8px;
+  justify-items:center; align-items:center;
 }
 .sticker-wall img{ width:86px; height:auto; image-rendering:pixelated; display:block; transition:transform 120ms ease; }
-.sticker-wall img:hover{ transform:translateY(-2px) rotate(-1deg); filter:drop-shadow(0 0 7px var(--lime)); }
+.sticker-wall img:hover{
+  filter:none;
+}
 .sticker-wall .wide{ grid-column:span 2; width:184px; }
 .sticker-wall .ghost{
   width:86px; height:31px; display:grid; place-items:center;
@@ -294,12 +217,11 @@ body{
    and black, which were invisible against the old black log.
    ================================================================ */
 .win{
+  box-shadow:3px 3px 0 #b7b3c0;
   margin:16px 0 22px;
   background:var(--sys-face);
   border:2px solid var(--sys-lit);
   border-right-color:var(--sys-dark); border-bottom-color:var(--sys-dark);
-  box-shadow:7px 7px 0 rgba(0,0,0,.6), 0 0 40px rgba(0,229,255,.2);
-  box-shadow:7px 7px 0 rgba(0,0,0,.6), 0 0 40px color-mix(in srgb, var(--cyan) 20%, transparent);
   color:var(--paper-ink);
   font-family:Verdana, Geneva, sans-serif;
 }
@@ -480,79 +402,76 @@ input#nick{ flex:0 1 168px; }
 /* transform, not left, so the cat does not relayout the strip 60 times a second */
 @keyframes walk{ from{ transform:translateX(-100%) } to{ transform:translateX(calc(100vw + 100%)) } }
 
-/* the taped notice */
+/* room notice */
 .notice{
-  position:relative; margin:6px 0 20px; padding:14px 18px;
-  background:#fff8c8; color:#2b2410; border:1px solid #d9c46a;
-  font:13px/1.6 "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;
-  transform:rotate(-.5deg);
-  box-shadow:4px 6px 0 rgba(0,0,0,.5);
+  margin:6px 0 16px; padding:6px 0;
+  border-bottom:1px dotted #aaa5b9;
+  color:#514b60; font:12px/1.6 Verdana,sans-serif;
 }
-.notice::before,.notice::after{
-  content:""; position:absolute; top:-11px; width:74px; height:22px;
-  background:rgba(255,255,255,.42); border-left:1px dashed rgba(0,0,0,.16); border-right:1px dashed rgba(0,0,0,.16);
-  box-shadow:0 1px 3px rgba(0,0,0,.25);
-}
-.notice::before{ left:22px; transform:rotate(-4deg); }
-.notice::after{ right:26px; transform:rotate(3deg); }
 .notice b{ color:#a3320f; }
 .notice .strike{ text-decoration:line-through; color:#8a7f5e; }
 
-/* section headers, hand-cut */
+/* blog heading */
 .head{
-  display:flex; align-items:center; gap:12px; margin:30px 0 12px;
+  margin:26px 0 10px; padding-bottom:4px; border-bottom:1px solid #aaa5b9;
 }
 .head h2{
-  margin:0; font:bold 22px/1.2 "Trebuchet MS", Verdana, sans-serif;
-  color:var(--sun); text-shadow:2px 2px 0 #2a0a52, 0 0 16px color-mix(in srgb, var(--sun) 55%, transparent);
-  letter-spacing:.02em;
+  margin:0; font:bold 20px/1.3 "Times New Roman",Times,serif; color:#393444;
 }
-.head .line{ flex:1; height:6px; background:repeating-linear-gradient(90deg, var(--grape) 0 6px, transparent 6px 12px); }
+.head .line{
+  display:none;
+}
 .head .eyebrow{
   font:9px/1.6 Verdana,sans-serif; letter-spacing:.2em; text-transform:uppercase;
   color:#08131a; background:var(--cyan); padding:1px 7px;
 }
 
-/* entries, on paper, because writing deserves a different substrate */
+/* blog entry and to-do list */
 .entries{ display:grid; gap:18px; }
 .paper{
-  position:relative; padding:24px 28px 22px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.03), transparent 60px),
-    #fbf3e0;
-  color:#2a2118; border:1px solid #cdb98c;
-  font:16px/1.7 Georgia, "Times New Roman", serif;
-  box-shadow:0 16px 0 -10px rgba(0,0,0,.55), 0 0 34px rgba(255,214,140,.10);
+  padding:0; color:#2a2630; font:16px/1.6 "Times New Roman",Times,serif;
 }
-.paper h3{ margin:0 0 4px; font:bold 22px/1.25 Georgia, serif; color:#1d1710; }
-.paper h3 a{ color:inherit; text-decoration:none; border-bottom:2px solid #d8b23f; }
-.paper h3 a:hover{ background:#fbe9a8; }
+.paper h3{
+  margin:0 0 5px; font:bold 18px/1.3 "Times New Roman",Times,serif;
+}
+.paper h3 a{
+  color:#303e82; text-decoration:underline;
+}
+.paper h3 a:hover{
+  color:#8b2844;
+}
 .paper .stamp{
-  font:10px/1.6 Verdana,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:#8a6b28;
-  border-bottom:1px dotted #cdb98c; padding-bottom:8px; margin-bottom:12px; display:block;
+  display:block; margin:0 0 10px; font:11px/1.6 Verdana,sans-serif; color:#625b6d;
 }
 .paper p{ margin:0 0 12px; }
 .paper p:last-child{ margin-bottom:0; }
 .paper .lede::first-letter{
-  float:left; font-size:52px; line-height:.82; padding:4px 8px 0 0; color:#a3320f; font-weight:bold;
+  float:none; font:inherit; padding:0; color:inherit;
 }
 .paper .pen{
-  display:block; margin-top:14px; padding-top:10px; border-top:1px dotted #cdb98c;
-  font:14px/1.5 "Comic Sans MS","Chalkboard SE",cursive; color:#b0421c; transform:rotate(-.3deg);
+  display:block; margin-top:10px; font:italic 13px/1.5 "Times New Roman",Times,serif; color:#625b6d;
 }
 .paper--short{ font-size:15px; }
 
 .postit{
-  position:relative; padding:16px 16px 18px; color:#221d10;
-  font:13px/1.55 "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;
-  box-shadow:3px 5px 0 rgba(0,0,0,.45);
+  padding:0 0 0 12px; border-left:1px dotted #aaa5b9; color:#393444; font:12px/1.6 Verdana,sans-serif;
 }
-.postit--yellow{ background:#fff173; transform:rotate(1.4deg); }
-.postit--pink{ background:#ffb4dd; transform:rotate(-1.8deg); }
-.postit--blue{ background:#a9e7ff; transform:rotate(.8deg); }
-.postit h4{ margin:0 0 6px; font-size:14px; text-transform:uppercase; letter-spacing:.05em; }
+.postit--yellow{
+  background:transparent;
+}
+.postit--pink{
+  background:transparent;
+}
+.postit--blue{
+  background:transparent;
+}
+.postit h4{
+  margin:0 0 6px; font:bold 13px/1.4 Verdana,sans-serif;
+}
 .postit ul{ margin:6px 0 0 16px; padding:0; }
-.postit s{ color:#6f6a55; }
+.postit s{
+  color:#736c7c;
+}
 
 .pair{ display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:16px; align-items:start; }
 .stack{ display:grid; gap:14px; }
@@ -612,17 +531,21 @@ input#nick{ flex:0 1 168px; }
 
 /* ---- footer ---- */
 .foot{
-  border-top:6px ridge var(--grape); padding:14px 18px 20px; text-align:center;
-  background:linear-gradient(180deg, rgba(20,4,44,.7), rgba(4,1,10,.9));
-  font:12px/1.7 Verdana,sans-serif; color:var(--ink-dim);
+  border-top:1px solid #b5b0c2; padding:14px 18px 20px;
+  text-align:center; background:#e4e2eb;
+  font:12px/1.7 Verdana,sans-serif; color:#595567;
 }
 .webring{
-  display:inline-flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;
-  padding:8px 14px; margin-bottom:10px; border:3px outset var(--cyan); background:#0a0430;
+  display:inline-flex; flex-wrap:wrap; gap:8px; align-items:center;
+  justify-content:center; padding:4px 0; margin-bottom:6px;
 }
-.webring a{ color:var(--sun); text-decoration:none; border-bottom:1px dotted currentColor; }
+.webring a{
+  color:#303e82; text-decoration:underline;
+}
 .webring a:hover{ color:var(--lime); }
-.webring .name{ color:var(--cyan); font-weight:bold; letter-spacing:.06em; }
+.webring .name{
+  color:#514b60; font-weight:bold;
+}
 
 a{ color:var(--cyan); }
 a:hover{ color:var(--lime); }
@@ -643,7 +566,7 @@ a:hover{ color:var(--lime); }
 
 @media (max-width: 920px){
   .grid{ grid-template-columns:1fr; }
-  .rail{ border-right:0; border-bottom:6px ridge var(--grape); display:grid; grid-template-columns:repeat(auto-fit,minmax(232px,1fr)); align-items:start; }
+  .rail{ border-right:0; border-bottom:1px solid #b5b0c2; display:grid; grid-template-columns:repeat(auto-fit,minmax(232px,1fr)); align-items:start; }
   .nav{ grid-column:1/-1; }
   .nav a{ display:inline-flex; margin:5px 3px; }
   .pair{ grid-template-columns:1fr; }
@@ -657,7 +580,7 @@ a:hover{ color:var(--lime); }
   #roster{ max-height:150px; }
   .row{ flex-wrap:wrap; }
   input#nick{ flex:1 1 140px; }
-  .shell{ width:100%; margin:0 0 30px; border-width:4px; }
+  .shell{ width:100%; margin:0 0 30px; border-width:1px; }
   .wordmark{ transform:none; }
 }
 
@@ -683,9 +606,6 @@ html.embed, html.embed body{ background:transparent; }
 </head>
 <body>
 
-<div class="sky sky--glow"></div>
-<div class="sky"></div>
-<div class="sky sky--near"></div>
 
 <a class="skip" href="#chat">Skip to the chat</a>
 
@@ -1552,3 +1472,4 @@ addEventListener("beforeunload", () => { try { ws && ws.close(); } catch(_){} })
 </script>
 </body>
 </html>
+
