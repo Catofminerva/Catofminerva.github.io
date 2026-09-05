@@ -22,6 +22,7 @@ body {
         linear-gradient(rgba(0,0,15,.24),rgba(0,0,15,.24)),
         url("www.gif") repeat,
         #020008;
+}
 
 a { color: #0000ee; }
 a:visited { color: #800080; }
@@ -534,20 +535,80 @@ a:hover { color: #ff1493; background: #ffff66; }
   }
 }
 
+
+/* Star mastheads, matching the chat and contact pages. */
+header.galaxy-header {
+  position:relative; min-height:0; padding:16px 12px 14px;
+  text-align:center; background:#000080 url("stars.gif") repeat;
+  border:0; border-bottom:3px double #ffff00;
+  color:#ffff00; box-shadow:none; transform:none; overflow:visible;
+}
+.galaxy-header .header-row {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+}
+.galaxy-header .header-art {
+  display:block; width:112px; max-height:96px; height:auto;
+  object-fit:contain; flex:0 0 auto; image-rendering:pixelated;
+}
+.galaxy-header h1 {
+  margin:0; padding:0; min-width:0;
+  font:bold italic clamp(34px, 7vw, 72px)/1.1 "Times New Roman",Times,serif;
+  letter-spacing:normal; color:#ffff00; background:none;
+  -webkit-text-stroke:0; -webkit-text-fill-color:currentColor;
+  text-shadow:2px 2px 0 #ff00ff; transform:none;
+}
+.galaxy-header h1 .word { color:#ffff00; }
+.galaxy-header h1 .accent { color:#00ffff; }
+.galaxy-header .header-sub {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  position:static; margin:8px 0 0; padding:0; border:0; background:none;
+  color:#ffff00; font:bold 14px/1.5 "Comic Sans MS","Comic Sans",cursive;
+  transform:none;
+}
+.galaxy-header .header-sub span { min-width:0; }
+.galaxy-header .header-keepsake {
+  position:static; width:54px; max-height:40px; height:auto;
+  object-fit:contain; flex:0 0 auto; image-rendering:pixelated;
+  filter:none; transform:none;
+}
+.galaxy-header .header-keepsake.mirror { transform:scaleX(-1); }
+.galaxy-header .microtag {
+  position:static; display:inline-block; margin:9px 0 0;
+  transform:none; box-shadow:none;
+}
+.galaxy-header .best-viewed {
+  margin:0 0 9px; padding:0; color:#ccccff;
+  font:11px/1.5 "Courier New",monospace; text-align:center;
+}
+@media (max-width:720px) {
+  header.galaxy-header { padding:12px 8px 14px; }
+  .galaxy-header .header-row { gap:7px; }
+  .galaxy-header .header-art { width:64px; max-height:66px; }
+  .galaxy-header h1 { font-size:clamp(28px, 6vw, 44px); }
+  .galaxy-header .header-sub { font-size:12px; gap:5px; }
+  .galaxy-header .header-keepsake { width:32px; max-height:28px; }
+}
+@media (max-width:430px) {
+  .galaxy-header .header-art { width:52px; }
+  .galaxy-header h1 { font-size:28px; }
+  .galaxy-header .header-sub { flex-wrap:wrap; }
+}
+
 </style>
 </head>
 
 <body>
 <div class="site-shell">
 
-  <header class="banner">
-    <img class="corner-gif left" src="sleepycat.gif" alt="">
-    <img class="corner-gif right" src="sleepycat.gif" alt="">
-    <h1>
-      <span class="r1">G</span><span class="r2">A</span><span class="r3">L</span><span class="r4">A</span><span class="r5">X</span><span class="r6">Y</span>
-      <span class="r7">9</span><span class="r8">8</span><span class="r3">1</span>
-    </h1>
-    <div class="tiny">★ about the webmaster ★ probably oversharing ★</div>
+  <header class="banner galaxy-header">
+    <div class="header-row">
+      <img class="header-art" src="sleepycat.gif" alt="">
+      <h1><span class="word">About</span> <span class="accent">Me</span></h1>
+    </div>
+    <div class="header-sub">
+      <span>★ about the webmaster ★ probably oversharing ★</span>
+      <img class="header-keepsake mirror" src="sleepycat.gif" alt="">
+    </div>
   </header>
 
   <div class="system-message">★ welcome to the ABOUT ME page ★ please excuse the dust ★</div>
@@ -752,3 +813,4 @@ document.getElementById('lastUpdated').textContent =
 
 </body>
 </html>
+
