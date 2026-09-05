@@ -2256,6 +2256,83 @@ td.content .post h3{ color:#000; text-shadow:none; }
   .dancer:nth-child(3){ right:0; width:30%; bottom:18px; }
 }
 
+
+/* Homepage directory: a framed list of links with the original GIFs. */
+.sidebar .home-directory{
+  margin:9px 5px 18px;
+  padding:4px 9px 8px;
+  border:3px double #000080;
+  background:#ffffee;
+  box-shadow:none;
+}
+.sidebar .home-directory::before{ content:none; }
+.directory-title{
+  grid-column:1 / -1;
+  margin:0 -5px 7px;
+  padding:5px 4px 8px;
+  border-bottom:3px double #9999bb;
+  background:#e6e6fa;
+  color:#000080;
+  text-align:center;
+  font:bold italic 25px/1.15 "Times New Roman",Times,serif;
+}
+.sidebar .home-directory a{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-height:36px;
+  margin:0;
+  padding:4px 3px;
+  border:0;
+  border-bottom:1px dotted #b8b8a3;
+  background:transparent;
+  color:#0000ee;
+  box-shadow:none;
+  text-shadow:none;
+  font:15px/1.3 "Times New Roman",Times,serif;
+  letter-spacing:normal;
+  text-transform:none;
+  text-decoration:underline;
+}
+.sidebar .home-directory a:last-child{ border-bottom:0; }
+.sidebar .home-directory a:visited{ color:#551a8b; }
+.sidebar .home-directory a[aria-current="page"]{
+  background:#eeeeff;
+  color:#800000;
+  font-weight:bold;
+}
+.sidebar .home-directory a[aria-current="page"]::after{
+  content:"\00ab";
+  margin-left:auto;
+  padding-right:4px;
+  color:#800000;
+}
+.sidebar .home-directory a:hover,
+.sidebar .home-directory a:focus-visible{
+  background:#e6e6fa;
+  color:#800000;
+  text-decoration:underline;
+  transform:none;
+  filter:none;
+}
+.sidebar .home-directory a:focus-visible{
+  outline:1px dotted #000080;
+  outline-offset:-2px;
+}
+.sidebar .home-directory a:active{ transform:none; }
+.sidebar .home-directory .nav-icon{
+  width:26px;
+  height:26px;
+  flex:0 0 26px;
+  margin:0;
+  object-fit:contain;
+}
+@media (max-width:700px){
+  .sidebar .home-directory{ gap:0 10px; padding:5px 7px 8px; }
+  .sidebar .home-directory a{ min-height:44px; font-family:"Times New Roman",Times,serif; }
+  .sidebar .home-directory .nav-icon{ flex-basis:24px; width:24px; height:24px; }
+}
+
   </style>
 <!-- ============================================================
      THE SEIZURE NOTICE (door page)
@@ -2446,17 +2523,18 @@ html.seizing, html.seizing body{ overflow:hidden; }
     <table class="layout">
       <tr>
         <td class="sidebar">
-          <div class="nav">
-            <a href="index.html"><img src="cutehome.gif" alt="Home" class="nav-icon">Home</a>
-            <a href="about.html"><img src="about.gif" alt="About" class="nav-icon">About</a>
-            <a href="blog_posts.html"><img src="post.gif" alt="Entries" class="nav-icon">Entries</a>
-<a href="chat.html"><img src="chattt.gif" alt="Chat" class="nav-icon">Chat</a>
-            <a href="coolsite.html"><img src="coollinks.gif" alt="Kool Webpages" class="nav-icon">Kool Webpages</a>
-            <a href="guestbook.html"><img src="book-0037.gif" alt="Guestbook" class="nav-icon">Guestbook</a>
-            <a href="books.html"><img src="catread.gif" alt="Kool Books" class="nav-icon">Kool Books</a>
-            <a href="contact.html"><img src="phone.gif" alt="Contact" class="nav-icon">Contact</a>
-            <a href="liminal.html"><img style="width:14px;height:20px" width="14" height="20" src="door.gif" alt="Liminal Space" class="nav-icon">Liminal Space</a>
-          </div>
+          <nav class="nav home-directory" aria-label="Site directory">
+            <div class="directory-title">Directory</div>
+            <a href="index.html" aria-current="page"><img src="cutehome.gif" alt="" class="nav-icon">Home</a>
+            <a href="about.html"><img src="about.gif" alt="" class="nav-icon">About</a>
+            <a href="blog_posts.html"><img src="post.gif" alt="" class="nav-icon">Entries</a>
+<a href="chat.html"><img src="chattt.gif" alt="" class="nav-icon">Chat</a>
+            <a href="coolsite.html"><img src="coollinks.gif" alt="" class="nav-icon">Kool Webpages</a>
+            <a href="guestbook.html"><img src="book-0037.gif" alt="" class="nav-icon">Guestbook</a>
+            <a href="books.html"><img src="catread.gif" alt="" class="nav-icon">Kool Books</a>
+            <a href="contact.html"><img src="phone.gif" alt="" class="nav-icon">Contact</a>
+            <a href="liminal.html"><img style="width:14px;height:20px" width="14" height="20" src="door.gif" alt="" class="nav-icon">Liminal Space</a>
+          </nav>
 
           <div class="sidebar-extras">
           <div class="visitor-panel" style="text-align:center; padding:10px">
@@ -2798,17 +2876,7 @@ html.seizing, html.seizing body{ overflow:hidden; }
 /* last updated label */
 document.getElementById('lastUpdated').textContent = document.lastModified || '1999-08-01';
 
-/* tiny nav misalignment */
-(() => {
-  const links = document.querySelectorAll('.nav a');
-  links.forEach(a => {
-    const ml = 6 + Math.floor(Math.random()*7);
-    const fs = 12 + Math.floor(Math.random()*3);
-    a.style.marginLeft = ml + 'px';
-    a.style.fontSize   = fs + 'px';
-    if (Math.random() < 0.4) a.style.letterSpacing = '1px';
-  });
-})();
+
 
 
 
