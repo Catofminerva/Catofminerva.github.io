@@ -2260,7 +2260,8 @@ td.content .post h3{ color:#000; text-shadow:none; }
 /* Homepage navigation: an Explorer-style list in Windows chrome. */
 .sidebar .home-directory{
   display:block;
-  margin:9px 5px 18px;
+  width:auto;
+  margin:-8px -6px 18px;
   padding:3px;
   border:2px solid;
   border-color:#fff #000 #000 #fff;
@@ -2328,7 +2329,11 @@ td.content .post h3{ color:#000; text-shadow:none; }
   object-fit:contain;
 }
 @media (max-width:700px){
-  .sidebar .home-directory{ padding:3px; }
+  .sidebar .home-directory{
+    width:calc(100% + 14px);
+    margin:-9px -7px -10px;
+    padding:3px;
+  }
   .directory-links{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
