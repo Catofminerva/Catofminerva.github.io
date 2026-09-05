@@ -599,6 +599,18 @@ html.embed, html.embed body{ background:transparent; }
 .embed .grid{ grid-template-columns:1fr; }
 .embed .main{ padding:0; background:transparent; }
 .embed .win{ margin:0; box-shadow:none; }
+
+/* Sidebar keepsakes move below the footer on small screens. */
+@media (max-width:920px) {
+  .shell > .rail-extras {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(min(232px,100%),1fr));
+    align-items:start; gap:8px; padding:8px;
+    background:#d8d8ef; border-top:3px ridge #b8b8d8;
+  }
+}
+.embed .rail-extras { display:none !important; }
+@media print { .rail-extras { display:none !important; } }
+
 </style>
 </head>
 <body>
@@ -637,6 +649,7 @@ html.embed, html.embed body{ background:transparent; }
         <a href="liminal.html"><img style="width:14px;height:20px" width="14" height="20" class="ico" src="door.gif" alt="Liminal Space">Liminal Space</a>
       </nav>
 
+      <div class="rail-extras">
       <div class="counter">
         You are visitor number
         <span id="hitCount" class="odometer">000001</span>
@@ -668,6 +681,7 @@ html.embed, html.embed body{ background:transparent; }
         <p><a href="contact.html">Email me</a></p>
         <p><a href="guestbook.html">Sign the guestbook</a></p>
         <p>Last touched: <span id="lastUpdated">1999</span></p>
+      </div>
       </div>
     </aside>
 
@@ -887,6 +901,23 @@ html.embed, html.embed body{ background:transparent; }
   <a href="#" id="ctx-whisper" role="menuitem">Whisper to them…</a>
   <a href="#" id="ctx-ignore" role="menuitem">Mute / unmute</a>
 </div>
+
+
+<script>
+/* Move the same elements, preserving their links, IDs and current state. */
+(() => {
+  const extras = document.querySelector('.rail-extras');
+  const rail = document.querySelector('.rail');
+  const shell = document.querySelector('.shell');
+  const mobile = matchMedia('(max-width:920px)');
+  function placeExtras() {
+    const destination = mobile.matches ? shell : rail;
+    if (extras.parentNode !== destination) destination.appendChild(extras);
+  }
+  placeExtras();
+  mobile.addEventListener('change', placeExtras);
+})();
+</script>
 
 <script>
 /* ================================================================
@@ -1475,5 +1506,6 @@ addEventListener("beforeunload", () => { try { ws && ws.close(); } catch(_){} })
 </script>
 </body>
 </html>
+
 
 
