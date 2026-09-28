@@ -1,7 +1,7 @@
 {
  "source": "commons",
  "subreddit": null,
- "generated": "2026-09-21T10:03:22Z",
+ "generated": "2026-09-28T11:02:15Z",
  "note": "photographs stay on their own servers. the page hotlinks them and credits every one.",
  "count": 250,
  "rooms": [
@@ -516,6 +516,26 @@
    "l": "Public domain"
   },
   {
+   "i": "147513",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Fra_Angelico_044.jpg/1920px-Fra_Angelico_044.jpg",
+   "t": "Fra Angelico 044",
+   "a": "{{creator:|Permission= [1] }}",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_044.jpg",
+   "d": "circa 1437",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
+   "i": "147516",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Fra_Angelico_047.jpg/1920px-Fra_Angelico_047.jpg",
+   "t": "Fra Angelico 047",
+   "a": "{{creator:|Permission= [1] }}",
+   "p": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_047.jpg",
+   "d": "circa 1437",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
+  },
+  {
    "i": "147517",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Fra_Angelico_048.jpg/1920px-Fra_Angelico_048.jpg",
    "t": "Fra Angelico 048",
@@ -584,26 +604,6 @@
    "d": "1486<div s",
    "s": "Wikimedia Commons",
    "l": "Public domain"
-  },
-  {
-   "i": "43714921",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Florence_in_poetry%2C_history_and_art_%281913%29_%2814576752430%29.jpg/1920px-Florence_in_poetry%2C_history_and_art_%281913%29_%2814576752430%29.jpg",
-   "t": "Florence in poetry, history and art (1913) (14576752430)",
-   "a": "Internet Archive Book Images",
-   "p": "https://commons.wikimedia.org/wiki/File:Florence_in_poetry,_history_and_art_(1913)_(14576752430).jpg",
-   "d": "1913",
-   "s": "Wikimedia Commons",
-   "l": "No restrictions"
-  },
-  {
-   "i": "44112335",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/In_and_out_of_Florence%3B_a_new_introduction_to_a_well-known_city_%281910%29_%2814595909439%29.jpg/1920px-In_and_out_of_Florence%3B_a_new_introduction_to_a_well-known_city_%281910%29_%2814595909439%29.jpg",
-   "t": "In and out of Florence; a new introduction to a well-known city (1910) (14595909439)",
-   "a": "Internet Archive Book Images",
-   "p": "https://commons.wikimedia.org/wiki/File:In_and_out_of_Florence;_a_new_introduction_to_a_well-known_city_(1910)_(14595909439).jpg",
-   "d": "1910",
-   "s": "Wikimedia Commons",
-   "l": "No restrictions"
   },
   {
    "i": "488139",
@@ -916,6 +916,16 @@
    "l": "CC BY-SA 3.0"
   },
   {
+   "i": "29725882",
+   "u": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Quayside_multi-storey_car_park%2C_15_January_2010.jpg",
+   "t": "Quayside multi-storey car park, 15 January 2010",
+   "a": "Andrew Curtis",
+   "p": "https://commons.wikimedia.org/wiki/File:Quayside_multi-storey_car_park,_15_January_2010.jpg",
+   "d": "2010-01-15",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 2.0"
+  },
+  {
    "i": "70753609",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Cologne_Bonn_Airport_-_multi-storey_car_park_P2-7274.jpg/1920px-Cologne_Bonn_Airport_-_multi-storey_car_park_P2-7274.jpg",
    "t": "Cologne Bonn Airport - multi-storey car park P2-7274",
@@ -996,16 +1006,6 @@
    "l": "CC BY-SA 2.0"
   },
   {
-   "i": "116006123",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/9/9e/George_Street_Multi-Storey_Car_Park_-_geograph.org.uk_-_3300549.jpg",
-   "t": "George Street Multi-Storey Car Park - geograph.org.uk - 3300549",
-   "a": "Mark Anderson",
-   "p": "https://commons.wikimedia.org/wiki/File:George_Street_Multi-Storey_Car_Park_-_geograph.org.uk_-_3300549.jpg",
-   "d": "2013-01-18",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
-  },
-  {
    "i": "2130979",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Melbourne_Old_Post_Office_%28Shopping_Mall_Interior%29.jpg/1920px-Melbourne_Old_Post_Office_%28Shopping_Mall_Interior%29.jpg",
    "t": "Melbourne Old Post Office (Shopping Mall Interior)",
@@ -1066,16 +1066,6 @@
    "l": "CC BY 4.0"
   },
   {
-   "i": "187449294",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Galeria_shopping_mall_interior_03.jpg/1920px-Galeria_shopping_mall_interior_03.jpg",
-   "t": "Galeria shopping mall interior 03",
-   "a": "MBH",
-   "p": "https://commons.wikimedia.org/wiki/File:Galeria_shopping_mall_interior_03.jpg",
-   "d": "2025-08-12",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 4.0"
-  },
-  {
    "i": "187449306",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Galeria_shopping_mall_interior_04.jpg/1920px-Galeria_shopping_mall_interior_04.jpg",
    "t": "Galeria shopping mall interior 04",
@@ -1096,11 +1086,21 @@
    "l": "CC BY 4.0"
   },
   {
-   "i": "187449324",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Galeria_shopping_mall_interior_07.jpg/1920px-Galeria_shopping_mall_interior_07.jpg",
-   "t": "Galeria shopping mall interior 07",
+   "i": "187449316",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Galeria_shopping_mall_interior_05.jpg/1920px-Galeria_shopping_mall_interior_05.jpg",
+   "t": "Galeria shopping mall interior 05",
    "a": "MBH",
-   "p": "https://commons.wikimedia.org/wiki/File:Galeria_shopping_mall_interior_07.jpg",
+   "p": "https://commons.wikimedia.org/wiki/File:Galeria_shopping_mall_interior_05.jpg",
+   "d": "2025-08-12",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 4.0"
+  },
+  {
+   "i": "187449337",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Galeria_shopping_mall_interior_08.jpg/1920px-Galeria_shopping_mall_interior_08.jpg",
+   "t": "Galeria shopping mall interior 08",
+   "a": "MBH",
+   "p": "https://commons.wikimedia.org/wiki/File:Galeria_shopping_mall_interior_08.jpg",
    "d": "2025-08-12",
    "s": "Wikimedia Commons",
    "l": "CC BY 4.0"
@@ -1136,6 +1136,56 @@
    "l": "CC BY-SA 4.0"
   },
   {
+   "i": "37056974",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2711.JPG/1920px-Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2711.JPG",
+   "t": "Forum (shopping centre) Interior with Xmas decoration C IMG 2711",
+   "a": "Anneli Salo",
+   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_Interior_with_Xmas_decoration_C_IMG_2711.JPG",
+   "d": "2014-11-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "37056975",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2707.JPG/1920px-Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2707.JPG",
+   "t": "Forum (shopping centre) Interior with Xmas decoration C IMG 2707",
+   "a": "Anneli Salo",
+   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_Interior_with_Xmas_decoration_C_IMG_2707.JPG",
+   "d": "2014-11-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "37056976",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2709.JPG/1920px-Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2709.JPG",
+   "t": "Forum (shopping centre) Interior with Xmas decoration C IMG 2709",
+   "a": "Anneli Salo",
+   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_Interior_with_Xmas_decoration_C_IMG_2709.JPG",
+   "d": "2014-11-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "37056980",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2708.JPG/1920px-Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2708.JPG",
+   "t": "Forum (shopping centre) Interior with Xmas decoration C IMG 2708",
+   "a": "Anneli Salo",
+   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_Interior_with_Xmas_decoration_C_IMG_2708.JPG",
+   "d": "2014-11-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "37056982",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2710.JPG/1920px-Forum_%28shopping_centre%29_Interior_with_Xmas_decoration_C_IMG_2710.JPG",
+   "t": "Forum (shopping centre) Interior with Xmas decoration C IMG 2710",
+   "a": "Anneli Salo",
+   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_Interior_with_Xmas_decoration_C_IMG_2710.JPG",
+   "d": "2014-11-24",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
    "i": "37905164",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Fu_Shin_Shopping_Centre_%28interior%29.JPG/1920px-Fu_Shin_Shopping_Centre_%28interior%29.JPG",
    "t": "Fu Shin Shopping Centre (interior)",
@@ -1152,56 +1202,6 @@
    "a": "Anneli Salo",
    "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_interior_C_IMG_4763.jpg",
    "d": "2017-02-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "58503837",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Forum_%28shopping_centre%29_interior_C_IMG_4768.jpg/1920px-Forum_%28shopping_centre%29_interior_C_IMG_4768.jpg",
-   "t": "Forum (shopping centre) interior C IMG 4768",
-   "a": "Anneli Salo",
-   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_interior_C_IMG_4768.jpg",
-   "d": "2017-02-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "58503838",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Forum_%28shopping_centre%29_interior_C_IMG_4767.jpg/1920px-Forum_%28shopping_centre%29_interior_C_IMG_4767.jpg",
-   "t": "Forum (shopping centre) interior C IMG 4767",
-   "a": "Anneli Salo",
-   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_interior_C_IMG_4767.jpg",
-   "d": "2017-02-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "58503839",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Forum_%28shopping_centre%29_interior_C_IMG_4758.jpg/1920px-Forum_%28shopping_centre%29_interior_C_IMG_4758.jpg",
-   "t": "Forum (shopping centre) interior C IMG 4758",
-   "a": "Anneli Salo",
-   "p": "https://commons.wikimedia.org/wiki/File:Forum_(shopping_centre)_interior_C_IMG_4758.jpg",
-   "d": "2017-02-16",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "86282114",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Interior_of_Riverlink_Shopping_Centre%2C_North_Ipswich%2C_Queensland.jpg/1920px-Interior_of_Riverlink_Shopping_Centre%2C_North_Ipswich%2C_Queensland.jpg",
-   "t": "Interior of Riverlink Shopping Centre, North Ipswich, Queensland",
-   "a": "Kgbo",
-   "p": "https://commons.wikimedia.org/wiki/File:Interior_of_Riverlink_Shopping_Centre,_North_Ipswich,_Queensland.jpg",
-   "d": "2020-01-17",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "88768100",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Ainoa_shopping_centre_interior.jpg/1920px-Ainoa_shopping_centre_interior.jpg",
-   "t": "Ainoa shopping centre interior",
-   "a": "kallerna",
-   "p": "https://commons.wikimedia.org/wiki/File:Ainoa_shopping_centre_interior.jpg",
-   "d": "2020-02-14",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -1406,6 +1406,16 @@
    "l": "CC BY-SA 4.0"
   },
   {
+   "i": "10272222",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Nagoya-subway-S07-Kurumamichi-station-platform-20100316.jpg/1920px-Nagoya-subway-S07-Kurumamichi-station-platform-20100316.jpg",
+   "t": "Nagoya-subway-S07-Kurumamichi-station-platform-20100316",
+   "a": "LERK ( talk · contribs )",
+   "p": "https://commons.wikimedia.org/wiki/File:Nagoya-subway-S07-Kurumamichi-station-platform-20100316.jpg",
+   "d": "撮影日",
+   "s": "Wikimedia Commons",
+   "l": "CC BY 3.0"
+  },
+  {
    "i": "10280796",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Nagoya-subway-H12-Chikusa-station-platform-20100316.jpg/1920px-Nagoya-subway-H12-Chikusa-station-platform-20100316.jpg",
    "t": "Nagoya-subway-H12-Chikusa-station-platform-20100316",
@@ -1496,16 +1506,6 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "74404736",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Fehrbelliner_Platz._U7._Berlin_U-Bahn._%2816823176751%29.jpg/1920px-Fehrbelliner_Platz._U7._Berlin_U-Bahn._%2816823176751%29.jpg",
-   "t": "Fehrbelliner Platz. U7. Berlin U-Bahn. (16823176751)",
-   "a": "Jon Worth from Belgium",
-   "p": "https://commons.wikimedia.org/wiki/File:Fehrbelliner_Platz._U7._Berlin_U-Bahn._(16823176751).jpg",
-   "d": "2015-03-15",
-   "s": "Wikimedia Commons",
-   "l": "CC BY 2.0"
-  },
-  {
    "i": "101075834",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Shanghai_South_Railway_Station_metro_station_corridor_2.jpg/1920px-Shanghai_South_Railway_Station_metro_station_corridor_2.jpg",
    "t": "Shanghai South Railway Station metro station corridor 2",
@@ -1522,36 +1522,6 @@
    "a": "Unnamelessness",
    "p": "https://commons.wikimedia.org/wiki/File:Shanghai_South_Railway_Station_metro_station_corridor_1.jpg",
    "d": "2021-03-05",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "135963366",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Corridor_at_Matinkyl%C3%A4_metro_station.jpg/1920px-Corridor_at_Matinkyl%C3%A4_metro_station.jpg",
-   "t": "Corridor at Matinkylä metro station",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Matinkyl%C3%A4_metro_station.jpg",
-   "d": "2022-11-10",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "137156910",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Corridor_at_Keilaniemi_metro_station.jpg/1920px-Corridor_at_Keilaniemi_metro_station.jpg",
-   "t": "Corridor at Keilaniemi metro station",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Keilaniemi_metro_station.jpg",
-   "d": "2022-08-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "143701323",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Corridor_at_Tapiola_metro_station.jpg/1920px-Corridor_at_Tapiola_metro_station.jpg",
-   "t": "Corridor at Tapiola metro station",
-   "a": "JIP",
-   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Tapiola_metro_station.jpg",
-   "d": "2022-07-31",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -1602,6 +1572,36 @@
    "a": "JIP",
    "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_May_2023.jpg",
    "d": "2023-05-29",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "149808292",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_August_2023.jpg/1920px-Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_August_2023.jpg",
+   "t": "Corridor at Sörnäinen metro station in August 2023",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_August_2023.jpg",
+   "d": "2023-08-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "150047316",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Corridor_at_Hakaniemi_metro_station_in_February.jpg/1920px-Corridor_at_Hakaniemi_metro_station_in_February.jpg",
+   "t": "Corridor at Hakaniemi metro station in February",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_Hakaniemi_metro_station_in_February.jpg",
+   "d": "2023-02-18",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
+   "i": "150047951",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_December_2022.jpg/1920px-Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_December_2022.jpg",
+   "t": "Corridor at Sörnäinen metro station in December 2022",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Corridor_at_S%C3%B6rn%C3%A4inen_metro_station_in_December_2022.jpg",
+   "d": "2022-12-02",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -1676,16 +1676,6 @@
    "l": "CC BY-SA 3.0"
   },
   {
-   "i": "59984575",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/2/29/Hatvan_railway_station%2C_underpass%2C_2017_Hatvan.jpg",
-   "t": "Hatvan railway station, underpass, 2017 Hatvan",
-   "a": "Globetrotter19",
-   "p": "https://commons.wikimedia.org/wiki/File:Hatvan_railway_station,_underpass,_2017_Hatvan.jpg",
-   "d": "2017",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
    "i": "61503340",
    "u": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Railway_station%2C_underpass%2C_2017_Dorog.jpg",
    "t": "Railway station, underpass, 2017 Dorog",
@@ -1702,6 +1692,16 @@
    "a": "Globetrotter19",
    "p": "https://commons.wikimedia.org/wiki/File:Gy%C3%A1rv%C3%A1ros_railway_station,_underpass,_stairs,_2018_Gy%C5%91r.jpg",
    "d": "2018-07",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "73640303",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Railway_station_underpass_stairs%2C_2018_Balatonbogl%C3%A1r.jpg/1920px-Railway_station_underpass_stairs%2C_2018_Balatonbogl%C3%A1r.jpg",
+   "t": "Railway station underpass stairs, 2018 Balatonboglár",
+   "a": "Globetrotter19",
+   "p": "https://commons.wikimedia.org/wiki/File:Railway_station_underpass_stairs,_2018_Balatonbogl%C3%A1r.jpg",
+   "d": "2018-09",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 3.0"
   },
@@ -1916,14 +1916,14 @@
    "l": "Public domain"
   },
   {
-   "i": "14461843",
-   "u": "https://upload.wikimedia.org/wikipedia/commons/9/9f/St_Dunstan%27s_swimming_pool_-_geograph.org.uk_-_1734989.jpg",
-   "t": "St Dunstan's swimming pool - geograph.org.uk - 1734989",
-   "a": "Paul Gillett",
-   "p": "https://commons.wikimedia.org/wiki/File:St_Dunstan%27s_swimming_pool_-_geograph.org.uk_-_1734989.jpg",
-   "d": "2010-03-03",
+   "i": "10585830",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Indoor_swimming_pool%2C_Westminster%2C_Colorado..jpg/1920px-Indoor_swimming_pool%2C_Westminster%2C_Colorado..jpg",
+   "t": "Indoor swimming pool, Westminster, Colorado.",
+   "a": "Endoc",
+   "p": "https://commons.wikimedia.org/wiki/File:Indoor_swimming_pool,_Westminster,_Colorado..jpg",
+   "d": "2007-08-20",
    "s": "Wikimedia Commons",
-   "l": "CC BY-SA 2.0"
+   "l": "CC BY-SA 3.0"
   },
   {
    "i": "24455754",
@@ -1936,6 +1936,16 @@
    "l": "CC BY-SA 3.0"
   },
   {
+   "i": "28068071",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Womens_Pool_%285100701762%29.jpg/1920px-Womens_Pool_%285100701762%29.jpg",
+   "t": "Womens Pool (5100701762)",
+   "a": "OSU Special Collections &amp; Archives : Commons",
+   "p": "https://commons.wikimedia.org/wiki/File:Womens_Pool_(5100701762).jpg",
+   "d": "1920",
+   "s": "Wikimedia Commons",
+   "l": "No restrictions"
+  },
+  {
    "i": "40006407",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Indoor_Pool_%2814859634373%29.jpg/1920px-Indoor_Pool_%2814859634373%29.jpg",
    "t": "Indoor Pool (14859634373)",
@@ -1944,6 +1954,16 @@
    "d": "2014-02-03",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 2.0"
+  },
+  {
+   "i": "50308171",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Tochigi_Prefectural_Heated_Indoor_Pool_Hall.JPG/1920px-Tochigi_Prefectural_Heated_Indoor_Pool_Hall.JPG",
+   "t": "Tochigi Prefectural Heated Indoor Pool Hall",
+   "a": "Abasaa",
+   "p": "https://commons.wikimedia.org/wiki/File:Tochigi_Prefectural_Heated_Indoor_Pool_Hall.JPG",
+   "d": "2016-05-22",
+   "s": "Wikimedia Commons",
+   "l": "Public domain"
   },
   {
    "i": "57411653",
@@ -1984,36 +2004,6 @@
    "d": "2016-07-08",
    "s": "Wikimedia Commons",
    "l": "Public domain"
-  },
-  {
-   "i": "79701681",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Hacienda_San_Jorge_-_Los_Cancajos_01.jpg/1920px-Hacienda_San_Jorge_-_Los_Cancajos_01.jpg",
-   "t": "Hacienda San Jorge - Los Cancajos 01",
-   "a": "H. Zell",
-   "p": "https://commons.wikimedia.org/wiki/File:Hacienda_San_Jorge_-_Los_Cancajos_01.jpg",
-   "d": "2019-03-20",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
-  },
-  {
-   "i": "85011354",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Swimming_Pool_of_SMCESPS.jpg/1920px-Swimming_Pool_of_SMCESPS.jpg",
-   "t": "Swimming Pool of SMCESPS",
-   "a": "Keith chau yet",
-   "p": "https://commons.wikimedia.org/wiki/File:Swimming_Pool_of_SMCESPS.jpg",
-   "d": "2019-12-18",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 1.0"
-  },
-  {
-   "i": "20178526",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/HK_%E5%A0%85%E5%B0%BC%E5%9C%B0%E5%9F%8E%E6%B3%B3%E6%B1%A0_Kennedy_Town_Swimming_Pool_lobby_hall_interior_night_July-2012.JPG/1920px-HK_%E5%A0%85%E5%B0%BC%E5%9C%B0%E5%9F%8E%E6%B3%B3%E6%B1%A0_Kennedy_Town_Swimming_Pool_lobby_hall_interior_night_July-2012.JPG",
-   "t": "HK 堅尼地城泳池 Kennedy Town Swimming Pool lobby hall interior night July-2012",
-   "a": "Niebiaraluenmen",
-   "p": "https://commons.wikimedia.org/wiki/File:HK_%E5%A0%85%E5%B0%BC%E5%9C%B0%E5%9F%8E%E6%B3%B3%E6%B1%A0_Kennedy_Town_Swimming_Pool_lobby_hall_interior_night_July-2012.JPG",
-   "d": "2012-07-07",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 3.0"
   },
   {
    "i": "22618437",
@@ -2106,6 +2096,16 @@
    "l": "CC BY-SA 2.0"
   },
   {
+   "i": "123913773",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Jane_Holloway_Hall%2C_listed_former_swimming_pool_on_Royal_Holloway_campus.jpg/1920px-Jane_Holloway_Hall%2C_listed_former_swimming_pool_on_Royal_Holloway_campus.jpg",
+   "t": "Jane Holloway Hall, listed former swimming pool on Royal Holloway campus",
+   "a": "GeorgeHoneywood",
+   "p": "https://commons.wikimedia.org/wiki/File:Jane_Holloway_Hall,_listed_former_swimming_pool_on_Royal_Holloway_campus.jpg",
+   "d": "8 October ",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
+  },
+  {
    "i": "3916083",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Classroom_3rd_floor.JPG/1920px-Classroom_3rd_floor.JPG",
    "t": "Classroom 3rd floor",
@@ -2166,6 +2166,16 @@
    "l": "CC0"
   },
   {
+   "i": "22027538",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Chizongwe_%28classroom%29.jpg/1920px-Chizongwe_%28classroom%29.jpg",
+   "t": "Chizongwe (classroom)",
+   "a": "Hans Hillewaert",
+   "p": "https://commons.wikimedia.org/wiki/File:Chizongwe_(classroom).jpg",
+   "d": "2012-08-04",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 3.0"
+  },
+  {
    "i": "41297061",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/School_Classroom_Empty_DVIDS271711.jpg/1920px-School_Classroom_Empty_DVIDS271711.jpg",
    "t": "School Classroom Empty DVIDS271711",
@@ -2192,16 +2202,6 @@
    "a": "Mariquitas CK",
    "p": "https://commons.wikimedia.org/wiki/File:Empty_classroom_at_CommuniKids.jpg",
    "d": "2015-07-22",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
-   "i": "73445866",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Classroom_in_Morocco.jpg/1920px-Classroom_in_Morocco.jpg",
-   "t": "Classroom in Morocco",
-   "a": "إسكواردو",
-   "p": "https://commons.wikimedia.org/wiki/File:Classroom_in_Morocco.jpg",
-   "d": "07/10/2018",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 4.0"
   },
@@ -2276,16 +2276,6 @@
    "l": "CC BY-SA 4.0"
   },
   {
-   "i": "47475319",
-   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/201510_Waiting_Room_9_of_SHA.jpg/1920px-201510_Waiting_Room_9_of_SHA.jpg",
-   "t": "201510 Waiting Room 9 of SHA",
-   "a": "MNXANL",
-   "p": "https://commons.wikimedia.org/wiki/File:201510_Waiting_Room_9_of_SHA.jpg",
-   "d": "2015-10-11",
-   "s": "Wikimedia Commons",
-   "l": "CC BY-SA 4.0"
-  },
-  {
    "i": "49665970",
    "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/201606_Central_Waiting_Room_interior_at_Beijing_Station.jpg/1920px-201606_Central_Waiting_Room_interior_at_Beijing_Station.jpg",
    "t": "201606 Central Waiting Room interior at Beijing Station",
@@ -2304,6 +2294,16 @@
    "d": "Taken on 1",
    "s": "Wikimedia Commons",
    "l": "CC BY-SA 3.0"
+  },
+  {
+   "i": "55457974",
+   "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Waiting_room_in_Module_D_of_Terminal_1_at_Munich_Airport.jpg/1920px-Waiting_room_in_Module_D_of_Terminal_1_at_Munich_Airport.jpg",
+   "t": "Waiting room in Module D of Terminal 1 at Munich Airport",
+   "a": "JIP",
+   "p": "https://commons.wikimedia.org/wiki/File:Waiting_room_in_Module_D_of_Terminal_1_at_Munich_Airport.jpg",
+   "d": "2015-05-25",
+   "s": "Wikimedia Commons",
+   "l": "CC BY-SA 4.0"
   },
   {
    "i": "16543431",
