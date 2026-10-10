@@ -851,12 +851,12 @@ header.galaxy-header {
               </div>
 
               <div id="smiley-panel" hidden>
-                <span data-smiley=":)">🙂</span>
-                <span data-smiley=":D">😄</span>
-                <span data-smiley=";)">😉</span>
-                <span data-smiley=":(">🙁</span>
-                <span data-smiley=":P">😛</span>
-                <span data-smiley="&lt;3">❤️</span>
+                <span data-smiley=":)">:)</span>
+                <span data-smiley=":D">:D</span>
+                <span data-smiley=";)">;)</span>
+                <span data-smiley=":(">:(</span>
+                <span data-smiley=":P">:P</span>
+                <span data-smiley="&lt;3">&lt;3</span>
               </div>
 
               <textarea class="gb-textarea" id="message" placeholder="Write something. BBCode: [b] [i] [u] [url=https://...]"></textarea>
@@ -1063,16 +1063,7 @@ header.galaxy-header {
         '<a href="$1" target="_blank" rel="nofollow noopener noreferrer">$2</a>'
       );
 
-      const emotes = [
-        {re:/(^|[\s])\:\)(?=$|[\s])/g, rep:'$1🙂'},
-        {re:/(^|[\s])\:D(?=$|[\s])/g, rep:'$1😄'},
-        {re:/(^|[\s])\;\)(?=$|[\s])/g, rep:'$1😉'},
-        {re:/(^|[\s])\:\((?=$|[\s])/g, rep:'$1🙁'},
-        {re:/(^|[\s])\:P(?=$|[\s])/g, rep:'$1😛'},
-        {re:/&lt;3/g, rep:'❤️'}
-      ];
-
-      emotes.forEach(({re, rep}) => s = s.replace(re, rep));
+      // Keep old-style text smileys as typed.
       return s;
     }
 

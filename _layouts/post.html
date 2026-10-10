@@ -257,9 +257,9 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--frame); outline-o
         <div class="entry-foot">
           <a href="#top">▲ back to top</a>
           <a href="{{ '/blog_posts.html' | relative_url }}">◄ all entries</a>
-          <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">✉ mail this to a friend</a>
-          <a href="{{ '/guestbook.html' | relative_url }}">✎ sign the guestbook</a>
-          <a href="#" onclick="window.print();return false;">🖨 print this page</a>
+          <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ site.url }}{{ page.url }}">mail this to a friend</a>
+          <a href="{{ '/guestbook.html' | relative_url }}">sign the guestbook</a>
+          <a href="#" onclick="window.print();return false;">print this page</a>
         </div>
 
         <nav class="updown" aria-label="Nearby entries">
@@ -324,7 +324,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--frame); outline-o
     </div>
 
     <audio id="blip" preload="auto"><source src="{{ '/kawaii%208bit.mp3' | relative_url }}" type="audio/mpeg"></audio>
-    <button id="soundToggle" class="sound-toggle" aria-pressed="false">🔇 sound</button>
+    <button id="soundToggle" class="sound-toggle" aria-pressed="false">sound: off</button>
   </footer>
 </div>
 
@@ -336,7 +336,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--frame); outline-o
   let on=false; a.volume=.45;
   btn.addEventListener('click',()=>{
     on=!on; btn.setAttribute('aria-pressed',String(on));
-    btn.textContent = on ? '🔊 sound' : '🔇 sound';
+    btn.textContent = on ? 'sound: on' : 'sound: off';
     try{ a.play().then(()=>{a.pause();a.currentTime=0;}).catch(()=>{}); }catch(_){}
   });
   const beep=()=>{ if(!on) return; try{ a.currentTime=0; a.play(); }catch(_){} };
