@@ -167,10 +167,6 @@ hr.retro{
   padding:9px 12px; margin:0 0 26px;
 }
 .stats b{ color:var(--stamp); font-weight:normal; }
-.stats .led-sm{
-  background:#000; color:#00ff5a; padding:1px 5px;
-  border:2px inset #0aa; letter-spacing:2px;
-}
 
 .post h2, .post h3, .post h4{ color:#000; font-weight:600; line-height:1.2; }
 .post h2{ font-size:1.46em; margin:1.6em 0 .38em; }
@@ -286,8 +282,8 @@ hr.retro{
 
 /* ---------- supplementary panels, below the article ---------- */
 .rail{
-  display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr) minmax(0,1fr);
-  gap:16px; align-items:start; margin:0 0 26px;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px; align-items:stretch; margin:0 0 26px;
   font-variant-numeric:normal; letter-spacing:normal;
   font-family:var(--f-ui); font-size:12px; line-height:1.55;
 }
@@ -309,13 +305,8 @@ hr.retro{
 @media (hover:hover){
   .panel a:hover{ color:var(--ink); background:var(--lemon); }
 }
-.led{
-  display:inline-block; padding:3px 7px; color:var(--ink); background:var(--band);
-  font-family:var(--f-data); font-variant-numeric:tabular-nums;
-  letter-spacing:1px; border:1px solid var(--rule);
-}
 
-.stickers{ display:grid; grid-template-columns:repeat(2,1fr); gap:7px; padding:9px; }
+.stickers{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; padding:9px; }
 .stickers img{
   width:100%; max-width:84px; height:auto; image-rendering:pixelated;
   justify-self:center; display:block; margin:0 auto; border:0; clear:none;
@@ -388,9 +379,6 @@ hr.retro{
   .perf::after{ left:2px; }
 
 
-  .rail{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .rail .panel-stickers{ grid-column:1 / -1; }
-  .rail .panel-stickers .stickers{ grid-template-columns:repeat(4,minmax(0,1fr)); }
   .post{ font-size:21px; }
   .post img{ content-visibility:auto; contain-intrinsic-size:800px auto; }
 }
@@ -552,8 +540,7 @@ hr.retro{
 
     <div class="stats">
       &gt; <b>{{ words }}</b> words · about <b>{{ mins }} min</b> to read<br>
-      &gt; <b>{{ kb }} KB</b> · roughly <b>{{ kb | divided_by: 5 | plus: 1 }} sec</b> over a 56k modem<br>
-      &gt; you are reader <span class="led-sm" id="entryHits">000000</span> of this entry
+      &gt; <b>{{ kb }} KB</b> · roughly <b>{{ kb | divided_by: 5 | plus: 1 }} sec</b> over a 56k modem
     </div>
 
     <div class="cols">
@@ -656,24 +643,6 @@ hr.retro{
 </div>
 
 <script>
-/* site-wide visitor counter */
-(() => { try{
-  const el=document.getElementById('hitCount'); if(!el) return;
-  const k='geocities_hit_counter';
-  const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
-  localStorage.setItem(k,n);
-  el.textContent=String(n).padStart(6,'0');
-}catch(e){} })();
-
-/* per-entry reader counter */
-(() => { try{
-  const el=document.getElementById('entryHits'); if(!el) return;
-  const k='g981_hits:'+location.pathname;
-  const n=(parseInt(localStorage.getItem(k)||'0',10)+1);
-  localStorage.setItem(k,n);
-  el.textContent=String(n).padStart(6,'0');
-}catch(e){} })();
-
 (() => {
   const el=document.getElementById('printed'); if(!el) return;
   el.textContent = new Date().toLocaleString('en-GB',
