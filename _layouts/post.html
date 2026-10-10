@@ -11,9 +11,8 @@
 
 /* ============================================================
    GALAXY 981 · SINGLE ENTRY
-   Starfield desk, fanfold sheet, penguin hero, purple rail.
-   Header and stats span the full sheet; a separate sidebar keeps
-   the article measure consistent from the first paragraph to the last.
+   Starfield desk, fanfold sheet, penguin hero.
+   One centred reading column, with supplementary panels below the entry.
    ============================================================ */
 
 :root{
@@ -38,7 +37,7 @@
 
   --f-display:Impact, Haettenschweiler, "Arial Narrow Bold", "Franklin Gothic Heavy", sans-serif;
   --f-read:"EB Garamond", Baskerville, Garamond, "Hoefler Text", "Palatino Linotype", Palatino, Georgia, serif;
-  --f-data:"Courier New", Courier, monospace;
+  --f-data:Tahoma, Verdana, Geneva, sans-serif;
   --f-ui:Verdana, Geneva, "MS Sans Serif", sans-serif;
 }
 
@@ -137,20 +136,13 @@ hr.retro{
   text-transform:uppercase; color:var(--lemon); overflow:hidden;
 }
 
-/* ---------- steady reading measure beside the rail ---------- */
-.cols{
-  display:grid; grid-template-columns:minmax(0,1fr) 194px;
-  gap:26px; align-items:start; padding:8px 0 0;
-}
-.main{ grid-column:1; grid-row:1; min-width:0; width:100%; max-width:66ch; }
-
-.rail{
-  grid-column:2; grid-row:1; width:194px; margin:0 0 20px;
-}
+/* ---------- one uninterrupted reading column ---------- */
+.cols{ display:block; padding:8px 0 0; }
+.main{ min-width:0; width:100%; }
 
 /* ---------- the reading column ---------- */
 .post{
-  margin:0; padding-top:24px;
+  width:100%; max-width:66ch; margin:0 auto; padding-top:24px;
   font-family:var(--f-read); font-size:22px; line-height:1.6;
   color:var(--ink); letter-spacing:normal;
   font-kerning:normal; font-variant-numeric:oldstyle-nums;
@@ -170,7 +162,7 @@ hr.retro{
 
 .stats{
   display:flow-root;
-  font-family:var(--f-data); font-size:12px; line-height:1.75;
+  font-family:var(--f-data); font-size:13px; line-height:1.75;
   color:#2b2820; background:var(--band); border:2px inset #a8ae99;
   padding:9px 12px; margin:0 0 26px;
 }
@@ -292,37 +284,35 @@ hr.retro{
 .updown .next{ text-align:right; }
 .updown .next b{ text-align:left; }
 
-/* ---------- rail (lives inside .post, so it overrides article type) ---------- */
+/* ---------- supplementary panels, below the article ---------- */
 .rail{
+  display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr) minmax(0,1fr);
+  gap:16px; align-items:start; margin:0 0 26px;
   font-variant-numeric:normal; letter-spacing:normal;
-  font-family:var(--f-ui); font-size:11px; line-height:1.55;
+  font-family:var(--f-ui); font-size:12px; line-height:1.55;
 }
 .panel{
-  margin:0 0 14px; border:4px ridge var(--grape);
-  background:repeating-linear-gradient(135deg, var(--void-a) 0 12px, var(--void-b) 12px 24px);
-  color:#dcd3ff; font-family:var(--f-ui); font-size:11px;
+  margin:0; border:1px solid var(--rule); background:transparent;
+  color:var(--ink-soft); font-family:var(--f-ui); font-size:12px;
   min-width:0; overflow:hidden;
 }
 .panel h3{
-  margin:0; padding:5px 8px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-  background:var(--grape); color:var(--lemon); border-bottom:2px groove #b98cff;
+  margin:0; padding:7px 10px; font-size:12px; font-weight:normal;
+  background:var(--band); color:var(--ink); border-bottom:1px solid var(--rule);
   line-height:1.4;
 }
-.panel .in{ padding:9px 9px 11px; line-height:1.7; min-width:0; }
+.panel .in{ padding:10px; line-height:1.7; min-width:0; }
 .panel a, .panel a:visited{
-  color:var(--cyan); text-decoration:none;
+  color:var(--link); text-decoration:underline; text-underline-offset:2px;
   overflow-wrap:anywhere; word-break:break-word; hyphens:auto;
 }
 @media (hover:hover){
-  .panel a:hover{ text-decoration:underline; color:#fff; }
+  .panel a:hover{ color:var(--ink); background:var(--lemon); }
 }
-.panel dl{ margin:0; }
-.panel dt{ color:#ffa9dd; float:left; clear:left; width:62px; }
-.panel dd{ margin:0 0 3px 66px; }
-
 .led{
-  display:inline-block; padding:3px 7px; background:#000; color:#00ff5a;
-  font-family:var(--f-data); letter-spacing:3px; border:3px inset #0aa;
+  display:inline-block; padding:3px 7px; color:var(--ink); background:var(--band);
+  font-family:var(--f-data); font-variant-numeric:tabular-nums;
+  letter-spacing:1px; border:1px solid var(--rule);
 }
 
 .stickers{ display:grid; grid-template-columns:repeat(2,1fr); gap:7px; padding:9px; }
@@ -332,16 +322,14 @@ hr.retro{
 }
 .stickers .wide{ grid-column:span 2; max-width:170px; }
 @media (hover:hover){
-  .stickers img:hover{ filter:drop-shadow(0 0 6px var(--cyan)); transform:translateY(-1px); }
+  .stickers img:hover{ transform:translateY(-1px); }
 }
 
 .construction{
-  padding:6px 8px; font-family:var(--f-ui); font-size:10px; font-weight:bold;
-  color:#000; text-align:center; text-transform:uppercase; letter-spacing:.06em;
-  background:repeating-linear-gradient(45deg,#ffcc00 0 10px,#000 10px 20px);
-  border:3px outset #ffcc00;
+  grid-column:1 / -1; padding:4px 0; font-family:var(--f-ui); font-size:10px;
+  color:var(--ink-soft); text-align:center;
 }
-.construction span{ background:#ffcc00; padding:2px 5px; display:inline-block; }
+.construction span{ padding:2px 5px; display:inline-block; }
 
 /* ---------- kitty + footer ---------- */
 .kitty-rail{ clear:both; position:relative; height:56px; margin:8px 0 0; overflow:hidden; }
@@ -362,10 +350,6 @@ hr.retro{
   .buttons img:hover{ transform:translateY(-2px); filter:drop-shadow(0 0 5px var(--pink)); }
 }
 
-.badges{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 14px; font-family:var(--f-ui); font-size:10px; }
-.badge{ padding:4px 8px; border:3px ridge var(--cyan); background:#000; color:var(--cyan); }
-.badge.b2{ border-color:var(--pink); color:var(--pink); }
-.badge.b3{ border-color:var(--lemon); color:var(--lemon); }
 
 .webring{
   margin:0 0 12px; padding:7px; text-align:center;
@@ -389,19 +373,11 @@ hr.retro{
   html, body{ background:#fff; }
   .form{ box-shadow:none; border:0; width:auto; padding:0; }
   .form::before, .form::after, .crumb, .hero, .ticker, .rail,
-  .buttons, .badges, .webring, .kitty-rail, .sound-toggle,
+  .buttons, .webring, .kitty-rail, .sound-toggle,
   .updown, .entry-foot{ display:none !important; }
-  .post{ font-size:12pt; padding-top:0; }
+  .post{ max-width:none; font-size:12pt; padding-top:0; }
   .cols{ display:block; }
   .main{ max-width:none; }
-}
-
-/* ---------- stack the sidebar before the text gets cramped ---------- */
-@media screen and (max-width:980px){
-  .cols{ display:flex; flex-direction:column; gap:0; }
-  .main{ order:1; margin-inline:auto; }
-  .rail{ order:2; width:100%; max-width:66ch; margin:28px auto 0; font-size:inherit; }
-  .rail .construction{ font-size:10px; }
 }
 
 /* ---------- small screens ---------- */
@@ -412,8 +388,9 @@ hr.retro{
   .perf::after{ left:2px; }
 
 
-  .stickers{ grid-template-columns:repeat(4,1fr); }
-  .stickers .wide{ grid-column:span 2; }
+  .rail{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rail .panel-stickers{ grid-column:1 / -1; }
+  .rail .panel-stickers .stickers{ grid-template-columns:repeat(4,minmax(0,1fr)); }
   .post{ font-size:21px; }
   .post img{ content-visibility:auto; contain-intrinsic-size:800px auto; }
 }
@@ -421,6 +398,7 @@ hr.retro{
   .form{ padding:0 18px; }
   .crumb, .hero, .ticker{ margin-left:-18px; margin-right:-18px; }
   .post{ font-size:20px; line-height:1.6; }
+  .rail{ grid-template-columns:minmax(0,1fr); gap:12px; }
 }
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; }
@@ -580,58 +558,6 @@ hr.retro{
 
     <div class="cols">
 
-      <!-- =============== SIDEBAR =============== -->
-      <aside class="rail">
-        <div class="panel">
-          <h3>Station log</h3>
-          <div class="in">
-            <dl>
-              <dt>Mood</dt><dd>caffeinated</dd>
-              <dt>Playing</dt><dd>oud, badly</dd>
-              <dt>Reading</dt><dd><a href="{{ '/books.html' | relative_url }}">see the shelf</a></dd>
-              <dt>Weather</dt><dd>drizzle, obviously</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Recent entries</h3>
-          <div class="in">
-            {% for p in site.posts limit: 5 %}
-              <div style="margin:0 0 6px">
-                <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
-                <span style="color:#b3a6e6; font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Visitors</h3>
-          <div class="in" style="text-align:center">
-            <span class="led" id="hitCount">000000</span><br>
-            <span style="font-size:10px; color:#b3a6e6">since 1999</span>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Stickers</h3>
-          <div class="stickers">
-            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
-            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
-            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
-            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
-            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
-            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
-            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
-            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
-            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
-          </div>
-        </div>
-
-        <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
-      </aside>
-
       <!-- =============== READING COLUMN =============== -->
       <div class="main">
         <section itemprop="articleBody">
@@ -669,6 +595,46 @@ hr.retro{
   <hr class="perf">
 
   <footer class="foot">
+      <!-- =============== SUPPLEMENTARY PANELS =============== -->
+      <aside class="rail" aria-label="Elsewhere on the site">
+        <div class="panel">
+          <h3>Recent entries</h3>
+          <div class="in">
+            {% for p in site.posts limit: 5 %}
+              <div style="margin:0 0 6px">
+                <a href="{{ p.url | relative_url }}">{{ p.title }}</a><br>
+                <span style="color:var(--ink-soft); font-size:10px">{{ p.date | date: "%d.%m.%y" }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Visitors</h3>
+          <div class="in" style="text-align:center">
+            <span class="led" id="hitCount">000000</span><br>
+            <span style="font-size:10px; color:var(--ink-soft)">since 1999</span>
+          </div>
+        </div>
+
+        <div class="panel panel-stickers">
+          <h3>Stickers</h3>
+          <div class="stickers">
+            <img src="{{ '/arabic.gif' | relative_url }}" alt="Arabic">
+            <img src="{{ '/qatar.gif' | relative_url }}" alt="Qatar">
+            <img src="{{ '/pali.gif' | relative_url }}" alt="Palestine">
+            <img src="{{ '/sleepycat.gif' | relative_url }}" alt="Sleepy cat">
+            <img src="{{ '/peta.gif' | relative_url }}" alt="PETA">
+            <img src="{{ '/fist.gif' | relative_url }}" alt="Fist">
+            <img src="{{ '/freespeechonline.gif' | relative_url }}" alt="Free speech online" class="wide">
+            <img src="{{ '/scifi.gif' | relative_url }}" alt="Sci-fi" class="wide">
+            <img src="{{ '/pals.png' | relative_url }}" alt="Friends" class="wide">
+          </div>
+        </div>
+
+        <div class="construction"><span>⚠ more entries under construction ⚠</span></div>
+      </aside>
+
     <div class="buttons">
       <img src="{{ '/icc.gif' | relative_url }}" alt="ICC">
       <img src="{{ '/dp.gif' | relative_url }}" alt="DP">
@@ -676,12 +642,6 @@ hr.retro{
       <img src="{{ '/freespeech.gif' | relative_url }}" alt="Free Speech">
       <img src="{{ '/privacy.gif' | relative_url }}" alt="Privacy">
       <img src="{{ '/piracy.png' | relative_url }}" alt="Piracy">
-    </div>
-
-    <div class="badges">
-      <span class="badge">Best viewed in Netscape Navigator 4.0 @ 800×600</span>
-      <span class="badge b2">Hand-coded, no tables were harmed</span>
-      <span class="badge b3">Y2K compliant (probably)</span>
     </div>
 
     <div class="webring">
@@ -748,7 +708,7 @@ hr.retro{
     if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
     if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
     if(img.hasAttribute('srcset') && !img.hasAttribute('sizes'))
-      img.setAttribute('sizes','(max-width: 600px) calc(100vw - 62px), (max-width: 820px) calc(100vw - 50px), (max-width: 980px) calc(100vw - 164px), 634px');
+      img.setAttribute('sizes','(max-width: 600px) calc(100vw - 62px), (max-width: 820px) calc(100vw - 50px), (max-width: 980px) calc(100vw - 164px), 660px');
     const setAR=()=>{ const w=img.naturalWidth,h=img.naturalHeight; if(w&&h) img.style.aspectRatio=w+' / '+h; };
     if(img.complete) setAR(); else img.addEventListener('load',setAR,{once:true});
   });
